@@ -1,0 +1,46 @@
+/**
+ * Color variables
+ */
+
+:root{
+	--midnight-blue: #283e4a;
+}
+
+/**
+ * Typography
+ */
+
+body {
+	font-size: 18px;
+	font-family: sans-serif;
+}
+
+p, span, a, div {
+	font-size: 1rem;
+}
+
+/**
+ * Base rules
+ */
+
+.logo {
+	display: block;
+	max-width: 190px;
+}
+
+.icon {
+	max-width: 32px;
+	max-height: 32px;
+	display: inline-block;
+}
+
+.icon--sm {
+	max-width: 18px;
+}
+
+.form-control {
+	outline: none;
+	padding: 7px;
+	border: none;
+	width: 100%;
+}
