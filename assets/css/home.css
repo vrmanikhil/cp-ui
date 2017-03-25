@@ -3,3 +3,30 @@
 @import url('/assets/css/base/base.css');
 @import url('/assets/css/components/header.css');
 @import url('/assets/css/components/footer.css');
+
+.feed-actor-module__featured-bg-image {
+	height: 100px;
+	background-size: cover;
+}
+
+.feed-actor-module__profile-image-container {
+	position: relative;
+	top: -40px;
+	margin-bottom: -30px;
+}
+
+.feed-actor-module__profile-image {
+	width: 80px;
+	display: block;
+	margin: auto;
+}
+
+.feed-actor-module__name,
+.feed-actor-module__actor-meta {
+	margin-bottom: 10px;
+}
+
+.create-post__submit-button {
+	align-self: flex-end;
+	width: 100px;
+}

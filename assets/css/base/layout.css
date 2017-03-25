@@ -11,6 +11,7 @@
 
 .main-container {
 	flex-grow: 1;
+	justify-content: space-between;
 }
 
 .globalContainer {
@@ -19,6 +20,18 @@
 	max-width: 1024px;
 	padding: 0 10px;
 	margin: 0 auto;
+}
+
+.globalContainer > .left-pane {
+	width: 250px;
+}
+
+.globalContainer > .right-pane {
+	width: 250px;
+}
+
+.globalContainer > .main-body {
+	width: 500px;
 }
 
 .flex {
@@ -45,4 +58,35 @@
 .img-30 {
 	width: 30px;
 	height: 30px;
+}
+
+.img-50 {
+	width: 50px;
+	height: 50px;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.margin-l-5 {
+	margin-left: 5px;
+}
+
+.margin-m-10 {
+	margin-bottom: 10px;
+}
+
+.textarea {
+	resize: none;
+	box-shadow: none;
+	outline: none;
+	padding: 10px;
+}
+
+.btn {
+	padding: 5px 10px;
+	border-radius: 2px;
+	outline: none;
+	box-shadow: none;
 }

@@ -4,6 +4,7 @@
 
 :root{
 	--midnight-blue: #283e4a;
+	--light-grey: #e5e5e5;
 }
 
 /**
@@ -17,6 +18,24 @@ body {
 
 p, span, a, div {
 	font-size: 1rem;
+	margin: 0;
+	line-height: 1rem;
+}
+
+.s-14 {
+	font-size: 14px;
+}
+
+.s-12 {
+	font-size: 0.75rem;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.white {
+	color: white;
 }
 
 /**
@@ -43,4 +62,31 @@ p, span, a, div {
 	padding: 7px;
 	border: none;
 	width: 100%;
+}
+
+.card {
+	background-color: rgb(255,255,255);
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+	border-radius: 2px;
+	padding: 10px;
+}
+
+.textarea {
+	border: 1px solid var(--light-grey);
+}
+
+.btn {
+	border: 1px solid var(--light-grey);
+	background: #fff;
+}
+
+/**
+ * Utility classes
+ */
+.text-center {
+	text-align: center;
+}
+
+.midnight-blue-bg {
+	background-color: var(--midnight-blue);
 }

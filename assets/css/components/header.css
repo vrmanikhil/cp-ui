@@ -1,6 +1,7 @@
 .primary-header {
 	background: var(--midnight-blue);
 	padding: 10px 0;
+	margin-bottom: 10px;
 }
 
 .primary-header > .flex {
