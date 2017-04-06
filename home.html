@@ -10,16 +10,12 @@
 </head>
 
 <body>
-
 	<div class="layout-container flex flex--col">
-
 		<header class="primary-header flex__item">
 			<div class="globalContainer flex">
-
 				<a href="/" class="flex__item">
 					<img alt="logo" src="/assets/img/logo-white.png" class="logo">
 				</a>
-
 				<div class="search-bar flex__item">
 					<form action="" method="GET" class="flex">
 						<button type="submit" class="search-bar__submit-btn">
@@ -28,7 +24,6 @@
 						<input type="search" name="q" placeholder="Search" class="form-control">
 					</form>
 				</div>
-
 				<div class="primary-menu flex__item flex">
 					<div class="primary-menu__item">
 						<a href="javascript:" class="menu-link">
@@ -50,17 +45,15 @@
 						</a>
 					</div>
 				</div>
-
 			</div>
 		</header>
-
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
 				<div class="feed-actor-module card">
 					<div class="feed-actor-module__featured-bg-image" style="background: url('/assets/img/bg.jpg') center no-repeat; background-size: cover;"></div>
 					<div class="feed-actor-module__profile-image-container">
 						<a href="javascript:">
-							<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="", class="feed-actor-module__profile-image">
+							<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="" , class="feed-actor-module__profile-image">
 						</a>
 					</div>
 					<div class=" feed-actor-module__actor-meta">
@@ -69,6 +62,10 @@
 							<img src="/assets/img/bits.jpg" alt="" class="media-figure img-50">
 							<p class="media-body text-center bold flex s-12 align-center margin-l-5">Birla Institute of Information Technology and Science Pilani</p>
 						</div>
+					</div>
+					<div class="feed-actor-module__connections-card" style="background: url('/assets/img/bg.jpg') center no-repeat; background-size: cover;">
+						<p class="feed-actor-module__connections-card-title">Connections</p>
+						<p class="feed-actor-module__connections-count">101</p>
 					</div>
 				</div>
 			</aside>
@@ -79,16 +76,73 @@
 						<button type="submit" class="btn create-post__submit-button white midnight-blue-bg s-14">Post</button>
 					</form>
 				</div>
+				<div class="post card">
+					Post 1
+				</div>
 			</div>
-			<aside class="flex__item right-pane"></aside>
+			<aside class="flex__item right-pane">
+				<div class="explore-panel card flex">
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">Jobs</span>
+					</a>
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">Internships</span>
+					</a>
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">Skills</span>
+					</a>
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">COAT</span>
+					</a>
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">Messages</span>
+					</a>
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">Connections</span>
+					</a>
+					<a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+						<span class="explore-panel__link-img-container">
+							<img class="explore-panel__link-img flex__item" src="/assets/img/briefcase.png" alt="">
+						</span>
+						<span class="explore-panel__link-text flex__item">User Profile</span>
+					</a>
+				</div>
+			</aside>
 		</main>
-
 		<footer class="flex__item primary-footer">
-
+			<div class="globalContainer flex align-center">
+				<div class="footer__social-links flex-item">
+					<a href="javascript:" class="footer__social-link"><img class="footer__social-link-img" src="/assets/img/fb.png" alt=""></a>
+					<a href="javascript:" class="footer__social-link"><img class="footer__social-link-img" src="/assets/img/twitter.png" alt=""></a>
+				</div>
+				<nav class="footer-nav">
+					<a href="javascript:" class="footer-nav__link">About Us</a>
+					<a href="javascript:" class="footer-nav__link">Privacy Policy</a>
+					<a href="javascript:" class="footer-nav__link">Terms and Conditions</a>
+					<a href="javascript:" class="footer-nav__link">COAT</a>
+					<a href="javascript:" class="footer-nav__link">Contact Us</a>
+				</nav>
+			</div>
 		</footer>
-
 	</div>
-
 </body>
 
 </html>

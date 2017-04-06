@@ -2,10 +2,12 @@
  * Color variables
  */
 
-:root{
+:root {
 	--midnight-blue: #283e4a;
 	--light-grey: #e5e5e5;
+	--light-black: #333;
 }
+
 
 /**
  * Typography
@@ -16,10 +18,18 @@ body {
 	font-family: sans-serif;
 }
 
-p, span, a, div {
+p,
+span,
+a,
+div {
 	font-size: 1rem;
 	margin: 0;
 	line-height: 1rem;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
 }
 
 .s-14 {
@@ -37,6 +47,7 @@ p, span, a, div {
 .white {
 	color: white;
 }
+
 
 /**
  * Base rules
@@ -65,10 +76,11 @@ p, span, a, div {
 }
 
 .card {
-	background-color: rgb(255,255,255);
-	box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
 	border-radius: 2px;
 	padding: 10px;
+	margin-bottom: 10px;
 }
 
 .textarea {
@@ -80,9 +92,11 @@ p, span, a, div {
 	background: #fff;
 }
 
+
 /**
  * Utility classes
  */
+
 .text-center {
 	text-align: center;
 }
