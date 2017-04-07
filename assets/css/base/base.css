@@ -104,3 +104,39 @@ a {
 .midnight-blue-bg {
 	background-color: var(--midnight-blue);
 }
+
+.hidden {
+	display: none !important;
+}
+
+
+/**
+ * dropdown
+ */
+
+.dropdown__container,
+.dropdown__item {
+	position: relative;
+}
+
+.dropdown__pane {
+	position: absolute;
+	right: 0;
+	top: 100%;
+	margin-top: 12px;
+	min-width: 200px;
+	min-height: 100px;
+}
+
+.dropdown__item--clicked:after {
+	position: absolute;
+	content: '';
+	width: 0;
+	height: 0;
+	top: 100%;
+	right: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 12px solid white;
+}
+

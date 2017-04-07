@@ -25,24 +25,26 @@
 					</form>
 				</div>
 				<div class="primary-menu flex__item flex">
-					<div class="primary-menu__item">
-						<a href="javascript:" class="menu-link">
+					<div class="primary-menu__item dropdown__container js-dropdown__container">
+						<a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
 							<img src="/assets/img/icons/home.png" alt="home" class="icon">
 						</a>
-						<a href="javascript:" class="menu-link">
+						<a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
 							<img src="/assets/img/icons/envelope.png" alt="envelope" class="icon">
 						</a>
-						<a href="javascript:" class="menu-link">
+						<a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
 							<img src="/assets/img/icons/world.png" alt="world" class="icon">
 						</a>
+						<div class="dropdown__pane card hidden js-dropdown__pane"></div>
 					</div>
-					<div class="primary-menu__item">
-						<a href="javascript:" class="menu-link">
+					<div class="primary-menu__item dropdown__container js-dropdown__container">
+						<a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
 							<div class="flex media media--reverse align-center">
 								<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure img-30">
 								<span class="media-body"><b>Nikhil Verma</b></span>
 							</div>
 						</a>
+						<div class="dropdown__pane card hidden js-dropdown__pane"></div>
 					</div>
 				</div>
 			</div>
@@ -156,6 +158,8 @@
 			</div>
 		</footer>
 	</div>
+	<script src="/assets/js/jquery-3.2.0.min.js"></script>
+	<script src="/assets/js/home.js"></script>
 </body>
 
 </html>
