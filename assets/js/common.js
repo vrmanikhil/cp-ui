@@ -34,4 +34,26 @@ $(document).ready(function () {
 
 		elem.toggleClass('dropdown__item--clicked');
 	});
+
+	$('.js-nav--stacked').on('click', '.js-nav-link', function (e) {
+		var elem;
+		if ($(e.target).hasClass('js-nav-link')) {
+			elem = $(e.target);
+		} else {
+			elem = $(e.target).closest('.js-nav-link');
+		}
+
+		if (elem.length === 0) {
+			return;
+		}
+
+		var container = elem.closest('.js-nav--stacked');
+		var activeElem = container.find('.js-nav-link.active');
+		if (elem.is(activeElem)) {
+			return;
+		}
+
+		activeElem.removeClass('active');
+		elem.addClass('active');
+	});
 });

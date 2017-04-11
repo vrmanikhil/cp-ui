@@ -21,6 +21,7 @@
 
 .globalContainer > .left-pane {
 	width: 250px;
+	margin-right: 10px;
 }
 
 .globalContainer > .right-pane {
@@ -28,7 +29,8 @@
 }
 
 .globalContainer > .main-body {
-	width: 500px;
+	flex-grow: 1;
+	margin-right: 10px;
 }
 
 .flex {
@@ -50,6 +52,10 @@
 .media--reverse > .media-figure {
 	order: 1;
 	margin: 0 0 0 10px;
+}
+
+.media-figure {
+	flex-shrink: 0;
 }
 
 .img-30 {
