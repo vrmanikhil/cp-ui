@@ -1,0 +1,23 @@
+.feed-post__user-pic {
+	max-width: 40px;
+	max-height: 40px;
+	margin-right: 10px;
+}
+
+.feed-post__info {
+	margin-top: 5px;
+}
+
+.feed-post__postdate,
+.feed-post__posttime {
+	font-size: 0.875rem;
+	color: var(--grey);
+}
+
+.feed-post__head {
+	margin-bottom: 10px;
+}
+
+.feed-post__body .link{
+	text-decoration: underline;
+}
