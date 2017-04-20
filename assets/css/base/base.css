@@ -126,11 +126,12 @@ a {
 
 .dropdown__pane {
 	position: absolute;
-	right: 0;
+	right: -50px;
 	top: 100%;
 	margin-top: 12px;
-	min-width: 200px;
+	width: 400px;
 	min-height: 100px;
+	padding: 0;
 }
 
 .dropdown__item--clicked:after {
@@ -145,6 +146,13 @@ a {
 	border-bottom: 12px solid white;
 }
 
+.dropdown__content-head {
+	padding: 10px;
+	border-bottom: solid 1px var(--light-grey);
+}
+.dropdown__content-title {
+	font-size: 0.875em;
+}
 
 /**
  * Nav (stacked)

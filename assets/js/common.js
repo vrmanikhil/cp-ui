@@ -17,6 +17,7 @@ $(document).ready(function () {
 		}
 
 		var dropdownPane = container.find('.js-dropdown__pane');
+		var html = elem.parent().find('.dropdown__html').html();
 		var activeElemClicked = false;
 		$.each(container.find('.dropdown__item--clicked'), function (index, value) {
 			if ($(value).is(elem)) {
@@ -28,8 +29,10 @@ $(document).ready(function () {
 
 		if (activeElemClicked) {
 			dropdownPane.addClass('hidden');
+			dropdownPane.html("");
 		} else {
 			dropdownPane.removeClass('hidden');
+			dropdownPane.html(html);
 		}
 
 		elem.toggleClass('dropdown__item--clicked');
