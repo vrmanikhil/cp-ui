@@ -120,8 +120,6 @@
             <span class="media-body"><b>Nikhil Verma</b></span>
           </div>
         </a>
-
-
         <div class="dropdown__pane card hidden js-dropdown__pane"></div>
       </div>
     </div>
