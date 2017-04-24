@@ -37,5 +37,20 @@ class Welcome extends CI_Controller {
 		$this->load->view('userProfile', $this->data);
 	}
 
+	// public function sendEMail(){
+	// 	$this->load->helper('mail_helper');
+	// 	$email = 'itishrisingh@campuspuppy.com';
+	// 	$message =  $this->load->view('emailers/forgotPassword',$data,true);
+	// 	$data = array(
+	// 			'sendToEmail' => $email,
+	// 			'fromName' => 'CampusPuppy Private Limited',
+	// 			'fromEmail' => 'no-reply@campuspuppy.com',
+	// 			'subject' => 'Welcome to CampusPuppy.com',
+	// 			'message' => $message,
+	// 			'using' =>'pepipost'
+	// 			);
+	// 	sendEmail($data);
+	// }
+
 
 }
