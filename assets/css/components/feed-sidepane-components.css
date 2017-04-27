@@ -1,0 +1,36 @@
+.feed-actor-module__featured-bg-image {
+	height: 100px;
+	background-size: cover;
+}
+
+.feed-actor-module__profile-image-container {
+	position: relative;
+	top: -40px;
+	margin-bottom: -30px;
+}
+
+.feed-actor-module__profile-image {
+	width: 80px;
+	display: block;
+	margin: auto;
+}
+
+.feed-actor-module__name,
+.feed-actor-module__actor-meta {
+	margin-bottom: 10px;
+}
+
+.feed-actor-module__connections-card {
+	padding: 15px 10px;
+	color: white;
+}
+
+.feed-actor-module__connections-card-title {
+	text-transform: uppercase;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.feed-actor-module__connections-count {
+	font-size: 1.375em;
+}

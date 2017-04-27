@@ -1,0 +1,29 @@
+.form {}
+.form__label {
+	font-size: 0.9317rem;
+	font-weight: 700;
+}
+
+input,
+input::-webkit-input-placeholder {
+	font-size: 0.875rem;
+}
+
+input[type='submit'] {
+	cursor: pointer;
+}
+
+.form__input {
+	width: 100%;
+	padding: 10px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid var(--semi-light-grey);
+	border-radius: 4px;
+	box-sizing: border-box;
+	outline: none;
+}
+
+.form__input:focus {
+	border-color: var(--grey);
+}
