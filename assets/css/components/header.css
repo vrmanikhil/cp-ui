@@ -43,7 +43,7 @@
 }
 
 .primary-menu__item:last-child {
-	margin-right: 0;
+	margin: 0;
 }
 
 .primary-menu__item:first-child {
@@ -88,4 +88,28 @@
 }
 .notification__date {
 	font-size: 0.875em;
+}
+
+.user-settings {
+	min-width: 125px;
+	width: auto;
+	min-height: auto;
+}
+
+.user-settings__link {
+	display: block;
+	padding: 14px 10px;
+	font-size: 0.9317rem;
+}
+
+.user-settings__link {
+	border-bottom: solid 1px var(--light-grey);
+}
+
+.user-settings__link:hover {
+	background: var(--light-grey);
+}
+
+.user-settings__link:last-child {
+	border-bottom: 0;
 }
