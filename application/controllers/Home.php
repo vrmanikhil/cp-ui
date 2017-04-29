@@ -37,6 +37,10 @@ class Home extends CI_Controller {
 		$this->load->view('userProfile', $this->data);
 	}
 
+	public function addJobOffer(){
+		$this->load->view('addJobOffer', $this->data);
+	}
+
 	// public function sendEMail(){
 	// 	$this->load->helper('mail_helper');
 	// 	$email = 'itishrisingh@campuspuppy.com';
