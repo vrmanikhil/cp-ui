@@ -127,9 +127,9 @@
 					<div class="dropdown__content">
 						<!-- <div class="dropdown__content-head"></div> -->
 						<div class="dropdown__content-body">
-							<a href="/changePassword" class="user-settings__link">User Profile</a>
-							<a href="/changePassword" class="user-settings__link">Change Password</a>
-							<a href="javascript:" class="user-settings__link">Sign Out</a>
+							<a href="/changePassword" class="user-settings__link"><i class="fa fa-user" aria-hidden="true"></i> User Profile</a>
+							<a href="/changePassword" class="user-settings__link"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a>
+							<a href="javascript:" class="user-settings__link"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
 						</div>
 					</div>
 				</div>
