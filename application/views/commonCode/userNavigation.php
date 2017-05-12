@@ -17,4 +17,29 @@
     </span>
     <span class="explore-panel__link-text flex__item">Skills</span>
   </a>
+<!--   <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+    <span class="explore-panel__link-img-container">
+      <img class="explore-panel__link-img flex__item" src="<?php echo base_url('/assets/img/icons/navigation/connections.png'); ?>" alt="">
+    </span>
+    <span class="explore-panel__link-text flex__item">Connections</span>
+  </a>
+  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+    <span class="explore-panel__link-img-container">
+      <img class="explore-panel__link-img flex__item" src="<?php echo base_url('/assets/img/icons/navigation/coat.png'); ?>" alt="">
+    </span>
+    <span class="explore-panel__link-text flex__item">COAT</span>
+  </a>
+  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+    <span class="explore-panel__link-img-container">
+      <img class="explore-panel__link-img flex__item" src="<?php echo base_url('/assets/img/icons/navigation/user-profile.png'); ?>" alt="">
+    </span>
+    <span class="explore-panel__link-text flex__item">User Profile</span>
+  </a> -->
+</div>
+<div class="card card--no-padding">
+	<div class="nav nav--stacked js-nav--stacked">
+		<a href="javascript:" class="nav__link js-nav-link active">Relevant Internships</a>
+		<a href="javascript:" class="nav__link js-nav-link">Browse Internships</a>
+		<a href="javascript:" class="nav__link js-nav-link">Applied Internships</a>
+	</div>
 </div>

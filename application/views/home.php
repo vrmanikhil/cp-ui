@@ -15,7 +15,7 @@
 		<?php echo $header; ?>
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
-				<?php echo $activeUserLeft; ?>
+				<?php echo $userNavigation; ?>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
@@ -82,14 +82,7 @@
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
-				<?php echo $userNavigation; ?>
-				<div class="card card--no-padding">
-					<div class="nav nav--stacked js-nav--stacked">
-						<a href="javascript:" class="nav__link js-nav-link active">Relevant Internships</a>
-						<a href="javascript:" class="nav__link js-nav-link">Browse Internships</a>
-						<a href="javascript:" class="nav__link js-nav-link">Applied Internships</a>
-					</div>
-				</div>
+				<?php echo $activeUserLeft; ?>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
