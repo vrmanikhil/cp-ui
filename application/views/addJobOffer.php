@@ -30,12 +30,12 @@
 				<div class="change-password__section card">
 					<h1 class="change-password__section-title">Add Job Offer</h1>
 					<form class="change-password__form form">
-					<label for="currentPassword" class="form__label">Job Offer Title</label>
-					<input type="password" id="currentPassword" placeholder="Current Password" class="form__input">
-					<label for="newPassword" class="form__label">New Password</label>
-					<input type="password" id="newPassword" placeholder="New Password" class="form__input">
-					<label for="confirmNewPassword" class="form__label">Confirm New Password</label>
-					<input type="password" id="confirmNewPassword" placeholder="Confirm New Password" class="form__input">
+					<label for="jobOfferTitle" class="form__label">Job Offer Title</label>
+					<input type="text" id="jobOfferTitle" placeholder="Job Offer Title" class="form__input">
+					<label for="jobOfferDescription" class="form__label">Job Offer Description</label>
+					<textarea id="jobOfferDescription" placeholder="Job Offer Description" class="form__input"></textarea>
+					<label for="openings" class="form__label">Number of Openings</label>
+					<input type="text" id="openings" placeholder="Number of Openings" class="form__input">
 					<input type="submit" value="Change Password" class="btn btn--primary change-password__form-submit">
 				</form>
 				</div>

@@ -55,6 +55,9 @@ $route['changePassword'] = 'home/changePassword';
 $route['aboutUs'] = 'home/aboutUs';
 $route['userProfile'] = 'home/userProfile';
 
-$route['addJobOffer'] = 'home/addJobOffer';
+$route['jobs/add-job-offer'] = 'home/addJobOffer';
+
+$route['notifications'] = 'home/notifications';
+$route['messages'] = 'home/messages';
 
 $route['translate_uri_dashes'] = FALSE;
