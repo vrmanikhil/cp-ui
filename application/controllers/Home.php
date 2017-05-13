@@ -32,12 +32,32 @@ class Home extends CI_Controller {
 		$this->load->view('aboutUs', $this->data);
 	}
 
+	public function termsAndConditions(){
+		$this->load->view('termsAndConditions', $this->data);
+	}
+
+	public function privacyPolicy(){
+		$this->load->view('privacyPolicy', $this->data);
+	}
+
+	public function contactUs(){
+		$this->load->view('contactUs', $this->data);
+	}
+
 	public function addJobOffer(){
 		$this->load->view('addJobOffer', $this->data);
 	}
 
 	public function notifications(){
 		$this->load->view('notifications', $this->data);
+	}
+
+	public function skillTest(){
+		$this->load->view('skillTest', $this->data);
+	}
+
+	public function skillTestGuidelines(){
+		$this->load->view('skillTestGuidelines', $this->data);
 	}
 
 	// public function sendEMail(){

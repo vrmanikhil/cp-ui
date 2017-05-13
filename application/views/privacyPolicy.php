@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>About Us|CampusPuppy</title>
+	<title>Privacy Policy|CampusPuppy</title>
 	<link href="/assets/css/content.css" rel="stylesheet">
 </head>
 
@@ -15,7 +15,7 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
-					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">About Us</h1>
+					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">Privacy Policy</h1>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
