@@ -24,10 +24,3 @@
     <span class="explore-panel__link-text flex__item">Skills</span>
   </a>
 </div>
-<div class="card card--no-padding">
-	<div class="nav nav--stacked js-nav--stacked">
-		<a href="javascript:" class="nav__link js-nav-link active">Relevant Internships</a>
-		<a href="javascript:" class="nav__link js-nav-link">Browse Internships</a>
-		<a href="javascript:" class="nav__link js-nav-link">Applied Internships</a>
-	</div>
-</div>

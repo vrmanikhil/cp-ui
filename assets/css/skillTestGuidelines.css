@@ -3,6 +3,4 @@
 @import url('/assets/css/base/base.css');
 @import url('/assets/css/components/header.css');
 @import url('/assets/css/components/footer.css');
-.globalContainer > .main-body {
-	max-width: 764px;
-}
+@import url('/assets/css/components/feed-sidepane-components.css');

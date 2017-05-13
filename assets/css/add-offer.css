@@ -5,14 +5,14 @@
 @import url('/assets/css/components/footer.css');
 @import url('/assets/css/components/forms.css');
 @import url('/assets/css/components/feed-sidepane-components.css');
-.change-password__section-title {
+.add-offer__section-title {
 	font-size: 0.9317rem;
 	text-transform: uppercase;
 	text-align: center;
 	margin-top: 0;
 }
 
-.change-password__form-submit {
+.add-offer__form-submit {
 	width: 100%;
 	padding: 14px 20px;
 	border: 0;

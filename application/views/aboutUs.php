@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>About Us|CampusPuppy</title>
-	<link href="/assets/css/about.css" rel="stylesheet">
+	<link href="/assets/css/content.css" rel="stylesheet">
 </head>
 
 <body>
@@ -15,17 +15,12 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
-					<h1>About Us</h1>
+					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">About Us</h1>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
-				<?php echo $userNavigation; ?>
-				<div class="card card--no-padding">
-					<div class="nav nav--stacked js-nav--stacked">
-						<a href="javascript:" class="nav__link js-nav-link active">Relevant Internships</a>
-						<a href="javascript:" class="nav__link js-nav-link">Browse Internships</a>
-						<a href="javascript:" class="nav__link js-nav-link">Applied Internships</a>
-					</div>
+				<div class="post card">
+					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
