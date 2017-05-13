@@ -25,6 +25,11 @@ class Home extends CI_Controller {
 		$this->load->view('home', $this->data);
 	}
 
+	public function jobs()
+	{
+		$this->load->view('jobs', $this->data);
+	}
+
 	public function changePassword(){
 		$this->load->view('changePassword', $this->data);
 	}

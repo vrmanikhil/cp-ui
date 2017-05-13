@@ -54,7 +54,7 @@ $route['404_override'] = '';
 $route['changePassword'] = 'home/changePassword';
 $route['aboutUs'] = 'home/aboutUs';
 $route['userProfile'] = 'home/userProfile';
-
+$route['jobs'] = 'home/jobs';
 $route['jobs/add-job-offer'] = 'home/addJobOffer';
 
 $route['notifications'] = 'home/notifications';
