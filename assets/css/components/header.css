@@ -98,8 +98,12 @@
 
 .user-settings__link {
 	display: block;
-	padding: 14px 10px;
+	padding: 10px;
 	font-size: 0.9317rem;
+}
+
+.user-settings__link > .fa {
+	color: var(--midnight-blue);
 }
 
 .user-settings__link {
