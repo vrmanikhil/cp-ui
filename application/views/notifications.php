@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CampusPuppy</title>
-	<link href="<?php echo base_url('/assets/css/change-password.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/notifications.css'); ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -14,14 +14,39 @@
 		<?php echo $header; ?>
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
-				<?php echo $activeUserLeft; ?>
-				<div class="card">
+				<div class="explore-panel card flex">
+				  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+				    <span class="explore-panel__link-icon-container">
+							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 50.2 50.2" class="briefcase-icon">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#briefcase-icon"></use>
+							</svg>
+				    </span>
+				    <span class="explore-panel__link-text flex__item">Jobs</span>
+				  </a>
+				  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+				    <span class="explore-panel__link-icon-container">
+							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 31.387 31.386" class="computer-icon">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#computer-icon"></use>
+							</svg>
+				    </span>
+				    <span class="explore-panel__link-text flex__item">Internships</span>
+				  </a>
+				  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+				    <span class="explore-panel__link-icon-container">
+							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 232.7 232.7" class="skills-icon">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#skills-icon"></use>
+							</svg>
+				    </span>
+				    <span class="explore-panel__link-text flex__item">Skills</span>
+				  </a>
+				</div>
+				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
 			</aside>
 			<div class="main-body flex__item">
-				<div class="change-password__section card">
-					<h1 class="change-password__section-title">Notifications</h1>
+				<div class="notifications__section card">
+					<h1 class="notifications__section-title">Notifications</h1>
 					<div class="notifications">
 						<a class="flex media notification" href="javascript:">
 							<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&amp;oe=5942A6DD" alt="user" class="media-figure notification__feature-img">
@@ -53,21 +78,32 @@
 								</span>
 							</span>
 						</a>
-						<a class="flex media notification" href="javascript:" style="font-size: 13px;"><b>See All</b></a>
+						<a class="flex media notification" href="javascript:">
+							<img src="https://scontent.fdel1-1.fna.fbcdn.net/v/t1.0-1/p50x50/13892348_1753977728147689_6287852477235695370_n.jpg?oh=4b8af9537d9b9665b2c61c418d4637c5&oe=598E66EF" alt="user" class="media-figure notification__feature-img">
+							<span class="media-body flex flex--col">
+								<span class="notification__message"><strong>Riders Music Festival</strong></span>
+								<span class="notification__message">This is a Test Message.</span>
+								<span class="notification__info">
+									<span class="notification__date">5 April 2017</span>
+								</span>
+							</span>
+						</a>
+						<a class="flex media notification" href="javascript:">
+							<img src="https://scontent.fdel1-1.fna.fbcdn.net/v/t1.0-1/p50x50/13892348_1753977728147689_6287852477235695370_n.jpg?oh=4b8af9537d9b9665b2c61c418d4637c5&oe=598E66EF" alt="user" class="media-figure notification__feature-img">
+							<span class="media-body flex flex--col">
+								<span class="notification__message"><strong>Riders Music Festival</strong></span>
+								<span class="notification__message">This is a Test Message.</span>
+								<span class="notification__info">
+									<span class="notification__date">5 April 2017</span>
+								</span>
+							</span>
+						</a>
+						<center><button type="submit" class="btn btn--primary notifications__load-more">Load More</button></center>
 					</div>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
-				<?php echo $userNavigation; ?>
-				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
-				</div>
-				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
-				</div>
-				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
-				</div>
+				<?php echo $activeUser; ?>
 			</aside>
 		</main>
 		<?php echo $footer; ?>

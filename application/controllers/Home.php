@@ -12,8 +12,7 @@ class Home extends CI_Controller {
 			// $this->data['csrf_token'] = $this->security->get_csrf_hash();
 			$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 			$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
-			$this->data['activeUserLeft'] = $this->load->view('commonCode/activeUserLeft', $this->data, true);
-			$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
+			$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
 			// $this->data['foot'] = $this->load->view('backoffice/common/foot', $this->data, true);
 			// $this->data['navigation'] = $this->load->view('backoffice/common/navigation', $this->data, true);
 			// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
@@ -33,20 +32,12 @@ class Home extends CI_Controller {
 		$this->load->view('aboutUs', $this->data);
 	}
 
-	public function userProfile(){
-		$this->load->view('userProfile', $this->data);
-	}
-
 	public function addJobOffer(){
 		$this->load->view('addJobOffer', $this->data);
 	}
 
 	public function notifications(){
 		$this->load->view('notifications', $this->data);
-	}
-
-	public function messages(){
-		$this->load->view('messages', $this->data);
 	}
 
 	// public function sendEMail(){
