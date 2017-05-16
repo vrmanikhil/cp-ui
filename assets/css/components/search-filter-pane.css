@@ -1,0 +1,32 @@
+.search-filter__head {
+	background: var(--midnight-blue);
+	color: white;
+	padding: 10px;
+}
+
+.search-filter__body .form-control {
+	border: 1px solid var(--light-grey);
+}
+
+.search-filter__head > p {
+	font-size: 0.875rem;
+}
+
+.search-filter__form {
+	padding: 10px;
+}
+
+.search-filter__form label {
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+.search-filter__list {
+	max-height: 110px;
+	overflow-y: scroll;
+}
+
+.search-filter__list-item {
+	padding: 10px;
+	border-top: 1px solid var(--light-grey);
+}

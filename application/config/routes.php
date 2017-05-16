@@ -57,7 +57,7 @@ $route['terms-and-conditions'] = 'home/termsAndConditions';
 $route['privacy-policy'] = 'home/privacyPolicy';
 $route['contact-us'] = 'home/contactUs';
 $route['userProfile'] = 'home/userProfile';
-
+$route['jobs'] = 'home/jobs';
 $route['jobs/add-job-offer'] = 'home/addJobOffer';
 
 $route['notifications'] = 'home/notifications';

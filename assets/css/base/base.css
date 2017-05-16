@@ -8,6 +8,9 @@
 	--semi-light-grey: #ccc;
 	--grey: #999999;
 	--light-black: #333;
+	--yellow: #f1c40f;
+	--red: #c0392b;
+	--green: #2ecc71;
 }
 
 
@@ -23,10 +26,17 @@ body {
 p,
 span,
 a,
-div {
+div,
+input,
+button {
 	font-size: 1rem;
 	margin: 0;
-	line-height: 1rem;
+	line-height: 1.2rem;
+	letter-spacing: 0.5px;
+}
+
+h1 {
+	line-height: 1em;
 }
 
 a {
@@ -50,6 +60,17 @@ a {
 	color: white;
 }
 
+.red {
+	color: var(--red);
+}
+
+.yellow {
+	color: var(--yellow);
+}
+
+.green {
+	color: var(--green);
+}
 
 /**
  * Base rules
@@ -89,6 +110,10 @@ a {
 	padding: 0;
 }
 
+.card--no-shadow {
+	box-shadow: none;
+}
+
 .textarea {
 	border: 1px solid var(--light-grey);
 }
@@ -96,6 +121,7 @@ a {
 .btn {
 	border: 1px solid var(--light-grey);
 	background: #fff;
+	cursor: pointer;
 }
 
 .btn--primary {

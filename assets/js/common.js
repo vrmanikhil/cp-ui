@@ -72,4 +72,11 @@ $(document).ready(function () {
 		elem.addClass('active');
 	});
 
+	// Prevent overflow of body when mouse enter
+	$(document).on('mouseenter', '.js-prevent-body-scroll', function (e) {
+		$('body').css({ 'overflow': 'hidden' });
+	});
+	$(document).on('mouseleave', '.js-prevent-body-scroll', function (e) {
+		$('body').css({ 'overflow': 'auto' });
+	});
 });
