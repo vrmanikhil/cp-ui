@@ -8,8 +8,8 @@
 	<div class=" feed-actor-module__actor-meta">
 		<p class="text-center feed-actor-module__name">Nikhil Verma</p>
 		<div class="media flex">
-			<img src="<?php echo base_url('/assets/img/bits.jpg'); ?>" alt="" class="media-figure img-50">
-			<p class="media-body text-center bold flex s-12 align-center margin-l-5">Birla Institute of Information Technology and Science Pilani</p>
+			<img src="<?php echo base_url('/assets/img/jss.png'); ?>" alt="" class="media-figure img-50">
+			<p class="media-body text-center bold flex s-12 align-center margin-l-5">JSS Academy of Technical Education, Noida</p>
 		</div>
 	</div>
 	<div class="feed-actor-module__connections-card" style="background: url('/assets/img/connections.jpg') center no-repeat; background-size: cover;">

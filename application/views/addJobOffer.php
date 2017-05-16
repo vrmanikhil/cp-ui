@@ -43,8 +43,8 @@
 				</div>
 				<div class="card card--no-padding">
 					<div class="nav nav--stacked js-nav--stacked">
-						<a href="javascript:" class="nav__link js-nav-link active">Add Job Offer</a>
-						<a href="javascript:" class="nav__link js-nav-link">My Job Offers</a>
+						<a href="<?php echo base_url('jobs/add-job-offer'); ?>" class="nav__link js-nav-link active">Add Job Offer</a>
+						<a href="javascript:" class="nav__link js-nav-link">Added Job Offers</a>
 					</div>
 				</div>
 				<div class="post card">

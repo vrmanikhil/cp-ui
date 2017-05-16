@@ -8,8 +8,8 @@
       <a href="<?php echo base_url('about-us'); ?>" class="footer-nav__link footer-text"><b>About Us</b></a>
       <a href="<?php echo base_url('privacy-policy'); ?>" class="footer-nav__link footer-text"><b>Privacy Policy</b></a>
       <a href="<?php echo base_url('terms-and-conditions'); ?>" class="footer-nav__link footer-text"><b>Terms and Conditions</b></a>
-      <a href="javascript:" class="footer-nav__link footer-text"><b>COAT</b></a>
-      <a href="javascript:" class="footer-nav__link footer-text"><b>Contact Us</b></a>
+      <a href="<?php echo base_url('coat'); ?>" class="footer-nav__link footer-text"><b>COAT</b></a>
+      <a href="<?php echo base_url('contactUs'); ?>" class="footer-nav__link footer-text"><b>Contact Us</b></a>
     </nav>
   </div>
 </footer>

@@ -6,7 +6,7 @@ class Home extends CI_Controller {
 	public function __construct(){
 			parent::__construct();
 			$this->load->helper(array('url'));
-			// $this->load->library(array('Data_lib', 'session'));
+			$this->load->library(array('Home_lib', 'session'));
 			$this->data = array();
 			// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
 			// $this->data['csrf_token'] = $this->security->get_csrf_hash();
@@ -25,10 +25,35 @@ class Home extends CI_Controller {
 		$this->load->view('home', $this->data);
 	}
 
-	public function jobs()
-	{
-		$this->load->view('jobs', $this->data);
+	//Job Offers- Normal Users
+
+	public function relevantJobs(){
+		$this->load->view('relevantJobs', $this->data);
 	}
+
+	public function jobOffers(){
+		$this->load->view('jobOffers', $this->data);
+	}
+
+	public function appliedJobOffers(){
+		$this->load->view('appliedJobOffers', $this->data);
+	}
+
+	//Internship Offers- Normal Users
+
+	public function relevantInternships(){
+		$this->load->view('relevantInternships', $this->data);
+	}
+
+	public function internshipOffers(){
+		$this->load->view('internshipOffers', $this->data);
+	}
+
+	public function appliedInternshipOffers(){
+		$this->load->view('appliedInternshipOffers', $this->data);
+	}
+
+	//
 
 	public function changePassword(){
 		$this->load->view('changePassword', $this->data);
@@ -46,12 +71,21 @@ class Home extends CI_Controller {
 		$this->load->view('privacyPolicy', $this->data);
 	}
 
+	public function coat(){
+		$this->load->view('coat', $this->data);
+	}
+
 	public function contactUs(){
 		$this->load->view('contactUs', $this->data);
 	}
 
 	public function addJobOffer(){
+		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->load->view('addJobOffer', $this->data);
+	}
+
+	public function addedJobOffers(){
+		$this->load->view('addedJobOffers', $this->data);
 	}
 
 	public function notifications(){

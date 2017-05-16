@@ -52,13 +52,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['changePassword'] = 'home/changePassword';
+$route['userProfile'] = 'home/userProfile';
+
+
+//Footer Links
+
 $route['about-us'] = 'home/aboutUs';
 $route['terms-and-conditions'] = 'home/termsAndConditions';
 $route['privacy-policy'] = 'home/privacyPolicy';
+$route['coat'] = 'home/coat';
 $route['contact-us'] = 'home/contactUs';
-$route['userProfile'] = 'home/userProfile';
-$route['jobs'] = 'home/jobs';
+
+//Job Offers- Normal Users
+
+$route['jobs/relevant-jobs'] = 'home/relevantJobs';
+$route['jobs/job-offers'] = 'home/jobOffers';
+$route['jobs/applied-job-offers'] = 'home/appliedJobOffers';
+
+//Internship Offers- Normal Users
+
+$route['internships/relevant-internships'] = 'home/relevantInternships';
+$route['internships/internship-offers'] = 'home/internshipOffers';
+$route['internships/applied-internship-offers'] = 'home/appliedInternshipOffers';
+
+//Job Offers- Employers
+
 $route['jobs/add-job-offer'] = 'home/addJobOffer';
+$route['jobs/added-job-offer'] = 'home/addedJobOffers';
 
 $route['notifications'] = 'home/notifications';
 $route['messages'] = 'home/messages';
