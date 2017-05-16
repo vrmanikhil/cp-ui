@@ -52,6 +52,10 @@ class Home extends CI_Controller {
 		$this->load->view('notifications', $this->data);
 	}
 
+	public function messages(){
+		$this->load->view('messages', $this->data);
+	}
+
 	public function skillTest(){
 		$this->load->view('skillTest', $this->data);
 	}

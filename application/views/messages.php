@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CampusPuppy</title>
-	<link href="<?php echo base_url('/assets/css/notifications.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/messages.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -46,8 +46,9 @@
 				</div>
 			</aside>
 			<div class="main-body flex__item">
-				<div class="notifications__section card">
-					<h1 class="notifications__section-title">Notifications</h1>
+				<div class="messages__section card">
+					<h1 class="messages__section-title">Messages</h1>
+					<button class="btn btn-primary" class="messages__load-more" style="float:right;"><i class="fa fa-pencil" aria-hidden="true"></i> Compose New</button>
 					<div class="notifications">
 						<a class="flex media notification" href="javascript:">
 							<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&amp;oe=5942A6DD" alt="user" class="media-figure notification__feature-img">
@@ -99,7 +100,7 @@
 								</span>
 							</span>
 						</a>
-						<center><button type="submit" class="btn btn--primary notifications__load-more">Load More</button></center>
+						<center><button type="submit" class="btn btn--primary messages__load-more">Load More</button></center>
 					</div>
 				</div>
 			</div>
