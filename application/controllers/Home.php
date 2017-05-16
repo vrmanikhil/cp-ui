@@ -13,6 +13,7 @@ class Home extends CI_Controller {
 			$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 			$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
 			$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
+			$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
 			// $this->data['foot'] = $this->load->view('backoffice/common/foot', $this->data, true);
 			// $this->data['navigation'] = $this->load->view('backoffice/common/navigation', $this->data, true);
 			// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
