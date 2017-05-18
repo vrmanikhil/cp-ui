@@ -77,7 +77,34 @@
 					<textarea id="jobOfferDescription" placeholder="Job Offer Description" class="form__input"></textarea>
 					<label for="openings" class="form__label">Number of Openings</label>
 					<input type="text" id="openings" placeholder="Number of Openings" class="form__input">
-					<input type="submit" value="Change Password" class="btn btn--primary add-offer__form-submit">
+					<label for="partTime" class="form__label">Part Time Allowed</label>
+					<select type="text" id="partTime" placeholder="Part Time Allowed" class="form__input">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</select>
+					<label for="startDate" class="form__label">Internship Start Date</label>
+					<input type="date" id="startDate" placeholder="Internship Start Date" class="form__input">
+					<label for="applicationDeadline" class="form__label">Application Deadline</label>
+					<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input">
+					<label for="stipendType" class="form__label">Stipend Type</label>
+					<select id="stipendType" placeholder="Stipend Type" class="form__input">
+						<option value="1">No Stipend</option>
+						<option value="1">Offered in Range</option>
+						<option value="2">Fixed</option>
+					</select>
+					<label for="minimumStipend" class="form__label">Minimum Stipend</label>
+					<input type="text" id="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+					<label for="maximumStipend" class="form__label">Maximum Stipend</label>
+					<input type="text" id="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+					<label for="stipend" class="form__label">Stipend</label>
+					<input type="text" id="stipend" placeholder="Stipend" class="form__input">
+					<label for="applicants" class="form__label">Applicant Type</label>
+					<select type="text" id="partTime" placeholder="Applicant Type" class="form__input">
+						<option value="1">100% Match with Skills</option>
+						<option value="2">Partial Match</option>
+						<option value="3">Anyone can Apply</option>
+					</select>
+					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>
 			</div>
