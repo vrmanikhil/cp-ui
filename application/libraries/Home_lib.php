@@ -8,4 +8,10 @@ class Home_lib {
 		return $CI->homeModel->getLocations();
 	}
 
+	public function getSkills(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSkills();
+	}
+
 }

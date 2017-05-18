@@ -12,4 +12,9 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getSkills(){
+		$result = $this->db->get('skills');
+		return $result->result_array();
+	}
+
 }

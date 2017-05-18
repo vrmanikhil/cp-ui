@@ -59,7 +59,7 @@
                       </span>
                     </span>
                   </a>
-                  <a class="flex media notification" href="javascript:" style="font-size: 13px;"><b>See All</b></a>
+                  <a class="flex media notification" href="<?php echo base_url('messages'); ?>" style="font-size: 13px;"><b>See All</b></a>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@
 											</span>
 										</span>
 									</a>
-									<a class="flex media notification" href="javascript:" style="font-size: 13px;"><b>See All</b></a>
+									<a class="flex media notification" href="<?php echo base_url('notifications'); ?>" style="font-size: 13px;"><b>See All</b></a>
 								</div>
 							</div>
 						</div>

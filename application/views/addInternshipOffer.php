@@ -8,6 +8,22 @@
 	<title>CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/add-offer.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+.skill{
+  border-radius: 3px;
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  margin: 0 8px 6px 0;
+  padding: 0 8px 0 8px;
+  font-weight: 400;
+  white-space: nowrap;
+  background-color: #E0EDF5;
+  color: #2F5D92;
+}
+</style>
+
 </head>
 
 <body>
@@ -104,6 +120,22 @@
 						<option value="2">Partial Match</option>
 						<option value="3">Anyone can Apply</option>
 					</select>
+
+					<label class="form__label">Skills</label>
+					<select id="skills" class="form__input" required>
+						<?php foreach ($skills as $key => $value) { ?>
+							<option value="<?php echo $value['skill_name'] ?>" skill-id="<?php echo $value['skillID'] ?>"><?php echo $value['skill_name'] ?></option>
+					 <?php  } ?>
+					</select>
+					<a href="javascript:" class="addSkill">Add</a>
+					<br><br>
+					<div class="selectedSkills">
+						<label class="form__label">Skills Required-</label>
+						<input type="hidden" name="selected_skills">
+					</div>
+					<br><br><br><br><br><br>
+
+
 					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>
@@ -134,6 +166,48 @@
 			editor = CKEDITOR.replace('jobOfferDescription');
 		});
 		</script>
+
+		<script>
+  	var skills_arr =[]
+  	var selectedSkills = [];
+
+  	$(document).on('click','.addSkill',function(){
+  	  var skill ={}
+  	  skill.skillname = $('#skills').find(":selected").val();
+  	  skill.skillID = $('#skills').find(":selected").attr('skill-id');
+  		if(!isAlreadyPresentSkill(skill.skillID)){
+  	    var html='<p class="skill">'+skill.skillname+
+  			' <a href="javascript:" data-skill="'+skill.skillname+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'">X</a></p>';
+  	    selectedSkills.push(skill);
+  	    $('.selectedSkills').append(html);
+  	  }
+  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
+  	});
+
+  	    function isAlreadyPresentSkill(id){
+  	        if(selectedSkills.length == 0)
+  	            return false
+  	        var alreadyPresent = false
+  					selectedSkills.forEach(function(value){
+  	            if(value.skillID == id)
+  	                alreadyPresent =true
+  	        })
+  	        return alreadyPresent
+  	    }
+  	$(document).on('click','.skill a',function(){
+  	  var skill = $(this).attr('data-skill');
+  	 	var parent = $(this).parent();
+
+  	  if(selectedSkills.length > 0)
+  	  {
+  	    delete selectedSkills[$(this).attr('index')]
+  	    $(this).parent().remove();
+  	  }
+  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
+  	});
+
+  	</script>
+
 </body>
 
 </html>

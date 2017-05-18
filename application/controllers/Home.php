@@ -89,6 +89,7 @@ class Home extends CI_Controller {
 	}
 
 	public function addInternshipOffer(){
+		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->load->view('addInternshipOffer', $this->data);
 	}
