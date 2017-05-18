@@ -283,3 +283,24 @@ a {
 	color: #ccc;
 	content: "/\00a0";
 }
+
+/*flash message */
+
+.message{
+ padding:5px 0;
+ text-align: center;
+ color:white;
+ background-color: white;
+}
+.message.success{
+ background-color: #27ae60;
+}
+.message.error{
+ background-color:#c0392b;
+}
+.message p{
+ margin-bottom: 0;
+ font-weight: 500;
+ font-size: 14px;
+ letter-spacing: .5px;
+}

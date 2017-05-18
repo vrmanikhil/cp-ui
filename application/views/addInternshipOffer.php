@@ -16,7 +16,7 @@
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
 				<div class="explore-panel card flex">
-				  <a href="<?php echo base_url('jobs/add-job-offer'); ?>" class="explore-panel__link active flex flex--col flex__item align-center">
+				  <a href="<?php echo base_url('jobs/add-job-offer'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 50.2 50.2" class="briefcase-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#briefcase-icon"></use>
@@ -24,7 +24,7 @@
 				    </span>
 				    <span class="explore-panel__link-text flex__item">Jobs</span>
 				  </a>
-				  <a href="<?php echo base_url('internships/add-internship-offer'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
+				  <a href="<?php echo base_url('internships/add-internship-offer'); ?>" class="explore-panel__link active flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 31.387 31.386" class="computer-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#computer-icon"></use>
@@ -43,8 +43,8 @@
 				</div>
 				<div class="card card--no-padding">
 					<div class="nav nav--stacked js-nav--stacked">
-						<a href="<?php echo base_url('jobs/add-job-offer'); ?>" class="nav__link js-nav-link active">Add Job Offer</a>
-						<a href="<?php echo base_url('jobs/added-job-offer'); ?>" class="nav__link js-nav-link">Added Job Offers</a>
+						<a href="<?php echo base_url('internships/add-internship-offer'); ?>" class="nav__link js-nav-link active">Add Internship Offer</a>
+						<a href="<?php echo base_url('internships/added-internship-offer'); ?>" class="nav__link js-nav-link">Added Internship Offers</a>
 					</div>
 				</div>
 				<div class="post card">
@@ -64,16 +64,16 @@
 				<div class="card">
 					<ol class="breadcrumb">
 						<li><a href="<?php echo base_url(); ?>">Home</a></li>
-						<li><a href="<?php echo base_url('jobs/add-job-offer'); ?>">Jobs</a></li>
-						<li class="active">Add Job Offer</li>
+						<li><a href="<?php echo base_url('jobs/add-internship-offer'); ?>">Internships</a></li>
+						<li class="active">Add Internship Offer</li>
 					</ol>
 				</div>
 				<div class="add-offer__section card">
-					<h1 class="add-offer__section-title">Add Job Offer</h1>
+					<h1 class="add-offer__section-title">Add Internship Offer</h1>
 					<form class="add-offer__form form">
-					<label for="jobOfferTitle" class="form__label">Job Offer Title</label>
+					<label for="jobOfferTitle" class="form__label">Internship Offer Title</label>
 					<input type="text" id="jobOfferTitle" placeholder="Job Offer Title" class="form__input">
-					<label for="jobOfferDescription" class="form__label">Job Offer Description</label>
+					<label for="jobOfferDescription" class="form__label">Internship Offer Description</label>
 					<textarea id="jobOfferDescription" placeholder="Job Offer Description" class="form__input"></textarea>
 					<label for="openings" class="form__label">Number of Openings</label>
 					<input type="text" id="openings" placeholder="Number of Openings" class="form__input">

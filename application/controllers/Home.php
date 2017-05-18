@@ -88,6 +88,15 @@ class Home extends CI_Controller {
 		$this->load->view('addedJobOffers', $this->data);
 	}
 
+	public function addInternshipOffer(){
+		$this->data['locations'] = $this->home_lib->getLocations();
+		$this->load->view('addInternshipOffer', $this->data);
+	}
+
+	public function addedInternshipOffers(){
+		$this->load->view('addedInternshipOffers', $this->data);
+	}
+
 	public function notifications(){
 		$this->load->view('notifications', $this->data);
 	}

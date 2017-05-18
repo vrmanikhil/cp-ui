@@ -18,7 +18,7 @@
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
 				<div class="explore-panel card flex">
-				  <a href="<?php echo base_url('jobs/job-offers'); ?>" class="explore-panel__link flex active flex--col flex__item align-center">
+				  <a href="<?php echo base_url('jobs/add-job-offer'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 50.2 50.2" class="briefcase-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#briefcase-icon"></use>
@@ -26,7 +26,7 @@
 				    </span>
 				    <span class="explore-panel__link-text flex__item">Jobs</span>
 				  </a>
-				  <a href="<?php echo base_url('internships/internship-offers'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
+				  <a href="<?php echo base_url('internships/add-internship-offer'); ?>" class="explore-panel__link active flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 31.387 31.386" class="computer-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#computer-icon"></use>
@@ -45,92 +45,29 @@
 				</div>
 				<div class="card card--no-padding">
 					<div class="nav nav--stacked js-nav--stacked">
-						<a href="<?php echo base_url('jobs/relevant-jobs'); ?>" class="nav__link js-nav-link">Relevant Job Offers</a>
-						<a href="<?php echo base_url('jobs/job-offers'); ?>" class="nav__link js-nav-link active">Browse Job Offers</a>
-						<a href="<?php echo base_url('jobs/applied-job-offers'); ?>" class="nav__link js-nav-link">Applied Job Offers</a>
-					</div>
-				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Locations</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list js-prevent-body-scroll">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Delhi
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Gurugram
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Greader Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Bangalore
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Skills</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> HTML
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Javascript
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> CSS
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> PHP
-								</label>
-							</div>
-						</div>
+						<a href="<?php echo base_url('internships/add-internship-offer'); ?>" class="nav__link js-nav-link">Add Internship Offer</a>
+						<a href="<?php echo base_url('internships/added-internship-offer'); ?>" class="nav__link js-nav-link active">Added Internship Offers</a>
 					</div>
 				</div>
 				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- CampusPuppy -->
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-client="ca-pub-2273757004475004"
+					     data-ad-slot="7062717170"
+					     data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 				</div>
 			</aside>
 			<div class="main-body flex__item">
 				<div class="card">
 					<ol class="breadcrumb">
 						<li><a href="<?php echo base_url(); ?>">Home</a></li>
-						<li><a href="<?php echo base_url('jobs/job-offers'); ?>">Jobs</a></li>
-						<li class="active">Browse Job Offers</li>
+						<li><a href="<?php echo base_url('internships/add-internship-offer'); ?>">Internships</a></li>
+						<li class="active">Added Internship Offers</li>
 					</ol>
 				</div>
 				<div class="card posting-card">
@@ -140,13 +77,10 @@
 							<p class="posting-card__title">
 								<strong>Silver Touch Technologies Limited</strong>
 							</p>
-							<p class="posting-card__desc">Android Developer</p>
-							<p class="posting-card__post-location">
-								<i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span>Noida</span>
-							</p>
-							<p class="posting-card__status"><strong>Skills</strong> : <span>PHP, HTML, CSS, JavaScript</span></p>
+							<p class="posting-card__desc">PHP Developer</p>
+							<p class="posting-card__status"><strong>Skills</strong> : <span>PHP, HTML, CSS, JavaScript, JavaScript</span></p>
 							<div class="posting-card__apply">
+								<button class="btn white midnight-blue-bg s-14">View Applicants</button>
 								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
 							</div>
 						</div>

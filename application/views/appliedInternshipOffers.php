@@ -34,7 +34,7 @@
 				    </span>
 				    <span class="explore-panel__link-text flex__item">Internships</span>
 				  </a>
-				  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+				  <a href="<?php echo base_url('skills'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 232.7 232.7" class="skills-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#skills-icon"></use>
@@ -45,91 +45,29 @@
 				</div>
 				<div class="card card--no-padding">
 					<div class="nav nav--stacked js-nav--stacked">
-						<a href="<?php echo base_url('jobs/relevant-jobs'); ?>" class="nav__link js-nav-link">Relevant Internship Offers</a>
-						<a href="<?php echo base_url('jobs/job-offers'); ?>" class="nav__link js-nav-link">Browse Internship Offers</a>
-						<a href="<?php echo base_url('jobs/applied-job-offers'); ?>" class="nav__link js-nav-link active">Applied Internship Offers</a>
-					</div>
-				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Locations</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list js-prevent-body-scroll">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Delhi
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Gurugram
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Greader Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Bangalore
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Skills</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> HTML
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Javascript
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> CSS
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> PHP
-								</label>
-							</div>
-						</div>
+						<a href="<?php echo base_url('internships/relevant-internships'); ?>" class="nav__link js-nav-link">Relevant Internship Offers</a>
+						<a href="<?php echo base_url('internships/internship-offers'); ?>" class="nav__link js-nav-link">Browse Internship Offers</a>
+						<a href="<?php echo base_url('internships/applied-internship-offers'); ?>" class="nav__link js-nav-link active">Applied Internship Offers</a>
 					</div>
 				</div>
 				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- CampusPuppy -->
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-client="ca-pub-2273757004475004"
+					     data-ad-slot="7062717170"
+					     data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 				</div>
 			</aside>
 			<div class="main-body flex__item">
 				<div class="card">
 					<ol class="breadcrumb">
-						<li><a href="/">Home</a></li>
-						<li><a href="/">Internships</a></li>
+						<li><a href="<?php echo base_url(); ?>">Home</a></li>
+						<li><a href="<?php echo base_url('internships/internship-offers'); ?>">Internships</a></li>
 						<li class="active">Applied Internship Offers</li>
 					</ol>
 				</div>
@@ -182,10 +120,16 @@
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>
 				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
-				</div>
-				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- CampusPuppy -->
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-client="ca-pub-2273757004475004"
+					     data-ad-slot="7062717170"
+					     data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 				</div>
 			</aside>
 		</main>

@@ -51,9 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
-$route['changePassword'] = 'home/changePassword';
-$route['userProfile'] = 'home/userProfile';
 
+$route['change-password'] = 'home/changePassword';
+$route['userProfile'] = 'home/userProfile';
+$route['notifications'] = 'home/notifications';
+$route['messages'] = 'home/messages';
+$route['connections'] = 'home/connections';
 
 //Footer Links
 
@@ -62,6 +65,8 @@ $route['terms-and-conditions'] = 'home/termsAndConditions';
 $route['privacy-policy'] = 'home/privacyPolicy';
 $route['coat'] = 'home/coat';
 $route['contact-us'] = 'home/contactUs';
+
+$rote['skills/browse-skills'] = 'home/browseSkills';
 
 //Job Offers- Normal Users
 
@@ -80,8 +85,12 @@ $route['internships/applied-internship-offers'] = 'home/appliedInternshipOffers'
 $route['jobs/add-job-offer'] = 'home/addJobOffer';
 $route['jobs/added-job-offer'] = 'home/addedJobOffers';
 
-$route['notifications'] = 'home/notifications';
-$route['messages'] = 'home/messages';
+//Internship Offers- Employers
+
+$route['internships/add-internship-offer'] = 'home/addInternshipOffer';
+$route['internships/added-internship-offer'] = 'home/addedInternshipOffers';
+
+//Skills
 
 $route['skills/skill-test'] = 'home/skillTest';
 $route['skills/skill-test-guidelines'] = 'home/skillTestGuidelines';
