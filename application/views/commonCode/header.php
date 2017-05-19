@@ -80,7 +80,6 @@
 										<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&amp;oe=5942A6DD" alt="user" class="media-figure notification__feature-img">
 										<span class="media-body flex flex--col">
 											<span class="notification__message"><strong>Nikhil</strong> commented on a post that you're tagged in. </span>
-											<span class="notification__message">This is a Test Message.</span>
 											<span class="notification__info">
 												<span class="notification__date">19 April 2017</span>
 											</span>

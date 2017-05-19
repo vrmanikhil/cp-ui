@@ -72,12 +72,122 @@
 					<h1 class="add-offer__section-title">Add Job Offer</h1>
 					<form class="add-offer__form form">
 					<label for="jobOfferTitle" class="form__label">Job Offer Title</label>
-					<input type="text" id="jobOfferTitle" placeholder="Job Offer Title" class="form__input">
+					<input type="text" id="jobOfferTitle" placeholder="Job Offer Title" class="form__input" required>
 					<label for="jobOfferDescription" class="form__label">Job Offer Description</label>
-					<textarea id="jobOfferDescription" placeholder="Job Offer Description" class="form__input"></textarea>
-					<label for="openings" class="form__label">Number of Openings</label>
-					<input type="text" id="openings" placeholder="Number of Openings" class="form__input">
-					<input type="submit" value="Change Password" class="btn btn--primary add-offer__form-submit">
+					<textarea id="jobOfferDescription" placeholder="Job Offer Description" class="form__input" required></textarea>
+					<div class="flex">
+						<div class="form-group">
+							<label for="openings" class="form__label">Number of Openings</label>
+							<input type="text" id="openings" placeholder="Number of Openings" class="form__input" required>
+						</div>
+						<div class="form-group">
+							<label for="partTime" class="form__label">Part Time Allowed</label>
+							<select type="text" id="partTime" placeholder="Part Time Allowed" class="form__input" required>
+								<option value="1">Yes</option>
+								<option value="0">No</option>
+							</select>
+						</div>
+					</div>
+					<div class="flex">
+						<div class="form-group">
+							<label for="startDate" class="form__label">Joining Date</label>
+							<input type="date" id="startDate" placeholder="Internship Start Date" class="form__input" required>
+						</div>
+						<div class="form-group">
+							<label for="applicationDeadline" class="form__label">Application Deadline</label>
+							<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
+						</div>
+					</div>
+					<div class="flex">
+						<div class="form-group">
+							<label for="durationType" class="form__label">Duration Type</label>
+							<select type="text" id="durationType" placeholder="Duration Type" class="form__input" required>
+								<option value="1">Fixed</option>
+								<option value="2">Flexible</option>
+							</select>
+						</div>
+						<div class="form-group" id="durationValue">
+							<label for="duration" class="form__label">Duration (in weeks)</label>
+							<input type="text" id="duration" placeholder="Duration" class="form__input">
+						</div>
+					</div>
+					<label for="stipendType" class="form__label">Stipend Type</label>
+					<select id="stipendType" placeholder="Stipend Type" class="form__input" required>
+						<option value="1">No Stipend</option>
+						<option value="2">Expenses Covered</option>
+						<option value="3">Offered in Range</option>
+						<option value="4">Fixed Stipend</option>
+					</select>
+					<div class="flex" id="offeredRange" style="display: none;">
+						<div class="form-group">
+							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
+							<input type="text" id="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+						</div>
+						<div class="form-group">
+							<label for="maximumStipend" class="form__label">Maximum Stipend</label>
+							<input type="text" id="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+						</div>
+					</div>
+					<div id="fixedStipend" style="display: none;">
+					<label for="stipend" class="form__label">Stipend</label>
+					<input type="text" id="stipend" placeholder="Stipend" class="form__input">
+					</div>
+					<div class="flex">
+						<div class="form-group">
+							<label for="applicants" class="form__label">Applicant Type</label>
+							<select type="text" id="applicants" placeholder="Applicant Type" class="form__input" required>
+								<option value="1">100% Match with Skills</option>
+								<option value="2">Partial Match</option>
+								<option value="3">Anyone can Apply</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="internshipType" class="form__label">Internship Type</label>
+							<select type="text" id="internshipType" placeholder="Applicant Type" class="form__input" required>
+								<option value="1">Work from Home</option>
+								<option value="2">In-Office/On-Field</option>
+							</select>
+						</div>
+					</div>
+					<div>
+					<div class="flex">
+						<div class="form-group" style="width: 85%;">
+							<label class="form__label">Skills</label>
+							<select id="skills" class="form__input" required>
+								<?php foreach ($skills as $key => $value) { ?>
+									<option value="<?php echo $value['skill_name'] ?>" skill-id="<?php echo $value['skillID'] ?>"><?php echo $value['skill_name'] ?></option>
+							 <?php  } ?>
+							</select>
+						</div>
+						<div class="form-group" style="margin-top: 38px; width: 15%;">
+							<a href="javascript:" class="addSkill btn btn--primary add-skill-location">Add</a>
+						</div>
+					</div>
+					<div class="selectedSkills">
+						<label class="form__label">Skill(s) Required-</label>
+						<input type="hidden" name="selected_skills">
+					</div>
+					</div>
+					<div id="cityLocations" style="display: none;">
+					<div class="flex">
+						<div class="form-group" style="width: 85%;">
+							<label class="form__label">Locations</label>
+							<select id="locations" class="form__input" required>
+								<?php foreach ($locations as $key => $value) { ?>
+									<option value="<?php echo $value['city'].", ".$value['state']; ?>" location-id="<?php echo $value['cityID'] ?>"><?php echo $value['city'].", ".$value['state']; ?></option>
+							 <?php  } ?>
+							</select>
+						</div>
+						<div class="form-group" style="margin-top: 38px; width: 15%;">
+							<a href="javascript:" class="addLocation btn btn--primary add-skill-location">Add</a>
+						</div>
+					</div>
+					<div class="selectedLocations">
+						<label class="form__label">Internship Location(s)-</label>
+						<input type="hidden" name="selected_skills">
+					</div>
+					</div>
+					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>
 			</div>
@@ -107,6 +217,122 @@
 			editor = CKEDITOR.replace('jobOfferDescription');
 		});
 		</script>
+		<script type="text/javascript">
+
+		 $('#stipendType').on('change',function(){
+		   if( $(this).val()==="4"){
+		     $("#fixedStipend").show()
+		   }
+		   else{
+		     $("#fixedStipend").hide()
+		   }
+		 });
+		 $('#stipendType').on('change',function(){
+		   if( $(this).val()==="3"){
+		     $("#offeredRange").show()
+		   }
+		   else{
+		     $("#offeredRange").hide()
+		   }
+		 });
+		 $('#internshipType').on('change',function(){
+			 if( $(this).val()==="2"){
+				 $("#cityLocations").show()
+			 }
+			 else{
+				 $("#cityLocations").hide()
+			 }
+		 });
+		 $('#durationType').on('change',function(){
+			 if( $(this).val()==="1"){
+				 $("#durationValue").show()
+			 }
+			 else{
+				 $("#durationValue").hide()
+			 }
+		 });
+		</script>
+			<script>
+	  	var skills_arr =[]
+	  	var selectedSkills = [];
+
+	  	$(document).on('click','.addSkill',function(){
+	  	  var skill ={}
+	  	  skill.skillname = $('#skills').find(":selected").val();
+	  	  skill.skillID = $('#skills').find(":selected").attr('skill-id');
+	  		if(!isAlreadyPresentSkill(skill.skillID)){
+	  	    var html='<p class="skill">'+skill.skillname+
+	  			' <a href="javascript:" data-skill="'+skill.skillname+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+	  	    selectedSkills.push(skill);
+	  	    $('.selectedSkills').append(html);
+	  	  }
+	  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
+	  	});
+
+	  	    function isAlreadyPresentSkill(id){
+	  	        if(selectedSkills.length == 0)
+	  	            return false
+	  	        var alreadyPresent = false
+	  					selectedSkills.forEach(function(value){
+	  	            if(value.skillID == id)
+	  	                alreadyPresent =true
+	  	        })
+	  	        return alreadyPresent
+	  	    }
+	  	$(document).on('click','.skill a',function(){
+	  	  var skill = $(this).attr('data-skill');
+	  	 	var parent = $(this).parent();
+
+	  	  if(selectedSkills.length > 0)
+	  	  {
+	  	    delete selectedSkills[$(this).attr('index')]
+	  	    $(this).parent().remove();
+	  	  }
+	  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
+	  	});
+
+	  	</script>
+
+			<script>
+			var locations_arr =[]
+			var selectedLocations = [];
+
+			$(document).on('click','.addLocation',function(){
+			  var locations ={};
+			  locations.city_name = $('#locations').find(":selected").val();
+			  locations.location_id = $('#locations').find(":selected").attr('location-id');
+			  if(!isAlreadyPresent(locations.location_id)){
+			    var html='<p class="skill location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+			    selectedLocations.push(locations);
+			    $('.selectedLocations').append(html);
+			  }
+			  $("input[name=\"selected_locations\"]").val(JSON.stringify(selectedLocations));
+
+			});
+
+			function isAlreadyPresent(id){
+			    if(selectedLocations.length == 0)
+			    	return false;
+			    var alreadyPresent = false;
+			      selectedLocations.forEach(function(value){
+			      if(value.location_id == id)
+			          alreadyPresent =true;
+			        })
+			        return alreadyPresent;
+			    }
+			$(document).on('click','.location a',function(){
+			  var location = $(this).attr('data-location');
+			 	var parent = $(this).parent();
+
+			  if(selectedLocations.length > 0)
+			  {
+			    delete selectedLocations[$(this).attr('index')]
+			    $(this).parent().remove();
+			  }
+			  $("input[name=\"selected_locations\"]").val(JSON.stringify(selectedLocations));
+			});
+
+			</script>
 </body>
 
 </html>

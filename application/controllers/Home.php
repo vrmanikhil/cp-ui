@@ -81,6 +81,7 @@ class Home extends CI_Controller {
 
 	public function addJobOffer(){
 		$this->data['locations'] = $this->home_lib->getLocations();
+		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('addJobOffer', $this->data);
 	}
 

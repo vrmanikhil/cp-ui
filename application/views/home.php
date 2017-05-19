@@ -114,21 +114,16 @@
 						</div>
 					</div>
 					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- CampusPuppy -->
+						<ins class="adsbygoogle"
+						     style="display:block"
+						     data-ad-client="ca-pub-2273757004475004"
+						     data-ad-slot="7062717170"
+						     data-ad-format="auto"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
 					</div>
 					<div class="feed-post card">
 						<div class="feed-post__head">
@@ -163,6 +158,35 @@
 						<div class="feed-post__body">
 							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
 						</div>
+					</div>
+					<div class="feed-post card">
+						<div class="feed-post__head">
+							<div class="flex media">
+								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
+								<span class="media-body flex flex--col">
+									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
+									<span class="feed-post__info flex__item">
+										<span class="feed-post__postdate">8 Aug 2016</span>
+										<span class="feed-post__posttime">9:30pm</span>
+									</span>
+								</span>
+							</div>
+						</div>
+						<div class="feed-post__body">
+							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
+						</div>
+					</div>
+					<div class="feed-post card">
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- CampusPuppy -->
+						<ins class="adsbygoogle"
+						     style="display:block"
+						     data-ad-client="ca-pub-2273757004475004"
+						     data-ad-slot="7062717170"
+						     data-ad-format="auto"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
 					</div>
 					<div class="feed-post card">
 						<div class="feed-post__head">

@@ -16,4 +16,24 @@
 	width: 100%;
 	padding: 14px 20px;
 	border: 0;
+	margin-top: 20px;
+}
+
+.add-skill-location{
+	width: 100%;
+	padding: 14px 20px;
+	border: 0;
+}
+
+.skill{
+  border-radius: 3px;
+  display: inline-block;
+  height: 28px;
+  line-height: 28px;
+  margin: 0 8px 6px 0;
+  padding: 0 8px 0 8px;
+  font-weight: 400;
+  white-space: nowrap;
+  background-color: #E0EDF5;
+  color: #2F5D92;
 }
