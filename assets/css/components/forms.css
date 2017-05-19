@@ -53,6 +53,10 @@ input[type='submit'] {
 	outline: none;
 }
 
+.form-group {
+	padding: 5px;
+}
+
 .form__input:focus {
 	border-color: var(--grey);
 }

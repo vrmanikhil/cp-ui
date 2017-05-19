@@ -8,7 +8,6 @@
 	<title>CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/add-offer.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
 <style>
 .skill{
   border-radius: 3px;
@@ -98,10 +97,16 @@
 						<option value="1">Yes</option>
 						<option value="0">No</option>
 					</select>
-					<label for="startDate" class="form__label">Internship Start Date</label>
-					<input type="date" id="startDate" placeholder="Internship Start Date" class="form__input">
-					<label for="applicationDeadline" class="form__label">Application Deadline</label>
-					<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input">
+					<div class="flex">
+						<div class="form-group">
+							<label for="startDate" class="form__label">Internship Start Date</label>
+							<input type="date" id="startDate" placeholder="Internship Start Date" class="form__input">
+						</div>
+						<div class="form-group">
+							<label for="applicationDeadline" class="form__label">Application Deadline</label>
+							<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input">
+						</div>
+					</div>
 					<label for="stipendType" class="form__label">Stipend Type</label>
 					<select id="stipendType" placeholder="Stipend Type" class="form__input">
 						<option value="1">No Stipend</option>
