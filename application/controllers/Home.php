@@ -115,15 +115,21 @@ class Home extends CI_Controller {
 		$this->load->view('skillTestGuidelines', $this->data);
 	}
 
+	public function test(){
+		$userID = '1';
+		$this->data['connections'] = $this->home_lib->getConnections($userID);
+		var_dump($this->data['connections']);die;
+	}
+
 	// public function sendEMail(){
 	// 	$this->load->helper('mail_helper');
-	// 	$email = 'itishrisingh@campuspuppy.com';
-	// 	$message =  $this->load->view('emailers/forgotPassword',$data,true);
+	// 	$email = 'vrmanikhil@gmail.com';
+	// 	$message =  $this->load->view('emailers/potential-interns', $data, true);
 	// 	$data = array(
 	// 			'sendToEmail' => $email,
 	// 			'fromName' => 'CampusPuppy Private Limited',
-	// 			'fromEmail' => 'no-reply@campuspuppy.com',
-	// 			'subject' => 'Welcome to CampusPuppy.com',
+	// 			'fromEmail' => 'nikhilverma@campuspuppy.com',
+	// 			'subject' => 'Potential Interns|Graphic Designer Intern',
 	// 			'message' => $message,
 	// 			'using' =>'pepipost'
 	// 			);

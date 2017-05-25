@@ -54,7 +54,7 @@
 			<div class="main-body flex__item">
 				<div class="card">
 					<p style="float:left;">Skill Test: <strong>PHP</strong></p>
-					<p style="float:right;">Time Remaining: <strong>hh:mm:ss</strong></p>
+					<div id="timer" style="float:right;"></div>
 				</div>
 				<div class="card">
 					<label style="font-weight: bold;">Question</label>
@@ -82,9 +82,14 @@
 									<label for="option4" style="text-transform: none !important;" class='option-label' data='3'>Cascase Sheet for Style</label>
 							</div>
 					</div>
-					<button class="btn btn-primary">Previous</button>
-					<button class="btn btn-primary">Submit</button>
-					<button class="btn btn-primary">Next</button>
+					<div style="margin-top: 15px;">
+					<button class="btn btn-primary testButton" style="float:left;">Previous</button>
+					<button class="btn btn-primary testButton" style="float:right;">Next</button>
+					</div>
+					<br>
+					<div id="submitButton" style="margin-top: 20px;">
+						<center><button class="btn btn-primary testButton">Submit</button></center>
+					</div>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
@@ -107,6 +112,14 @@
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script>
+				time=15*60,r=document.getElementById('timer'),tmp=time;
+				setInterval(function(){
+					var c=tmp--,m=(c/60)>>0,s=(c-m*60)+'';
+					timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
+					tmp!=0||(tmp=time);
+				},1000);
+	</script>
 </body>
 
 </html>

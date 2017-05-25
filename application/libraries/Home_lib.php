@@ -14,4 +14,10 @@ class Home_lib {
 		return $CI->homeModel->getSkills();
 	}
 
+	public function getConnections($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getConnections($userID);
+	}
+
 }

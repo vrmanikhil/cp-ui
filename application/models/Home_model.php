@@ -13,7 +13,13 @@ class Home_model extends CI_Model {
 	}
 
 	public function getSkills(){
-		$result = $this->db->get('skills');
+		$result = $this->db->get_where('skills', array('active' => '1'));
+		return $result->result_array();
+	}
+
+	public function getConnections($userID){
+		$result = $this->db->get_where('connections', array('active' => $userID));
+		// $this->db->join('comments', 'comments.id = blogs.id');
 		return $result->result_array();
 	}
 

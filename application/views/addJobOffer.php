@@ -98,25 +98,10 @@
 							<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
 						</div>
 					</div>
-					<div class="flex">
-						<div class="form-group">
-							<label for="durationType" class="form__label">Duration Type</label>
-							<select type="text" id="durationType" placeholder="Duration Type" class="form__input" required>
-								<option value="1">Fixed</option>
-								<option value="2">Flexible</option>
-							</select>
-						</div>
-						<div class="form-group" id="durationValue">
-							<label for="duration" class="form__label">Duration (in weeks)</label>
-							<input type="text" id="duration" placeholder="Duration" class="form__input">
-						</div>
-					</div>
 					<label for="stipendType" class="form__label">Stipend Type</label>
 					<select id="stipendType" placeholder="Stipend Type" class="form__input" required>
-						<option value="1">No Stipend</option>
-						<option value="2">Expenses Covered</option>
-						<option value="3">Offered in Range</option>
-						<option value="4">Fixed Stipend</option>
+						<option value="1">Offered in Range</option>
+						<option value="2">Fixed Offer</option>
 					</select>
 					<div class="flex" id="offeredRange" style="display: none;">
 						<div class="form-group">
