@@ -63,13 +63,13 @@
 				</div>
 				<div class="change-password__section card">
 					<h1 class="change-password__section-title">Change password</h1>
-					<form class="change-password__form form">
+					<form class="change-password__form form" method="post" action="<?php echo base_url('web/changePassword'); ?>">
 					<label for="currentPassword" class="form__label">Current Password</label>
-					<input type="password" id="currentPassword" placeholder="Current Password" class="form__input">
+					<input type="password" id="currentPassword" name="currentPassword" placeholder="Current Password" class="form__input">
 					<label for="newPassword" class="form__label">New Password</label>
-					<input type="password" id="newPassword" placeholder="New Password" class="form__input">
+					<input type="password" id="newPassword" name="newPassword" placeholder="New Password" class="form__input">
 					<label for="confirmNewPassword" class="form__label">Confirm New Password</label>
-					<input type="password" id="confirmNewPassword" placeholder="Confirm New Password" class="form__input">
+					<input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password" class="form__input">
 					<input type="submit" value="Change Password" class="btn btn--primary change-password__form-submit">
 				</form>
 				</div>

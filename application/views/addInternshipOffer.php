@@ -71,19 +71,19 @@
 				</div>
 				<div class="add-offer__section card">
 					<h1 class="add-offer__section-title">Add Internship Offer</h1>
-					<form class="add-offer__form form">
+					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/addInternshipOffer'); ?>">
 					<label for="internshipOfferTitle" class="form__label">Internship Offer Title</label>
-					<input type="text" id="internshipOfferTitle" placeholder="Internship Offer Title" class="form__input" required>
+					<input type="text" id="internshipOfferTitle" name="internshipOfferTitle" placeholder="Internship Offer Title" class="form__input" required>
 					<label for="internshipOfferDescription" class="form__label">Internship Offer Description</label>
-					<textarea id="internshipOfferDescription" placeholder="Job Offer Description" class="form__input" required></textarea>
+					<textarea id="internshipOfferDescription" name="internshipOfferDescription" placeholder="Internship Offer Description" class="form__input" required></textarea>
 					<div class="flex">
 						<div class="form-group">
 							<label for="openings" class="form__label">Number of Openings</label>
-							<input type="text" id="openings" placeholder="Number of Openings" class="form__input" required>
+							<input type="text" id="openings" name="openings" placeholder="Number of Openings" class="form__input" required>
 						</div>
 						<div class="form-group">
 							<label for="partTime" class="form__label">Part Time Allowed</label>
-							<select type="text" id="partTime" placeholder="Part Time Allowed" class="form__input" required>
+							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
 								<option value="1">Yes</option>
 								<option value="0">No</option>
 							</select>
@@ -92,28 +92,28 @@
 					<div class="flex">
 						<div class="form-group">
 							<label for="startDate" class="form__label">Internship Start Date</label>
-							<input type="date" id="startDate" placeholder="Internship Start Date" class="form__input" required>
+							<input type="date" id="startDate" name="startDate" placeholder="Internship Start Date" class="form__input" required>
 						</div>
 						<div class="form-group">
 							<label for="applicationDeadline" class="form__label">Application Deadline</label>
-							<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
+							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
 						</div>
 					</div>
 					<div class="flex">
 						<div class="form-group">
 							<label for="durationType" class="form__label">Duration Type</label>
-							<select type="text" id="durationType" placeholder="Duration Type" class="form__input" required>
+							<select type="text" id="durationType" name="durationType" placeholder="Duration Type" class="form__input" required>
 								<option value="1">Fixed</option>
 								<option value="2">Flexible</option>
 							</select>
 						</div>
 						<div class="form-group" id="durationValue">
 							<label for="duration" class="form__label">Duration (in weeks)</label>
-							<input type="text" id="duration" placeholder="Duration" class="form__input">
+							<input type="text" id="duration" name="duration" placeholder="Duration" class="form__input">
 						</div>
 					</div>
 					<label for="stipendType" class="form__label">Stipend Type</label>
-					<select id="stipendType" placeholder="Stipend Type" class="form__input" required>
+					<select id="stipendType" name="stipendType" placeholder="Stipend Type" class="form__input" required>
 						<option value="1">No Stipend</option>
 						<option value="2">Expenses Covered</option>
 						<option value="3">Offered in Range</option>
@@ -122,39 +122,39 @@
 					<div class="flex" id="offeredRange" style="display: none;">
 						<div class="form-group">
 							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
-							<input type="text" id="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input">
 						</div>
 						<div class="form-group">
 							<label for="maximumStipend" class="form__label">Maximum Stipend</label>
-							<input type="text" id="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input">
 						</div>
 					</div>
 					<div id="fixedStipend" style="display: none;">
 					<label for="stipend" class="form__label">Stipend</label>
-					<input type="text" id="stipend" placeholder="Stipend" class="form__input">
+					<input type="text" id="stipend" name="stipend" placeholder="Stipend" class="form__input">
 					</div>
 					<div class="flex">
 						<div class="form-group">
 							<label for="applicants" class="form__label">Applicant Type</label>
-							<select type="text" id="applicants" placeholder="Applicant Type" class="form__input" required>
+							<select type="text" id="applicants" name="applicants" placeholder="Applicant Type" class="form__input" required>
+								<option value="3">Anyone can Apply</option>
 								<option value="1">100% Match with Skills</option>
 								<option value="2">Partial Match</option>
-								<option value="3">Anyone can Apply</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="internshipType" class="form__label">Internship Type</label>
-							<select type="text" id="internshipType" placeholder="Applicant Type" class="form__input" required>
+							<select type="text" name="internshipType" id="internshipType" placeholder="Applicant Type" class="form__input" required>
 								<option value="1">Work from Home</option>
 								<option value="2">In-Office/On-Field</option>
 							</select>
 						</div>
 					</div>
-					<div>
+					<div id="skillsDiv" style="display:none;">
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Skills</label>
-							<select id="skills" class="form__input" required>
+							<select id="skills" class="form__input">
 								<?php foreach ($skills as $key => $value) { ?>
 									<option value="<?php echo $value['skill_name'] ?>" skill-id="<?php echo $value['skillID'] ?>"><?php echo $value['skill_name'] ?></option>
 							 <?php  } ?>
@@ -173,7 +173,7 @@
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Locations</label>
-							<select id="locations" class="form__input" required>
+							<select id="locations" class="form__input">
 								<?php foreach ($locations as $key => $value) { ?>
 									<option value="<?php echo $value['city'].", ".$value['state']; ?>" location-id="<?php echo $value['cityID'] ?>"><?php echo $value['city'].", ".$value['state']; ?></option>
 							 <?php  } ?>
@@ -185,7 +185,7 @@
 					</div>
 					<div class="selectedLocations">
 						<label class="form__label">Internship Location(s)-</label>
-						<input type="hidden" name="selected_skills">
+						<input type="hidden" name="selected_locations">
 					</div>
 					</div>
 					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
@@ -248,6 +248,19 @@
 		 }
 	 });
 	</script>
+
+	<script type="text/javascript">
+
+	 $('#applicants').on('change',function(){
+	   if( $(this).val()==="3"){
+	     $("#skillsDiv").hide()
+	   }
+	   else{
+	     $("#skillsDiv").show()
+	   }
+	 });
+	</script>
+
 	<script>
 		$(document).ready(function(){
 			editor = CKEDITOR.replace('internshipOfferDescription');

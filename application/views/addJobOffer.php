@@ -72,17 +72,17 @@
 					<h1 class="add-offer__section-title">Add Job Offer</h1>
 					<form class="add-offer__form form">
 					<label for="jobOfferTitle" class="form__label">Job Offer Title</label>
-					<input type="text" id="jobOfferTitle" placeholder="Job Offer Title" class="form__input" required>
+					<input type="text" id="jobOfferTitle" name="jobOfferTitle" placeholder="Job Offer Title" class="form__input" required>
 					<label for="jobOfferDescription" class="form__label">Job Offer Description</label>
-					<textarea id="jobOfferDescription" placeholder="Job Offer Description" class="form__input" required></textarea>
+					<textarea id="jobOfferDescription" name="jobOfferDescription" placeholder="Job Offer Description" class="form__input" required></textarea>
 					<div class="flex">
 						<div class="form-group">
 							<label for="openings" class="form__label">Number of Openings</label>
-							<input type="text" id="openings" placeholder="Number of Openings" class="form__input" required>
+							<input type="text" id="openings" name="openings" placeholder="Number of Openings" class="form__input" required>
 						</div>
 						<div class="form-group">
 							<label for="partTime" class="form__label">Part Time Allowed</label>
-							<select type="text" id="partTime" placeholder="Part Time Allowed" class="form__input" required>
+							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
 								<option value="1">Yes</option>
 								<option value="0">No</option>
 							</select>
@@ -91,26 +91,26 @@
 					<div class="flex">
 						<div class="form-group">
 							<label for="startDate" class="form__label">Joining Date</label>
-							<input type="date" id="startDate" placeholder="Internship Start Date" class="form__input" required>
+							<input type="date" id="startDate" name="startDate" placeholder="Start Date" class="form__input" required>
 						</div>
 						<div class="form-group">
 							<label for="applicationDeadline" class="form__label">Application Deadline</label>
-							<input type="date" id="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
+							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
 						</div>
 					</div>
-					<label for="stipendType" class="form__label">Stipend Type</label>
-					<select id="stipendType" placeholder="Stipend Type" class="form__input" required>
+					<label for="stipendType" class="form__label">Salary Type</label>
+					<select id="stipendType" name="stipendType" placeholder="Stipend Type" class="form__input" required>
 						<option value="1">Offered in Range</option>
 						<option value="2">Fixed Offer</option>
 					</select>
 					<div class="flex" id="offeredRange" style="display: none;">
 						<div class="form-group">
 							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
-							<input type="text" id="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input">
 						</div>
 						<div class="form-group">
 							<label for="maximumStipend" class="form__label">Maximum Stipend</label>
-							<input type="text" id="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input">
 						</div>
 					</div>
 					<div id="fixedStipend" style="display: none;">

@@ -41,14 +41,17 @@
 				    <span class="explore-panel__link-text active flex__item">Skills</span>
 				  </a>
 				</div>
-				<div class="card card--no-padding">
-					<div class="nav nav--stacked js-nav--stacked">
-						<a href="javascript:" class="nav__link js-nav-link">My Skills</a>
-						<a href="javascript:" class="nav__link js-nav-link">Browse Skills</a>
-					</div>
-				</div>
 				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- CampusPuppy -->
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-client="ca-pub-2273757004475004"
+					     data-ad-slot="7062717170"
+					     data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 				</div>
 			</aside>
 			<div class="main-body flex__item">
