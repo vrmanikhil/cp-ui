@@ -172,7 +172,6 @@
 						<p>Bolstered by a team with the strongest pedigree – Oxford, Columbia, IIT, St.Stephen's and Delhi University, with its teeth cut in UBS Investment Bank, McKinsey, the World Bank, Zomato, KPMG, etc. – we are bringing in the age of fit-tech in India!</p>
 						<p>FITPASS is defined by our insistence on providing an unparalleled customer experience.</p>
 						<p>Our team members are charged with bringing creativity, honesty, and intellectual rigor to their responsibilities in a never-ending quest to delight our customers. We have high expectations of each other and work as a team to build things we are all proud of.</p>
-						<button type="button" class="btn">APPLY</button>
 					</aside>
 				</div>
 			</div>
