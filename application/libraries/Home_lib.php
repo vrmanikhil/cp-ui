@@ -20,4 +20,22 @@ class Home_lib {
 		return $CI->homeModel->getConnections($userID);
 	}
 
+	public function getJobOffers($relevant){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getJobOffers($relevant);
+	}
+
+	public function addInternship($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addInternship($data);
+	}
+
+	public function deleteInternship($internshipID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->deleteInternship($internshipID);
+	}
+
 }

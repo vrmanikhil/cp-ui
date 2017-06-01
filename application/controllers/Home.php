@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 			$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
 			$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
 			$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
+			$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
 			// $this->data['foot'] = $this->load->view('backoffice/common/foot', $this->data, true);
 			// $this->data['navigation'] = $this->load->view('backoffice/common/navigation', $this->data, true);
 			// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
@@ -32,6 +33,9 @@ class Home extends CI_Controller {
 	}
 
 	public function jobOffers(){
+		$relevant = 0;
+		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
+		var_dump($this->data['jobOffers']);die;
 		$this->load->view('jobOffers', $this->data);
 	}
 
