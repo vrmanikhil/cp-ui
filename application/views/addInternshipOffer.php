@@ -149,7 +149,7 @@
 						</div>
 						<div class="form-group">
 							<label for="internshipType" class="form__label">Internship Type</label>
-							<select type="text" name="internshipType" id="internshipType" placeholder="Applicant Type" class="form__input" required>
+							<select type="text" name="internshipType" id="internshipType" placeholder="Internship Type" class="form__input" required>
 								<option value="1">Work from Home</option>
 								<option value="2">In-Office/On-Field</option>
 							</select>

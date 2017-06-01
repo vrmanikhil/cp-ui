@@ -98,43 +98,43 @@
 							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
 						</div>
 					</div>
-					<label for="stipendType" class="form__label">Salary Type</label>
-					<select id="stipendType" name="stipendType" placeholder="Stipend Type" class="form__input" required>
+					<label for="salaryType" class="form__label">Salary Type</label>
+					<select id="salaryType" name="salaryType" placeholder="Stipend Type" class="form__input" required>
 						<option value="1">Offered in Range</option>
 						<option value="2">Fixed Offer</option>
 					</select>
-					<div class="flex" id="offeredRange" style="display: none;">
+					<div class="flex" id="offeredRange">
 						<div class="form-group">
-							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
-							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+							<label for="minimumStipend" class="form__label">Minimum Salary Offered</label>
+							<input type="text" id="minimumStipend" name="minimumOffer" placeholder="Minimum Salary (in lakhs)" class="form__input">
 						</div>
 						<div class="form-group">
-							<label for="maximumStipend" class="form__label">Maximum Stipend</label>
-							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+							<label for="maximumStipend" class="form__label">Maximum Salary Offered</label>
+							<input type="text" id="maximumStipend" name="maximumOffer" placeholder="Maximum Salary (in lakhs)" class="form__input">
 						</div>
 					</div>
-					<div id="fixedStipend" style="display: none;">
-					<label for="stipend" class="form__label">Stipend</label>
-					<input type="text" id="stipend" placeholder="Stipend" class="form__input">
+					<div id="salaryOffered" style="display: none;">
+					<label for="salary" class="form__label">Salary Offer</label>
+					<input type="text" id="salary" placeholder="Salary Offered (in lakhs)" class="form__input">
 					</div>
 					<div class="flex">
 						<div class="form-group">
 							<label for="applicants" class="form__label">Applicant Type</label>
 							<select type="text" id="applicants" placeholder="Applicant Type" class="form__input" required>
+								<option value="3">Anyone can Apply</option>
 								<option value="1">100% Match with Skills</option>
 								<option value="2">Partial Match</option>
-								<option value="3">Anyone can Apply</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="internshipType" class="form__label">Internship Type</label>
-							<select type="text" id="internshipType" placeholder="Applicant Type" class="form__input" required>
+							<label for="jobType" class="form__label">Job Type</label>
+							<select type="text" id="jobType" placeholder="Applicant Type" class="form__input" required>
 								<option value="1">Work from Home</option>
 								<option value="2">In-Office/On-Field</option>
 							</select>
 						</div>
 					</div>
-					<div>
+					<div id="skillsDiv" style="display:none;">
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Skills</label>
@@ -168,11 +168,11 @@
 						</div>
 					</div>
 					<div class="selectedLocations">
-						<label class="form__label">Internship Location(s)-</label>
+						<label class="form__label">Job Location(s)-</label>
 						<input type="hidden" name="selected_skills">
 					</div>
 					</div>
-					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
+					<input type="submit" value="Add Job Offer" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>
 			</div>
@@ -204,23 +204,23 @@
 		</script>
 		<script type="text/javascript">
 
-		 $('#stipendType').on('change',function(){
-		   if( $(this).val()==="4"){
-		     $("#fixedStipend").show()
+		 $('#salaryType').on('change',function(){
+		   if( $(this).val()==="2"){
+		     $("#salaryOffered").show()
 		   }
 		   else{
-		     $("#fixedStipend").hide()
+		     $("#salaryOffered").hide()
 		   }
 		 });
-		 $('#stipendType').on('change',function(){
-		   if( $(this).val()==="3"){
+		 $('#salaryType').on('change',function(){
+		   if( $(this).val()==="1"){
 		     $("#offeredRange").show()
 		   }
 		   else{
 		     $("#offeredRange").hide()
 		   }
 		 });
-		 $('#internshipType').on('change',function(){
+		 $('#jobType').on('change',function(){
 			 if( $(this).val()==="2"){
 				 $("#cityLocations").show()
 			 }
@@ -235,6 +235,17 @@
 			 else{
 				 $("#durationValue").hide()
 			 }
+		 });
+		</script>
+		<script type="text/javascript">
+
+		 $('#applicants').on('change',function(){
+		   if( $(this).val()==="3"){
+		     $("#skillsDiv").hide()
+		   }
+		   else{
+		     $("#skillsDiv").show()
+		   }
 		 });
 		</script>
 			<script>

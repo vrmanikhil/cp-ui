@@ -105,7 +105,7 @@ class Employers extends CI_Controller {
 			'internshipType' => $internshipType
 		);
 
-		if($internshipOfferTitle == '' || $internshipOfferDescription == '' || $openings == '' || $partTime == '' || $startDate == '' || $applicationDeadline == '' $durationType == '' || $stipendType == '' || $applicants == '' || $internshipType == ''){
+		if($internshipOfferTitle == '' || $internshipOfferDescription == '' || $openings == '' || $partTime == '' || $startDate == '' || $applicationDeadline == '' || $durationType == '' || $stipendType == '' || $applicants == '' || $internshipType == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/add-internship-offer'));
 		}
