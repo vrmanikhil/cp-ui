@@ -11,6 +11,11 @@
 </head>
 
 <body>
+	<?php
+	if($message['content']!=''){?>
+	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
+	<?php }?>
+
 	<div class="layout-container flex flex--col">
 		<?php echo $header; ?>
 		<main class="flex main-container globalContainer">
@@ -70,7 +75,7 @@
 				</div>
 				<div class="add-offer__section card">
 					<h1 class="add-offer__section-title">Add Job Offer</h1>
-					<form class="add-offer__form form">
+					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/addJobOffer'); ?>">
 					<label for="jobOfferTitle" class="form__label">Job Offer Title</label>
 					<input type="text" id="jobOfferTitle" name="jobOfferTitle" placeholder="Job Offer Title" class="form__input" required>
 					<label for="jobOfferDescription" class="form__label">Job Offer Description</label>
@@ -84,7 +89,7 @@
 							<label for="partTime" class="form__label">Part Time Allowed</label>
 							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
 								<option value="1">Yes</option>
-								<option value="0">No</option>
+								<option value="2">No</option>
 							</select>
 						</div>
 					</div>
@@ -99,28 +104,28 @@
 						</div>
 					</div>
 					<label for="salaryType" class="form__label">Salary Type</label>
-					<select id="salaryType" name="salaryType" placeholder="Stipend Type" class="form__input" required>
+					<select id="salaryType" name="salaryType" placeholder="Salary Type" class="form__input" required>
 						<option value="1">Offered in Range</option>
 						<option value="2">Fixed Offer</option>
 					</select>
 					<div class="flex" id="offeredRange">
 						<div class="form-group">
-							<label for="minimumStipend" class="form__label">Minimum Salary Offered</label>
-							<input type="text" id="minimumStipend" name="minimumOffer" placeholder="Minimum Salary (in lakhs)" class="form__input">
+							<label for="minimumOffer" class="form__label">Minimum Salary Offered</label>
+							<input type="text" id="minimumOffer" name="minimumOffer" placeholder="Minimum Salary (in lakhs)" class="form__input">
 						</div>
 						<div class="form-group">
-							<label for="maximumStipend" class="form__label">Maximum Salary Offered</label>
-							<input type="text" id="maximumStipend" name="maximumOffer" placeholder="Maximum Salary (in lakhs)" class="form__input">
+							<label for="maximumOffer" class="form__label">Maximum Salary Offered</label>
+							<input type="text" id="maximumOffer" name="maximumOffer" placeholder="Maximum Salary (in lakhs)" class="form__input">
 						</div>
 					</div>
 					<div id="salaryOffered" style="display: none;">
 					<label for="salary" class="form__label">Salary Offer</label>
-					<input type="text" id="salary" placeholder="Salary Offered (in lakhs)" class="form__input">
+					<input type="text" id="salary" name="salary" placeholder="Salary Offered (in lakhs)" class="form__input">
 					</div>
 					<div class="flex">
 						<div class="form-group">
 							<label for="applicants" class="form__label">Applicant Type</label>
-							<select type="text" id="applicants" placeholder="Applicant Type" class="form__input" required>
+							<select type="text" id="applicants" name="applicants" placeholder="Applicant Type" class="form__input" required>
 								<option value="3">Anyone can Apply</option>
 								<option value="1">100% Match with Skills</option>
 								<option value="2">Partial Match</option>
@@ -128,7 +133,7 @@
 						</div>
 						<div class="form-group">
 							<label for="jobType" class="form__label">Job Type</label>
-							<select type="text" id="jobType" placeholder="Applicant Type" class="form__input" required>
+							<select type="text" id="jobType" name="jobType" placeholder="Applicant Type" class="form__input" required>
 								<option value="1">Work from Home</option>
 								<option value="2">In-Office/On-Field</option>
 							</select>
@@ -169,7 +174,7 @@
 					</div>
 					<div class="selectedLocations">
 						<label class="form__label">Job Location(s)-</label>
-						<input type="hidden" name="selected_skills">
+						<input type="hidden" name="selected_locations">
 					</div>
 					</div>
 					<input type="submit" value="Add Job Offer" class="btn btn--primary add-offer__form-submit">
@@ -248,87 +253,86 @@
 		   }
 		 });
 		</script>
-			<script>
-	  	var skills_arr =[]
-	  	var selectedSkills = [];
+		<script>
+  	var skills_arr =[]
+  	var selectedSkills = [];
 
-	  	$(document).on('click','.addSkill',function(){
-	  	  var skill ={}
-	  	  skill.skillname = $('#skills').find(":selected").val();
-	  	  skill.skillID = $('#skills').find(":selected").attr('skill-id');
-	  		if(!isAlreadyPresentSkill(skill.skillID)){
-	  	    var html='<p class="skill">'+skill.skillname+
-	  			' <a href="javascript:" data-skill="'+skill.skillname+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
-	  	    selectedSkills.push(skill);
-	  	    $('.selectedSkills').append(html);
-	  	  }
-	  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
-	  	});
+  	$(document).on('click','.addSkill',function(){
+  	  var skill ={}
+  	  skill.skillname = $('#skills').find(":selected").val();
+  	  skill.skillID = $('#skills').find(":selected").attr('skill-id');
+  		if(!isAlreadyPresentSkill(skill.skillID)){
+  	    var html='<p class="skill">'+skill.skillname+
+  			' <a href="javascript:" data-skill="'+skill.skillname+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+  	    selectedSkills.push(skill);
+  	    $('.selectedSkills').append(html);
+  	  }
+  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
+  	});
 
-	  	    function isAlreadyPresentSkill(id){
-	  	        if(selectedSkills.length == 0)
-	  	            return false
-	  	        var alreadyPresent = false
-	  					selectedSkills.forEach(function(value){
-	  	            if(value.skillID == id)
-	  	                alreadyPresent =true
-	  	        })
-	  	        return alreadyPresent
-	  	    }
-	  	$(document).on('click','.skill a',function(){
-	  	  var skill = $(this).attr('data-skill');
-	  	 	var parent = $(this).parent();
+  	    function isAlreadyPresentSkill(id){
+  	        if(selectedSkills.length == 0)
+  	            return false
+  	        var alreadyPresent = false
+  					selectedSkills.forEach(function(value){
+  	            if(value.skillID == id)
+  	                alreadyPresent =true
+  	        })
+  	        return alreadyPresent
+  	    }
+  	$(document).on('click','.skill a',function(){
+  	  var skill = $(this).attr('data-skill');
+  	 	var parent = $(this).parent();
 
-	  	  if(selectedSkills.length > 0)
-	  	  {
-	  	    delete selectedSkills[$(this).attr('index')]
-	  	    $(this).parent().remove();
-	  	  }
-	  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
-	  	});
+  	  if(selectedSkills.length > 0)
+  	  {
+  	    delete selectedSkills[$(this).attr('index')]
+  	    $(this).parent().remove();
+  	  }
+  	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
+  	});
 
-	  	</script>
+  	</script>
 
-			<script>
-			var locations_arr =[]
-			var selectedLocations = [];
+		<script>
+		var locations_arr =[]
+		var selectedLocations = [];
 
-			$(document).on('click','.addLocation',function(){
-			  var locations ={};
-			  locations.city_name = $('#locations').find(":selected").val();
-			  locations.location_id = $('#locations').find(":selected").attr('location-id');
-			  if(!isAlreadyPresent(locations.location_id)){
-			    var html='<p class="skill location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
-			    selectedLocations.push(locations);
-			    $('.selectedLocations').append(html);
-			  }
-			  $("input[name=\"selected_locations\"]").val(JSON.stringify(selectedLocations));
+		$(document).on('click','.addLocation',function(){
+		  var locations ={};
+		  locations.city_name = $('#locations').find(":selected").val();
+		  locations.location_id = $('#locations').find(":selected").attr('location-id');
+		  if(!isAlreadyPresent(locations.location_id)){
+		    var html='<p class="skill location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+		    selectedLocations.push(locations);
+		    $('.selectedLocations').append(html);
+		  }
+		  $("input[name=\"selected_locations\"]").val(JSON.stringify(selectedLocations));
 
-			});
+		});
 
-			function isAlreadyPresent(id){
-			    if(selectedLocations.length == 0)
-			    	return false;
-			    var alreadyPresent = false;
-			      selectedLocations.forEach(function(value){
-			      if(value.location_id == id)
-			          alreadyPresent =true;
-			        })
-			        return alreadyPresent;
-			    }
-			$(document).on('click','.location a',function(){
-			  var location = $(this).attr('data-location');
-			 	var parent = $(this).parent();
+		function isAlreadyPresent(id){
+		    if(selectedLocations.length == 0)
+		    	return false;
+		    var alreadyPresent = false;
+		      selectedLocations.forEach(function(value){
+		      if(value.location_id == id)
+		          alreadyPresent =true;
+		        })
+		        return alreadyPresent;
+		    }
+		$(document).on('click','.location a',function(){
+		  var location = $(this).attr('data-location');
+		 	var parent = $(this).parent();
 
-			  if(selectedLocations.length > 0)
-			  {
-			    delete selectedLocations[$(this).attr('index')]
-			    $(this).parent().remove();
-			  }
-			  $("input[name=\"selected_locations\"]").val(JSON.stringify(selectedLocations));
-			});
-
-			</script>
+		  if(selectedLocations.length > 0)
+		  {
+		    delete selectedLocations[$(this).attr('index')]
+		    $(this).parent().remove();
+		  }
+		  $("input[name=\"selected_locations\"]").val(JSON.stringify(selectedLocations));
+		});
+		</script>
 </body>
 
 </html>

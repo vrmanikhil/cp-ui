@@ -32,6 +32,12 @@ class Home_lib {
 		return $CI->homeModel->addInternship($data);
 	}
 
+	public function addJob($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addJob($data);
+	}
+
 	public function deleteInternship($internshipID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');

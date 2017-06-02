@@ -90,7 +90,7 @@
 							<label for="partTime" class="form__label">Part Time Allowed</label>
 							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
 								<option value="1">Yes</option>
-								<option value="0">No</option>
+								<option value="2">No</option>
 							</select>
 						</div>
 					</div>

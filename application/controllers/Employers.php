@@ -12,7 +12,6 @@ class Employers extends CI_Controller {
 	}
 
 	public function addInternshipOffer(){
-
 		$internshipOfferTitle = '';
 		$internshipOfferDescription = '';
 		$openings = '';
@@ -87,7 +86,8 @@ class Employers extends CI_Controller {
 
 		date_default_timezone_set("Asia/Kolkata");
 		$today = date('Y-m-d');
-
+		$d1 = DateTime::createFromFormat('Y-m-d', $startDate);
+		$d2 = DateTime::createFromFormat('Y-m-d', $applicationDeadline);
 		$data = array(
 			'internshipTitle' => $internshipOfferTitle,
 			'internshipDescription' => $internshipOfferDescription,
@@ -137,7 +137,7 @@ class Employers extends CI_Controller {
 				redirect(base_url('internships/add-internship-offer'));
 			}
 		}
-		if (!($d && $d->format('Y-m-d') === $startDate)){
+		if (!($d1 && $d1->format('Y-m-d') === $startDate)){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/add-internship-offer'));
 		}
@@ -145,7 +145,7 @@ class Employers extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Internship Start Date has already passed. Please Try Again','class'=>'error'));
 			redirect(base_url());
 		}
-		if (!($d && $d->format('Y-m-d') === $applicationDeadline)){
+		if (!($d2 && $d2->format('Y-m-d') === $applicationDeadline)){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/add-internship-offer'));
 		}
@@ -191,8 +191,178 @@ class Employers extends CI_Controller {
 							redirect(base_url('internships/add-internship-offer'));
 						}
 					}
-			$this->session->set_flashdata('message', array('content'=>'Internship Successfully Added.','class'=>'success'));
+			$this->session->set_flashdata('message', array('content'=>'Internship Offer Successfully Added.','class'=>'success'));
 			redirect(base_url('internships/add-internship-offer'));
+			}
+	}
+
+	public function addJobOffer(){
+		$jobOfferTitle = '';
+		$jobOfferDescription = '';
+		$openings = '';
+		$partTime = '';
+		$startDate = '';
+		$applicationDeadline = '';
+		$salaryType = '';
+		$minimumOffer = '';
+		$maximumOffer = '';
+		$salary = '';
+		$applicants = '';
+		$jobType = '';
+
+		if($x = $this->input->post('jobOfferTitle')){
+			$jobOfferTitle = $x;
+		}
+		if($x = $this->input->post('jobOfferDescription')){
+			$jobOfferDescription = $x;
+		}
+		if($x = $this->input->post('openings')){
+			$openings = $x;
+		}
+		if($x = $this->input->post('partTime')){
+			$partTime = $x;
+		}
+		if($x = $this->input->post('startDate')){
+			$startDate = $x;
+		}
+		if($x = $this->input->post('applicationDeadline')){
+			$applicationDeadline = $x;
+		}
+		if($x = $this->input->post('salaryType')){
+			$salaryType = $x;
+		}
+		if($salaryType == '1'){
+				if($x = $this->input->post('minimumOffer')){
+					$minimumOffer = $x;
+				}
+				if($x = $this->input->post('maximumOffer')){
+					$maximumOffer = $x;
+				}
+		}
+		if($salaryType == '2'){
+				if($x = $this->input->post('salary')){
+					$salary = $x;
+				}
+		}
+		if($x = $this->input->post('applicants')){
+			$applicants = $x;
+		}
+		if($x = $this->input->post('jobType')){
+			$jobType = $x;
+		}
+		if($applicants == '1' || $applicants == '2'){
+			$selected_skills = '';
+			$selected_skills = ($this->input->post('selected_skills')!='')?$this->input->post('selected_skills'):'';
+		}
+		if($jobType == '2'){
+			$selected_locations = '';
+			$selected_locations = ($this->input->post('selected_locations')!='')?$this->input->post('selected_locations'):'';
+		}
+
+		date_default_timezone_set("Asia/Kolkata");
+		$today = date('Y-m-d');
+		$d1 = DateTime::createFromFormat('Y-m-d', $startDate);
+		$d2 = DateTime::createFromFormat('Y-m-d', $applicationDeadline);
+		$data = array(
+			'jobTitle' => $jobOfferTitle,
+			'jobDescription' => $jobOfferDescription,
+			'openings' => $openings,
+			'partTime' => $partTime,
+			'startDate' => $startDate,
+			'applicationDeadline' => $applicationDeadline,
+			'offerType' => $salaryType,
+			'minimumOffer' => $minimumOffer,
+			'maximumOffer' => $maximumOffer,
+			'offer' => $salary,
+			'applicants' => $applicants,
+			'jobType' => $jobType
+		);
+		date_default_timezone_set("Asia/Kolkata");
+		$today = date('Y-m-d');
+		if($jobOfferTitle == '' || $jobOfferDescription == '' || $openings == '' || $partTime == '' || $startDate == '' || $applicationDeadline == '' || $salaryType == '' || $applicants == '' || $jobType == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if($salaryType == '1' && $minimumOffer == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if($salaryType == '1' && $maximumOffer == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again3','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if($salaryType == '2' && $salary == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again4','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if($applicants == '1' || $applicants == '2'){
+			if($selected_skills == ''){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again5','class'=>'error'));
+				redirect(base_url('jobs/add-job-offer'));
+			}
+		}
+		if($jobType == '2'){
+			if($selected_locations == ''){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again6','class'=>'error'));
+				redirect(base_url('jobs/add-job-offer'));
+			}
+		}
+		if (!($d1 && $d1->format('Y-m-d') === $startDate)){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again7','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if ($startDate < $today){
+			$this->session->set_flashdata('message', array('content'=>'Job Start Date has already passed. Please Try Again','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if (!($d2 && $d2->format('Y-m-d') === $applicationDeadline)){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again8','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if ($applicationDeadline < $today){
+			$this->session->set_flashdata('message', array('content'=>'Job Application Date has already passed. Please Try Again','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+		if ($applicationDeadline > $startDate){
+			$this->session->set_flashdata('message', array('content'=>'Job Start Date cannot be before the Internship Application Deadline. Please Try Again','class'=>'error'));
+			redirect(base_url('jobs/add-job-offer'));
+		}
+
+		if($jobID = $this->home_lib->addJob($data)){
+			if ($selected_skills!=''){
+				$skillIDs = [];
+				$i=0;
+				$selected_skills = json_decode($selected_skills,true);
+				foreach ($selected_skills as $key => $value) {
+					array_push($skillIDs,['skillID'=>$value,'jobID'=>$jobID]);
+				}
+				$try=[];
+				foreach ($skillIDs as $key => $value){
+					array_push($try,['skillID'=>$value['skillID']['skillID'],'jobID'=>$jobID]);}
+					$this->load->model('home_model','homeModel');
+					if (!$this->homeModel->map_job_skills($try)){
+						$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again9','class'=>'error'));
+						redirect(base_url('jobs/add-job-offer'));
+					}
+				}
+				if ($selected_locations!=''){
+					$locationIDs = [];
+					$i=0;
+					$selected_locations = json_decode($selected_locations,true);
+					foreach ($selected_locations as $key => $value){
+					array_push($locationIDs,['cityID'=>$value,'jobID'=>$jobID]);
+					}
+					$try=[];
+					foreach ($locationIDs as $key => $value){
+						array_push($try,['cityID'=>$value['cityID']['location_id'],'jobID'=>$jobID]);}
+						$this->load->model('home_model','homeModel');
+						if (!$this->homeModel->map_job_locations($try)){
+							$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again10','class'=>'error'));
+							redirect(base_url('jobs/add-job-offer'));
+						}
+					}
+			$this->session->set_flashdata('message', array('content'=>'Job Offer Successfully Added.','class'=>'success'));
+			redirect(base_url('jobs/add-job-offer'));
 			}
 	}
 

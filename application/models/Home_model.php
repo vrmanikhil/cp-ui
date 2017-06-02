@@ -36,6 +36,19 @@ class Home_model extends CI_Model {
 		return $this->db->insert_batch('internshipSkills', $data);
 	}
 
+	public function addJob($data){
+		$this->db->insert('jobOffers', $data);
+		return ($this->db->affected_rows()>0)?$this->db->insert_id():0;
+	}
+
+	public function map_job_locations($data){
+		return $this->db->insert_batch('jobLocations', $data);
+	}
+
+	public function map_job_skills($data){
+		return $this->db->insert_batch('jobSkills', $data);
+	}
+
 	public function deleteInternship($internshipID){
 		return $this->db->delete('internshipOffers', array('internshipID' => $internshipID));
 	}
