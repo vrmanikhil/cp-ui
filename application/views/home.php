@@ -11,9 +11,11 @@
 </head>
 
 <body>
-
-	<div class="message error"><p>Nacho ye aa gaya</p></div>
-
+	<?php
+	if($message['content']!=''){?>
+	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
+	<?php }?>
+	
 	<div class="layout-container flex flex--col">
 		<?php echo $header; ?>
 		<main class="flex main-container globalContainer">
