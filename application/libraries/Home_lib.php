@@ -44,4 +44,22 @@ class Home_lib {
 		return $CI->homeModel->deleteInternship($internshipID);
 	}
 
+	public function addWorkEx($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addWorkEx($data);
+	}
+
+	public function addProject($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addProject($data);
+	}
+
+	public function addAchievement($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addAchievement($data);
+	}
+
 }

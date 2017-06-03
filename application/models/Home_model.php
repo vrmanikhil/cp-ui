@@ -63,4 +63,16 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	public function addWorkEx($data){
+		return $this->db->insert('workExperience', $data);
+	}
+
+	public function addProject($data){
+		return $this->db->insert('projects', $data);
+	}
+
+	public function addAchievement($data){
+		return $this->db->insert('achievements', $data);
+	}
+
 }
