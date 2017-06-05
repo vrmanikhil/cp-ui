@@ -100,4 +100,14 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getColleges(){
+		$result = $this->db->get_where('colleges', array('active' => '1'));
+		return $result->result_array();
+	}
+
+	public function getCourses(){
+		$result = $this->db->get_where('courses', array('active' => '1'));
+		return $result->result_array();
+	}
+
 }

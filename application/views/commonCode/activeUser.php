@@ -6,7 +6,8 @@
 		</a>
 	</div>
 	<div class=" feed-actor-module__actor-meta">
-		<p class="text-center feed-actor-module__name">Nikhil Verma</p>
+		<p class="text-center feed-actor-module__name">Nikhil Verma <i class="fa fa-check-circle" aria-hidden="true" style="color: #2980b9;"></i></p>
+		<p><center><a style="font-size: 12px;"><b>Get your Profile Verified</b></a></center></p>
 		<div class="media flex">
 			<img src="<?php echo base_url('/assets/img/jss.png'); ?>" alt="" class="media-figure img-50">
 			<p class="media-body text-center bold flex s-12 align-center margin-l-5">JSS Academy of Technical Education, Noida</p>

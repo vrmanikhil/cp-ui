@@ -92,4 +92,16 @@ class Home_lib {
 		return $CI->homeModel->getUserSkills($userID);
 	}
 
+	public function getColleges(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getColleges();
+	}
+
+	public function getCourses(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getCourses();
+	}
+
 }

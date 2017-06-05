@@ -23,6 +23,21 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->view('main', $this->data);
+	}
+
+	public function educationDetails(){
+		$this->data['colleges'] = $this->home_lib->getColleges();
+		$this->data['courses'] = $this->home_lib->getCourses();
+		$this->load->view('educationDetails', $this->data);
+	}
+
+	public function employerDetails(){
+		$this->load->view('employerDetails', $this->data);
+	}
+
+	public function home()
+	{
 		$this->load->view('home', $this->data);
 	}
 
