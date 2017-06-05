@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.18
--- https://www.phpmyadmin.net
+-- version 4.5.4.1deb2ubuntu1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Jun 03, 2017 at 07:49 AM
--- Server version: 5.6.35-cll-lve
--- PHP Version: 5.6.30
+-- Host: localhost
+-- Generation Time: Jun 05, 2017 at 12:37 PM
+-- Server version: 5.7.18-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `campuspuppy`
@@ -26,13 +26,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE IF NOT EXISTS `achievements` (
-  `achievementID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `achievements` (
+  `achievementID` int(5) NOT NULL,
   `achievementTitle` text NOT NULL,
   `achievementDescription` text NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`achievementID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -40,13 +39,11 @@ CREATE TABLE IF NOT EXISTS `achievements` (
 -- Table structure for table `adminAuth`
 --
 
-CREATE TABLE IF NOT EXISTS `adminAuth` (
-  `adminID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adminAuth` (
+  `adminID` int(5) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`adminID`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adminAuth`
@@ -61,13 +58,12 @@ INSERT INTO `adminAuth` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE IF NOT EXISTS `colleges` (
-  `college_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `colleges` (
+  `college_id` int(5) NOT NULL,
   `college` varchar(255) NOT NULL,
   `logo` text NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `colleges`
@@ -101,7 +97,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 -- Table structure for table `connections`
 --
 
-CREATE TABLE IF NOT EXISTS `connections` (
+CREATE TABLE `connections` (
   `active` int(5) NOT NULL,
   `passive` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -112,16 +108,15 @@ CREATE TABLE IF NOT EXISTS `connections` (
 -- Table structure for table `contactMessages`
 --
 
-CREATE TABLE IF NOT EXISTS `contactMessages` (
-  `contactID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contactMessages` (
+  `contactID` int(5) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
   `message` text NOT NULL,
   `messageRead` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`contactID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -129,16 +124,15 @@ CREATE TABLE IF NOT EXISTS `contactMessages` (
 -- Table structure for table `content`
 --
 
-CREATE TABLE IF NOT EXISTS `content` (
-  `content_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `content` (
+  `content_id` int(5) NOT NULL,
   `aboutUs` text NOT NULL,
   `termsAndConditions` text NOT NULL,
   `privacyPolicy` text NOT NULL,
   `coat` text NOT NULL,
   `facebook` varchar(255) NOT NULL,
-  `twitter` varchar(255) NOT NULL,
-  PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `twitter` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `content`
@@ -153,13 +147,12 @@ INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPo
 -- Table structure for table `courses`
 --
 
-CREATE TABLE IF NOT EXISTS `courses` (
-  `course_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses` (
+  `course_id` int(5) NOT NULL,
   `course` varchar(255) NOT NULL,
   `duration` int(3) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
@@ -180,14 +173,13 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `active`) VALUES
 -- Table structure for table `employerUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `employerUsers` (
+CREATE TABLE `employerUsers` (
   `userID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` text NOT NULL,
-  UNIQUE KEY `userID` (`userID`)
+  `companyLogo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -203,7 +195,7 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 -- Table structure for table `generalUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `generalUsers` (
+CREATE TABLE `generalUsers` (
   `userID` int(5) NOT NULL,
   `collegeID` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
@@ -240,12 +232,11 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`, `identit
 -- Table structure for table `indianCities`
 --
 
-CREATE TABLE IF NOT EXISTS `indianCities` (
-  `cityID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `indianCities` (
+  `cityID` int(5) NOT NULL,
   `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
-  PRIMARY KEY (`cityID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=568 ;
+  `state` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `indianCities`
@@ -826,7 +817,7 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 -- Table structure for table `internshipLocations`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipLocations` (
+CREATE TABLE `internshipLocations` (
   `internshipID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -837,8 +828,8 @@ CREATE TABLE IF NOT EXISTS `internshipLocations` (
 -- Table structure for table `internshipOffers`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipOffers` (
-  `internshipID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `internshipOffers` (
+  `internshipID` int(5) NOT NULL,
   `internshipTitle` varchar(255) NOT NULL,
   `internshipType` enum('1','2') NOT NULL,
   `internshipDescription` text NOT NULL,
@@ -856,9 +847,8 @@ CREATE TABLE IF NOT EXISTS `internshipOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`internshipID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -866,7 +856,7 @@ CREATE TABLE IF NOT EXISTS `internshipOffers` (
 -- Table structure for table `internshipSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipSkills` (
+CREATE TABLE `internshipSkills` (
   `internshipID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -877,7 +867,7 @@ CREATE TABLE IF NOT EXISTS `internshipSkills` (
 -- Table structure for table `jobLocations`
 --
 
-CREATE TABLE IF NOT EXISTS `jobLocations` (
+CREATE TABLE `jobLocations` (
   `jobID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -888,8 +878,8 @@ CREATE TABLE IF NOT EXISTS `jobLocations` (
 -- Table structure for table `jobOffers`
 --
 
-CREATE TABLE IF NOT EXISTS `jobOffers` (
-  `jobID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jobOffers` (
+  `jobID` int(5) NOT NULL,
   `jobTitle` varchar(255) NOT NULL,
   `jobType` enum('1','2') NOT NULL,
   `jobDescription` text NOT NULL,
@@ -905,9 +895,8 @@ CREATE TABLE IF NOT EXISTS `jobOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`jobID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -915,7 +904,7 @@ CREATE TABLE IF NOT EXISTS `jobOffers` (
 -- Table structure for table `jobSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `jobSkills` (
+CREATE TABLE `jobSkills` (
   `jobID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -926,14 +915,13 @@ CREATE TABLE IF NOT EXISTS `jobSkills` (
 -- Table structure for table `projects`
 --
 
-CREATE TABLE IF NOT EXISTS `projects` (
-  `projectID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `projects` (
+  `projectID` int(5) NOT NULL,
   `projectTitle` text NOT NULL,
   `projectLink` text NOT NULL,
   `projectDescription` text NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`projectID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -941,8 +929,8 @@ CREATE TABLE IF NOT EXISTS `projects` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE IF NOT EXISTS `questions` (
-  `question_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `questions` (
+  `question_id` int(5) NOT NULL,
   `question` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
@@ -950,9 +938,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `option4` text NOT NULL,
   `answer` enum('1','2','3','4') NOT NULL,
   `skillID` int(5) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
@@ -998,12 +985,11 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- Table structure for table `skills`
 --
 
-CREATE TABLE IF NOT EXISTS `skills` (
-  `skillID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `skills` (
+  `skillID` int(5) NOT NULL,
   `skill_name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`skillID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `skills`
@@ -1042,8 +1028,9 @@ INSERT INTO `skills` (`skillID`, `skill_name`, `active`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `userID` int(5) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
@@ -1060,35 +1047,32 @@ CREATE TABLE IF NOT EXISTS `users` (
   `displayMobile` tinyint(1) NOT NULL,
   `accountApproved` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileImage`, `coverImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `accountApproved`, `active`, `created_at`) VALUES
-(1, 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', '', '', 'M', '4', '1', 135, 1, 1, 1, 1, 1, 1, '2017-04-09 20:09:10'),
-(2, 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-04-09 20:11:19'),
-(3, 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 20:16:36'),
-(4, 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 0, 1, '2017-04-09 20:18:25'),
-(5, 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', '', '', 'M', '4', '1', 135, 1, 0, 1, 0, 0, 0, '2017-04-09 20:49:51'),
-(6, 'Prashant Chaudhary', 'prashantp099@gmail.com', 9899310579, '3075d701de5770f0016cc1f93adb05bf', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-04-09 20:53:02'),
-(7, 'Sakshi Jaiswal', 'jswal.sakshi@gmail.com', 9971974077, '11a98374ebec8e0c7a54751d2161804d', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 21:02:09'),
-(8, 'Abhay Rawat', 'abhayrawat2695@gmail.com', 8468915550, '0cc175b9c0f1b6a831c399e269772661', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-09 20:57:05'),
-(9, 'Yash Vardhan', 'yashapril30@gmail.com', 9999393132, 'a9c91bac2c315f83a55ae9fcb88c61f0', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:36:44'),
-(10, 'Shivam Goyal', 'shivam.sinew@gmail.com', 8587882383, '456b370011f154a7ce7af17ee49a76ad', '', '', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-04-10 10:41:11'),
-(11, 'Deergha Jain', 'deerghajain11@gmail.com', 9716150496, '0bb3b7a7855d8532e55577a502ae236e', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:43:45'),
-(12, 'Deepti Jain', 'deeptijain9676@gmail.com', 9718669382, '3036514cbad26225659717408c8d2c67', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:48:37'),
-(13, 'Suyash Tilhari', 'suyash.tilhari12@gmail.com', 8375867124, '1bbfd0943ed91f99438eead55020f85a', '', '', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-04-10 10:50:38'),
-(14, 'Siddharth Jain', 'sidjain2901@gmail.com', 9560839425, 'e10adc3949ba59abbe56e057f20f883e', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:53:34'),
-(15, 'Anukriti Keshari', 'anukriti.kaushki@gmail.com', 8860309313, 'e10adc3949ba59abbe56e057f20f883e', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:57:26'),
-(16, 'Salokya Srivastava', 'sriv.salokya@gmail.com', 9453847603, '62c1dc840b80b395403ad0fed7debcf6', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-10 11:04:28'),
-(17, 'Krishnapriya Agarwal', 'kp.agarwal95@gmail.com', 8882521283, 'f1c78b8f774fa7804a081a20df35874a', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-10 11:07:09'),
-(18, 'Jubika Khanna', 'jubika.khanna@fitpass.co.in', 8130995418, 'dbf3d937d4808b94e0e39b804e0bbea0', '', '', 'F', '4', '2', 135, 1, 1, 0, 0, 1, 1, '2017-05-31 18:12:56');
+INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`, `profileImage`, `coverImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `accountApproved`, `active`, `created_at`) VALUES
+(1, 'vrmanikhil', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', '', '', 'M', '4', '1', 135, 1, 1, 1, 1, 1, 1, '2017-06-03 17:41:29'),
+(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-06-03 17:50:28'),
+(3, '', 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 20:16:36'),
+(4, '', 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 0, 1, '2017-04-09 20:18:25'),
+(5, '', 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', '', '', 'M', '4', '1', 135, 1, 0, 1, 0, 0, 0, '2017-04-09 20:49:51'),
+(6, '', 'Prashant Chaudhary', 'prashantp099@gmail.com', 9899310579, '3075d701de5770f0016cc1f93adb05bf', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-04-09 20:53:02'),
+(7, '', 'Sakshi Jaiswal', 'jswal.sakshi@gmail.com', 9971974077, '11a98374ebec8e0c7a54751d2161804d', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 21:02:09'),
+(8, '', 'Abhay Rawat', 'abhayrawat2695@gmail.com', 8468915550, '0cc175b9c0f1b6a831c399e269772661', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-09 20:57:05'),
+(9, '', 'Yash Vardhan', 'yashapril30@gmail.com', 9999393132, 'a9c91bac2c315f83a55ae9fcb88c61f0', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:36:44'),
+(10, '', 'Shivam Goyal', 'shivam.sinew@gmail.com', 8587882383, '456b370011f154a7ce7af17ee49a76ad', '', '', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-04-10 10:41:11'),
+(11, '', 'Deergha Jain', 'deerghajain11@gmail.com', 9716150496, '0bb3b7a7855d8532e55577a502ae236e', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:43:45'),
+(12, '', 'Deepti Jain', 'deeptijain9676@gmail.com', 9718669382, '3036514cbad26225659717408c8d2c67', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:48:37'),
+(13, '', 'Suyash Tilhari', 'suyash.tilhari12@gmail.com', 8375867124, '1bbfd0943ed91f99438eead55020f85a', '', '', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-04-10 10:50:38'),
+(14, '', 'Siddharth Jain', 'sidjain2901@gmail.com', 9560839425, 'e10adc3949ba59abbe56e057f20f883e', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:53:34'),
+(15, '', 'Anukriti Keshari', 'anukriti.kaushki@gmail.com', 8860309313, 'e10adc3949ba59abbe56e057f20f883e', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:57:26'),
+(16, '', 'Salokya Srivastava', 'sriv.salokya@gmail.com', 9453847603, '62c1dc840b80b395403ad0fed7debcf6', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-10 11:04:28'),
+(17, '', 'Krishnapriya Agarwal', 'kp.agarwal95@gmail.com', 8882521283, 'f1c78b8f774fa7804a081a20df35874a', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-10 11:07:09'),
+(18, '', 'Jubika Khanna', 'jubika.khanna@fitpass.co.in', 8130995418, 'dbf3d937d4808b94e0e39b804e0bbea0', '', '', 'F', '4', '2', 135, 1, 1, 0, 0, 1, 1, '2017-05-31 18:12:56');
 
 -- --------------------------------------------------------
 
@@ -1096,9 +1080,9 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `userSkills` (
-  `user_id` int(5) NOT NULL,
-  `skill_id` int(5) NOT NULL,
+CREATE TABLE `userSkills` (
+  `userID` int(5) NOT NULL,
+  `skillID` int(5) NOT NULL,
   `score` int(5) NOT NULL,
   `testDate` datetime NOT NULL,
   `available` tinyint(1) NOT NULL,
@@ -1111,8 +1095,8 @@ CREATE TABLE IF NOT EXISTS `userSkills` (
 -- Table structure for table `workExperience`
 --
 
-CREATE TABLE IF NOT EXISTS `workExperience` (
-  `weID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workExperience` (
+  `weID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -1120,10 +1104,180 @@ CREATE TABLE IF NOT EXISTS `workExperience` (
   `startYear` int(4) NOT NULL,
   `endMonth` varchar(255) NOT NULL,
   `endYear` int(4) NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`weID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `achievements`
+--
+ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`achievementID`);
+
+--
+-- Indexes for table `adminAuth`
+--
+ALTER TABLE `adminAuth`
+  ADD PRIMARY KEY (`adminID`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `colleges`
+--
+ALTER TABLE `colleges`
+  ADD PRIMARY KEY (`college_id`);
+
+--
+-- Indexes for table `contactMessages`
+--
+ALTER TABLE `contactMessages`
+  ADD PRIMARY KEY (`contactID`);
+
+--
+-- Indexes for table `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`content_id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `employerUsers`
+--
+ALTER TABLE `employerUsers`
+  ADD UNIQUE KEY `userID` (`userID`);
+
+--
+-- Indexes for table `indianCities`
+--
+ALTER TABLE `indianCities`
+  ADD PRIMARY KEY (`cityID`);
+
+--
+-- Indexes for table `internshipOffers`
+--
+ALTER TABLE `internshipOffers`
+  ADD PRIMARY KEY (`internshipID`);
+
+--
+-- Indexes for table `jobOffers`
+--
+ALTER TABLE `jobOffers`
+  ADD PRIMARY KEY (`jobID`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`projectID`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
+
+--
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`skillID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userID`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `mobile` (`mobile`);
+
+--
+-- Indexes for table `workExperience`
+--
+ALTER TABLE `workExperience`
+  ADD PRIMARY KEY (`weID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `achievements`
+--
+ALTER TABLE `achievements`
+  MODIFY `achievementID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `adminAuth`
+--
+ALTER TABLE `adminAuth`
+  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `colleges`
+--
+ALTER TABLE `colleges`
+  MODIFY `college_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `contactMessages`
+--
+ALTER TABLE `contactMessages`
+  MODIFY `contactID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `content`
+--
+ALTER TABLE `content`
+  MODIFY `content_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `course_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `indianCities`
+--
+ALTER TABLE `indianCities`
+  MODIFY `cityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
+--
+-- AUTO_INCREMENT for table `internshipOffers`
+--
+ALTER TABLE `internshipOffers`
+  MODIFY `internshipID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `jobOffers`
+--
+ALTER TABLE `jobOffers`
+  MODIFY `jobID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `projectID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `workExperience`
+--
+ALTER TABLE `workExperience`
+  MODIFY `weID` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
