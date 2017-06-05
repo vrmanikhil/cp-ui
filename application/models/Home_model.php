@@ -75,4 +75,29 @@ class Home_model extends CI_Model {
 		return $this->db->insert('achievements', $data);
 	}
 
+	public function getUserDetails($username){
+		$result = $this->db->get_where('users', array('username' => $username), '1');
+		return $result->result_array();
+	}
+
+	public function getUserProjects($userID){
+		$result = $this->db->get_where('projects', array('userID' => $userID));
+		return $result->result_array();
+	}
+
+	public function getUserWorkEx($userID){
+		$result = $this->db->get_where('workExperience', array('userID' => $userID));
+		return $result->result_array();
+	}
+
+	public function getUserAchievements($userID){
+		$result = $this->db->get_where('achievements', array('userID' => $userID));
+		return $result->result_array();
+	}
+
+	public function getUserSkills($userID){
+		$result = $this->db->get_where('userSkills', array('userID' => $userID));
+		return $result->result_array();
+	}
+
 }

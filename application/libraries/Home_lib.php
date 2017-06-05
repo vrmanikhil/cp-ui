@@ -62,4 +62,34 @@ class Home_lib {
 		return $CI->homeModel->addAchievement($data);
 	}
 
+	public function getUserDetails($username){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserDetails($username);
+	}
+
+	public function getUserProjects($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserProjects($userID);
+	}
+
+	public function getUserWorkEx($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserWorkEx($userID);
+	}
+
+	public function getUserAchievements($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserAchievements($userID);
+	}
+
+	public function getUserSkills($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserSkills($userID);
+	}
+
 }

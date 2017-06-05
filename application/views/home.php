@@ -15,7 +15,7 @@
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
-	
+
 	<div class="layout-container flex flex--col">
 		<?php echo $header; ?>
 		<main class="flex main-container globalContainer">
@@ -244,6 +244,21 @@
 		</main>
 		<?php echo $footer; ?>
 	</div>
+	<script>
+	var adBlockEnabled = false;
+	var testAd = document.createElement('div');
+	testAd.innerHTML = '&nbsp;';
+	testAd.className = 'adsbox';
+	document.body.appendChild(testAd);
+	window.setTimeout(function() {
+	if (testAd.offsetHeight === 0) {
+		adBlockEnabled = true;
+	}
+	testAd.remove();
+	console.log('AdBlock Enabled? ', adBlockEnabled)
+	}, 100);
+	</script>
+	
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 </body>

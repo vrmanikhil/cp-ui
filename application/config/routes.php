@@ -53,7 +53,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 
 $route['change-password'] = 'home/changePassword';
-$route['userProfile'] = 'home/userProfile';
+$route['user/(:any)'] = 'home/user/$1';
 $route['notifications'] = 'home/notifications';
 $route['messages'] = 'home/messages';
 $route['connections'] = 'home/connections';

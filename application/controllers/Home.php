@@ -119,7 +119,7 @@ class Home extends CI_Controller {
 		$this->load->view('skillTestGuidelines', $this->data);
 	}
 
-	public function test(){
+	public function connections(){
 		$userID = '1';
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
 		var_dump($this->data['connections']);die;
@@ -140,5 +140,16 @@ class Home extends CI_Controller {
 	// 	sendEmail($data);
 	// }
 
+	public function user($username=''){
+		$this->data['userDetails'] = $this->home_lib->getUserDetails($username);
+		$this->data['userDetails'] = $this->data['userDetails'][0];
+		$userID = $this->data['userDetails']['userID'];
+		$this->data['userProjects'] = $this->home_lib->getUserProjects($userID);
+		$this->data['userWorkEx'] = $this->home_lib->getUserWorkEx($userID);
+		$this->data['userAchievements'] = $this->home_lib->getUserAchievements($userID);
+		$this->data['userSkills'] = $this->home_lib->getUserSkills($userID);
+		var_dump($this->data['userAchievements']);die;
+		var_dump($this->data['userDetails']);die;
+	}
 
 }
