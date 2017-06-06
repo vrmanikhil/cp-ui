@@ -15,9 +15,9 @@
 	<?php }?>
 
   <h3>Login</h3>
-  <form>
-    <input type="email" placeholder="E-Mail Address">
-    <input type="password" placeholder="Password">
+  <form method="post" action="<?php echo base_url('web/doLogin'); ?>">
+    <input type="email" name="email" placeholder="E-Mail Address">
+    <input type="password" name="password" placeholder="Password">
     <button type="submit">LOGIN</button>
   </form>
   <h3>Register</h3>

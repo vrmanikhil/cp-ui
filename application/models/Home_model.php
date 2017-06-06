@@ -7,6 +7,20 @@ class Home_model extends CI_Model {
 		$this->load->database();
 	}
 
+	public function login($email,$password)
+	{
+		$result = $this->db->get_where('users', array('email' => $email,'password' => $password), 1, 0);
+		if ($result->num_rows()>0) {
+			return true;
+		}
+		return false;
+	}
+
+	public function getUserDetailsFromEMail($email){
+		$result = $this->db->get_where('users', array('email' => $email));
+		return $result->result_array();
+	}
+
 	public function getLocations(){
 		$result = $this->db->get('indianCities');
 		return $result->result_array();
@@ -116,7 +130,9 @@ class Home_model extends CI_Model {
 		if ($result->num_rows() > 0) {
 			return 1;
 		}
-		return 0;
+		else{
+			return 0;
+		}
 	}
 
 	public function checkMobileExist($mobile){
@@ -125,7 +141,17 @@ class Home_model extends CI_Model {
 		if ($result->num_rows() > 0) {
 			return 1;
 		}
-		return 0;
+		else{
+			return 0;
+		}
+	}
+
+	public function checkPasswordMatch($email, $password){
+		$result = $this->db->get_where('users', array('email' => $email,'password' => $password), 1, 0);
+		if ($result->num_rows()>0) {
+			return true;
+		}
+		return false;
 	}
 
 }

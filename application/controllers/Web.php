@@ -12,9 +12,48 @@ class Web extends CI_Controller {
 	}
 
 	private function login($email, $password){
-		echo $email;
-		echo $password;
-		die;
+		$result = $this->home_lib->login($email,$password);
+		if ($result){
+			$this->session->set_flashdata('message', array('content'=>'Nachooooooooooo','class'=>'success'));
+			redirect(base_url('home'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+	}
+
+	public function doLogin(){
+		$email = '';
+		$password = '';
+		if($x = $this->input->post('email')){
+			$email = $x;
+		}
+		if($x = $this->input->post('password')){
+			$password = $x;
+			$password = md5($password);
+		}
+		if($email == '' || $password == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+		if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+		if(!$this->home_lib->checkEMailExist($email)){
+			$this->session->set_flashdata('message', array('content'=>'The entered E-Mail Address is not registered with us, try creating a New Account.','class'=>'error'));
+			redirect(base_url());
+		}
+		else{
+			if($this->home_lib->checkPasswordMatch($email, $password)){
+				$this->login($email, $password);
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Password does not matches the one in our database, please Try Again.','class'=>'error'));
+				redirect(base_url());
+			}
+		}
 	}
 
 	public function register(){
@@ -67,7 +106,6 @@ class Web extends CI_Controller {
 			'accountType' => $accountType
 		);
 		$this->login($email, $password);
-
 		$result = $this->home_lib->register($data);
 		if($result){
 		}
@@ -75,6 +113,13 @@ class Web extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
 			redirect(base_url());
 		}
+	}
+
+	public function logout(){
+		$this->session->set_userdata('userData', false);
+		$this->session->set_userdata('userData', []);
+		$this->session->sess_destroy();
+		redirect(base_url());
 	}
 
 	public function changePassword(){

@@ -38,6 +38,7 @@ class Home extends CI_Controller {
 
 	public function home()
 	{
+		// var_dump($_SESSION['userData']);die;
 		$this->load->view('home', $this->data);
 	}
 
@@ -50,7 +51,6 @@ class Home extends CI_Controller {
 	public function jobOffers(){
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
-		var_dump($this->data['jobOffers']);die;
 		$this->load->view('jobOffers', $this->data);
 	}
 
@@ -138,6 +138,48 @@ class Home extends CI_Controller {
 		$userID = '1';
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
 		var_dump($this->data['connections']);die;
+	}
+
+	public function generateVerifyEMail(){
+		$email = 'vrmanikhil@gmail.com';
+
+		//check if token is available and active
+					$token = //get token from db
+					// $emailData['token'] = $token;
+					// $this->load->helper('mail_helper');
+					// $message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
+					// $data = array(
+					// 	'sendToEmail' => $email,
+					// 	'fromName' => 'CampusPuppy Private Limited',
+					// 	'fromEmail' => 'no-reply@campuspuppy.com',
+					// 	'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
+					// 	'message' => $message,
+					// 	'using' =>'pepipost'
+					// );
+					// sendEmail($data);
+
+		//else if token is not available
+
+
+		$token = "some8charactertoken";
+		date_default_timezone_set("Asia/Kolkata");
+		$generatedAt = strtotime(date("d M Y H:i:s"));
+
+
+
+
+		// $emailData['token'] = $token;
+		// $this->load->helper('mail_helper');
+		// $message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
+		// $data = array(
+		// 	'sendToEmail' => $email,
+		// 	'fromName' => 'CampusPuppy Private Limited',
+		// 	'fromEmail' => 'no-reply@campuspuppy.com',
+		// 	'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
+		// 	'message' => $message,
+		// 	'using' =>'pepipost'
+		// );
+		// sendEmail($data);
 	}
 
 	// public function sendEMail(){

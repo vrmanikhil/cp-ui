@@ -2,6 +2,26 @@
 
 class Home_lib {
 
+	public function login($email,$password)
+	{
+		$CI =& get_instance();
+		$CI->load->model('home_model','homeModel');
+		$result = $CI->homeModel->login($email,$password);
+		$userData = $CI->homeModel->getUserDetailsFromEMail($email);
+		$userData = $userData[0];
+		if ($result) {
+			$data = array(
+				'loggedIn' => true,
+				'email' => $email,
+				'userID' => $userData['userID'],
+				'accountApproved' => $userData['accountApproved']
+				);
+			$CI->session->set_userdata('userData', $data);
+			return 1;
+		}
+		return 0;
+	}
+
 	public function getLocations(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -114,6 +134,12 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel-> checkMobileExist($mobile);
+	}
+
+	public function checkPasswordMatch($email, $password){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkPasswordMatch($email, $password);
 	}
 
 }
