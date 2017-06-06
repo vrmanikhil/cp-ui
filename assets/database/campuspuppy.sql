@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu1
--- http://www.phpmyadmin.net
+-- version 4.0.10.18
+-- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 05, 2017 at 12:37 PM
--- Server version: 5.7.18-0ubuntu0.16.04.1
--- PHP Version: 7.0.15-0ubuntu0.16.04.4
+-- Host: localhost:3306
+-- Generation Time: Jun 06, 2017 at 10:44 AM
+-- Server version: 5.6.35-cll-lve
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `campuspuppy`
@@ -26,12 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE `achievements` (
-  `achievementID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `achievements` (
+  `achievementID` int(5) NOT NULL AUTO_INCREMENT,
   `achievementTitle` text NOT NULL,
   `achievementDescription` text NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`achievementID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -39,11 +40,13 @@ CREATE TABLE `achievements` (
 -- Table structure for table `adminAuth`
 --
 
-CREATE TABLE `adminAuth` (
-  `adminID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adminAuth` (
+  `adminID` int(5) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`adminID`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `adminAuth`
@@ -58,12 +61,13 @@ INSERT INTO `adminAuth` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE `colleges` (
-  `college_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `colleges` (
+  `college_id` int(5) NOT NULL AUTO_INCREMENT,
   `college` varchar(255) NOT NULL,
   `logo` text NOT NULL,
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`college_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `colleges`
@@ -97,7 +101,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 -- Table structure for table `connections`
 --
 
-CREATE TABLE `connections` (
+CREATE TABLE IF NOT EXISTS `connections` (
   `active` int(5) NOT NULL,
   `passive` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -108,15 +112,16 @@ CREATE TABLE `connections` (
 -- Table structure for table `contactMessages`
 --
 
-CREATE TABLE `contactMessages` (
-  `contactID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `contactMessages` (
+  `contactID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
   `message` text NOT NULL,
   `messageRead` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`contactID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -124,15 +129,16 @@ CREATE TABLE `contactMessages` (
 -- Table structure for table `content`
 --
 
-CREATE TABLE `content` (
-  `content_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `content` (
+  `content_id` int(5) NOT NULL AUTO_INCREMENT,
   `aboutUs` text NOT NULL,
   `termsAndConditions` text NOT NULL,
   `privacyPolicy` text NOT NULL,
   `coat` text NOT NULL,
   `facebook` varchar(255) NOT NULL,
-  `twitter` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `twitter` varchar(255) NOT NULL,
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `content`
@@ -147,12 +153,13 @@ INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPo
 -- Table structure for table `courses`
 --
 
-CREATE TABLE `courses` (
-  `course_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `courses` (
+  `course_id` int(5) NOT NULL AUTO_INCREMENT,
   `course` varchar(255) NOT NULL,
   `duration` int(3) NOT NULL,
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `courses`
@@ -173,13 +180,14 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `active`) VALUES
 -- Table structure for table `employerUsers`
 --
 
-CREATE TABLE `employerUsers` (
+CREATE TABLE IF NOT EXISTS `employerUsers` (
   `userID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` text NOT NULL
+  `companyLogo` text NOT NULL,
+  UNIQUE KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -195,7 +203,7 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 -- Table structure for table `generalUsers`
 --
 
-CREATE TABLE `generalUsers` (
+CREATE TABLE IF NOT EXISTS `generalUsers` (
   `userID` int(5) NOT NULL,
   `collegeID` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
@@ -232,11 +240,12 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`, `identit
 -- Table structure for table `indianCities`
 --
 
-CREATE TABLE `indianCities` (
-  `cityID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `indianCities` (
+  `cityID` int(5) NOT NULL AUTO_INCREMENT,
   `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `state` varchar(255) NOT NULL,
+  PRIMARY KEY (`cityID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=568 ;
 
 --
 -- Dumping data for table `indianCities`
@@ -814,10 +823,22 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `internshipApplicants`
+--
+
+CREATE TABLE IF NOT EXISTS `internshipApplicants` (
+  `internshipID` int(5) NOT NULL,
+  `userID` int(5) NOT NULL,
+  `status` enum('1','2','3','4') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `internshipLocations`
 --
 
-CREATE TABLE `internshipLocations` (
+CREATE TABLE IF NOT EXISTS `internshipLocations` (
   `internshipID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -828,8 +849,8 @@ CREATE TABLE `internshipLocations` (
 -- Table structure for table `internshipOffers`
 --
 
-CREATE TABLE `internshipOffers` (
-  `internshipID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `internshipOffers` (
+  `internshipID` int(5) NOT NULL AUTO_INCREMENT,
   `internshipTitle` varchar(255) NOT NULL,
   `internshipType` enum('1','2') NOT NULL,
   `internshipDescription` text NOT NULL,
@@ -847,8 +868,9 @@ CREATE TABLE `internshipOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`internshipID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -856,7 +878,7 @@ CREATE TABLE `internshipOffers` (
 -- Table structure for table `internshipSkills`
 --
 
-CREATE TABLE `internshipSkills` (
+CREATE TABLE IF NOT EXISTS `internshipSkills` (
   `internshipID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -864,10 +886,22 @@ CREATE TABLE `internshipSkills` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jobApplicants`
+--
+
+CREATE TABLE IF NOT EXISTS `jobApplicants` (
+  `jobID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `status` enum('1','2','3','4') NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobLocations`
 --
 
-CREATE TABLE `jobLocations` (
+CREATE TABLE IF NOT EXISTS `jobLocations` (
   `jobID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -878,8 +912,8 @@ CREATE TABLE `jobLocations` (
 -- Table structure for table `jobOffers`
 --
 
-CREATE TABLE `jobOffers` (
-  `jobID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `jobOffers` (
+  `jobID` int(5) NOT NULL AUTO_INCREMENT,
   `jobTitle` varchar(255) NOT NULL,
   `jobType` enum('1','2') NOT NULL,
   `jobDescription` text NOT NULL,
@@ -895,8 +929,9 @@ CREATE TABLE `jobOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`jobID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -904,7 +939,7 @@ CREATE TABLE `jobOffers` (
 -- Table structure for table `jobSkills`
 --
 
-CREATE TABLE `jobSkills` (
+CREATE TABLE IF NOT EXISTS `jobSkills` (
   `jobID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -912,16 +947,34 @@ CREATE TABLE `jobSkills` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `passwordToken`
+--
+
+CREATE TABLE IF NOT EXISTS `passwordToken` (
+  `tokenID` int(5) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `tokenType` enum('1','2') NOT NULL,
+  `generatedAt` bigint(12) NOT NULL,
+  `expiry` bigint(12) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tokenID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `projects`
 --
 
-CREATE TABLE `projects` (
-  `projectID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `projects` (
+  `projectID` int(5) NOT NULL AUTO_INCREMENT,
   `projectTitle` text NOT NULL,
   `projectLink` text NOT NULL,
   `projectDescription` text NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`projectID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -929,8 +982,8 @@ CREATE TABLE `projects` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `question_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `question_id` int(5) NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
@@ -938,8 +991,9 @@ CREATE TABLE `questions` (
   `option4` text NOT NULL,
   `answer` enum('1','2','3','4') NOT NULL,
   `skillID` int(5) NOT NULL,
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `questions`
@@ -985,11 +1039,12 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- Table structure for table `skills`
 --
 
-CREATE TABLE `skills` (
-  `skillID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `skills` (
+  `skillID` int(5) NOT NULL AUTO_INCREMENT,
   `skill_name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`skillID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `skills`
@@ -1025,11 +1080,32 @@ INSERT INTO `skills` (`skillID`, `skill_name`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `testSettings`
+--
+
+CREATE TABLE IF NOT EXISTS `testSettings` (
+  `skillID` int(5) NOT NULL AUTO_INCREMENT,
+  `numberQuestions` int(5) NOT NULL,
+  `timeAllowed` int(5) NOT NULL,
+  `passingCriteria` int(5) NOT NULL,
+  PRIMARY KEY (`skillID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `testSettings`
+--
+
+INSERT INTO `testSettings` (`skillID`, `numberQuestions`, `timeAllowed`, `passingCriteria`) VALUES
+(1, 10, 120, 60);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(5) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -1047,16 +1123,19 @@ CREATE TABLE `users` (
   `displayMobile` tinyint(1) NOT NULL,
   `accountApproved` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `mobile` (`mobile`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`, `profileImage`, `coverImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `accountApproved`, `active`, `created_at`) VALUES
-(1, 'vrmanikhil', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', '', '', 'M', '4', '1', 135, 1, 1, 1, 1, 1, 1, '2017-06-03 17:41:29'),
-(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-06-03 17:50:28'),
+(1, '', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', '', '', 'M', '4', '1', 135, 1, 1, 1, 1, 1, 1, '2017-04-09 20:09:10'),
+(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-04-09 20:11:19'),
 (3, '', 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 20:16:36'),
 (4, '', 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 0, 1, '2017-04-09 20:18:25'),
 (5, '', 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', '', '', 'M', '4', '1', 135, 1, 0, 1, 0, 0, 0, '2017-04-09 20:49:51'),
@@ -1080,13 +1159,12 @@ INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE `userSkills` (
+CREATE TABLE IF NOT EXISTS `userSkills` (
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
   `score` int(5) NOT NULL,
-  `testDate` datetime NOT NULL,
-  `available` tinyint(1) NOT NULL,
-  `skillType` enum('0','1','2','3') NOT NULL
+  `testDate` bigint(12) NOT NULL,
+  `skillType` enum('0','1','2','3','4') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1095,8 +1173,8 @@ CREATE TABLE `userSkills` (
 -- Table structure for table `workExperience`
 --
 
-CREATE TABLE `workExperience` (
-  `weID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `workExperience` (
+  `weID` int(5) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -1104,180 +1182,10 @@ CREATE TABLE `workExperience` (
   `startYear` int(4) NOT NULL,
   `endMonth` varchar(255) NOT NULL,
   `endYear` int(4) NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`weID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `achievements`
---
-ALTER TABLE `achievements`
-  ADD PRIMARY KEY (`achievementID`);
-
---
--- Indexes for table `adminAuth`
---
-ALTER TABLE `adminAuth`
-  ADD PRIMARY KEY (`adminID`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- Indexes for table `colleges`
---
-ALTER TABLE `colleges`
-  ADD PRIMARY KEY (`college_id`);
-
---
--- Indexes for table `contactMessages`
---
-ALTER TABLE `contactMessages`
-  ADD PRIMARY KEY (`contactID`);
-
---
--- Indexes for table `content`
---
-ALTER TABLE `content`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`course_id`);
-
---
--- Indexes for table `employerUsers`
---
-ALTER TABLE `employerUsers`
-  ADD UNIQUE KEY `userID` (`userID`);
-
---
--- Indexes for table `indianCities`
---
-ALTER TABLE `indianCities`
-  ADD PRIMARY KEY (`cityID`);
-
---
--- Indexes for table `internshipOffers`
---
-ALTER TABLE `internshipOffers`
-  ADD PRIMARY KEY (`internshipID`);
-
---
--- Indexes for table `jobOffers`
---
-ALTER TABLE `jobOffers`
-  ADD PRIMARY KEY (`jobID`);
-
---
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`projectID`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`);
-
---
--- Indexes for table `skills`
---
-ALTER TABLE `skills`
-  ADD PRIMARY KEY (`skillID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `mobile` (`mobile`);
-
---
--- Indexes for table `workExperience`
---
-ALTER TABLE `workExperience`
-  ADD PRIMARY KEY (`weID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `achievements`
---
-ALTER TABLE `achievements`
-  MODIFY `achievementID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `adminAuth`
---
-ALTER TABLE `adminAuth`
-  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `colleges`
---
-ALTER TABLE `colleges`
-  MODIFY `college_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `contactMessages`
---
-ALTER TABLE `contactMessages`
-  MODIFY `contactID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `content`
---
-ALTER TABLE `content`
-  MODIFY `content_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `courses`
---
-ALTER TABLE `courses`
-  MODIFY `course_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `indianCities`
---
-ALTER TABLE `indianCities`
-  MODIFY `cityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
---
--- AUTO_INCREMENT for table `internshipOffers`
---
-ALTER TABLE `internshipOffers`
-  MODIFY `internshipID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `jobOffers`
---
-ALTER TABLE `jobOffers`
-  MODIFY `jobID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `projectID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
---
--- AUTO_INCREMENT for table `skills`
---
-ALTER TABLE `skills`
-  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT for table `workExperience`
---
-ALTER TABLE `workExperience`
-  MODIFY `weID` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -97,6 +97,7 @@ $route['internships/added-internship-offer'] = 'home/addedInternshipOffers';
 
 //Skills
 
+$route['skills'] = 'home/skills';
 $route['skills/skill-test'] = 'home/skillTest';
 $route['skills/skill-test-guidelines'] = 'home/skillTestGuidelines';
 

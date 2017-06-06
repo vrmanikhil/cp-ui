@@ -126,6 +126,11 @@ class Home extends CI_Controller {
 		$this->load->view('messages', $this->data);
 	}
 
+	public function skills(){
+		$this->data['skills'] = $this->home_lib->getSkills();
+		$this->load->view('skills', $this->data);
+	}
+
 	public function skillTest(){
 		$this->load->view('skillTest', $this->data);
 	}
