@@ -110,4 +110,22 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkEMailExist($email){
+		$this->db->where('email', $email);
+		$result = $this->db->get('users');
+		if ($result->num_rows() > 0) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public function checkMobileExist($mobile){
+		$this->db->where('mobile', $mobile);
+		$result = $this->db->get('users');
+		if ($result->num_rows() > 0) {
+			return 1;
+		}
+		return 0;
+	}
+
 }

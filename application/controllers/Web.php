@@ -8,7 +8,73 @@ class Web extends CI_Controller {
 			$this->load->helper(array('url'));
 			$this->load->library(array('Home_lib', 'session'));
 			$this->data = array();
-			// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
+			$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
+	}
+
+	private function login($email, $password){
+		echo $email;
+		echo $password;
+		die;
+	}
+
+	public function register(){
+		$name = '';
+		$email = '';
+		$mobile = '';
+		$password = '';
+		$accountType = '';
+		if($x = $this->input->post('name')){
+			$name = $x;
+		}
+		if($x = $this->input->post('email')){
+			$email = $x;
+		}
+		if($x = $this->input->post('mobile')){
+			$mobile = $x;
+		}
+		if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+		if(strlen($mobile)!=10 || !ctype_digit($mobile)) {
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+		if($this->home_lib->checkEMailExist($email)){
+			$this->session->set_flashdata('message', array('content'=>'E-Mail Address already registered, try registering using another e-mail Address.','class'=>'error'));
+			redirect(base_url());
+		}
+		if($this->home_lib->checkMobileExist($mobile)){
+			$this->session->set_flashdata('message', array('content'=>'Mobile Number already registered, try registering using another mobile number.','class'=>'error'));
+			redirect(base_url());
+		}
+		if($x = $this->input->post('password')){
+			$password = $x;
+		}
+		$password = md5($password);
+		if($x = $this->input->post('accountType')){
+			$accountType = $x;
+		}
+		if($name == '' || $email == '' || $mobile == '' || $password == '' || $accountType == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+		$data = array(
+			'name' => $name,
+			'email' => $email,
+			'mobile' => $mobile,
+			'password' => $password,
+			'accountType' => $accountType
+		);
+		$this->login($email, $password);
+
+		$result = $this->home_lib->register($data);
+		if($result){
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
 	}
 
 	public function changePassword(){

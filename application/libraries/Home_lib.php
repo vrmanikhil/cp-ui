@@ -104,4 +104,16 @@ class Home_lib {
 		return $CI->homeModel->getCourses();
 	}
 
+	public function checkEMailExist($email){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel-> checkEMailExist($email);
+	}
+
+	public function checkMobileExist($mobile){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel-> checkMobileExist($mobile);
+	}
+
 }
