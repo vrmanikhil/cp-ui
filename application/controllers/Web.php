@@ -105,9 +105,9 @@ class Web extends CI_Controller {
 			'password' => $password,
 			'accountType' => $accountType
 		);
-		$this->login($email, $password);
 		$result = $this->home_lib->register($data);
 		if($result){
+			$this->login($email, $password);
 		}
 		else{
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
