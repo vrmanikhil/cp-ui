@@ -115,8 +115,8 @@
 			<div class="primary-menu__item dropdown__container js-dropdown__container">
 				<a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
 					<div class="flex media media--reverse align-center">
-						<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure img-30">
-						<span class="media-body"><b>Nikhil Verma</b></span>
+						<img src="<?php echo $_SESSION['profileImage']; ?>" alt="user" class="media-figure img-30">
+						<span class="media-body"><b><?php echo $_SESSION['userData']['name']; ?></b></span>
 					</div>
 				</a>
 				<div class="dropdown__html hidden">

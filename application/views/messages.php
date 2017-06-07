@@ -20,7 +20,7 @@
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
 				<div class="explore-panel card flex">
-				  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+				  <a href="<?php if($_SESSION['userData']['accountType']=='1') { echo base_url('jobs/job-offers'); } else { echo base_url('jobs/add-job-offer'); } ?>" class="explore-panel__link flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 50.2 50.2" class="briefcase-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#briefcase-icon"></use>
@@ -28,7 +28,7 @@
 				    </span>
 				    <span class="explore-panel__link-text flex__item">Jobs</span>
 				  </a>
-				  <a href="javascript:" class="explore-panel__link flex flex--col flex__item align-center">
+				  <a href="<?php if($_SESSION['userData']['accountType']=='1') { echo base_url('internships/internship-offers');} else { echo base_url('internships/add-internship-offer'); } ?>" class="explore-panel__link flex flex--col flex__item align-center">
 				    <span class="explore-panel__link-icon-container">
 							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 31.387 31.386" class="computer-icon">
 								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#computer-icon"></use>

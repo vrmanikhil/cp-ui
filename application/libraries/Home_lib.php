@@ -10,13 +10,43 @@ class Home_lib {
 		$userData = $CI->homeModel->getUserDetailsFromEMail($email);
 		$userData = $userData[0];
 		if ($result) {
-			$data = array(
-				'loggedIn' => true,
-				'email' => $email,
-				'userID' => $userData['userID'],
-				'accountApproved' => $userData['accountApproved']
-				);
+			if($userData['accountType']=='1'){
+				$data = array(
+					'loggedIn' => true,
+					'email' => $email,
+					'name' => $userData['name'],
+					'userID' => $userData['userID'],
+					'accountType' => $userData['accountType'],
+					'accountApproved' => $userData['accountApproved'],
+					'collegeLogo' => $userData['logo'],
+					'collegeName' => $userData['college']
+					);
+			}
+			if($userData['accountType']=='2'){
+				$data = array(
+					'loggedIn' => true,
+					'email' => $email,
+					'name' => $userData['name'],
+					'userID' => $userData['userID'],
+					'accountType' => $userData['accountType'],
+					'accountApproved' => $userData['accountApproved'],
+					'companyLogo' => $userData['companyLogo'],
+					'companyName' => $userData['companyName']
+					);
+			}
 			$CI->session->set_userdata('userData', $data);
+			$profileImage = $userData['profileImage'];
+			$CI->session->set_userdata('profileImage', $profileImage);
+			return 1;
+		}
+		return 0;
+	}
+
+	public function auth(){
+		$CI = & get_instance();
+		$CI->load->library('session');
+		$data = $CI->session->userdata('userData');
+		if (isset($data['loggedIn']) && $data['loggedIn']) {
 			return 1;
 		}
 		return 0;
@@ -50,6 +80,12 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->addInternship($data);
+	}
+
+	public function register($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->register($data);
 	}
 
 	public function addJob($data){
@@ -140,6 +176,12 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->checkPasswordMatch($email, $password);
+	}
+
+	public function changePassword($email, $password){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->changePassword($email, $password);
 	}
 
 }

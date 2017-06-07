@@ -15,66 +15,80 @@ class Home extends CI_Controller {
 			$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
 			$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
 			$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
-			// $this->data['foot'] = $this->load->view('backoffice/common/foot', $this->data, true);
-			// $this->data['navigation'] = $this->load->view('backoffice/common/navigation', $this->data, true);
-			// $this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','color'=>'');
-			// $this->data['navigation'] =  $this->load->view('common/navigation',$this->data,true);
 	}
 
-	public function index()
-	{
-		$this->load->view('main', $this->data);
+	private function redirection(){
+			if(!$this->home_lib->auth()){
+				redirect(base_url());
+			}
+	}
+
+	public function index(){
+		if($this->home_lib->auth()){
+			redirect(base_url('home'));
+		}
+		else{
+			$this->load->view('main', $this->data);
+		}
+	}
+
+	public function home(){
+		$this->redirection();
+		$this->load->view('home', $this->data);
 	}
 
 	public function educationDetails(){
+		$this->redirection();
 		$this->data['colleges'] = $this->home_lib->getColleges();
 		$this->data['courses'] = $this->home_lib->getCourses();
 		$this->load->view('educationDetails', $this->data);
 	}
 
 	public function employerDetails(){
+		$this->redirection();
 		$this->load->view('employerDetails', $this->data);
-	}
-
-	public function home()
-	{
-		// var_dump($_SESSION['userData']);die;
-		$this->load->view('home', $this->data);
 	}
 
 	//Job Offers- Normal Users
 
 	public function relevantJobs(){
+		$this->redirection();
 		$this->load->view('relevantJobs', $this->data);
 	}
 
 	public function jobOffers(){
+		$this->redirection();
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
 		$this->load->view('jobOffers', $this->data);
 	}
 
 	public function appliedJobOffers(){
+		$this->redirection();
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
 	//Internship Offers- Normal Users
 
 	public function relevantInternships(){
+		$this->redirection();
 		$this->load->view('relevantInternships', $this->data);
 	}
 
 	public function internshipOffers(){
+		$this->redirection();
 		$this->load->view('internshipOffers', $this->data);
 	}
 
 	public function appliedInternshipOffers(){
+		$this->redirection();
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
 
 	//
 
 	public function changePassword(){
+		$this->redirection();
 		$this->load->view('changePassword', $this->data);
 	}
 
@@ -99,47 +113,57 @@ class Home extends CI_Controller {
 	}
 
 	public function addJobOffer(){
+		$this->redirection();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('addJobOffer', $this->data);
 	}
 
 	public function addedJobOffers(){
+		$this->redirection();
 		$this->load->view('addedJobOffers', $this->data);
 	}
 
 	public function addInternshipOffer(){
+		$this->redirection();
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->load->view('addInternshipOffer', $this->data);
 	}
 
 	public function addedInternshipOffers(){
+		$this->redirection();
 		$this->load->view('addedInternshipOffers', $this->data);
 	}
 
 	public function notifications(){
+		$this->redirection();
 		$this->load->view('notifications', $this->data);
 	}
 
 	public function messages(){
+		$this->redirection();
 		$this->load->view('messages', $this->data);
 	}
 
 	public function skills(){
+		$this->redirection();
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('skills', $this->data);
 	}
 
 	public function skillTest(){
+		$this->redirection();
 		$this->load->view('skillTest', $this->data);
 	}
 
 	public function skillTestGuidelines(){
+		$this->redirection();
 		$this->load->view('skillTestGuidelines', $this->data);
 	}
 
 	public function connections(){
+		$this->redirection();
 		$userID = '1';
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
 		var_dump($this->data['connections']);die;

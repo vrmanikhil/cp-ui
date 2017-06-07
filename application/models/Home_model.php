@@ -17,8 +17,21 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserDetailsFromEMail($email){
+
 		$result = $this->db->get_where('users', array('email' => $email));
-		return $result->result_array();
+		$data = $result->result_array();
+		$accountType = $data[0]['accountType'];
+		if($accountType=='1'){
+			$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
+			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
+			$query = $this->db->get_where('users', array('email' => $email));
+			return $query->result_array();
+		}
+		else{
+			$this->db->join('employerUsers', 'users.userID = employerUsers.userID');
+			$query = $this->db->get_where('users', array('email' => $email));
+			return $query->result_array();
+		}
 	}
 
 	public function getLocations(){
@@ -83,6 +96,10 @@ class Home_model extends CI_Model {
 
 	public function addProject($data){
 		return $this->db->insert('projects', $data);
+	}
+
+	public function register($data){
+		return $this->db->insert('users', $data);
 	}
 
 	public function addAchievement($data){
@@ -152,6 +169,11 @@ class Home_model extends CI_Model {
 			return true;
 		}
 		return false;
+	}
+
+	public function changePassword($email, $password){
+		$query = "UPDATE users SET password='$password' WHERE email='$email'";
+		return $this->db->query($query);
 	}
 
 }

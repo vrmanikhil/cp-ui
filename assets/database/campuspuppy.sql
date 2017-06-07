@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2017 at 10:44 AM
+-- Generation Time: Jun 07, 2017 at 03:07 AM
 -- Server version: 5.6.35-cll-lve
 -- PHP Version: 5.6.30
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `employerUsers` (
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` text NOT NULL,
+  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg',
   UNIQUE KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -195,7 +195,15 @@ CREATE TABLE IF NOT EXISTS `employerUsers` (
 --
 
 INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescription`, `companyWebsite`, `companyLogo`) VALUES
-(18, 'Fitpass', '', '<p><strong>FITPASS</strong> is your all access pass to 1250+ gyms and fitness studios in Delhi NCR. Available on iOS &amp; android, FITPASS users can freely workout anywhere, anytime however they want - gym workouts, Yoga, Zumba, Pilates, Cross Fit, Kickboxing, MMA, spinning and many many more. Priced at Rs.999 a month only, FITPASS makes fitness super affordable and accessible.</p>\r\n\r\n<p>Bolstered by a team with the strongest pedigree &ndash; Oxford, Columbia, IIT, St.Stephen&#39;s and Delhi University, with its teeth cut in UBS Investment Bank, McKinsey, the World Bank, Zomato, KPMG, etc. &ndash; we are bringing in the age of fit-tech in India!</p>\r\n\r\n<p>FITPASS is defined by our insistence on providing an unparalleled customer experience.</p>\r\n\r\n<p>Our team members are charged with bringing creativity, honesty, and intellectual rigor to their responsibilities in a never-ending quest to delight our customers. We have high expectations of each other and work as a team to build things we are all proud of.</p>\r\n\r\n<ul>\r\n</ul>', 'https://fitpass.co.in/', '');
+(18, 'Fitpass', 'HR', '<p><strong>FITPASS</strong> is your all access pass to 1250+ gyms and fitness studios in Delhi NCR. Available on iOS &amp; android, FITPASS users can freely workout anywhere, anytime however they want - gym workouts, Yoga, Zumba, Pilates, Cross Fit, Kickboxing, MMA, spinning and many many more. Priced at Rs.999 a month only, FITPASS makes fitness super affordable and accessible.</p>\r\n\r\n<p>Bolstered by a team with the strongest pedigree &ndash; Oxford, Columbia, IIT, St.Stephen&#39;s and Delhi University, with its teeth cut in UBS Investment Bank, McKinsey, the World Bank, Zomato, KPMG, etc. &ndash; we are bringing in the age of fit-tech in India!</p>\r\n\r\n<p>FITPASS is defined by our insistence on providing an unparalleled customer experience.</p>\r\n\r\n<p>Our team members are charged with bringing creativity, honesty, and intellectual rigor to their responsibilities in a never-ending quest to delight our customers. We have high expectations of each other and work as a team to build things we are all proud of.</p>\r\n\r\n<ul>\r\n</ul>', 'https://fitpass.co.in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/fitpass.jpg'),
+(19, 'Wisethink Information Solutions Pvt Ltd', 'HR', '', 'http://wisethinksolutions.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/wisethink.jpg'),
+(20, 'Silver Touch Technologies Limited', '', '', 'https://www.silvertouch.com/in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/silvertouch.jpg'),
+(21, 'SISL Infotech Private Limited', '', '', 'http://www.sislinfotech.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/sisl-infotech.jpg'),
+(22, 'Velocis Systems Private Limited', '', '', 'http://www.velocis.in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/velocis.jpg'),
+(23, 'NetCreativeMind Solutions Private Limited', '', '', 'http://www.netcreativemind.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/netcreativemind.jpg'),
+(24, 'StartupActivator.com', '', '', 'http://startupactivator.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/startupactivator.jpg'),
+(25, 'PES University', '', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(26, 'Campus Puppy Private Limited', 'CEO', '', 'http://www.campuspuppy.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/campuspuppy.jpg');
 
 -- --------------------------------------------------------
 
@@ -993,7 +1001,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `skillID` int(5) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
 
 --
 -- Dumping data for table `questions`
@@ -1031,7 +1039,103 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 (29, '<p>What will be the ratio of simple interest earned by certain amount at the same rate of interest for 6 years and that for 9 years?</p>', '<p>1 : 3</p>', '<p>1 : 4</p>', '<p>2 : 3</p>', '<p>Data Inadequate</p>', '3', 25, 1),
 (30, '<p>In a certain store, the profit is 320% of the cost. If the cost increases by 25% but the selling price remains constant, approximately what percentage of the selling price is the profit?</p>', '<p>30%</p>', '<p>70%</p>', '<p>100%</p>', '<p>250%</p>', '2', 25, 1),
 (31, '<p>In a mixture 60 litres, the ratio of milk and water 2 : 1. If this ratio is to be 1 : 2, then the quanity of water to be further added is:</p>', '<p>20 litres</p>', '<p>30 litres</p>', '<p>40 litres</p>', '<p>60 litres</p>', '4', 25, 1),
-(32, '<p>The salaries A, B, C are in the ratio 2 : 3 : 5. If the increments of 15%, 10% and 20% are allowed respectively in their salaries, then what will be new ratio of their salaries?</p>', '<p>3 : 3 : 10</p>', '<p>10 : 11 : 20</p>', '<p>23 : 33 : 60</p>', '<p>Cannot be Determined</p>', '3', 25, 1);
+(32, '<p>The salaries A, B, C are in the ratio 2 : 3 : 5. If the increments of 15%, 10% and 20% are allowed respectively in their salaries, then what will be new ratio of their salaries?</p>', '<p>3 : 3 : 10</p>', '<p>10 : 11 : 20</p>', '<p>23 : 33 : 60</p>', '<p>Cannot be Determined</p>', '3', 25, 1),
+(33, '<p>The old name of Java was ?</p><p>&nbsp;</p>', '<p>J language</p>', '<p>oak</p>', '<p>oct</p>', '<p>None of the above</p>', '2', 17, 1),
+(34, '<p>Which of the following feature is not supported by java ?</p><p>&nbsp;</p>', '<p>Multithreading</p>', '<p>Reflection</p>', '<p>Operator Overloading</p>', '<p>Garbage Collection</p>', '3', 17, 1),
+(35, '<p>Which of the following is not keyword in java ?</p><p>&nbsp;</p>', '<p>null</p>', '<p>import</p>', '<p>volatile</p>', '<p>package</p>', '1', 17, 1),
+(36, '<p>What is the full form of JDK ?</p><p>&nbsp;</p>', '<p>Java Data Kit</p>', '<p>Java Defination Kit</p>', '<p>Java Development Kit</p>', '<p>Java Design Kit</p>', '3', 17, 1),
+(37, '<p>Which command is used to compile a java program ?</p><p>&nbsp;</p>', '<p>javac</p>', '<p>&nbsp;java</p>', '<p>javad</p>', '<p>javadoc</p>', '1', 17, 1),
+(38, '<p>What is the full form of JVM</p><p>&nbsp;</p>', '<p>Java Virtual Machine</p>', '<p>Java Variable Machine</p>', '<p>Java Virtual Mechanism</p>', '<p>Java Variable Mechanism</p>', '1', 17, 1),
+(39, '<p>What is the full form of ADT ?</p><p>&nbsp;</p>', '<p>Abstract Data Type</p>', '<p>Abstract Development tool</p>', '<p>Abstract Design Tool</p>', '<p>Abstract Development&nbsp;Tool</p>', '1', 17, 1),
+(40, '<p>Which of the following is generated when the source code is successfully compiled ?</p><p>&nbsp;</p>', '<p>Output</p>', '<p>Bytecode</p>', '<p>Error</p>', '<p>None of the above</p>', '2', 17, 1),
+(41, '<p>In JAVA, if you do not give a value to a variable before using it, ______</p><p>&nbsp;</p>', '<p>It will contain a garbage value</p>', '<p>It will initialized with zero</p>', '<p>Compiler will give an error</p>', '<p>None of the above</p>', '3', 17, 0),
+(42, '<p>Which among the following is the compulsory section of java program ?</p><p>&nbsp;</p>', '<p>package Statement</p>', '<p>&nbsp;import Statement</p>', '<p>documentation section</p>', '<p>class declaration section</p>', '4', 17, 1),
+(43, '<p>Sharing of common information is achieved by the concept of ?</p><p>&nbsp;</p>', '<p>polymorphism</p>', '<p>encapsulation</p>', '<p>inheritance</p>', '<p>none of the above</p>', '3', 17, 1),
+(44, '<p>The extension name of a Java source code file is ?</p><p>&nbsp;</p>', '<p>.java</p>', '<p>&nbsp;.obj</p>', '<p>.class</p>', '<p>.exe</p>', '1', 17, 1),
+(45, '<p>_________ is a software that interprets Java bytecode.</p><p>&nbsp;</p>', '<p>Java virtual machine</p>', '<p>Java compiler</p>', '<p>Java debugger</p>', '<p>Java API</p>', '1', 17, 1),
+(46, '<p>Which JDK command is correct to run a Java application in ByteCode.class?</p><p>&nbsp;</p>', '<p>&nbsp;java ByteCode</p>', '<p>java ByteCode.class</p>', '<p>javac ByteCode.java</p>', '<p>javac ByteCode</p>', '1', 17, 1),
+(47, '<p>Java is also known as ...... stage language</p><p>&nbsp;</p>', '<p>One</p>', '<p>Two</p>', '<p>Three</p>', '<p>Four</p>', '2', 17, 1),
+(48, '<p>For interpretation of java program, _________ command is used.</p>', '<p>java</p>', '<p>javac</p>', '<p>javap</p>', '<p>none of these</p>', '1', 17, 1),
+(49, '<p>&nbsp;What do you mean by javap?</p>', '<p>java compiler</p>', '<p>java Interpreter</p>', '<p>java Disassemble</p>', '<p>java Debugger</p>', '3', 17, 1),
+(50, '<p>What is HotJava ?</p>', '<p>system software</p>', '<p>web browser</p>', '<p>java environment</p>', '<p>IDE</p>', '2', 17, 1),
+(51, '<p>Which is a reserved word in the Java programming language?</p><p>&nbsp;</p>', '<p>method</p>', '<p>native</p>', '<p>&nbsp;subclasse</p>', '<p>array</p>', '2', 17, 1),
+(52, '<p>Runnable is</p><p>&nbsp;</p>', '<p>class</p>', '<p>method</p>', '<p>Interface</p>', '<p>none of these</p>', '3', 17, 1),
+(53, '<p>Which method executes only once</p><p>&nbsp;</p>', '<p>start()</p>', '<p>init()</p>', '<p>destroy()</p>', '<p>none of these</p>', '2', 17, 1),
+(54, '<p>Minimum threads in a program are</p><p>&nbsp;</p>', '<p>1</p>', '<p>2</p>', '<p>3</p>', '<p>4</p>', '1', 17, 1),
+(55, '<p>After compilation of JAVA class the file created is</p><p>&nbsp;</p>', '<p>.class</p>', '<p>.doc</p>', '<p>.java</p>', '<p>none of these</p>', '1', 17, 0),
+(56, '<p>Super is the predefined</p><p>&nbsp;</p>', '<p>keyword</p>', '<p>method</p>', '<p>&nbsp;keyword and method</p>', '<p>none of these</p>', '3', 17, 1),
+(57, '<p>What is the base class of all classes</p><p>&nbsp;</p>', '<p>object class</p>', '<p>string class</p>', '<p>util class</p>', '<p>none of these</p>', '1', 17, 1),
+(58, '<p>How many JDBC driver types does Sun define?</p><p>&nbsp;</p>', '<p>1</p>', '<p>2</p>', '<p>3</p>', '<p>4</p>', '4', 17, 1),
+(59, '<p>To run a compiled Java program, the machine must have what loaded and running?</p><p>&nbsp;</p>', '<p>JVM</p>', '<p>byte code</p>', '<p>web browser</p>', '<p>java compiler</p>', '1', 17, 1),
+(60, '<p>A JSP is transformed into a:</p><p>&nbsp;</p>', '<p>servlet</p>', '<p>method</p>', '<p>java class</p>', '<p>applet</p>', '1', 17, 1),
+(61, '<p>What servlet processor was developed by Apache Foundation and Sun?</p><p>&nbsp;</p>', '<p>Apache Tomcat</p>', '<p>Apache webserver</p>', '<p>Glass fish</p>', '<p>Browser</p>', '1', 17, 1),
+(62, '<p>Type 4 is completely written in java hence</p><p>&nbsp;</p>', '<p>Computer</p>', '<p>Cross Platform</p>', '<p>Linux</p>', '<p>Office</p>', '2', 17, 0),
+(63, '<p>Statement use to execute Store Procedure</p><p>&nbsp;</p>', '<p>Prepared statement</p>', '<p>Stored procedure</p>', '<p>Callable statement</p>', '<p>Statement</p>', '3', 17, 0),
+(64, '<p>How many interface in JDBC API</p>', '<p>1</p>', '<p>2</p>', '<p>3</p>', '<p>4</p>', '3', 17, 0),
+(65, '<p>C constants can be divided into _ categories?</p><p>&nbsp;</p>', '<p>3</p>', '<p>6</p>', '<p>2</p>', '<p>4</p>', '3', 4, 1),
+(66, '<p>Who invented the C - Programming?</p><p>&nbsp;</p>', '<p>James Gosling</p>', '<p>Dennis Ritche</p>', '<p>Bjarne Stroustrup&#39;s</p>', '<p>Tim Berners-Lee</p>', '2', 4, 1),
+(67, '<p>C is _______ language.</p><p>&nbsp;</p>', '<p>Low level</p>', '<p>Middle Level</p>', '<p>High Level</p>', '<p>Alll the above&nbsp;</p>', '2', 4, 1),
+(68, '<p>Where does C language get invented?</p><p>&nbsp;</p>', '<p>Ritche&#39;s Lab</p>', '<p>AT &amp; T Bell Labs</p>', '<p>Under Oak Tree</p>', '<p>Fringe Labs</p>', '2', 4, 1),
+(69, '<p>Which symbol terminates a C statement?</p><p>&nbsp;</p>', '<p>.</p>', '<p>,</p>', '<p>;</p>', '<p>}</p>', '3', 4, 1),
+(70, '<p>Which is not a character of C?</p><p>&nbsp;</p>', '<p>$</p>', '<p>!</p>', '<p>^</p>', '<p>~</p>', '1', 4, 1),
+(71, '<p>Identify the scalar data type in C.</p><p>&nbsp;</p>', '<p>union</p>', '<p>function</p>', '<p>double</p>', '<p>array</p>', '3', 4, 1),
+(72, '<p>How many tokens are in the following:</p><p>if(age==21)</p><p>&nbsp;</p>', '<p>4</p>', '<p>5</p>', '<p>6</p>', '<p>7</p>', '3', 4, 1),
+(73, '<p>Which is an invalid variable name?</p><p>&nbsp;</p>', '<p>&nbsp;integer</p>', '<p>Xx</p>', '<p>&nbsp;net-total</p>', '<p>sum</p>', '3', 4, 1),
+(74, '<p>Identify the type(s) if data type.</p><p>&nbsp;</p>', '<p>Scalar</p>', '<p>Drived</p>', '<p>Ponter</p>', '<p>All the above</p>', '4', 4, 1),
+(75, '<p>The value of automatic variable that is declared but not initialized will be?</p>', '<p>0</p>', '<p>1</p>', '<p>unpredictable</p>', '<p>none of the above&nbsp;&nbsp;</p>', '3', 4, 1),
+(76, '<p>Choose the correct statement</p><p>&nbsp;</p>', '<p>An identifier may start with an underscore</p>', '<p>An identifier may end with an underscore</p>', '<p>IF is a valid identifier</p>', '<p>All of the above</p>', '4', 4, 1),
+(77, '<p>The const feature can be applied to?</p><p>&nbsp;</p>', '<p>An identifier</p>', '<p>An array</p>', '<p>An array argument</p>', '<p>All the above</p>', '4', 4, 1),
+(78, '<p>Smallest element of Array Index is called</p><p>&nbsp;</p>', '<p>Lower Bond</p>', '<p>Upper Bond</p>', '<p>Extraction</p>', '<p>Rang</p>', '1', 4, 1),
+(79, '<p>Cons feature can be applied on</p><p>&nbsp;</p>', '<p>identifier</p>', '<p>array</p>', '<p>array argument</p>', '<p>function</p>', '3', 4, 1),
+(80, '<p>What are the types of linkages?</p><p>&nbsp;</p>', '<p>Internal and External</p>', '<p>External and None</p>', '<p>External, Internal and None</p>', '<p>Internal</p>', '2', 4, 1),
+(81, '<p>How would you round off a value from 1.66 to 2.0?</p><p>&nbsp;</p>', '<p>ceil(1.66)</p>', '<p>floor(1.66)</p>', '<p>roundup(1.66)</p>', '<p>roundto(1.66)</p>', '1', 4, 1),
+(82, '<p>By default a real number is treated as a</p><p>[</p>', '<p>float</p>', '<p>double</p>', '<p>long&nbsp;double</p>', '<p>far double</p>', '2', 4, 1),
+(83, '<p>When do we mention the prototype of a function?</p><p>&nbsp;</p>', '<p>Defining</p>', '<p>Declaring</p>', '<p>Prototyping</p>', '<p>Calling</p>', '2', 4, 1),
+(84, '<p>Which of the following is a collection of different data types?</p><p>&nbsp;</p>', '<p>String</p>', '<p>Array</p>', '<p>Structure</p>', '<p>File</p>', '3', 4, 1),
+(85, '<p>For accessing a structure element using a pointer,you must use?</p><p>&nbsp;</p>', '<p>Pointer operator (&amp;)</p>', '<p>Dot operators(.)</p>', '<p>Pointer operator(*)</p>', '<p>&nbsp;Arrow operator(-&gt;)</p>', '4', 4, 1),
+(86, '<p>Which operator is used to connect structure name to its member name?</p><p>&nbsp;</p>', '<p>dot operator(.)</p>', '<p>logical operator(&amp;&amp;)</p>', '<p>&nbsp;pointer operator(&amp;)</p>', '<p>Arrow operator(-&gt;)</p>', '1', 4, 1),
+(87, '<p>The default parameter passing mechanism is ?</p><p>&nbsp;</p>', '<p>Call by value</p>', '<p>Call by reference</p>', '<p>Call by value result</p>', '<p>None of the above</p>', '1', 4, 1),
+(88, '<p>The order in which actual arguments are evaluated in function call</p><p>&nbsp;</p>', '<p>is from the left</p>', '<p>&nbsp;is from the right</p>', '<p>is compiler dependent</p>', '<p>None of the above</p>', '3', 4, 1),
+(89, '<p>Use of functions ?</p><p>&nbsp;</p>', '<p>Helps to avoid repeating a set of statements many times</p>', '<p>Enhance the logical clarity of the program</p>', '<p>Helps to avoid repeated programming across program</p>', '<p>All the above</p>', '4', 4, 1),
+(90, '<p>Any C program</p><p>&nbsp;</p>', '<p>Must contain at least one function</p>', '<p>Need not contain any function</p>', '<p>Needs input data&nbsp;</p>', '<p>None of the above</p>', '1', 4, 1),
+(91, '<p>Call by reference is also known as ?</p><p>&nbsp;</p>', '<p>Call by address or Call by location</p>', '<p>Call by address or Call by value</p>', '<p>Call by value or Call by name</p>', '<p>None of the above</p>', '1', 4, 1),
+(92, '<p>In a for loop, if the condition is missing,then?</p><p>&nbsp;</p>', '<p>it is assumed to be present and taken to be false</p>', '<p>it is assumed to be present and taken to be true</p>', '<p>it result in the syntax error</p>', '<p>execution will be terminated abruptly</p>', '2', 4, 1),
+(93, '<p>n a for loop, if the condition is missing, then infinite looping can not be avoided by a</p><p>&nbsp;</p>', '<p>Continue statement</p>', '<p>goto statement</p>', '<p>return statement</p>', '<p>break statement</p>', '1', 4, 1),
+(94, '<p>Break statement can be simulated by using ?</p><p>&nbsp;</p>', '<p>goto</p>', '<p>return</p>', '<p>exit</p>', '<p>any of the above</p>', '1', 4, 1),
+(95, '<p>Which of the following operator takes only integer operands?</p><p>&nbsp;</p>', '<p>+</p>', '<p>*</p>', '<p>?</p>', '<p>%</p>', '4', 4, 1),
+(96, '<p>how many types of expression in c++.</p><p>&nbsp;</p>', '<p>5</p>', '<p>6</p>', '<p>7</p>', '<p>8</p>', '3', 6, 1),
+(97, '<p>Do-while is an ...... loop.</p><p>&nbsp;</p>', '<p>&nbsp;Entry control</p>', '<p>Exit control</p>', '<p>Entry enrolled</p>', '<p>None of these</p>', '2', 6, 1),
+(98, '<p>Dragons have wings like a bird and scales like a lizard. In object oriented verabage, we would say this is an example of ?</p><p>&nbsp;</p>', '<p>Multilevel Inheritance</p>', '<p>Polymorphism</p>', '<p>Multiple inheritance</p>', '<p>Aggregation</p>', '3', 6, 1),
+(99, '<p>C++ was originally developed by ?</p><p>&nbsp;</p>', '<p>Colcksin and Mellish</p>', '<p>Donald E.Knuth</p>', '<p>Sir Richard Handlee</p>', '<p>Bajarne Stoustrup</p>', '4', 6, 1),
+(100, '<p>cfront ?</p><p>&nbsp;</p>', '<p>is the front end of C compiler</p>', '<p>is the pre-processor of C compiler</p>', '<p>&nbsp;is a tool that translate a C++ code to its equivalent C code</p>', '<p>none of the above</p>', '3', 6, 1),
+(101, '<p>Which of the following is false about object oriented ?</p><p>&nbsp;</p>', '<p>is block structured language</p>', '<p>is not a block structured language</p>', '<p>aids in object oriented programming</p>', '<p>is an extension of C</p>', '1', 6, 1),
+(102, '<p>Polymorphism is implemented through which mechanism in C++ ?</p><p>&nbsp;</p>', '<p>Late Interpretation</p>', '<p>&nbsp;Late Binding</p>', '<p>&nbsp;Early Binding</p>', '<p>Overloading</p>', '3', 6, 1),
+(103, '<p>Re-usability is a desirable feature of a language as it is ?&nbsp;</p><p>&nbsp;</p>', '<p>&nbsp;Decreases the testing time</p>', '<p>Lowers the maintenance cost</p>', '<p>Reduce the compilation time</p>', '<p>Reduces the exectution time</p>', '2', 6, 1),
+(104, '<p>Which of the following is not an extension associated during the creation of a C++ program?</p><p>&nbsp;</p>', '<p>&nbsp;.cpp</p>', '<p>&nbsp;.exe</p>', '<p>.jpg</p>', '<p>.bak</p>', '3', 6, 1),
+(105, '<p>Which of the following is not a C++ Compiler ?</p><p>&nbsp;</p>', '<p>C front</p>', '<p>Turbo C++</p>', '<p>&nbsp;Borland C++</p>', '<p>C++ Compiler</p>', '4', 6, 1),
+(106, '<p>Why every program begins with main () in C++ ?</p><p>&nbsp;</p>', '<p>As this is from the compiler knows that program execution actually starts.</p>', '<p>Because its name is main</p>', '<p>Both A and B</p>', '<p>None of above</p>', '1', 6, 1),
+(107, '<p>The wrapping up of data and functions into a single unit is called ?</p><p>&nbsp;</p>', '<p>Inheritance</p>', '<p>Polymorphism</p>', '<p>Encapsulation</p>', '<p>Overloading</p>', '3', 6, 1),
+(108, '<p>The process by which objects of one class acquire the attributes of another class is known as............?</p><p>&nbsp;</p>', '<p>Inheritance</p>', '<p>Polymorphism</p>', '<p>Data Abstraction</p>', '<p>Binding</p>', '1', 6, 1),
+(109, '<p>......... means the ability that one thing can take several distinct forms ?</p><p>&nbsp;</p>', '<p>Dynamic Binding</p>', '<p>Early Binding</p>', '<p>Polymorphism</p>', '<p>None of the above</p>', '3', 6, 1),
+(110, '<p>The technique by which objects communicate with each other is called ?</p><p>&nbsp;</p>', '<p>information passing</p>', '<p>function passing</p>', '<p>message passing</p>', '<p>none of the above</p>', '2', 6, 1),
+(111, '<p>For a method to be an interface between the outside world and a class,it has to be declared ?</p><p>&nbsp;</p>', '<p>private</p>', '<p>&nbsp;protected</p>', '<p>public&nbsp;</p>', '<p>external</p>', '3', 6, 1),
+(112, '<p>In C++, a function contained within the class is called ?</p><p>&nbsp;</p>', '<p>member function</p>', '<p>a class function</p>', '<p>a method</p>', '<p>none of the above</p>', '1', 6, 1),
+(113, '<p>In C++, a function contained within the class is called ?</p><p>&nbsp;</p>', '<p>member function</p>', '<p>a class function</p>', '<p>a method</p>', '<p>none of the above</p>', '1', 6, 1),
+(114, '<p>classes are useful because they</p><p>&nbsp;</p>', '<p>are removed from memory when not in use</p>', '<p>permit data to be hidden from other classes</p>', '<p>bring together all aspects of an entity in one place</p>', '<p>can closely model objects in the real world</p>', '2', 6, 1),
+(115, '<p>The public files in a class library usually contain ?</p><p>&nbsp;</p>', '<p>Constant definitions</p>', '<p>&nbsp;member function definitions</p>', '<p>class declarations</p>', '<p>variable definition</p>', '3', 6, 1),
+(116, '<p>A class cannot be ?</p><p>&nbsp;</p>', '<p>Virtual</p>', '<p>Generic</p>', '<p>Inline</p>', '<p>Friend</p>', '3', 6, 1),
+(117, '<p>Objects of the same class share the values of ...... while they maintain separate values for ........ .</p><p>&nbsp;</p>', '<p>&nbsp;Static variables, non static variables</p>', '<p>Non static variables, static variables</p>', '<p>Global variables, static variables</p>', '<p>Static variables, register variables</p>', '1', 6, 1),
+(118, '<p>Which of the following keywords cannot appear inside a class definition ?</p><p>&nbsp;</p>', '<p>friend</p>', '<p>static</p>', '<p>template</p>', '<p>virtual</p>', '3', 6, 1),
+(119, '<p>Shallow copy is</p><p>&nbsp;</p>', '<p>Member wise copying of objects</p>', '<p>A substitute for the operator</p>', '<p>Same kind like deep copy</p>', '<p>&nbsp;Used in constructor</p>', '1', 6, 1),
+(120, '<p>Which member function of class cannot modify its objects attributes ?</p><p>&nbsp;</p>', '<p>friend functions</p>', '<p>Private member functions</p>', '<p>Constant member functions</p>', '<p>Static member functions</p>', '3', 6, 1),
+(121, '<p>The signature of a function is its ..... ?</p><p>&nbsp;</p>', '<p>Function code</p>', '<p>Prototype</p>', '<p>Call</p>', '<p>Parameter list</p>', '2', 6, 1),
+(122, '<p>What is true about inline functions ?</p><p>&nbsp;</p>', '<p>It&#39;s a compulsion on the compiler to make function inline</p>', '<p>It&#39;s a request to the compiler to make te function inline</p>', '<p>It&#39;s the indication to the compiler that the function is recursive</p>', '<p>It&#39;s the indication to the compiler that the function is member function</p>', '2', 6, 1),
+(123, '<p>Which member function of class cannot modify its objects attributes ?</p><p>&nbsp;</p>', '<p>Friend functions</p>', '<p>Private member functions</p>', '<p>Constant member functions</p>', '<p>Static member functions</p>', '3', 6, 1),
+(124, '<p>Which of the following parameter passing mechanism is/are supported by C++ but not in C?</p><p>&nbsp;</p>', '<p>Pass by value</p>', '<p>Pass by reference</p>', '<p>Pass by value result</p>', '<p>All the above</p>', '2', 6, 1),
+(125, '<p>The library function exit() causes an exit from ?</p><p>&nbsp;</p>', '<p>The loop in which it occurs</p>', '<p>The block in which it occurs</p>', '<p>The function in which it occurs</p>', '<p>The program&nbsp;in which it occurs</p>', '4', 6, 1),
+(126, '<p>The getche() library function</p><p>&nbsp;</p>', '<p>&nbsp;returns a character when any key is pressed</p>', '<p>returns a character when ENTER is pressed</p>', '<p>displays a character on the screen when any key is pressed</p>', '<p>does not display a character on the screen</p>', '1', 6, 1),
+(127, '<p>When an argument is passed by reference</p><p>&nbsp;</p>', '<p>a variable is created in function to hold the argument value</p>', '<p>&nbsp;the function cannot access the argument value</p>', '<p>a temporary variable is created in the calling program to hold arguments value</p>', '<p>none of these</p>', '1', 6, 1),
+(128, '<p>Overloaded function</p><p>&nbsp;</p>', '<p>are a group of functions,with the same value</p>', '<p>all have the same number and types of arguments</p>', '<p>&nbsp;make life simpler for programmers</p>', '<p>&nbsp;may fail unexpectedly due to stress</p>', '3', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -1110,9 +1214,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `profileImage` text NOT NULL,
-  `coverImage` text NOT NULL,
+  `password` varchar(255) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg',
+  `profileImage` varchar(1000) NOT NULL,
   `gender` enum('M','F') NOT NULL,
   `relationshipStatus` enum('1','2','3','4') NOT NULL DEFAULT '4',
   `accountType` enum('1','2') NOT NULL,
@@ -1127,31 +1230,39 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`userID`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`, `profileImage`, `coverImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `accountApproved`, `active`, `created_at`) VALUES
-(1, '', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', '', '', 'M', '4', '1', 135, 1, 1, 1, 1, 1, 1, '2017-04-09 20:09:10'),
-(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-04-09 20:11:19'),
-(3, '', 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 20:16:36'),
-(4, '', 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 0, 1, '2017-04-09 20:18:25'),
-(5, '', 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', '', '', 'M', '4', '1', 135, 1, 0, 1, 0, 0, 0, '2017-04-09 20:49:51'),
-(6, '', 'Prashant Chaudhary', 'prashantp099@gmail.com', 9899310579, '3075d701de5770f0016cc1f93adb05bf', '', '', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-04-09 20:53:02'),
-(7, '', 'Sakshi Jaiswal', 'jswal.sakshi@gmail.com', 9971974077, '11a98374ebec8e0c7a54751d2161804d', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-09 21:02:09'),
-(8, '', 'Abhay Rawat', 'abhayrawat2695@gmail.com', 8468915550, '0cc175b9c0f1b6a831c399e269772661', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-09 20:57:05'),
-(9, '', 'Yash Vardhan', 'yashapril30@gmail.com', 9999393132, 'a9c91bac2c315f83a55ae9fcb88c61f0', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:36:44'),
-(10, '', 'Shivam Goyal', 'shivam.sinew@gmail.com', 8587882383, '456b370011f154a7ce7af17ee49a76ad', '', '', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-04-10 10:41:11'),
-(11, '', 'Deergha Jain', 'deerghajain11@gmail.com', 9716150496, '0bb3b7a7855d8532e55577a502ae236e', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:43:45'),
-(12, '', 'Deepti Jain', 'deeptijain9676@gmail.com', 9718669382, '3036514cbad26225659717408c8d2c67', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:48:37'),
-(13, '', 'Suyash Tilhari', 'suyash.tilhari12@gmail.com', 8375867124, '1bbfd0943ed91f99438eead55020f85a', '', '', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-04-10 10:50:38'),
-(14, '', 'Siddharth Jain', 'sidjain2901@gmail.com', 9560839425, 'e10adc3949ba59abbe56e057f20f883e', '', '', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:53:34'),
-(15, '', 'Anukriti Keshari', 'anukriti.kaushki@gmail.com', 8860309313, 'e10adc3949ba59abbe56e057f20f883e', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-04-10 10:57:26'),
-(16, '', 'Salokya Srivastava', 'sriv.salokya@gmail.com', 9453847603, '62c1dc840b80b395403ad0fed7debcf6', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-10 11:04:28'),
-(17, '', 'Krishnapriya Agarwal', 'kp.agarwal95@gmail.com', 8882521283, 'f1c78b8f774fa7804a081a20df35874a', '', '', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-04-10 11:07:09'),
-(18, '', 'Jubika Khanna', 'jubika.khanna@fitpass.co.in', 8130995418, 'dbf3d937d4808b94e0e39b804e0bbea0', '', '', 'F', '4', '2', 135, 1, 1, 0, 0, 1, 1, '2017-05-31 18:12:56');
+INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`, `profileImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `accountApproved`, `active`, `created_at`) VALUES
+(1, '', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg', 'M', '4', '1', 135, 1, 1, 1, 1, 1, 1, '2017-06-07 09:06:39'),
+(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(3, '', 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(4, '', 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(5, '', 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 0, 1, 0, 0, 0, '2017-06-07 09:06:14'),
+(6, '', 'Prashant Chaudhary', 'prashantp099@gmail.com', 9899310579, '3075d701de5770f0016cc1f93adb05bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(7, '', 'Sakshi Jaiswal', 'jswal.sakshi@gmail.com', 9971974077, '11a98374ebec8e0c7a54751d2161804d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(8, '', 'Abhay Rawat', 'abhayrawat2695@gmail.com', 8468915550, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(9, '', 'Yash Vardhan', 'yashapril30@gmail.com', 9999393132, 'a9c91bac2c315f83a55ae9fcb88c61f0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(10, '', 'Shivam Goyal', 'shivam.sinew@gmail.com', 8587882383, '456b370011f154a7ce7af17ee49a76ad', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(11, '', 'Deergha Jain', 'deerghajain11@gmail.com', 9716150496, '0bb3b7a7855d8532e55577a502ae236e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(12, '', 'Deepti Jain', 'deeptijain9676@gmail.com', 9718669382, '3036514cbad26225659717408c8d2c67', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(13, '', 'Suyash Tilhari', 'suyash.tilhari12@gmail.com', 8375867124, '1bbfd0943ed91f99438eead55020f85a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 0, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(14, '', 'Siddharth Jain', 'sidjain2901@gmail.com', 9560839425, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(15, '', 'Anukriti Keshari', 'anukriti.kaushki@gmail.com', 8860309313, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(16, '', 'Salokya Srivastava', 'sriv.salokya@gmail.com', 9453847603, '62c1dc840b80b395403ad0fed7debcf6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(17, '', 'Krishnapriya Agarwal', 'kp.agarwal95@gmail.com', 8882521283, 'f1c78b8f774fa7804a081a20df35874a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(18, '', 'Jubika Khanna', 'jubika.khanna@fitpass.co.in', 8130995418, 'dbf3d937d4808b94e0e39b804e0bbea0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 0, 0, 1, 1, '2017-06-07 09:06:14'),
+(19, '', 'Nisha Bharti', 'hr@wisethink.in', 8745024797, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(20, '', 'Setu Simant', 'setu.simant@silvertouch.com', 9871482198, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(21, '', 'Kunal Kumar', 'kunal_kumar@sislinfotech.com', 7838666639, '508df4cb2f4d8f80519256258cfb975f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(22, '', 'Ashok Gupta', 'ashok.gupta@velocis.in', 9818826020, '5bd2026f128662763c532f2f4b6f2476', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(23, '', 'Manoj Kumar Garg', 'manoj@netcreativemind.com', 9810978433, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(24, '', 'S R Mustafa', 'srmustafa73@gmail.com', 7838204509, '5baced99d0bb5e574737dc535576bc9c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, 1, '2017-06-07 09:06:14'),
+(25, '', 'Madhu S Shivakumar', 'madhu.ss96@gmail.com', 9108642164, 'd7aad483f66d38e875ff283dc220b58e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 61, 1, 0, 1, 0, 0, 1, '2017-06-07 09:06:14'),
+(26, '', 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 1, 1, 1, '2017-06-07 09:06:14');
 
 -- --------------------------------------------------------
 

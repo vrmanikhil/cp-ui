@@ -14,7 +14,6 @@ class Web extends CI_Controller {
 	private function login($email, $password){
 		$result = $this->home_lib->login($email,$password);
 		if ($result){
-			$this->session->set_flashdata('message', array('content'=>'Nachooooooooooo','class'=>'success'));
 			redirect(base_url('home'));
 		}
 		else{
@@ -136,8 +135,30 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('confirmNewPassword')){
 			$confirmNewPassword = $x;
 		}
+		$currentPassword = md5($currentPassword);
+		$newPassword = md5($newPassword);
+		$confirmNewPassword = md5($confirmNewPassword);
 		if($newPassword === $confirmNewPassword){
-			echo "yahan sab karenge";
+			$email = $_SESSION['userData']['email'];
+			if($this->home_lib->checkPasswordMatch($email, $currentPassword)){
+				$result = $this->home_lib->changePassword($email, $newPassword);
+				if($result){
+					$this->session->set_flashdata('message', array('content'=>'Password Successfully Changed','class'=>'success'));
+					redirect(base_url('change-password'));
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+					redirect(base_url('change-password'));
+				}
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'The Current Password, does not match with the one in our database, Please Try Again.','class'=>'error'));
+				redirect(base_url('change-password'));
+			}
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Your New Password, does not matches with Confirm New Password, Please Try Again.','class'=>'error'));
+			redirect(base_url('change-password'));
 		}
 	}
 
