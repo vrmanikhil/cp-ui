@@ -99,6 +99,7 @@ $route['internships/added-internship-offer'] = 'home/addedInternshipOffers';
 
 $route['skills'] = 'home/skills';
 $route['skills/skill-test'] = 'home/skillTest';
+$route['skills/skill-test-guidelines/(:num)'] = 'home/getskillTestGuidelines';
 $route['skills/skill-test-guidelines'] = 'home/skillTestGuidelines';
 
 $route['translate_uri_dashes'] = FALSE;
