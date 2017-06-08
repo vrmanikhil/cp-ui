@@ -64,7 +64,7 @@ class Home_model extends CI_Model {
 
 	public function fetch_questions($num_ques, $skill_id)
 	{
-		$this->db->select('question_id, question, option1, option2, option3, option4');
+		$this->db->select('question_id, question, option1, option2, option3, option4, answer');
 		$this->db->order_by('question_id', 'RANDOM');
 		$this->db->limit($num_ques);
 		$result = $this->db->get_where('questions', ['skillID'=> $skill_id, 'active'=> '1']);
