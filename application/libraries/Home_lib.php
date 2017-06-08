@@ -52,6 +52,12 @@ class Home_lib {
 		return 0;
 	}
 
+	public function getAddedJobOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAddedJobOffers();
+	}
+
 	public function getLocations(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -92,6 +98,18 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->addJob($data);
+	}
+
+	public function checkToken($email, $tokenType){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkToken($email, $tokenType);
+	}
+
+	public function insertPasswordToken($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->insertPasswordToken($data);
 	}
 
 	public function deleteInternship($internshipID){

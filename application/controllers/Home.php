@@ -121,6 +121,7 @@ class Home extends CI_Controller {
 
 	public function addedJobOffers(){
 		$this->redirection();
+		$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
 		$this->load->view('addedJobOffers', $this->data);
 	}
 
@@ -170,45 +171,55 @@ class Home extends CI_Controller {
 	}
 
 	public function generateVerifyEMail(){
-		$email = 'vrmanikhil@gmail.com';
-
-		//check if token is available and active
-					$token = //get token from db
-					// $emailData['token'] = $token;
-					// $this->load->helper('mail_helper');
-					// $message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
-					// $data = array(
-					// 	'sendToEmail' => $email,
-					// 	'fromName' => 'CampusPuppy Private Limited',
-					// 	'fromEmail' => 'no-reply@campuspuppy.com',
-					// 	'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
-					// 	'message' => $message,
-					// 	'using' =>'pepipost'
-					// );
-					// sendEmail($data);
-
-		//else if token is not available
 
 
-		$token = "some8charactertoken";
 		date_default_timezone_set("Asia/Kolkata");
-		$generatedAt = strtotime(date("d M Y H:i:s"));
-
-
-
-
-		// $emailData['token'] = $token;
-		// $this->load->helper('mail_helper');
-		// $message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
-		// $data = array(
-		// 	'sendToEmail' => $email,
-		// 	'fromName' => 'CampusPuppy Private Limited',
-		// 	'fromEmail' => 'no-reply@campuspuppy.com',
-		// 	'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
-		// 	'message' => $message,
-		// 	'using' =>'pepipost'
-		// );
-		// sendEmail($data);
+		// $email = $_SESSION['userData']['email'];
+		$checkToken = $this->home_lib->checkToken($email, '1');
+		$currentTime = strtotime(date("d M Y H:i:s"));
+		if($checkToken){
+			$expiry = $checkToken[0]['expiry'];
+			$timeDifference = $expiry-$currentTime;
+			if($timeDifference>0 && $timeDifference<7200){
+				$emailData['token'] = $checkToken[0]['token'];
+				$this->load->helper('mail_helper');
+				$message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
+				$data = array(
+					'sendToEmail' => $email,
+					'fromName' => 'CampusPuppy Private Limited',
+					'fromEmail' => 'no-reply@campuspuppy.com',
+					'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
+					'message' => $message,
+					'using' =>'pepipost'
+					);
+				sendEmail($data);
+		}}
+		else{
+			$token = "Quickbrownfoxjumpedoveralazydog0123456789".md5($email);
+			$token = str_shuffle($token);
+			$token = substr($token, 0,8);
+			$expiry = $currentTime + 7200;
+			$tokenData = array(
+				'token' => $token,
+				'email' => $email,
+				'tokenType' => '1',
+				'generatedAt' => $currentTime,
+				'expiry' => $expiry
+			);
+			$this->home_lib->insertPasswordToken($tokenData);
+			$emailData['token'] = $token;
+			$this->load->helper('mail_helper');
+			$message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
+			$data = array(
+				'sendToEmail' => $email,
+				'fromName' => 'CampusPuppy Private Limited',
+				'fromEmail' => 'no-reply@campuspuppy.com',
+				'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
+				'message' => $message,
+				'using' =>'pepipost'
+			);
+			sendEmail($data);
+		}
 	}
 
 	// public function sendEMail(){

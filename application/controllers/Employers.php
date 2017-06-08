@@ -26,6 +26,7 @@ class Employers extends CI_Controller {
 		$stipend = '';
 		$applicants = '';
 		$internshipType = '';
+		$addedBy = $_SESSION['userData']['userID'];
 
 		if($x = $this->input->post('internshipOfferTitle')){
 			$internshipOfferTitle = $x;
@@ -102,7 +103,8 @@ class Employers extends CI_Controller {
 			'maximumStipend' => $maximumStipend,
 			'stipend' => $stipend,
 			'applicants' => $applicants,
-			'internshipType' => $internshipType
+			'internshipType' => $internshipType,
+			'addedBy' => $addedBy
 		);
 
 		if($internshipOfferTitle == '' || $internshipOfferDescription == '' || $openings == '' || $partTime == '' || $startDate == '' || $applicationDeadline == '' || $durationType == '' || $stipendType == '' || $applicants == '' || $internshipType == ''){
@@ -209,6 +211,7 @@ class Employers extends CI_Controller {
 		$salary = '';
 		$applicants = '';
 		$jobType = '';
+		$addedBy = $_SESSION['userData']['userID'];
 
 		if($x = $this->input->post('jobOfferTitle')){
 			$jobOfferTitle = $x;
@@ -275,7 +278,8 @@ class Employers extends CI_Controller {
 			'maximumOffer' => $maximumOffer,
 			'offer' => $salary,
 			'applicants' => $applicants,
-			'jobType' => $jobType
+			'jobType' => $jobType,
+			'addedBy' => $addedBy
 		);
 		date_default_timezone_set("Asia/Kolkata");
 		$today = date('Y-m-d');

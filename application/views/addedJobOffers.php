@@ -74,15 +74,16 @@
 						<li class="active">Added Job Offer</li>
 					</ol>
 				</div>
+				<?php foreach ($addedJobOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $_SESSION['userData']['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
+								<strong><?php echo $_SESSION['userData']['companyName']; ?></strong>
 							</p>
-							<p class="posting-card__desc">PHP Developer</p>
-							<p class="posting-card__status"><strong>Skills</strong> : <span>PHP, HTML, CSS, JavaScript, JavaScript</span></p>
+							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
+							<p class="posting-card__status"><strong>Skills</strong> : <?php echo $value['skillsRequired']; ?><span></span></p>
 							<div class="posting-card__apply">
 								<button class="btn white midnight-blue-bg s-14">View Applicants</button>
 								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
@@ -90,6 +91,7 @@
 						</div>
 					</div>
 				</div>
+			<?php } ?>
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>

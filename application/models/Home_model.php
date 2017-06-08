@@ -33,6 +33,10 @@ class Home_model extends CI_Model {
 			return $query->result_array();
 		}
 	}
+	public function checkToken($email, $tokenType){
+		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email));
+		return $result->result_array();
+	}
 
 	public function getLocations(){
 		$result = $this->db->get('indianCities');
@@ -55,12 +59,27 @@ class Home_model extends CI_Model {
 		return ($this->db->affected_rows()>0)?$this->db->insert_id():0;
 	}
 
+	public function insertPasswordToken($data){
+		return $this->db->insert('passwordToken', $data);
+	}
+
 	public function map_intern_locations($data){
 		return $this->db->insert_batch('internshipLocations', $data);
 	}
 
 	public function map_intern_skills($data){
 		return $this->db->insert_batch('internshipSkills', $data);
+	}
+
+	public function getAddedJobOffers(){
+		$addedBy = $_SESSION['userData']['userID'];
+		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
+		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+		$this->db->group_by('jobOffers.jobID');
+		$this->db->order_by('jobOffers.jobID', 'DESC');
+		$result = $this->db->get_where('jobOffers', array('addedBy' => $addedBy));
+		return $result->result_array();
 	}
 
 	public function addJob($data){
