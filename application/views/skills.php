@@ -71,12 +71,12 @@
 								</span>
 							</span>
 						</a>
-						<select class="form__input">
+						<select class="form__input" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>
 							<?php } ?>
 						</select>
-						<center><button type="submit" class="btn btn--primary notifications__load-more">Take Test</button></center>
+						<center><button type="submit" class="btn btn--primary notifications__load-more" id = 'take_test'>Take Test</button></center>
 					</div>
 				</div>
 			</div>
@@ -88,5 +88,13 @@
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script type="text/javascript">
+		$('#take_test').click(function(){
+    		var skill_id = $('#skills').val()
+    		console.log(skill_id);
+    		window.location = "<?php echo base_url('skills/skill-test-guidelines/'); ?>" + skill_id;
+		})
+
+	</script>
 </body>
 </html>

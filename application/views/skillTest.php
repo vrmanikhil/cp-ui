@@ -51,42 +51,42 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="card">
-					<p style="float:left;">Skill Test: <strong>PHP</strong></p>
+					<p style="float:left;">Skill Test: <strong><?php echo $skill_data['skill_name']; ?></strong></p>
 					<div id="timer" style="float:right;"></div>
 				</div>
 				<div class="card">
 					<label style="font-weight: bold;">Question</label>
-					<p class="mcq" style="text-align: left;" id="ques-content">This is a test question, which is what is the full form of CSS?</p>
+					<p class="mcq" style="text-align: left;" id="ques-content"></p>
 
 					<div class="options" style="text-transform: none;">
 							<div>
-									<span class="opt">A</span>
-									<input type="radio" name="answer" id="option1" value="0" />
-									<label for="option1" style="text-transform: none !important;" class='option-label' data='0'>Cascase Style Sheets Cascase Style Sheets Cascase Style Sheets Cascase Style Sheets</label>
+								<span class="opt">A</span>
+								<input type="radio" name="answer" id="option1" value="1" />
+								<label for="option1" style="text-transform: none !important;" class='option-label' data='1'></label>
 							</div>
 							<div>
-									<span class="opt">B</span>
-									<input type="radio" name="answer" id="option2" value="1" />
-									<label for="option2" style="text-transform: none !important;" class='option-label' data='1'>Common Style Sheets</label>
+								<span class="opt">B</span>
+								<input type="radio" name="answer" id="option2" value="2" />
+								<label for="option2" style="text-transform: none !important;" class='option-label' data='2'></label>
 							</div>
 							<div>
-									<span class="opt">C</span>
-									<input type="radio" name="answer" id="option3" value="2" />
-									<label for="option3" style="text-transform: none !important;" class='option-label' data='2'>Common Sheet for Style</label>
+								<span class="opt">C</span>
+								<input type="radio" name="answer" id="option3" value="3" />
+								<label for="option3" style="text-transform: none !important;" class='option-label' data='3'></label>
 							</div>
 							<div>
-									<span class="opt">D</span>
-									<input type="radio" name="answer" id="option4" value="3" />
-									<label for="option4" style="text-transform: none !important;" class='option-label' data='3'>Cascase Sheet for Style</label>
+								<span class="opt">D</span>
+								<input type="radio" name="answer" id="option4" value="4" />
+								<label for="option4" style="text-transform: none !important;" class='option-label' data='4'></label>
 							</div>
 					</div>
 					<div style="margin-top: 15px;">
-					<button class="btn btn-primary testButton" style="float:left;">Previous</button>
-					<button class="btn btn-primary testButton" style="float:right;">Next</button>
+					<button class="btn btn-primary testButton" id="previous-button" style="float:left;">Previous</button>
+					<button class="btn btn-primary testButton" id="next-button" style="float:right;">Next</button>
 					</div>
 					<br>
 					<div id="submitButton" style="margin-top: 20px;">
-						<center><button class="btn btn-primary testButton">Submit</button></center>
+						<center><button class="btn btn-primary testButton" id="final-submit">Submit</button></center>
 					</div>
 				</div>
 			</div>
@@ -111,13 +111,196 @@
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script>
-				time=15*60,r=document.getElementById('timer'),tmp=time;
+				time=<?php echo $test_settings['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
 				setInterval(function(){
 					var c=tmp--,m=(c/60)>>0,s=(c-m*60)+'';
 					timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
 					tmp!=0||(tmp=time);
 				},1000);
 	</script>
+<script type="text/javascript">
+	questions = JSON.parse(atob("<?= $question_string?>"));
+
+var eventKey = "<?php echo $skill_data['skill_name']?>_test";
+var time = <?php echo $test_settings['timeAllowed']; ?>;
+
+var currentId = 1;
+
+$('#next-button').click(function(){
+    var current = +getCurrent(eventKey)
+    populateQuestion(eventKey, current + 1)
+})
+
+$('#previous-button').click(function(){
+    var current = +getCurrent(eventKey)
+    populateQuestion(eventKey, current - 1)
+})
+
+$('.switch-question').click(function(){
+    var index = +($(this).html()) - 1
+    populateQuestion(eventKey, index)
+})
+
+$('.option-label').click(function(){
+    var option = $(this).attr('data')
+    var current = +getCurrent(eventKey)
+    saveAns(eventKey, current, option)
+})
+
+$('#final-submit').click(function(){
+    clock.stop()
+})
+
+function init(eventKey, clock){
+    if(alreadyInit(eventKey)){
+        clock.setTime(getSavedTime(eventKey));
+        reinitialise(eventKey)
+    }else{
+        clock.setTime(time * 60)
+        ans = [];
+        for (i = 0; i < questions.length; i++){
+            ans[i] = {ques_id: questions[i].id, ans: ''};
+        }
+        localStorage.setItem(eventKey+'_length', questions.length)
+        localStorage.setItem(eventKey+'_answers', JSON.stringify(ans))
+        populateQuestion(eventKey, 0)
+    }
+    clock.start()
+}
+
+function alreadyInit(eventKey){
+    return !!localStorage.getItem(eventKey+'_length');
+}
+
+function reinitialise(eventKey){
+    init_gems(eventKey)
+    populateQuestion(eventKey, +getCurrent(eventKey))
+}
+
+function getSavedTime(eventKey){
+    return localStorage.getItem(eventKey+'_time');
+}
+
+function populateQuestion(eventKey, index){
+    var ques = getQuestion(eventKey, index)
+    var opts = JSON.parse(ques.options)
+    $('#ques-content').html(ques.ques)
+    $('#ques-no').html(+getCurrent(eventKey)+1)
+    populateOptions(opts, ques.ans)
+    disableButtons(eventKey)
+}
+
+function populateOptions(options, ans){
+    var opts = $('.option-label')
+    opts.each(function(index){
+        $(this).html(options[index]);
+    })
+    markAnswer(ans)
+}
+
+function markAnswer(ans){
+    var ans = +ans
+    if(ans != 4 || ans != 3|| ans != 2 || ans != 1 )
+    $('input[name=answer]').prop('checked', false)
+    $('#option'+ans).prop('checked', true)
+}
+
+function disableButtons(eventKey){
+    var index = getCurrent(eventKey)
+    if(index == 0)
+    $('#previous-button').attr('disabled', 'disabled')
+    else if(index == questions.length -1)
+    $('#next-button').attr('disabled', 'disabled')
+    else {
+        $('#previous-button').removeAttr('disabled')
+        $('#next-button').removeAttr('disabled')
+    }
+}
+
+function getCurrent(eventKey){
+    return localStorage.getItem(eventKey+'_current')
+}
+
+function getAnswers(eventKey){
+    return JSON.parse(localStorage.getItem(eventKey+'_answers'))
+}
+
+function getQuestion(eventKey, index){
+    var ans = getAnswers(eventKey)
+    localStorage.setItem(eventKey+'_current', index)
+    return {
+        ques: questions[index].question,
+        options: questions[index].options,
+        ans: ans[index].ans || ''
+    }
+}
+
+function saveAns(eventKey, current, option){
+    var ans = getAnswers(eventKey)
+    ans[current].ans = option
+    localStorage.setItem(eventKey+'_answers', JSON.stringify(ans))
+    enableGem(eventKey, current)
+}
+
+function enableGem(eventKey, current){
+    $('#ques-'+current).addClass('answered')
+}
+
+function init_gems(eventKey){
+    var ans = getAnswers(eventKey)
+    var gems = $('.switch-question')
+    for (var i = 0; i < gems.length; i++) {
+        var curr_ans = +ans[i].ans
+        if(curr_ans < 5 && curr_ans >0 ){
+            enableGem(eventKey, i)
+        }
+    }
+}
+
+function submitAnswers(eventKey){
+    var data = {answers: getAnswers(eventKey), <?php echo $csrf_token_name?>: "<?php echo $csrf_token?>"}
+    $.post('/web/submit_answers', data, function(res){
+    }).done(function(){
+        localStorage.clear()
+        window.location.replace('<?= base_url('skills')?>')
+    }).fail(function(){
+        alert('failed')
+    })
+}
+
+
+$(document).ready(function(){
+    clock = $('.your-clock').FlipClock({
+        autoStart: false,
+        countdown: true,
+        clockFace: 'MinuteCounter',
+        callbacks: {
+            interval: function(){
+                localStorage.setItem(eventKey+'_time', clock.getTime().time)
+            },
+
+            init: function(){
+                if(!alreadyInit(eventKey)){
+                    localStorage.setItem(eventKey+'_time', 0)
+                }
+            },
+
+            stop: function(){
+                submitAnswers(eventKey, clock)
+            }
+        }
+    });
+
+
+    $(document).on("contextmenu",function(e){
+        alert('right click disabled');
+        return false;
+    });
+
+    init(eventKey, clock);
+
+});
+</script>
 </body>
 
 </html>

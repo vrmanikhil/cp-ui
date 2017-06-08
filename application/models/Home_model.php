@@ -48,6 +48,29 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function get_skill_data($skill_id)
+	{
+		$this->db->select('*');
+		$this->db->where('skillID', $skill_id);
+		return $this->db->get('skills')->result_array();
+	}
+
+	public function fetch_test_settings()
+	{
+		$this->db->select('*');
+		$result = $this->db->get_where('testSettings');
+		return $result->result_array()[0];
+	}
+
+	public function fetch_questions($num_ques, $skill_id)
+	{
+		$this->db->select('question_id, question, option1, option2, option3, option4');
+		$this->db->order_by('question_id', 'RANDOM');
+		$this->db->limit($num_ques);
+		$result = $this->db->get_where('questions', ['skillID'=> $skill_id, 'active'=> '1']);
+		return $result->result_array();
+	}
+
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
 		// $this->db->join('comments', 'comments.id = blogs.id');

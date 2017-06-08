@@ -63,13 +63,13 @@
 					<center><label style="font-weight: bold;">Skill Test Guidelines</label></center>
 					<p style="text-align: left;">
 						<ul>
-							<li>This test is for the skill <strong>PHP</strong></li>
-							<li>Maximum Time Allowed for the Skill Test is <strong>10 minutes.</strong></li>
-							<li>Some more Guideline.</li>
+							<li>This test is for the skill <strong><?php echo $skill_name; ?></strong></li>
+							<li>Maximum Time Allowed for the Skill Test is <strong><?php echo $timeAllowed; ?> minutes.</strong></li>
+							<li>Number of Questions that will be asked are <strong><?php echo $numberQuestion; ?>.</strong></li>
 							<li>One more Guideline.</li>
 						</ul>
 					</p>
-					<center><button class="btn btn-primary">Start Test</button></center>
+					<center><a href = "<?php echo base_url('skills/skill-test'); ?>"><button class="btn btn-primary">Start Test</button></a></center>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
