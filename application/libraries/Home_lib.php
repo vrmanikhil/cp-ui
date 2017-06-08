@@ -148,6 +148,35 @@ class Home_lib {
 		return $CI->homeModel->getUserSkills($userID);
 	}
 
+	public function fetch_skill_data($skill_id)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		return $CI->homemodel->get_skill_data($skill_id)[0];
+	}
+
+	public function is_in_test()
+	{
+		$CI = &get_instance();
+		$CI->load->library('session');
+		return $CI->session->userdata('in_test');
+	}
+
+	public function get_test_settings()
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		return $CI->homemodel->fetch_test_settings();
+	}
+
+	public function get_questions($num_ques, $skill_id)
+	{
+		// var_dump($num_ques, $skill_id);die;
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		return $CI->homemodel->fetch_questions($num_ques, $skill_id);
+	}
+
 	public function getColleges(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');

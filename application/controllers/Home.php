@@ -152,13 +152,62 @@ class Home extends CI_Controller {
 		$this->load->view('skills', $this->data);
 	}
 
-	public function skillTest(){
-		$this->redirection();
-		$this->load->view('skillTest', $this->data);
+	public function skillTest()
+	{
+		// if($this->home_lib->is_in_test()){
+		// 	$this->session->unset_userdata('skill_data');
+		// 	$this->session->unset_userdata('test_settings');
+		// 	$this->session->set_userdata('in_test', false);
+		// 	$this->session->set_flashdata('error', 'Do not reload the page during the test.');
+		// 	redirect(base_url('skills'));
+  //       }
+        $this->session->set_userdata('in_test', true);
+        $skill_data = $this->session->userdata('skill_data');
+        $test_settings = $this->session->userdata('test_settings');
+        $this->data['questions'] = $this->home_lib->get_questions($test_settings['numberQuestions'], $skill_data['skillID']);
+
+        // var_dump(json_encode($this->data['questions']));die;
+        $this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
+        $this->data['test_settings'] = $test_settings;
+        $this->data['skill_data'] = $skill_data;
+        // print_r($test_settings);die();
+        $this->load->view('skillTest', $this->data);
+	}
+
+	public function getskillTestGuidelines($get_id = NULL){
+		if(!empty($get_id)) {
+			$flag = 0;
+			$skills = $this->home_lib->getUserSkills($this->session->userdata('userID'));
+			foreach ($skills as $skill) {
+				if($skill === $get_id){
+					$flag = 1;
+					break;
+				}
+			}
+			if($flag !== 1){
+				$skill_data = $this->home_lib->fetch_skill_data($get_id);
+				$this->session->set_userdata(['skill_data'=> $skill_data]);
+				$this->session->set_userdata('in_test', false);				
+				$this->session->set_flashdata(['skill_id'=> $get_id]);
+				redirect(base_url('skills/skill-test-guidelines'));
+			}else{
+				$this->data['message'] = ['content' => 'No skill Selected', 'class' => 'error'];
+				redirect(base_url('skills'));
+			}
+			}elseif (empty($get_id)) {
+				redirect(base_url('skills'));
+		}	
+		
 	}
 
 	public function skillTestGuidelines(){
-		$this->redirection();
+		$test_settings = $this->home_lib->get_test_settings();
+		$this->session->set_userdata(['test_settings' => $test_settings]);
+		$this->data['timeAllowed'] = $test_settings['timeAllowed']/60;
+		$this->data['numberQuestion'] = $test_settings['numberQuestions'];
+		$skill_data = $this->session->userdata('skill_data');
+		$this->data['skill_name'] = $skill_data['skill_name'];
+		$this->data['title'] = 'Skill Test Guidelines';
 		$this->load->view('skillTestGuidelines', $this->data);
 	}
 
