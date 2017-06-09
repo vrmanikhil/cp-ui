@@ -55,7 +55,7 @@
 					<div id="timer" style="float:right;"></div>
 				</div>
 				<div class="card">
-					<label style="font-weight: bold;">Question</label>
+					<label style="font-weight: bold;">Question : <sec id = "ques-no"></sec></label>
 					<p class="mcq" style="text-align: left;" id="ques-content"></p>
 
 					<div class="options" style="text-transform: none;">
@@ -121,12 +121,14 @@
 
 	var eventKey = "<?php echo $skill_data['skill_name']?>_test";
 	
-	time=<?php echo $test_settings['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
-				setInterval(function(){
-					var c=tmp--,m=(c/60)>>0,s=(c-m*60)+'';
-					timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
-					tmp!=0||(tmp=time);
-				},1000);
+	time = <?php echo $test_settings[0]['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
+			
+					setInterval(function(){
+						var c=tmp--,m=(c/60)>>0,s=(c-m*60)+'';
+						timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
+						if(c==0)
+							submitAnswers(eventKey);
+					},1000);
 
 	var currentId = 1;
 
@@ -154,14 +156,13 @@
 
 	function init(eventKey){
 	    if(alreadyInit(eventKey)){
-	        // clock.setTime(getSavedTime(eventKey));
 	        reinitialise(eventKey)
 	    }else{
-	        // setInterval();
 	        ans = [];
 	        for (i = 0; i < questions.length; i++){
-	            ans[i] = {ques_id: questions[i].id, ans: ''};
+	            ans[i] = {ques_id: questions[i].question_id, ans: ''};
 	        }
+	        console.log(ans);
 	        localStorage.setItem(eventKey+'_length', questions.length)
 	        localStorage.setItem(eventKey+'_answers', JSON.stringify(ans))
 	        populateQuestion(eventKey, 0)
@@ -171,7 +172,7 @@
 
 
 	function alreadyInit(eventKey){
-	    return !!localStorage.getItem(eventKey+'_length');
+	    return !!localStorage.getItem(eventKey+'_current');
 	}
 
 	function reinitialise(eventKey){	
@@ -184,9 +185,9 @@
 
 	function populateQuestion(eventKey, index){
 	    var ques = getQuestion(eventKey, index)
-	   	console.log(ques);
+	   	
 	    var opts = [ques.option1,ques.option2,ques.option3,ques.option4];	
-	    console.log(opts);
+	   
 	    $('#ques-content').html(ques.ques)
 	    $('#ques-no').html(+getCurrent(eventKey)+1)
 	    populateOptions(opts, ques.ans)
