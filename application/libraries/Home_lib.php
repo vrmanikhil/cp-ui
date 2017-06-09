@@ -159,6 +159,41 @@ class Home_lib {
 		return $this->get_score($actual_ans, $ans_given);
 	}
 
+	public function get_score($actual_ans, $ans_given)
+	{
+		$score = 0;
+		// for ($i = 0; $i < count($actual_ans); $i++) {
+		// 	if($actual_ans[$i] == ($ans_given[$i]-1))
+		// 		$score++;
+		// }
+		return $score;
+	}
+
+	public function add_skill($score, $skill_id, $num_ques)
+	{
+		$response = 0;
+		// $CI = &get_instance();
+		// $CI->load->model('Data_model', 'datamodel');
+		// if($this->passed_test($score)){
+		// 	if($CI->datamodel->add_skill_to_user($skill_id, $this->get_user_id(), $score, $num_ques)){
+		// 		$response = 1;
+		// 	}else{
+		// 		$response = 2;
+		// 	}
+		// }
+		return $response;
+	}
+
+	public function passed_test($score)
+	{
+		// $CI = &get_instance();
+		// $CI->load->model('Data_model', 'datamodel');
+		// $num_ques = $CI->datamodel->fetch_test_settings()['questions'];
+		// return $score >= (0.6 * $num_ques);
+	}
+
+	
+
 	public function getUserWorkEx($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -191,11 +226,12 @@ class Home_lib {
 		return $CI->session->userdata('in_test');
 	}
 
-	public function get_test_settings()
+	public function get_test_settings($skill_id)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		return $CI->homemodel->fetch_test_settings();
+		$setting = $CI->homemodel->fetch_test_settings($skill_id);
+		return $setting;
 	}
 
 	public function get_questions($num_ques, $skill_id)

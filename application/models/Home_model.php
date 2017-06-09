@@ -59,7 +59,11 @@ class Home_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$result = $this->db->get_where('testSettings');
-		return $result->result_array()[0];
+		if ($result->result_array() !== NULL){
+			return $result->result_array();
+		}else{
+			return 0;
+		}
 	}
 
 	public function fetch_questions($num_ques, $skill_id)
@@ -70,6 +74,24 @@ class Home_model extends CI_Model {
 		$result = $this->db->get_where('questions', ['skillID'=> $skill_id, 'active'=> '1']);
 		return $result->result_array();
 	}
+
+	public function get_answers($ques_ids)
+	{
+		// $this->db->select('answer');
+		// $this->db->where_in('id', $ques_ids);
+		// $result = $this->db->get('questions');
+		// return $result->result_array();
+	}
+
+	public function add_skill_to_user($skill_id, $user_id, $score, $num_ques)
+	{
+		// $data = ['skill_id'=> $skill_id, 'user_id'=> $user_id];
+		// $data['percentage'] = json_encode(['score'=> $score, 'total_ques'=> $num_ques]);
+		// $this->db->insert('user_skills', $data);
+		// return (bool)$this->db->affected_rows();
+	}
+
+	
 
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
