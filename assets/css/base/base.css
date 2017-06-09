@@ -1,0 +1,314 @@
+/**
+ * Color variables
+ */
+
+:root {
+	--midnight-blue: #283e4a;
+	--light-grey: #e5e5e5;
+	--semi-light-grey: #ccc;
+	--grey: #999999;
+	--light-black: #333;
+	--yellow: #f1c40f;
+	--red: #c0392b;
+	--green: #2ecc71;
+}
+
+
+/**
+ * Typography
+ */
+
+body {
+	font-size: 18px;
+	font-family: sans-serif;
+}
+
+p,
+span,
+a,
+div,
+input,
+button {
+	font-size: 1rem;
+	margin: 0;
+	line-height: 1.2rem;
+	letter-spacing: 0.5px;
+}
+
+h1 {
+	line-height: 1em;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.s-14 {
+	font-size: 14px;
+}
+
+.s-12 {
+	font-size: 0.75rem;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.white {
+	color: white;
+}
+
+.red {
+	color: var(--red);
+}
+
+.yellow {
+	color: var(--yellow);
+}
+
+.green {
+	color: var(--green);
+}
+
+/**
+ * Base rules
+ */
+
+.logo {
+	display: block;
+	max-width: 190px;
+}
+
+.icon {
+	max-width: 32px;
+	max-height: 32px;
+	display: inline-block;
+}
+
+.icon--sm {
+	max-width: 18px;
+}
+
+.form-control {
+	outline: none;
+	padding: 7px;
+	border: none;
+	width: 100%;
+}
+
+.card {
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+	border-radius: 2px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.card--no-padding {
+	padding: 0;
+}
+
+.card--no-shadow {
+	box-shadow: none;
+}
+
+.textarea {
+	border: 1px solid var(--light-grey);
+}
+
+.btn {
+	border: 1px solid var(--light-grey);
+	background: #fff;
+	cursor: pointer;
+}
+
+.btn--primary {
+	color: white;
+	background: var(--midnight-blue);
+}
+
+.btn--apply {
+	color: white;
+	padding: 10px;
+	background: var(--midnight-blue);
+	width: 100%;
+	margin-top: 10px;
+}
+
+
+/**
+ * Utility classes
+ */
+
+.text-center {
+	text-align: center;
+}
+
+.midnight-blue-bg {
+	background-color: var(--midnight-blue);
+}
+
+.hidden {
+	display: none !important;
+}
+
+
+/**
+ * dropdown
+ */
+
+.dropdown__container,
+.dropdown__item {
+	position: relative;
+}
+
+.dropdown__pane {
+	position: absolute;
+	right: -50px;
+	top: 100%;
+	margin-top: 12px;
+	width: 400px;
+	min-height: 100px;
+	padding: 0;
+	z-index: 1;
+}
+
+.dropdown__item--clicked:after {
+	position: absolute;
+	content: '';
+	width: 0;
+	height: 0;
+	top: 100%;
+	right: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 12px solid white;
+}
+
+.dropdown__content-head {
+	padding: 10px;
+	border-bottom: solid 1px var(--light-grey);
+}
+
+.dropdown__content-title {
+	font-size: 0.875em;
+}
+
+
+/**
+ * Nav (stacked)
+ */
+
+.nav--stacked > .nav__link {
+	display: block;
+	text-align: center;
+	padding: 12px 10px;
+	border-bottom: 1px solid var(--light-grey);
+}
+
+.nav__stacked > .nav__link:last-child {
+	border-bottom: 0;
+}
+
+.nav--stacked > .nav__link.active {
+	background: var(--midnight-blue);
+	color: white;
+	border-bottom-color: var(--midnight-blue);
+}
+
+
+/**
+ * right pane explore panel
+ */
+
+.explore-panel {
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.explore-panel__link {
+	margin-bottom: 10px;
+	flex-basis: 32%;
+}
+
+.explore-panel__link-text {
+	font-weight: 700;
+	color: var(--light-black);
+	font-size: .8125rem;
+}
+
+.explore-panel__link-icon-container {
+	width: 100%;
+	max-width: 45px;
+	border-radius: 100%;
+	background-color: var(--light-grey);
+	padding: 10px;
+	margin-bottom: 8px;
+}
+
+.explore-panel__link-icon-container > svg > use {
+	fill: var(--midnight-blue);
+}
+
+.explore-panel__link.active .explore-panel__link-icon-container {
+	background: var(--midnight-blue);
+}
+
+.explore-panel__link.active .explore-panel__link-icon-container > svg > use {
+	fill: white;
+}
+
+/**
+ * breadcrumb
+ */
+
+.breadcrumb {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border-radius: 4px;
+}
+
+.breadcrumb > li {
+	display: inline-block;
+}
+
+.breadcrumb > li,
+.breadcrumb > li > a {
+	font-size: 0.9317rem;
+}
+
+.breadcrumb > .active {
+	color: #777;
+}
+
+.breadcrumb>li+li:before {
+	padding: 0 5px;
+	color: #ccc;
+	content: "/\00a0";
+}
+
+/*flash message */
+
+.message{
+ padding:5px 0;
+ text-align: center;
+ color:white;
+ background-color: white;
+}
+.message.success{
+ background-color: #27ae60;
+}
+.message.error{
+ background-color:#c0392b;
+}
+.message p{
+ margin-bottom: 0;
+ font-weight: 500;
+ font-size: 14px;
+ letter-spacing: .5px;
+}

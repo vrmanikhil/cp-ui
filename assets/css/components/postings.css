@@ -1,0 +1,38 @@
+.posting-card > .media > .media-body {
+	flex-grow: 1;
+}
+.posting-card__img {
+	width: 125px;
+	height: 125px;
+	margin-right: 10px;
+}
+
+.posting-card__title {
+	margin-bottom: 3px;
+}
+
+.posting-card__desc {
+	color: var(--grey);
+	font-size: 0.875em;
+}
+
+.posting-card__desc,
+.posting-card__post,
+.posting-card__post-location,
+.posting-card__status {
+	margin-bottom: 10px;
+}
+
+.posting-card__post-location > span,
+.posting-card__post-location > .fa {
+	font-size: 0.875em;
+}
+
+.posting-card__apply {
+	text-align: right;
+}
+
+.posting-card__apply > .btn {
+	padding-right: 20px;
+	padding-left: 20px;
+}

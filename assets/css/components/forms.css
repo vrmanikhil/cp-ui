@@ -1,0 +1,62 @@
+.form {}
+.form__label {
+	font-size: 0.9317rem;
+	font-weight: 700;
+}
+
+textarea,
+textarea::-webkit-input-placeholder {
+	font-size: 0.875rem;
+}
+
+input,
+input::-webkit-input-placeholder {
+	font-size: 0.875rem;
+}
+
+.radio,
+.checkbox {
+	position: relative;
+	display: block;
+}
+.radio label,
+.checkbox label {
+	min-height: 20px;
+	padding-left: 20px;
+	margin-bottom: 0;
+	font-weight: normal;
+	cursor: pointer;
+}
+.radio input[type="radio"],
+.checkbox input[type="checkbox"] {
+	position: absolute;
+	margin-top: 4px \9;
+	margin-left: -20px;
+}
+.radio + .radio,
+.checkbox + .checkbox {
+	margin-top: -5px;
+}
+
+input[type='submit'] {
+	cursor: pointer;
+}
+
+.form__input {
+	width: 100%;
+	padding: 10px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid var(--semi-light-grey);
+	border-radius: 4px;
+	box-sizing: border-box;
+	outline: none;
+}
+
+.form-group {
+	padding: 5px;
+}
+
+.form__input:focus {
+	border-color: var(--grey);
+}
