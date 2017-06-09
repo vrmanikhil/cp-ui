@@ -155,13 +155,13 @@ class Home extends CI_Controller {
 
 	public function skillTest()
 	{
-		// if($this->home_lib->is_in_test()){
-		// 	$this->session->unset_userdata('skill_data');
-		// 	$this->session->unset_userdata('test_settings');
-		// 	$this->session->set_userdata('in_test', false);
-		// 	$this->session->set_flashdata('error', 'Do not reload the page during the test.');
-		// 	redirect(base_url('skills'));
-  //       }
+		if($this->home_lib->is_in_test()){
+			$this->session->unset_userdata('skill_data');
+			$this->session->unset_userdata('test_settings');
+			$this->session->set_userdata('in_test', false);
+			$this->session->set_flashdata('error', 'Do not reload the page during the test.');
+			redirect(base_url('skills'));
+        }
         $this->session->set_userdata('in_test', true);
         $skill_data = $this->session->userdata('skill_data');
         $test_settings = $this->session->userdata('test_settings');

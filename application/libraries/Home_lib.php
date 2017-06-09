@@ -148,6 +148,17 @@ class Home_lib {
 		return $CI->homeModel->getUserProjects($userID);
 	}
 
+	public function check_answers($ans)
+	{
+		// $CI = &get_instance();
+		// $CI->load->model('Data_model', 'datamodel');
+		// $ques_ids = array_column($ans, 'ques_id');
+		// $actual_ans = $CI->datamodel->get_answers($ques_ids);
+		// $actual_ans = array_column($actual_ans, 'answer');
+		// $ans_given =array_column($ans, 'ans');
+		return $this->get_score($actual_ans, $ans_given);
+	}
+
 	public function getUserWorkEx($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
