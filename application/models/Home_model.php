@@ -55,14 +55,14 @@ class Home_model extends CI_Model {
 		return $this->db->get('skills')->result_array();
 	}
 
-	public function fetch_test_settings()
+	public function fetch_test_settings($skill_id)
 	{
 		$this->db->select('*');
-		$result = $this->db->get_where('testSettings');
+		$result = $this->db->get_where('testSettings',array('skillID',$skill_id));
 		if ($result->result_array() !== NULL){
 			return $result->result_array();
 		}else{
-			return 0;
+			return False;
 		}
 	}
 

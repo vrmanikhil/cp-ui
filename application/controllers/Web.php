@@ -221,22 +221,21 @@ class Web extends CI_Controller {
 
 	public function submit_answers()
 	{
-		echo "submit ho gya";
-		// $skill_id = $this->session->userdata('skill_data')['skill_id'];
-  //       $ans = $this->input->post('answers');
-  //       $score = $this->data_lib->check_answers($ans);
-  //       $test_settings = $this->data_lib->get_test_settings();
-  //       $num_ques = $test_settings['questions'];
-  //       switch ($this->data_lib->add_skill($score, $skill_id, $num_ques)) {
-  //       	case 0: $msg = ['error', "You scored $score out of $num_ques and were unable to clear the skill test. Better luck next time. Try Again"];
-  //       		break;
-  //       	case 1: $msg = ['success', "Congratulations you scored $score out of $num_ques and skill was successfully added to your profile."];
-  //       		break;
-  //       	default: $msg = ['error', "Some Error Occured"];
-  //       		break;
-  //       }
-  //       $this->data_lib->set_flashdata($msg[0], $msg[1]);
-        die;
+		echo "submit ho gya";die();
+		$skill_id = $this->session->userdata('skill_data')['skillID'];
+        $ans = $this->input->post('answers');
+        $score = $this->data_lib->check_answers($ans);
+        $test_settings = $this->data_lib->get_test_settings();
+        $num_ques = $test_settings['questions'];
+        switch ($this->data_lib->add_skill($score, $skill_id, $num_ques)) {
+        	case 0: $msg = ['error', "You scored $score out of $num_ques and were unable to clear the skill test. Better luck next time. Try Again"];
+        		break;
+        	case 1: $msg = ['success', "Congratulations you scored $score out of $num_ques and skill was successfully added to your profile."];
+        		break;
+        	default: $msg = ['error', "Some Error Occured"];
+        		break;
+        }
+        $this->data_lib->set_flashdata($msg[0], $msg[1]);
 	}
 
 
