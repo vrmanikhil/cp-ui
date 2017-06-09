@@ -58,6 +58,7 @@ $route['employer-details'] = 'home/employerDetails';
 
 
 $route['change-password'] = 'home/changePassword';
+$route['reset-password'] = 'home/resetPassword';
 $route['user/(:any)'] = 'home/user/$1';
 $route['notifications'] = 'home/notifications';
 $route['messages'] = 'home/messages';

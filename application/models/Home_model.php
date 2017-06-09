@@ -91,7 +91,7 @@ class Home_model extends CI_Model {
 		// return (bool)$this->db->affected_rows();
 	}
 
-	
+
 
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
@@ -191,6 +191,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserSkills($userID){
+		$this->db->select('GROUP_CONCAT(userSkills.skillID) as userSkillIDs');
 		$result = $this->db->get_where('userSkills', array('userID' => $userID));
 		return $result->result_array();
 	}
@@ -242,12 +243,17 @@ class Home_model extends CI_Model {
 
 	public function getJobData($jobID){
 		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
-		$result = $this->db->get_where('jobOffers', array('jobID' => $jobID));
+		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
+		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy,jobOffers.jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName, jobOffers.active');
+		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
 	}
 
 	public function getInternshipData($internshipID){
 		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID');
+		$this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName');
 		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
 		return $result->result_array();
 	}

@@ -73,6 +73,10 @@ class Home extends CI_Controller {
 		$this->load->view('relevantJobs', $this->data);
 	}
 
+	public function resetPassword(){
+		$this->load->view('resetPassword', $this->data);
+	}
+
 	public function jobOffers(){
 		$this->redirection();
 		$relevant = 0;
