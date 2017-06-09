@@ -21,6 +21,19 @@ class Home extends CI_Controller {
 			if(!$this->home_lib->auth()){
 				redirect(base_url());
 			}
+			else{
+				if($_SESSION['registrationLevel']=='1'){
+					if($_SESSION['userData']['accountType']=='1'){
+						redirect(base_url('education-details'));
+					}
+					if($_SESSION['userData']['accountType']=='2'){
+						redirect(base_url('employer-details'));
+					}
+				}
+				if($_SESSION['registrationLevel']=='2'){
+					echo "email verification pending hai";
+				}
+			}
 	}
 
 	public function index(){
@@ -30,6 +43,10 @@ class Home extends CI_Controller {
 		else{
 			$this->load->view('main', $this->data);
 		}
+	}
+
+	public function error404(){
+		$this->load->view('404', $this->data);
 	}
 
 	public function home(){
@@ -188,7 +205,7 @@ class Home extends CI_Controller {
 			if($flag !== 1){
 				$skill_data = $this->home_lib->fetch_skill_data($get_id);
 				$this->session->set_userdata(['skill_data'=> $skill_data]);
-				$this->session->set_userdata('in_test', false);				
+				$this->session->set_userdata('in_test', false);
 				$this->session->set_flashdata(['skill_id'=> $get_id]);
 				redirect(base_url('skills/skill-test-guidelines'));
 			}else{
@@ -197,8 +214,8 @@ class Home extends CI_Controller {
 			}
 			}elseif (empty($get_id)) {
 				redirect(base_url('skills'));
-		}	
-		
+		}
+
 	}
 
 	public function skillTestGuidelines(){

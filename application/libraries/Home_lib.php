@@ -9,6 +9,7 @@ class Home_lib {
 		$result = $CI->homeModel->login($email,$password);
 		$userData = $CI->homeModel->getUserDetailsFromEMail($email);
 		$userData = $userData[0];
+		$registraionLevel = $userData['registrationLevel'];
 		if ($result) {
 			if($userData['accountType']=='1'){
 				$data = array(
@@ -37,6 +38,7 @@ class Home_lib {
 			$CI->session->set_userdata('userData', $data);
 			$profileImage = $userData['profileImage'];
 			$CI->session->set_userdata('profileImage', $profileImage);
+			$CI->session->set_userdata('registrationLevel', $registrationLevel);
 			return 1;
 		}
 		return 0;
@@ -229,6 +231,18 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->changePassword($email, $password);
+	}
+
+	public function getJobData($jobID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getJobData($jobID);
+	}
+
+	public function getInternshipData($internshipID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getInternshipData($internshipID);
 	}
 
 }

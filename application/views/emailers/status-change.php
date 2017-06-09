@@ -123,7 +123,7 @@
 					<tr>
 						<td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
 							<p style="margin: 0;">Hi Nikhil Verma</p><br>
-							<p style="margin: 0;">There has been a change in your application status for <b>Web Development</b> internship, posted by <b>Campus Puppy Private Limited.</b>. Visit our <a href="http://www.campuspuppy.com/" target="_blank">website</a> for more details.</p>
+							<p style="margin: 0;">There has been a change in your application status for <b><?php echo $offerTitle; ?></b> <?php if($offerType=='1') echo "job offer"; if($offerType=='2') echo "intership"; ?>, posted by <b><?php echo $company; ?>.</b>. Visit our <a href="http://www.campuspuppy.com/" target="_blank">website</a> for more details.</p>
 							<p>All the Best</p>
 						</td>
 					</tr>

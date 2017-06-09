@@ -123,7 +123,7 @@
 					<tr>
 						<td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
 							<p style="margin: 0;">Don't Worry, We will help you reset the password. All you need to do is enter your Password Reset Code.</p><br>
-							<p style="margin: 0;">Your Password Reset Code is: <b>659148</b></p>
+							<p style="margin: 0;">Your Password Reset Code is: <b><?php echo $token; ?></b></p>
 						</td>
 					</tr>
 

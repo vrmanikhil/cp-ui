@@ -218,4 +218,16 @@ class Home_model extends CI_Model {
 		return $this->db->query($query);
 	}
 
+	public function getJobData($jobID){
+		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
+		$result = $this->db->get_where('jobOffers', array('jobID' => $jobID));
+		return $result->result_array();
+	}
+
+	public function getInternshipData($internshipID){
+		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
+		return $result->result_array();
+	}
+
 }
