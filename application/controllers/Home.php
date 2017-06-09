@@ -172,13 +172,13 @@ class Home extends CI_Controller {
 
 	public function skillTest()
 	{
-		// if($this->home_lib->is_in_test()){
-		// 	$this->session->unset_userdata('skill_data');
-		// 	$this->session->unset_userdata('test_settings');
-		// 	$this->session->set_userdata('in_test', false);
-		// 	$this->session->set_flashdata('error', 'Do not reload the page during the test.');
-		// 	redirect(base_url('skills'));
-  //       }
+		if($this->home_lib->is_in_test()){
+			$this->session->unset_userdata('skill_data');
+			$this->session->unset_userdata('test_settings');
+			$this->session->set_userdata('in_test', false);
+			$this->session->set_flashdata(['content', 'Page Reload not Allowed during test.'],['class', 'error']);
+			redirect(base_url('skills'));
+        }
         $this->session->set_userdata('in_test', true);
         $skill_data = $this->session->userdata('skill_data');
         $test_settings = $this->session->userdata('test_settings');
@@ -219,14 +219,19 @@ class Home extends CI_Controller {
 	}
 
 	public function skillTestGuidelines(){
-		$test_settings = $this->home_lib->get_test_settings();
-		$this->session->set_userdata(['test_settings' => $test_settings]);
-		$this->data['timeAllowed'] = $test_settings['timeAllowed']/60;
-		$this->data['numberQuestion'] = $test_settings['numberQuestions'];
-		$skill_data = $this->session->userdata('skill_data');
-		$this->data['skill_name'] = $skill_data['skill_name'];
-		$this->data['title'] = 'Skill Test Guidelines';
-		$this->load->view('skillTestGuidelines', $this->data);
+		$test_settings = $this->home_lib->get_test_settings($this->userdata('skill_id'));
+		if($test_settings !== 0) {
+			$this->session->set_userdata(['test_settings' => $test_settings]);
+			$this->data['timeAllowed'] = $test_settings['timeAllowed']/60;
+			$this->data['numberQuestion'] = $test_settings['numberQuestions'];
+			$skill_data = $this->session->userdata('skill_data');
+			$this->data['skill_name'] = $skill_data['skill_name'];
+			$this->data['title'] = 'Skill Test Guidelines';
+			$this->load->view('skillTestGuidelines', $this->data);
+		}else{
+			$this->session->set_flashdata(['content', 'This skill is nor available for the time being. Thank you for your Co-operation.'],['class', 'error']);
+			redirect(base_url('skills'));
+		}
 	}
 
 	public function connections(){
