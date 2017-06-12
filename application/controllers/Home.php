@@ -259,8 +259,6 @@ class Home extends CI_Controller {
 
 	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->get_test_settings($this->session->userdata('skill_id'));
-
-		// var_dump($test_settings);die();	
 		if(!empty($test_settings[0]['skillID'])) {		
 			$this->session->set_userdata(['test_settings' => $test_settings]);
 			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
