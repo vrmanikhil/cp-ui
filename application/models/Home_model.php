@@ -58,12 +58,10 @@ class Home_model extends CI_Model {
 	public function fetch_test_settings($skill_id)
 	{
 		$this->db->select('*');
-		$result = $this->db->get_where('testSettings',array('skillID',$skill_id));
-		if ($result->result_array() !== NULL){
+		$result = $this->db->get_where('testSettings', ['skillID' => $skill_id]);
+		// var_dump($this->db->last_query());
+		if ($result->result_array() !== NULL)
 			return $result->result_array();
-		}else{
-			return False;
-		}
 	}
 
 	public function fetch_questions($num_ques, $skill_id)
@@ -75,20 +73,19 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function get_answers($ques_ids)
+	public function getAnswers($ques_ids)
 	{
-		// $this->db->select('answer');
-		// $this->db->where_in('id', $ques_ids);
-		// $result = $this->db->get('questions');
-		// return $result->result_array();
+		$this->db->select('answer');
+		$this->db->where_in('question_id', $ques_ids);
+		$result = $this->db->get('questions');
+		return $result->result_array();
 	}
 
-	public function add_skill_to_user($skill_id, $user_id, $score, $num_ques)
+	public function addSkilltoUser($skill_id, $user_id, $score, $date)
 	{
-		// $data = ['skill_id'=> $skill_id, 'user_id'=> $user_id];
-		// $data['percentage'] = json_encode(['score'=> $score, 'total_ques'=> $num_ques]);
-		// $this->db->insert('user_skills', $data);
-		// return (bool)$this->db->affected_rows();
+		$data = ['skillID'=> $skill_id, 'userID'=> $user_id, 'score'=> $score, 'testDate'=> $date, 'skillType'=> '1'];
+		$this->db->insert('userskills', $data);
+		return (bool)$this->db->affected_rows();
 	}
 
 
@@ -191,7 +188,6 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserSkills($userID){
-		$this->db->select('GROUP_CONCAT(userSkills.skillID) as userSkillIDs');
 		$result = $this->db->get_where('userSkills', array('userID' => $userID));
 		return $result->result_array();
 	}

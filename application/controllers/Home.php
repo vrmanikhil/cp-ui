@@ -176,13 +176,13 @@ class Home extends CI_Controller {
 
 	public function skillTest()
 	{
-		// if($this->home_lib->is_in_test()){
-		// 	$this->session->unset_userdata('skill_data');
-		// 	$this->session->unset_userdata('test_settings');
-		// 	$this->session->set_userdata('in_test', false);
-		// 	$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
-		// 	redirect(base_url('skills'));
-  //       }
+		if($this->home_lib->is_in_test()){
+			$this->session->unset_userdata('skill_data');
+			$this->session->unset_userdata('test_settings');
+			$this->session->set_userdata('in_test', false);
+			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
+			redirect(base_url('skills'));
+        }
         $this->session->set_userdata('in_test', true);
         $skill_data = $this->session->userdata('skill_data');
         $test_settings = $this->session->userdata('test_settings');
@@ -203,9 +203,10 @@ class Home extends CI_Controller {
 	public function getskillTestGuidelines($get_id = NULL){
 		if(!empty($get_id)) {
 			$flag = 0;
-			$skills = $this->home_lib->getUserSkills($this->session->userdata('userID'));
+			$skills = $this->home_lib->getUserSkills($_SESSION['userData']['userID']);
+
 			foreach ($skills as $skill) {
-				if($skill === $get_id){
+				if($skill['skillID'] === $get_id){
 					$flag = 1;
 					break;
 				}
@@ -229,7 +230,7 @@ class Home extends CI_Controller {
 	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->get_test_settings($this->session->userdata('skill_id'));
 		// var_dump($test_settings);die();	
-		if($test_settings) {
+		if(!empty($test_settings[0]['skillID'])) {
 			$this->session->set_userdata(['test_settings' => $test_settings]);
 			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
 			$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];

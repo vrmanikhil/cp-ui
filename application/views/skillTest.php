@@ -117,8 +117,6 @@
 <script type="text/javascript">
 	questions = JSON.parse(atob("<?php echo $question_string; ?>"));
 
-		// console.log(questions);
-
 	var eventKey = "<?php echo $skill_data['skill_name']?>_test";
 	
 	time = <?php echo $test_settings[0]['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
@@ -126,7 +124,7 @@
 					setInterval(function(){
 						var c=tmp--,m=(c/60)>>0,s=(c-m*60)+'';
 						timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
-						if(c==0)
+						if(c<1)
 							submitAnswers(eventKey);
 					},1000);
 
@@ -158,11 +156,12 @@
 	    if(alreadyInit(eventKey)){
 	        reinitialise(eventKey)
 	    }else{
+	    	localStorage.clear()
 	        ans = [];
 	        for (i = 0; i < questions.length; i++){
 	            ans[i] = {ques_id: questions[i].question_id, ans: ''};
 	        }
-	        console.log(ans);
+	        // console.log(ans);
 	        localStorage.setItem(eventKey+'_length', questions.length)
 	        localStorage.setItem(eventKey+'_answers', JSON.stringify(ans))
 	        populateQuestion(eventKey, 0)
@@ -178,10 +177,6 @@
 	function reinitialise(eventKey){	
 	    populateQuestion(eventKey, +getCurrent(eventKey))
 	}
-
-	// function getSavedTime(eventKey){
-	//     return localStorage.getItem(eventKey+'_time');
-	// }
 
 	function populateQuestion(eventKey, index){
 	    var ques = getQuestion(eventKey, index)
@@ -212,12 +207,12 @@
 	function disableButtons(eventKey){
 	    var index = getCurrent(eventKey)
 	    if(index == 0)
-	    $('#previous-button').attr('disabled', 'disabled')
+	    $('#previous-button').attr('hidden', 'hidden')
 	    else if(index == questions.length -1)
-	    $('#next-button').attr('disabled', 'disabled')
+	    $('#next-button').attr('hidden', 'hidden')
 	    else {
-	        $('#previous-button').removeAttr('disabled')
-	        $('#next-button').removeAttr('disabled')
+	        $('#previous-button').removeAttr('hidden')
+	        $('#next-button').removeAttr('hidden')
 	    }
 	}
 
@@ -252,49 +247,43 @@
 
 
 	function submitAnswers(eventKey){
-	    var data = getAnswers(eventKey); 
-	    console.log(data);
-	    $.post('/web/submit_answers', data, function(res){
-	    }).done(function(){
-	        localStorage.clear()
-	        window.location.replace('<?php echo base_url('skills'); ?>')
-	    }).fail(function(){
-	        alert('failed')
-	    })
+	    var data =JSON.stringify(getAnswers(eventKey));
+	    document.cookie = "data = " + data;
+	    if(data) {
+	    	localStorage.clear();
+	    	window.location.replace('<?php echo base_url('skills/submit-answers');?>')
+	    }else{
+	    	alert('Some error occured');
+	    }
 	}
 
 
 	$(document).ready(function(){
-	    // clock = $('.your-clock').FlipClock({
-	    //     autoStart: false,
-	    //     countdown: true,
-	    //     clockFace: 'MinuteCounter',
-	    //     callbacks: {
-	    //         interval: function(){
-	    //             localStorage.setItem(eventKey+'_time', clock.getTime().time)
-	    //         },
-
-	    //         init: function(){
-	    //             if(!alreadyInit(eventKey)){
-	    //                 localStorage.setItem(eventKey+'_time', 0)
-	    //             }
-	    //         },
-
-	    //         stop: function(){
-	    //             submitAnswers(eventKey, clock)
-	    //         }
-	    //     }
-	    // });
-
-
 	    $(document).on("contextmenu",function(e){
-	        alert('right click disabled');
 	        return false;
 	    });
 
 	    init(eventKey);
 
 	});
+
+	document.onkeydown = function(e) {
+		if(event.keyCode == 123) {
+		return false;
+		}
+		if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+		return false;
+		}
+		if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+		return false;
+		}
+		if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)){
+		return false;
+		}
+		if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+		return false;
+		}
+		}
 </script>
 </body>
 

@@ -219,15 +219,21 @@ class Web extends CI_Controller {
 		}
 	}
 
-	public function submit_answers()
+	public function submitAnswers()
 	{
-		echo "submit ho gya";die();
+		// echo "submit ho gya";die();
 		$skill_id = $this->session->userdata('skill_data')['skillID'];
-        $ans = $this->input->post('answers');
-        $score = $this->data_lib->check_answers($ans);
-        $test_settings = $this->data_lib->get_test_settings();
-        $num_ques = $test_settings['questions'];
-        switch ($this->data_lib->add_skill($score, $skill_id, $num_ques)) {
+        // $ans = $this->input->post('answers');
+        $answer = json_decode($_COOKIE['data']);
+        $i = 0;
+        foreach ($answer as $key) {
+        	$ans[$i++] = json_decode(json_encode($key), true);
+        }
+        $score = $this->home_lib->checkAnswers($ans);
+        $test_settings = $this->session->userdata('test_settings');
+        $userID = $_SESSION['userData']['userID'];
+        $num_ques = $test_settings[0]['numberQuestions'];
+        switch ($this->home_lib->addSkill($score, $userID, $skill_id, $num_ques)) {
         	case 0: $msg = ['error', "You scored $score out of $num_ques and were unable to clear the skill test. Better luck next time. Try Again"];
         		break;
         	case 1: $msg = ['success', "Congratulations you scored $score out of $num_ques and skill was successfully added to your profile."];
@@ -235,7 +241,9 @@ class Web extends CI_Controller {
         	default: $msg = ['error', "Some Error Occured"];
         		break;
         }
-        $this->data_lib->set_flashdata($msg[0], $msg[1]);
+        // var_dump($msg);
+        $this->session->set_flashdata('message', array('content' => $msg[1], 'class' => $msg[0]));
+        redirect(base_url('skills'));
 	}
 
 

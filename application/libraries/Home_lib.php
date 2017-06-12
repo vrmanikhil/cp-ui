@@ -150,48 +150,52 @@ class Home_lib {
 		return $CI->homeModel->getUserProjects($userID);
 	}
 
-	public function check_answers($ans)
+	public function checkAnswers($ans)
 	{
-		// $CI = &get_instance();
-		// $CI->load->model('Data_model', 'datamodel');
-		// $ques_ids = array_column($ans, 'ques_id');
-		// $actual_ans = $CI->datamodel->get_answers($ques_ids);
-		// $actual_ans = array_column($actual_ans, 'answer');
-		// $ans_given =array_column($ans, 'ans');
-		return $this->get_score($actual_ans, $ans_given);
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$ques_ids = array_column($ans, 'ques_id');
+		$actual_ans = $CI->homemodel->getAnswers($ques_ids);
+		$actual_ans = array_column($actual_ans, 'answer');
+		$ans_given =array_column($ans, 'ans');
+		return $this->getScore($actual_ans, $ans_given);
 	}
 
-	public function get_score($actual_ans, $ans_given)
+	public function getScore($actual_ans, $ans_given)
 	{
 		$score = 0;
-		// for ($i = 0; $i < count($actual_ans); $i++) {
-		// 	if($actual_ans[$i] == ($ans_given[$i]-1))
-		// 		$score++;
-		// }
+		for ($i = 0; $i < count($actual_ans); $i++) {
+			if($actual_ans[$i] == ($ans_given[$i]))
+				$score++;
+		}
 		return $score;
 	}
 
-	public function add_skill($score, $skill_id, $num_ques)
+	public function addSkill($score, $skill_id, $num_ques)
 	{
 		$response = 0;
-		// $CI = &get_instance();
-		// $CI->load->model('Data_model', 'datamodel');
-		// if($this->passed_test($score)){
-		// 	if($CI->datamodel->add_skill_to_user($skill_id, $this->get_user_id(), $score, $num_ques)){
-		// 		$response = 1;
-		// 	}else{
-		// 		$response = 2;
-		// 	}
-		// }
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		if($this->passedTest($score)){
+			date_default_timezone_set('Asia/Kolkata');
+			$time = time();
+			$date = date("d-m-Y", $time);
+			$datestamp = strtotime($date);
+			if($CI->homemodel->addSkillToUser($skill_id, $this->session->userdata('UserID'), $score, $datestamp)){
+				$response = 1;
+			}else{
+				$response = 2;
+			}
+		}
 		return $response;
 	}
 
-	public function passed_test($score)
+	public function passedTest($score)
 	{
-		// $CI = &get_instance();
-		// $CI->load->model('Data_model', 'datamodel');
-		// $num_ques = $CI->datamodel->fetch_test_settings()['questions'];
-		// return $score >= (0.6 * $num_ques);
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$test_settings = $CI->session->userdata('test_settings');
+		return $score >= (($test_settings[0]['passingCriteria']/100) * $test_settings[0]['numberQuestions']);
 	}
 
 	
