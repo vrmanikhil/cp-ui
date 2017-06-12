@@ -210,6 +210,7 @@ class Home extends CI_Controller {
 			$this->session->unset_userdata('skill_data');
 			$this->session->unset_userdata('test_settings');
 			$this->session->set_userdata('in_test', false);
+			$this->session->set_userdata('test_reload', true);
 			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
 			redirect(base_url('skills'));
         }
@@ -266,6 +267,11 @@ class Home extends CI_Controller {
 			$skill_data = $this->session->userdata('skill_data');
 			$this->data['skill_name'] = $skill_data['skill_name'];
 			$this->data['title'] = 'Skill Test Guidelines';
+			// if($this->session->userdata('test_reload')){
+   //      	$data['reload'] = true;
+   //      		}else{
+   //      	$data['reload'] = false;
+   //      		}
 			$this->load->view('skillTestGuidelines', $this->data);
 		}else{
 			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
