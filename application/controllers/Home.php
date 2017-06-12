@@ -70,6 +70,9 @@ class Home extends CI_Controller {
 
 	public function relevantJobs(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->load->view('relevantJobs', $this->data);
 	}
 
@@ -79,6 +82,9 @@ class Home extends CI_Controller {
 
 	public function jobOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
 		$this->load->view('jobOffers', $this->data);
@@ -86,6 +92,9 @@ class Home extends CI_Controller {
 
 	public function appliedJobOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
@@ -93,16 +102,25 @@ class Home extends CI_Controller {
 
 	public function relevantInternships(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->load->view('relevantInternships', $this->data);
 	}
 
 	public function internshipOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->load->view('internshipOffers', $this->data);
 	}
 
 	public function appliedInternshipOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
 
@@ -135,6 +153,9 @@ class Home extends CI_Controller {
 
 	public function addJobOffer(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('addJobOffer', $this->data);
@@ -142,12 +163,18 @@ class Home extends CI_Controller {
 
 	public function addedJobOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
 		$this->load->view('addedJobOffers', $this->data);
 	}
 
 	public function addInternshipOffer(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->load->view('addInternshipOffer', $this->data);
@@ -155,6 +182,9 @@ class Home extends CI_Controller {
 
 	public function addedInternshipOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		$this->load->view('addedInternshipOffers', $this->data);
 	}
 
@@ -195,7 +225,7 @@ class Home extends CI_Controller {
         // var_dump($this->data['skill_data']);
         // var_dump($this->data['test_settings']);
         // var_dump($this->data['question_string']);
-        // var_dump($this->data['questions']); 
+        // var_dump($this->data['questions']);
         // die();
         $this->load->view('skillTest', $this->data);
 	}
@@ -229,8 +259,9 @@ class Home extends CI_Controller {
 
 	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->get_test_settings($this->session->userdata('skill_id'));
+
 		// var_dump($test_settings);die();	
-		if(!empty($test_settings[0]['skillID'])) {
+		if(!empty($test_settings[0]['skillID'])) {		
 			$this->session->set_userdata(['test_settings' => $test_settings]);
 			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
 			$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];

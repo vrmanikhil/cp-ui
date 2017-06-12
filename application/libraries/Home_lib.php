@@ -198,7 +198,7 @@ class Home_lib {
 		return $score >= (($test_settings[0]['passingCriteria']/100) * $test_settings[0]['numberQuestions']);
 	}
 
-	
+
 
 	public function getUserWorkEx($userID){
 		$CI = &get_instance();
