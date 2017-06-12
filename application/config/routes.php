@@ -102,5 +102,6 @@ $route['skills'] = 'home/skills';
 $route['skills/skill-test'] = 'home/skillTest';
 $route['skills/skill-test-guidelines/(:num)'] = 'home/getskillTestGuidelines/$1';
 $route['skills/skill-test-guidelines'] = 'home/skillTestGuidelines';
+$route['skills/submit-answers'] = 'web/submitAnswers';
 
 $route['translate_uri_dashes'] = FALSE;

@@ -91,7 +91,6 @@
 	<script type="text/javascript">
 		$('#take_test').click(function(){
     		var skill_id = $('#skills').val()
-    		console.log(skill_id);
     		window.location = "<?php echo base_url('skills/skill-test-guidelines/'); ?>" + skill_id;
 		})
 
