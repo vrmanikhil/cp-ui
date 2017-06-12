@@ -194,7 +194,7 @@ class Home_lib {
 		// return $score >= (0.6 * $num_ques);
 	}
 
-	
+
 
 	public function getUserWorkEx($userID){
 		$CI = &get_instance();
