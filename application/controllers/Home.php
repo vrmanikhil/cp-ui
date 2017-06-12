@@ -210,7 +210,6 @@ class Home extends CI_Controller {
 			$this->session->unset_userdata('skill_data');
 			$this->session->unset_userdata('test_settings');
 			$this->session->set_userdata('in_test', false);
-			$this->session->set_userdata('test_reload', true);
 			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
 			redirect(base_url('skills'));
         }
@@ -218,16 +217,9 @@ class Home extends CI_Controller {
         $skill_data = $this->session->userdata('skill_data');
         $test_settings = $this->session->userdata('test_settings');
         $this->data['questions'] = $this->home_lib->get_questions($test_settings[0]['numberQuestions'], $skill_data['skillID']);
-
-        // var_dump(json_encode($this->data['questions']));die;
         $this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
         $this->data['test_settings'] = $test_settings;
         $this->data['skill_data'] = $skill_data;
-        // var_dump($this->data['skill_data']);
-        // var_dump($this->data['test_settings']);
-        // var_dump($this->data['question_string']);
-        // var_dump($this->data['questions']);
-        // die();
         $this->load->view('skillTest', $this->data);
 	}
 
@@ -267,11 +259,6 @@ class Home extends CI_Controller {
 			$skill_data = $this->session->userdata('skill_data');
 			$this->data['skill_name'] = $skill_data['skill_name'];
 			$this->data['title'] = 'Skill Test Guidelines';
-			// if($this->session->userdata('test_reload')){
-   //      	$data['reload'] = true;
-   //      		}else{
-   //      	$data['reload'] = false;
-   //      		}
 			$this->load->view('skillTestGuidelines', $this->data);
 		}else{
 			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
