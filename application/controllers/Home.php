@@ -69,33 +69,26 @@ class Home extends CI_Controller {
 	//Job Offers- Normal Users
 
 	public function relevantJobs(){
-		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
-		$this->data['relevantJobs'] = $this->home_lib->getJobOffers('1');
+    $this->load->model('Home_model');
+		$this->data['skills'] = $this->Home_model->relevant_joboffers();
+		// var_dump($data);die();
 		$this->load->view('relevantJobs', $this->data);
-	}
 
-	public function resetPassword(){
-		$this->load->view('resetPassword', $this->data);
+		//$this->redirection();
+		//$this->load->view('relevantJobs', $this->data);
 	}
+	
 
 	public function jobOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
+		// var_dump($this->data['jobOffers']);die;
 		$this->load->view('jobOffers', $this->data);
 	}
 
 	public function appliedJobOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
@@ -103,25 +96,16 @@ class Home extends CI_Controller {
 
 	public function relevantInternships(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('relevantInternships', $this->data);
 	}
 
 	public function internshipOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('internshipOffers', $this->data);
 	}
 
 	public function appliedInternshipOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
 
@@ -133,30 +117,37 @@ class Home extends CI_Controller {
 	}
 
 	public function aboutUs(){
+		$this->load->model('Home_model');
+		$this->data['about']= $this->Home_model->content();
+		//var_dump($this->data['about']);die;
 		$this->load->view('aboutUs', $this->data);
 	}
 
 	public function termsAndConditions(){
+		$this->load->model('Home_model');
+		$this->data['terms']= $this->Home_model->content();
 		$this->load->view('termsAndConditions', $this->data);
 	}
 
 	public function privacyPolicy(){
+		$this->load->model('Home_model');
+		$this->data['privacypolicy']= $this->Home_model->content();
 		$this->load->view('privacyPolicy', $this->data);
 	}
 
 	public function coat(){
+		$this->load->model('Home_model');
+		$this->data['coat']= $this->Home_model->content();
 		$this->load->view('coat', $this->data);
 	}
 
 	public function contactUs(){
+		
 		$this->load->view('contactUs', $this->data);
 	}
 
 	public function addJobOffer(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('addJobOffer', $this->data);
@@ -164,18 +155,12 @@ class Home extends CI_Controller {
 
 	public function addedJobOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
 		$this->load->view('addedJobOffers', $this->data);
 	}
 
 	public function addInternshipOffer(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->load->view('addInternshipOffer', $this->data);
@@ -183,9 +168,6 @@ class Home extends CI_Controller {
 
 	public function addedInternshipOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->load->view('addedInternshipOffers', $this->data);
 	}
 
@@ -207,42 +189,44 @@ class Home extends CI_Controller {
 
 	public function skillTest()
 	{
-		if($this->home_lib->isInTest()){
+		if($this->home_lib->is_in_test()){
 			$this->session->unset_userdata('skill_data');
 			$this->session->unset_userdata('test_settings');
 			$this->session->set_userdata('in_test', false);
-			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
+			$this->session->set_flashdata(['content', 'Page Reload not Allowed during test.'],['class', 'error']);
 			redirect(base_url('skills'));
         }
         $this->session->set_userdata('in_test', true);
         $skill_data = $this->session->userdata('skill_data');
         $test_settings = $this->session->userdata('test_settings');
-        $this->data['questions'] = $this->home_lib->getQuestions($test_settings[0]['numberQuestions'], $skill_data['skillID']);
+        $this->data['questions'] = $this->home_lib->get_questions($test_settings['numberQuestions'], $skill_data['skillID']);
+
+        // var_dump(json_encode($this->data['questions']));die;
         $this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
         $this->data['test_settings'] = $test_settings;
         $this->data['skill_data'] = $skill_data;
+        // print_r($test_settings);die();
         $this->load->view('skillTest', $this->data);
 	}
 
 	public function getskillTestGuidelines($get_id = NULL){
 		if(!empty($get_id)) {
 			$flag = 0;
-			$skills = $this->home_lib->getUserSkills($_SESSION['userData']['userID']);
-
+			$skills = $this->home_lib->getUserSkills($this->session->userdata('userID'));
 			foreach ($skills as $skill) {
-				if($skill['skillID'] === $get_id){
+				if($skill === $get_id){
 					$flag = 1;
 					break;
 				}
 			}
 			if($flag !== 1){
-				$skill_data = $this->home_lib->fetchSkillData($get_id);
+				$skill_data = $this->home_lib->fetch_skill_data($get_id);
 				$this->session->set_userdata(['skill_data'=> $skill_data]);
 				$this->session->set_userdata('in_test', false);
 				$this->session->set_flashdata(['skill_id'=> $get_id]);
 				redirect(base_url('skills/skill-test-guidelines'));
 			}else{
-				$this->session->set_flashdata('message', array('content' => 'You have already added the above skill. Please choose another skill to continue.', 'class' => 'error'));
+				$this->data['message'] = ['content' => 'No skill Selected', 'class' => 'error'];
 				redirect(base_url('skills'));
 			}
 			}elseif (empty($get_id)) {
@@ -252,17 +236,17 @@ class Home extends CI_Controller {
 	}
 
 	public function skillTestGuidelines(){
-      $test_settings = $this->home_lib->getTestSettings($this->session->userdata('skill_id'));
-		  if(!empty($test_settings[0]['skillID'])) {
+		$test_settings = $this->home_lib->get_test_settings($this->userdata('skill_id'));
+		if($test_settings !== 0) {
 			$this->session->set_userdata(['test_settings' => $test_settings]);
-			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
-			$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];
+			$this->data['timeAllowed'] = $test_settings['timeAllowed']/60;
+			$this->data['numberQuestion'] = $test_settings['numberQuestions'];
 			$skill_data = $this->session->userdata('skill_data');
 			$this->data['skill_name'] = $skill_data['skill_name'];
 			$this->data['title'] = 'Skill Test Guidelines';
 			$this->load->view('skillTestGuidelines', $this->data);
 		}else{
-			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
+			$this->session->set_flashdata(['content', 'This skill is nor available for the time being. Thank you for your Co-operation.'],['class', 'error']);
 			redirect(base_url('skills'));
 		}
 	}

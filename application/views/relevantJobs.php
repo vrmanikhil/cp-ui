@@ -137,25 +137,38 @@
 						<li class="active">Relevant Job Offers</li>
 					</ol>
 				</div>
-				<div class="card posting-card">
+				
+					<?php foreach ($skills as $key) { ?>
+						
+				
+					<div class="card posting-card">
 					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
+				
+						<img src="<?php  print_r($key['companyLogo']); ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
+								<strong> <?php
+			                     print_r($key['companyName']); 
+		                        ?></strong>
 							</p>
-							<p class="posting-card__desc">Android developer</p>
+							<p class="posting-card__desc"><?php 
+			                       print_r($key['jobTitle']); 
+		                         ?></p>
 							<p class="posting-card__post-location">
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span>Noida</span>
+								<span><?php 
+			                     print_r($key['city']); 
+		                        ?></span>
 							</p>
-							<p class="posting-card__status"><strong>Skills</strong> : <span>PHP, HTML, CSS, JavaScript</span></p>
+							<p class="posting-card__status"><strong>Skills</strong> : <span><?php 
+			                     print_r($key['skill_name']); 
+		                         ?></span></p>
 							<div class="posting-card__apply">
 								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> <?php } ?>
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>
