@@ -20,7 +20,12 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
-					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">CampusPuppy Online Assessment Test (COAT)</h1>
+					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">CampusPuppy Online Assessment <div class="card">
+				Test (COAT)</h1>
+				</div>
+				<?php 
+				   print_r ($coat[0]['coat']);
+				  ?>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

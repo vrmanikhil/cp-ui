@@ -197,8 +197,6 @@ class Home_lib {
 		return $score >= (($test_settings[0]['passingCriteria']/100) * $test_settings[0]['numberQuestions']);
 	}
 
-
-
 	public function getUserWorkEx($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -254,7 +252,7 @@ class Home_lib {
 		$CI->load->model('Home_model', 'homemodel');
 		return $CI->homemodel->fetchQuestions($num_ques, $skill_id);
 	}
-
+	
 	public function getColleges(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');

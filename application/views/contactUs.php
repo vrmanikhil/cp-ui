@@ -26,6 +26,8 @@
 					<p style="font-size: 0.75rem; margin-top:10px;"><strong>E-Mail: </strong> hello@campuspuppy.com</p>
 					<p style="font-size: 0.75rem; margin-top:10px;"><strong>Address: </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi</p>
 				</div>
+				</div>
+				
 			</div>
 			<aside class="flex__item right-pane">
 				<div class="post card">
