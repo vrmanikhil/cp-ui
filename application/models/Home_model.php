@@ -48,14 +48,14 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function get_skill_data($skill_id)
+	public function getSkillData($skill_id)
 	{
 		$this->db->select('*');
 		$this->db->where('skillID', $skill_id);
 		return $this->db->get('skills')->result_array();
 	}
 
-	public function fetch_test_settings($skill_id)
+	public function fetchTestSettings($skill_id)
 	{
 		$this->db->select('*');
 		$result = $this->db->get_where('testSettings', ['skillID' => $skill_id]);
@@ -64,7 +64,7 @@ class Home_model extends CI_Model {
 			return $result->result_array();
 	}
 
-	public function fetch_questions($num_ques, $skill_id)
+	public function fetchQuestions($num_ques, $skill_id)
 	{
 		$this->db->select('question_id, question, option1, option2, option3, option4');
 		$this->db->order_by('question_id', 'RANDOM');
@@ -74,11 +74,14 @@ class Home_model extends CI_Model {
 	}
 
 	public function getAnswers($ques_ids)
-	{
-		$this->db->select('answer');
-		$this->db->where_in('question_id', $ques_ids);
-		$result = $this->db->get('questions');
-		return $result->result_array();
+	{	
+		$i = 0;
+		foreach ($ques_ids as $key => $ques_id) {
+			$this->db->select('answer');
+			$result = $this->db->get_where('questions', array('question_id' => $ques_id));
+			$answers[$i++] = $result->result_array()[0]['answer'];
+		}
+		return $answers;
 	}
 
 	public function addSkilltoUser($skill_id, $user_id, $score, $date)
