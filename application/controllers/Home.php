@@ -217,16 +217,9 @@ class Home extends CI_Controller {
         $skill_data = $this->session->userdata('skill_data');
         $test_settings = $this->session->userdata('test_settings');
         $this->data['questions'] = $this->home_lib->get_questions($test_settings[0]['numberQuestions'], $skill_data['skillID']);
-
-        // var_dump(json_encode($this->data['questions']));die;
         $this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
         $this->data['test_settings'] = $test_settings;
         $this->data['skill_data'] = $skill_data;
-        // var_dump($this->data['skill_data']);
-        // var_dump($this->data['test_settings']);
-        // var_dump($this->data['question_string']);
-        // var_dump($this->data['questions']);
-        // die();
         $this->load->view('skillTest', $this->data);
 	}
 
@@ -259,7 +252,7 @@ class Home extends CI_Controller {
 
 	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->get_test_settings($this->session->userdata('skill_id'));
-    if(!empty($test_settings[0]['skillID'])) {
+		if(!empty($test_settings[0]['skillID'])) {		
 			$this->session->set_userdata(['test_settings' => $test_settings]);
 			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
 			$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];
