@@ -75,51 +75,37 @@
 						<li class="active">Applied Internship Offers</li>
 					</ol>
 				</div>
+
+				<?php 
+				 foreach ($intern as $key => $value) { ?>
+					
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $value['companyLogo']?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
+								<strong><?php print_r($value['companyName'])  ; ?></strong>
 							</p>
-							<p class="posting-card__desc">Android developer</p>
-							<p class="posting-card__status"><strong>Status</strong> : <span class="green">Selected</span></p>
+							<p class="posting-card__desc"><?php print_r($value['internshipTitle'])  ; ?></p>
+							<p class="posting-card__status"><strong>Status</strong> : <?php if ($value['status'] ==1) {echo "applied";}
+							elseif ($value['status'] ==2) { ?>
+							<span class="yellow">
+							  	<?php echo "shortlisted" ;
+							  }  
+							  elseif ($value['status'] ==3) { ?>
+							   	<span class="red">
+							   	<?php echo "rejected" ; 
+							   }
+							   else { ?>
+							   <span class="green">
+							   <?php  echo "hired" ; } ?></span></p>
 							<div class="posting-card__apply">
 								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="card posting-card">
-					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
-						<div class="media-body flex flex--col">
-							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
-							</p>
-							<p class="posting-card__desc">Android developer</p>
-							<p class="posting-card__status"><strong>Status</strong> : <span class="red">Rejected</span></p>
-							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card posting-card">
-					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
-						<div class="media-body flex flex--col">
-							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
-							</p>
-							<p class="posting-card__desc">Android developer</p>
-							<p class="posting-card__status"><strong>Status</strong> : <span class="yellow">Short listed</span></p>
-							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				</div> <?php } ?>
+				
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>

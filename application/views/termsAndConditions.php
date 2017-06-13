@@ -22,6 +22,11 @@
 				<div class="card">
 					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">Terms And Conditions</h1>
 				</div>
+				<div class="card">
+				<?php 
+				   print_r ($terms[0]['termsAndConditions']);
+				  ?>
+				</div>
 			</div>
 			<aside class="flex__item right-pane">
 				<div class="post card">

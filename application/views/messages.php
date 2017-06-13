@@ -11,12 +11,13 @@
 </head>
 
 <body>
-	<?php
+	<?php 
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
 	<div class="layout-container flex flex--col">
-		<?php echo $header; ?>
+		<?php   echo $header;
+		//var_dump($data);die; ?>
 		<main class="flex main-container globalContainer">
 			<aside class="flex__item left-pane">
 				<div class="explore-panel card flex">

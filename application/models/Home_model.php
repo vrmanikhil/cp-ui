@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+ <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home_model extends CI_Model {
 
@@ -55,15 +55,13 @@ class Home_model extends CI_Model {
 		return $this->db->get('skills')->result_array();
 	}
 
-	public function fetch_test_settings()
+	public function fetch_test_settings($skill_id)
 	{
 		$this->db->select('*');
-		$result = $this->db->get_where('testSettings');
-		if ($result->result_array() !== NULL){
+		$result = $this->db->get_where('testSettings', ['skillID' => $skill_id]);
+		// var_dump($this->db->last_query());
+		if ($result->result_array() !== NULL)
 			return $result->result_array();
-		}else{
-			return 0;
-		}
 	}
 
 	public function fetch_questions($num_ques, $skill_id)
@@ -75,23 +73,22 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function get_answers($ques_ids)
+	public function getAnswers($ques_ids)
 	{
-		// $this->db->select('answer');
-		// $this->db->where_in('id', $ques_ids);
-		// $result = $this->db->get('questions');
-		// return $result->result_array();
+		$this->db->select('answer');
+		$this->db->where_in('question_id', $ques_ids);
+		$result = $this->db->get('questions');
+		return $result->result_array();
 	}
 
-	public function add_skill_to_user($skill_id, $user_id, $score, $num_ques)
+	public function addSkilltoUser($skill_id, $user_id, $score, $date)
 	{
-		// $data = ['skill_id'=> $skill_id, 'user_id'=> $user_id];
-		// $data['percentage'] = json_encode(['score'=> $score, 'total_ques'=> $num_ques]);
-		// $this->db->insert('user_skills', $data);
-		// return (bool)$this->db->affected_rows();
+		$data = ['skillID'=> $skill_id, 'userID'=> $user_id, 'score'=> $score, 'testDate'=> $date, 'skillType'=> '1'];
+		$this->db->insert('userskills', $data);
+		return (bool)$this->db->affected_rows();
 	}
 
-	
+
 
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
@@ -146,18 +143,33 @@ class Home_model extends CI_Model {
 
 	public function getJobOffers($relevant){
 		if($relevant == 0){
-			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
-			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
-			$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName, employerUsers.companyLogo');
-			$this->db->group_by('jobOffers.jobID');
-			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
 			return $result->result_array();
 		}
-		else{
-			echo "its 1";
+		if($relevant == 1){
+			$userID = '1';
+			$userSkills = $this->getAddedUserSkills($userID);
+			$userSkills = $userSkills[0]['userSkills'];
+
+			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
+			$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+			$this->db->group_by('jobOffers.jobID');
+			$this->db->order_by('jobOffers.jobID', 'DESC');
+			$result = $this->db->get_where('jobOffers');
+
+			var_dump($result->result_array());die;
+
+
 		}
+	}
+
+	public function getAddedUserSkills($userID){
+		$skillType = array('1', '2', '3', '4');
+		$this->db->where_in('skillType', $skillType);
+		$this->db->select('GROUP_CONCAT(userSkills.skillID) as userSkills');
+		$result = $this->db->get_where('userSkills', array('userID'=>$userID));
+		return $result->result_array();
 	}
 
 	public function addWorkEx($data){
@@ -248,14 +260,45 @@ class Home_model extends CI_Model {
 
 	public function getJobData($jobID){
 		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
-		$result = $this->db->get_where('jobOffers', array('jobID' => $jobID));
+		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
+		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy,jobOffers.jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName, jobOffers.active');
+		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
 	}
 
 	public function getInternshipData($internshipID){
 		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID');
+		$this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName');
 		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
 		return $result->result_array();
 	}
+public function content(){
+	
+	$result = $this->db->get('content');
+	return $result->result_array();
+}
+
+public function appliedinternship()
+{
+	$userid=$_SESSION['userData']['userID'];
+	$this->db->join('internshipOffers','internshipoffers.internshipID=internshipapplicants.internshipID')
+			 ->join('employerusers','employerusers.userID=internshipoffers.addedBy')
+			 ->select('employerusers.companyLogo,employerusers.companyName,internshipapplicants.status,internshipoffers.internshipTitle');
+	$result = $this->db->get_where('internshipapplicants', array('internshipapplicants.userID' => $userid));
+	return $result ->result_array();
+
+}
+public function appliedjob()
+{
+	$userid=$_SESSION['userData']['userID'];
+	$this->db->join('jobOffers','joboffers.jobID=jobapplicants.jobID')
+			 ->join('employerusers','employerusers.userID=joboffers.addedBy')
+			 ->select('employerusers.companyLogo,employerusers.companyName,jobapplicants.status,joboffers.jobTitle');
+	$result = $this->db->get_where('jobapplicants', array('jobapplicants.userID' => $userid));
+	return $result ->result_array();
+
+}
 
 }
