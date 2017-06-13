@@ -69,32 +69,26 @@ class Home extends CI_Controller {
 	//Job Offers- Normal Users
 
 	public function relevantJobs(){
-		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
+    $this->load->model('Home_model');
+		$this->data['skills'] = $this->Home_model->relevant_joboffers();
+		// var_dump($data);die();
 		$this->load->view('relevantJobs', $this->data);
-	}
 
-	public function resetPassword(){
-		$this->load->view('resetPassword', $this->data);
+		//$this->redirection();
+		//$this->load->view('relevantJobs', $this->data);
 	}
+	
 
 	public function jobOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
+		// var_dump($this->data['jobOffers']);die;
 		$this->load->view('jobOffers', $this->data);
 	}
 
 	public function appliedJobOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
@@ -102,25 +96,16 @@ class Home extends CI_Controller {
 
 	public function relevantInternships(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('relevantInternships', $this->data);
 	}
 
 	public function internshipOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('internshipOffers', $this->data);
 	}
 
 	public function appliedInternshipOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			redirect(base_url());
-		}
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
 
@@ -132,30 +117,37 @@ class Home extends CI_Controller {
 	}
 
 	public function aboutUs(){
+		$this->load->model('Home_model');
+		$this->data['about']= $this->Home_model->content();
+		//var_dump($this->data['about']);die;
 		$this->load->view('aboutUs', $this->data);
 	}
 
 	public function termsAndConditions(){
+		$this->load->model('Home_model');
+		$this->data['terms']= $this->Home_model->content();
 		$this->load->view('termsAndConditions', $this->data);
 	}
 
 	public function privacyPolicy(){
+		$this->load->model('Home_model');
+		$this->data['privacypolicy']= $this->Home_model->content();
 		$this->load->view('privacyPolicy', $this->data);
 	}
 
 	public function coat(){
+		$this->load->model('Home_model');
+		$this->data['coat']= $this->Home_model->content();
 		$this->load->view('coat', $this->data);
 	}
 
 	public function contactUs(){
+		
 		$this->load->view('contactUs', $this->data);
 	}
 
 	public function addJobOffer(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('addJobOffer', $this->data);
@@ -163,18 +155,12 @@ class Home extends CI_Controller {
 
 	public function addedJobOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
 		$this->load->view('addedJobOffers', $this->data);
 	}
 
 	public function addInternshipOffer(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$this->load->view('addInternshipOffer', $this->data);
@@ -182,9 +168,6 @@ class Home extends CI_Controller {
 
 	public function addedInternshipOffers(){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='1'){
-			redirect(base_url());
-		}
 		$this->load->view('addedInternshipOffers', $this->data);
 	}
 
@@ -271,7 +254,7 @@ class Home extends CI_Controller {
 			redirect(base_url('skills'));
 		}
 	}
-
+	
 	public function connections(){
 		$this->redirection();
 		$userID = '1';
