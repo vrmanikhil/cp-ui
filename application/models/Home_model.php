@@ -48,25 +48,23 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function get_skill_data($skill_id)
+	public function getSkillData($skill_id)
 	{
 		$this->db->select('*');
 		$this->db->where('skillID', $skill_id);
 		return $this->db->get('skills')->result_array();
 	}
 
-	public function fetch_test_settings()
+	public function fetchTestSettings($skill_id)
 	{
 		$this->db->select('*');
-		$result = $this->db->get_where('testSettings');
-		if ($result->result_array() !== NULL){
+		$result = $this->db->get_where('testSettings', ['skillID' => $skill_id]);
+		// var_dump($this->db->last_query());
+		if ($result->result_array() !== NULL)
 			return $result->result_array();
-		}else{
-			return 0;
-		}
 	}
 
-public function fetchQuestionNumber($skill_id)
+	public function fetchQuestionNumber($skill_id)
 	{
 		$this->db->select('count(question_id)');
 		$result = $this->db->get_where('questions', ['skillID' => $skill_id]);
@@ -75,7 +73,7 @@ public function fetchQuestionNumber($skill_id)
 			return $result->result_array();
 	}
 
-	public function fetchQuestions($num_ques, $skill_id)	
+	public function fetchQuestions($num_ques, $skill_id)
 	{
 		$this->db->select('question_id, question, option1, option2, option3, option4');
 		$this->db->order_by('question_id', 'RANDOM');
@@ -98,9 +96,10 @@ public function fetchQuestionNumber($skill_id)
 	public function addSkilltoUser($skill_id, $user_id, $score, $date)
 	{
 		$data = ['skillID'=> $skill_id, 'userID'=> $user_id, 'score'=> $score, 'testDate'=> $date, 'skillType'=> '1'];
-		$this->db->insert('userSkills', $data);
+		$this->db->insert('userskills', $data);
 		return (bool)$this->db->affected_rows();
-	}	
+	}
+
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
 		// $this->db->join('comments', 'comments.id = blogs.id');
