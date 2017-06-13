@@ -21,6 +21,7 @@
 			<div class="main-body flex__item">
 				<div class="card">
 					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">About Us</h1>
+					<?php echo $about[0]['aboutUs']; ?>
 				</div>
 				<div class="card">
 				<?php 

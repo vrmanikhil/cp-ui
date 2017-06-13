@@ -48,24 +48,25 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function getSkillData($skill_id)
+	public function get_skill_data($skill_id)
 	{
 		$this->db->select('*');
 		$this->db->where('skillID', $skill_id);
 		return $this->db->get('skills')->result_array();
 	}
 
-	public function fetchTestSettings($skill_id)
+	public function fetch_test_settings()
 	{
 		$this->db->select('*');
-		$result = $this->db->get_where('testSettings', ['skillID' => $skill_id]);
-		// var_dump($this->db->last_query());
-		if ($result->result_array() !== NULL)
+		$result = $this->db->get_where('testSettings');
+		if ($result->result_array() !== NULL){
 			return $result->result_array();
+		}else{
+			return 0;
+		}
 	}
 
-
-	public function fetchQuestionNumber($skill_id)
+public function fetchQuestionNumber($skill_id)
 	{
 		$this->db->select('count(question_id)');
 		$result = $this->db->get_where('questions', ['skillID' => $skill_id]);
@@ -100,9 +101,6 @@ class Home_model extends CI_Model {
 		$this->db->insert('userSkills', $data);
 		return (bool)$this->db->affected_rows();
 	}	
-
-	
-
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
 		// $this->db->join('comments', 'comments.id = blogs.id');
