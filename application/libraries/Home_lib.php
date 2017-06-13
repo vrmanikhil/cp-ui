@@ -150,51 +150,52 @@ class Home_lib {
 		return $CI->homeModel->getUserProjects($userID);
 	}
 
-	public function check_answers($ans)
+	public function checkAnswers($ans)
 	{
-		// $CI = &get_instance();
-		// $CI->load->model('Data_model', 'datamodel');
-		// $ques_ids = array_column($ans, 'ques_id');
-		// $actual_ans = $CI->datamodel->get_answers($ques_ids);
-		// $actual_ans = array_column($actual_ans, 'answer');
-		// $ans_given =array_column($ans, 'ans');
-		return $this->get_score($actual_ans, $ans_given);
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$ques_ids = array_column($ans, 'ques_id');
+		$actual_ans = $CI->homemodel->getAnswers($ques_ids);
+		$ans_given =array_column($ans, 'ans');
+		return $this->getScore($actual_ans, $ans_given);
 	}
 
-	public function get_score($actual_ans, $ans_given)
+	public function getScore($actual_ans, $ans_given)
 	{
 		$score = 0;
-		// for ($i = 0; $i < count($actual_ans); $i++) {
-		// 	if($actual_ans[$i] == ($ans_given[$i]-1))
-		// 		$score++;
-		// }
+		for ($i = 0; $i < count($actual_ans); $i++) {
+			if($actual_ans[$i] == ($ans_given[$i]))
+				$score++;
+		}
 		return $score;
 	}
 
-	public function add_skill($score, $skill_id, $num_ques)
+	public function addSkill($score, $userID, $skill_id, $num_ques)
 	{
 		$response = 0;
-		// $CI = &get_instance();
-		// $CI->load->model('Data_model', 'datamodel');
-		// if($this->passed_test($score)){
-		// 	if($CI->datamodel->add_skill_to_user($skill_id, $this->get_user_id(), $score, $num_ques)){
-		// 		$response = 1;
-		// 	}else{
-		// 		$response = 2;
-		// 	}
-		// }
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		if($this->passedTest($score)){
+			date_default_timezone_set('Asia/Kolkata');
+			$time = time();
+			$date = date("d-m-Y", $time);
+			$datestamp = strtotime($date);
+			if($CI->homemodel->addSkillToUser($skill_id, $userID, $score, $datestamp)){
+				$response = 1;
+			}else{
+				$response = 2;
+			}
+		}
 		return $response;
 	}
 
-	public function passed_test($score)
+	public function passedTest($score)
 	{
-		// $CI = &get_instance();
-		// $CI->load->model('Data_model', 'datamodel');
-		// $num_ques = $CI->datamodel->fetch_test_settings()['questions'];
-		// return $score >= (0.6 * $num_ques);
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$test_settings = $CI->session->userdata('test_settings');
+		return $score >= (($test_settings[0]['passingCriteria']/100) * $test_settings[0]['numberQuestions']);
 	}
-
-	
 
 	public function getUserWorkEx($userID){
 		$CI = &get_instance();
@@ -214,36 +215,46 @@ class Home_lib {
 		return $CI->homeModel->getUserSkills($userID);
 	}
 
-	public function fetch_skill_data($skill_id)
+	public function fetchSkillData($skill_id)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		return $CI->homemodel->get_skill_data($skill_id)[0];
+		return $CI->homemodel->getSkillData($skill_id)[0];
 	}
 
-	public function is_in_test()
+	public function isInTest()
 	{
 		$CI = &get_instance();
 		$CI->load->library('session');
 		return $CI->session->userdata('in_test');
 	}
 
-	public function get_test_settings($skill_id)
+	public function getTestSettings($skill_id)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		$setting = $CI->homemodel->fetch_test_settings($skill_id);
+		$setting = $CI->homemodel->fetchTestSettings($skill_id);
 		return $setting;
 	}
 
-	public function get_questions($num_ques, $skill_id)
+	public function getTestQuestions($skill_id)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$setting = $CI->homemodel->fetchQuestionNumber($skill_id);
+		return $setting;
+	}
+
+	public function getQuestions($num_ques, $skill_id)
 	{
 		// var_dump($num_ques, $skill_id);die;
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		return $CI->homemodel->fetch_questions($num_ques, $skill_id);
+		return $CI->homemodel->fetchQuestions($num_ques, $skill_id);
 	}
+	
 
+	
 	public function getColleges(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
