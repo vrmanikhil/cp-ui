@@ -1,5 +1,5 @@
 .DS_Store
 /**/.DS_Store
 composer.lock
-application/config/database.php
 vendor/
+application/config/database.php
