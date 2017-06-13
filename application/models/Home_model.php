@@ -149,9 +149,30 @@ class Home_model extends CI_Model {
 			$result = $this->db->get('jobOffers');
 			return $result->result_array();
 		}
-		else{
-			echo "its 1";
+		if($relevant == 1){
+			$userID = '1';
+			$userSkills = $this->getAddedUserSkills($userID);
+			$userSkills = $userSkills[0]['userSkills'];
+
+			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
+			$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+			$this->db->group_by('jobOffers.jobID');
+			$this->db->order_by('jobOffers.jobID', 'DESC');
+			$result = $this->db->get_where('jobOffers');
+
+			var_dump($result->result_array());die;
+
+
 		}
+	}
+
+	public function getAddedUserSkills($userID){
+		$skillType = array('1', '2', '3', '4');
+		$this->db->where_in('skillType', $skillType);
+		$this->db->select('GROUP_CONCAT(userSkills.skillID) as userSkills');
+		$result = $this->db->get_where('userSkills', array('userID'=>$userID));
+		return $result->result_array();
 	}
 
 	public function addWorkEx($data){
