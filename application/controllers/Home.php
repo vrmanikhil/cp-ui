@@ -73,6 +73,7 @@ class Home extends CI_Controller {
 		if($_SESSION['userData']['accountType']=='2'){
 			redirect(base_url());
 		}
+		$this->data['relevantJobs'] = $this->home_lib->getJobOffers('1');
 		$this->load->view('relevantJobs', $this->data);
 	}
 
@@ -252,7 +253,7 @@ class Home extends CI_Controller {
 
 	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->get_test_settings($this->session->userdata('skill_id'));
-		if(!empty($test_settings[0]['skillID'])) {		
+		if(!empty($test_settings[0]['skillID'])) {
 			$this->session->set_userdata(['test_settings' => $test_settings]);
 			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
 			$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];
