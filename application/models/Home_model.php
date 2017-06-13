@@ -64,6 +64,15 @@ class Home_model extends CI_Model {
 			return $result->result_array();
 	}
 
+	public function fetchQuestionNumber($skill_id)
+	{
+		$this->db->select('count(question_id)');
+		$result = $this->db->get_where('questions', ['skillID' => $skill_id]);
+		// var_dump($this->db->last_query());
+		// var_dump($result->result_array()); die();
+			return $result->result_array();
+	}
+
 	public function fetchQuestions($num_ques, $skill_id)
 	{
 		$this->db->select('question_id, question, option1, option2, option3, option4');

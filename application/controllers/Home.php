@@ -252,14 +252,20 @@ class Home extends CI_Controller {
 
 	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->getTestSettings($this->session->userdata('skill_id'));
+		$test_questions = $this->home_lib->getTestQuestions($this->session->userdata('skill_id'));
 		if(!empty($test_settings[0]['skillID'])) {		
-			$this->session->set_userdata(['test_settings' => $test_settings]);
-			$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
-			$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];
-			$skill_data = $this->session->userdata('skill_data');
-			$this->data['skill_name'] = $skill_data['skill_name'];
-			$this->data['title'] = 'Skill Test Guidelines';
-			$this->load->view('skillTestGuidelines', $this->data);
+			if($test_settings[0]['skillID'] <= $test_questions[0]['count(question_id)']){
+				$this->session->set_userdata(['test_settings' => $test_settings]);
+				$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
+				$this->data['numberQuestion'] = $test_settings[0]['numberQuestions'];
+				$skill_data = $this->session->userdata('skill_data');
+				$this->data['skill_name'] = $skill_data['skill_name'];
+				$this->data['title'] = 'Skill Test Guidelines';
+				$this->load->view('skillTestGuidelines', $this->data);
+			}else{
+				$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
+			redirect(base_url('skills'));
+			}
 		}else{
 			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
 			redirect(base_url('skills'));

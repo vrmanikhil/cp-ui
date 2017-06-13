@@ -239,6 +239,14 @@ class Home_lib {
 		return $setting;
 	}
 
+	public function getTestQuestions($skill_id)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$setting = $CI->homemodel->fetchQuestionNumber($skill_id);
+		return $setting;
+	}
+
 	public function getQuestions($num_ques, $skill_id)
 	{
 		// var_dump($num_ques, $skill_id);die;
