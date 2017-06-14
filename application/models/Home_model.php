@@ -22,13 +22,13 @@ class Home_model extends CI_Model {
 		$data = $result->result_array();
 		$accountType = $data[0]['accountType'];
 		if($accountType=='1'){
-			$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
-			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
+			$this->db->join('generalUsers', 'users.userID = generalUsers.userID', 'left');
+			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id', 'left');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
 		else{
-			$this->db->join('employerUsers', 'users.userID = employerUsers.userID');
+			$this->db->join('employerUsers', 'users.userID = employerUsers.userID', 'left');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
@@ -83,7 +83,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getAnswers($ques_ids)
-	{	
+	{
 		$i = 0;
 		foreach ($ques_ids as $key => $ques_id) {
 			$this->db->select('answer');
@@ -268,7 +268,7 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 	public function relevant_joboffers()
-{           
+{
              $userID = $_SESSION['userData']['userID'];
   //          $this->db->join('jobskills','jobskills.skillID=userskills.skillID')
   //              		  ->join('skills','skills.skillID=jobskills.skillID')
@@ -278,12 +278,12 @@ class Home_model extends CI_Model {
   //             		  ->join('employerusers','employerusers.userID=joboffers.addedBy')
   //             		  ->select('*');
   //              		  //->select('skills.skill_name','joboffers.jobTitle','indiancities.city','employerusers.companyName','employerusers.companyLogo');
-             
+
   //             $result = $this->db->get_where('userskills', array('userskills.userID' => $userID));
   //             			// var_dump($result->result_array());
   //             			// echo("<br>");
   //             			var_dump($this->db->last_query());
-  //             			die; 
+  //             			die;
 		// return $result->result_array();
             /* $userSkills = $this->getAddedUserSkills();
 
@@ -306,11 +306,9 @@ class Home_model extends CI_Model {
              return $userSkills; */
     }
 public function content(){
-	
+
 	$result = $this->db->get('content');
 	return $result->result_array();
 }
 
 }
-
-	

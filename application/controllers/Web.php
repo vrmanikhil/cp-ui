@@ -227,7 +227,7 @@ class Web extends CI_Controller {
         foreach ($answer as $key) {
         	$ans[$i++] = json_decode(json_encode($key), true);
         }
-        $score = $this->home_lib->checkAnswers($ans);
+				$score = $this->home_lib->checkAnswers($ans);
         $test_settings = $this->session->userdata('test_settings');
         $userID = $_SESSION['userData']['userID'];
         $num_ques = $test_settings[0]['numberQuestions'];
