@@ -9,7 +9,7 @@ class Home_lib {
 		$result = $CI->homeModel->login($email,$password);
 		$userData = $CI->homeModel->getUserDetailsFromEMail($email);
 		$userData = $userData[0];
-		$registraionLevel = $userData['registrationLevel'];
+		$registrationLevel = $userData['registrationLevel'];
 		if ($result) {
 			if($userData['accountType']=='1'){
 				$data = array(
@@ -252,9 +252,9 @@ class Home_lib {
 		$CI->load->model('Home_model', 'homemodel');
 		return $CI->homemodel->fetchQuestions($num_ques, $skill_id);
 	}
-	
 
-	
+
+
 	public function getColleges(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
