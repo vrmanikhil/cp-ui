@@ -162,12 +162,15 @@ class Home_lib {
 
 	public function getScore($actual_ans, $ans_given)
 	{
+		$CI = &get_instance();
 		$score = 0;
 		for ($i = 0; $i < count($actual_ans); $i++) {
 			if($actual_ans[$i] == ($ans_given[$i]))
 				$score++;
 		}
-		return $score;
+		$test_settings = $CI->session->userdata('test_settings');
+		$percent = $score/$test_settings[0]['numberQuestions'] * 100;
+		return $percent;
 	}
 
 	public function addSkill($score, $userID, $skill_id, $num_ques)
@@ -194,7 +197,7 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
 		$test_settings = $CI->session->userdata('test_settings');
-		return $score >= (($test_settings[0]['passingCriteria']/100) * $test_settings[0]['numberQuestions']);
+		return ($score >= $test_settings[0]['passingCriteria']);
 	}
 
 	public function getUserWorkEx($userID){
