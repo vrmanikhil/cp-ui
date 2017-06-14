@@ -18,7 +18,6 @@ class Home_lib {
 					'name' => $userData['name'],
 					'userID' => $userData['userID'],
 					'accountType' => $userData['accountType'],
-					'accountApproved' => $userData['accountApproved'],
 					'collegeLogo' => $userData['logo'],
 					'collegeName' => $userData['college']
 					);
@@ -30,7 +29,6 @@ class Home_lib {
 					'name' => $userData['name'],
 					'userID' => $userData['userID'],
 					'accountType' => $userData['accountType'],
-					'accountApproved' => $userData['accountApproved'],
 					'companyLogo' => $userData['companyLogo'],
 					'companyName' => $userData['companyName']
 					);
