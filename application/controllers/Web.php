@@ -14,7 +14,7 @@ class Web extends CI_Controller {
 	private function login($email, $password){
 		$result = $this->home_lib->login($email,$password);
 		if ($result){
-			redirect(base_url('home'));
+			redirect(base_url());
 		}
 		else{
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
@@ -102,7 +102,8 @@ class Web extends CI_Controller {
 			'email' => $email,
 			'mobile' => $mobile,
 			'password' => $password,
-			'accountType' => $accountType
+			'accountType' => $accountType,
+			'registrationLevel' => '1'
 		);
 		$result = $this->home_lib->register($data);
 		if($result){

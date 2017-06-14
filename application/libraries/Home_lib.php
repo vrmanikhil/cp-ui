@@ -9,7 +9,7 @@ class Home_lib {
 		$result = $CI->homeModel->login($email,$password);
 		$userData = $CI->homeModel->getUserDetailsFromEMail($email);
 		$userData = $userData[0];
-		$registraionLevel = $userData['registrationLevel'];
+		$registrationLevel = $userData['registrationLevel'];
 		if ($result) {
 			if($userData['accountType']=='1'){
 				$data = array(
@@ -18,7 +18,6 @@ class Home_lib {
 					'name' => $userData['name'],
 					'userID' => $userData['userID'],
 					'accountType' => $userData['accountType'],
-					'accountApproved' => $userData['accountApproved'],
 					'collegeLogo' => $userData['logo'],
 					'collegeName' => $userData['college']
 					);
@@ -30,7 +29,6 @@ class Home_lib {
 					'name' => $userData['name'],
 					'userID' => $userData['userID'],
 					'accountType' => $userData['accountType'],
-					'accountApproved' => $userData['accountApproved'],
 					'companyLogo' => $userData['companyLogo'],
 					'companyName' => $userData['companyName']
 					);
