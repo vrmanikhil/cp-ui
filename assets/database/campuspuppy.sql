@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 13, 2017 at 01:17 AM
+-- Generation Time: Jun 14, 2017 at 12:53 AM
 -- Server version: 5.6.35-cll-lve
 -- PHP Version: 5.6.30
 
@@ -1251,8 +1251,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mobileVerified` tinyint(1) NOT NULL,
   `displayEMail` tinyint(1) NOT NULL,
   `displayMobile` tinyint(1) NOT NULL,
-  `accountApproved` tinyint(1) NOT NULL,
-  `registrationLevel` enum('1','2','3') NOT NULL,
+  `registrationLevel` enum('1','2','3','4','5') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`userID`),
@@ -1264,44 +1263,44 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`, `profileImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `accountApproved`, `registrationLevel`, `active`, `created_at`) VALUES
-(1, '', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg', 'M', '4', '1', 135, 1, 1, 1, 1, 1, '3', 1, '2017-06-08 09:38:14'),
-(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(3, '', 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(4, '', 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(5, '', 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 0, 1, 0, 0, '3', 0, '2017-06-08 09:38:14'),
-(6, '', 'Prashant Chaudhary', 'prashantp099@gmail.com', 9899310579, '3075d701de5770f0016cc1f93adb05bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(7, '', 'Sakshi Jaiswal', 'jswal.sakshi@gmail.com', 9971974077, '11a98374ebec8e0c7a54751d2161804d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(8, '', 'Abhay Rawat', 'abhayrawat2695@gmail.com', 8468915550, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(9, '', 'Yash Vardhan', 'yashapril30@gmail.com', 9999393132, 'a9c91bac2c315f83a55ae9fcb88c61f0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(10, '', 'Shivam Goyal', 'shivam.sinew@gmail.com', 8587882383, '456b370011f154a7ce7af17ee49a76ad', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 0, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(11, '', 'Deergha Jain', 'deerghajain11@gmail.com', 9716150496, '0bb3b7a7855d8532e55577a502ae236e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(12, '', 'Deepti Jain', 'deeptijain9676@gmail.com', 9718669382, '3036514cbad26225659717408c8d2c67', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(13, '', 'Suyash Tilhari', 'suyash.tilhari12@gmail.com', 8375867124, '1bbfd0943ed91f99438eead55020f85a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 0, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(14, '', 'Siddharth Jain', 'sidjain2901@gmail.com', 9560839425, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(15, '', 'Anukriti Keshari', 'anukriti.kaushki@gmail.com', 8860309313, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(16, '', 'Salokya Srivastava', 'sriv.salokya@gmail.com', 9453847603, '62c1dc840b80b395403ad0fed7debcf6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(17, '', 'Krishnapriya Agarwal', 'kp.agarwal95@gmail.com', 8882521283, 'f1c78b8f774fa7804a081a20df35874a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(18, '', 'Jubika Khanna', 'jubika.khanna@fitpass.co.in', 8130995418, 'dbf3d937d4808b94e0e39b804e0bbea0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 0, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(19, '', 'Nisha Bharti', 'hr@wisethink.in', 8745024797, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(20, '', 'Setu Simant', 'setu.simant@silvertouch.com', 9871482198, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(21, '', 'Kunal Kumar', 'kunal_kumar@sislinfotech.com', 7838666639, '508df4cb2f4d8f80519256258cfb975f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(22, '', 'Ashok Gupta', 'ashok.gupta@velocis.in', 9818826020, '5bd2026f128662763c532f2f4b6f2476', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(23, '', 'Manoj Kumar Garg', 'manoj@netcreativemind.com', 9810978433, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(24, '', 'S R Mustafa', 'srmustafa73@gmail.com', 7838204509, '5baced99d0bb5e574737dc535576bc9c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-08 09:38:14'),
-(25, '', 'Madhu S Shivakumar', 'madhu.ss96@gmail.com', 9108642164, 'd7aad483f66d38e875ff283dc220b58e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 61, 1, 0, 1, 0, 0, '3', 1, '2017-06-08 09:38:14'),
-(26, '', 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 1, 1, '3', 1, '2017-06-08 09:38:14'),
-(27, '', 'Rinku Kumar', 'rinku@1solutions.biz', 7428961976, '04b993c532201cefcdbb7b994f105355', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 06:57:48'),
-(28, '', 'Adid Khan', 'adid@explorecivil.net', 9973882422, 'c30761beaa3c43a3e9624603bc2e76f7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:00:30'),
-(29, '', 'Rohit Dutt', 'rohit@thealternativeglobal.com', 8800331664, '8a9ef653eb0a66d4f031a2110b6224be', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-13 07:02:39'),
-(30, '', 'Nishant Varshney', 'nishantvarshney@gmail.com', 9810832351, 'd569bd79600a6d5b717d5d719c75fa8a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:02:39'),
-(31, '', 'Praveen Anasurya', 'anasuryapraveen@gmail.com', 8686173848, '2023f6e09edaca15267e2f5521da5476', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:05:04'),
-(32, '', 'Aayush Poddar', 'aayush.257@gmail.com', 8527044088, '833e5ef3c613f09112c35870a7c4624a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:05:04'),
-(33, '', 'Ankush Khera', 'hello@foxmybox.com', 9873130686, '610768d03941e226f3824d5152711673', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:07:44'),
-(34, '', 'Priyanka Mehta', 'mehta.priyanka97@gmail.com', 9999922663, 'd642b239f86929216a991af383151008', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:14:27'),
-(35, '', 'Bhanu Prakash Agarwal', 'bhanu.bcet27@gmail.com', 7903461334, '25f9e794323b453885f5181f1b624d0b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:14:34'),
-(36, '', 'Parul Singh', 'withparulsingh@gmail.com', 9873855357, '9a517c9d23fa78e7117c63de3c494d72', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 0, 1, 0, 1, '3', 1, '2017-06-13 07:10:07'),
-(37, '', 'Sukhneet Kaur', 'sukhneet@akalinfosys.com', 9871092725, '989ce6020295e0438ca30ad02cbc6ea3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, 1, '3', 1, '2017-06-13 07:13:14');
+INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`, `profileImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `registrationLevel`, `active`, `created_at`) VALUES
+(1, '', 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg', 'M', '4', '1', 135, 1, 1, 1, 1, '5', 1, '2017-06-14 06:48:35'),
+(2, '', 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, '5', 1, '2017-06-14 06:48:31'),
+(3, '', 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '4', 1, '2017-06-14 06:49:13'),
+(4, '', 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, '5', 1, '2017-06-14 06:48:22'),
+(5, '', 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 0, 1, 0, '3', 0, '2017-06-08 09:38:14'),
+(6, '', 'Prashant Chaudhary', 'prashantp099@gmail.com', 9899310579, '3075d701de5770f0016cc1f93adb05bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, '5', 1, '2017-06-14 06:48:58'),
+(7, '', 'Sakshi Jaiswal', 'jswal.sakshi@gmail.com', 9971974077, '11a98374ebec8e0c7a54751d2161804d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(8, '', 'Abhay Rawat', 'abhayrawat2695@gmail.com', 8468915550, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(9, '', 'Yash Vardhan', 'yashapril30@gmail.com', 9999393132, 'a9c91bac2c315f83a55ae9fcb88c61f0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(10, '', 'Shivam Goyal', 'shivam.sinew@gmail.com', 8587882383, '456b370011f154a7ce7af17ee49a76ad', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 0, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(11, '', 'Deergha Jain', 'deerghajain11@gmail.com', 9716150496, '0bb3b7a7855d8532e55577a502ae236e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(12, '', 'Deepti Jain', 'deeptijain9676@gmail.com', 9718669382, '3036514cbad26225659717408c8d2c67', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(13, '', 'Suyash Tilhari', 'suyash.tilhari12@gmail.com', 8375867124, '1bbfd0943ed91f99438eead55020f85a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 0, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(14, '', 'Siddharth Jain', 'sidjain2901@gmail.com', 9560839425, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(15, '', 'Anukriti Keshari', 'anukriti.kaushki@gmail.com', 8860309313, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(16, '', 'Salokya Srivastava', 'sriv.salokya@gmail.com', 9453847603, '62c1dc840b80b395403ad0fed7debcf6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(17, '', 'Krishnapriya Agarwal', 'kp.agarwal95@gmail.com', 8882521283, 'f1c78b8f774fa7804a081a20df35874a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(18, '', 'Jubika Khanna', 'jubika.khanna@fitpass.co.in', 8130995418, 'dbf3d937d4808b94e0e39b804e0bbea0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 0, 0, '5', 1, '2017-06-14 06:49:41'),
+(19, '', 'Nisha Bharti', 'hr@wisethink.in', 8745024797, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(20, '', 'Setu Simant', 'setu.simant@silvertouch.com', 9871482198, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(21, '', 'Kunal Kumar', 'kunal_kumar@sislinfotech.com', 7838666639, '508df4cb2f4d8f80519256258cfb975f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(22, '', 'Ashok Gupta', 'ashok.gupta@velocis.in', 9818826020, '5bd2026f128662763c532f2f4b6f2476', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(23, '', 'Manoj Kumar Garg', 'manoj@netcreativemind.com', 9810978433, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(24, '', 'S R Mustafa', 'srmustafa73@gmail.com', 7838204509, '5baced99d0bb5e574737dc535576bc9c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(25, '', 'Madhu S Shivakumar', 'madhu.ss96@gmail.com', 9108642164, 'd7aad483f66d38e875ff283dc220b58e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 61, 1, 0, 1, 0, '3', 1, '2017-06-08 09:38:14'),
+(26, '', 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 1, '3', 1, '2017-06-08 09:38:14'),
+(27, '', 'Rinku Kumar', 'rinku@1solutions.biz', 7428961976, '04b993c532201cefcdbb7b994f105355', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 06:57:48'),
+(28, '', 'Adid Khan', 'adid@explorecivil.net', 9973882422, 'c30761beaa3c43a3e9624603bc2e76f7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:00:30'),
+(29, '', 'Rohit Dutt', 'rohit@thealternativeglobal.com', 8800331664, '8a9ef653eb0a66d4f031a2110b6224be', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-13 07:02:39'),
+(30, '', 'Nishant Varshney', 'nishantvarshney@gmail.com', 9810832351, 'd569bd79600a6d5b717d5d719c75fa8a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:02:39'),
+(31, '', 'Praveen Anasurya', 'anasuryapraveen@gmail.com', 8686173848, '2023f6e09edaca15267e2f5521da5476', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:05:04'),
+(32, '', 'Aayush Poddar', 'aayush.257@gmail.com', 8527044088, '833e5ef3c613f09112c35870a7c4624a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:05:04'),
+(33, '', 'Ankush Khera', 'hello@foxmybox.com', 9873130686, '610768d03941e226f3824d5152711673', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:07:44'),
+(34, '', 'Priyanka Mehta', 'mehta.priyanka97@gmail.com', 9999922663, 'd642b239f86929216a991af383151008', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:14:27'),
+(35, '', 'Bhanu Prakash Agarwal', 'bhanu.bcet27@gmail.com', 7903461334, '25f9e794323b453885f5181f1b624d0b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:14:34'),
+(36, '', 'Parul Singh', 'withparulsingh@gmail.com', 9873855357, '9a517c9d23fa78e7117c63de3c494d72', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:10:07'),
+(37, '', 'Sukhneet Kaur', 'sukhneet@akalinfosys.com', 9871092725, '989ce6020295e0438ca30ad02cbc6ea3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-13 07:13:14');
 
 -- --------------------------------------------------------
 
@@ -1312,7 +1311,7 @@ INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`
 CREATE TABLE IF NOT EXISTS `userSkills` (
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
-  `score` int(5) NOT NULL,
+  `score` float NOT NULL,
   `testDate` bigint(12) NOT NULL,
   `skillType` enum('0','1','2','3','4') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

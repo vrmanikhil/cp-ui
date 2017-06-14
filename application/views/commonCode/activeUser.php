@@ -6,8 +6,8 @@
 		</a>
 	</div>
 	<div class=" feed-actor-module__actor-meta">
-		<p class="text-center feed-actor-module__name"><?php echo $_SESSION['userData']['name']; ?> <?php if($_SESSION['userData']['accountApproved']=='1'){ ?><i class="fa fa-check-circle" aria-hidden="true" style="color: #2980b9;"></i><?php } ?></p>
-		<?php if($_SESSION['userData']['accountApproved']!='1') { ?>
+		<p class="text-center feed-actor-module__name"><?php echo $_SESSION['userData']['name']; ?> <?php if($_SESSION['registrationLevel']=='5'){ ?><i class="fa fa-check-circle" aria-hidden="true" style="color: #2980b9;"></i><?php } ?></p>
+		<?php if($_SESSION['registrationLevel']!='1') { ?>
 		<p><center><a style="font-size: 12px;"><b>Get your Profile Verified</b></a></center></p>
 		<?php } ?>
 
