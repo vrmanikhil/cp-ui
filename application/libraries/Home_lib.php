@@ -301,4 +301,16 @@ class Home_lib {
 		return $CI->homeModel->getInternshipData($internshipID);
 	}
 
+	public function addEducationalDetails($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addEducationalDetails($data);
+	}
+
+	public function contactUs($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->contactUs($data);
+	}
+
 }

@@ -55,14 +55,12 @@ class Home extends CI_Controller {
 	}
 
 	public function educationDetails(){
-		$this->redirection();
 		$this->data['colleges'] = $this->home_lib->getColleges();
 		$this->data['courses'] = $this->home_lib->getCourses();
 		$this->load->view('educationDetails', $this->data);
 	}
 
 	public function employerDetails(){
-		$this->redirection();
 		$this->load->view('employerDetails', $this->data);
 	}
 

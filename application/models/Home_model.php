@@ -305,10 +305,19 @@ class Home_model extends CI_Model {
              $userSkills = $userSkills[0]['userSkills'];
              return $userSkills; */
     }
-public function content(){
 
-	$result = $this->db->get('content');
-	return $result->result_array();
-}
+		public function content(){
+
+			$result = $this->db->get('content');
+			return $result->result_array();
+		}
+
+		public function addEducationalDetails($data){
+			return $this->db->insert('generalUsers', $data);
+		}
+
+		public function contactUs($data){
+			return $this->db->insert('contactMessages', $data);
+		}
 
 }

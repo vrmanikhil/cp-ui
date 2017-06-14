@@ -400,4 +400,63 @@ class Web extends CI_Controller {
 		sendEmail($data);
 	}
 
+	public function addEducationalDetails(){
+		if($x = $this->input->post('collegeID')){
+			$collegeID = $x;
+		}
+		if($x = $this->input->post('courseID')){
+			$courseID = $x;
+		}
+		if($x = $this->input->post('batch')){
+			$batch = $x;
+		}
+		$userID = $_SESSION['userData']['userID'];
+		$data = array(
+			'collegeID' => $collegeID,
+			'courseID' => $courseID,
+			'batch' => $batch,
+			'userID' => $userID
+		);
+		$result = $this->home_lib->addEducationalDetails($data);
+		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Educational Details Successfully Updated.','class'=>'error'));
+			redirect(base_url());
+		}
+	}
+
+	public function contactUs(){
+		if($x = $this->input->post('name')){
+			$name = $x;
+		}
+		if($x = $this->input->post('email')){
+			$email = $x;
+		}
+		if($x = $this->input->post('mobile')){
+			$mobile = $x;
+		}
+		if($x = $this->input->post('message')){
+			$message = $x;
+		}
+
+		if($name == '' || $email == '' || $mobile == '' || $message == ''){
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+			redirect(base_url('contact-us'));
+		}
+		$data = array(
+			'name' => $name,
+			'email' => $email,
+			'mobile' => $mobile,
+			'message' => $message
+		);
+		$result = $this->home_lib->contactUs($data);
+		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Message Received. Our Team will get back to you shortly.','class'=>'success'));
+			redirect(base_url('contact-us'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+			redirect(base_url('contact-us'));
+		}
+	}
+	
 }
