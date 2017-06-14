@@ -247,7 +247,7 @@ public function skillTestGuidelines(){
 				$this->data['title'] = 'Skill Test Guidelines';
 				$this->load->view('skillTestGuidelines', $this->data);
 			}else{
-				$this->session->set_flashdata('message', array('content' => 'Question nhi chadhe hai db mein abhi.', 'class' => 'error'));
+				$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
 			redirect(base_url('skills'));
 			}
 		}else{
