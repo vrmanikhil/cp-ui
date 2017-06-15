@@ -458,5 +458,5 @@ class Web extends CI_Controller {
 			redirect(base_url('contact-us'));
 		}
 	}
-	
+
 }
