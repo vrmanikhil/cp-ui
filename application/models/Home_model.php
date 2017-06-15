@@ -34,7 +34,7 @@ class Home_model extends CI_Model {
 		}
 	}
 	public function checkToken($email, $tokenType){
-		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email));
+		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email, 'active'=>'1'));
 		return $result->result_array();
 	}
 
@@ -318,6 +318,15 @@ class Home_model extends CI_Model {
 
 		public function contactUs($data){
 			return $this->db->insert('contactMessages', $data);
+		}
+
+		public function deactivateToken($email, $tokenType){
+			$data = array(
+				'active' => '0'
+			);
+			$this->db->where('email', $email);
+			$this->db->where('tokenType', $tokenType);
+			return $this->db->update('passwordToken', $data);
 		}
 
 }

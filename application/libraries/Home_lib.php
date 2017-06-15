@@ -316,4 +316,10 @@ class Home_lib {
 		return $CI->homeModel->contactUs($data);
 	}
 
+	public function deactivateToken($email, $tokenType){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->deactivateToken($email, $tokenType);
+	}
+
 }
