@@ -358,17 +358,20 @@ public function loadMoreChats()
 		}
 	}
 
-	public function test(){
-		// $this->statusChangeEMail('v.nikhil323@gmail.com', '1', '1');
-		$this->resetPasswordEMail('v.nikhil323@gmail.com');
-	}
-
-	private function resetPasswordEMail($email=''){
-		date_default_timezone_set("Asia/Kolkata");
+	public function forgotPassword(){
+		$email = '';
+		if($x = $this->input->get('email')){
+			$email = $x;
+		}
 		if(!$this->home_lib->checkEMailExist($email)){
 			$this->session->set_flashdata('message', array('content'=>'The entered E-Mail Address is not registered with us, try creating a New Account.','class'=>'error'));
 			redirect(base_url());
 		}
+		$this->resetPasswordEMail('vrmanikhil@gmail.com');
+	}
+
+	private function resetPasswordEMail($email=''){
+		date_default_timezone_set("Asia/Kolkata");
 		$checkToken = $this->home_lib->checkToken($email, '2');
 		$currentTime = strtotime(date("d M Y H:i:s"));
 		if($checkToken){
@@ -376,6 +379,7 @@ public function loadMoreChats()
 			$timeDifference = $expiry-$currentTime;
 			if($timeDifference>0 && $timeDifference<7200){
 				$emailData['token'] = $checkToken[0]['token'];
+				$emailData['email'] = $email;
 				$this->load->helper('mail_helper');
 				$message =  $this->load->view('emailers/forgotPassword', $emailData, true);
 				$data = array(
@@ -402,6 +406,7 @@ public function loadMoreChats()
 			);
 			$this->home_lib->insertPasswordToken($tokenData);
 			$emailData['token'] = $token;
+			$emailData['email'] = $email;
 			$this->load->helper('mail_helper');
 			$message =  $this->load->view('emailers/forgotPassword', $emailData, true);
 			$data = array(
@@ -415,6 +420,8 @@ public function loadMoreChats()
 			sendEmail($data);
 		}
 	}
+
+
 
 	private function statusChangeEMail($email='', $offerType='', $offerID=''){
 		$emailData['offerType'] = $offerType;
@@ -439,6 +446,129 @@ public function loadMoreChats()
 			'using' =>'pepipost'
 		);
 		sendEmail($data);
+	}
+
+	public function addEducationalDetails(){
+		if($x = $this->input->post('collegeID')){
+			$collegeID = $x;
+		}
+		if($x = $this->input->post('courseID')){
+			$courseID = $x;
+		}
+		if($x = $this->input->post('batch')){
+			$batch = $x;
+		}
+		$userID = $_SESSION['userData']['userID'];
+		$data = array(
+			'collegeID' => $collegeID,
+			'courseID' => $courseID,
+			'batch' => $batch,
+			'userID' => $userID
+		);
+		$result = $this->home_lib->addEducationalDetails($data);
+		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Educational Details Successfully Updated.','class'=>'error'));
+			redirect(base_url());
+		}
+	}
+
+	public function contactUs(){
+		if($x = $this->input->post('name')){
+			$name = $x;
+		}
+		if($x = $this->input->post('email')){
+			$email = $x;
+		}
+		if($x = $this->input->post('mobile')){
+			$mobile = $x;
+		}
+		if($x = $this->input->post('message')){
+			$message = $x;
+		}
+		if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url('contact-us'));
+		}
+		if(strlen($mobile)!=10 || !ctype_digit($mobile)) {
+			$this->session->set_flashdata('message', array('content'=>'Mobile Number has to only of 10 digits. Please Try Again.','class'=>'error'));
+			redirect(base_url('contact-us'));
+		}
+		if($name == '' || $email == '' || $mobile == '' || $message == ''){
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+			redirect(base_url('contact-us'));
+		}
+		$data = array(
+			'name' => $name,
+			'email' => $email,
+			'mobile' => $mobile,
+			'message' => $message
+		);
+		$result = $this->home_lib->contactUs($data);
+		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Message Received. Our Team will get back to you shortly.','class'=>'success'));
+			redirect(base_url('contact-us'));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+			redirect(base_url('contact-us'));
+		}
+	}
+
+
+
+	public function resetPassword(){
+		$newPassword = '';
+		$confirmNewPassword = '';
+		$email = '';
+		$token = '';
+		if($x = $this->input->post('newPassword')){
+			$newPassword = $x;
+		}
+		if($x = $this->input->post('confirmNewPassword')){
+			$confirmNewPassword = $x;
+		}
+		if($x = $this->input->post('email')){
+			$email = $x;
+		}
+		if($x = $this->input->post('token')){
+			$token = $x;
+		}
+		if($newPassword != $confirmNewPassword){
+			$this->session->set_flashdata('message', array('content'=>'Your New and Confirm New Password do not Match. Please Try Again.','class'=>'error'));
+			redirect(base_url('home/resetPassword?email='.$email.'&token='.$token));
+		}
+		$checkToken = $this->home_lib->checkToken($email, '2');
+		$currentTime = strtotime(date("d M Y H:i:s"));
+		if($checkToken){
+			$expiry = $checkToken[0]['expiry'];
+			$timeDifference = $expiry-$currentTime;
+			if($timeDifference>0 && $timeDifference<7200){
+				$newPassword = md5($newPassword);
+				$result = $this->home_lib->changePassword($email, $newPassword);
+				if($result){
+					$this->home_lib->deactivateToken($email, '2');
+					$this->session->set_flashdata('message', array('content'=>'Your Password Reset Process is Successful.','class'=>'success'));
+					redirect(base_url());
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+					redirect(base_url('home/resetPassword?email='.$email.'&token='.$token));
+				}
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Your Password Reset Link has expired. Please requrest a New One.','class'=>'error'));
+				redirect(base_url());
+			}
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'The Password Reset Link is Not Valid.','class'=>'error'));
+			redirect(base_url());
+		}
+	}
+
+	public function hello(){
+		$time = strtotime(date("d M Y H:i:s"));
+		echo $time;
 	}
 
 }

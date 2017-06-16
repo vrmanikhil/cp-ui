@@ -76,6 +76,12 @@ class Home_lib {
 		return $CI->homeModel->getConnections($userID);
 	}
 
+	public function getConnectionRequests($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getConnectionRequests($userID);
+	}
+
 	public function getJobOffers($relevant){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -425,6 +431,30 @@ public function injectClassName(&$data)
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getInternshipData($internshipID);
+	}
+
+	public function addEducationalDetails($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addEducationalDetails($data);
+	}
+
+	public function contactUs($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->contactUs($data);
+	}
+
+	public function deactivateToken($email, $tokenType){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->deactivateToken($email, $tokenType);
+	}
+
+	public function getConnectionProfiles($connections){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getConnectionProfiles($connections);
 	}
 
 }

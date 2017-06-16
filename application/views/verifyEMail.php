@@ -13,15 +13,12 @@
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
-    <h3>Latest Educational Details</h3>
-		<?php var_dump($_SESSION['userData']); die; ?>
+    <h3>Verify E-Mail</h3>
     <form action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
-    <label>College Name</label>
-    <select name="collegeID">
-      <?php foreach ($colleges as $key => $value) { ?>
-        <option value="<?php echo $value['college_id']; ?>"><?php echo $value['college']; ?></option>
-      <?php } ?>
-    </select>
+    <label>E-Mail Address</label>
+    <input type="email" name="email">
+    <label>Token</label>
+    <input type="email" name="email">
     <br><br>
     <label>Course</label>
     <select name="courseID">

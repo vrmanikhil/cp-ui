@@ -55,14 +55,12 @@ class Home extends CI_Controller {
 	}
 
 	public function educationDetails(){
-		$this->redirection();
 		$this->data['colleges'] = $this->home_lib->getColleges();
 		$this->data['courses'] = $this->home_lib->getCourses();
 		$this->load->view('educationDetails', $this->data);
 	}
 
 	public function employerDetails(){
-		$this->redirection();
 		$this->load->view('employerDetails', $this->data);
 	}
 
@@ -235,7 +233,7 @@ public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->getTestSettings($this->session->userdata('skill_id'));
 		$test_questions = $this->home_lib->getTestQuestions($this->session->userdata('skill_id'));
 
-		if(!empty($test_settings[0]['skillID'])) {		
+		if(!empty($test_settings[0]['skillID'])) {
 			if($test_settings[0]['numberQuestions'] <= $test_questions[0]['count(question_id)']){
 				$this->session->set_userdata(['test_settings' => $test_settings]);
 				$this->data['timeAllowed'] = $test_settings[0]['timeAllowed']/60;
@@ -310,8 +308,25 @@ public function skillTestGuidelines(){
 
 	public function connections(){
 		$this->redirection();
-		$userID = '1';
+		$userID = $_SESSION['userData']['userID'];
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
+		$connections = array();
+		foreach ($this->data['connections'] as $key => $value) {
+			if($value['active']==$userID){
+				array_push($connections,$value['passive']);
+			}
+			if($value['passive']==$userID){
+				array_push($connections,$value['active']);
+			}
+		}
+		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
+		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
+		echo "Connection Requests";
+		echo "<br>";
+		var_dump($this->data['connectionRequests']);
+		echo "<br>";
+		echo "My Connections";
+		echo "<br>";
 		var_dump($this->data['connections']);die;
 	}
 
@@ -393,5 +408,12 @@ public function skillTestGuidelines(){
 		var_dump($this->data['userAchievements']);die;
 		var_dump($this->data['userDetails']);die;
 	}
+
+	public function resetPassword(){
+		$this->session->sess_destroy();
+		$this->load->view('resetPassword', $this->data);
+	}
+
+
 
 }

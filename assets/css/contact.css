@@ -3,7 +3,21 @@
 @import url('/assets/css/base/base.css');
 @import url('/assets/css/components/header.css');
 @import url('/assets/css/components/footer.css');
+@import url('/assets/css/components/forms.css');
 @import url('/assets/css/components/feed-sidepane-components.css');
 .globalContainer > .main-body {
 	max-width: 764px;
+}
+.contact-us__section-title {
+	font-size: 0.9317rem;
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: 0;
+}
+
+.contact-us__form-submit {
+	width: 100%;
+	padding: 14px 20px;
+	border: 0;
+	margin-top: 20px;
 }

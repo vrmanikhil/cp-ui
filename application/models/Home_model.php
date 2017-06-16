@@ -34,7 +34,7 @@ class Home_model extends CI_Model {
 		}
 	}
 	public function checkToken($email, $tokenType){
-		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email));
+		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email, 'active'=>'1'));
 		return $result->result_array();
 	}
 
@@ -184,8 +184,15 @@ class Home_model extends CI_Model {
 
 
 	public function getConnections($userID){
-		$result = $this->db->get_where('connections', array('active' => $userID));
-		// $this->db->join('comments', 'comments.id = blogs.id');
+		$this->db->where('active', $userID);
+		$this->db->where('status', '1');
+		$this->db->or_where('passive', $userID);
+		$result = $this->db->get('connections');
+		return $result->result_array();
+	}
+
+	public function getConnectionRequests($userID){
+		$result = $this->db->get_where('connections', array('passive'=>$userID, 'status'=> '0'));
 		return $result->result_array();
 	}
 
@@ -388,10 +395,35 @@ class Home_model extends CI_Model {
              $userSkills = $userSkills[0]['userSkills'];
              return $userSkills; */
     }
-public function content(){
 
-	$result = $this->db->get('content');
-	return $result->result_array();
-}
+		public function content(){
+
+			$result = $this->db->get('content');
+			return $result->result_array();
+		}
+
+		public function addEducationalDetails($data){
+			return $this->db->insert('generalUsers', $data);
+		}
+
+		public function contactUs($data){
+			return $this->db->insert('contactMessages', $data);
+		}
+
+		public function deactivateToken($email, $tokenType){
+			$data = array(
+				'active' => '0'
+			);
+			$this->db->where('email', $email);
+			$this->db->where('tokenType', $tokenType);
+			return $this->db->update('passwordToken', $data);
+		}
+
+		public function getConnectionProfiles($connections){
+			$this->db->where_in('userID', $connections);
+			$this->db->select('userID, name, profileImage');
+			$result = $this->db->get('users');
+			return $result->result_array();
+		}
 
 }
