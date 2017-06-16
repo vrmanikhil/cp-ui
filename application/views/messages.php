@@ -63,57 +63,40 @@
 					<h1 class="messages__section-title">Messages</h1>
 					<button class="btn btn-primary" class="messages__load-more" style="float:right;"><i class="fa fa-pencil" aria-hidden="true"></i> Compose New</button>
 					<div class="notifications">
-						<a class="flex media notification" href="javascript:">
-							<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&amp;oe=5942A6DD" alt="user" class="media-figure notification__feature-img">
+					<?php
+					if(empty($latest_chats)){?>
+						You do not have sent or recieved any message.
+					<?php } ?>
+					<?php 
+					$i = 0;
+					foreach($latest_chats as $chat){
+						$i++;
+						?>
+						<a class="flex media notification chat" chatter-id="<?= $chat['chatter_id']?>">
+							<img src="<?php echo $chat['profile_image'];?>" alt="user" class="media-figure notification__feature-img">
 							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>Nikhil Verma</strong></span>
-								<span class="notification__message">This is a Test message for you.</span>
+								<span class="notification__message"><strong><?php echo $chat['chatter']?></strong></span>
+								<?php if($chat['chatter_id'] !== $chat['sender']) {?>
+									<span class="notification__message"><?php echo $chat['message'];?></span>
+								<?php }else{ 
+									if($chat['read'] == 1){?>
+									<span class="notification__message"><i class = "fa fa-reply"></i>  <?php echo $chat['message'];?></span>
+								<?php }else{?>
+									<span class="notification__message" style = "background-color:#f05f40"><i class = "fa fa-reply"></i>  <?php echo $chat['message'];}?></span>
+								<?php	} ?>
 								<span class="notification__info">
-									<span class="notification__date">19 April 2017</span>
+									<span class="notification__date"><?php echo $chat['timestamp'];?></span>
 								</span>
 							</span>
 						</a>
-						<a class="flex media notification" href="javascript:">
-							<img src="https://scontent.fdel1-1.fna.fbcdn.net/v/t1.0-1/p50x50/17626408_935294396507025_1452685277211461461_n.png?oh=167c40084cee66601fa97c302098fd03&oe=598CB4FB" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>Motorola Inc</strong></span>
-								<span class="notification__message">This is a Campus Puppy Test Message for you.</span>
-								<span class="notification__info">
-									<span class="notification__date">14 April 2017</span>
-								</span>
-							</span>
-						</a>
-						<a class="flex media notification" href="javascript:">
-							<img src="https://scontent.fdel1-1.fna.fbcdn.net/v/t1.0-1/p50x50/13892348_1753977728147689_6287852477235695370_n.jpg?oh=4b8af9537d9b9665b2c61c418d4637c5&oe=598E66EF" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>Riders Music Festival</strong></span>
-								<span class="notification__message">This is a Test Message.</span>
-								<span class="notification__info">
-									<span class="notification__date">5 April 2017</span>
-								</span>
-							</span>
-						</a>
-						<a class="flex media notification" href="javascript:">
-							<img src="https://scontent.fdel1-1.fna.fbcdn.net/v/t1.0-1/p50x50/13892348_1753977728147689_6287852477235695370_n.jpg?oh=4b8af9537d9b9665b2c61c418d4637c5&oe=598E66EF" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>Riders Music Festival</strong></span>
-								<span class="notification__message">This is a Test Message.</span>
-								<span class="notification__info">
-									<span class="notification__date">5 April 2017</span>
-								</span>
-							</span>
-						</a>
-						<a class="flex media notification" href="javascript:">
-							<img src="https://scontent.fdel1-1.fna.fbcdn.net/v/t1.0-1/p50x50/13892348_1753977728147689_6287852477235695370_n.jpg?oh=4b8af9537d9b9665b2c61c418d4637c5&oe=598E66EF" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>Riders Music Festival</strong></span>
-								<span class="notification__message">This is a Test Message.</span>
-								<span class="notification__info">
-									<span class="notification__date">5 April 2017</span>
-								</span>
-							</span>
-						</a>
-						<center><button type="submit" class="btn btn--primary messages__load-more">Load More</button></center>
+						<?php } ?>
+						<center>
+						<div id = "chats"></div>
+						<?php if($more) {?>
+						<button type="submit" class="btn btn--primary messages__load-more" onclick = "loadDoc(<?php echo $i;?>)" id ="load-more" >Load More</button>
+						<?php }else{
+							} ?>
+						</center>
 					</div>
 				</div>
 			</div>
@@ -122,9 +105,54 @@
 			</aside>
 		</main>
 		<?php echo $footer; ?>
+		<div id = "demo"></div>
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+
+	<script type="text/javascript">
+		function loadDoc($i) {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		   if (this.readyState == 4 && this.status == 200) {
+		   	var response = JSON.parse(this.responseText);
+		   	var more = response.more;
+		   	var chats = response.latest_chats;
+		   	var i =0;
+		    for( i = 0; i < chats.length; i++){
+		    	if(chats[i].chatter_id !== chats[i].sender ){
+		    		var html = "<a class='flex media notification chat' chatter-id='" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+		    		document.getElementById('chats').innerHTML += html;
+		    	}else{
+		    		if(chats[i].read  != 0){
+		    		var html = "<a class='flex media notification chat' chatter-id='" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'>	</i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+		    		document.getElementById('chats').innerHTML += html;
+		    	}else{
+		    		var html = "<a class='flex media notification chat' chatter-id='" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message' style = 'background-color:#f05f40'><i class = 'fa fa-reply'></i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+		    		document.getElementById('chats').innerHTML += html;
+		    	}
+		    }
+			}
+		    if(chats.length == 0 || more === false){
+				document.getElementById('load-more').style.visibility = "hidden";
+			}
+		   }
+		}
+		  
+  			xhttp.open("GET", "<?php echo base_url('messages/load-more-chats/').$i;?>", true);
+  			xhttp.send();
+  		};
+  		$(document).ready(function(){
+  			$('.chat').click(function(){
+				chatter = $(this).attr('chatter-id')
+				console.log(chatter)
+				window.location.replace('<?= base_url('messages/chats')?>/'+chatter)
+
+			})
+  		})
+	</script>
+	<!-- href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "' -->
+	<!-- href="<?php echo base_url('messages/chats/').$chat['chatter_id'];?>" -->
 </body>
 
 </html>

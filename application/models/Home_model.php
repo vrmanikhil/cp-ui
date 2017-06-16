@@ -99,6 +99,89 @@ class Home_model extends CI_Model {
 		$this->db->insert('userSkills', $data);
 		return (bool)$this->db->affected_rows();
 	}
+	/*		SKILL END 		*/
+	/*		CHATS		*/
+
+	public function fetchChatIds($user)
+	{
+		$this->db->select_max('messageID');
+		$this->db->where('receiver', $user);
+		$this->db->or_where('sender', $user);
+		$this->db->group_by('receiver + sender', false);
+		$res = $this->db->get('messages')->result_array();
+		// var_dump($res[0]);die();
+		return array_column($res, 'messageID');
+	}
+
+	public function fetchChats($user, $offset = 0, $limit = 5)
+	{
+		$this->db->select('*');
+		$recent = $this->fetchChatIds($user, $offset, $limit);
+		if(empty($recent))
+			return $recent;
+		$this->db->where_in('messageID', $recent);
+		$this->db->order_by('messageID', 'DESC');
+		$this->db->limit($limit, $offset);
+		return $this->db->get('messages')->result_array();
+	}
+
+	public function fetchMessages($sender, $receiver, $offset = 0, $limit = 10)
+	{
+		$this->db->select('*');
+		$this->db->where(['sender'=> $sender, 'receiver'=> $receiver]);
+		$this->db->or_where(['sender'=> $receiver]);
+		$this->db->where(['receiver'=> $sender]);
+		$this->db->order_by('messageID', 'DESC');
+		$this->db->limit($limit, $offset);
+		$res = $this->db->get('messages')->result_array();
+		return $res;
+	}
+
+	public function markMessagesAsRead($sender_id, $receiver_id)
+	{
+		$this->db->set('read', '1');
+		$this->db->where(['sender'=> $sender_id, 'receiver'=> $receiver_id]);
+		$this->db->update('messages');
+	}
+
+	public function sendMessage($sender, $receiver, $message)
+	{
+		$data['sender'] = $sender;
+		$data['receiver'] = $receiver;
+		$data['message'] = $message;
+		$data['read'] = 0;
+		$success = $this->db->insert('messages', $data);
+		$insert_id = $this->db->insert_id();
+		return ['success'=> $success, 'insert_id'=> $insert_id];
+	}
+
+	public function readMessage($id)
+	{
+		$this->db->set('read', '1');
+		$this->db->where('messageID', $id);
+		return $this->db->update('messages');
+	}
+
+	public function checkForNewMessages($sender, $receiver, $minimum)
+	{
+		$this->db->select('*');
+		$this->db->where('mesaageID >', $minimum);
+		$this->db->where("((sender = $sender AND receiver = $receiver) OR
+			(sender = $receiver AND receiver = $sender))", null, false);
+		$res = $this->db->get_where('messages');
+		$res = $res->result_array();
+		return (empty($res)) ? false : $res;
+	}
+
+	public function hasUnreadMessages($user_id)
+	{
+		$this->db->select('*');
+		$this->db->where('receiver', $user_id);
+		$res = $this->db->get_where('messages', ['read'=> 0])->result_array();
+		return count($res);
+	}
+
+
 
 	public function getConnections($userID){
 		$result = $this->db->get_where('connections', array('active' => $userID));
@@ -186,8 +269,8 @@ class Home_model extends CI_Model {
 		return $this->db->insert('achievements', $data);
 	}
 
-	public function getUserDetails($username){
-		$result = $this->db->get_where('users', array('username' => $username), '1');
+	public function getUserDetails($userId){
+		$result = $this->db->get_where('users', array('userID' => $userId), '1');
 		return $result->result_array();
 	}
 

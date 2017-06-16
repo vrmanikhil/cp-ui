@@ -247,6 +247,47 @@ class Web extends CI_Controller {
         redirect(base_url('skills'));
 	}
 
+public function loadMoreChats()
+	{
+        $offset = $this->input->get('offset');
+		$chats = $this->home_lib->fetchLatestChats($offset);
+		echo json_encode(['content'=> $chats, 
+					'load_more'=> $this->home_lib->moreChats($offset+5)]);
+		die;
+	}
+
+	public function load_more_messages()
+	{
+		$offset = $this->input->get('offset');
+		$user = $this->input->get('user');
+		$messages = $this->data_lib->fetch_messages($user, $offset);
+		echo json_encode(['content'=> $messages, 
+					'load_more'=> $this->data_lib->load_more_messages($user, $offset+5)]);
+		die;
+	}
+
+	public function send_message()
+	{
+		$message = $this->input->post('message');
+		$receiver = $this->input->post('to');
+		$this->data_lib->is_auth_to_chat($receiver);
+        $response = $this->data_lib->send_message($receiver, $message);
+        $response['csrf'] = $this->data['csrf_token'];
+		echo json_encode($response);
+	}
+
+	public function check_for_new_messages()
+	{
+		$last_id = $this->input->get('last_id');
+		$user = $this->input->get('from');
+		$new_msgs = $this->data_lib->check_for_new_messages($user, $last_id);
+		if(!$new_msgs)
+			echo 'false';
+		else
+			echo json_encode($new_msgs);
+		die;
+	}
+
 
 	public function addAchievement(){
 		$achievementTitle = '';

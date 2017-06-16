@@ -176,10 +176,7 @@ class Home extends CI_Controller {
 		$this->load->view('notifications', $this->data);
 	}
 
-	public function messages(){
-		$this->redirection();
-		$this->load->view('messages', $this->data);
-	}
+			/*	SKILLS 	*/
 
 	public function skills(){
 		$this->redirection();
@@ -255,6 +252,59 @@ public function skillTestGuidelines(){
 			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
 			redirect(base_url('skills'));
 		}
+	}
+
+			/*	 CHATS 	*/
+
+
+	public function composeMessage()
+	{
+        $this->data['title'] = 'Compose Message';
+		$this->load_view('composeMessage', $this->data);
+	}
+
+	public function messages()
+	{
+		$number = $this->session->userdata('chats');
+		$this->data['latest_chats'] = $this->home_lib->fetchLatestChats();
+		$this->data['user_id'] = $this->session->userdata('userID');
+		$this->data['more'] = $this->home_lib->moreChats(5);
+        $this->data['title'] = 'Messages';
+		$this->load->view('messages', $this->data);
+	}
+
+	public function loadMoreChats($offset){
+		$number = $this->session->userdata('chats');
+		$dat['latest_chats'] = $this->home_lib->fetchLatestChats($offset);
+		$dat['more'] = $this->home_lib->moreChats(5 + $offset);
+		echo json_encode($dat);
+	}
+
+	public function chat($chatter_id)
+	{
+		// $this->home_lib->isAuthToChat($chatter_id);
+		$this->home_lib->markAsRead($chatter_id);
+		$this->data['chatter_id']  = $chatter_id;
+		$this->data['messages'] = $this->home_lib->fetchConversation($chatter_id);
+		$this->data['usr'] = $chatter_id;
+		$chatter = $this->home_lib->getUserDetails($chatter_id);
+		$this->data['profile_image'] = $chatter[0]['profileImage'];
+		$this->data['user_name'] = $chatter[0]['name'];
+		$this->data['more'] = $this->home_lib->loadMoreMessages($chatter_id, 5);
+		// var_dump($chatter); die();
+		// $this->data['user_name'] = implode(' ', json_decode($this->data['user_name'], true));
+        $this->data['title'] = $this->data['user_name'];
+		$this->load->view('chat', $this->data);
+	}
+
+	public function loadMoreMessages($offset, $user)
+	{
+		// $offset = $this->input->get('offset');
+		// $user = $this->input->get('user');
+		$messages = $this->home_lib->fetchConversation($user, $offset);
+		echo json_encode(['content'=> $messages, 
+					'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
+		die;
 	}
 
 

@@ -136,10 +136,10 @@ class Home_lib {
 		return $CI->homeModel->addAchievement($data);
 	}
 
-	public function getUserDetails($username){
+	public function getUserDetails($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getUserDetails($username);
+		return $CI->homeModel->getUserDetails($userID);
 	}
 
 	public function getUserProjects($userID){
@@ -196,6 +196,129 @@ class Home_lib {
 		$CI->load->model('Home_model', 'homemodel');
 		$test_settings = $CI->session->userdata('test_settings');
 		return ($score >= $test_settings[0]['passingCriteria']);
+	}
+
+	/*	Chats	*/
+
+	public function fetchLatestChats($offset = 0, $limit = 5)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$chats = $CI->homemodel->fetchChats($_SESSION['userData']['userID'], $offset, $limit);
+		// var_dump($chats); die();
+		$this->fixTimestamp($chats, 'timestamp', 'd M Y  g:i A');
+		$this->injectUserNames($chats);
+		return $chats;
+	}
+
+	public function fixTimestamp(&$data, $timestamp, $format)
+	{
+		for($i =0; $i < count($data); $i++){
+			$data[$i][$timestamp] = date($format, strtotime($data[$i][$timestamp]));
+		}
+	}
+
+	public function injectUserNames(&$data)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$names = [];
+		$current_user = $_SESSION['userData']['userID'];
+		foreach ($data as $index=> $message) {
+			$sender = $message['sender'];
+			$receiver = $message['receiver'];
+			if(!isset($names[$sender])){
+				$names[$sender] = $this->fetchFormedUserName($sender);
+			}
+			if(!isset($names[$receiver])){
+				$names[$receiver] = $this->fetchFormedUserName($receiver);
+			}
+			if($sender != $current_user){
+				$data[$index]['chatter'] = $names[$sender];
+				$data[$index]['profile_image'] = $CI->homemodel->getUserDetails($sender)[0]['profileImage'];
+				$data[$index]['chatter_id'] = $sender;
+			}else{
+				$data[$index]['chatter'] = $names[$receiver];
+				$data[$index]['profile_image'] = $CI->homemodel->getUserDetails($receiver)[0]['profileImage'];
+				$data[$index]['chatter_id'] = $receiver;
+			}
+		}
+	}
+
+	public function fetchFormedUserName($user_id = null)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$user_id = (empty($user_id)) ? $_SESSION['userData']['userID'] : $user_id;
+		$name = $CI->homemodel->getUserDetails($user_id);
+		return $name[0]['name'];
+	}
+
+
+	public function fetchConversation($user_id, $offset = 0, $limit = 5)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$res = $CI->homemodel->fetchMessages($_SESSION['userData']['userID'], 
+			$user_id, $offset, $limit);
+		$this->fixTimestamp($res, 'timestamp', 'd M Y  g:i A');
+		$this->injectClassName($res);
+		return $res;
+	}
+	public function loadMoreMessages($user_id, $offset = 0, $limit = 5)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model');
+		$res = $CI->Home_model->fetchMessages($user_id, $offset, $limit);
+		return !empty($res);
+	}
+
+	public function markAsRead($chatter_id)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$CI->homemodel->markMessagesAsRead($chatter_id, $_SESSION['userData']['userID']);
+	}
+
+	public function moreChats($offset = 0, $limit = 5)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$res = $CI->homemodel->fetchChats($_SESSION['userData']['userID'], $offset, $limit);
+		return !empty($res);
+	}
+
+public function injectClassName(&$data)
+	{
+		foreach($data as $index => $value){
+			$data[$index]['class'] = 'receiver';
+			if($value['sender'] == $_SESSION['userData']['userID'])
+				$data[$index]['class'] = 'sender';
+		}
+	}
+
+	public function sendMessage($receiver, $message)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$success = $CI->homemodel->sendMessage($_SESSION['userData']['userID'], 
+				$receiver, $message);
+		return ['success'=> $success['success'], 
+				'time'=> date('d M Y  g:i A', time()),
+				'insert_id'=> $success['insert_id']];
+	}
+
+	public function checkForNewMessages($chatter, $threshold)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Data_model', 'datamodel');
+		$success = $CI->datamodel->
+				check_for_new_messages($this->get_user_id(), $chatter, $threshold);
+		if($success){
+			$this->fix_timestamp($success, 'created_at', 'd M Y  g:i A');
+			$this->inject_class_name($success);
+		}
+		return $success;
 	}
 
 	public function getUserWorkEx($userID){
