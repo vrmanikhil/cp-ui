@@ -76,6 +76,12 @@ class Home_lib {
 		return $CI->homeModel->getConnections($userID);
 	}
 
+	public function getConnectionRequests($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getConnectionRequests($userID);
+	}
+
 	public function getJobOffers($relevant){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -320,6 +326,12 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->deactivateToken($email, $tokenType);
+	}
+
+	public function getConnectionProfiles($connections){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getConnectionProfiles($connections);
 	}
 
 }

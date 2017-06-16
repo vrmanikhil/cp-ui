@@ -260,6 +260,24 @@ public function skillTestGuidelines(){
 		$this->redirection();
 		$userID = $_SESSION['userData']['userID'];
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
+		$connections = array();
+		foreach ($this->data['connections'] as $key => $value) {
+			if($value['active']==$userID){
+				array_push($connections,$value['passive']);
+			}
+			if($value['passive']==$userID){
+				array_push($connections,$value['active']);
+			}
+		}
+		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
+		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
+		echo "Connection Requests";
+		echo "<br>";
+		var_dump($this->data['connectionRequests']);
+		echo "<br>";
+		echo "My Connections";
+		echo "<br>";
+		var_dump($this->data['connections']);die;
 	}
 
 	public function generateVerifyEMail(){
