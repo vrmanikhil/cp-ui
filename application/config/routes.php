@@ -62,7 +62,6 @@ $route['change-password'] = 'home/changePassword';
 $route['reset-password'] = 'home/resetPassword';
 $route['user/(:any)'] = 'home/user/$1';
 $route['notifications'] = 'home/notifications';
-$route['messages'] = 'home/messages';
 $route['connections'] = 'home/connections';
 
 //Footer Links
@@ -106,3 +105,16 @@ $route['skills/skill-test-guidelines'] = 'home/skillTestGuidelines';
 $route['skills/submit-answers'] = 'web/submitAnswers';
 
 $route['translate_uri_dashes'] = FALSE;
+
+// Messages
+
+$route['messages/compose'] = 'home/composeMessage';
+$route['messages'] = 'home/messages';
+$route['messages/composeMessage'] = 'home/sendComposedMessage';
+$route['messages/chats/(:num)'] = 'home/chat/$1';
+$route['messages/load-more-chats/(:num)'] = 'home/loadMoreChats/$1';	
+$route['messages/load-more-messages/(:num)/(:num)'] = 'home/loadMoreMessages/$1/$2';
+$route['messages/send-message'] = 'home/sendMessage';
+$route['messages/checkForNewMessages'] = 'home/checkForNewMessages';
+
+

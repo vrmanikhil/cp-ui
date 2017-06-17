@@ -175,10 +175,7 @@ class Home extends CI_Controller {
 		$this->load->view('notifications', $this->data);
 	}
 
-	public function messages(){
-		$this->redirection();
-		$this->load->view('messages', $this->data);
-	}
+			/*	SKILLS 	*/
 
 	public function skills(){
 		$this->redirection();
@@ -256,6 +253,97 @@ public function skillTestGuidelines(){
 		}
 	}
 
+			/*	 CHATS 	*/
+
+
+	public function composeMessage()
+	{
+        $this->data['title'] = 'Compose Message';
+        $this->data['connections'] = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
+		$this->load->view('composeMessage', $this->data);
+	}
+
+	public function sendComposedMessage(){
+		$message = $this->input->post('message');
+		$recipient = $this->input->post('data');
+		$receiver = $recipient['userID'];
+		// $receiver = $this->home_lib->getUserId($recipient);
+		// var_dump($receiver); die();
+		if(!empty($receiver)){
+		$response = $this->home_lib->sendMessage($receiver[0]['userID'], $message);
+		redirect(base_url('messages/chats/'.$receiver[0]['userID']));
+	}
+	}
+
+	public function messages()
+	{
+		if($_SESSION['userData']['loggedIn']){
+		$number = $this->session->userdata('chats');
+		$this->data['latest_chats'] = $this->home_lib->fetchLatestChats();
+		$this->data['user_id'] = $this->session->userdata('userID');
+		$this->data['more'] = $this->home_lib->moreChats(5);
+        $this->data['title'] = 'Messages';
+		$this->load->view('messages', $this->data);
+	}else{
+		redirect(base_url());
+	}
+	}
+
+	public function loadMoreChats($offset){
+		$number = $this->session->userdata('chats');
+		$dat['latest_chats'] = $this->home_lib->fetchLatestChats($offset);
+		$dat['more'] = $this->home_lib->moreChats(5 + $offset);
+		echo json_encode($dat);
+	}
+
+	public function chat($chatter_id)
+	{
+		$this->home_lib->markAsRead($chatter_id);
+		$this->data['chatter_id']  = $chatter_id;
+		$messages = $this->home_lib->fetchConversation($chatter_id);
+		$this->data['usr'] = $chatter_id;
+		$chatter = $this->home_lib->getUserDetails($chatter_id);
+		$this->data['profile_image'] = $chatter[0]['profileImage'];
+		$this->data['user_name'] = $chatter[0]['name'];
+		$more = $this->home_lib->loadMoreMessages($chatter_id, 5);
+		$this->data['more'] = $more;
+        $this->data['title'] = $this->data['user_name'];
+        $connection = $this->home_lib->checkConnection($chatter_id);
+        if(empty($connection)){
+        	$this->session->set_flashdata('message', array('content' => 'You need to be connected to this person to start a chat.', 'class' => 'error'));
+			redirect(base_url('messages'));
+        }
+        $this->data['messages'] = $messages;
+		$this->load->view('chat', $this->data);
+	}
+
+	public function loadMoreMessages($user, $offset)
+	{
+		$messages = $this->home_lib->fetchConversation($user, $offset);
+		echo json_encode(['content'=> $messages, 
+					'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
+		die;
+	}
+
+	public function sendMessage()
+	{	
+		$message = $this->input->post('message');
+		$receiver = $this->input->post('to');
+        $response = $this->home_lib->sendMessage($receiver, $message);
+		echo json_encode($response);
+	}
+
+	public function checkForNewMessages()
+	{
+		$last_id = $this->input->get('last_id');
+		$user = $this->input->get('from');
+		$new_msgs = $this->home_lib->checkForNewMessages($user, $last_id);
+		if(!$new_msgs)
+			echo 'false';
+		else
+			echo json_encode($new_msgs);
+		die;
+	}
 
 	public function connections(){
 		$this->redirection();

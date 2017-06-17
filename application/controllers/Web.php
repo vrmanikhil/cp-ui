@@ -247,7 +247,6 @@ class Web extends CI_Controller {
         redirect(base_url('skills'));
 	}
 
-
 	public function addAchievement(){
 		$achievementTitle = '';
 		$achievementDescription = '';
