@@ -14,8 +14,7 @@
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
     <h3>Latest Educational Details</h3>
-		<?php var_dump($_SESSION['userData']); die; ?>
-    <form action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
+		<form action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
     <label>College Name</label>
     <select name="collegeID">
       <?php foreach ($colleges as $key => $value) { ?>

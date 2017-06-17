@@ -24,18 +24,29 @@ class Home_model extends CI_Model {
 		if($accountType=='1'){
 			$this->db->join('generalUsers', 'users.userID = generalUsers.userID', 'left');
 			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id', 'left');
+			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
 		else{
+			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->join('employerUsers', 'users.userID = employerUsers.userID', 'left');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
 	}
+
 	public function checkToken($email, $tokenType){
 		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email, 'active'=>'1'));
 		return $result->result_array();
+	}
+
+	public function updateRegistrationLevel($userID, $registrationLevel){
+		$data = array(
+               'registrationLevel' => $registrationLevel
+            );
+		$this->db->where('userID', $userID);
+		$this->db->update('users', $data);
 	}
 
 	public function getLocations(){
@@ -163,7 +174,11 @@ class Home_model extends CI_Model {
 			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID');
+			$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(jobLocations.cityID) as cityIDs, GROUP_CONCAT(indianCities.city) as city, employerUsers.companyName, employerUsers.companyLogo');
+			// $this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, employerUsers.companyName, employerUsers.companyLogo');
+
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
@@ -274,67 +289,28 @@ class Home_model extends CI_Model {
 		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
 		return $result->result_array();
 	}
-	public function relevant_joboffers()
-{
-             $userID = $_SESSION['userData']['userID'];
-  //          $this->db->join('jobskills','jobskills.skillID=userskills.skillID')
-  //              		  ->join('skills','skills.skillID=jobskills.skillID')
-  //             		  ->join('joboffers','joboffers.jobID=jobskills.jobID')
-  //             		  ->join('joblocations','joblocations.jobID=joboffers.jobID')
-  //             	      ->join('indiancities','indiancities.cityID=joblocations.cityID')
-  //             		  ->join('employerusers','employerusers.userID=joboffers.addedBy')
-  //             		  ->select('*');
-  //              		  //->select('skills.skill_name','joboffers.jobTitle','indiancities.city','employerusers.companyName','employerusers.companyLogo');
 
-  //             $result = $this->db->get_where('userskills', array('userskills.userID' => $userID));
-  //             			// var_dump($result->result_array());
-  //             			// echo("<br>");
-  //             			var_dump($this->db->last_query());
-  //             			die;
-		// return $result->result_array();
-            /* $userSkills = $this->getAddedUserSkills();
+	public function content(){
+		$result = $this->db->get('content');
+		return $result->result_array();
+	}
 
-             $this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
-             $this->db->select('jobOffers.jobTitle, GROUP_CONCAT(jobSkills.skillID AS skillsRequired)');
-             $this->db->group_by('jobSkills.jobID');
+	public function addEducationalDetails($data){
+		return $this->db->insert('generalUsers', $data);
+	}
 
-             $this->db->get_where('jobOffers', array('status'=>'3', 'active'=>'1'));
-             echo $this->db->last_query();die;
+	public function contactUs($data){
+		return $this->db->insert('contactMessages', $data);
+	}
 
-             }
-
-    public function getAddedUserSkills(){
-    		$skillType = array('0');
-             $this->db->where_not_in('skillType', $skillType);
-             $this->db->select('GROUP_CONCAT(skillID) AS userSkills');
-             $result = $this->db->get('userSkills');
-             $userSkills = $result->result_array();
-             $userSkills = $userSkills[0]['userSkills'];
-             return $userSkills; */
-    }
-
-		public function content(){
-
-			$result = $this->db->get('content');
-			return $result->result_array();
-		}
-
-		public function addEducationalDetails($data){
-			return $this->db->insert('generalUsers', $data);
-		}
-
-		public function contactUs($data){
-			return $this->db->insert('contactMessages', $data);
-		}
-
-		public function deactivateToken($email, $tokenType){
-			$data = array(
-				'active' => '0'
-			);
-			$this->db->where('email', $email);
-			$this->db->where('tokenType', $tokenType);
-			return $this->db->update('passwordToken', $data);
-		}
+	public function deactivateToken($email, $tokenType){
+		$data = array(
+			'active' => '0'
+		);
+		$this->db->where('email', $email);
+		$this->db->where('tokenType', $tokenType);
+		return $this->db->update('passwordToken', $data);
+	}
 
 		public function getConnectionProfiles($connections){
 			$this->db->where_in('userID', $connections);

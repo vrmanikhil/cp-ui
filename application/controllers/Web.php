@@ -426,7 +426,10 @@ class Web extends CI_Controller {
 		);
 		$result = $this->home_lib->addEducationalDetails($data);
 		if($result){
-			$this->session->set_flashdata('message', array('content'=>'Educational Details Successfully Updated.','class'=>'error'));
+			$CI =& get_instance();
+			$CI->session->set_userdata('registrationLevel', '2');
+			$this->home_lib->updateRegistrationLevel($userID, '2');
+			$this->session->set_flashdata('message', array('content'=>'Educational Details Successfully Updated.','class'=>'success'));
 			redirect(base_url());
 		}
 	}

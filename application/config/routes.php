@@ -55,6 +55,7 @@ $route['404_override'] = 'home/error404';
 $route['home'] = 'home/home';
 $route['education-details'] = 'home/educationDetails';
 $route['employer-details'] = 'home/employerDetails';
+$route['verify-email'] = 'home/verifyEMail';
 
 
 $route['change-password'] = 'home/changePassword';

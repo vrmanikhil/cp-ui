@@ -11,27 +11,20 @@ class Home_lib {
 		$userData = $userData[0];
 		$registrationLevel = $userData['registrationLevel'];
 		if ($result) {
+			$data = array(
+				'loggedIn' => true,
+				'email' => $email,
+				'name' => $userData['name'],
+				'userID' => $userData['userID'],
+				'accountType' => $userData['accountType'],
+				);
 			if($userData['accountType']=='1'){
-				$data = array(
-					'loggedIn' => true,
-					'email' => $email,
-					'name' => $userData['name'],
-					'userID' => $userData['userID'],
-					'accountType' => $userData['accountType'],
-					'collegeLogo' => $userData['logo'],
-					'collegeName' => $userData['college']
-					);
+				$CI->session->set_userdata('collegeLogo', $userData['logo']);
+				$CI->session->set_userdata('collegeName', $userData['college']);
 			}
 			if($userData['accountType']=='2'){
-				$data = array(
-					'loggedIn' => true,
-					'email' => $email,
-					'name' => $userData['name'],
-					'userID' => $userData['userID'],
-					'accountType' => $userData['accountType'],
-					'companyLogo' => $userData['companyLogo'],
-					'companyName' => $userData['companyName']
-					);
+				$CI->session->set_userdata('companyLogo', $userData['companyLogo']);
+				$CI->session->set_userdata('companyName', $userData['companyName']);
 			}
 			$CI->session->set_userdata('userData', $data);
 			$profileImage = $userData['profileImage'];
@@ -134,6 +127,12 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->addProject($data);
+	}
+
+	public function updateRegistrationLevel($userID, $registrationLevel){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->updateRegistrationLevel($userID, $registrationLevel);
 	}
 
 	public function addAchievement($data){

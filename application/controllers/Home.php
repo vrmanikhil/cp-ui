@@ -31,7 +31,7 @@ class Home extends CI_Controller {
 					}
 				}
 				if($_SESSION['registrationLevel']=='2'){
-					echo "email verification pending hai";
+					redirect(base_url('verify-email'));
 				}
 			}
 	}
@@ -64,16 +64,18 @@ class Home extends CI_Controller {
 		$this->load->view('employerDetails', $this->data);
 	}
 
+	public function verifyEMail(){
+		$this->load->view('verifyEMail', $this->data);
+	}
+
 	//Job Offers- Normal Users
 
 	public function relevantJobs(){
-    $this->load->model('Home_model');
-		$this->data['skills'] = $this->Home_model->relevant_joboffers();
-		// var_dump($data);die();
+		$this->redirection();
+		$relevant = 1;
+		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
+		// var_dump($this->data['jobOffers']);die;
 		$this->load->view('relevantJobs', $this->data);
-
-		//$this->redirection();
-		//$this->load->view('relevantJobs', $this->data);
 	}
 
 
@@ -81,7 +83,7 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
-		// var_dump($this->data['jobOffers']);die;
+		var_dump($this->data['jobOffers']);die;
 		$this->load->view('jobOffers', $this->data);
 	}
 
@@ -117,7 +119,6 @@ class Home extends CI_Controller {
 	public function aboutUs(){
 		$this->load->model('Home_model');
 		$this->data['about']= $this->Home_model->content();
-		//var_dump($this->data['about']);die;
 		$this->load->view('aboutUs', $this->data);
 	}
 
@@ -362,6 +363,10 @@ public function skillTestGuidelines(){
 	public function resetPassword(){
 		$this->session->sess_destroy();
 		$this->load->view('resetPassword', $this->data);
+	}
+
+	public function getJobData($jobID){
+		return $this->home_lib->getJobData($jobID);
 	}
 
 
