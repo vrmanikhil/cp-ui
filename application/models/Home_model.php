@@ -48,6 +48,11 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getUserId($username){
+		$result = $this->db->get_where('users', array('username' => $username));
+		return $result->result_array();
+	}
+
 	public function getSkillData($skill_id)
 	{
 		$this->db->select('*');
@@ -162,10 +167,10 @@ class Home_model extends CI_Model {
 		return $this->db->update('messages');
 	}
 
-	public function checkForNewMessages($sender, $receiver, $minimum)
+	public function checkForNewMessages($sender, $receiver, $lastid)
 	{
 		$this->db->select('*');
-		$this->db->where('mesaageID >', $minimum);
+		$this->db->where('mesaageID >', $lastid);
 		$this->db->where("((sender = $sender AND receiver = $receiver) OR
 			(sender = $receiver AND receiver = $sender))", null, false);
 		$res = $this->db->get_where('messages');
@@ -189,6 +194,15 @@ class Home_model extends CI_Model {
 		$this->db->or_where('passive', $userID);
 		$result = $this->db->get('connections');
 		return $result->result_array();
+	}
+
+	public function getConnectionUsernames($userID){
+		$this->db->where('active', $userID);
+		$this->db->where('status', '1');
+		$this->db->or_where('passive', $userID);
+		$result = $this->db->get('connections');
+		$connections = $result->result_array();
+		return $connections;
 	}
 
 	public function getConnectionRequests($userID){

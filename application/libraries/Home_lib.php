@@ -41,6 +41,11 @@ class Home_lib {
 		}
 		return 0;
 	}
+	public function getUserId($username){
+		$CI = & get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserId($username);
+	}
 
 	public function auth(){
 		$CI = & get_instance();
@@ -74,6 +79,35 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getConnections($userID);
+	}
+
+	public function checkConnection($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return !empty($CI->homeModel->getConnections($userID));
+	}
+
+	public function getConnectionUsernames($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		$conns = $CI->homeModel->getConnectionUsernames($userID);
+		$i = 0;
+		foreach ($conns as $key => $conn) {
+			if($_SESSION['userData']['userID'] == $conn['active']) {
+				$details = $CI->homeModel->getUserDetails($conn['passive']);
+				$connection[$i]['userID'] = $conn['passive'];
+				$connection[$i]['name'] = $details[0]['name'];
+				$connection[$i]['username'] = $details[0]['username'];	
+			}else{
+				$details = $CI->homeModel->getUserDetails($conn['active']);
+				$connection[$i]['userID'] = $conn['active'];
+				$connection[$i]['name'] = $details[0]['name'];
+				$connection[$i]['username'] = $details[0]['username'];
+			}
+			$i++;
+		}	
+		// var_dump($connection); die();
+		return $connection;
 	}
 
 	public function getConnectionRequests($userID){
@@ -211,7 +245,6 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
 		$chats = $CI->homemodel->fetchChats($_SESSION['userData']['userID'], $offset, $limit);
-		// var_dump($chats); die();
 		$this->fixTimestamp($chats, 'timestamp', 'd M Y  g:i A');
 		$this->injectUserNames($chats);
 		return $chats;
@@ -275,7 +308,8 @@ class Home_lib {
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model');
-		$res = $CI->Home_model->fetchMessages($user_id, $offset, $limit);
+		$res = $CI->Home_model->fetchMessages($user_id, $_SESSION['userData']['userID'], $offset, $limit);
+		// var_dump($res); die();
 		return !empty($res);
 	}
 
@@ -314,15 +348,15 @@ public function injectClassName(&$data)
 				'insert_id'=> $success['insert_id']];
 	}
 
-	public function checkForNewMessages($chatter, $threshold)
+	public function checkForNewMessages($chatter, $lastid)
 	{
 		$CI = &get_instance();
-		$CI->load->model('Data_model', 'datamodel');
-		$success = $CI->datamodel->
-				check_for_new_messages($this->get_user_id(), $chatter, $threshold);
+		$CI->load->model('Home_model', 'homemodel');
+		$success = $CI->homemodel->
+				checkForNewMessages($_SESSION['userData']['userID'], $chatter, $lastid);
 		if($success){
-			$this->fix_timestamp($success, 'created_at', 'd M Y  g:i A');
-			$this->inject_class_name($success);
+			$this->fixTimestamp($success, 'created_at', 'd M Y  g:i A');
+			$this->injectClassName($success);
 		}
 		return $success;
 	}

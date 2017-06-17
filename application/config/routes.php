@@ -109,7 +109,11 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['messages/compose'] = 'home/composeMessage';
 $route['messages'] = 'home/messages';
+$route['messages/composeMessage'] = 'home/sendComposedMessage';
 $route['messages/chats/(:num)'] = 'home/chat/$1';
 $route['messages/load-more-chats/(:num)'] = 'home/loadMoreChats/$1';	
-$route['messages/load-more-messages/(:num)/(:num)'] = 'home/loadMoreMessages/$1/$2';	
+$route['messages/load-more-messages/(:num)/(:num)'] = 'home/loadMoreMessages/$1/$2';
+$route['messages/send-message'] = 'home/sendMessage';
+$route['messages/checkForNewMessages'] = 'home/checkForNewMessages';
+
 
