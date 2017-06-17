@@ -297,6 +297,10 @@ class Home_model extends CI_Model {
 		return $this->db->insert('generalUsers', $data);
 	}
 
+	public function addEmployerDetails($data){
+		return $this->db->insert('employerUsers', $data);
+	}
+
 	public function contactUs($data){
 		return $this->db->insert('contactMessages', $data);
 	}

@@ -315,6 +315,12 @@ class Home_lib {
 		return $CI->homeModel->addEducationalDetails($data);
 	}
 
+	public function addEmployerDetails($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addEmployerDetails($data);
+	}
+
 	public function contactUs($data){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');

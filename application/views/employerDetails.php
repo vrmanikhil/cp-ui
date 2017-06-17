@@ -16,13 +16,13 @@
 	<?php }?>
 
     <h3>Company Details</h3>
-    <form>
+    <form action="<?php echo base_url('web/addEmployerDetails'); ?>" method="post">
     <label>Company Name</label>
-    <input type="text" placeholder="Company Name">
+    <input type="text" placeholder="Company Name" name="companyName">
     <br><br>
     <label>Position</label>
-    <input type="text" placeholder="Position">
-    <button>Save</button>
+    <input type="text" placeholder="Position" name="position">
+    <button type="submit">Save</button>
     <br><br>
     </form>
   </body>

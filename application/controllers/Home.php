@@ -282,8 +282,6 @@ public function skillTestGuidelines(){
 	}
 
 	public function generateVerifyEMail(){
-
-
 		date_default_timezone_set("Asia/Kolkata");
 		// $email = $_SESSION['userData']['email'];
 		$checkToken = $this->home_lib->checkToken($email, '1');
