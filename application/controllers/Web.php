@@ -247,7 +247,6 @@ class Web extends CI_Controller {
         redirect(base_url('skills'));
 	}
 
-
 	public function addAchievement(){
 		$achievementTitle = '';
 		$achievementDescription = '';
@@ -408,6 +407,9 @@ class Web extends CI_Controller {
 	}
 
 	public function addEducationalDetails(){
+		$collegeID = '';
+		$courseID = '';
+		$batch = '';
 		if($x = $this->input->post('collegeID')){
 			$collegeID = $x;
 		}
@@ -424,14 +426,62 @@ class Web extends CI_Controller {
 			'batch' => $batch,
 			'userID' => $userID
 		);
+		if($collegeID == '' || $courseID == '' || $batch == ''){
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong, Please Try Again.','class'=>'error'));
+			redirect(base_url('education-details'));
+		}
 		$result = $this->home_lib->addEducationalDetails($data);
 		if($result){
-			$this->session->set_flashdata('message', array('content'=>'Educational Details Successfully Updated.','class'=>'error'));
+			$CI =& get_instance();
+			$CI->session->set_userdata('registrationLevel', '2');
+			$this->home_lib->updateRegistrationLevel($userID, '2');
+			$this->session->set_flashdata('message', array('content'=>'Details Successfully Updated.','class'=>'success'));
 			redirect(base_url());
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong, Please Try Again.','class'=>'error'));
+			redirect(base_url('education-details'));
+		}
+	}
+
+	public function addEmployerDetails(){
+		$companyName = '';
+		$position = '';
+		$userID = $_SESSION['userData']['userID'];
+		if($x = $this->input->post('companyName')){
+			$companyName = $x;
+		}
+		if($x = $this->input->post('position')){
+			$position = $x;
+		}
+		if($companyName == '' || $position == ''){
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong, Please Try Again.','class'=>'error'));
+			redirect(base_url('employer-details'));
+		}
+		$data = array(
+			'companyName' => $companyName,
+			'position'=> $position,
+			'userID' => $userID
+		);
+		$result = $this->home_lib->addEmployerDetails($data);
+		if($result){
+			$CI =& get_instance();
+			$CI->session->set_userdata('registrationLevel', '2');
+			$this->home_lib->updateRegistrationLevel($userID, '2');
+			$this->session->set_flashdata('message', array('content'=>'Details Successfully Updated.','class'=>'success'));
+			redirect(base_url());
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong, Please Try Again.','class'=>'error'));
+			redirect(base_url('employer-details'));
 		}
 	}
 
 	public function contactUs(){
+		$name = '';
+		$email = '';
+		$mobile = '';
+		$message = '';
 		if($x = $this->input->post('name')){
 			$name = $x;
 		}

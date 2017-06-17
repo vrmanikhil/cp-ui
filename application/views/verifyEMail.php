@@ -15,22 +15,10 @@
 	<?php }?>
     <h3>Verify E-Mail</h3>
     <form action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
-    <label>E-Mail Address</label>
-    <input type="email" name="email">
     <label>Token</label>
-    <input type="email" name="email">
+    <input type="text" name="token">
     <br><br>
-    <label>Course</label>
-    <select name="courseID">
-      <?php foreach ($courses as $key => $value) { ?>
-        <option value="<?php echo $value['course_id']; ?>"><?php echo $value['course']; ?></option>
-      <?php } ?>
-    </select>
-    <br><br>
-    <label>Batch</label>
-    <input type="text" placeholder="Batch" name="batch">
-    <br><br>
-    <button type="submit">Save</button>
+    <button type="submit">Verify E-Mail</button>
     </form>
   </body>
 </html>

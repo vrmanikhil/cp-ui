@@ -154,7 +154,7 @@
 							</p>
 							<p class="posting-card__status"><strong>Skills</strong> : <span><?php echo $value['skillsRequired']; ?></span></p>
 							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
+								<a data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details">View</a>
 							</div>
 						</div>
 					</div>
@@ -182,7 +182,7 @@
 		<div class="remodal" data-remodal-id="modal">
 			<button data-remodal-action="close" class="remodal-close"></button>
 			<div class="modal-body">
-				<h1>Offer <small>Content Writer Intern</small></h1>
+				<h1>Job Offer <small>Content Writer Intern</small></h1>
 				<div class="flex">
 					<div class="modal-body__left flex__item">
 						<p><strong>Why should you join FITPASS?</strong></p>
@@ -227,6 +227,7 @@
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
+
 </body>
 
 </html>

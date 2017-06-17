@@ -12,8 +12,8 @@
 		<?php } ?>
 
 		<div class="media flex">
-			<img src="<?php if($_SESSION['userData']['accountType']=='1') { echo $_SESSION['userData']['collegeLogo']; } else { echo $_SESSION['userData']['companyLogo']; } ?>" alt="" class="media-figure img-50" style="<?php if($_SESSION['userData']['accountType']=='2') echo 'border-radius: 50%'; ?>">
-			<p class="media-body text-center bold flex s-12 align-center margin-l-5"><?php if($_SESSION['userData']['accountType']=='1') { echo $_SESSION['userData']['collegeName']; } else { echo $_SESSION['userData']['companyName']; } ?></p>
+			<img src="<?php if($_SESSION['userData']['accountType']=='1') { echo $_SESSION['collegeLogo']; } else { echo $_SESSION['companyLogo']; } ?>" alt="" class="media-figure img-50" style="<?php if($_SESSION['userData']['accountType']=='2') echo 'border-radius: 50%'; ?>">
+			<p class="media-body text-center bold flex s-12 align-center margin-l-5"><?php if($_SESSION['userData']['accountType']=='1') { echo $_SESSION['collegeName']; } else { echo $_SESSION['companyName']; } ?></p>
 		</div>
 	</div>
 	<a href="<?php echo base_url('connections'); ?>">
