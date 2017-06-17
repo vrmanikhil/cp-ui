@@ -83,7 +83,7 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$relevant = 0;
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
-		var_dump($this->data['jobOffers']);die;
+		// var_dump($this->data['jobOffers']);die;
 		$this->load->view('jobOffers', $this->data);
 	}
 
