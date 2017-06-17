@@ -11,35 +11,36 @@
 	justify-content: space-between;
 }
 
-.login-from .form__label,
-.login-from .forgot-psswd {
+.login-form .form__label,
+.login-form .forgot-psswd {
 	color: white;
 }
 
-.login-from .form-group {
+.login-form .form-group {
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-.login-from .forgot-psswd {
+.login-form .forgot-psswd {
 	font-size: 0.75em;
 }
 
-.login-from .forgot-psswd:hover {
+.login-form .forgot-psswd:hover {
 	text-decoration: underline;
 }
 
-.login-from .form__input {
+.login-form .form__input {
 	display: block;
 	width: 200px;
 	border-radius: 2px;
 }
 
-.login-from .btn {
+.login-form .btn {
 	margin: auto;
 	font-size: 0.875em;
 	background: var(--midnight-blue-light);
 	border-color: var(--midnight-blue-dark);
+	padding: 7px 15px;
 }
 
 .main-container {
@@ -54,7 +55,7 @@
 
 .register-form-container {
 	background: rgba(255, 255, 255, 0.8);
-	margin: 50px 0 20px;
+	margin: 35px 0 20px;
 	padding: 20px 30px;
 	width: 100%;
 	max-width: 300px;
@@ -62,14 +63,20 @@
 
 .register-form-container > h2 {
 	margin: 0 0 10px;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .register-form .form-group {
 	padding-left: 0;
 }
 
+.register-form .form__input {
+	margin: 5px 0;
+}
+
 .register-form .select {
-	width: auto;
+	width: 70px;
 }
 
 .register-form .btn {
@@ -78,4 +85,37 @@
 	width: 100%;
 	max-width: 130px;
 	text-transform: uppercase;
+	margin: auto;
+	display: block;
+}
+
+label[for="accountType"] {
+	display: inline-block;
+	width: calc(100% - 75px);
+}
+
+.forgot-psswd-modal {
+	max-width: 550px;
+}
+
+.forgot-psswd-modal .remodal-close {
+	right: 0;
+	left: auto;
+}
+
+.forgot-psswd-modal .modal-body {
+	text-align: left;
+}
+
+.forgot-psswd-form-container > h2 {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.forgot-psswd-form {
+	overflow: hidden;
+}
+
+.forgot-psswd-form input[type="submit"] {
+	float: right;
 }
