@@ -120,10 +120,10 @@ class Home_model extends CI_Model {
 
 	public function fetchChatIds($user)
 	{
-		$this->db->select_max('messageID');
+		// $this->db->select_max('messageID');
 		$this->db->where('receiver', $user);
 		$this->db->or_where('sender', $user);
-		$this->db->group_by('receiver + sender', false);
+		// $this->db->group_by('receiver + sender', false);
 		$res = $this->db->get('messages')->result_array();
 		// var_dump($res[0]);die();
 		return array_column($res, 'messageID');

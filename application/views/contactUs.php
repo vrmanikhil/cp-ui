@@ -21,14 +21,17 @@
 			<div class="main-body flex__item">
 				<div class="card">
 					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">We'd Love to Hear from You</h1>
-					<label style="font-size: 0.75rem; text-transform: uppercase; font-weight:bold;">Contact Us</label>
+					<label style="font-size: 0.75rem; text-transform: uppercase; font-weight:bold;">Reach Us</label>
 					<p style="font-size: 0.75rem; margin-top:10px;"><strong>Mobile: </strong> +91-7503705892</p>
 					<p style="font-size: 0.75rem; margin-top:10px;"><strong>E-Mail: </strong> hello@campuspuppy.com</p>
-					<p style="font-size: 0.75rem; margin-top:10px;"><strong>Address: </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi</p>
+					<p style="font-size: 0.75rem; margin-top:10px;"><strong>Registered Address: </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi</p>
+					<p style="font-size: 0.75rem; margin-top:10px;"><strong>Office Address: </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi</p>
 				</div>
 
 
 				<form class="contact-us__form form" method="post" action="<?php echo base_url('web/contactUs'); ?>">
+					<label style="font-size: 0.75rem; text-transform: uppercase; font-weight:bold;">Drop Us a Message</label><br>
+
 				<label for="name" class="form__label">Name</label>
 				<input type="text" id="name" name="name" placeholder="Name" class="form__input" required>
 

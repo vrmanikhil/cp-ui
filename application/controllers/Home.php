@@ -319,12 +319,7 @@ class Home extends CI_Controller {
 	public function loadMoreMessages($user, $offset)
 	{
 		$messages = $this->home_lib->fetchConversation($user, $offset);
-		echo json_encode(['content'=> $messages,
-<<<<<<< HEAD
-					'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
-=======
-			'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
->>>>>>> cf658d0a8f819f84c39d51ee97e073b9bd9028eb
+		echo json_encode(['content'=> $messages, 'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
 		die;
 	}
 
