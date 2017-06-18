@@ -62,7 +62,7 @@
 			<div class="main-body flex__item">
 				<div class="feed">
 					<div class="card">
-						<h1 style="font-size: 1rem; text-transform: uppercase; text-align: center; margin-top: 0;">Job and Internship Feeds</h1>
+						<h1 style="font-size: 1rem; text-transform: uppercase; text-align: center; margin-top: 0;"><b>Job and Internship Feeds</b></h1>
 					</div>
 					<div class="feed-post card">
 						<div class="feed-post__head">

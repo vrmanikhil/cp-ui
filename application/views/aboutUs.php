@@ -23,13 +23,8 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
-					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">About Us</h1>
+					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;"><b>About Us</b></h1>
 					<?php echo $about[0]['aboutUs']; ?>
-				</div>
-				<div class="card">
-				<?php
-				   print_r ($about[0]['aboutUs']);
-				  ?>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

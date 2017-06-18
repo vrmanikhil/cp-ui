@@ -579,9 +579,12 @@ class Web extends CI_Controller {
 		}
 	}
 
-	public function hello(){
-		$time = strtotime(date("d M Y H:i:s"));
-		echo $time;
+	public function search(){
+		$query = '';
+		if($x = $this->input->get('query')){
+			$query = $x;
+		}
+		echo $query;die;
 	}
 
 }
