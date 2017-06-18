@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>About Us|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/contact.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
+	<link href="<?php if(isset($_SESSION['userData']['loggedIn'])){ echo base_url('assets/css/components/header.css'); } else { echo base_url('/assets/css/components/logged-out-header.css'); }  ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -16,7 +19,7 @@
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
 	<div class="layout-container flex flex--col">
-		<?php echo $header; ?>
+		<?php if(isset($_SESSION['userData']['loggedIn'])){ echo $header; } else { echo $headerLogin; } ?>
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
