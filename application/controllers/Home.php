@@ -79,6 +79,11 @@ class Home extends CI_Controller {
 		$this->load->view('uploadIdentityDoc', $this->data);
 	}
 
+	public function userProfile()
+	{
+		$this->load->view('userProfile', $this->data);
+	}
+
 	public function chatNew()
 	{
 		$this->redirection();
