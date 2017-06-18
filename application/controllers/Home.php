@@ -148,9 +148,12 @@ class Home extends CI_Controller {
 		$this->load->view('coat', $this->data);
 	}
 
-	public function contactUs()
-	{
+	public function contactUs(){
 		$this->load->view('contactUs', $this->data);
+	}
+
+	public function search(){
+		$this->load->view('search', $this->data);
 	}
 
 	public function addJobOffer(){
