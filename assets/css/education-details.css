@@ -23,9 +23,13 @@
 	max-width: 600px;
 }
 
+.education-details-container > h2 {
+	text-transform: uppercase;
+	text-align: center;
+}
+
 .form input[type="submit"] {
 	border: 0;
 	display: block;
 	margin: auto;
-	text-transform: uppercase;
 }
