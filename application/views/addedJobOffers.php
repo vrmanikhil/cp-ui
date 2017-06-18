@@ -77,10 +77,10 @@
 				<?php foreach ($addedJobOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="<?php echo $_SESSION['userData']['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong><?php echo $_SESSION['userData']['companyName']; ?></strong>
+								<strong><?php echo $_SESSION['companyName']; ?></strong>
 							</p>
 							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
 							<p class="posting-card__status"><strong>Skills</strong> : <?php echo $value['skillsRequired']; ?><span></span></p>
