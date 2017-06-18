@@ -251,6 +251,7 @@ class Home_lib {
 
 	public function fixTimestamp(&$data, $timestamp, $format)
 	{
+		date_default_timezone_set("Asia/Kolkata");
 		for($i =0; $i < count($data); $i++){
 			$data[$i][$timestamp] = date($format, strtotime($data[$i][$timestamp]));
 		}
