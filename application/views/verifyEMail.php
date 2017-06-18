@@ -19,7 +19,7 @@
 		<?php echo $header; ?>
 		<main class="flex main-container">
 			<div class="globalContainer flex">
-				<div class="main-body flex__item">
+				<div class="main-body flex__item flex flex--col">
 					<div class="verify-email-container">
 						<h2>Verify E-Mail</h2>
 						<form class="form" action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
