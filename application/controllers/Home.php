@@ -68,6 +68,11 @@ class Home extends CI_Controller {
 		$this->load->view('verifyEMail', $this->data);
 	}
 
+	public function verifyMobileNumber()
+	{
+		$this->load->view('verifyMobileNumber', $this->data);
+	}
+
 	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$this->redirection();

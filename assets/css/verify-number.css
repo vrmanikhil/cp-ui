@@ -1,0 +1,44 @@
+@import url('/assets/css/base/normalize.css');
+@import url('/assets/css/base/layout.css');
+@import url('/assets/css/base/base.css');
+@import url('/assets/css/components/header.css');
+@import url('/assets/css/components/footer.css');
+@import url('/assets/css/components/forms.css');
+.primary-header {
+	margin: 0;
+}
+.globalContainer > .main-body {
+	margin-right: 0;
+	max-width: 100%;
+}
+.main-container {
+	background: url('/assets/img/landing-page-bg.png') center center no-repeat;
+	background-size: cover;
+}
+.verify-number-container {
+	background: rgba(255, 255, 255, 0.8);
+	margin: auto;
+	padding: 20px 30px;
+	width: 100%;
+	max-width: 600px;
+}
+
+.verify-number-container > h2 {
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.form input[type="submit"] {
+	border: 0;
+	display: block;
+	margin: auto;
+}
+
+.resend-otp {
+	text-align: right;
+}
+
+.resend-otp > a {
+	font-size: 0.875em;
+}

@@ -56,7 +56,7 @@ $route['home'] = 'home/home';
 $route['education-details'] = 'home/educationDetails';
 $route['employer-details'] = 'home/employerDetails';
 $route['verify-email'] = 'home/verifyEMail';
-
+$route['verify-mobile-number'] = 'home/verifyMobileNumber';
 
 $route['change-password'] = 'home/changePassword';
 $route['reset-password'] = 'home/resetPassword';
@@ -112,7 +112,7 @@ $route['messages/compose'] = 'home/composeMessage';
 $route['messages'] = 'home/messages';
 $route['messages/composeMessage'] = 'home/sendComposedMessage';
 $route['messages/chats/(:num)'] = 'home/chat/$1';
-$route['messages/load-more-chats/(:num)'] = 'home/loadMoreChats/$1';	
+$route['messages/load-more-chats/(:num)'] = 'home/loadMoreChats/$1';
 $route['messages/load-more-messages/(:num)/(:num)'] = 'home/loadMoreMessages/$1/$2';
 $route['messages/send-message'] = 'home/sendMessage';
 $route['messages/checkForNewMessages'] = 'home/checkForNewMessages';
