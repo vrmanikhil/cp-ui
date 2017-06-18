@@ -324,6 +324,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserSkills($userID){
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID');
 		$result = $this->db->get_where('userSkills', array('userID' => $userID));
 		return $result->result_array();
 	}

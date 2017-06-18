@@ -179,6 +179,7 @@ class Home extends CI_Controller {
 
 	public function skills(){
 		$this->redirection();
+		$this->data['userSkills'] = $this->home_lib->getUserSkills($_SESSION['userData']['userID']);
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('skills', $this->data);
 	}
@@ -320,13 +321,13 @@ public function skillTestGuidelines(){
 	public function loadMoreMessages($user, $offset)
 	{
 		$messages = $this->home_lib->fetchConversation($user, $offset);
-		echo json_encode(['content'=> $messages, 
+		echo json_encode(['content'=> $messages,
 					'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
 		die;
 	}
 
 	public function sendMessage()
-	{	
+	{
 		$message = $this->input->post('message');
 		$receiver = $this->input->post('to');
         $response = $this->home_lib->sendMessage($receiver, $message);
