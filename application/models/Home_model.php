@@ -275,8 +275,6 @@ class Home_model extends CI_Model {
 			$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID');
 			$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID');
 			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, GROUP_CONCAT(jobLocations.cityID) as cityIDs, GROUP_CONCAT(indianCities.city) as city, employerUsers.companyName, employerUsers.companyLogo');
-			// $this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, employerUsers.companyName, employerUsers.companyLogo');
-
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');

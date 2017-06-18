@@ -26,14 +26,14 @@
 				<h1 class="title">We'd Love to Hear from You</h1>
 				<div class="flex">
 					<div class="left">
-						<p>Reach Us</p>
+						<p><strong>Reach Us</strong></p>
 						<p><strong>Mobile : </strong> +91-7503705892</p>
 						<p><strong>E-Mail : </strong> <a href="mailto:hello@campuspuppy.com">hello@campuspuppy.com</a></p>
 						<address>
-							<strong>Registered Address : </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
+							<strong>Registered Office: </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
 						</address>
 						<address>
-							<strong>Office Address : </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
+							<strong>Office Address: </strong><br>TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
 						</address>
 					</div>
 					<div class="right">
