@@ -3,8 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>About Us|CampusPuppy</title>
-	<link href="/assets/css/content.css" rel="stylesheet">
+	<title>Verify Email | CampusPuppy</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
+	<link href="/assets/css/verify-email.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -13,12 +14,33 @@
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
-    <h3>Verify E-Mail</h3>
-    <form action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
-    <label>Token</label>
-    <input type="text" name="token">
-    <br><br>
-    <button type="submit">Verify E-Mail</button>
-    </form>
-  </body>
+
+	<div class="layout-container flex flex--col">
+		<?php echo $header; ?>
+		<main class="flex main-container">
+			<div class="globalContainer flex">
+				<div class="main-body flex__item">
+					<div class="verify-email-container">
+						<h2>Verify E-Mail</h2>
+						<form class="form" action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
+						<div class="form-group">
+							<label for="token" class="form__label">Token</label>
+							<input type="text" name="token" id="token" placeholder="Enter your token" class="form__input">
+							<div class="resend-verification">
+								<a href="javascript:">Resend verification code</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Verify E-Mail" class="btn btn--primary">
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</main>
+		<?php echo $footer; ?>
+	</div>
+	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+</body>
 </html>
