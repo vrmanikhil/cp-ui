@@ -70,7 +70,7 @@
 								<option value="2">Yes</option>
 							</select>
 						</div>
-						<p class="register-info">By clicking register button you agree to our <a href="javascript:">terms and condition</a> and <a href="javascript:">privacy policy</a>.</p>
+						<p class="register-info">By clicking register button you agree to our <a href="<?php echo base_url('terms-and-conditions'); ?>"><b>Terms and Condition</b></a> and <a href="<?php echo base_url('privacy-policy'); ?>"><b>Privacy Policy</b></a>.</p>
 						<div class="form-group">
 							<input type="submit" value="Register" class="btn btn--primary">
 						</div>

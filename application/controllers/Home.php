@@ -66,6 +66,7 @@ class Home extends CI_Controller {
 	}
 
 	public function verifyEMail(){
+		$this->generateVerifyEMail();
 		$this->load->view('verifyEMail', $this->data);
 	}
 
@@ -389,7 +390,7 @@ class Home extends CI_Controller {
 
 	public function generateVerifyEMail(){
 		date_default_timezone_set("Asia/Kolkata");
-		// $email = $_SESSION['userData']['email'];
+		$email = $_SESSION['userData']['email'];
 		$checkToken = $this->home_lib->checkToken($email, '1');
 		$currentTime = strtotime(date("d M Y H:i:s"));
 		if($checkToken){
@@ -420,7 +421,8 @@ class Home extends CI_Controller {
 				'email' => $email,
 				'tokenType' => '1',
 				'generatedAt' => $currentTime,
-				'expiry' => $expiry
+				'expiry' => $expiry,
+				'active' => '1'
 			);
 			$this->home_lib->insertPasswordToken($tokenData);
 			$emailData['token'] = $token;
