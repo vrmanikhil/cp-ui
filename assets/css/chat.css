@@ -1,0 +1,62 @@
+@import url('/assets/css/base/normalize.css');
+@import url('/assets/css/base/layout.css');
+@import url('/assets/css/base/base.css');
+@import url('/assets/css/components/header.css');
+@import url('/assets/css/components/footer.css');
+@import url('/assets/css/components/forms.css');
+@import url('/assets/css/components/feed-sidepane-components.css');
+.messages__section-title {
+	font-size: 1rem;
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: 5px;
+}
+.explore-panel{
+	margin-bottom: 10px;
+}
+
+.messages-container {
+	margin: 10px -10px;
+	border-top: 1px solid var(--light-grey);
+	border-bottom: 1px solid var(--light-grey);
+	max-height: 500px;
+	overflow-y: auto;
+}
+
+.user-message {
+	padding: 10px;
+	margin: 0;
+}
+
+.receiver {
+	flex-direction: row-reverse;
+	text-align: right;
+	background: var(--light-grey);
+}
+
+.receiver > .media-figure {
+	margin-right: 0;
+	margin-left: 10px;
+}
+
+.form .form__input {
+	margin: 0;
+	flex-grow: 1;
+}
+
+.form .horizontal-group {
+	align-items: center;
+}
+
+.message-input-container {
+	flex-grow: 1;
+}
+
+.form input[type="submit"] {
+	padding: 9px 10px;
+	border: 0;
+}
+
+.form [name="message"] {
+	margin-bottom: -5px;
+}

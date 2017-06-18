@@ -70,6 +70,7 @@
 								<option value="2">Yes</option>
 							</select>
 						</div>
+						<p class="register-info">By clicking register button you agree to our <a href="javascript:">terms and condition</a> and <a href="javascript:">privacy policy</a>.</p>
 						<div class="form-group">
 							<input type="submit" value="Register" class="btn btn--primary">
 						</div>

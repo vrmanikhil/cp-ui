@@ -54,3 +54,13 @@ label[for="accountType"] {
 	display: inline-block;
 	width: calc(100% - 75px);
 }
+
+.register-info {
+	text-align: center;
+	font-size: 0.875em;
+	margin-bottom: 10px;
+}
+
+.register-info > a {
+	font-size: 0.875rem;
+}
