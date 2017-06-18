@@ -5,6 +5,10 @@
 @import url('/assets/css/components/feed-sidepane-components.css');
 @import url('/assets/css/components/forms.css');
 
+.primary-header {
+	margin-bottom: 10px;
+}
+
 .globalContainer > .main-body {
 	max-width: 764px;
 }
