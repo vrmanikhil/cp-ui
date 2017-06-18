@@ -455,7 +455,8 @@ class Home extends CI_Controller {
 		var_dump($this->data['userDetails']);die;
 	}
 
-	public function resetPassword(){
+	public function resetPassword()
+	{
 		$this->session->sess_destroy();
 		$this->load->view('resetPassword', $this->data);
 	}
