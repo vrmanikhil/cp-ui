@@ -15,7 +15,7 @@
 	background: url('/assets/img/landing-page-bg.png') center center no-repeat;
 	background-size: cover;
 }
-.education-details-container {
+.upload-identity-doc-container {
 	background: rgba(255, 255, 255, 0.8);
 	margin: auto;
 	padding: 20px 30px;
@@ -23,13 +23,22 @@
 	max-width: 600px;
 }
 
-.education-details-container > h2 {
+.upload-identity-doc-container > h2 {
 	text-transform: uppercase;
 	text-align: center;
+	margin-top: 10px;
 }
 
 .form input[type="submit"] {
 	border: 0;
 	display: block;
 	margin: auto;
+}
+
+.show-instructions {
+	text-align: right;
+}
+
+.show-instructions > a {
+	font-size: 0.875em;
 }

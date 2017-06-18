@@ -98,11 +98,6 @@ label[for="accountType"] {
 	max-width: 550px;
 }
 
-.forgot-psswd-modal .remodal-close {
-	right: 0;
-	left: auto;
-}
-
 .forgot-psswd-modal .modal-body {
 	text-align: left;
 }

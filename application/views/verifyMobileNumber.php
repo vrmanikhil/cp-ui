@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Verify Email | CampusPuppy</title>
+	<title>Verify Mobile Number | CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
-	<link href="/assets/css/verify-email.css" rel="stylesheet">
+	<link href="/assets/css/verify-number.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -20,18 +20,18 @@
 		<main class="flex main-container">
 			<div class="globalContainer flex">
 				<div class="main-body flex__item flex flex--col">
-					<div class="verify-email-container">
-						<h2>Verify E-Mail</h2>
-						<form class="form" action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
+					<div class="verify-number-container">
+						<h2>Verify Mobile Number</h2>
+						<form class="form" action="" method="post">
 						<div class="form-group">
-							<label for="token" class="form__label">Token</label>
-							<input type="text" name="token" id="token" placeholder="Enter your token" class="form__input">
-							<div class="resend-verification">
-								<a href="javascript:">Resend verification code</a>
+							<label for="otp" class="form__label">OTP</label>
+							<input type="text" name="otp" id="otp" placeholder="Enter your OTP" class="form__input">
+							<div class="resend-otp">
+								<a href="javascript:">Resend OTP</a>
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Verify E-Mail" class="btn btn--primary">
+							<input type="submit" value="Verify Mobile Number" class="btn btn--primary">
 						</div>
 						</form>
 					</div>

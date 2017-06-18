@@ -17,7 +17,7 @@
 }
 .verify-email-container {
 	background: rgba(255, 255, 255, 0.8);
-	margin: 35px auto 20px;
+	margin: auto;
 	padding: 20px 30px;
 	width: 100%;
 	max-width: 600px;

@@ -329,3 +329,15 @@ a {
  font-size: 14px;
  letter-spacing: .5px;
 }
+
+/*
+	Modal
+ */
+.remodal-close {
+	right: 0;
+	left: auto;
+}
+
+.remodal-wrapper .modal-body {
+	text-align: left;
+}

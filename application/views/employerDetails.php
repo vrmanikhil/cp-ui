@@ -19,7 +19,7 @@
 		<?php echo $header; ?>
 		<main class="flex main-container">
 			<div class="globalContainer flex">
-				<div class="main-body flex__item">
+				<div class="main-body flex__item flex flex--col">
 					<div class="education-details-container">
 						<h2>Company Details</h2>
 						<form class="form" action="<?php echo base_url('web/addEmployerDetails'); ?>" method="post">
