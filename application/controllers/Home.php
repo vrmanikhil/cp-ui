@@ -73,6 +73,11 @@ class Home extends CI_Controller {
 		$this->load->view('verifyMobileNumber', $this->data);
 	}
 
+	public function uploadUdentityDoc()
+	{
+		$this->load->view('uploadIdentityDoc', $this->data);
+	}
+
 	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$this->redirection();

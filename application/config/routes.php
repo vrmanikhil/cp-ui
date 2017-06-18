@@ -57,6 +57,7 @@ $route['education-details'] = 'home/educationDetails';
 $route['employer-details'] = 'home/employerDetails';
 $route['verify-email'] = 'home/verifyEMail';
 $route['verify-mobile-number'] = 'home/verifyMobileNumber';
+$route['upload-identity-doc'] = 'home/uploadUdentityDoc';
 
 $route['change-password'] = 'home/changePassword';
 $route['reset-password'] = 'home/resetPassword';
