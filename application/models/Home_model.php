@@ -242,7 +242,8 @@ class Home_model extends CI_Model {
 		$addedBy = $_SESSION['userData']['userID'];
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
-		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName');
 		$this->db->group_by('jobOffers.jobID');
 		$this->db->order_by('jobOffers.jobID', 'DESC');
 		$result = $this->db->get_where('jobOffers', array('addedBy' => $addedBy));
