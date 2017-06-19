@@ -316,6 +316,7 @@ class Home extends CI_Controller {
 
 	public function loadMoreChats($offset){
 		$number = $this->session->userdata('chats');
+		$dat['number'] = $number;
 		$dat['latest_chats'] = $this->home_lib->fetchLatestChats($offset);
 		$dat['more'] = $this->home_lib->moreChats(5 + $offset);
 		echo json_encode($dat);
@@ -324,11 +325,10 @@ class Home extends CI_Controller {
 	public function chat($chatter_id)
 	{
 		$this->home_lib->markAsRead($chatter_id);
-		$this->data['chatter_id']  = $chatter_id;
 		$messages = $this->home_lib->fetchConversation($chatter_id);
 		$this->data['usr'] = $chatter_id;
 		$chatter = $this->home_lib->getUserDetails($chatter_id);
-		$this->data['profile_image'] = $chatter[0]['profileImage'];
+		$this->data['profileImage'] = $chatter[0]['profileImage'];
 		$this->data['user_name'] = $chatter[0]['name'];
 		$more = $this->home_lib->loadMoreMessages($chatter_id, 5);
 		$this->data['more'] = $more;
@@ -339,7 +339,7 @@ class Home extends CI_Controller {
 			redirect(base_url('messages'));
 		}
 		$this->data['messages'] = $messages;
-		$this->load->view('chat', $this->data);
+		$this->load->view('chat-new', $this->data);
 	}
 
 	public function loadMoreMessages($user, $offset)
