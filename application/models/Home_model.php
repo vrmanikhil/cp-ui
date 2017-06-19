@@ -125,7 +125,7 @@ class Home_model extends CI_Model {
 		$this->db->or_where('sender', $user);
 		$this->db->group_by('receiver + sender', false);
 		$res = $this->db->get('messages')->result_array();
-		// var_dump($res[0]);die();
+		// var_dump($this->db->last_query());die();
 		return array_column($res, 'messageID');
 	}
 
