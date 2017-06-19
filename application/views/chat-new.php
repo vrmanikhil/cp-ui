@@ -164,8 +164,10 @@ var chatterImage = '<?= $profileImage ?>';
 
 var	lastId = <?php echo $messages[0]['messageID']; ?>;
   		$(document).ready(function(){
+  			container = $('.wrap').clone()
   			$('#send').click(function(){
 			msg = $('#message').val().trim();
+			i = 0;
 			data = {message: msg, to: <?php echo $usr; ?>}
 			if(msg != ''){
 				$.post('<?php echo base_url('messages/send-message'); ?>', data).done(function(res){
@@ -174,7 +176,6 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 					time = res.time
 					res = res.success
 					if(res){
-						container = $('.wrap').clone()
 						container.find('.time').html(time)
 						container.find('.msg').html(msg)
 						container.addClass('receiver')
@@ -199,20 +200,19 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 				if(res){
 					for (var i = 0; i < res.length; i++){
 						container = $('.wrap').clone()
-						container.removeClass('wrap')
 						container.find('.time').html(res[i].created_at)
 						container.find('.msg').html(res[i].message)
-						container.attr('id', res[i].class)
-						$('#chat').append(container)
+						container.addClass('sender')
+						$('#messages-container').append(container)
 						container.show()
 						$('#message').val('')
 						$('#chat').scrollTop($('#chat')
 							.prop("scrollHeight"))
 					}
-					lastId = res[i-1].id
+					lastId = res[i-1].messageID
 				}
 			})
-		}, 5000)
+		}, 1000)
 
 	})
 
