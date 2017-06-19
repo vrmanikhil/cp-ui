@@ -120,10 +120,10 @@ class Home_model extends CI_Model {
 
 	public function fetchChatIds($user)
 	{
-		$this->db->select_max('messageID');
+		// $this->db->select_max('messageID');
 		$this->db->where('receiver', $user);
 		$this->db->or_where('sender', $user);
-		$this->db->group_by('receiver + sender', false);
+		// $this->db->group_by('receiver + sender', false);
 		$res = $this->db->get('messages')->result_array();
 		// var_dump($this->db->last_query());die();
 		return array_column($res, 'messageID');
@@ -242,7 +242,8 @@ class Home_model extends CI_Model {
 		$addedBy = $_SESSION['userData']['userID'];
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
-		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName');
 		$this->db->group_by('jobOffers.jobID');
 		$this->db->order_by('jobOffers.jobID', 'DESC');
 		$result = $this->db->get_where('jobOffers', array('addedBy' => $addedBy));
@@ -268,17 +269,17 @@ class Home_model extends CI_Model {
 
 	public function getJobOffers($relevant){
 		if($relevant == 0){
-			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
-			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
-			$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
-			$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID');
-			$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, GROUP_CONCAT(jobLocations.cityID) as cityIDs, GROUP_CONCAT(indianCities.city) as city, employerUsers.companyName, employerUsers.companyLogo');
-			// $this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, employerUsers.companyName, employerUsers.companyLogo');
 
+			$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
+			$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');
+			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
+			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
+			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, GROUP_CONCAT(jobLocations.cityID) as cityIDs,GROUP_CONCAT(indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
+			// echo $this->db->last_query();die;
 			return $result->result_array();
 		}
 		else{
@@ -324,6 +325,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserSkills($userID){
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID');
 		$result = $this->db->get_where('userSkills', array('userID' => $userID));
 		return $result->result_array();
 	}

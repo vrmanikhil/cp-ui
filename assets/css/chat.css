@@ -15,40 +15,48 @@
 	margin-bottom: 10px;
 }
 
-.compose-message {
-	text-align: right;
-}
-.compose-message > .btn {
-	border: 0;
-	font-size: 0.875em;
-	display: inline-block;
-}
-
 .messages-container {
-	margin: 10px 0;
+	margin: 10px -10px;
+	border-top: 1px solid var(--light-grey);
+	border-bottom: 1px solid var(--light-grey);
+	max-height: 500px;
+	overflow-y: auto;
 }
 
 .user-message {
 	padding: 10px;
-	margin: 0 -10px;
-	border-bottom: solid 1px var(--light-grey);
+	margin: 0;
 }
 
-.user-message.unread {
+.receiver {
+	flex-direction: row-reverse;
+	text-align: right;
 	background: var(--light-grey);
 }
 
-.compose-message-modal {
-	max-width: 600px;
+.receiver > .media-figure {
+	margin-right: 0;
+	margin-left: 10px;
 }
 
-.compose-message-form-container > h2 {
-	text-transform: uppercase;
-	text-align: center;
-	margin-top: 10px;
+.form .form__input {
+	margin: 0;
+	flex-grow: 1;
 }
 
-.submit-container {
-	text-align: right;
-	padding-bottom: 0;
+.form .horizontal-group {
+	align-items: center;
+}
+
+.message-input-container {
+	flex-grow: 1;
+}
+
+.form input[type="submit"] {
+	padding: 9px 10px;
+	border: 0;
+}
+
+.form [name="message"] {
+	margin-bottom: -5px;
 }

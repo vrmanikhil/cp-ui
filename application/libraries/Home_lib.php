@@ -90,7 +90,7 @@ class Home_lib {
 				$details = $CI->homeModel->getUserDetails($conn['passive']);
 				$connection[$i]['userID'] = $conn['passive'];
 				$connection[$i]['name'] = $details[0]['name'];
-				$connection[$i]['username'] = $details[0]['username'];	
+				$connection[$i]['username'] = $details[0]['username'];
 			}else{
 				$details = $CI->homeModel->getUserDetails($conn['active']);
 				$connection[$i]['userID'] = $conn['active'];
@@ -98,7 +98,7 @@ class Home_lib {
 				$connection[$i]['username'] = $details[0]['username'];
 			}
 			$i++;
-		}	
+		}
 		// var_dump($connection); die();
 		return $connection;
 	}
@@ -251,6 +251,7 @@ class Home_lib {
 
 	public function fixTimestamp(&$data, $timestamp, $format)
 	{
+		date_default_timezone_set("Asia/Kolkata");
 		for($i =0; $i < count($data); $i++){
 			$data[$i][$timestamp] = date($format, strtotime($data[$i][$timestamp]));
 		}
@@ -297,7 +298,7 @@ class Home_lib {
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		$res = $CI->homemodel->fetchMessages($_SESSION['userData']['userID'], 
+		$res = $CI->homemodel->fetchMessages($_SESSION['userData']['userID'],
 			$user_id, $offset, $limit);
 		$this->fixTimestamp($res, 'timestamp', 'd M Y  g:i A');
 		$this->injectClassName($res);
@@ -340,9 +341,9 @@ public function injectClassName(&$data)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		$success = $CI->homemodel->sendMessage($_SESSION['userData']['userID'], 
+		$success = $CI->homemodel->sendMessage($_SESSION['userData']['userID'],
 				$receiver, $message);
-		return ['success'=> $success['success'], 
+		return ['success'=> $success['success'],
 				'time'=> date('d M Y  g:i A', time()),
 				'insert_id'=> $success['insert_id']];
 	}

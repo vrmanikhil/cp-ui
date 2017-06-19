@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.18
--- https://www.phpmyadmin.net
+-- version 4.5.4.1deb2ubuntu1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Jun 14, 2017 at 12:53 AM
--- Server version: 5.6.35-cll-lve
--- PHP Version: 5.6.30
+-- Host: localhost
+-- Generation Time: Jun 18, 2017 at 05:00 PM
+-- Server version: 5.7.18-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `campuspuppy`
@@ -26,13 +26,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE IF NOT EXISTS `achievements` (
-  `achievementID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `achievements` (
+  `achievementID` int(5) NOT NULL,
   `achievementTitle` text NOT NULL,
   `achievementDescription` text NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`achievementID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -40,13 +39,11 @@ CREATE TABLE IF NOT EXISTS `achievements` (
 -- Table structure for table `adminAuth`
 --
 
-CREATE TABLE IF NOT EXISTS `adminAuth` (
-  `adminID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adminAuth` (
+  `adminID` int(5) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`adminID`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adminAuth`
@@ -61,13 +58,12 @@ INSERT INTO `adminAuth` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE IF NOT EXISTS `colleges` (
-  `college_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `colleges` (
+  `college_id` int(5) NOT NULL,
   `college` varchar(255) NOT NULL,
   `logo` text NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `colleges`
@@ -101,10 +97,25 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 -- Table structure for table `connections`
 --
 
-CREATE TABLE IF NOT EXISTS `connections` (
+CREATE TABLE `connections` (
   `active` int(5) NOT NULL,
-  `passive` int(5) NOT NULL
+  `passive` int(5) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `connections`
+--
+
+INSERT INTO `connections` (`active`, `passive`, `status`) VALUES
+(1, 6, 1),
+(1, 2, 1),
+(17, 1, 0),
+(1, 4, 1),
+(1, 3, 1),
+(1, 10, 0),
+(11, 1, 0),
+(12, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -112,16 +123,23 @@ CREATE TABLE IF NOT EXISTS `connections` (
 -- Table structure for table `contactMessages`
 --
 
-CREATE TABLE IF NOT EXISTS `contactMessages` (
-  `contactID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contactMessages` (
+  `contactID` int(5) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
   `message` text NOT NULL,
   `messageRead` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`contactID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contactMessages`
+--
+
+INSERT INTO `contactMessages` (`contactID`, `name`, `email`, `mobile`, `message`, `messageRead`, `created_at`) VALUES
+(1, 'Nikhil Verma', 'vrmanikhil@gmail.com', 7503705892, 'Good Morning', 0, '2017-06-18 10:47:34'),
+(2, 'Hello', 'hello@abc.com', 9953017515, 'abc', 0, '2017-06-18 10:47:57');
 
 -- --------------------------------------------------------
 
@@ -129,16 +147,15 @@ CREATE TABLE IF NOT EXISTS `contactMessages` (
 -- Table structure for table `content`
 --
 
-CREATE TABLE IF NOT EXISTS `content` (
-  `content_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `content` (
+  `content_id` int(5) NOT NULL,
   `aboutUs` text NOT NULL,
   `termsAndConditions` text NOT NULL,
   `privacyPolicy` text NOT NULL,
   `coat` text NOT NULL,
   `facebook` varchar(255) NOT NULL,
-  `twitter` varchar(255) NOT NULL,
-  PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `twitter` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `content`
@@ -153,13 +170,12 @@ INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPo
 -- Table structure for table `courses`
 --
 
-CREATE TABLE IF NOT EXISTS `courses` (
-  `course_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses` (
+  `course_id` int(5) NOT NULL,
   `course` varchar(255) NOT NULL,
   `duration` int(3) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
@@ -180,14 +196,13 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `active`) VALUES
 -- Table structure for table `employerUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `employerUsers` (
+CREATE TABLE `employerUsers` (
   `userID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg',
-  UNIQUE KEY `userID` (`userID`)
+  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -222,7 +237,7 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 -- Table structure for table `generalUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `generalUsers` (
+CREATE TABLE `generalUsers` (
   `userID` int(5) NOT NULL,
   `collegeID` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
@@ -259,12 +274,11 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`, `identit
 -- Table structure for table `indianCities`
 --
 
-CREATE TABLE IF NOT EXISTS `indianCities` (
-  `cityID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `indianCities` (
+  `cityID` int(5) NOT NULL,
   `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
-  PRIMARY KEY (`cityID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=568 ;
+  `state` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `indianCities`
@@ -845,7 +859,7 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 -- Table structure for table `internshipApplicants`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipApplicants` (
+CREATE TABLE `internshipApplicants` (
   `internshipID` int(5) NOT NULL,
   `userID` int(5) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL
@@ -857,7 +871,7 @@ CREATE TABLE IF NOT EXISTS `internshipApplicants` (
 -- Table structure for table `internshipLocations`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipLocations` (
+CREATE TABLE `internshipLocations` (
   `internshipID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -868,8 +882,8 @@ CREATE TABLE IF NOT EXISTS `internshipLocations` (
 -- Table structure for table `internshipOffers`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipOffers` (
-  `internshipID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `internshipOffers` (
+  `internshipID` int(5) NOT NULL,
   `internshipTitle` varchar(255) NOT NULL,
   `internshipType` enum('1','2') NOT NULL,
   `internshipDescription` text NOT NULL,
@@ -887,9 +901,8 @@ CREATE TABLE IF NOT EXISTS `internshipOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`internshipID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -897,7 +910,7 @@ CREATE TABLE IF NOT EXISTS `internshipOffers` (
 -- Table structure for table `internshipSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipSkills` (
+CREATE TABLE `internshipSkills` (
   `internshipID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -908,7 +921,7 @@ CREATE TABLE IF NOT EXISTS `internshipSkills` (
 -- Table structure for table `jobApplicants`
 --
 
-CREATE TABLE IF NOT EXISTS `jobApplicants` (
+CREATE TABLE `jobApplicants` (
   `jobID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL
@@ -920,10 +933,20 @@ CREATE TABLE IF NOT EXISTS `jobApplicants` (
 -- Table structure for table `jobLocations`
 --
 
-CREATE TABLE IF NOT EXISTS `jobLocations` (
+CREATE TABLE `jobLocations` (
   `jobID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobLocations`
+--
+
+INSERT INTO `jobLocations` (`jobID`, `cityID`) VALUES
+(1, 183),
+(1, 135),
+(2, 200),
+(4, 200);
 
 -- --------------------------------------------------------
 
@@ -931,8 +954,8 @@ CREATE TABLE IF NOT EXISTS `jobLocations` (
 -- Table structure for table `jobOffers`
 --
 
-CREATE TABLE IF NOT EXISTS `jobOffers` (
-  `jobID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jobOffers` (
+  `jobID` int(5) NOT NULL,
   `jobTitle` varchar(255) NOT NULL,
   `jobType` enum('1','2') NOT NULL,
   `jobDescription` text NOT NULL,
@@ -948,9 +971,19 @@ CREATE TABLE IF NOT EXISTS `jobOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`jobID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobOffers`
+--
+
+INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `startDate`, `applicationDeadline`, `offerType`, `minimumOffer`, `maximumOffer`, `offer`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
+(1, 'Test Job Offer Title-1', '2', '<p>This is a Test Job Offer Title</p>', '2017-08-01', '2017-07-15', '1', 4.8, 5.4, 0, '2', 2, '1', '1', 0, 18, '2017-06-18 11:22:28'),
+(2, 'This is a Test Job Offer-2', '2', '<p>Job Offer Description</p>', '2017-08-01', '2017-07-08', '1', 3.6, 4.2, 0, '1', 1, '2', '1', 0, 20, '2017-06-18 11:29:39'),
+(3, 'Test Job Offer Title-3', '1', '<p>Job Offer Description</p>', '2017-07-17', '2017-07-10', '2', 0, 0, 1.2, '1', 1, '3', '1', 0, 19, '2017-06-18 11:29:19'),
+(4, 'Test Job Offer Title-4', '2', '<p>Job Offer Description</p>', '2017-08-02', '2017-07-15', '2', 0, 0, 2.8, '1', 1, '3', '1', 0, 18, '2017-06-18 11:27:24'),
+(5, 'Test Job Offer Title-5', '1', '<p>Job Offer Description</p>', '2017-08-16', '2017-08-01', '2', 0, 0, 3.2, '1', 1, '1', '1', 0, 33, '2017-06-18 11:29:42');
 
 -- --------------------------------------------------------
 
@@ -958,10 +991,24 @@ CREATE TABLE IF NOT EXISTS `jobOffers` (
 -- Table structure for table `jobSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `jobSkills` (
+CREATE TABLE `jobSkills` (
   `jobID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobSkills`
+--
+
+INSERT INTO `jobSkills` (`jobID`, `skillID`) VALUES
+(1, 1),
+(1, 2),
+(1, 4),
+(2, 17),
+(2, 1),
+(2, 2),
+(5, 15),
+(5, 9);
 
 -- --------------------------------------------------------
 
@@ -969,15 +1016,31 @@ CREATE TABLE IF NOT EXISTS `jobSkills` (
 -- Table structure for table `messages`
 --
 
-CREATE TABLE IF NOT EXISTS `messages` (
-  `messageID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messages` (
+  `messageID` int(5) NOT NULL,
   `sender` int(5) NOT NULL,
   `receiver` int(5) NOT NULL,
   `message` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `read` tinyint(1) NOT NULL,
-  PRIMARY KEY (`messageID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `read` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`messageID`, `sender`, `receiver`, `message`, `timestamp`, `read`) VALUES
+(1, 1, 6, 'Hello', '2017-06-18 10:15:54', 1),
+(2, 6, 1, 'Hello, How are You?', '2017-06-18 10:16:17', 1),
+(3, 1, 6, 'I am Good', '2017-06-18 10:16:47', 1),
+(4, 1, 6, 'How are you?', '2017-06-18 10:17:26', 1),
+(5, 6, 1, 'I am also fine', '2017-06-18 10:17:26', 1),
+(6, 1, 6, 'So, what\'s going on these days?', '2017-06-18 10:18:44', 1),
+(7, 2, 1, 'Hello', '2017-06-18 10:26:11', 1),
+(8, 1, 8, 'Hello, how are you?', '2017-06-18 10:19:01', 1),
+(9, 12, 1, 'Test Message', '2017-06-18 10:20:27', 1),
+(10, 13, 1, 'Another Test Message', '2017-06-18 10:20:27', 1),
+(11, 1, 4, 'Hello Brother', '2017-06-18 10:20:41', 1);
 
 -- --------------------------------------------------------
 
@@ -985,16 +1048,15 @@ CREATE TABLE IF NOT EXISTS `messages` (
 -- Table structure for table `passwordToken`
 --
 
-CREATE TABLE IF NOT EXISTS `passwordToken` (
-  `tokenID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `passwordToken` (
+  `tokenID` int(5) NOT NULL,
   `token` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `tokenType` enum('1','2') NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
   `expiry` bigint(12) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tokenID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `active` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1002,14 +1064,13 @@ CREATE TABLE IF NOT EXISTS `passwordToken` (
 -- Table structure for table `projects`
 --
 
-CREATE TABLE IF NOT EXISTS `projects` (
-  `projectID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `projects` (
+  `projectID` int(5) NOT NULL,
   `projectTitle` text NOT NULL,
   `projectLink` text NOT NULL,
   `projectDescription` text NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`projectID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1017,8 +1078,8 @@ CREATE TABLE IF NOT EXISTS `projects` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE IF NOT EXISTS `questions` (
-  `question_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `questions` (
+  `question_id` int(5) NOT NULL,
   `question` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
@@ -1026,9 +1087,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `option4` text NOT NULL,
   `answer` enum('1','2','3','4') NOT NULL,
   `skillID` int(5) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
@@ -1162,7 +1222,99 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 (125, '<p>The library function exit() causes an exit from ?</p><p>&nbsp;</p>', '<p>The loop in which it occurs</p>', '<p>The block in which it occurs</p>', '<p>The function in which it occurs</p>', '<p>The program&nbsp;in which it occurs</p>', '4', 6, 1),
 (126, '<p>The getche() library function</p><p>&nbsp;</p>', '<p>&nbsp;returns a character when any key is pressed</p>', '<p>returns a character when ENTER is pressed</p>', '<p>displays a character on the screen when any key is pressed</p>', '<p>does not display a character on the screen</p>', '1', 6, 1),
 (127, '<p>When an argument is passed by reference</p><p>&nbsp;</p>', '<p>a variable is created in function to hold the argument value</p>', '<p>&nbsp;the function cannot access the argument value</p>', '<p>a temporary variable is created in the calling program to hold arguments value</p>', '<p>none of these</p>', '1', 6, 1),
-(128, '<p>Overloaded function</p><p>&nbsp;</p>', '<p>are a group of functions,with the same value</p>', '<p>all have the same number and types of arguments</p>', '<p>&nbsp;make life simpler for programmers</p>', '<p>&nbsp;may fail unexpectedly due to stress</p>', '3', 6, 1);
+(128, '<p>Overloaded function</p><p>&nbsp;</p>', '<p>are a group of functions,with the same value</p>', '<p>all have the same number and types of arguments</p>', '<p>&nbsp;make life simpler for programmers</p>', '<p>&nbsp;may fail unexpectedly due to stress</p>', '3', 6, 1),
+(129, '<p>In C#&nbsp;variables are categorized into ..........<br /><br />i) Value types &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ii) Reference types &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; iii) initial types &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; iv) pointer types<br /><br />&nbsp;</p>', '<p>i, ii and iii only</p>', '<p>ii, iii and iv only</p>', '<p>i, ii and iv only</p>', '<p>All i, ii, iii and iv</p>', '3', 5, 1),
+(130, '<p>Value type variables can be assigned a value directly which are derived from the class&nbsp;<br /><br />&nbsp;</p>', '<p>System.value<br />&nbsp;</p>', '<p>System.ValueType</p>', '<p>General.ValueType</p>', '<p>Variable.ValueType</p>', '2', 5, 1),
+(131, '<p>The various data types&nbsp;used in C# are&nbsp;<br /><br />i) Integral type&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ii) Floating point types &nbsp; &nbsp; &nbsp;&nbsp; iii) Boolean types &nbsp; &nbsp; &nbsp; iv) Nullable type<br /><br />&nbsp;</p>', '<p>i, ii and iii only</p>', '<p>ii, iii and iv only</p>', '<p>i, iii and iv only</p>', '<p>All i, ii, iii and iv</p>', '4', 5, 1),
+(132, '<p>The built-in operators that are provided by C# programming language&nbsp;are...<br /><br />i) Arithmetic operators&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ii) Logical operators &nbsp; &nbsp; &nbsp; iii) Bitwise operators &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; iv) Assignment operators<br /><br />&nbsp;</p>', '<p>i, ii and iii only</p>', '<p>ii, iii and iv only</p>', '<p>i, iii and iv only</p>', '<p>All i, ii, iii and iv</p>', '4', 5, 1),
+(133, '<p>Match the different Bitwise operators supported by C# with their descriptions.<br /><br />i) &amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a) Binary Left Shift Operator<br /><br />ii) ^ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b) Binary Right Shift Operator<br /><br />iii) &lt;&lt; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c) Binary XOR operator<br /><br />iv) &gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; d) Binary AND operator<br /><br />&nbsp;</p>', '<p>i-d, ii-c, iii-a, iv-b</p>', '<p>i-b, ii-c, iii-a, iv-d</p>', '<p>i-c, ii-a, iii-b, iv-d</p>', '<p>i-a, ii-c, iii-d, iv-b</p>', '1', 5, 1),
+(134, '<p>What will be the value of the following expression if x=10?<br /><br />&nbsp;</p>', '<p>25</p>', '<p>-5</p>', '<p>10</p>', '<p>15</p>', '1', 5, 1),
+(135, '<p>While passing parameter to a method ................ copies the actual value of an argument into the formal parameter of the function.<br /><br />&nbsp;</p>', '<p>Output Parameter<br />&nbsp;</p>', '<p>Value Parameter</p>', '<p>Reference Parameter</p>', '<p>Initial Parameter</p>', '2', 5, 1),
+(136, '<p>In C# methods can be defined by using which of the following syntex?<br /><br />&nbsp;</p>', '<p>&lt;<a target="_blank" href="http://en.wikipedia.org/wiki/Method_%28computer_programming%29">Method</a>&nbsp;Name&gt; (parameter list) { Method body }</p>', '<p>&lt;Method Name&gt; &lt;Return Type&gt; &lt;Access Specifier&gt; (parameter list) { Method body }<br />&nbsp;</p>', '<p>&lt;Return Type&gt; &lt;Method Name&gt; &lt;Access Specifier&gt; (parameter list) { Method body }</p>', '<p>None of the above</p>', '1', 5, 1),
+(137, '<p>Which of the following are the methods to assign values to an array?<br /><br />i) double [ ] score = {234.0, 214.5, 572.0};<br /><br />ii) int [ ] marks = new int [3] {33, 45, 67};<br /><br />iii) int [ ] marks = new int [ ] {33, 45, 67};<br /><br />&nbsp;</p>', '<p>i and ii only</p>', '<p>ii and iii only</p>', '<p>i and iii only<br />&nbsp;</p>', '<p>All i, ii, iii</p>', '4', 5, 1),
+(138, '<p>State whether the following statements are True or False.<br /><br />i) Unlike classes, structures cannot inherit other structures or classes.<br /><br />ii) A structure can implement one or more interfaces.<br /><br />iii) Structure members can be specified as abstract, virtual or protected.<br /><br />&nbsp;</p>', '<p>i- True, ii- False, iii-True</p>', '<p>i- False, ii- True, iii-True</p>', '<p>i-True, ii-True, iii-False</p>', '<p>i- False, ii- False, iii-True</p>', '3', 5, 1),
+(139, '<p>Features of readonly variables</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>It is allocated at compile time</p>', '<p>Declaration and initialization can be separated</p>', '<p>It is initialized at run time</p>', '<p>all of these</p>', '4', 5, 1),
+(140, '<p>_______________ represents a drawing surface and provides methods for rendering to that drawing surface.</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>Graphic object</p>', '<p>Pens object</p>', '<p>Brushes object</p>', '<p>Colors object</p>', '1', 5, 1),
+(141, '<p>What is the output of the code&nbsp;<br /><br />public class B : A { }</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>Errors</p>', '<p>It defines a class that inherits the public methods of A only.</p>', '<p>It defines a class that inherits all the methods of A but the private members cannot be accessed.</p>', '<p>b and c</p>', '3', 5, 1),
+(142, '<p>A variable which is declared inside a method is called a________variable</p><p><br />&nbsp;</p>', '<p>Serial</p>', '<p>Local</p>', '<p>Private</p>', '<p>Static</p>', '2', 5, 1),
+(143, '<p>___________________ allow to encapsulate discrete units of functionality and provide a graphical representation of that functionality to the user</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>controls</p>', '<p>object</p>', '<p>class</p>', '<p>graphics</p>', '1', 5, 1),
+(144, '<p>What is the .NET collection class that allows an element to be accessed using a unique key?</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>HashTable</p>', '<p>ArrayList</p>', '<p>SortedList</p>', '<p>None of these</p>', '1', 5, 1),
+(145, '<p>What does the keyword virtual mean in the method definition?</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>The method is public</p>', '<p>The method can be derived</p>', '<p>The method is static</p>', '<p>The method can be over-ridden</p>', '4', 5, 1),
+(146, '<p>Is there any error in the following code? If yes, identify the error.&nbsp;<br /><br />EmployeeMgmt constructor: public int EmployeeMgmt() { emp_id = 100; }</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>Return type</p>', '<p>No errors</p>', '<p>Formal parameters</p>', '<p>Name</p>', '1', 5, 1),
+(147, '<p>What is accessibility modifier &ldquo;protected internal&rdquo;?</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>It is available to classes that are within the same assembly or derived from the specified base class.</p>', '<p>It is available within the class definition</p>', '<p>It is the most permissive access level</p>', '<p>It is the least permissive access level</p>', '1', 5, 1),
+(148, '<p>Which of the following is incorrect about System.Text.StringBuilder and System.String?</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>StringBuilder is more efficient when there is a large amount of string manipulation</p>', '<p>Strings are immutable, so each time a string is changed, a new instance in memory is created.</p>', '<p>StringBuilder is mutable; when you modify an instance of the StringBuilder class, you modify the actual string, not a copy</p>', '<p>Strings are mutable in .Net</p>', '4', 5, 1),
+(149, '<p>Difference between Convert.ToString() and ToString()</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>Convert.ToString() handles null values but ToString() doesn&#39;t</p>', '<p>ToString() output as per format supplied</p>', '<p>Convert.ToString() only handles null values</p>', '<p>ToString() handles null values but Convert.ToString() doesn&#39;t</p>', '1', 5, 1),
+(150, '<p>CLR is the .NET equivalent of _________.<br />&nbsp;</p>', '<p>Java Virtual Machine</p>', '<p>Common Language Runtime</p>', '<p>Common Type System</p>', '<p>Common Language Specification</p>', '1', 5, 1),
+(151, '<p>The CLR is physically represented by an assembly named _______<br />&nbsp;</p>', '<p>mscoree.dll</p>', '<p>mcoree.dll</p>', '<p>msoree.dll</p>', '<p>mscor.dll</p>', '1', 5, 1),
+(152, '<p>SOAP stands for __________.<br />&nbsp;</p>', '<p>Simple Object Access Program</p>', '<p>Simple Object Access Protocol</p>', '<p>Simple Object Application Protocol</p>', '<p>Simple Object Account Protocol</p>', '2', 5, 1),
+(153, '<p>The ____ language allows more than one method in a single class<br />&nbsp;</p>', '<p>C#</p>', '<p>J#</p>', '<p>C++</p>', '<p>C</p>', '1', 5, 1),
+(154, '<p>In C#, a subroutine is called a ________.<br />&nbsp;</p>', '<p>Function</p>', '<p>Metadata</p>', '<p>Method</p>', '<p>Managed code</p>', '3', 5, 1),
+(155, '<p>All C# applications begin execution by calling the _____ method.<br />&nbsp;</p>', '<p>Class()</p>', '<p>Main()</p>', '<p>Submain()</p>', '<p>Namespace</p>', '2', 5, 1),
+(156, '<p>A _______ is an identifier that denotes a storage location<br />&nbsp;</p>', '<p>Constant</p>', '<p>Reference type</p>', '<p>Variable</p>', '<p>Object</p>', '3', 5, 1),
+(157, '<p>_________ are reserved, and cannot be used as identifiers.<br />&nbsp;</p>', '<p>Keywords</p>', '<p>literal</p>', '<p>variables</p>', '<p>Identifiers</p>', '1', 5, 1),
+(158, '<p>Boxing converts a value type on the stack to an ______ on the heap.<br />&nbsp;</p>', '<p>Bool type</p>', '<p>Instance type</p>', '<p>Class type</p>', '<p>Object type</p>', '4', 5, 1),
+(159, '<p>The character pair ?: is a________________available in C#.<br />&nbsp;</p>', '<p>Unary operator</p>', '<p>Ternary operator</p>', '<p>Decision operator</p>', '<p>Functional operator</p>', '2', 5, 1),
+(160, '<p>In C#, all binary operators are ______.<br />&nbsp;</p>', '<p>Center-associative</p>', '<p>Right-associative</p>', '<p>Left-associative</p>', '<p>Top-associative</p>', '3', 5, 1),
+(161, '<p>An _______ is a symbol that tells the computer to perform certain mathematical or logical manipulations.<br />&nbsp;</p>', '<p>Operator</p>', '<p>Expression</p>', '<p>Condition&nbsp;</p>', '<p>Logic</p>', '1', 5, 1),
+(162, '<p>A _____ is any valid C# variable ending with a colon.<br />&nbsp;</p>', '<p>goto</p>', '<p>Label</p>', '<p>Logical</p>', '<p>Bitwise</p>', '2', 5, 1),
+(163, '<p>C# has _______ operator, useful for making two way decisions.<br />&nbsp;</p>', '<p>Looping</p>', '<p>Functional</p>', '<p>Exponential</p>', '<p>Conditional</p>', '4', 5, 1),
+(164, '<p>________causes the loop to continue with the next iteration after skipping any statements in between.<br />&nbsp;</p>', '<p>Loop</p>', '<p>Exit</p>', '<p>Break</p>', '<p>Continue</p>', '4', 5, 1),
+(165, '<p>Arrays in C# are ______ objects<br />&nbsp;</p>', '<p>Reference</p>', '<p>Logical</p>', '<p>Value</p>', '<p>Arithmetic</p>', '1', 5, 1),
+(166, '<p>C# does not support _____ constructors.<br />&nbsp;</p>', '<p>parameterized</p>', '<p>parameter-less</p>', '<p>class</p>', '<p>method</p>', '2', 5, 1),
+(167, '<p>A structure in C# provides a unique way of packing together data of ______ types.<br />&nbsp;</p>', '<p>Different</p>', '<p>Same</p>', '<p>Invoking</p>', '<p>Calling</p>', '1', 5, 1),
+(168, '<p>Computer Network is&nbsp;</p>', '<p>Collection of hardware components and computers</p>', '<p>Interconnected by communication channels</p>', '<p>Sharing of resources and information</p>', '<p>All of the above</p>', '4', 7, 1),
+(169, '<p>What is a Firewall in Computer Network?</p>', '<p>The physical boundary of Network</p>', '<p>An operating System of Computer Network</p>', '<p>A system designed to prevent unauthorized access</p>', '<p>A web browsing Software</p>', '3', 7, 1),
+(170, '<p>How many layers does OSI Reference Model has?</p>', '<p>4</p>', '<p>5</p>', '<p>6</p>', '<p>7</p>', '4', 7, 1),
+(171, '<p>DHCP is the abbreviation of&nbsp;</p>', '<p>Dynamic Host Control Protocol</p>', '<p>Dynamic Host Configuration Protocol</p>', '<p>Dynamic Hyper Control Protocol</p>', '<p>Dynamic Hyper Configuration Protocol</p>', '2', 7, 1),
+(172, '<p>IPV4 Address is&nbsp;</p>', '<p>8 bit</p>', '<p>16&nbsp;bit</p>', '<p>32 bit</p>', '<p>64 bit</p>', '3', 7, 1),
+(173, '<p>DNS is the abbreviation of&nbsp;</p>', '<p>Dynamic Name System</p>', '<p>Dynamic Network System</p>', '<p>Domain Name System</p>', '<p>Domain Network Service</p>', '3', 7, 1),
+(174, '<p>What is the meaning of Bandwidth in Network?&nbsp;</p>', '<p>Transmission capacity of a communication channels</p>', '<p>Connected Computers in the Network</p>', '<p>Class of IP used in Network</p>', '<p>None of these</p>', '1', 7, 1),
+(175, '<p>ADSL is the abbreviation of&nbsp;</p>', '<p>Asymmetric Dual Subscriber Line</p>', '<p>Asymmetric Digital System Line</p>', '<p>Asymmetric Dual System Line</p>', '<p>Asymmetric Digital Subscriber Line</p>', '4', 7, 1),
+(176, '<p>What is the use of Bridge in Network?&nbsp;</p>', '<p>to connect LANs</p>', '<p>to separate LANs</p>', '<p>to control Network Speed</p>', '<p>all of the above</p>', '1', 7, 1),
+(177, '<p>Router operates in which layer of OSI Reference Model?&nbsp;</p>', '<p>Layer 1 (Physical Layer)</p>', '<p>Layer 3 (Network Layer)</p>', '<p>Layer 4 (Transport Layer)</p>', '<p>Layer 7 (Application Layer)</p>', '2', 7, 1),
+(178, '<p>Each IP packet must contain&nbsp;</p>', '<p>Only Source address</p>', '<p>Only Destination address</p>', '<p>Source and Destination address</p>', '<p>Source or Destination address</p>', '3', 7, 1),
+(179, '<p>Bridge works in which layer of the OSI model?</p>', '<p>Appliation layer</p>', '<p>Transport layer</p>', '<p>Network layer</p>', '<p>Datalink layer</p>', '4', 7, 1),
+(180, '<p>_______ provides a connection-oriented reliable service for sending messages&nbsp;</p>', '<p>TCP</p>', '<p>IP</p>', '<p>UDP</p>', '<p>All the above</p>', '1', 7, 1),
+(181, '<p>Which layers of the OSI model are host-to-host layers?&nbsp;</p>', '<p>Transport, Session, Persentation, Application</p>', '<p>Network, Transport, Session, Presentation</p>', '<p>Datalink, Network, Transport, Session</p>', '<p>Physical, Datalink, Network, Transport</p>', '1', 7, 1),
+(182, '<p>Which of the following IP address class is Multicast</p>', '<p>Class A</p>', '<p>Class B</p>', '<p>ClassC</p>', '<p>Class D</p>', '4', 7, 1),
+(183, '<p>Which of the following is correct regarding Class B Address of IP address&nbsp;</p>', '<p>Network bit &ndash; 14, Host bit &ndash; 16</p>', '<p>Network bit &ndash; 16, Host bit &ndash; 14</p>', '<p>Network bit &ndash; 18, Host bit &ndash; 16</p>', '<p>Network bit &ndash; 12, Host bit &ndash; 14</p>', '1', 7, 1),
+(184, '<p>The last address of IP address represents</p>', '<p>Unicast address</p>', '<p>Network address</p>', '<p>Broadcast address</p>', '<p>None of the above</p>', '3', 7, 1),
+(185, '<p>How many bits are there in the Ethernet address?&nbsp;</p>', '<p>64 bits</p>', '<p>48&nbsp;bits</p>', '<p>32 bits</p>', '<p>16&nbsp;bits</p>', '2', 7, 1),
+(186, '<p>How many layers are in the TCP/IP model?&nbsp;</p>', '<p>4 Layers</p>', '<p>5 Layers&nbsp;</p>', '<p>6 Layers&nbsp;</p>', '<p>7 Layers</p>', '1', 7, 1),
+(187, '<p>Which of the following layer of OSI model also called end-to-end layer?&nbsp;</p>', '<p>Presentation layer</p>', '<p>Network layer</p>', '<p>Session layer</p>', '<p>Transport layer</p>', '4', 7, 1),
+(188, '<p>Why IP Protocol is considered as unreliable?</p>', '<p>A packet may be lost</p>', '<p>Packets may arrive out of order</p>', '<p>Duplicate packets may be generated</p>', '<p>All the above</p>', '4', 7, 1),
+(189, '<p>What is the minimum header size of an IP packet?</p>', '<p>16 bytes</p>', '<p>10 bytes</p>', '<p>20 bytes</p>', '<p>32 bytes</p>', '3', 7, 1),
+(190, '<p>Which of following provides reliable communication?</p>', '<p>TCP</p>', '<p>IP</p>', '<p>UDP</p>', '<p>All the above</p>', '1', 7, 1),
+(191, '<p>What is the address size of IPv6 ?</p>', '<p>32 bit</p>', '<p>64 bits</p>', '<p>128 bits</p>', '<p>256 bits</p>', '3', 7, 1),
+(192, '<p>What is the size of Network bits &amp; Host bits of Class A of IP address?&nbsp;</p>', '<p>Network bits 7, Host bits 24</p>', '<p>Network bits 8, Host bits 24</p>', '<p>Network bits 7, Host bits 23</p>', '<p>Network bits 8, Host bits 23</p>', '1', 7, 1),
+(193, '<p>What does Router do in a network?&nbsp;</p>', '<p>Forwards a packet to all outgoing links</p>', '<p>Forwards a packet to the next free outgoing link</p>', '<p>Determines on which outing link a packet is to be forwarded</p>', '<p>Forwards a packet to all outgoing links except the originated link</p>', '3', 7, 1),
+(194, '<p>The Internet is an example of</p>', '<p>Cell switched network</p>', '<p>Circuit switched network</p>', '<p>Packet switched network</p>', '<p>All the above</p>', '3', 7, 1),
+(195, '<p>What does protocol defines?</p>', '<p>Protocol defines what data is communicated</p>', '<p>Protocol defines how data is communicated.</p>', '<p>Protocol defines when data is communicated</p>', '<p>All the above</p>', '4', 7, 1),
+(196, '<p>What is the uses of subnetting?&nbsp;</p>', '<p>It divides one large network into several smaller ones</p>', '<p>It divides network into network classes</p>', '<p>It speeds up the speed of network</p>', '<p>None of the above</p>', '1', 7, 1),
+(197, '<p>Repeater operates in which layer of the OSI model?&nbsp;</p>', '<p>Physical Layer</p>', '<p>Data link layer</p>', '<p>Network layer</p>', '<p>Transport layer</p>', '1', 7, 1),
+(198, '<p>What is the benefit of the Networking?&nbsp;</p>', '<p>File Sharing</p>', '<p>Easier access to Resources</p>', '<p>Easier Backups</p>', '<p>All of the Above</p>', '4', 7, 1),
+(199, '<p>. Which of the following is not the Networking Devices?</p>', '<p>Gateways</p>', '<p>Linux</p>', '<p>Routers</p>', '<p>Firewalls</p>', '2', 7, 1),
+(200, '<p>What is the size of MAC Address?&nbsp;</p>', '<p>16&nbsp;bits</p>', '<p>32&nbsp;bits</p>', '<p>48&nbsp;bits</p>', '<p>64&nbsp;bits</p>', '3', 7, 1),
+(201, '<p>Which of the following can be Software?&nbsp;</p>', '<p>Routers</p>', '<p>Firewalls</p>', '<p>Gateway</p>', '<p>Modems</p>', '2', 7, 1),
+(202, '<p>What is the use of Ping command?&nbsp;</p>', '<p>To test a device on the network is reachable</p>', '<p>To test a hard disk fault</p>', '<p>To test a bug in a Application</p>', '<p>To test a Pinter Quality</p>', '1', 7, 1),
+(203, '<p>MAC Address is the example of&nbsp;</p>', '<p>Transport Layer</p>', '<p>Data Link Layer</p>', '<p>Application Layer</p>', '<p>Physical Layer</p>', '2', 7, 1),
+(204, '<p>In the relational modes, cardinality is termed as:&nbsp;</p>', '<p>Number of tuples</p>', '<p>Number of attributes</p>', '<p>Number of tables</p>', '<p>Number of constraints</p>', '2', 12, 1),
+(205, '<p>DBMS is a collection of &hellip;&hellip;&hellip;&hellip;.. that enables user to create and maintain a database.<br />&nbsp;</p>', '<p>Keys</p>', '<p>Translators</p>', '<p>Program</p>', '<p>Language Activity</p>', '3', 12, 1),
+(206, '<p>&nbsp;In a relational schema, each tuple is divided into fields called&nbsp;<br />&nbsp;</p>', '<p>Relations<br />&nbsp;</p>', '<p>Domains</p>', '<p>Queries</p>', '<p>All the above</p>', '2', 12, 1),
+(207, '<p>In an ER model, &hellip;&hellip;&hellip;&hellip;&hellip;. is described in the database by storing its data.<br />&nbsp;</p>', '<p>Entity</p>', '<p>Attribute</p>', '<p>Relationship</p>', '<p>Notation</p>', '1', 12, 1),
+(208, '<p>DFD stands for<br />&nbsp;</p>', '<p>Data Flow Document</p>', '<p>Data File Diagram</p>', '<p>Data Flow Diagram</p>', '<p>None of the above</p>', '3', 12, 1),
+(209, '<p>A top-to-bottom relationship among the items in a database is established by a&nbsp;<br />&nbsp;</p>', '<p>Hierarchical schema</p>', '<p>Network schema</p>', '<p>Relational Schema</p>', '<p>All the above</p>', '3', 12, 0),
+(210, '<p>&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; table store information about database or about the system.<br />&nbsp;</p>', '<p>SQL</p>', '<p>Nested</p>', '<p>System</p>', '<p>None of these</p>', '1', 12, 1),
+(211, '<p>&hellip;&hellip;&hellip;&hellip;..defines the structure of a relation which consists of a fixed set of attribute-domain pairs.<br />&nbsp;</p>', '<p>Instance&nbsp;</p>', '<p>Schema</p>', '<p>Program</p>', '<p>Super key</p>', '2', 12, 1),
+(212, '<p>&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; clause is an additional filter that is applied to the result.<br />&nbsp;</p>', '<p>Select</p>', '<p>Group-by</p>', '<p>Having</p>', '<p>Order-by</p>', '3', 12, 1),
+(213, '<p>&nbsp;A logical schema&nbsp;<br />&nbsp;</p>', '<p>is the entire database</p>', '<p>is a standard way of organizing information into accessible parts</p>', '<p>is a standard way of organizing information into accessible parts</p>', '<p>All the above</p>', '2', 12, 1),
+(214, '<p>&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip; is a full form of SQL.<br />&nbsp;</p>', '<p>Standard query language</p>', '<p>Sequential query language<br />&nbsp;</p>', '<p>Structured query language</p>', '<p>Server side query language</p>', '3', 12, 1),
+(215, '<p>A relational database developer refers to a record as&nbsp;<br />&nbsp;</p>', '<p>a criteria</p>', '<p>a relation</p>', '<p>a tuple</p>', '<p>an attribute</p>', '3', 12, 1),
+(216, '<p>.......... keyword is used to find the number of values in a column.<br />&nbsp;</p>', '<p>TOTAL</p>', '<p>COUNT</p>', '<p>ADD</p>', '<p>SUM</p>', '2', 12, 1),
+(217, '<p>An advantage of the database management approach is&nbsp;<br />&nbsp;</p>', '<p>data is dependent on programs</p>', '<p>data redundancy increases</p>', '<p>data is integrated and can be accessed by multiple programs</p>', '<p>None of the above</p>', '3', 12, 1),
+(218, '<p>The collection of information stored in a database at a particular moment is called as ......<br />&nbsp;</p>', '<p>schema</p>', '<p>instance of the database</p>', '<p>data domain</p>', '<p>independence</p>', '2', 12, 1),
+(219, '<p>&nbsp;Data independence means<br />&nbsp;</p>', '<p>data is defined separately and not included in programs</p>', '<p>programs are not dependent on the physical attributes of data&nbsp;</p>', '<p>programs are not dependent on the logical attributes of data&nbsp;</p>', '<p>both B and C&nbsp;</p>', '4', 12, 1),
+(220, '<p>A ......... is used to define overall design of the database<br />&nbsp;</p>', '<p>schema</p>', '<p>application program</p>', '<p>data definition language</p>', '<p>code</p>', '1', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -1170,12 +1322,11 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- Table structure for table `skills`
 --
 
-CREATE TABLE IF NOT EXISTS `skills` (
-  `skillID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `skills` (
+  `skillID` int(5) NOT NULL,
   `skill_name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`skillID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `skills`
@@ -1214,13 +1365,12 @@ INSERT INTO `skills` (`skillID`, `skill_name`, `active`) VALUES
 -- Table structure for table `testSettings`
 --
 
-CREATE TABLE IF NOT EXISTS `testSettings` (
-  `skillID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `testSettings` (
+  `skillID` int(5) NOT NULL,
   `numberQuestions` int(5) NOT NULL,
   `timeAllowed` int(5) NOT NULL,
-  `passingCriteria` int(5) NOT NULL,
-  PRIMARY KEY (`skillID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `passingCriteria` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `testSettings`
@@ -1235,8 +1385,8 @@ INSERT INTO `testSettings` (`skillID`, `numberQuestions`, `timeAllowed`, `passin
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `userID` int(5) NOT NULL,
   `username` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -1253,11 +1403,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `displayMobile` tinyint(1) NOT NULL,
   `registrationLevel` enum('1','2','3','4','5') NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -1308,13 +1455,24 @@ INSERT INTO `users` (`userID`, `username`, `name`, `email`, `mobile`, `password`
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `userSkills` (
+CREATE TABLE `userSkills` (
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
   `score` float NOT NULL,
   `testDate` bigint(12) NOT NULL,
-  `skillType` enum('0','1','2','3','4') NOT NULL
+  `skillType` enum('1','2','3','4') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userSkills`
+--
+
+INSERT INTO `userSkills` (`userID`, `skillID`, `score`, `testDate`, `skillType`) VALUES
+(1, 1, 60, 1497782274, '1'),
+(1, 2, 35, 1497782274, '2'),
+(1, 3, 57, 1497782274, '3'),
+(1, 4, 71, 1497782274, '4'),
+(1, 17, 60, 1497782274, '1');
 
 -- --------------------------------------------------------
 
@@ -1322,8 +1480,8 @@ CREATE TABLE IF NOT EXISTS `userSkills` (
 -- Table structure for table `workExperience`
 --
 
-CREATE TABLE IF NOT EXISTS `workExperience` (
-  `weID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workExperience` (
+  `weID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -1331,10 +1489,213 @@ CREATE TABLE IF NOT EXISTS `workExperience` (
   `startYear` int(4) NOT NULL,
   `endMonth` varchar(255) NOT NULL,
   `endYear` int(4) NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`weID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `achievements`
+--
+ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`achievementID`);
+
+--
+-- Indexes for table `adminAuth`
+--
+ALTER TABLE `adminAuth`
+  ADD PRIMARY KEY (`adminID`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `colleges`
+--
+ALTER TABLE `colleges`
+  ADD PRIMARY KEY (`college_id`);
+
+--
+-- Indexes for table `contactMessages`
+--
+ALTER TABLE `contactMessages`
+  ADD PRIMARY KEY (`contactID`);
+
+--
+-- Indexes for table `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`content_id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `employerUsers`
+--
+ALTER TABLE `employerUsers`
+  ADD UNIQUE KEY `userID` (`userID`);
+
+--
+-- Indexes for table `indianCities`
+--
+ALTER TABLE `indianCities`
+  ADD PRIMARY KEY (`cityID`);
+
+--
+-- Indexes for table `internshipOffers`
+--
+ALTER TABLE `internshipOffers`
+  ADD PRIMARY KEY (`internshipID`);
+
+--
+-- Indexes for table `jobOffers`
+--
+ALTER TABLE `jobOffers`
+  ADD PRIMARY KEY (`jobID`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`messageID`);
+
+--
+-- Indexes for table `passwordToken`
+--
+ALTER TABLE `passwordToken`
+  ADD PRIMARY KEY (`tokenID`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`projectID`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
+
+--
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`skillID`);
+
+--
+-- Indexes for table `testSettings`
+--
+ALTER TABLE `testSettings`
+  ADD PRIMARY KEY (`skillID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userID`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `mobile` (`mobile`);
+
+--
+-- Indexes for table `workExperience`
+--
+ALTER TABLE `workExperience`
+  ADD PRIMARY KEY (`weID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `achievements`
+--
+ALTER TABLE `achievements`
+  MODIFY `achievementID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `adminAuth`
+--
+ALTER TABLE `adminAuth`
+  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `colleges`
+--
+ALTER TABLE `colleges`
+  MODIFY `college_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `contactMessages`
+--
+ALTER TABLE `contactMessages`
+  MODIFY `contactID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `content`
+--
+ALTER TABLE `content`
+  MODIFY `content_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `course_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `indianCities`
+--
+ALTER TABLE `indianCities`
+  MODIFY `cityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
+--
+-- AUTO_INCREMENT for table `internshipOffers`
+--
+ALTER TABLE `internshipOffers`
+  MODIFY `internshipID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `jobOffers`
+--
+ALTER TABLE `jobOffers`
+  MODIFY `jobID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `messageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `passwordToken`
+--
+ALTER TABLE `passwordToken`
+  MODIFY `tokenID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `projectID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `testSettings`
+--
+ALTER TABLE `testSettings`
+  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `workExperience`
+--
+ALTER TABLE `workExperience`
+  MODIFY `weID` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

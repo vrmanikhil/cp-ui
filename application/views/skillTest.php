@@ -111,16 +111,16 @@
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script>
-				
-				
+
+
 	</script>
 <script type="text/javascript">
 	questions = JSON.parse(atob("<?php echo $question_string; ?>"));
 
 	var eventKey = "<?php echo $skill_data['skill_name']?>_test";
-	
+
 	time = <?php echo $test_settings[0]['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
-			
+
 					setInterval(function(){
 						var c=tmp--,m=(c/60)>>0,s=(c-m*60)+'';
 						timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
@@ -166,7 +166,7 @@
 	        localStorage.setItem(eventKey+'_answers', JSON.stringify(ans))
 	        populateQuestion(eventKey, 0)
 	    }
-	   
+
 	}
 
 
@@ -174,15 +174,15 @@
 	    return !!localStorage.getItem(eventKey+'_current');
 	}
 
-	function reinitialise(eventKey){	
+	function reinitialise(eventKey){
 	    populateQuestion(eventKey, +getCurrent(eventKey))
 	}
 
 	function populateQuestion(eventKey, index){
 	    var ques = getQuestion(eventKey, index)
-	   	
-	    var opts = [ques.option1,ques.option2,ques.option3,ques.option4];	
-	   
+
+	    var opts = [ques.option1,ques.option2,ques.option3,ques.option4];
+
 	    $('#ques-content').html(ques.ques)
 	    $('#ques-no').html(+getCurrent(eventKey)+1)
 	    populateOptions(opts, ques.ans)

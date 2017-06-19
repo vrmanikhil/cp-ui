@@ -4,7 +4,7 @@
 
 .form__label {
 	font-size: 0.9317rem;
-	font-weight: 700;
+	font-weight: 500;
 }
 
 textarea,
@@ -64,8 +64,9 @@ input[type='submit'] {
 .select {
 	display: inline-block;
 	width: 100%;
-	height: 34px;
+	height: 40px;
 	padding: 6px 12px;
+	margin: 8px 0;
 	font-size: 0.875em;
 	line-height: 1.42857143;
 	background-color: white;
@@ -81,4 +82,9 @@ input[type='submit'] {
 
 .form__input:focus {
 	border-color: var(--grey);
+}
+
+.horizontal-group {
+	display: flex;
+	align-items: flex-start;
 }

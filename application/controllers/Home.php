@@ -4,36 +4,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function __construct(){
-			parent::__construct();
-			$this->load->helper(array('url'));
-			$this->load->library(array('Home_lib', 'session'));
-			$this->data = array();
-			// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
-			// $this->data['csrf_token'] = $this->security->get_csrf_hash();
-			$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
-			$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
-			$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
-			$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
-			$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
+		parent::__construct();
+		$this->load->helper(array('url'));
+		$this->load->library(array('Home_lib', 'session'));
+		$this->data = array();
+		// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
+		// $this->data['csrf_token'] = $this->security->get_csrf_hash();
+		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
+		$this->data['headerLogin'] = $this->load->view('commonCode/headerLogin', $this->data, true);
+		$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
+		$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
+		$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
+		$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
 	}
 
 	private function redirection(){
-			if(!$this->home_lib->auth()){
-				redirect(base_url());
-			}
-			else{
-				if($_SESSION['registrationLevel']=='1'){
-					if($_SESSION['userData']['accountType']=='1'){
-						redirect(base_url('education-details'));
-					}
-					if($_SESSION['userData']['accountType']=='2'){
-						redirect(base_url('employer-details'));
-					}
+		if(!$this->home_lib->auth()){
+			redirect(base_url());
+		}
+		else{
+			if($_SESSION['registrationLevel']=='1'){
+				if($_SESSION['userData']['accountType']=='1'){
+					redirect(base_url('education-details'));
 				}
-				if($_SESSION['registrationLevel']=='2'){
-					redirect(base_url('verify-email'));
+				if($_SESSION['userData']['accountType']=='2'){
+					redirect(base_url('employer-details'));
 				}
 			}
+			if($_SESSION['registrationLevel']=='2'){
+				redirect(base_url('verify-email'));
+			}
+		}
 	}
 
 	public function index(){
@@ -65,11 +66,32 @@ class Home extends CI_Controller {
 	}
 
 	public function verifyEMail(){
+		$this->generateVerifyEMail();
 		$this->load->view('verifyEMail', $this->data);
 	}
 
-	//Job Offers- Normal Users
+	public function verifyMobileNumber()
+	{
+		$this->load->view('verifyMobileNumber', $this->data);
+	}
 
+	public function uploadUdentityDoc()
+	{
+		$this->load->view('uploadIdentityDoc', $this->data);
+	}
+
+	public function userProfile()
+	{
+		$this->load->view('userProfile', $this->data);
+	}
+
+	public function chatNew()
+	{
+		$this->redirection();
+		$this->load->view('chat-new', $this->data);
+	}
+
+	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$this->redirection();
 		$relevant = 1;
@@ -77,7 +99,6 @@ class Home extends CI_Controller {
 		// var_dump($this->data['jobOffers']);die;
 		$this->load->view('relevantJobs', $this->data);
 	}
-
 
 	public function jobOffers(){
 		$this->redirection();
@@ -141,8 +162,11 @@ class Home extends CI_Controller {
 	}
 
 	public function contactUs(){
-
 		$this->load->view('contactUs', $this->data);
+	}
+
+	public function search(){
+		$this->load->view('search', $this->data);
 	}
 
 	public function addJobOffer(){
@@ -175,10 +199,11 @@ class Home extends CI_Controller {
 		$this->load->view('notifications', $this->data);
 	}
 
-			/*	SKILLS 	*/
+	/*	SKILLS 	*/
 
 	public function skills(){
 		$this->redirection();
+		$this->data['userSkills'] = $this->home_lib->getUserSkills($_SESSION['userData']['userID']);
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('skills', $this->data);
 	}
@@ -193,15 +218,15 @@ class Home extends CI_Controller {
 			$this->session->set_userdata('in_test', false);
 			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
 			redirect(base_url('skills'));
-        }
-        $this->session->set_userdata('in_test', true);
-        $skill_data = $this->session->userdata('skill_data');
-        $test_settings = $this->session->userdata('test_settings');
-        $this->data['questions'] = $this->home_lib->getQuestions($test_settings[0]['numberQuestions'], $skill_data['skillID']);
-        $this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
-        $this->data['test_settings'] = $test_settings;
-        $this->data['skill_data'] = $skill_data;
-        $this->load->view('skillTest', $this->data);
+		}
+		$this->session->set_userdata('in_test', true);
+		$skill_data = $this->session->userdata('skill_data');
+		$test_settings = $this->session->userdata('test_settings');
+		$this->data['questions'] = $this->home_lib->getQuestions($test_settings[0]['numberQuestions'], $skill_data['skillID']);
+		$this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
+		$this->data['test_settings'] = $test_settings;
+		$this->data['skill_data'] = $skill_data;
+		$this->load->view('skillTest', $this->data);
 	}
 
 	public function getskillTestGuidelines($get_id = NULL){
@@ -225,12 +250,12 @@ class Home extends CI_Controller {
 				$this->session->set_flashdata('message', array('content' => 'You have already added the above skill. Please choose another skill to continue.', 'class' => 'error'));
 				redirect(base_url('skills'));
 			}
-			}elseif (empty($get_id)) {
-				redirect(base_url('skills'));
+		}elseif (empty($get_id)) {
+			redirect(base_url('skills'));
 		}
 	}
 
-public function skillTestGuidelines(){
+	public function skillTestGuidelines(){
 		$test_settings = $this->home_lib->getTestSettings($this->session->userdata('skill_id'));
 		$test_questions = $this->home_lib->getTestQuestions($this->session->userdata('skill_id'));
 
@@ -245,7 +270,7 @@ public function skillTestGuidelines(){
 				$this->load->view('skillTestGuidelines', $this->data);
 			}else{
 				$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
-			redirect(base_url('skills'));
+				redirect(base_url('skills'));
 			}
 		}else{
 			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
@@ -253,13 +278,13 @@ public function skillTestGuidelines(){
 		}
 	}
 
-			/*	 CHATS 	*/
+	/*	 CHATS 	*/
 
 
 	public function composeMessage()
 	{
-        $this->data['title'] = 'Compose Message';
-        $this->data['connections'] = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
+		$this->data['title'] = 'Compose Message';
+		$this->data['connections'] = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
 		$this->load->view('composeMessage', $this->data);
 	}
 
@@ -270,23 +295,23 @@ public function skillTestGuidelines(){
 		// $receiver = $this->home_lib->getUserId($recipient);
 		// var_dump($receiver); die();
 		if(!empty($receiver)){
-		$response = $this->home_lib->sendMessage($receiver[0]['userID'], $message);
-		redirect(base_url('messages/chats/'.$receiver[0]['userID']));
-	}
+			$response = $this->home_lib->sendMessage($receiver[0]['userID'], $message);
+			redirect(base_url('messages/chats/'.$receiver[0]['userID']));
+		}
 	}
 
 	public function messages()
 	{
 		if($_SESSION['userData']['loggedIn']){
-		$number = $this->session->userdata('chats');
-		$this->data['latest_chats'] = $this->home_lib->fetchLatestChats();
-		$this->data['user_id'] = $this->session->userdata('userID');
-		$this->data['more'] = $this->home_lib->moreChats(5);
-        $this->data['title'] = 'Messages';
-		$this->load->view('messages', $this->data);
-	}else{
-		redirect(base_url());
-	}
+			$number = $this->session->userdata('chats');
+			$this->data['latest_chats'] = $this->home_lib->fetchLatestChats();
+			$this->data['user_id'] = $this->session->userdata('userID');
+			$this->data['more'] = $this->home_lib->moreChats(5);
+			$this->data['title'] = 'Messages';
+			$this->load->view('messages', $this->data);
+		}else{
+			redirect(base_url());
+		}
 	}
 
 	public function loadMoreChats($offset){
@@ -307,29 +332,28 @@ public function skillTestGuidelines(){
 		$this->data['user_name'] = $chatter[0]['name'];
 		$more = $this->home_lib->loadMoreMessages($chatter_id, 5);
 		$this->data['more'] = $more;
-        $this->data['title'] = $this->data['user_name'];
-        $connection = $this->home_lib->checkConnection($chatter_id);
-        if(empty($connection)){
-        	$this->session->set_flashdata('message', array('content' => 'You need to be connected to this person to start a chat.', 'class' => 'error'));
+		$this->data['title'] = $this->data['user_name'];
+		$connection = $this->home_lib->checkConnection($chatter_id);
+		if(empty($connection)){
+			$this->session->set_flashdata('message', array('content' => 'You need to be connected to this person to start a chat.', 'class' => 'error'));
 			redirect(base_url('messages'));
-        }
-        $this->data['messages'] = $messages;
+		}
+		$this->data['messages'] = $messages;
 		$this->load->view('chat', $this->data);
 	}
 
 	public function loadMoreMessages($user, $offset)
 	{
 		$messages = $this->home_lib->fetchConversation($user, $offset);
-		echo json_encode(['content'=> $messages, 
-					'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
+		echo json_encode(['content'=> $messages, 'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
 		die;
 	}
 
 	public function sendMessage()
-	{	
+	{
 		$message = $this->input->post('message');
 		$receiver = $this->input->post('to');
-        $response = $this->home_lib->sendMessage($receiver, $message);
+		$response = $this->home_lib->sendMessage($receiver, $message);
 		echo json_encode($response);
 	}
 
@@ -371,7 +395,7 @@ public function skillTestGuidelines(){
 
 	public function generateVerifyEMail(){
 		date_default_timezone_set("Asia/Kolkata");
-		// $email = $_SESSION['userData']['email'];
+		$email = $_SESSION['userData']['email'];
 		$checkToken = $this->home_lib->checkToken($email, '1');
 		$currentTime = strtotime(date("d M Y H:i:s"));
 		if($checkToken){
@@ -388,10 +412,11 @@ public function skillTestGuidelines(){
 					'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
 					'message' => $message,
 					'using' =>'pepipost'
-					);
+				);
 				sendEmail($data);
-		}}
-		else{
+			}
+		}
+		else {
 			$token = "Quickbrownfoxjumpedoveralazydog0123456789".md5($email);
 			$token = str_shuffle($token);
 			$token = substr($token, 0,8);
@@ -401,7 +426,8 @@ public function skillTestGuidelines(){
 				'email' => $email,
 				'tokenType' => '1',
 				'generatedAt' => $currentTime,
-				'expiry' => $expiry
+				'expiry' => $expiry,
+				'active' => '1'
 			);
 			$this->home_lib->insertPasswordToken($tokenData);
 			$emailData['token'] = $token;
@@ -446,7 +472,8 @@ public function skillTestGuidelines(){
 		var_dump($this->data['userDetails']);die;
 	}
 
-	public function resetPassword(){
+	public function resetPassword()
+	{
 		$this->session->sess_destroy();
 		$this->load->view('resetPassword', $this->data);
 	}
@@ -454,7 +481,5 @@ public function skillTestGuidelines(){
 	public function getJobData($jobID){
 		return $this->home_lib->getJobData($jobID);
 	}
-
-
 
 }

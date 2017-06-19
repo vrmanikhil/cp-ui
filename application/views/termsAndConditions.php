@@ -8,6 +8,9 @@
 	<title>Terms And Conditions|CampusPuppy</title>
 	<link href="/assets/css/content.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
+	<link href="<?php if(isset($_SESSION['userData']['loggedIn'])){ echo base_url('assets/css/components/header.css'); } else { echo base_url('/assets/css/components/logged-out-header.css'); }  ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -16,16 +19,12 @@
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
 	<div class="layout-container flex flex--col">
-		<?php echo $header; ?>
+		<?php if(isset($_SESSION['userData']['loggedIn'])){ echo $header; } else { echo $headerLogin; } ?>
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
-					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;">Terms And Conditions</h1>
-				</div>
-				<div class="card">
-				<?php 
-				   print_r ($terms[0]['termsAndConditions']);
-				  ?>
+					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;"><b>Terms And Conditions</b></h1>
+					<?php echo $terms[0]['termsAndConditions']; ?>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

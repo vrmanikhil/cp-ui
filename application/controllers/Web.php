@@ -325,7 +325,11 @@ class Web extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'The entered E-Mail Address is not registered with us, try creating a New Account.','class'=>'error'));
 			redirect(base_url());
 		}
+		else{
 		$this->resetPasswordEMail('vrmanikhil@gmail.com');
+		$this->session->set_flashdata('message', array('content'=>'Password Reset Instructions have been successfully Sent.','class'=>'success'));
+		redirect(base_url());
+		}
 	}
 
 	private function resetPasswordEMail($email=''){
@@ -575,9 +579,12 @@ class Web extends CI_Controller {
 		}
 	}
 
-	public function hello(){
-		$time = strtotime(date("d M Y H:i:s"));
-		echo $time;
+	public function search(){
+		$query = '';
+		if($x = $this->input->get('query')){
+			$query = $x;
+		}
+		echo $query;die;
 	}
 
 }

@@ -22,7 +22,12 @@
 
 body {
 	font-size: 18px;
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+* {
+	box-sizing: border-box;
 }
 
 p,
@@ -35,6 +40,16 @@ button {
 	margin: 0;
 	line-height: 1.2rem;
 	letter-spacing: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+	font-weight: 500;
 }
 
 h1 {
@@ -245,10 +260,10 @@ a {
 
 .explore-panel__link-icon-container {
 	width: 100%;
-	max-width: 45px;
+	max-width: 70px;
 	border-radius: 100%;
 	background-color: var(--light-grey);
-	padding: 10px;
+	padding: 9px 12px;
 	margin-bottom: 8px;
 }
 
@@ -313,4 +328,16 @@ a {
  font-weight: 500;
  font-size: 14px;
  letter-spacing: .5px;
+}
+
+/*
+	Modal
+ */
+.remodal-close {
+	right: 0;
+	left: auto;
+}
+
+.remodal-wrapper .modal-body {
+	text-align: left;
 }

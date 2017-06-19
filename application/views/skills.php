@@ -58,19 +58,16 @@
 				</div>
 			</aside>
 			<div class="main-body flex__item">
-				<div class="notifications__section card">
-					<h1 class="notifications__section-title">My Skills</h1>
-					<div class="notifications">
-						<a class="flex media notification" href="javascript:">
-							<img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&amp;oe=5942A6DD" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>Nikhil Verma</strong></span>
-								<span class="notification__message">This is a Test message for you.</span>
-								<span class="notification__info">
-									<span class="notification__date">19 April 2017</span>
-								</span>
-							</span>
-						</a>
+				<div class="skills__section card">
+					<h1 class="skills__section-title"><b>My Skills</b></h1>
+					<div class="skills">
+						<?php
+						$i=0;
+						foreach($userSkills as $key => $value){
+							echo $i++." ".$value['skill_name']." ".$value['skillType']."<br>";
+						}
+						?>
+						<h1 class="skills__section-title"><b>Add New Skill to Profile</b></h1>
 						<select class="form__input" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>

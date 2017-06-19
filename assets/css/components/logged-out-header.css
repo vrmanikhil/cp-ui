@@ -1,0 +1,62 @@
+.primary-header {
+	background: var(--midnight-blue);
+	padding: 10px 0;
+	margin: 0;
+}
+.primary-header > .flex {
+	justify-content: space-between;
+	align-items: center;
+}
+
+.login-form .form__label,
+.login-form .forgot-psswd {
+	color: white;
+}
+
+.login-form .form-group {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.login-form .forgot-psswd {
+	font-size: 0.75em;
+}
+
+.login-form .forgot-psswd:hover {
+	text-decoration: underline;
+}
+
+.login-form .form__input {
+	display: block;
+	width: 200px;
+	border-radius: 2px;
+}
+
+.login-form .btn {
+	margin: auto;
+	font-size: 0.875em;
+	background: var(--midnight-blue-light);
+	border-color: var(--midnight-blue-dark);
+	padding: 7px 15px;
+}
+
+.forgot-psswd-modal {
+	max-width: 550px;
+}
+
+.forgot-psswd-modal .modal-body {
+	text-align: left;
+}
+
+.forgot-psswd-form-container > h2 {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.forgot-psswd-form {
+	overflow: hidden;
+}
+
+.forgot-psswd-form input[type="submit"] {
+	float: right;
+}

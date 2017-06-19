@@ -28,7 +28,8 @@
 
 .footer-nav__link:before {
 	position: absolute;
-	left: -7px;
+	left: -8px;
+	top: 1px;
 	width: 2px;
 	height: 15px;
 	background: white;

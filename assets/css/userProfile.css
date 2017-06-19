@@ -12,3 +12,33 @@
 .globalContainer > .main-body {
 	max-width: 764px;
 }
+
+.user__cover-pic {
+	height: 300px;
+}
+
+.user__name {
+	padding: 10px;
+	align-items: center;
+	background: black;
+}
+.user__name > p {
+	flex-grow: 1;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 500;
+}
+
+.user__pic {
+	height: 50px;
+}
+
+.user__pic > img {
+	display: block;
+	max-width: 150px;
+	border-radius: 100%;
+	margin: auto;
+	border: 5px solid white;
+	top: -100px;
+	position: relative;
+}
