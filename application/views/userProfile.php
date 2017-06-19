@@ -26,7 +26,7 @@
 				<div class="user__cover-pic" style="background: url('/assets/img/cover-default.jpg') center no-repeat; background-size: cover;"></div>
 				<div class="user__name flex">
 					<p>Nikhil Verma</p>
-					<a href="javascript:" class="btn">Edit Profile</a>
+					<a href="javascript:" class="btn">Add to Connection</a>
 				</div>
 				<div class="user__pic">
 					<img src="http://www.campuspuppy.com/assets/uploads/profile_images/Nikhil_Verma_18-09-2016 18:58:45" alt="">
