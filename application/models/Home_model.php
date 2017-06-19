@@ -117,20 +117,15 @@ class Home_model extends CI_Model {
 	}
 	/*		SKILL END 		*/
 	/*		CHATS		*/
-
-	public function fetchChatIds($user)
-	{
-		// $this->db->select_max('messageID');
-		$this->db->where('receiver', $user);
-		$this->db->or_where('sender', $user);
-		// $this->db->group_by('receiver + sender', false);
-		$res = $this->db->get('messages')->result_array();
-		// var_dump($res[0]);die();
-		return array_column($res, 'messageID');
+//
+	public function fetchChatIds($user){
+		$query = "SELECT MAX(`messageID`) AS `messageID` FROM `messages` WHERE `receiver` = '1' OR `sender` = '1' GROUP BY receiver+sender";
+		$result = $this->db->query($query);
+		$result = $result->result_array();
+		return array_column($result, 'messageID');
 	}
 
-	public function fetchChats($user, $offset = 0, $limit = 5)
-	{
+	public function fetchChats($user, $offset = 0, $limit = 5){
 		$this->db->select('*');
 		$recent = $this->fetchChatIds($user, $offset, $limit);
 		if(empty($recent))
@@ -141,8 +136,7 @@ class Home_model extends CI_Model {
 		return $this->db->get('messages')->result_array();
 	}
 
-	public function fetchMessages($sender, $receiver, $offset = 0, $limit = 10)
-	{
+	public function fetchMessages($sender, $receiver, $offset = 0, $limit = 10){
 		$this->db->select('*');
 		$this->db->where(['sender'=> $sender, 'receiver'=> $receiver]);
 		$this->db->or_where(['sender'=> $receiver]);
@@ -153,15 +147,13 @@ class Home_model extends CI_Model {
 		return $res;
 	}
 
-	public function markMessagesAsRead($sender_id, $receiver_id)
-	{
+	public function markMessagesAsRead($sender_id, $receiver_id){
 		$this->db->set('read', '1');
 		$this->db->where(['sender'=> $sender_id, 'receiver'=> $receiver_id]);
 		$this->db->update('messages');
 	}
 
-	public function sendMessage($sender, $receiver, $message)
-	{
+	public function sendMessage($sender, $receiver, $message){
 		$data['sender'] = $sender;
 		$data['receiver'] = $receiver;
 		$data['message'] = $message;
@@ -171,15 +163,13 @@ class Home_model extends CI_Model {
 		return ['success'=> $success, 'insert_id'=> $insert_id];
 	}
 
-	public function readMessage($id)
-	{
+	public function readMessage($id){
 		$this->db->set('read', '1');
 		$this->db->where('messageID', $id);
 		return $this->db->update('messages');
 	}
 
-	public function checkForNewMessages($sender, $receiver, $lastid)
-	{
+	public function checkForNewMessages($sender, $receiver, $lastid){
 		$this->db->select('*');
 		$this->db->where('mesaageID >', $lastid);
 		$this->db->where("((sender = $sender AND receiver = $receiver) OR
@@ -189,8 +179,7 @@ class Home_model extends CI_Model {
 		return (empty($res)) ? false : $res;
 	}
 
-	public function hasUnreadMessages($user_id)
-	{
+	public function hasUnreadMessages($user_id){
 		$this->db->select('*');
 		$this->db->where('receiver', $user_id);
 		$res = $this->db->get_where('messages', ['read'=> 0])->result_array();
@@ -275,7 +264,7 @@ class Home_model extends CI_Model {
 			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, GROUP_CONCAT(jobLocations.cityID) as cityIDs,GROUP_CONCAT(indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
