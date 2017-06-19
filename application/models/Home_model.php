@@ -117,7 +117,8 @@ class Home_model extends CI_Model {
 	}
 	/*		SKILL END 		*/
 	/*		CHATS		*/
-//
+
+
 	public function fetchChatIds($user){
 		$query = "SELECT MAX(`messageID`) AS `messageID` FROM `messages` WHERE `receiver` = '1' OR `sender` = '1' GROUP BY receiver+sender";
 		$result = $this->db->query($query);

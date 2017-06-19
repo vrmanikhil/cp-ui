@@ -37,7 +37,9 @@
 <?php
 	}}
 ?>
-<?php if($more == true){?>
+<?php if($more == true){
+	var_dump($more);
+	?>
 <button type = "submit" id="load-more" onclick = "loadDoc()"> Load more</button>
 <?php } ?>
 <div class="col-md-12" style="margin-top:20px;">
