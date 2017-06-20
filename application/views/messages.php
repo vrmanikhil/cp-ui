@@ -13,6 +13,13 @@
 	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> -->
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<style type="text/css">
+		#conn-grp ul {
+			position: relative;
+			list-style: none !important; 
+			padding-left: 3% !important; 
+		}
+	</style>
 </head>
 
 <body>
@@ -120,6 +127,7 @@
 		</main>
 		<?php echo $footer; ?>
 	</div>
+	<?php var_dump($connections)?>
 	<div class="remodal compose-message-modal" data-remodal-id="composeMessage">
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
@@ -217,7 +225,6 @@
 			appendTo: "#conn-grp",
 			select: function(e, u){
 						$('#userId').val(u.item.userID);
-						console.log(u);
 					},
 		});
 

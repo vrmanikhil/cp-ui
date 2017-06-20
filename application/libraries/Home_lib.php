@@ -77,7 +77,7 @@ class Home_lib {
 	public function checkConnection($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return !empty($CI->homeModel->getConnections($userID));
+		return !empty($CI->homeModel->checkConnections($userID));
 	}
 
 	public function getConnectionUsernames($userID){
