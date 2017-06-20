@@ -137,38 +137,31 @@
 						<li class="active">Relevant Job Offers</li>
 					</ol>
 				</div>
-				
-					<?php foreach ($skills as $key) { ?>
-						
-				
-					<div class="card posting-card">
+
+				<?php foreach ($jobOffers as $key => $value) { ?>
+
+				<div class="card posting-card">
 					<div class="flex media">
-				
-						<img src="<?php  print_r($key['companyLogo']); ?>" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $value['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong> <?php
-			                     print_r($key['companyName']); 
-		                        ?></strong>
+								<strong><?php echo $value['companyName']; ?></strong>
 							</p>
-							<p class="posting-card__desc"><?php 
-			                       print_r($key['jobTitle']); 
-		                         ?></p>
+							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
 							<p class="posting-card__post-location">
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span><?php 
-			                     print_r($key['city']); 
-		                        ?></span>
+								<span><?php if($value['cities']==''){ echo "Work from Home"; } else { echo $value['cities']; } ?></span>
 							</p>
-							<p class="posting-card__status"><strong>Skills</strong> : <span><?php 
-			                     print_r($key['skill_name']); 
-		                         ?></span></p>
+							<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
+								<a data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details">View</a>
 							</div>
 						</div>
 					</div>
-				</div> <?php } ?>
+				</div>
+
+				<?php } ?>
+
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>

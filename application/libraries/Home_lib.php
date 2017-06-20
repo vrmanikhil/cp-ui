@@ -109,10 +109,16 @@ class Home_lib {
 		return $CI->homeModel->getConnectionRequests($userID);
 	}
 
-	public function getJobOffers($relevant){
+	public function getJobOffers(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getJobOffers($relevant);
+		return $CI->homeModel->getJobOffers();
+	}
+
+	public function getInternshipOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getInternshipOffers();
 	}
 
 	public function addInternship($data){

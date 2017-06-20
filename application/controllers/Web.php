@@ -364,7 +364,8 @@ class Web extends CI_Controller {
 				'email' => $email,
 				'tokenType' => '2',
 				'generatedAt' => $currentTime,
-				'expiry' => $expiry
+				'expiry' => $expiry,
+				'active' => '1'
 			);
 			$this->home_lib->insertPasswordToken($tokenData);
 			$emailData['token'] = $token;
@@ -585,6 +586,38 @@ class Web extends CI_Controller {
 			$query = $x;
 		}
 		echo $query;die;
+	}
+
+	public function verifyEMail(){
+		$token = '';
+		if($x = $this->input->post('token')){
+			$token = $x;
+		}
+		$email = $_SESSION['userData']['email'];
+		$checkToken = $this->home_lib->checkToken($email, '1');
+		$currentTime = strtotime(date("d M Y H:i:s"));
+		if($checkToken){
+			$expiry = $checkToken[0]['expiry'];
+			$timeDifference = $expiry-$currentTime;
+			if($timeDifference>0 && $timeDifference<7200){
+				if($checkToken[0]['token']===$token){
+					$this->home_lib->deactivateToken($email, '1');
+					$this->home_lib->updateRegistrationLevel($_SESSION['userData']['userID'], '3');
+					$CI = &get_instance();
+					$CI->session->set_userdata('registrationLevel', '3');
+					$this->session->set_flashdata('message', array('content'=>'E-Mail Address Successfully Verified','class'=>'success'));
+					redirect(base_url());
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'The Entered Token is Not Valid. Please Try Again.','class'=>'error'));
+					redirect(base_url('verify-email/1'));
+				}
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'The Entered Token has Expired. Please Request New Token.','class'=>'error'));
+				redirect(base_url('verify-email/1'));
+			}
+		}
 	}
 
 }

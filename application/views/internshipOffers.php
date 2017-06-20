@@ -137,25 +137,29 @@
 						<li class="active">Browse Internship Offers</li>
 					</ol>
 				</div>
+				<?php foreach ($internshipOffers as $key => $value) { ?>
+
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $value['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
+								<strong><?php echo $value['companyName']; ?></strong>
 							</p>
-							<p class="posting-card__desc">Android developer</p>
+							<p class="posting-card__desc"><?php echo $value['internshipTitle']; ?></p>
 							<p class="posting-card__post-location">
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span>Noida</span>
+								<span><?php if($value['cities']==''){ echo "Work from Home"; } else { echo $value['cities']; } ?></span>
 							</p>
-							<p class="posting-card__status"><strong>Skills</strong> : <span>PHP, HTML, CSS, JavaScript</span></p>
+							<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
+								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details">View</a>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<?php } ?>
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>

@@ -32,7 +32,7 @@ class Home extends CI_Controller {
 				}
 			}
 			if($_SESSION['registrationLevel']=='2'){
-				redirect(base_url('verify-email'));
+				redirect(base_url('verify-email/8800'));
 			}
 		}
 	}
@@ -65,10 +65,17 @@ class Home extends CI_Controller {
 		$this->load->view('employerDetails', $this->data);
 	}
 
-	public function verifyEMail(){
+	public function verifyEMail($redirection=''){
+		if($redirection=='1'){
+			$this->load->view('verifyEMail', $this->data);
+		}
+		else{
 		$this->generateVerifyEMail();
 		$this->load->view('verifyEMail', $this->data);
+		}
 	}
+
+
 
 	public function verifyMobileNumber()
 	{
@@ -93,18 +100,38 @@ class Home extends CI_Controller {
 
 	//Job Offers- Normal Users
 	public function relevantJobs(){
-		$this->redirection();
-		$relevant = 1;
-		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
-		// var_dump($this->data['jobOffers']);die;
+		$userID = $_SESSION['userData']['userID'];
+		$userSkills = array();
+		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
+			array_push($userSkills, $value['skillID']);
+		}
+		// var_dump($userSkills);die;
+		$jobOffers = array();
+		$this->data['jobOffers'] = $this->home_lib->getJobOffers();
+		foreach ($this->data['jobOffers'] as $key => $value) {
+			if($value['applicants']=='3'){
+				array_push($jobOffers, $value);
+			}
+			else{
+				$jobSkills = explode(',', $value['skillIDsRequired']);
+				if($value['applicants']=='1'){
+					if(count(array_diff($jobSkills,$userSkills))=='0'){
+						array_push($jobOffers, $value);
+					}
+				}
+				if($value['applicants']=='2'){
+					if(count($jobSkills)>count(array_diff($jobSkills,$userSkills))){
+						array_push($jobOffers, $value);
+					}
+				}
+			}
+		}
+		$this->data['jobOffers'] = $jobOffers;
 		$this->load->view('relevantJobs', $this->data);
 	}
 
 	public function jobOffers(){
-		$this->redirection();
-		$relevant = 0;
-		$this->data['jobOffers'] = $this->home_lib->getJobOffers($relevant);
-		// var_dump($this->data['jobOffers']);die;
+		$this->data['jobOffers'] = $this->home_lib->getJobOffers();
 		$this->load->view('jobOffers', $this->data);
 	}
 
@@ -116,12 +143,37 @@ class Home extends CI_Controller {
 	//Internship Offers- Normal Users
 
 	public function relevantInternships(){
-		$this->redirection();
+		$userID = $_SESSION['userData']['userID'];
+		$userSkills = array();
+		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
+			array_push($userSkills, $value['skillID']);
+		}
+		$jobOffers = array();
+		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
+		foreach ($this->data['internshipOffers'] as $key => $value) {
+			if($value['applicants']=='3'){
+				array_push($internshipOffers, $value);
+			}
+			else{
+				$internshipSkills = explode(',', $value['skillIDsRequired']);
+				if($value['applicants']=='1'){
+					if(count(array_diff($internshipSkills,$userSkills))=='0'){
+						array_push($internshipOffers, $value);
+					}
+				}
+				if($value['applicants']=='2'){
+					if(count($internshipSkills)>count(array_diff($internshipSkills,$userSkills))){
+						array_push($internshipOffers, $value);
+					}
+				}
+			}
+		}
+		$this->data['internshipOffers'] = $internshipOffers;
 		$this->load->view('relevantInternships', $this->data);
 	}
 
 	public function internshipOffers(){
-		$this->redirection();
+		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
 		$this->load->view('internshipOffers', $this->data);
 	}
 

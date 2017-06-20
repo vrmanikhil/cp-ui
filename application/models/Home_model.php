@@ -256,25 +256,30 @@ class Home_model extends CI_Model {
 		return $this->db->delete('internshipOffers', array('internshipID' => $internshipID));
 	}
 
-	public function getJobOffers($relevant){
-		if($relevant == 0){
-
+	public function getJobOffers(){
 			$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
 			$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');
 			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, jobOffers.applicants, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
-			// echo $this->db->last_query();die;
 			return $result->result_array();
-		}
-		else{
-			echo "its 1";
-			$userID = $_SESSION['userData']['userID'];
-		}
+	}
+
+	public function getInternshipOffers(){
+	    $this->db->join('internshipLocations', 'internshipOffers.internshipID = internshipLocations.internshipID', 'left outer');
+	    $this->db->join('indianCities', 'internshipLocations.cityID = indianCities.cityID', 'left outer');
+	    $this->db->join('employerUsers', 'internshipOffers.addedBy=employerUsers.userID');
+	    $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
+	    $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
+	    $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, internshipOffers.applicants, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+	    $this->db->group_by('internshipOffers.internshipID');
+	    $this->db->order_by('internshipOffers.internshipID', 'DESC');
+	    $result = $this->db->get('internshipOffers');
+	    return $result->result_array();
 	}
 
 	public function addWorkEx($data){

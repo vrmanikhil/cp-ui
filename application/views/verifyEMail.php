@@ -22,12 +22,12 @@
 				<div class="main-body flex__item flex flex--col">
 					<div class="verify-email-container">
 						<h2>Verify E-Mail</h2>
-						<form class="form" action="<?php echo base_url('web/addEducationalDetails'); ?>" method="post">
+						<form class="form" action="<?php echo base_url('web/verifyEMail'); ?>" method="post">
 						<div class="form-group">
 							<label for="token" class="form__label">Token</label>
-							<input type="text" name="token" id="token" placeholder="Enter your token" class="form__input">
+							<input type="text" name="token" id="token" maxlength="8" placeholder="Enter your token" class="form__input">
 							<div class="resend-verification">
-								<a href="javascript:">Resend verification code</a>
+								<a href="<?php echo base_url('verify-email/8800'); ?>">Resend verification code</a>
 							</div>
 						</div>
 						<div class="form-group">
