@@ -284,11 +284,11 @@ class Home_model extends CI_Model {
 
 	public function getJobDetails($jobID){
 		$this->db->select('jobOffers.jobID, jobOffers.jobTitle, jobOffers.jobtype, jobOffers.jobDescription, jobOffers.startDate, jobOffers.applicationDeadline, jobOffers.offerType, jobOffers.offer, jobOffers.minimumOffer, jobOffers.maximumOffer, jobOffers.partTime, jobOffers.openings, jobOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
+		$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
+		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');	
 		$this->db->join('employerUsers','employerUsers.userID = jobOffers.addedBy');
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
-		$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
-		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');	
 		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
 	}

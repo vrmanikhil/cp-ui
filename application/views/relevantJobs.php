@@ -263,37 +263,37 @@
 		$(document).ready(function(){
 			$('#view').click(function(){
 				console.log('hello');
-				// var data = null
-				// id = $('#view').attr('data-id')
-				// console.log(id)
-				// data = {jobid : id}
-				// $.get('<?= base_url('home/getDetails')?>', data).done(function(res){
+				var data = null
+				id = $('#view').attr('data-id')
+				console.log(id)
+				data = {jobid : id}
+				$.get('<?= base_url('home/getDetails')?>', data).done(function(res){
 
-				// 	res = JSON.parse(res)
-					
+					res = JSON.parse(res)
+					console.log(res);
 
-				// 	$("#jobTitle").html(res[0].jobTitle)
-				// 	$("#jobDescription").html(res[0].jobDescription)
-				// 	$("#jobStart").html(res[0].startDate)
-				// 	$("#jobDeadline").html(res[0].applicationDeadline)
-				// 	if(res[0].offerType == "2")
-				// 		$("#jobOffer").html(res[0].offer)
-				// 	else
-				// 		$(".#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
-				// 	$("#jobOpening").html(res[0].openings)
-				// 	if(res[0].partTime == "1")
-				// 		$("#jobTime").html('YES')
-				// 	else
-				// 		$("$jobTime").html('NO')
-				// 	$("#jobSkill").html(res[0].jobTitle)
-				// 	if(res[0].jobType == "1")
-				// 	$("#jobType").html("Work From Home")
-				// 	$("#companyName").html(res[0].companyName)
-				// 	$("#companyWebsite").html(res[0].companyWebsite)
-				// 	$("#companyDescription").html(res[0].companyDescription)
-				// }).fail(function(){
+					$("#jobTitle").html(res[0].jobTitle)
+					$("#jobDescription").html(res[0].jobDescription)
+					$("#jobStart").html(res[0].startDate)
+					$("#jobDeadline").html(res[0].applicationDeadline)
+					if(res[0].offerType == "2")
+						$("#jobOffer").html(res[0].offer)
+					else
+						$(".#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
+					$("#jobOpening").html(res[0].openings)
+					if(res[0].partTime == "1")
+						$("#jobTime").html('YES')
+					else
+						$("$jobTime").html('NO')
+					$("#jobSkill").html(res[0].jobTitle)
+					if(res[0].jobType == "1")
+					$("#jobType").html("Work From Home")
+					$("#companyName").html(res[0].companyName)
+					$("#companyWebsite").html(res[0].companyWebsite)
+					$("#companyDescription").html(res[0].companyDescription)
+				}).fail(function(){
 
-				// })
+				})
 			})
 		})
 		
