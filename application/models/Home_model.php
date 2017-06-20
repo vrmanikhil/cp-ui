@@ -285,7 +285,7 @@ class Home_model extends CI_Model {
 	public function getJobDetails($jobID){
 		$this->db->select('jobOffers.jobID, jobOffers.jobTitle, jobOffers.jobtype, jobOffers.jobDescription, jobOffers.startDate, jobOffers.applicationDeadline, jobOffers.offerType, jobOffers.offer, jobOffers.minimumOffer, jobOffers.maximumOffer, jobOffers.partTime, jobOffers.openings, jobOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
 		$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
-		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');	
+		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');
 		$this->db->join('employerUsers','employerUsers.userID = jobOffers.addedBy');
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
@@ -467,6 +467,22 @@ class Home_model extends CI_Model {
 			$result=  $this->db->get_where('internshipOffers', array('internshipID'=> $offerID));
 			return $result->result_array()[0];
 		}
+	}
+
+	public function getApplicants($offerType, $offerID){
+		$this->db->join('users', 'jobApplicants.userID = users.userID');
+		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
+		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
+		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');
+		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID');
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID');
+		$this->db->select('users.userID, users.name, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(skills.skillID) AS userSkills');
+		$this->db->group_by('userSkills.skillID');
+		if($offerType=='1'){
+			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
+		if($offerType=='2'){
+			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
+		return $result->result_array();
 	}
 
 }

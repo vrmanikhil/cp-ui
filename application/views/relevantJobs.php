@@ -137,7 +137,6 @@
 						<li class="active">Relevant Job Offers</li>
 					</ol>
 				</div>
-
 				<?php foreach ($jobOffers as $key => $value) { ?>
 
 				<div class="card posting-card">
@@ -261,7 +260,7 @@
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('#view').click(function(){
+			$('#view').click(".js-view-posting-details",function(){
 				console.log('hello');
 				var data = null
 				id = $('#view').attr('data-id')
@@ -296,7 +295,7 @@
 				})
 			})
 		})
-		
+
 	</script>
 </body>
 
