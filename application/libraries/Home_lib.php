@@ -501,4 +501,16 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getConnectionProfiles($connections);
 	}
 
+	public function getAppliedJobOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAppliedJobOffers();
+	}
+
+	public function getAppliedInternshipOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAppliedInternshipOffers();
+	}
+
 }

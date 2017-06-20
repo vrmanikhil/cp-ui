@@ -420,11 +420,29 @@ class Home_model extends CI_Model {
 		return $this->db->update('passwordToken', $data);
 	}
 
-		public function getConnectionProfiles($connections){
-			$this->db->where_in('userID', $connections);
-			$this->db->select('userID, name, profileImage');
-			$result = $this->db->get('users');
-			return $result->result_array();
-		}
+	public function getConnectionProfiles($connections){
+		$this->db->where_in('userID', $connections);
+		$this->db->select('userID, name, profileImage');
+		$result = $this->db->get('users');
+		return $result->result_array();
+	}
+
+	public function getAppliedJobOffers(){
+		$userID = $_SESSION['userData']['userID'];
+		$this->db->join('jobOffers', 'jobApplicants.jobID = jobOffers.jobID');
+		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.jobID, employerUsers.companyName, employerUsers.companyLogo, jobApplicants.status');
+		$result = $this->db->get_where('jobApplicants', array('jobApplicants.userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function getAppliedInternshipOffers(){
+		$userID = $_SESSION['userData']['userID'];
+		$this->db->join('internshipOffers', 'internshipApplicants.internshipID = internshipOffers.internshipID');
+		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+		$this->db->select('internshipOffers.internshipTitle, internshipOffers.internshipID, employerUsers.companyName, employerUsers.companyLogo, internshipApplicants.status');
+		$result = $this->db->get_where('internshipApplicants', array('internshipApplicants.userID'=>$userID));
+		return $result->result_array();
+	}
 
 }

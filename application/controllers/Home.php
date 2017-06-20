@@ -136,7 +136,7 @@ class Home extends CI_Controller {
 	}
 
 	public function appliedJobOffers(){
-		$this->redirection();
+		$this->data['appliedJobOffers'] = $this->home_lib->getAppliedJobOffers();
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
@@ -178,7 +178,7 @@ class Home extends CI_Controller {
 	}
 
 	public function appliedInternshipOffers(){
-		$this->redirection();
+		$this->data['appliedInternshipOffers'] = $this->home_lib->getAppliedInternshipOffers();
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
 
