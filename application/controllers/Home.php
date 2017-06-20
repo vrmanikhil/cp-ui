@@ -283,9 +283,8 @@ class Home extends CI_Controller {
 
 	public function composeMessage()
 	{
-		$this->data['title'] = 'Compose Message';
-		$this->data['connections'] = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
-		$this->load->view('composeMessage', $this->data);
+		$connections = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
+		return $connections;
 	}
 
 	public function sendComposedMessage(){
@@ -308,6 +307,7 @@ class Home extends CI_Controller {
 			$this->data['user_id'] = $this->session->userdata('userID');
 			$this->data['more'] = $this->home_lib->moreChats(5);
 			$this->data['title'] = 'Messages';
+			$this->data['connections'] = $this->composeMessage();
 			$this->load->view('messages', $this->data);
 		}else{
 			redirect(base_url());
@@ -359,13 +359,13 @@ class Home extends CI_Controller {
 
 	public function checkForNewMessages()
 	{
-		$last_id = $this->input->get('last_id');
-		$user = $this->input->get('from');
+		$last_id = $_GET['last_id'];
+		$user = $_GET['from'];
 		$new_msgs = $this->home_lib->checkForNewMessages($user, $last_id);
 		if(!$new_msgs)
 			echo 'false';
 		else
-			echo json_encode($new_msgs);
+			echo json_encode($new_msgs);	
 		die;
 	}
 

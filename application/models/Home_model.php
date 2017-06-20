@@ -172,7 +172,7 @@ class Home_model extends CI_Model {
 
 	public function checkForNewMessages($sender, $receiver, $lastid){
 		$this->db->select('*');
-		$this->db->where('mesaageID >', $lastid);
+		$this->db->where('messageID >', $lastid);
 		$this->db->where("((sender = $sender AND receiver = $receiver) OR
 			(sender = $receiver AND receiver = $sender))", null, false);
 		$res = $this->db->get_where('messages');
@@ -193,14 +193,16 @@ class Home_model extends CI_Model {
 		$this->db->where('active', $userID);
 		$this->db->where('status', '1');
 		$this->db->or_where('passive', $userID);
+		$this->db->where('status', '1');
 		$result = $this->db->get('connections');
-		return $result->result_array();
+		return $this->db->last_query();
 	}
 
 	public function getConnectionUsernames($userID){
 		$this->db->where('active', $userID);
 		$this->db->where('status', '1');
 		$this->db->or_where('passive', $userID);
+		$this->db->where('status', '1');
 		$result = $this->db->get('connections');
 		$connections = $result->result_array();
 		return $connections;
@@ -208,6 +210,16 @@ class Home_model extends CI_Model {
 
 	public function getConnectionRequests($userID){
 		$result = $this->db->get_where('connections', array('passive'=>$userID, 'status'=> '0'));
+		return $result->result_array();
+	}
+
+	public function checkConnections($userID){
+		$user = $_SESSION['userData']['userID'];
+		$this->db->select('*');
+		$this->db->where('status', '1');
+		$this->db->where("((active = $userID AND passive = $user) OR 
+			(passive = $userID AND active = $user))");
+		$result = $this->db->get('connections');
 		return $result->result_array();
 	}
 

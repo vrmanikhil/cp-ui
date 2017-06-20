@@ -119,7 +119,7 @@
 		<?php echo $footer; ?>
 	</div>
 
-	<div class="flex media user-message chat wrap">
+	<div class="flex media user-message chat wrap" style = "display: none">
 		<img src="" alt="user" class="media-figure notification__feature-img">
 		<span class="media-body flex flex--col">
 			<span class="notification__message msg"></span>
@@ -165,7 +165,9 @@ var chatterImage = '<?= $profileImage ?>';
 var	lastId = <?php echo $messages[0]['messageID']; ?>;
   		$(document).ready(function(){
   			$('#send').click(function(){
+  			container = $('.wrap').clone()
 			msg = $('#message').val().trim();
+			i = 0;
 			data = {message: msg, to: <?php echo $usr; ?>}
 			if(msg != ''){
 				$.post('<?php echo base_url('messages/send-message'); ?>', data).done(function(res){
@@ -174,12 +176,11 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 					time = res.time
 					res = res.success
 					if(res){
-						container = $('.wrap').clone()
 						container.find('.time').html(time)
 						container.find('.msg').html(msg)
 						container.addClass('receiver')
 						container.find('img').attr('src', userImage)
-						$('#messages-container').append(container)
+						$('#messages-container').append(container[0])
 						container.show()
 						$('#message').val('')
 						$('#chat').scrollTop($('#chat').prop("scrollHeight"))
@@ -194,22 +195,26 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 		window.setInterval(function(){
 			var data = {last_id: lastId, from: <?php echo $usr; ?>}
 			$.get('<?= base_url('messages/checkForNewMessages')?>', data).done(function(res){
-				console.log(res);
-				res = JSON.parse(res)
-				if(res){
+				res = JSON.parse(res);
+				if(res != false){
 					for (var i = 0; i < res.length; i++){
 						container = $('.wrap').clone()
-						container.removeClass('wrap')
-						container.find('.time').html(res[i].created_at)
+						container.find('.time').html(res[i].timestamp)
 						container.find('.msg').html(res[i].message)
-						container.attr('id', res[i].class)
-						$('#chat').append(container)
+						if(res[i].class == "receiver"){
+						container.find('img').attr('src', chatterImage)
+						container.addClass('sender')
+						}else{
+						container.addClass('receiver')
+						container.find('img').attr('src', userImage)}	
+						$('#messages-container').append(container[0])
 						container.show()
 						$('#message').val('')
 						$('#chat').scrollTop($('#chat')
 							.prop("scrollHeight"))
 					}
-					lastId = res[i-1].id
+					lastId = res[i-1].messageID
+					res = 'false'; 
 				}
 			})
 		}, 5000)
