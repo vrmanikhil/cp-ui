@@ -172,7 +172,7 @@ class Home_model extends CI_Model {
 
 	public function checkForNewMessages($sender, $receiver, $lastid){
 		$this->db->select('*');
-		$this->db->where('mesaageID >', $lastid);
+		$this->db->where('messageID >', $lastid);
 		$this->db->where("((sender = $sender AND receiver = $receiver) OR
 			(sender = $receiver AND receiver = $sender))", null, false);
 		$res = $this->db->get_where('messages');

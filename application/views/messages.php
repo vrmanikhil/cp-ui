@@ -125,10 +125,12 @@
 		<div class="modal-body">
 			<div class="compose-message-form-container">
 				<h2>Compose Message</h2>
-				<form method="get" class="form" action="">
+				<form method="post" class="form" action="<?php echo base_url('messages/composeMessage');?>">
 					<div class="form-group">
 						<label for="name" class="form__label">Receiver's Name</label>
-						<input type="text" class="form__input" id="name" name="name" placeholder="Receiver's name" required>
+						<input type="text" class="form__input" id="name" name="to" placeholder="Receiver's name" required>
+						<input type="hidden" id="userId" name="data[userID]" value = "data[userID]">
+						<div class="ui-front" id="conn-grp">
 					</div>
 					<div class="form-group">
 						<label for="message" class="form__label">Message</label>
@@ -153,6 +155,7 @@
 			}
 		});
 	</script>
+	<script src="<?php echo base_url('assets/js/jquery-ui.min.js')?>" type="text/javascript"></script>
 	<script type="text/javascript">
 		var offset = <?php echo $i; ?>;
 		function loadDoc() {
@@ -192,6 +195,32 @@
 					window.location.replace('<?= base_url('messages/chats')?>/'+chatter);
 				});
 			});
+
+
+			var data = <?php echo json_encode($connections)?>;
+		data.forEach(function(x, i){
+			x.label = x['name'];
+		});
+
+		$("#name").autocomplete({
+			autoFocus : true,
+			source: function(req, res){
+						var matcher = new RegExp($.ui.autocomplete.escapeRegex(req.term), "i");
+						var r = $.grep(data, function(value) {	
+							return matcher.test(value.userID) || matcher.test(value.name);
+						})
+						if(r.length == 0){
+							console.log('empty');
+						}
+						return res(r.slice(0,5));
+					},
+			appendTo: "#conn-grp",
+			select: function(e, u){
+						$('#userId').val(u.item.userID);
+						console.log(u);
+					},
+		});
+
 	</script>
 </body>
 

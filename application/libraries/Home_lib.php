@@ -298,8 +298,7 @@ class Home_lib {
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		$res = $CI->homemodel->fetchMessages($_SESSION['userData']['userID'],
-			$user_id, $offset, $limit);
+		$res = $CI->homemodel->fetchMessages($_SESSION['userData']['userID'], $user_id, $offset, $limit);
 		$this->fixTimestamp($res, 'timestamp', 'd M Y  g:i A');
 		$this->injectClassName($res);
 		return $res;
@@ -352,10 +351,9 @@ public function injectClassName(&$data)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		$success = $CI->homemodel->
-				checkForNewMessages($_SESSION['userData']['userID'], $chatter, $lastid);
+		 $success = $CI->homemodel->checkForNewMessages($_SESSION['userData']['userID'], $chatter, $lastid);
 		if($success){
-			$this->fixTimestamp($success, 'created_at', 'd M Y  g:i A');
+			$this->fixTimestamp($success, 'timestamp', 'd M Y  g:i A');
 			$this->injectClassName($success);
 		}
 		return $success;
