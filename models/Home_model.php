@@ -259,19 +259,21 @@ class Home_model extends CI_Model {
 	}
 
 	public function getJobData($jobID){
-		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
-		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
-		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
-		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy,jobOffers.jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName, jobOffers.active, jobOffers.applicants');
-		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
+		$this->db->join('employerusers', 'joboffers.addedBy = employerusers.userID');
+		$this->db->join('jobskills', 'joboffers.jobID = jobskills.jobID');
+		$this->db->join('skills', 'jobskills.skillID = skills.skillID');
+		$this->db->select('joboffers.jobTitle, joboffers.addedBy,joboffers.jobID, GROUP_CONCAT(jobskills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerusers.companyName, joboffers.active, joboffers.applicants');
+		$result = $this->db->get_where('joboffers', array('joboffers.jobID' => $jobID));
 		return $result->result_array();
 	}
 
 	public function getInternshipData($internshipID){
-		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
-		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID');
-		$this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName');
-		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
+		$this->db->join('employerusers', 'internshipoffers.addedBy = employerusers.userID');
+		$this->db->join('internshipskills','internshipskills.internshipID = internshipoffers.internshipID');
+		$this->db->join('skills', 'internshipskills.skillID = skills.skillID');
+		$this->db->select('internshipoffers.internshipTitle, internshipoffers.addedBy, GROUP_CONCAT(internshipskills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerusers.companyName,internshipOffers.applicants');
+		$result = $this->db->get_where('internshipoffers', array('internshipoffers.internshipID' => $internshipID));
+		//var_dump($result->result_array());die;
 		return $result->result_array();
 	}
 public function content(){
@@ -301,14 +303,42 @@ public function appliedjob()
 
 }
 
-public function apply($offerType, $offerID, $userID){
+public function apply_job($offerType, $offerID, $userID){
 	if($offerType=='2'){
 		$data = array(
 			'jobID'=> $offerID,
 			'userID' => $userID,
 			'status' => '1'
 			);
-		return $this->db->insert('jobapplicants', $data);
+		$array= $this->db->get('jobapplicants');
+		$array = $array->result_array();
+		
+		foreach ($array as $key => $value) {
+			if($value['jobID']==$data['jobID'] && $value['userID']==$data['userID']) { echo "already applied" ; die;}
+		}
+		
+       
+		return $this->db->insert('jobapplicants', $data); 
+	}
+}
+public function apply_intern($offerType, $offerID, $userID){
+	if($offerType=='2'){
+		$data = array(
+			'internshipID'=> $offerID,
+			'userID' => $userID,
+			'status' => '1'
+			);
+		$array= $this->db->get('internshipapplicants');
+		$array = $array->result_array();
+
+		
+		foreach ($array as $key => $value) {
+			if($value['internshipID']==$data['internshipID'] && $value['userID']==$data['userID']) { echo "already applied" ; die;}
+		}
+		
+       
+
+		return $this->db->insert('internshipapplicants', $data);
 	}
 }
 }

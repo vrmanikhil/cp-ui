@@ -296,10 +296,15 @@ class Home_lib {
 		return $CI->homeModel->getInternshipData($internshipID);
 	}
 
-	public function apply($offerType, $offerID, $userID){
+	public function apply_job($offerType, $offerID, $userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->apply($offerType, $offerID, $userID);
+		return $CI->homeModel->apply_job($offerType, $offerID, $userID);
+	}
+	public function apply_intern($offerType, $offerID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->apply_intern($offerType, $offerID, $userID);
 	}
 
 }

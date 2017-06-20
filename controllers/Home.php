@@ -184,72 +184,152 @@ class Home extends CI_Controller {
 		$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
 		$this->load->view('addedJobOffers', $this->data);
 	}
-	// public function applyjob(){
-	// 	$this->load->model('Home_model');
-	// 	$this->load
-	// }
-	// public function apply_button(){
-	// 	// $id = $this->input->get('');
-	// 	// echo $id;die;
 	
-	// $this->load->model('Home_model');
-	// $data['applied'] = $this->Home_model->apply_button(); 
-	// //$this->load->view('jobOffers',$this->data); }
-	// var_dump($this->data['applied']);die; }
-	// //if($this->data['applied'])
-	// //$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error')); }
 
 	public function hi(){
-		$this->apply(2,1);
+		$jobID = $this->input->get('jobID');
+		$internID= $this->input->get('internID');
+		if($jobID)
+		{$this->apply_job(2,$jobID);}
+	 else 
+		{$this->apply_intern(2,$internID);}
 	}
 
-	public function apply($offerType='', $offerID=''){
+	public function apply_job($offerType='', $offerID=''){
 		if($offerType=='2'){
 			$jobData = $this->home_lib->getJobData($offerID);
-			$jobData = $jobData[0];
+			$jobData = $jobData[0]; 
+			$jobSkillsRequired = $jobData['skillIDsRequired'];
+			$jobSkillsRequired = explode(',', $jobSkillsRequired);
+			$jobskill = 0 ;
+			foreach ($jobSkillsRequired as $key => $value) {
+				$jobskill ++ ;
+			} 
+			
 			$userID = $_SESSION['userData']['userID'];
-			if($jobData['applicants']=='1' || $jobData['applicants']=='2'){
-				$checkSkillMatch = $this->checkSkillMatch($offerType, $offerID);
-				if($checkSkillMatch){
-					if($jobData['applicants']=='1'){
-						$apply = $this->home_lib->apply($offerType, $offerID, $userID);
-					}
-				}
-				else{
-					if($jobData['applicants']=='2'){
-						$apply = $this->home_lib->apply($offerType, $offerID, $userID);
-					}
-				}
-			}
-			else{
-				$apply = $this->home_lib->apply($offerType, $offerID, $userID);
-			}
- 		}
+			
+
+						
+						  if($jobData['applicants']=='1' || $jobData['applicants']=='2'){ 
+							$checkSkillMatch = $this->checkJobSkillMatch($offerType, $offerID); 
+							//var_dump($checkSkillMatch);die;
+							if($checkSkillMatch){ 
+								if($jobData['applicants']=='1' && $checkSkillMatch==$jobskill){ 
+							
+									$apply = $this->home_lib->apply_job($offerType, $offerID, $userID);
+									echo "applied successfully";
+							} 
+
+							else 
+								if($jobData['applicants']=='2'){
+									$apply = $this->home_lib->apply_job($offerType, $offerID, $userID);
+									echo"applied successfully!! partial";
+								}
+							
+								else { echo "unsuccessful attempt!!" ; }
+							}
+							
+						   }
+						
+						    else{
+							$apply = $this->home_lib->apply_job($offerType, $offerID, $userID);
+						    }
+					  }  
+			            
+	}
+    
+   public function apply_intern($offerType='', $offerID=''){
+		if($offerType=='2'){
+			$internData = $this->home_lib->getInternshipData($offerID);
+			$internData = $internData[0]; 
+			$internSkillsRequired = $internData['skillIDsRequired'];
+			$internSkillsRequired = explode(',', $internSkillsRequired);
+			$internskill = 0 ;
+			foreach ($internSkillsRequired as $key => $value) {
+				$internskill ++ ;
+			} 
+			
+			$userID = $_SESSION['userData']['userID'];
+			
+
+						
+						  if($internData['applicants']=='1' || $internData['applicants']=='2'){ 
+							$checkSkillMatch = $this->checkInternSkillMatch($offerType, $offerID); 
+							//var_dump($checkSkillMatch);die;
+							if($checkSkillMatch){ 
+								if($internData['applicants']=='1' && $checkSkillMatch==$internskill){ 
+							
+									$apply = $this->home_lib->apply_intern($offerType, $offerID, $userID);
+									echo "applied successfully";
+							} 
+
+							else 
+								if($internData['applicants']=='2'){
+									$apply = $this->home_lib->apply_intern($offerType, $offerID, $userID);
+									echo"applied successfully!! partial";
+								}
+							
+								else { echo "unsuccessful attempt!!" ; }
+							}
+							
+						   }
+						
+						    else{
+							$apply = $this->home_lib->apply_intern($offerType, $offerID, $userID);
+						    }
+					  }  
+			            
 	}
 
-	public function checkSkillMatch($offerType, $offerID){
+	public function checkJobSkillMatch($offerType, $offerID){
 		$userID = $_SESSION['userData']['userID'];
 		if($offerType=='2'){
+			//job match skills
 			$jobData = $this->home_lib->getJobData($offerID);
 			$jobData = $jobData[0];
 			$jobSkillsRequired = $jobData['skillIDsRequired'];
 			$jobSkillsRequired = explode(',', $jobSkillsRequired);
+			
 			$userSkills = $this->home_lib->getUserSkills($userID);
+			
 			$skillCount = 0;
+			
 			foreach ($userSkills as $key => $value) {
 				if(in_array($value['skillID'], $jobSkillsRequired)){
 					$skillCount++;
 				}
-			}
-			$countJobSkillsRequired = count($jobSkillsRequired);
-			if($countJobSkillsRequired == $skillCount){
-				return 1;
-			}
-			else{
-				return 0;
-			}
+			} 
 		}
+		
+		return ($skillCount);
+
 	}
+
+	
+public function checkInternSkillMatch($offerType, $offerID){
+		$userID = $_SESSION['userData']['userID'];
+		if($offerType=='2'){
+			//job match skills
+			$internData = $this->home_lib->getInternshipData($offerID);
+			$internData = $internData[0];
+			$internSkillsRequired = $internData['skillIDsRequired'];
+			$internSkillsRequired = explode(',', $internSkillsRequired);
+			
+			$userSkills = $this->home_lib->getUserSkills($userID);
+			
+			$skillCount = 0;
+			
+			foreach ($userSkills as $key => $value) {
+				if(in_array($value['skillID'], $internSkillsRequired)){
+					$skillCount++;
+				}
+			} 
+		}
+		
+		return ($skillCount);
+
+	}
+
 
 	public function addInternshipOffer(){
 		$this->redirection();
