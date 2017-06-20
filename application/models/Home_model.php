@@ -217,7 +217,7 @@ class Home_model extends CI_Model {
 		$user = $_SESSION['userData']['userID'];
 		$this->db->select('*');
 		$this->db->where('status', '1');
-		$this->db->where("((active = $userID AND passive = $user) OR 
+		$this->db->where("((active = $userID AND passive = $user) OR
 			(passive = $userID AND active = $user))");
 		$result = $this->db->get('connections');
 		return $result->result_array();

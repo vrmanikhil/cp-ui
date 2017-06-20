@@ -148,7 +148,7 @@ class Home extends CI_Controller {
 		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
 			array_push($userSkills, $value['skillID']);
 		}
-		$jobOffers = array();
+		$internshipOffers = array();
 		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
 		foreach ($this->data['internshipOffers'] as $key => $value) {
 			if($value['applicants']=='3'){
@@ -417,7 +417,7 @@ class Home extends CI_Controller {
 		if(!$new_msgs)
 			echo 'false';
 		else
-			echo json_encode($new_msgs);	
+			echo json_encode($new_msgs);
 		die;
 	}
 
