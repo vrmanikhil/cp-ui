@@ -143,8 +143,8 @@ class Home extends CI_Controller {
 	public function getDetails(){
 		$jobID = $this->input->get('jobid');
 		$jobDetails = $this->home_lib->getJobDetails($jobID);
-		$jobDetails['skillIDs'] = $jobDetails[0]['skillIDsRequired'];
-		$jobDetails['skills'] = $jobDetails[0]['skillsRequired'];
+		$jobDetails['cities'] = "Some Random Cities";
+		$jobDetails['skills'] = "Some Random Skills";
 		echo json_encode($jobDetails);
 	}
 
