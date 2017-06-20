@@ -335,9 +335,8 @@ class Home extends CI_Controller {
 
 	public function composeMessage()
 	{
-		$this->data['title'] = 'Compose Message';
-		$this->data['connections'] = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
-		$this->load->view('composeMessage', $this->data);
+		$connections = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
+		return $connections;
 	}
 
 	public function sendComposedMessage(){
@@ -360,6 +359,7 @@ class Home extends CI_Controller {
 			$this->data['user_id'] = $this->session->userdata('userID');
 			$this->data['more'] = $this->home_lib->moreChats(5);
 			$this->data['title'] = 'Messages';
+			$this->data['connections'] = $this->composeMessage();
 			$this->load->view('messages', $this->data);
 		}else{
 			redirect(base_url());
@@ -368,6 +368,7 @@ class Home extends CI_Controller {
 
 	public function loadMoreChats($offset){
 		$number = $this->session->userdata('chats');
+		$dat['number'] = $number;
 		$dat['latest_chats'] = $this->home_lib->fetchLatestChats($offset);
 		$dat['more'] = $this->home_lib->moreChats(5 + $offset);
 		echo json_encode($dat);
@@ -376,11 +377,10 @@ class Home extends CI_Controller {
 	public function chat($chatter_id)
 	{
 		$this->home_lib->markAsRead($chatter_id);
-		$this->data['chatter_id']  = $chatter_id;
 		$messages = $this->home_lib->fetchConversation($chatter_id);
 		$this->data['usr'] = $chatter_id;
 		$chatter = $this->home_lib->getUserDetails($chatter_id);
-		$this->data['profile_image'] = $chatter[0]['profileImage'];
+		$this->data['profileImage'] = $chatter[0]['profileImage'];
 		$this->data['user_name'] = $chatter[0]['name'];
 		$more = $this->home_lib->loadMoreMessages($chatter_id, 5);
 		$this->data['more'] = $more;
@@ -391,7 +391,7 @@ class Home extends CI_Controller {
 			redirect(base_url('messages'));
 		}
 		$this->data['messages'] = $messages;
-		$this->load->view('chat', $this->data);
+		$this->load->view('chat-new', $this->data);
 	}
 
 	public function loadMoreMessages($user, $offset)
@@ -411,13 +411,13 @@ class Home extends CI_Controller {
 
 	public function checkForNewMessages()
 	{
-		$last_id = $this->input->get('last_id');
-		$user = $this->input->get('from');
+		$last_id = $_GET['last_id'];
+		$user = $_GET['from'];
 		$new_msgs = $this->home_lib->checkForNewMessages($user, $last_id);
 		if(!$new_msgs)
 			echo 'false';
 		else
-			echo json_encode($new_msgs);
+			echo json_encode($new_msgs);	
 		die;
 	}
 

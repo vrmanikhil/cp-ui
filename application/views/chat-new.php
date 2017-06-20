@@ -61,92 +61,55 @@
 					</script>
 				</div>
 			</aside>
-
+			<div>
+			<?php if($more){?>
+				<button type="submit" id="load-more" onclick = loadDoc() class="btn btn--primary">Load More</button>
+			<?php } ?>
+			</div>
 			<div class="main-body flex__item">
 				<div class="messages__section card">
-					<h1 class="messages__section-title">Nikhil Verma</h1>
-					<div class="messages-container">
-						<div class="flex media user-message chat sender">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
+					<h1 class="messages__section-title"><?php echo $title; ?></h1>
+					<div class="messages-container" id = "messages-container">
+					<div id = "messages"></div>
+					<?php
+					$i = 0;
+					foreach (array_reverse($messages) as $key => $value) {
+						$i++;
+						if($value['class'] == "sender"){?>
+						<div class="flex media user-message chat receiver" id = "message<?= $i ?>">
+							<img src="<?php echo $_SESSION['profileImage']?>" alt="user" class="media-figure notification__feature-img">
 							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 1</strong></span>
-								<span class="notification__message">Message</span>
+								<span class="notification__message"><?php echo $value['message'];?></span>
 								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
+									<span class="notification__date"><?php echo $value['timestamp']?></span>
 								</span>
 							</span>
 						</div>
-						<div class="flex media user-message chat receiver">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
+						<?php
+						}else{
+						?>
+						<div class="flex media user-message chat sender" id =  "message<?= $i ?>">
+							<img src="<?php echo $profileImage; ?>" alt="user" class="media-figure notification__feature-img">
 							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 2</strong></span>
-								<span class="notification__message">Message</span>
+								<span class="notification__message"><?php echo $value['message'];?></span>
 								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
+									<span class="notification__date"><?php echo $value['timestamp']?></span>
 								</span>
 							</span>
 						</div>
-						<div class="flex media user-message chat sender">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 1</strong></span>
-								<span class="notification__message">Message</span>
-								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
-								</span>
-							</span>
-						</div>
-						<div class="flex media user-message chat receiver">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 2</strong></span>
-								<span class="notification__message">Message</span>
-								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
-								</span>
-							</span>
-						</div>
-						<div class="flex media user-message chat receiver">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 2</strong></span>
-								<span class="notification__message">Message</span>
-								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
-								</span>
-							</span>
-						</div>
-						<div class="flex media user-message chat sender">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 1</strong></span>
-								<span class="notification__message">Message</span>
-								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
-								</span>
-							</span>
-						</div>
-						<div class="flex media user-message chat sender">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure notification__feature-img">
-							<span class="media-body flex flex--col">
-								<span class="notification__message"><strong>User 1</strong></span>
-								<span class="notification__message">Message</span>
-								<span class="notification__info">
-									<span class="notification__date">18 Jun 2017  3:50 PM</span>
-								</span>
-							</span>
-						</div>
+						<?php
+							}
+							}
+						?>			
 					</div>
-					<form action="" class="form">
 						<div class="horizontal-group">
 							<div class="form-group message-input-container">
 								<textarea name="message" id="message" required class="form__input" rows="1" placeholder="Type your message here"></textarea>
 							</div>
 							<div class="form-group">
-								<input type="submit" value="Send" class="btn btn--primary">
+								<button type="submit" id = 'send' class="btn btn--primary">Send Message</button>
 							</div>
 						</div>
-					</form>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
@@ -155,8 +118,110 @@
 		</main>
 		<?php echo $footer; ?>
 	</div>
+
+	<div class="flex media user-message chat wrap" style = "display: none">
+		<img src="" alt="user" class="media-figure notification__feature-img">
+		<span class="media-body flex flex--col">
+			<span class="notification__message msg"></span>
+			<span class="notification__info">
+				<span class="notification__date time"></span>
+			</span>
+		</span>
+	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script type="text/javascript">
+var offset = <?= $i ?>;
+var userImage = '<?= $_SESSION['profileImage'] ?>';
+var chatterImage = '<?= $profileImage ?>';
+		function loadDoc() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		   if (this.readyState == 4 && this.status == 200) {
+		   	var response = JSON.parse(this.responseText);
+		   	var more = response.more;
+		   	var chats = response.content;
+		    for( i = 0; i < chats.length; i++){
+		    	offset++;
+		    	if(chats[i].class === 'sender' ){
+		    		var elChild = document.createElement("div");
+		    		elChild.innerHTML = "<div class='flex media user-message chat receiver' id = 'message" + offset + "'><img src='"+ userImage +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'>"+ chats[i].message +"</span><span class='notification__info'><span class='notification__date'>"+ chats[i].timestamp +"</span></span></span></div>";
+		    		document.getElementById('messages-container').insertBefore(elChild, document.getElementById("messages-container").firstChild);
+		    	}else{
+		    		var elChild = document.createElement("div");
+		    		elChild.innerHTML = "<div class='flex media user-message chat sender' id = 'message" + offset + "'><img src='"+ chatterImage +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'>"+ chats[i].message +"</span><span class='notification__info'><span class='notification__date'>"+ chats[i].timestamp +"</span></span></span></div>";
+		    		document.getElementById('messages-container').insertBefore(elChild,document.getElementById("messages-container").firstChild);
+		    }
+			}
+		    if(chats.length == 0 || more === false){
+				document.getElementById('load-more').style.visibility = "hidden";
+			}
+			}
+		   }
+  			xhttp.open("POST", "<?php echo base_url('messages/load-more-messages/'). $usr.'/';?>" + offset, true);
+  			xhttp.send();
+  		}
+
+var	lastId = <?php echo $messages[0]['messageID']; ?>;
+  		$(document).ready(function(){
+  			$('#send').click(function(){
+  			container = $('.wrap').clone()
+			msg = $('#message').val().trim();
+			i = 0;
+			data = {message: msg, to: <?php echo $usr; ?>}
+			if(msg != ''){
+				$.post('<?php echo base_url('messages/send-message'); ?>', data).done(function(res){
+					res = JSON.parse(res)
+					new_lastId = res.insert_id
+					time = res.time
+					res = res.success
+					if(res){
+						container.find('.time').html(time)
+						container.find('.msg').html(msg)
+						container.addClass('receiver')
+						container.find('img').attr('src', userImage)
+						$('#messages-container').append(container[0])
+						container.show()
+						$('#message').val('')
+						$('#chat').scrollTop($('#chat').prop("scrollHeight"))
+						lastId = new_lastId
+					}
+				}).fail(function(){
+
+				})
+			}
+		})
+
+		window.setInterval(function(){
+			var data = {last_id: lastId, from: <?php echo $usr; ?>}
+			$.get('<?= base_url('messages/checkForNewMessages')?>', data).done(function(res){
+				res = JSON.parse(res);
+				if(res != false){
+					for (var i = 0; i < res.length; i++){
+						container = $('.wrap').clone()
+						container.find('.time').html(res[i].timestamp)
+						container.find('.msg').html(res[i].message)
+						if(res[i].class == "receiver"){
+						container.find('img').attr('src', chatterImage)
+						container.addClass('sender')
+						}else{
+						container.addClass('receiver')
+						container.find('img').attr('src', userImage)}	
+						$('#messages-container').append(container[0])
+						container.show()
+						$('#message').val('')
+						$('#chat').scrollTop($('#chat')
+							.prop("scrollHeight"))
+					}
+					lastId = res[i-1].messageID
+					res = 'false'; 
+				}
+			})
+		}, 5000)
+
+	})
+
+	</script>
 </body>
 
 </html>

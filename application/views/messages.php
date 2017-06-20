@@ -13,6 +13,13 @@
 	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> -->
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<style type="text/css">
+		#conn-grp ul {
+			position: relative;
+			list-style: none !important; 
+			padding-left: 3% !important; 
+		}
+	</style>
 </head>
 
 <body>
@@ -75,7 +82,7 @@
 							<span>Compose New</span>
 						</a>
 					</div>
-					<div class="messages-container">
+					<div class="messages-container" id = "messages-container">
 					<?php	if (empty($latest_chats)) {	?>
 						<p>You do not have sent or recieved any message.</p>
 					<?php } ?>
@@ -84,7 +91,7 @@
 						foreach ($latest_chats as $chat) {
 							$i++;
 							$cls = '';
-							if ($chat['read'] != 1) {
+							if ($chat['read'] != 1 && $_SESSION['userData']['userID'] !== $chat['sender'] ) {
 								$cls = 'unread';
 							}
 					?>
@@ -120,15 +127,18 @@
 		</main>
 		<?php echo $footer; ?>
 	</div>
+	<?php var_dump($connections)?>
 	<div class="remodal compose-message-modal" data-remodal-id="composeMessage">
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<div class="compose-message-form-container">
 				<h2>Compose Message</h2>
-				<form method="get" class="form" action="">
+				<form method="post" class="form" action="<?php echo base_url('messages/composeMessage');?>">
 					<div class="form-group">
 						<label for="name" class="form__label">Receiver's Name</label>
-						<input type="text" class="form__input" id="name" name="name" placeholder="Receiver's name" required>
+						<input type="text" class="form__input" id="name" name="to" placeholder="Receiver's name" required>
+						<input type="hidden" id="userId" name="data[userID]" value = "data[userID]">
+						<div class="ui-front" id="conn-grp">
 					</div>
 					<div class="form-group">
 						<label for="message" class="form__label">Message</label>
@@ -153,6 +163,7 @@
 			}
 		});
 	</script>
+	<script src="<?php echo base_url('assets/js/jquery-ui.min.js')?>" type="text/javascript"></script>
 	<script type="text/javascript">
 		var offset = <?php echo $i; ?>;
 		function loadDoc() {
@@ -165,15 +176,15 @@
 				for( i = 0; i < chats.length; i++){
 					offset++;
 					if(chats[i].chatter_id !== chats[i].sender ){
-						var html = "<a class='flex media notification chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
-						document.getElementById('notifications').innerHTML += html;
+						var html = "<a class='flex media user-message chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+						document.getElementById('messages-container').innerHTML += html;
 					}else{
 						if(chats[i].read  != 0){
-						var html = "<a class='flex media notification chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'>	</i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
-						document.getElementById('notifications').innerHTML += html;
+						var html = "<a class='flex media user-message chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'>	</i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+						document.getElementById('messages-container').innerHTML += html;
 					}else{
-						var html = "<a class='flex media notification chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message' style = 'background-color:#f05f40'><i class = 'fa fa-reply'></i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
-						document.getElementById('notifications').innerHTML += html;
+						var html = "<a class='flex media user-message chat unread' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'></i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+						document.getElementById('messages-container').innerHTML += html;
 					}
 				}
 			}
@@ -192,6 +203,31 @@
 					window.location.replace('<?= base_url('messages/chats')?>/'+chatter);
 				});
 			});
+
+
+			var data = <?php echo json_encode($connections)?>;
+		data.forEach(function(x, i){
+			x.label = x['name'];
+		});
+
+		$("#name").autocomplete({
+			autoFocus : true,
+			source: function(req, res){
+						var matcher = new RegExp($.ui.autocomplete.escapeRegex(req.term), "i");
+						var r = $.grep(data, function(value) {	
+							return matcher.test(value.userID) || matcher.test(value.name);
+						})
+						if(r.length == 0){
+							console.log('empty');
+						}
+						return res(r.slice(0,5));
+					},
+			appendTo: "#conn-grp",
+			select: function(e, u){
+						$('#userId').val(u.item.userID);
+					},
+		});
+
 	</script>
 </body>
 
