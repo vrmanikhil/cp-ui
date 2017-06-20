@@ -445,4 +445,17 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getOfferData($offerType, $offerID){
+		if($offerType=='1'){
+			$this->db->select('jobTitle,addedBy');
+			$result = $this->db->get_where('jobOffers', array('jobID'=> $offerID));
+			return $result->result_array()[0];
+		}
+		if($offerType=='2'){
+			$this->db->select('internshipTitle,addedBy');
+			$result=  $this->db->get_where('internshipOffers', array('internshipID'=> $offerID));
+			return $result->result_array()[0];
+		}
+	}
+
 }

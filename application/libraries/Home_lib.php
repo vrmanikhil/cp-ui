@@ -513,4 +513,10 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getAppliedInternshipOffers();
 	}
 
+	public function getOfferData($offerType, $offerID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getOfferData($offerType, $offerID);
+	}
+
 }

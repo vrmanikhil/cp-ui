@@ -534,4 +534,16 @@ class Home extends CI_Controller {
 		return $this->home_lib->getJobData($jobID);
 	}
 
+	public function applicants($offerType='', $offerID){
+		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
+		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
+
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
+		var_dump($this->data['offerData']);die;
+	}
+
 }
