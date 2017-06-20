@@ -140,6 +140,14 @@ class Home extends CI_Controller {
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
+	public function getDetails(){
+		$jobID = $this->input->get('jobid');
+		$jobDetails = $this->home_lib->getJobDetails($jobID);
+		$jobDetails['skillIDs'] = $jobDetails[0]['skillIDsRequired'];
+		$jobDetails['skills'] = $jobDetails[0]['skillsRequired'];
+		echo json_encode($jobDetails);
+	}
+
 	//Internship Offers- Normal Users
 
 	public function relevantInternships(){
@@ -299,7 +307,7 @@ class Home extends CI_Controller {
 				$this->session->set_flashdata(['skill_id'=> $get_id]);
 				redirect(base_url('skills/skill-test-guidelines'));
 			}else{
-				$this->session->set_flashdata('message', array('content' => 'You have already added the above skill. Please choose another skill to continue.', 'class' => 'error'));
+				$this->session->set_flashdata('message', array('contentr' => 'You have already added the above skill. Please choose another skill to continue.', 'class' => 'error'));
 				redirect(base_url('skills'));
 			}
 		}elseif (empty($get_id)) {
@@ -343,8 +351,6 @@ class Home extends CI_Controller {
 		$message = $this->input->post('message');
 		$recipient = $this->input->post('data');
 		$receiver = $recipient['userID'];
-		// $receiver = $this->home_lib->getUserId($recipient);
-		// var_dump($receiver); die();
 		if(!empty($receiver)){
 			$response = $this->home_lib->sendMessage($receiver[0]['userID'], $message);
 			redirect(base_url('messages/chats/'.$receiver[0]['userID']));
@@ -424,7 +430,7 @@ class Home extends CI_Controller {
 	public function connections(){
 		$this->redirection();
 		$userID = $_SESSION['userData']['userID'];
-		$this->data['connections'] = $this->home_lib->getConnections($userID);
+		$this->data['connections'] = $thisr->home_lib->getConnections($userID);
 		$connections = array();
 		foreach ($this->data['connections'] as $key => $value) {
 			if($value['active']==$userID){

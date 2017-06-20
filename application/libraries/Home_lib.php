@@ -115,6 +115,12 @@ class Home_lib {
 		return $CI->homeModel->getJobOffers();
 	}
 
+	public function getJobDetails($jobID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getJobDetails($jobID);
+	}
+
 	public function getInternshipOffers(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');

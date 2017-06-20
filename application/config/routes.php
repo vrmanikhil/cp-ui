@@ -115,7 +115,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['messages/compose'] = 'home/composeMessage';
 $route['messages'] = 'home/messages';
-$route['messages/composeMessage'] = 'home/sendComposedMessage';
+$route['messages/composeMessage'] = 'home/sendCompose	dMessage';
 $route['messages/chats/(:num)'] = 'home/chat/$1';
 $route['messages/load-more-chats/(:num)'] = 'home/loadMoreChats/$1';
 $route['messages/load-more-messages/(:num)/(:num)'] = 'home/loadMoreMessages/$1/$2';
