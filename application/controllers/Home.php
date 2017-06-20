@@ -140,6 +140,14 @@ class Home extends CI_Controller {
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
+	public function getDetails(){
+		$jobID = $this->input->get('jobid');
+		$jobDetails = $this->home_lib->getJobDetails($jobID);
+		$jobDetails['skillIDs'] = $jobDetails[0]['skillIDsRequired'];
+		$jobDetails['skills'] = $jobDetails[0]['skillsRequired'];
+		echo json_encode($jobDetails);
+	}
+
 	//Internship Offers- Normal Users
 
 	public function relevantInternships(){
@@ -343,8 +351,6 @@ class Home extends CI_Controller {
 		$message = $this->input->post('message');
 		$recipient = $this->input->post('data');
 		$receiver = $recipient['userID'];
-		// $receiver = $this->home_lib->getUserId($recipient);
-		// var_dump($receiver); die();
 		if(!empty($receiver)){
 			$response = $this->home_lib->sendMessage($receiver[0]['userID'], $message);
 			redirect(base_url('messages/chats/'.$receiver[0]['userID']));
