@@ -75,51 +75,28 @@
 						<li class="active">Applied Job Offers</li>
 					</ol>
 				</div>
+
+				<?php foreach ($appliedJobOffers as $key => $value) { ?>
+
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $value['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
+								<strong><?php echo $value['companyName']; ?></strong>
 							</p>
-							<p class="posting-card__desc">Android developer</p>
-							<p class="posting-card__status"><strong>Status</strong> : <span class="green">Selected</span></p>
+							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
+							<p class="posting-card__status"><strong>Status</strong> : <?php if($value['status']=='1') echo "Applied"; if($value['status']=='2') echo "<span class='red'>Rejected</span>"; if($value['status']=='3') echo "<span class='yellow'>Short-Listed</span>"; if($value['status']=='4') echo "<span class='green'>Selected</span>"; ?></p>
 							<div class="posting-card__apply">
 								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="card posting-card">
-					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
-						<div class="media-body flex flex--col">
-							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
-							</p>
-							<p class="posting-card__desc">Android developer</p>
-							<p class="posting-card__status"><strong>Status</strong> : <span class="red">Rejected</span></p>
-							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card posting-card">
-					<div class="flex media">
-						<img src="/assets/img/image-placeholder.png" alt="user" class="media-figure posting-card__img">
-						<div class="media-body flex flex--col">
-							<p class="posting-card__title">
-								<strong>Silver Touch Technologies Limited</strong>
-							</p>
-							<p class="posting-card__desc">Android developer</p>
-							<p class="posting-card__status"><strong>Status</strong> : <span class="yellow">Short listed</span></p>
-							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
-							</div>
-						</div>
-					</div>
-				</div>
+
+				<?php } ?>
+
+
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>

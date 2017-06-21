@@ -137,7 +137,6 @@
 						<li class="active">Relevant Job Offers</li>
 					</ol>
 				</div>
-
 				<?php foreach ($jobOffers as $key => $value) { ?>
 
 				<div class="card posting-card">
@@ -296,7 +295,7 @@
 				})
 			})
 		})
-		
+
 	</script>
 </body>
 

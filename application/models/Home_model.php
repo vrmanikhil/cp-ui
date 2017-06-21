@@ -217,7 +217,7 @@ class Home_model extends CI_Model {
 		$user = $_SESSION['userData']['userID'];
 		$this->db->select('*');
 		$this->db->where('status', '1');
-		$this->db->where("((active = $userID AND passive = $user) OR 
+		$this->db->where("((active = $userID AND passive = $user) OR
 			(passive = $userID AND active = $user))");
 		$result = $this->db->get('connections');
 		return $result->result_array();
@@ -285,7 +285,7 @@ class Home_model extends CI_Model {
 	public function getJobDetails($jobID){
 		$this->db->select('jobOffers.jobID, jobOffers.jobTitle, jobOffers.jobtype, jobOffers.jobDescription, jobOffers.startDate, jobOffers.applicationDeadline, jobOffers.offerType, jobOffers.offer, jobOffers.minimumOffer, jobOffers.maximumOffer, jobOffers.partTime, jobOffers.openings, jobOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
 		$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
-		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');	
+		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');
 		$this->db->join('employerUsers','employerUsers.userID = jobOffers.addedBy');
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
@@ -431,11 +431,58 @@ class Home_model extends CI_Model {
 		return $this->db->update('passwordToken', $data);
 	}
 
-		public function getConnectionProfiles($connections){
-			$this->db->where_in('userID', $connections);
-			$this->db->select('userID, name, profileImage');
-			$result = $this->db->get('users');
-			return $result->result_array();
+	public function getConnectionProfiles($connections){
+		$this->db->where_in('userID', $connections);
+		$this->db->select('userID, name, profileImage');
+		$result = $this->db->get('users');
+		return $result->result_array();
+	}
+
+	public function getAppliedJobOffers(){
+		$userID = $_SESSION['userData']['userID'];
+		$this->db->join('jobOffers', 'jobApplicants.jobID = jobOffers.jobID');
+		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.jobID, employerUsers.companyName, employerUsers.companyLogo, jobApplicants.status');
+		$result = $this->db->get_where('jobApplicants', array('jobApplicants.userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function getAppliedInternshipOffers(){
+		$userID = $_SESSION['userData']['userID'];
+		$this->db->join('internshipOffers', 'internshipApplicants.internshipID = internshipOffers.internshipID');
+		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+		$this->db->select('internshipOffers.internshipTitle, internshipOffers.internshipID, employerUsers.companyName, employerUsers.companyLogo, internshipApplicants.status');
+		$result = $this->db->get_where('internshipApplicants', array('internshipApplicants.userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function getOfferData($offerType, $offerID){
+		if($offerType=='1'){
+			$this->db->select('jobTitle,addedBy');
+			$result = $this->db->get_where('jobOffers', array('jobID'=> $offerID));
+			return $result->result_array()[0];
 		}
+		if($offerType=='2'){
+			$this->db->select('internshipTitle,addedBy');
+			$result=  $this->db->get_where('internshipOffers', array('internshipID'=> $offerID));
+			return $result->result_array()[0];
+		}
+	}
+
+	public function getApplicants($offerType, $offerID){
+		$this->db->join('users', 'jobApplicants.userID = users.userID');
+		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
+		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
+		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');
+		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID');
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID');
+		$this->db->select('users.userID, users.name, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(skills.skillID) AS userSkills');
+		$this->db->group_by('userSkills.skillID');
+		if($offerType=='1'){
+			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
+		if($offerType=='2'){
+			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
+		return $result->result_array();
+	}
 
 }

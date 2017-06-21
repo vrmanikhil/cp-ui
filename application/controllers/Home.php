@@ -136,7 +136,7 @@ class Home extends CI_Controller {
 	}
 
 	public function appliedJobOffers(){
-		$this->redirection();
+		$this->data['appliedJobOffers'] = $this->home_lib->getAppliedJobOffers();
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
@@ -156,7 +156,7 @@ class Home extends CI_Controller {
 		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
 			array_push($userSkills, $value['skillID']);
 		}
-		$jobOffers = array();
+		$internshipOffers = array();
 		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
 		foreach ($this->data['internshipOffers'] as $key => $value) {
 			if($value['applicants']=='3'){
@@ -186,7 +186,7 @@ class Home extends CI_Controller {
 	}
 
 	public function appliedInternshipOffers(){
-		$this->redirection();
+		$this->data['appliedInternshipOffers'] = $this->home_lib->getAppliedInternshipOffers();
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
 
@@ -423,7 +423,7 @@ class Home extends CI_Controller {
 		if(!$new_msgs)
 			echo 'false';
 		else
-			echo json_encode($new_msgs);	
+			echo json_encode($new_msgs);
 		die;
 	}
 
@@ -538,6 +538,18 @@ class Home extends CI_Controller {
 
 	public function getJobData($jobID){
 		return $this->home_lib->getJobData($jobID);
+	}
+
+	public function applicants($offerType='', $offerID){
+		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
+		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
+			$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
+			var_dump($this->data['applicants']);die;
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));
+			redirect(base_url());
+		}
 	}
 
 }
