@@ -507,4 +507,28 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getConnectionProfiles($connections);
 	}
 
+	public function getAppliedJobOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAppliedJobOffers();
+	}
+
+	public function getAppliedInternshipOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAppliedInternshipOffers();
+	}
+
+	public function getOfferData($offerType, $offerID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getOfferData($offerType, $offerID);
+	}
+
+	public function getApplicants($offerType, $offerID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getApplicants($offerType, $offerID);
+	}
+
 }

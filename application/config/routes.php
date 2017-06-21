@@ -69,6 +69,9 @@ $route['connections'] = 'home/connections';
 
 $route['search'] = 'home/search';
 
+
+$route['applicants/(:num)/(:num)'] = 'home/applicants/$1/$2';
+
 //Footer Links
 
 $route['about-us'] = 'home/aboutUs';
