@@ -153,7 +153,7 @@
 							</p>
 							<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details" id = "view">View</button>
+								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">View</button>
 							</div>
 						</div>
 					</div>
@@ -260,33 +260,33 @@
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('#view').click(".js-view-posting-details",function(){
-				console.log('hello');
+			$('.view').click(function(){
 				var data = null
-				id = $('#view').attr('data-id')
-				console.log(id)
+				id = this.id
+				id = $('#'+id).attr('data-id')
 				data = {jobid : id}
 				$.get('<?= base_url('home/getDetails')?>', data).done(function(res){
 
 					res = JSON.parse(res)
-					console.log(res);
 
 					$("#jobTitle").html(res[0].jobTitle)
 					$("#jobDescription").html(res[0].jobDescription)
 					$("#jobStart").html(res[0].startDate)
 					$("#jobDeadline").html(res[0].applicationDeadline)
 					if(res[0].offerType == "2")
-						$("#jobOffer").html(res[0].offer)
+						$("#jobOffer").html("INR " + res[0].offer + " lakhs")
 					else
-						$(".#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
+						$("#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
 						$("#jobTime").html('YES')
 					else
-						$("$jobTime").html('NO')
-					$("#jobSkill").html(res[0].jobTitle)
+						$("#jobTime").html('NO')
+					$("#jobSkill").html(res.skills)
 					if(res[0].jobType == "1")
-					$("#jobType").html("Work From Home")
+						$("#jobType").html("Work From Home")
+					else
+						$('#jobType').html(res.cities)
 					$("#companyName").html(res[0].companyName)
 					$("#companyWebsite").html(res[0].companyWebsite)
 					$("#companyDescription").html(res[0].companyDescription)
