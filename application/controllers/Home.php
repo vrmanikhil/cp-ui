@@ -251,6 +251,7 @@ class Home extends CI_Controller {
 
 	public function addedInternshipOffers(){
 		$this->redirection();
+		$this->data['addedInternshipOffers'] = $this->home_lib->getAddedInternshipOffers();
 		$this->load->view('addedInternshipOffers', $this->data);
 	}
 
