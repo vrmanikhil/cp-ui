@@ -59,12 +59,9 @@
 						<p><strong>Locations</strong></p>
 					</div>
 					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
 						<div class="search-filter__list js-prevent-body-scroll">
-							<div class="search-filter__list-item checkbox">
+						<table id = "location-list" class = "display" width = "100%"></table>
+							<!-- <div class="search-filter__list-item checkbox">
 								<label>
 									<input type="checkbox"> Delhi
 								</label>
@@ -88,7 +85,7 @@
 								<label>
 									<input type="checkbox"> Bangalore
 								</label>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -97,31 +94,8 @@
 						<p><strong>Skills</strong></p>
 					</div>
 					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> HTML
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Javascript
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> CSS
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> PHP
-								</label>
-							</div>
+						<div class="search-filter__list js-prevent-body-scroll">
+						<table id = "search-list" class = " table cell-border" cellspacing="0" width = "100%"></table>
 						</div>
 					</div>
 				</div>
@@ -267,9 +241,7 @@
 				id = $('#'+id).attr('data-id')
 				data = {jobid : id}
 				$.get('<?= base_url('home/getDetails')?>', data).done(function(res){
-
 					res = JSON.parse(res)
-
 					$("#jobTitle").html(res[0].jobTitle)
 					$("#jobDescription").html(res[0].jobDescription)
 					$("#jobStart").html(res[0].startDate)
@@ -298,6 +270,42 @@
 		})
 		
 	</script>
+	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.bootstrap.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.responsive.js'); ?>"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var dataSet = [["<input type='checkbox' value = '' name = ''> Tiger Nixon "], ["Garrett Winters"], ["Ashton Cox"], ["Cedric Kelly"], ["Airi Satou"], ["Brielle Williamson"], ["Herrod Chandler"], ["Rhona Davidson"], ["Colleen Hurst"], ["Sonya Frost"], ["Jena Gaines"], ["Quinn Flynn"], ["Charde Marshall"], ["Haley Kennedy"], ["Tatyana Fitzpatrick"], ["Paul Byrd"]];
+    $('#search-list').DataTable( {
+    	"oLanguage": {
+  						"sSearch": '<label><strong>Search</strong></label>',
+					},
+    	"dom" : '<"form-control"fl><"top">rt<"bottom"ip><"clear">',
+    	"paging" : false,
+    	"ordering" : false,
+    	"info" : false,
+        data: dataSet,
+        columns: [
+            { title: "" }
+        ]
+    });
+    $('#location-list').DataTable( {
+    	"oLanguage": {
+  						"sSearch": '<label><strong>Search</strong></label>',
+					},
+    	"dom" : '<"form-control"fl><"top">rt<"bottom"ip><"clear">',
+    	"paging" : false,
+    	"ordering" : false,
+    	"info" : false,
+        data: dataSet,
+        columns: [
+            { title: "" }
+        ]
+    });
+});
+	</script>
+
+
 </body>
 
 </html>
