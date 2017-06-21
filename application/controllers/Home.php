@@ -226,8 +226,14 @@ class Home extends CI_Controller {
 	}
 
 	public function search(){
+		$query = '';
+		if($x = $this->input->get('query')){
+			$query = $x;
+		}
+		$this->data['searchResults'] = $this->home_lib->getSearchResults($query);
 		$this->load->view('search', $this->data);
 	}
+
 
 	public function addJobOffer(){
 		$this->redirection();

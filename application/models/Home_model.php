@@ -502,4 +502,11 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getSearchResults($query){
+		$term = $this->db->escape($query);
+		$term = str_replace("'", "", $query);
+		$query = "(select userID, name, 'users' as tbl from users where name like '%$term%') union (select internshipID,internshipTitle, 'internships' as tbl from internshipOffers where internshipTitle like '%$term%') union (select jobID,jobTitle, 'jobs' as tbl from jobOffers where jobTitle like '%$term%')";
+		return $this->db->query($query)->result_array();
+	}
+
 }

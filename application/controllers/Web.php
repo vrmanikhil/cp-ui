@@ -580,14 +580,7 @@ class Web extends CI_Controller {
 		}
 	}
 
-	public function search(){
-		$query = '';
-		if($x = $this->input->get('query')){
-			$query = $x;
-		}
-		echo $query;die;
-	}
-
+	
 	public function verifyEMail(){
 		$token = '';
 		if($x = $this->input->post('token')){
