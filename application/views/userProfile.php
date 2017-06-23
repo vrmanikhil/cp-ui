@@ -41,7 +41,7 @@
 								}
 							}
 							else{ ?>
-								<a href="javascript:" class="btn">Remove Connection</a>
+								<a href="javascript:" onclick="alert('Are you sure you want to Remove the Connection?')" class="btn">Remove Connection</a>
 							<?php
 							}
 						} ?>

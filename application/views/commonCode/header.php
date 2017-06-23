@@ -128,7 +128,7 @@
 					<div class="dropdown__content">
 						<!-- <div class="dropdown__content-head"></div> -->
 						<div class="dropdown__content-body">
-							<a href="<?php echo base_url('user-profile'); ?>" class="user-settings__link"><i class="fa fa-user" aria-hidden="true"></i> User Profile</a>
+							<a href="<?php echo base_url('user-profile/').$_SESSION['userData']['userID']; ?>" class="user-settings__link"><i class="fa fa-user" aria-hidden="true"></i> User Profile</a>
 							<a href="<?php echo base_url('change-password'); ?>" class="user-settings__link"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a>
 							<a href="<?php echo base_url('settings'); ?>" class="user-settings__link"><i class="fa fa-gear" aria-hidden="true"></i> Settings</a>
 							<a href="<?php echo base_url('web/logout'); ?>" class="user-settings__link"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
