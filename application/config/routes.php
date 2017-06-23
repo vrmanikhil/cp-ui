@@ -103,10 +103,6 @@ $route['jobs/added-job-offer'] = 'home/addedJobOffers';
 $route['internships/add-internship-offer'] = 'home/addInternshipOffer';
 $route['internships/added-internship-offer'] = 'home/addedInternshipOffers';
 
-// Filter
-
-$route['clear-filter/(:num)/(:num)'] = 'home/clearFilter/$1/$2';
-
 //Skills
 
 $route['skills'] = 'home/skills';
@@ -119,7 +115,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Messages
 
-$route['messages/compose'] = 'home/composeMessage';
 $route['messages'] = 'home/messages';
 $route['messages/composeMessage'] = 'home/sendComposedMessage';
 $route['messages/chats/(:num)'] = 'home/chat/$1';
