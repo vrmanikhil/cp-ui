@@ -53,16 +53,50 @@ class Home_lib {
 		return $CI->homeModel->getAddedJobOffers();
 	}
 
+
+	public function getJobOffersSkillFilters($skills){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getJobOffersSkillFilters($skills);
+	}
+	public function getinternshipOffersLocationFilters($location){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getinternshipOffersLocationFilters($location);
+	}
+	public function getinternshipOffersSkillFilters($skills){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getinternshipOffersSkillFilters($skills);
+	}
+	public function getJobOffersLocationFilters($location){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getJobOffersLocationFilters($location);
+
 	public function getAddedInternshipOffers(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getAddedInternshipOffers();
+
 	}
 
 	public function getLocations(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getLocations();
+	}
+
+	public function getRelevantLocations($job){
+		$CI = &get_instance();
+		$CI->load->model('Home_model','homemodel');
+		return $CI->homemodel->getRelevantLocations($job);
+	}
+
+	public function getRelevantSkills($job = 0){
+		$CI = &get_instance();
+		$CI->load->model('Home_model','homemodel');
+		return $CI->homemodel->getRelevantSkills($job);
 	}
 
 	public function getSkills(){
@@ -123,10 +157,17 @@ class Home_lib {
 		return $CI->homeModel->getJobOffers();
 	}
 
+
 	public function getJobDetails($jobID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getJobDetails($jobID);
+	}
+
+	public function getInternshipDetails($internshipID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getInternshipDetails($internshipID);
 	}
 
 	public function getInternshipOffers(){

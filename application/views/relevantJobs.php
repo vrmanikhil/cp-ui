@@ -54,77 +54,31 @@
 						<a href="<?php echo base_url('jobs/applied-job-offers'); ?>" class="nav__link js-nav-link">Applied Job Offers</a>
 					</div>
 				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Locations</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list js-prevent-body-scroll">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Delhi
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Gurugram
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Greader Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Bangalore
-								</label>
+				<form action = "<?= base_url('jobs/relevant-jobs')?>" method="POST">
+					<div class="card card--no-padding search-filter">
+						<div class="search-filter__head">
+							<p><strong>Locations</strong></p>
+						</div>
+						<div class="search-filter__body">
+							<div class="search-filter__list js-prevent-body-scroll">
+								<table id = "location-list" class = "display" width = "100%"></table>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Skills</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> HTML
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Javascript
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> CSS
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> PHP
-								</label>
+					<div class="card card--no-padding search-filter">
+						<div class="search-filter__head">
+							<p><strong>Skills</strong></p>
+						</div>
+						<div class="search-filter__body">
+							<div class="search-filter__list js-prevent-body-scroll">
+								<table id = "skill-list" class = " table cell-border" cellspacing="0" width = "100%"></table>
 							</div>
 						</div>
 					</div>
-				</div>
+					<input type="hidden" name="filter" value="1">
+					<a href = "<?= base_url('clear-filter/1/2')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
+					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
+				</form>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
@@ -190,49 +144,49 @@
                 <form class="form-horizontal">
 
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Job Offer Description:</label>
+                  <label class="control-label col-sm-3"><strong>Job Offer Description:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobDescription">Job Offer Description</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Job Start Date:</label>
+                  <label class="control-label col-sm-3"><strong>Job Start Date:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobStart">Job Start Date</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Application Deadline:</label>
+                  <label class="control-label col-sm-3"><strong>Application Deadline:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobDeadline">Application Deadline</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Offer:</label>
+                  <label class="control-label col-sm-3"><strong>Offer:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobOffer">Offer</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Number of Openings:</label>
+                  <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobOpening">Number of Openings</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Part Time Allowed:</label>
+                  <label class="control-label col-sm-3"><strong>Part Time Allowed:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobTime">Part Time Allowed</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3">Skills:</label>
+                  <label class="control-label col-sm-3"><strong>Skills:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobSkill">Skills</p>
                   </div>
                 </div>
               <div class="form-group">
-                <label class="control-label col-sm-3">Job Offer Location:</label>
+                <label class="control-label col-sm-3"><strong>Job Offer Location:</strong></label>
                 <div class="col-sm-9">
                   <p class="form-control-static" id = "jobType"><?php echo "Work from Home"; ?></p>
                 </div>
@@ -258,6 +212,7 @@
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.view').click(function(){
@@ -265,10 +220,9 @@
 				id = this.id
 				id = $('#'+id).attr('data-id')
 				data = {jobid : id}
-				$.get('<?= base_url('home/getDetails')?>', data).done(function(res){
-
+				$.get('<?= base_url('home/getJobDetails')?>', data).done(function(res){
 					res = JSON.parse(res)
-
+					console.log(res)
 					$("#jobTitle").html(res[0].jobTitle)
 					$("#jobDescription").html(res[0].jobDescription)
 					$("#jobStart").html(res[0].startDate)
@@ -296,6 +250,78 @@
 			})
 		})
 
+	</script>
+	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.bootstrap.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.responsive.js'); ?>"></script>
+
+	<script type="text/javascript">
+	var skill = [];
+	var locate = [];
+	var	filterskills = <?= $filterskills?>;
+	var filterlocations = <?= $filterlocations?>;
+	$(document).ready(function() {
+		$.ajax({
+			method:'GET',
+			url:'/home/getLocationsSkills',
+			data:{job : '1' }
+		}).done(function(data){	
+			data = JSON.parse(data)
+			locations = data.locations
+			skills = data.skills
+			for(var i = 0 ; i < skills.length; i++){
+				if(filterskills){
+					if(filterskills.indexOf(skills[i].skillID) !== -1){
+						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+" checked>" + skills[i].skill_name];
+					}else{
+						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+">" + skills[i].skill_name];
+					}
+				}else{
+					skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+">" + skills[i].skill_name];
+				}
+			}
+			for(var i = 0 ; i < locations.length; i++){
+				if(filterlocations){
+					if(filterlocations.indexOf(locations[i].cityID) !== -1){
+						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+" checked>" + locations[i].city];
+					}else{
+						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
+					}
+				}else{
+					locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
+				}
+				
+			}
+
+			$('#skill-list').DataTable( {
+		    	"oLanguage": {
+		  						"sSearch": '<label><strong>Search</strong></label>',
+							},
+		    	"dom" : '<"form-control"fl><"top">rt<"bottom"ip><"clear">',
+		    	"paging" : false,
+		    	"retrieve": true,
+		      	"info" : false,
+		        "data" : skill,
+		        "columns" : [
+		            { "title": "" }
+		        ]
+		    });
+
+		    $('#location-list').DataTable( {
+		    	"oLanguage": {
+		  						"sSearch": '<label><strong>Search</strong></label>',
+							},
+		    	"dom" : '<"form-control"fl><"top">rt<"bottom"ip><"clear">',
+		    	"paging" : false,
+		    	"retrieve": true,
+		      	"info" : false,
+		        "data": locate,
+		        "columns"	: [
+		            { "title": "" }
+		        	]
+		    });
+		});
+		});  
 	</script>
 </body>
 
