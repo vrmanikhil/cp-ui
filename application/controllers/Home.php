@@ -161,7 +161,7 @@ class Home extends CI_Controller {
 			}else{
 				$filteredSkillJobIDs = [];
 			}
-			
+
 			if(isset($_POST['location'])){
 				$location = $_POST['location'];
 				$filteredLocationJobIDs = array();
@@ -180,7 +180,7 @@ class Home extends CI_Controller {
 			if(isset($location))
 				$this->data['filterlocations'] =json_encode($location);
 			$filteredJobIDs = array_unique(array_merge($filteredLocationJobIDs, $filteredSkillJobIDs));
-			
+
 			$jobIDs = array();
 			$i = 0;
 			if(empty($filteredJobIDs)){
@@ -223,7 +223,7 @@ class Home extends CI_Controller {
 			}else{
 				$filteredSkillJobIDs = [];
 			}
-			
+
 			if(isset($_POST['location'])){
 				$location = $_POST['location'];
 				$filteredLocationJobIDs = array();
@@ -242,7 +242,7 @@ class Home extends CI_Controller {
 			if(isset($location))
 				$this->data['filterlocations'] =json_encode($location);
 			$filteredJobIDs = array_unique(array_merge($filteredLocationJobIDs, $filteredSkillJobIDs));
-			
+
 			$jobIDs = array();
 			$i = 0;
 			if(empty($filteredJobIDs)){
@@ -325,7 +325,7 @@ class Home extends CI_Controller {
 			}else{
 				$filteredSkillinternshipIDs = [];
 			}
-			
+
 			if(isset($_POST['location'])){
 				$location = $_POST['location'];
 				$filteredLocationinternshipIDs = array();
@@ -340,7 +340,7 @@ class Home extends CI_Controller {
 			if(isset($location))
 				$this->data['filterlocations'] =json_encode($location);
 			$filteredinternshipIDs = array_unique(array_merge($filteredLocationinternshipIDs, $filteredSkillinternshipIDs));
-			
+
 			$internshipIDs = array();
 			$i = 0;
 			if(empty($filteredinternshipIDs)){
@@ -352,10 +352,10 @@ class Home extends CI_Controller {
 					}
 					$i++;
 				}
-				$this->load->view('relevantinternships', $this->data);
+				$this->load->view('relevantInternships', $this->data);
 			}
 		}else{
-			$this->load->view('relevantinternships', $this->data);
+			$this->load->view('relevantInternships', $this->data);
 		}
 	}
 
@@ -375,7 +375,7 @@ class Home extends CI_Controller {
 			}else{
 				$filteredSkillinternshipIDs = [];
 			}
-			
+
 			if(isset($_POST['location'])){
 				$location = $_POST['location'];
 				$filteredLocationinternshipIDs = array();
@@ -390,7 +390,7 @@ class Home extends CI_Controller {
 			if(isset($location))
 				$this->data['filterlocations'] =json_encode($location);
 			$filteredinternshipIDs = array_unique(array_merge($filteredLocationinternshipIDs, $filteredSkillinternshipIDs));
-			
+
 			$internshipIDs = array();
 			$i = 0;
 			if(empty($filteredinternshipIDs)){

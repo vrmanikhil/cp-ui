@@ -16,8 +16,8 @@
 	<style type="text/css">
 		#conn-grp ul {
 			position: relative;
-			list-style: none !important; 
-			padding-left: 3% !important; 
+			list-style: none !important;
+			padding-left: 3% !important;
 		}
 	</style>
 </head>
@@ -127,7 +127,6 @@
 		</main>
 		<?php echo $footer; ?>
 	</div>
-	<?php var_dump($connections)?>
 	<div class="remodal compose-message-modal" data-remodal-id="composeMessage">
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
@@ -214,7 +213,7 @@
 			autoFocus : true,
 			source: function(req, res){
 						var matcher = new RegExp($.ui.autocomplete.escapeRegex(req.term), "i");
-						var r = $.grep(data, function(value) {	
+						var r = $.grep(data, function(value) {
 							return matcher.test(value.userID) || matcher.test(value.name);
 						})
 						if(r.length == 0){
