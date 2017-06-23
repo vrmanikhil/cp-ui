@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				<div class="card card--no-padding search-filter">
-					<form action = "<?= base_url('intenships/internship-offers')?>" method="POST">
+					<form action = "<?= base_url('internships/internship-offers')?>" method="POST">
 					<div class="card card--no-padding search-filter">
 						<div class="search-filter__head">
 							<p><strong>Locations</strong></p>
@@ -226,20 +226,26 @@
 					$("#jobDescription").html(res[0].internshipDescription)
 					$("#jobStart").html(res[0].startDate)
 					$("#jobDeadline").html(res[0].applicationDeadline)
-					if(res[0].stipendType == "2")
-						$("#jobOffer").html("INR " + res[0].stipend + " lakhs")
-					else
-						$("#jobOffer").html('INR ' + res[0].minimumStipend + ' lakhs - INR ' + res[0].maximumStipend + ' lakhs')
+					if(res[0].stipendType == "4"){
+						$("#jobOffer").html("INR " + res[0].stipend)
+					}
+					else if(res[0].stipendType == "3"){
+						$("#jobOffer").html('INR ' + res[0].minimumStipend + ' - INR ' + res[0].maximumStipend)
+					}else if(res[0].stipendType == "2"){
+						$("#jobOffer").html('Expenses Covered')
+					}else {
+						$("#jobOffer").html('No Stipend')
+					}
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
 						$("#jobTime").html('YES')
 					else
 						$("#jobTime").html('NO')
-					$("#jobSkill").html(res.skills)
+					$("#jobSkill").html(res[0].skillsRequired)
 					if(res[0].internshipType == "1")
 						$("#jobType").html("Work From Home")
 					else
-						$('#jobType').html(res.cities)
+						$('#jobType').html(res[0].cities)
 					$("#companyName").html(res[0].companyName)
 					$("#companyWebsite").html(res[0].companyWebsite)
 					$("#companyDescription").html(res[0].companyDescription)
