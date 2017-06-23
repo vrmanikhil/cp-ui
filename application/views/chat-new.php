@@ -165,7 +165,6 @@ var chatterImage = '<?= $profileImage ?>';
 var	lastId = <?php echo $messages[0]['messageID']; ?>;
   		$(document).ready(function(){
   			$('#send').click(function(){
-  			container = $('.wrap').clone()
 			msg = $('#message').val().trim();
 			i = 0;
 			data = {message: msg, to: <?php echo $usr; ?>}
@@ -176,6 +175,8 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 					time = res.time
 					res = res.success
 					if(res){
+						container = $('.wrap').clone()
+						container.removeClass('wrap')
 						container.find('.time').html(time)
 						container.find('.msg').html(msg)
 						container.addClass('receiver')
@@ -199,6 +200,7 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 				if(res != false){
 					for (var i = 0; i < res.length; i++){
 						container = $('.wrap').clone()
+						container.removeClass('wrap')
 						container.find('.time').html(res[i].timestamp)
 						container.find('.msg').html(res[i].message)
 						console.log(res[i].class)
