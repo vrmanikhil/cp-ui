@@ -234,11 +234,11 @@
 						$("#jobTime").html('YES')
 					else
 						$("#jobTime").html('NO')
-					$("#jobSkill").html(res.skills)
+					$("#jobSkill").html(res[0].skillsRequired)
 					if(res[0].jobType == "1")
 						$("#jobType").html("Work From Home")
 					else
-						$('#jobType').html(res.cities)
+						$('#jobType').html(res[0].cities)
 					$("#companyName").html(res[0].companyName)
 					$("#companyWebsite").html(res[0].companyWebsite)
 					$("#companyDescription").html(res[0].companyDescription)
