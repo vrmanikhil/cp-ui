@@ -229,7 +229,7 @@
 					if(res[0].stipendType == "2")
 						$("#jobOffer").html("INR " + res[0].stipend + " lakhs")
 					else
-						$("#jobOffer").html('INR ' + res[0].minimumStipend + ' lakhs - INR ' + res[0].maximumStipend + ' lakhs')
+						$("#jobOffer").html('INR ' + res[0].minimumStipend + ' - INR ' + res[0].maximumStipend)
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
 						$("#jobTime").html('YES')

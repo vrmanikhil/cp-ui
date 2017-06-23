@@ -219,7 +219,7 @@
 				id = this.id
 				id = $('#'+id).attr('data-id')
 				data = {jobid : id}
-				$.get('<?= base_url('home/getDetails')?>', data).done(function(res){
+				$.get('<?= base_url('home/getJobDetails')?>', data).done(function(res){
 					res = JSON.parse(res)
 					$("#jobTitle").html(res[0].jobTitle)
 					$("#jobDescription").html(res[0].jobDescription)
