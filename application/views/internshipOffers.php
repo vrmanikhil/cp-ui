@@ -226,7 +226,7 @@
 					$("#jobDescription").html(res[0].internshipDescription)
 					$("#jobStart").html(res[0].startDate)
 					$("#jobDeadline").html(res[0].applicationDeadline)
-					if(res[0].offerType == "2")
+					if(res[0].stipendType == "2")
 						$("#jobOffer").html("INR " + res[0].stipend + " lakhs")
 					else
 						$("#jobOffer").html('INR ' + res[0].minimumStipend + ' lakhs - INR ' + res[0].maximumStipend + ' lakhs')
@@ -236,7 +236,7 @@
 					else
 						$("#jobTime").html('NO')
 					$("#jobSkill").html(res.skills)
-					if(res[0].jobType == "1")
+					if(res[0].internshipType == "1")
 						$("#jobType").html("Work From Home")
 					else
 						$('#jobType').html(res.cities)
