@@ -101,7 +101,21 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$this->load->view('chat-new', $this->data);
 	}
-
+	public function clearFilter($class, $page)
+	{
+		if($class == 1)
+		{
+			if($page == 1)
+				redirect(base_url('jobs/job-offers'));
+			else
+				redirect(base_url('job/relevant-jobs'));
+		}else{
+			if($page == 1)
+				redirect(base_url('internships/internship-offers'));
+			else
+				redirect(base_url('internships/relevant-internships'));
+		}
+	}
 	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$userID = $_SESSION['userData']['userID'];
@@ -131,12 +145,118 @@ class Home extends CI_Controller {
 			}
 		}
 		$this->data['jobOffers'] = $jobOffers;
-		$this->load->view('relevantJobs', $this->data);
+		$this->data['filterskills'] = 'false';
+		$this->data['filterlocations'] = 'false';
+		if(isset($_POST))
+		if($this->input->post('filter')  == 1){
+			if(isset($_POST['skill'])){
+				$skill = $_POST['skill'];
+				$filteredSkillJobIDs =  array();
+				$skillFilteredJobid = $this->home_lib->getJobOffersSkillFilters($skill);
+				foreach ($skillFilteredJobid as $key => $value) {
+					array_push($filteredSkillJobIDs, $value['jobID']);
+				}
+			}else{
+				$filteredSkillJobIDs = [];
+			}
+			
+			if(isset($_POST['location'])){
+				$location = $_POST['location'];
+				$filteredLocationJobIDs = array();
+				$locationFilteredJobid = $this->home_lib->getJobOffersLocationFilters($location);
+				foreach ($locationFilteredJobid as $key => $value) {
+					array_push($filteredLocationJobIDs, $value['jobID']);
+				}
+			}else{
+				$filteredLocationJobIDs = [];
+				}
+				// var_dump(json_encode($skill));
+				// var_dump(json_encode($location));
+				// die();
+			if(isset($skill))
+				$this->data['filterskills'] =	json_encode($skill);
+			if(isset($location))
+				$this->data['filterlocations'] =json_encode($location);
+			$filteredJobIDs = array_unique(array_merge($filteredLocationJobIDs, $filteredSkillJobIDs));
+			
+			$jobIDs = array();
+			$i = 0;
+			if(empty($filteredJobIDs)){
+				$this->load->view('relevantJobs', $this->data);
+			}else{
+				foreach ($this->data['jobOffers'] as $key => $value) {
+					if(!in_array($value['jobID'], $filteredJobIDs)){
+						unset($this->data['jobOffers'][$i]);
+					}
+					$i++;
+				}
+				$this->load->view('relevantJobs', $this->data);
+			}
+		}else{
+			$this->load->view('relevantJobs', $this->data);
+		}
+	}
+
+
+	public function getLocationsSkills(){
+		$job = $_GET['job'];
+		$data['locations'] = $this->home_lib->getRelevantLocations($job);
+		$data['skills'] = $this->home_lib->getRelevantSkills($job);
+		echo json_encode($data);
 	}
 
 	public function jobOffers(){
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers();
-		$this->load->view('jobOffers', $this->data);
+		$this->data['filterskills'] = 'false';
+		$this->data['filterlocations'] = 'false';
+		if(isset($_POST))
+		if($this->input->post('filter')  == 1){
+			if(isset($_POST['skill'])){
+				$skill = $_POST['skill'];
+				$filteredSkillJobIDs =  array();
+				$skillFilteredJobid = $this->home_lib->getJobOffersSkillFilters($skill);
+				foreach ($skillFilteredJobid as $key => $value) {
+					array_push($filteredSkillJobIDs, $value['jobID']);
+				}
+			}else{
+				$filteredSkillJobIDs = [];
+			}
+			
+			if(isset($_POST['location'])){
+				$location = $_POST['location'];
+				$filteredLocationJobIDs = array();
+				$locationFilteredJobid = $this->home_lib->getJobOffersLocationFilters($location);
+				foreach ($locationFilteredJobid as $key => $value) {
+					array_push($filteredLocationJobIDs, $value['jobID']);
+				}
+			}else{
+				$filteredLocationJobIDs = [];
+				}
+				// var_dump(json_encode($skill));
+				// var_dump(json_encode($location));
+				// die();
+			if(isset($skill))
+				$this->data['filterskills'] =	json_encode($skill);
+			if(isset($location))
+				$this->data['filterlocations'] =json_encode($location);
+			$filteredJobIDs = array_unique(array_merge($filteredLocationJobIDs, $filteredSkillJobIDs));
+			
+			$jobIDs = array();
+			$i = 0;
+			if(empty($filteredJobIDs)){
+				$this->load->view('jobOffers', $this->data);
+			}else{
+				foreach ($this->data['jobOffers'] as $key => $value) {
+					if(!in_array($value['jobID'], $filteredJobIDs)){
+						unset($this->data['jobOffers'][$i]);
+					}
+					$i++;
+				}
+				$this->load->view('jobOffers', $this->data);
+			}
+		}else{
+			$this->load->view('jobOffers', $this->data);
+		}
 	}
 
 	public function appliedJobOffers(){
@@ -144,12 +264,20 @@ class Home extends CI_Controller {
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
-	public function getDetails(){
+	public function getJobDetails(){
 		$jobID = $this->input->get('jobid');
 		$jobDetails = $this->home_lib->getJobDetails($jobID);
 		$jobDetails['cities'] = "Some Random Cities";
 		$jobDetails['skills'] = "Some Random Skills";
 		echo json_encode($jobDetails);
+	}
+
+	public function getInternshipDetails(){
+		$internshipID = $this->input->get('internshipID');
+		$internshipDetails = $this->home_lib->getInternshipDetails($internshipID);
+		$internshipDetails['cities'] = "Some Random Cities";
+		$internshipDetails['skills'] = "Some Random Skills";
+		echo json_encode($internshipDetails);
 	}
 
 	//Internship Offers- Normal Users
@@ -181,12 +309,102 @@ class Home extends CI_Controller {
 			}
 		}
 		$this->data['internshipOffers'] = $internshipOffers;
-		$this->load->view('relevantInternships', $this->data);
+		$this->data['filterskills'] = 'false';
+		$this->data['filterlocations'] = 'false';
+		if(isset($_POST))
+		if($this->input->post('filter')  == 1){
+			if(isset($_POST['skill'])){
+				$skill = $_POST['skill'];
+				$filteredSkillinternshipIDs =  array();
+				$skillFilteredinternshipid = $this->home_lib->getinternshipOffersSkillFilters($skill);
+				foreach ($skillFilteredinternshipid as $key => $value) {
+					array_push($filteredSkillinternshipIDs, $value['internshipID']);
+				}
+			}else{
+				$filteredSkillinternshipIDs = [];
+			}
+			
+			if(isset($_POST['location'])){
+				$location = $_POST['location'];
+				$filteredLocationinternshipIDs = array();
+				$locationFilteredinternshipid = $this->home_lib->getinternshipOffersLocationFilters($location);
+				foreach ($locationFilteredinternshipid as $key => $value) {
+					array_push($filteredLocationinternshipIDs, $value['internshipID']);
+				}
+			}else{
+				$filteredLocationinternshipIDs = [];
+				}
+				$this->data['filterskills'] =	json_encode($skill);
+			if(isset($location))
+				$this->data['filterlocations'] =json_encode($location);
+			$filteredinternshipIDs = array_unique(array_merge($filteredLocationinternshipIDs, $filteredSkillinternshipIDs));
+			
+			$internshipIDs = array();
+			$i = 0;
+			if(empty($filteredinternshipIDs)){
+				$this->load->view('relevantinternships', $this->data);
+			}else{
+				foreach ($this->data['internshipOffers'] as $key => $value) {
+					if(!in_array($value['internshipID'], $filteredinternshipIDs)){
+						unset($this->data['internshipOffers'][$i]);
+					}
+					$i++;
+				}
+				$this->load->view('relevantinternships', $this->data);
+			}
+		}else{
+			$this->load->view('relevantinternships', $this->data);
+		}
 	}
 
 	public function internshipOffers(){
 		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
-		$this->load->view('internshipOffers', $this->data);
+		$this->data['filterskills'] = 'false';
+		$this->data['filterlocations'] = 'false';
+		if(isset($_POST))
+		if($this->input->post('filter')  == 1){
+			if(isset($_POST['skill'])){
+				$skill = $_POST['skill'];
+				$filteredSkillinternshipIDs =  array();
+				$skillFilteredinternshipid = $this->home_lib->getinternshipOffersSkillFilters($skill);
+				foreach ($skillFilteredinternshipid as $key => $value) {
+					array_push($filteredSkillinternshipIDs, $value['internshipID']);
+				}
+			}else{
+				$filteredSkillinternshipIDs = [];
+			}
+			
+			if(isset($_POST['location'])){
+				$location = $_POST['location'];
+				$filteredLocationinternshipIDs = array();
+				$locationFilteredinternshipid = $this->home_lib->getinternshipOffersLocationFilters($location);
+				foreach ($locationFilteredinternshipid as $key => $value) {
+					array_push($filteredLocationinternshipIDs, $value['internshipID']);
+				}
+			}else{
+				$filteredLocationinternshipIDs = [];
+				}
+				$this->data['filterskills'] =	json_encode($skill);
+			if(isset($location))
+				$this->data['filterlocations'] =json_encode($location);
+			$filteredinternshipIDs = array_unique(array_merge($filteredLocationinternshipIDs, $filteredSkillinternshipIDs));
+			
+			$internshipIDs = array();
+			$i = 0;
+			if(empty($filteredinternshipIDs)){
+				$this->load->view('internshipOffers', $this->data);
+			}else{
+				foreach ($this->data['internshipOffers'] as $key => $value) {
+					if(!in_array($value['internshipID'], $filteredinternshipIDs)){
+						unset($this->data['internshipOffers'][$i]);
+					}
+					$i++;
+				}
+				$this->load->view('internshipOffers', $this->data);
+			}
+		}else{
+			$this->load->view('internshipOffers', $this->data);
+		}
 	}
 
 	public function appliedInternshipOffers(){

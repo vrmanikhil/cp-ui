@@ -115,7 +115,7 @@ class Home_model extends CI_Model {
 
 
 	public function fetchChatIds($user){
-		$query = "SELECT MAX(`messageID`) AS `messageID` FROM `messages` WHERE `receiver` = '1' OR `sender` = '1' GROUP BY receiver+sender";
+		$query = "SELECT MAX(`messageID`) AS `messageID` FROM `messages` WHERE `receiver` = '$user' OR `sender` = '$user' GROUP BY receiver+sender";
 		$result = $this->db->query($query);
 		$result = $result->result_array();
 		return array_column($result, 'messageID');
@@ -307,6 +307,83 @@ class Home_model extends CI_Model {
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
 		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
+	}
+
+	public function getInternshipDetails($internshipID){
+		$this->db->select('internshipOffers.internshipID, internshipOffers.internshipTitle, internshipOffers.internshiptype, internshipOffers.internshipDescription, internshipOffers.startDate, internshipOffers.applicationDeadline, internshipOffers.stipendType, internshipOffers.stipend, internshipOffers.minimumStipend, internshipOffers.maximumStipend, internshipOffers.partTime, internshipOffers.openings, internshipOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
+		$this->db->join('internshipLocations', 'internshipOffers.internshipID = internshipLocations.internshipID', 'left outer');
+		$this->db->join('indianCities', 'internshipLocations.cityID = indianCities.cityID', 'left outer');
+		$this->db->join('employerUsers','employerUsers.userID = internshipOffers.addedBy');
+		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID');
+		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
+		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
+		// var_dump($this->db->last_query()); die();
+		return $result->result_array();
+	}
+
+
+	public function getRelevantLocations($job){
+		if($job == 1)
+			$table = "jobLocations";
+		else
+			$table  = "internshipLocations";
+		$this->db->DISTINCT($table . '.cityID');
+		$this->db->select($table . '.cityID, indianCities.city, indianCities.state');
+		$this->db->join('indianCities',$table.'.cityID = indianCities.cityID');
+		$result = $this->db->get($table);
+		return $result->result_array();
+	}
+	public function getJobOffersSkillFilters($skills){
+		if($skills != NULL){
+			$this->db->select('DISTINCT(jobID)');
+			$this->db->where_in('skillID', $skills);
+			return $this->db->get('jobSkills')->result_array();
+		}else{
+			return null;
+		}
+	}
+
+	public function getJobOffersLocationFilters($locations){
+		if($locations != NULL){
+			$this->db->select('DISTINCT(jobID)');
+			$this->db->where_in('cityID', $locations);
+			return $this->db->get('jobLocations')->result_array();
+		}else{
+			return null;
+		}
+	}
+
+	public function getinternshipOffersSkillFilters($skills){
+		if($skills != NULL){
+			$this->db->select('DISTINCT(internshipID)');
+			$this->db->where_in('skillID', $skills);
+			return $this->db->get('internshipSkills')->result_array();
+		}else{
+			return null;
+		}
+	}
+
+	public function getinternshipOffersLocationFilters($locations){
+		if($locations != NULL){
+			$this->db->select('DISTINCT(internshipID)');
+			$this->db->where_in('cityID', $locations);
+			return $this->db->get('internshipLocations')->result_array();
+		}else{
+			return null;
+		}
+	}
+
+	public function getRelevantSkills($job = 0){
+		if($job == 1)
+			$table = "jobSkills";
+		else
+			$table  = "internshipSkills";
+		$this->db->DISTINCT($table . '.skillID');
+		$this->db->select($table . '.skillID, skills.skill_name');
+		$this->db->join('skills',$table.'.skillID = skills.skillID');
+		$result = $this->db->get_where($table, array('skills.active' => 1 ));
+		return $result->result_array();
+		
 	}
 
 	public function getInternshipOffers(){

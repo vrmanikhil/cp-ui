@@ -201,12 +201,14 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 						container = $('.wrap').clone()
 						container.find('.time').html(res[i].timestamp)
 						container.find('.msg').html(res[i].message)
+						console.log(res[i].class)
 						if(res[i].class == "receiver"){
-						container.find('img').attr('src', chatterImage)
-						container.addClass('sender')
+							container.find('img').attr('src', chatterImage)
+							container.addClass('sender')
 						}else{
-						container.addClass('receiver')
-						container.find('img').attr('src', userImage)}	
+							container.addClass('receiver')
+							container.find('img').attr('src', userImage)
+						}	
 						$('#messages-container').append(container[0])
 						container.show()
 						$('#message').val('')
