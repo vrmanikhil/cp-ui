@@ -55,76 +55,31 @@
 					</div>
 				</div>
 				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Locations</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list js-prevent-body-scroll">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Delhi
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Gurugram
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Greader Noida
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Bangalore
-								</label>
+					<form action = "<?= base_url('intenships/internship-offers')?>" method="POST">
+					<div class="card card--no-padding search-filter">
+						<div class="search-filter__head">
+							<p><strong>Locations</strong></p>
+						</div>
+						<div class="search-filter__body">
+							<div class="search-filter__list js-prevent-body-scroll">
+								<table id = "location-list" class = "display" width = "100%"></table>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="card card--no-padding search-filter">
-					<div class="search-filter__head">
-						<p><strong>Skills</strong></p>
-					</div>
-					<div class="search-filter__body">
-						<form name="city-search" class="search-filter__form">
-							<label>Search</label>
-							<input type="search" class="form-control" name="" placeholder="Search here">
-						</form>
-						<div class="search-filter__list">
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> HTML
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> Javascript
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> CSS
-								</label>
-							</div>
-							<div class="search-filter__list-item checkbox">
-								<label>
-									<input type="checkbox"> PHP
-								</label>
+					<div class="card card--no-padding search-filter">
+						<div class="search-filter__head">
+							<p><strong>Skills</strong></p>
+						</div>
+						<div class="search-filter__body">
+							<div class="search-filter__list js-prevent-body-scroll">
+								<table id = "skill-list" class = " table cell-border" cellspacing="0" width = "100%"></table>
 							</div>
 						</div>
 					</div>
-				</div>
+					<input type="hidden" name="filter" value="1">
+					<a href = "<?= base_url('clear-filter/1/1')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
+					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
+				</form>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
@@ -153,7 +108,7 @@
 							</p>
 							<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details">View</a>
+								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 view js-view-posting-details"  id = "view<?= $value['internshipID'] ?>">View</a>
 							</div>
 						</div>
 					</div>
@@ -181,42 +136,73 @@
 		<div class="remodal" data-remodal-id="modal">
 			<button data-remodal-action="close" class="remodal-close"></button>
 			<div class="modal-body">
-				<h1>Offer <small>Content Writer Intern</small></h1>
-				<div class="flex">
-					<div class="modal-body__left flex__item">
-						<p><strong>Why should you join FITPASS?</strong></p>
-						<p>• <strong>Team:</strong> Work with smart and passionate people</p>
-						<p>• <strong>Growth:</strong> We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p>
-						<p>• <strong>Start-up Culture:</strong> Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p>
-						<p>• <strong>Impact:</strong> FITPASS does not function on a defined hierarchy &amp; everyone's given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p>
-						<p><strong>Here’s what you’ll do day-to-day:</strong></p>
-						<p>• Curate and create quality, fact filled content for fitness blogs and articles</p>
-						<p>• Create engaging content to be published on social media</p>
-						<p>• Drafting articles and blogs to promote SEO activities of FITPASS</p>
-						<p>• Contributing in promoting website and social media platforms through succinct, concise communication</p>
-						<p>• Build a strong product-base for FITPASS with high quality write-up</p>
-						<p>• Execute quality check of content on our website to ensure that information is accurate</p>
-						<p><strong>Who we’re looking for:</strong></p>
-						<p>• Someone with a prior work experience is a bonus, though it is not a necessity</p>
-						<p>• Preferably studying English and Journalism</p>
-						<p>• Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p>
-						<p>• Great understanding of the product</p>
-						<p>• Excellent organizational and time management skills with the drive to achieve targets</p>
-						<p>• Comfortable travelling within the city</p>
-						<p>• Ability to thrive in a highly-charged environment</p>
-						<p>• Good knowledge of MS Office</p>
-					</div>
+			<h1>Offer <small id = "jobTitle"></small></h1>
+			<div class="flex">
+			<div class="modal-body__left flex__item">
+			<div class="col-md-9">
+              <div class="col-sm-12">
+                <form class="form-horizontal">
+
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Internship Offer Description:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDescription">Internship Offer Description</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Internship Start Date:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobStart">Internship Start Date</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Application Deadline:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDeadline">Application Deadline</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Offer:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOffer">Offer</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOpening">Number of Openings</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Part Time Allowed:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobTime">Part Time Allowed</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Skills:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobSkill">Skills</p>
+                  </div>
+                </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3"><strong>Internship Offer Location:</strong></label>
+                <div class="col-sm-9">
+                  <p class="form-control-static" id = "jobType"><?php echo "Work from Home"; ?></p>
+                </div>
+              </div>
+              </form>
+              </div>
+            </div>
+		</div>
 					<aside class="modal-body__right flex__item">
 						<center><strong>Company Profile</strong></center>
 						<br>
-						<strong>FITPASS</strong>
+						<strong id = "companyName">companyName</strong>
 						<br>
-						<p>https://fitpass.co.in/</p>
-						<p><strong>FITPASS</strong> is your all access pass to 1250+ gyms and fitness studios in Delhi NCR. Available on iOS &amp; android, FITPASS users can freely workout anywhere, anytime however they want - gym workouts, Yoga, Zumba, Pilates, Cross Fit, Kickboxing, MMA, spinning and many many more. Priced at Rs.999 a month only, FITPASS makes fitness super affordable and accessible.</p>
-						<p>Bolstered by a team with the strongest pedigree – Oxford, Columbia, IIT, St.Stephen's and Delhi University, with its teeth cut in UBS Investment Bank, McKinsey, the World Bank, Zomato, KPMG, etc. – we are bringing in the age of fit-tech in India!</p>
-						<p>FITPASS is defined by our insistence on providing an unparalleled customer experience.</p>
-						<p>Our team members are charged with bringing creativity, honesty, and intellectual rigor to their responsibilities in a never-ending quest to delight our customers. We have high expectations of each other and work as a team to build things we are all proud of.</p>
-						<<button type="button" class="btn--apply">APPLY</button>
+						<p id = "companyWebsite">Company Website</p>
+						<p id = "companyDescription">Company Description</p>
+						<button type="button" class="btn--apply">APPLY</button>
 					</aside>
 				</div>
 			</div>
@@ -226,6 +212,116 @@
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.view').click(function(){
+				var data = null
+				id = this.id
+				id = $('#'+id).attr('data-id')
+				data = {internshipID : id}
+				$.get('<?= base_url('home/getInternshipDetails')?>', data).done(function(res){
+					res = JSON.parse(res)
+					console.log(res)
+					$("#jobTitle").html(res[0].internshipTitle)
+					$("#jobDescription").html(res[0].internshipDescription)
+					$("#jobStart").html(res[0].startDate)
+					$("#jobDeadline").html(res[0].applicationDeadline)
+					if(res[0].offerType == "2")
+						$("#jobOffer").html("INR " + res[0].stipend + " lakhs")
+					else
+						$("#jobOffer").html('INR ' + res[0].minimumStipend + ' lakhs - INR ' + res[0].maximumStipend + ' lakhs')
+					$("#jobOpening").html(res[0].openings)
+					if(res[0].partTime == "1")
+						$("#jobTime").html('YES')
+					else
+						$("#jobTime").html('NO')
+					$("#jobSkill").html(res.skills)
+					if(res[0].jobType == "1")
+						$("#jobType").html("Work From Home")
+					else
+						$('#jobType').html(res.cities)
+					$("#companyName").html(res[0].companyName)
+					$("#companyWebsite").html(res[0].companyWebsite)
+					$("#companyDescription").html(res[0].companyDescription)
+				}).fail(function(){
+
+				})
+			})
+		})
+
+	</script>
+	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.bootstrap.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/dataTables.responsive.js'); ?>"></script>
+
+	<script type="text/javascript">
+	var skill = [];
+	var locate = [];
+	var	filterskills = <?= $filterskills?>;
+	var filterlocations = <?= $filterlocations?>;
+	$(document).ready(function() {
+		$.ajax({
+			method:'GET',
+			url:'/home/getLocationsSkills',
+			data:{job : '0' }
+		}).done(function(data){	
+			data = JSON.parse(data)
+			locations = data.locations
+			skills = data.skills
+			for(var i = 0 ; i < skills.length; i++){
+				if(filterskills){
+					if(filterskills.indexOf(skills[i].skillID) !== -1){
+						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+" checked>" + skills[i].skill_name];
+					}else{
+						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+">" + skills[i].skill_name];
+					}
+				}else{
+					skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+">" + skills[i].skill_name];
+				}
+			}
+			for(var i = 0 ; i < locations.length; i++){
+				if(filterlocations){
+					if(filterlocations.indexOf(locations[i].cityID) !== -1){
+						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+" checked>" + locations[i].city];
+					}else{
+						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
+					}
+				}else{
+					locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
+				}
+				
+			}
+
+			$('#skill-list').DataTable( {
+		    	"oLanguage": {
+		  						"sSearch": '<label><strong>Search</strong></label>',
+							},
+		    	"dom" : '<"form-control"fl><"top">rt<"bottom"ip><"clear">',
+		    	"paging" : false,
+		    	"retrieve": true,
+		      	"info" : false,
+		        "data" : skill,
+		        "columns" : [
+		            { "title": "" }
+		        ]
+		    });
+
+		    $('#location-list').DataTable( {
+		    	"oLanguage": {
+		  						"sSearch": '<label><strong>Search</strong></label>',
+							},
+		    	"dom" : '<"form-control"fl><"top">rt<"bottom"ip><"clear">',
+		    	"paging" : false,
+		    	"retrieve": true,
+		      	"info" : false,
+		        "data": locate,
+		        "columns"	: [
+		            { "title": "" }
+		        	]
+		    });
+		});
+		});  
+	</script>
 </body>
 
 </html>
