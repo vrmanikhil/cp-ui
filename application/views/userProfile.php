@@ -28,20 +28,20 @@
 					<p><?php echo $userDetails['name']; ?></p>
 					<?php if($userDetails['userID']!=$_SESSION['userData']['userID']){ ?>
 						<?php if(empty($checkConnection)) { ?>
-					<a href="javascript:" class="btn">Add to Connection</a>
+					<a href="<?php echo base_url('connections/requestConnection/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" class="btn">Add to Connection</a>
 						<?php } else {
 							if($checkConnection[0]['status']!='1'){ if($checkConnection[0]['active']==$_SESSION['userData']['userID']) { ?>
-								<a href="javascript:" class="btn">Connection Request Sent</a>
+								<a href="<?php echo base_url('connections/cancelConnectionRequest/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" onclick="alert('Are you sure you want to Cancel the Connection Request?')" class="btn">Cancel Connection Request</a>
 							<?php
 								}
 								else{ ?>
-									<a href="javascript:" class="btn">Accept Request</a>
-									<a href="javascript:" class="btn" style="margin-left: 5px;">Decline</a>
+									<a href="<?php echo base_url('connections/acceptConnectionRequest/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" class="btn">Accept Request</a>
+									<a href="<?php echo base_url('connections/cancelConnectionRequest/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" onclick="alert('Are you sure you want to Decline the Connection Request?')" class="btn" style="margin-left: 5px;">Decline</a>
 								<?php
 								}
 							}
 							else{ ?>
-								<a href="javascript:" class="btn">Remove Connection</a>
+								<a href="<?php echo base_url('connections/removeConnection/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" onclick="alert('Are you sure you want to Remove the Connection?')" class="btn">Remove Connection</a>
 							<?php
 							}
 						} ?>

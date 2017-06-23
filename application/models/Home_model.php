@@ -379,7 +379,7 @@ class Home_model extends CI_Model {
 		$this->db->join('skills',$table.'.skillID = skills.skillID');
 		$result = $this->db->get_where($table, array('skills.active' => 1 ));
 		return $result->result_array();
-		
+
 	}
 
 	public function getInternshipOffers(){
@@ -587,9 +587,34 @@ class Home_model extends CI_Model {
 	}
 
 	public function getFeeds(){
-		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID` from `jobOffers` UNION SELECT `internshipOffers`.`internshipTitle`, `internshipOffers`.`internshipID` AS `offerID` AS `title` from `internshipOffers`";
+		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` UNION SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID`";
 		$result = $this->db->query($query);
 		return $result->result_array();
+	}
+
+	public function checkConnectionExist($user1,$user2){
+		$query = "SELECT COUNT(*) AS count from connections WHERE ((`active`='$user2' AND `passive`='$user1') OR (`active`='$user1' AND `passive`='$user2')) AND `status`='1'";
+		$result = $this->db->query($query);
+		return $result->result_array();
+	}
+
+	public function removeConnection($user1,$user2){
+		$query = "DELETE from connections WHERE ((`active`='$user2' AND `passive`='$user1') OR (`active`='$user1' AND `passive`='$user2')) AND `status`='1'";
+		return $this->db->query($query);
+	}
+
+	public function requestConnection($data){
+		return $this->db->insert('connections', $data);
+	}
+
+	public function cancelConnectionRequest($user1,$user2){
+		$query = "DELETE from connections WHERE ((`active`='$user2' AND `passive`='$user1') OR (`active`='$user1' AND `passive`='$user2')) AND `status`='0'";
+		return $this->db->query($query);
+	}
+
+	public function acceptConnectionRequest($user1,$user2){
+		$query = "UPDATE connections SET `status`='1' WHERE `active`='$user1' AND `passive`=$user2";
+		return $this->db->query($query);
 	}
 
 }
