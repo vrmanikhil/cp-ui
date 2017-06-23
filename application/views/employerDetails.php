@@ -24,7 +24,7 @@
 						<h2>Company Details</h2>
 						<form class="form" action="<?php echo base_url('web/addEmployerDetails'); ?>" method="post">
 							<div class="form-group">
-								<label class="form__label" for="companyName">College Name</label>
+								<label class="form__label" for="companyName">Company Name</label>
 								<input type="text" name="companyName" class="form__input" id="companyName" placeholder="Company Name">
 							</div>
 							<div class="form-group">

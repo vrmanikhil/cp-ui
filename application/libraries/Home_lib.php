@@ -100,12 +100,10 @@ class Home_lib {
 				$details = $CI->homeModel->getUserDetails($conn['passive']);
 				$connection[$i]['userID'] = $conn['passive'];
 				$connection[$i]['name'] = $details[0]['name'];
-				$connection[$i]['username'] = $details[0]['username'];
 			}else{
 				$details = $CI->homeModel->getUserDetails($conn['active']);
 				$connection[$i]['userID'] = $conn['active'];
 				$connection[$i]['name'] = $details[0]['name'];
-				$connection[$i]['username'] = $details[0]['username'];
 			}
 			$i++;
 		}
@@ -545,6 +543,12 @@ public function injectClassName(&$data)
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getSearchResults($query);
+	}
+
+	public function getFeeds(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getFeeds();
 	}
 
 

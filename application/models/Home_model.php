@@ -17,19 +17,18 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserDetailsFromEMail($email){
-
 		$result = $this->db->get_where('users', array('email' => $email));
 		$data = $result->result_array();
 		$accountType = $data[0]['accountType'];
 		if($accountType=='1'){
 			$this->db->join('generalUsers', 'users.userID = generalUsers.userID', 'left');
 			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id', 'left');
-			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.coverImage,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
+			$this->db->select('users.userID,users.name,users.email,users.mobile,users.coverImage,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
 		else{
-			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->select('users.userID,users.name,users.email,users.mobile,users.profileImage,users.coverImage, users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->join('employerUsers', 'users.userID = employerUsers.userID', 'left');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
@@ -195,7 +194,6 @@ class Home_model extends CI_Model {
 
 	public function getConnectionUsernames($userID){
 		$this->db->where('active', $userID);
-		$this->db->where('status', '1');
 		$this->db->or_where('passive', $userID);
 		$this->db->where('status', '1');
 		$result = $this->db->get('connections');
@@ -511,6 +509,12 @@ class Home_model extends CI_Model {
 		$term = str_replace("'", "", $query);
 		$query = "(select userID, name, 'users' as tbl from users where name like '%$term%') union (select internshipID,internshipTitle, 'internships' as tbl from internshipOffers where internshipTitle like '%$term%') union (select jobID,jobTitle, 'jobs' as tbl from jobOffers where jobTitle like '%$term%')";
 		return $this->db->query($query)->result_array();
+	}
+
+	public function getFeeds(){
+		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID` from `jobOffers` UNION SELECT `internshipOffers`.`internshipTitle`, `internshipOffers`.`internshipID` AS `offerID` AS `title` from `internshipOffers`";
+		$result = $this->db->query($query);
+		return $result->result_array();
 	}
 
 }
