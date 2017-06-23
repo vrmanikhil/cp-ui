@@ -64,166 +64,30 @@
 					<div class="card">
 						<h1 style="font-size: 1rem; text-transform: uppercase; text-align: center; margin-top: 0;"><b>Job and Internship Feeds</b></h1>
 					</div>
+
+					<?php foreach ($feeds as $key => $value) { ?>
+
 					<div class="feed-post card">
 						<div class="feed-post__head">
 							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
+								<a href="javascript:"><img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure feed-post__user-pic"></a>
 								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
+									<a href="javascript:" class="flex__item"><span class="feed-post__username"><?php echo $value['name']; ?></span></a>
 									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">8:30pm</span>
+										<?php $timestamp = strtotime($value['timestamp']); ?>
+										<span class="feed-post__postdate"><?php echo date('d-M-Y', $timestamp); ?></span>
+										<span class="feed-post__posttime"><?php echo date('g:i a', $timestamp); ?></span>
 									</span>
 								</span>
 							</div>
 						</div>
 						<div class="feed-post__body">
-							<p>Posted a Job Offer <a href="javascript:" class="link">Link</a> for candidate with skills PHP, HTML and CSS</p>
+							<p>Posted a <?php echo $value['offerType']; ?> Offer <a href="javascript:" class="link"><b><?php echo $value['title']; ?></b></a></p>
 						</div>
 					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:00pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skills JS, HTML and CSS</p>
-						</div>
-					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
-					</div>
-					<div class="feed-post card">
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- CampusPuppy -->
-						<ins class="adsbygoogle"
-						     style="display:block"
-						     data-ad-client="ca-pub-2273757004475004"
-						     data-ad-slot="7062717170"
-						     data-ad-format="auto"></ins>
-						<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
-					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
-					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
-					</div>
-					<div class="feed-post card">
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- CampusPuppy -->
-						<ins class="adsbygoogle"
-						     style="display:block"
-						     data-ad-client="ca-pub-2273757004475004"
-						     data-ad-slot="7062717170"
-						     data-ad-format="auto"></ins>
-						<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
-					</div>
-					<div class="feed-post card">
-						<div class="feed-post__head">
-							<div class="flex media">
-								<a href="javascript:"><img src="https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-1/p160x160/15871847_1187641447950420_5590639677209919525_n.jpg?oh=d4d88d54889e7a4e3546dc6701c0bfe0&oe=5942A6DD" alt="user" class="media-figure feed-post__user-pic"></a>
-								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username">Nikhil Verma</span></a>
-									<span class="feed-post__info flex__item">
-										<span class="feed-post__postdate">8 Aug 2016</span>
-										<span class="feed-post__posttime">9:30pm</span>
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="feed-post__body">
-							<p>Posted a new offer <a href="javascript:" class="link">Link</a> for candidate with skill Ruby</p>
-						</div>
-					</div>
+
+					<?php } ?>
+
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

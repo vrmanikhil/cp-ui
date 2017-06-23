@@ -74,7 +74,7 @@ class Home_lib {
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getJobOffersLocationFilters($location);
 	}
-	
+
 	public function getAddedInternshipOffers(){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
@@ -593,5 +593,34 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getFeeds();
 	}
 
+	public function checkConnectionExist($user1, $user2){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkConnectionExist($user1, $user2);
+	}
+
+	public function removeConnection($user1, $user2){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->removeConnection($user1, $user2);
+	}
+
+	public function requestConnection($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->requestConnection($data);
+	}
+
+	public function cancelConnectionRequest($user1, $user2){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->cancelConnectionRequest($user1, $user2);
+	}
+
+	public function acceptConnectionRequest($user1, $user2){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->acceptConnectionRequest($user1, $user2);
+	}
 
 }

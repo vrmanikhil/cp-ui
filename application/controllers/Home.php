@@ -52,8 +52,7 @@ class Home extends CI_Controller {
 
 	public function home(){
 		$this->redirection();
-		// $this->data['feeds'] = $this->home_lib->getFeeds();
-		// var_dump($this->data['feeds']);die;
+		$this->data['feeds'] = $this->home_lib->getFeeds();
 		$this->load->view('home', $this->data);
 	}
 
