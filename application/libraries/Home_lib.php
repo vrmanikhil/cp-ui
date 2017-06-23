@@ -28,7 +28,9 @@ class Home_lib {
 			}
 			$CI->session->set_userdata('userData', $data);
 			$profileImage = $userData['profileImage'];
+			$coverImage = $userData['coverImage'];
 			$CI->session->set_userdata('profileImage', $profileImage);
+			$CI->session->set_userdata('coverImage', $coverImage);
 			$CI->session->set_userdata('registrationLevel', $registrationLevel);
 			return 1;
 		}

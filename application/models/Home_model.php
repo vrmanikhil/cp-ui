@@ -24,7 +24,7 @@ class Home_model extends CI_Model {
 		if($accountType=='1'){
 			$this->db->join('generalUsers', 'users.userID = generalUsers.userID', 'left');
 			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id', 'left');
-			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
+			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.coverImage,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
