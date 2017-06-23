@@ -59,11 +59,6 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function getUserId($username){
-		$result = $this->db->get_where('users', array('username' => $username));
-		return $result->result_array();
-	}
-
 	public function getSkillData($skill_id)
 	{
 		$this->db->select('*');
@@ -195,7 +190,7 @@ class Home_model extends CI_Model {
 		$this->db->or_where('passive', $userID);
 		$this->db->where('status', '1');
 		$result = $this->db->get('connections');
-		return $this->db->last_query();
+		return $result->result_array();
 	}
 
 	public function getConnectionUsernames($userID){
@@ -217,6 +212,15 @@ class Home_model extends CI_Model {
 		$user = $_SESSION['userData']['userID'];
 		$this->db->select('*');
 		$this->db->where('status', '1');
+		$this->db->where("((active = $userID AND passive = $user) OR
+			(passive = $userID AND active = $user))");
+		$result = $this->db->get('connections');
+		return $result->result_array();
+	}
+
+	public function checkConnectionWithStatus($userID){
+		$user = $_SESSION['userData']['userID'];
+		$this->db->select('*');
 		$this->db->where("((active = $userID AND passive = $user) OR
 			(passive = $userID AND active = $user))");
 		$result = $this->db->get('connections');

@@ -34,11 +34,6 @@ class Home_lib {
 		}
 		return 0;
 	}
-	public function getUserId($username){
-		$CI = & get_instance();
-		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getUserId($username);
-	}
 
 	public function auth(){
 		$CI = & get_instance();
@@ -86,10 +81,17 @@ class Home_lib {
 		return !empty($CI->homeModel->checkConnections($userID));
 	}
 
+	public function checkConnectionWithStatus($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkConnectionWithStatus($userID);
+	}
+
 	public function getConnectionUsernames($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		$conns = $CI->homeModel->getConnectionUsernames($userID);
+		$connection = array();
 		$i = 0;
 		foreach ($conns as $key => $conn) {
 			if($_SESSION['userData']['userID'] == $conn['active']) {
@@ -542,5 +544,6 @@ public function injectClassName(&$data)
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getSearchResults($query);
 	}
+
 
 }

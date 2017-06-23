@@ -87,8 +87,12 @@ class Home extends CI_Controller {
 		$this->load->view('uploadIdentityDoc', $this->data);
 	}
 
-	public function userProfile()
+	public function userProfile($userID)
 	{
+		$this->data['userDetails'] = $this->home_lib->getUserDetails($userID);
+		$this->data['userDetails'] = $this->data['userDetails'][0];
+		$this->data['checkConnection'] = $this->home_lib->checkConnectionWithStatus($userID);
+		// var_dump($this->data['checkConnection']);die;
 		$this->load->view('userProfile', $this->data);
 	}
 
@@ -231,6 +235,7 @@ class Home extends CI_Controller {
 			$query = $x;
 		}
 		$this->data['searchResults'] = $this->home_lib->getSearchResults($query);
+		var_dump($this->data['searchResults']);die;
 		$this->load->view('search', $this->data);
 	}
 
@@ -524,18 +529,6 @@ class Home extends CI_Controller {
 	// 			);
 	// 	sendEmail($data);
 	// }
-
-	public function user($username=''){
-		$this->data['userDetails'] = $this->home_lib->getUserDetails($username);
-		$this->data['userDetails'] = $this->data['userDetails'][0];
-		$userID = $this->data['userDetails']['userID'];
-		$this->data['userProjects'] = $this->home_lib->getUserProjects($userID);
-		$this->data['userWorkEx'] = $this->home_lib->getUserWorkEx($userID);
-		$this->data['userAchievements'] = $this->home_lib->getUserAchievements($userID);
-		$this->data['userSkills'] = $this->home_lib->getUserSkills($userID);
-		var_dump($this->data['userAchievements']);die;
-		var_dump($this->data['userDetails']);die;
-	}
 
 	public function resetPassword()
 	{
