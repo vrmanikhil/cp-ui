@@ -23,13 +23,32 @@
 		<?php if(isset($_SESSION['userData']['loggedIn'])){ echo $header; } else { echo $headerLogin; } ?>
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item card">
-				<div class="user__cover-pic" style="background: url('/assets/img/cover-default.jpg') center no-repeat; background-size: cover;"></div>
+				<div class="user__cover-pic" style="background: url('<?php echo $userDetails['coverImage']; ?>') center no-repeat; background-size: cover;"></div>
 				<div class="user__name flex">
-					<p>Nikhil Verma</p>
+					<p><?php echo $userDetails['name']; ?></p>
+					<?php if($userDetails['userID']!=$_SESSION['userData']['userID']){ ?>
+						<?php if(empty($checkConnection)) { ?>
 					<a href="javascript:" class="btn">Add to Connection</a>
+						<?php } else {
+							if($checkConnection[0]['status']!='1'){ if($checkConnection[0]['active']==$_SESSION['userData']['userID']) { ?>
+								<a href="javascript:" class="btn">Connection Request Sent</a>
+							<?php
+								}
+								else{ ?>
+									<a href="javascript:" class="btn">Accept Request</a>
+									<a href="javascript:" class="btn" style="margin-left: 5px;">Decline</a>
+								<?php
+								}
+							}
+							else{ ?>
+								<a href="javascript:" class="btn">Remove Connection</a>
+							<?php
+							}
+						} ?>
+					<?php } ?>
 				</div>
 				<div class="user__pic">
-					<img src="http://www.campuspuppy.com/assets/uploads/profile_images/Nikhil_Verma_18-09-2016 18:58:45" alt="">
+					<img src="<?php echo $userDetails['profileImage']; ?>" alt="">
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

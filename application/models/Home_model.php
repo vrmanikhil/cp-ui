@@ -24,7 +24,7 @@ class Home_model extends CI_Model {
 		if($accountType=='1'){
 			$this->db->join('generalUsers', 'users.userID = generalUsers.userID', 'left');
 			$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id', 'left');
-			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
+			$this->db->select('users.userID,users.username,users.name,users.email,users.mobile,users.coverImage,users.profileImage,users.accountType,users.cityID,users.emailVerified, users.mobileVerified, users.registrationLevel, users.active, generalUsers.collegeID, generalUsers.courseID, generalUsers.batch, colleges.college, colleges.logo');
 			$query = $this->db->get_where('users', array('email' => $email));
 			return $query->result_array();
 		}
@@ -56,11 +56,6 @@ class Home_model extends CI_Model {
 
 	public function getSkills(){
 		$result = $this->db->get_where('skills', array('active' => '1'));
-		return $result->result_array();
-	}
-
-	public function getUserId($username){
-		$result = $this->db->get_where('users', array('username' => $username));
 		return $result->result_array();
 	}
 
@@ -195,7 +190,7 @@ class Home_model extends CI_Model {
 		$this->db->or_where('passive', $userID);
 		$this->db->where('status', '1');
 		$result = $this->db->get('connections');
-		return $this->db->last_query();
+		return $result->result_array();
 	}
 
 	public function getConnectionUsernames($userID){
@@ -223,6 +218,15 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkConnectionWithStatus($userID){
+		$user = $_SESSION['userData']['userID'];
+		$this->db->select('*');
+		$this->db->where("((active = $userID AND passive = $user) OR
+			(passive = $userID AND active = $user))");
+		$result = $this->db->get('connections');
+		return $result->result_array();
+	}
+
 	public function addInternship($data){
 		$this->db->insert('internshipOffers', $data);
 		return ($this->db->affected_rows()>0)?$this->db->insert_id():0;
@@ -242,14 +246,26 @@ class Home_model extends CI_Model {
 
 	public function getAddedJobOffers(){
 		$addedBy = $_SESSION['userData']['userID'];
-		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
-		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
+		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
 		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
 		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName');
 		$this->db->group_by('jobOffers.jobID');
 		$this->db->order_by('jobOffers.jobID', 'DESC');
 		$result = $this->db->get_where('jobOffers', array('addedBy' => $addedBy));
 		return $result->result_array();
+	}
+
+	public function getAddedInternshipOffers(){
+	  $addedBy = $_SESSION['userData']['userID'];
+	  $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
+	  $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
+	  $this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+	  $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName');
+	  $this->db->group_by('internshipOffers.internshipID');
+	  $this->db->order_by('internshipOffers.internshipID', 'DESC');
+	  $result = $this->db->get_where('internshipOffers', array('addedBy' => $addedBy));
+	  return $result->result_array();
 	}
 
 	public function addJob($data){
@@ -547,19 +563,31 @@ class Home_model extends CI_Model {
 	}
 
 	public function getApplicants($offerType, $offerID){
+		$this->db->select('users.userID, users.name, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skillID) AS userSkills');
 		$this->db->join('users', 'jobApplicants.userID = users.userID');
 		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
 		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
 		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');
-		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID');
-		$this->db->join('skills', 'userSkills.skillID = skills.skillID');
-		$this->db->select('users.userID, users.name, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(skills.skillID) AS userSkills');
-		$this->db->group_by('userSkills.skillID');
+		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID', 'left outer');
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID', 'left outer');
+		$this->db->group_by('users.userID');
+		$this->db->group_by('colleges.college_id');
+		$this->db->group_by('generalUsers.batch');
+		$this->db->group_by('courses.course_id');
 		if($offerType=='1'){
+			$this->db->group_by('jobApplicants.timestamp');
 			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
 		if($offerType=='2'){
+			$this->db->group_by('internshipApplicants.timestamp');
 			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
 		return $result->result_array();
+	}
+
+	public function getSearchResults($query){
+		$term = $this->db->escape($query);
+		$term = str_replace("'", "", $query);
+		$query = "(select userID, name, 'users' as tbl from users where name like '%$term%') union (select internshipID,internshipTitle, 'internships' as tbl from internshipOffers where internshipTitle like '%$term%') union (select jobID,jobTitle, 'jobs' as tbl from jobOffers where jobTitle like '%$term%')";
+		return $this->db->query($query)->result_array();
 	}
 
 }

@@ -28,16 +28,13 @@ class Home_lib {
 			}
 			$CI->session->set_userdata('userData', $data);
 			$profileImage = $userData['profileImage'];
+			$coverImage = $userData['coverImage'];
 			$CI->session->set_userdata('profileImage', $profileImage);
+			$CI->session->set_userdata('coverImage', $coverImage);
 			$CI->session->set_userdata('registrationLevel', $registrationLevel);
 			return 1;
 		}
 		return 0;
-	}
-	public function getUserId($username){
-		$CI = & get_instance();
-		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getUserId($username);
 	}
 
 	public function auth(){
@@ -55,6 +52,7 @@ class Home_lib {
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getAddedJobOffers();
 	}
+
 
 	public function getJobOffersSkillFilters($skills){
 		$CI = &get_instance();
@@ -75,6 +73,12 @@ class Home_lib {
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getJobOffersLocationFilters($location);
+
+	public function getAddedInternshipOffers(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAddedInternshipOffers();
+
 	}
 
 	public function getLocations(){
@@ -113,10 +117,17 @@ class Home_lib {
 		return !empty($CI->homeModel->checkConnections($userID));
 	}
 
+	public function checkConnectionWithStatus($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkConnectionWithStatus($userID);
+	}
+
 	public function getConnectionUsernames($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		$conns = $CI->homeModel->getConnectionUsernames($userID);
+		$connection = array();
 		$i = 0;
 		foreach ($conns as $key => $conn) {
 			if($_SESSION['userData']['userID'] == $conn['active']) {
@@ -570,5 +581,12 @@ public function injectClassName(&$data)
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->getApplicants($offerType, $offerID);
 	}
+
+	public function getSearchResults($query){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getSearchResults($query);
+	}
+
 
 }

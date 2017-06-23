@@ -4,12 +4,14 @@
 			<img alt="logo" src="<?php echo base_url('/assets/img/logo-white.png'); ?>" class="logo">
 		</a>
 		<div class="search-bar flex__item">
-			<form action="" method="get" class="flex" action="<?php echo base_url('web/search'); ?>">
+			<form method="get" class="flex" action="<?php echo base_url('home/search'); ?>">
 				<button type="submit" class="search-bar__submit-btn">
 					<img src="<?php echo base_url('/assets/img/icons/magnifying-glass.png'); ?>" alt="search-icon" class="icoen icon--sm">
 				</button>
-				<input type="search" name="query" placeholder="Search" class="form-control">
+				<input type="search" name="query" id="inputSearch" placeholder="Search" class="form-control">
 			</form>
+
+
 		</div>
 		<div class="primary-menu flex__item flex">
 			<div class="primary-menu__item dropdown__container js-dropdown__container">

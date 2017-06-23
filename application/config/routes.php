@@ -59,11 +59,10 @@ $route['verify-email/(:num)'] = 'home/verifyEMail/$1';
 $route['verify-mobile-number'] = 'home/verifyMobileNumber';
 $route['upload-identity-document'] = 'home/uploadUdentityDoc';
 $route['chat'] = 'home/chatNew';
-$route['userProfile'] = 'home/userProfile';
+$route['user-profile/(:num)'] = 'home/userProfile/$1';
 
 $route['change-password'] = 'home/changePassword';
 $route['reset-password'] = 'home/resetPassword';
-$route['user/(:any)'] = 'home/user/$1';
 $route['notifications'] = 'home/notifications';
 $route['connections'] = 'home/connections';
 
