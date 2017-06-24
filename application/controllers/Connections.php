@@ -50,6 +50,7 @@ class Connections extends CI_Controller {
 			);
 			$result = $this->home_lib->requestConnection($data);
 			if($result){
+				$this->home_lib->triggerNotification($user1,"1",$user2);
 				$this->session->set_flashdata('message', array('content'=>'Connection Request Successfully Sent.','class'=>'success'));
 				redirect(base_url('user-profile/').$user1);
 			}
@@ -94,6 +95,7 @@ class Connections extends CI_Controller {
 		else{
 			$result = $this->home_lib->acceptConnectionRequest($user1, $user2);
 			if($result){
+				$this->home_lib->triggerNotification($user1,"2",$user2);
 				$this->session->set_flashdata('message', array('content'=>'Connection Request Successfully Sent.','class'=>'success'));
 				redirect(base_url('user-profile/').$user1);
 			}

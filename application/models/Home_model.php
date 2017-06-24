@@ -617,4 +617,35 @@ class Home_model extends CI_Model {
 		return $this->db->query($query);
 	}
 
+	public function triggerNotification($concernedUser, $notificationType, $triggeredBy){
+		$notification = '';
+		$link = '';
+		$userData = $this->getUserDetails($triggeredBy);
+		$name = $userData[0]['name'];
+		$image = $userData[0]['profileImage'];
+
+		if($notificationType=='1'){
+			$notification = $name." has sent you a Connection Request.";
+			$link = base_url('/connections');
+		}
+		if($notificationType=='2'){
+			$notification = $name." has accepted your Connection Request.";
+			$link = base_url('/connections');
+		}
+		$data = array(
+			'name' => $name,
+			'image' => $image,
+			'notification' => $notification,
+			'concernedUser' => $concernedUser,
+			'link' => $link
+		);
+		return $this->db->insert('notifications', $data);
+	}
+
+	public function getNotifications(){
+		$userID = $_SESSION['userData']['userID'];
+		$result = $this->db->get_where('notifications', array('concernedUser'=> $userID));
+		return $result->result_array();
+	}
+
 }

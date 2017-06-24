@@ -607,4 +607,16 @@ public function injectClassName(&$data)
 		return $CI->homeModel->acceptConnectionRequest($user1, $user2);
 	}
 
+	public function triggerNotification($concernedUser, $notificationType, $triggeredBy){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->triggerNotification($concernedUser, $notificationType, $triggeredBy);
+	}
+
+	public function getNotifications(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getNotifications();
+	}
+
 }

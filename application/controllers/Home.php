@@ -488,7 +488,7 @@ class Home extends CI_Controller {
 	}
 
 	public function notifications(){
-		$this->redirection();
+		$this->data['notifications'] = $this->home_lib->getNotifications();
 		$this->load->view('notifications', $this->data);
 	}
 
