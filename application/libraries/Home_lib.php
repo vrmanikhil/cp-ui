@@ -127,22 +127,7 @@ class Home_lib {
 	public function getConnectionUsernames($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		$conns = $CI->homeModel->getConnectionUsernames($userID);
-		$connection = array();
-		$i = 0;
-		foreach ($conns as $key => $conn) {
-			if($_SESSION['userData']['userID'] == $conn['active']) {
-				$details = $CI->homeModel->getUserDetails($conn['passive']);
-				$connection[$i]['userID'] = $conn['passive'];
-				$connection[$i]['name'] = $details[0]['name'];
-			}else{
-				$details = $CI->homeModel->getUserDetails($conn['active']);
-				$connection[$i]['userID'] = $conn['active'];
-				$connection[$i]['name'] = $details[0]['name'];
-			}
-			$i++;
-		}
-		// var_dump($connection); die();
+		$connection = $CI->homeModel->getConnectionUsernames($userID);
 		return $connection;
 	}
 
