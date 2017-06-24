@@ -104,10 +104,10 @@
 								<div class="skill flex paid">
 									<p>HTML</p>
 								</div>
-								<div class="skill flex">
+								<div class="skill flex paid">
 									<p>CSS</p>
 								</div>
-								<div class="skill flex">
+								<div class="skill flex free">
 									<p>JS</p>
 								</div>
 							</div>

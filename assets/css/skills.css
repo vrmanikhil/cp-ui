@@ -5,18 +5,66 @@
 @import url('/assets/css/components/footer.css');
 @import url('/assets/css/components/forms.css');
 @import url('/assets/css/components/feed-sidepane-components.css');
+.skills-container {
+	flex-wrap: wrap;
+	margin: 20px -10px 20px 0;
+}
+
+.skill {
+	background: var(--midnight-blue);
+	border: 1px solid var(--midnight-blue);
+	color: white;
+	padding: 10px;
+	width: 237px;
+	height: 130px;
+	margin: 0 10px 10px 0;
+	flex-shrink: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.skill:after {
+	position: absolute;
+	right: -22px;
+	top: 18px;
+	width: 100px;
+	text-align: center;
+	transform: rotateZ(45deg);
+	background: white;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.skill.free:after {
+	content: 'Free';
+	color: var(--midnight-blue);
+}
+
+.skill.paid:after {
+	content: 'Paid';
+	color: var(--red);
+}
+
+.skill > p {
+	margin: auto;
+	font-weight: 500;
+}
+
 .skills__section-title {
 	font-size: 0.9317rem;
 	text-transform: uppercase;
 	text-align: center;
 	margin-top: 0;
 }
-.explore-panel{
+
+.explore-panel {
 	margin-bottom: 10px;
 }
+
 .skills__load-more {
 	width: 20%;
 	padding: 7px;
 	border: 0;
 	margin-top: 10px;
 }
+

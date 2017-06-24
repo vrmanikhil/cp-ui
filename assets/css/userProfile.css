@@ -103,7 +103,9 @@
 }
 
 .skill {
-	border: 1px solid var(--grey);
+	background: var(--midnight-blue);
+	border: 1px solid var(--midnight-blue);
+	color: white;
 	padding: 10px;
 	width: 239px;
 	height: 130px;
@@ -113,30 +115,29 @@
 	overflow: hidden;
 }
 
-.skill.free:after {
-	content: 'Free';
+.skill:after {
 	position: absolute;
 	right: -22px;
 	top: 18px;
 	width: 100px;
 	text-align: center;
 	transform: rotateZ(45deg);
-	border: 1px solid var(--grey);
+	background: white;
+	font-weight: 500;
 	text-transform: uppercase;
+}
+
+.skill.free:after {
+	content: 'Free';
+	color: var(--midnight-blue);
 }
 
 .skill.paid:after {
 	content: 'Paid';
-	position: absolute;
-	right: -22px;
-	top: 18px;
-	width: 100px;
-	text-align: center;
-	transform: rotateZ(45deg);
-	border: 1px solid var(--grey);
-	text-transform: uppercase;
+	color: var(--red);
 }
 
 .skill > p {
 	margin: auto;
+	font-weight: 500;
 }

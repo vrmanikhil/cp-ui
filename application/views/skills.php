@@ -60,6 +60,20 @@
 			<div class="main-body flex__item">
 				<div class="skills__section card">
 					<h1 class="skills__section-title"><b>My Skills</b></h1>
+					<div class="skills-container flex">
+						<div class="skill flex free">
+							<p>PHP</p>
+						</div>
+						<div class="skill flex paid">
+							<p>HTML</p>
+						</div>
+						<div class="skill flex paid">
+							<p>CSS</p>
+						</div>
+						<div class="skill flex free">
+							<p>JS</p>
+						</div>
+					</div>
 					<div class="skills">
 						<?php
 						$i=0;
@@ -68,7 +82,7 @@
 						}
 						?>
 						<h1 class="skills__section-title"><b>Add New Skill to Profile</b></h1>
-						<select class="form__input" id="skills">
+						<select class="select" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>
 							<?php } ?>
