@@ -648,8 +648,10 @@ class Home_model extends CI_Model {
 		return $this->db->insert('notifications', $data);
 	}
 
-	public function getNotifications(){
+	public function getNotifications($offset = 0, $limit = 5){
 		$userID = $_SESSION['userData']['userID'];
+		$this->db->order_by('notificationID', 'DESC');
+		$this->db->limit($limit, $offset);
 		$result = $this->db->get_where('notifications', array('concernedUser'=> $userID));
 		return $result->result_array();
 	}
