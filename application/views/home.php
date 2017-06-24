@@ -17,7 +17,7 @@
 	<?php
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
-	<?php } var_dump($feeds);?>
+	<?php }?>
 
 	<div class="layout-container flex flex--col">
 		<?php echo $header; ?>
