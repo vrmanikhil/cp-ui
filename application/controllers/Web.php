@@ -171,7 +171,7 @@ class Web extends CI_Controller {
 		$startYear = '';
 		$endMonth = '';
 		$endYear = '';
-		$userID = '';
+		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('companyName')){
 			$companyName = $x;
 		}
@@ -250,7 +250,7 @@ class Web extends CI_Controller {
 	public function addAchievement(){
 		$achievementTitle = '';
 		$achievementDescription = '';
-		$userID = '';
+		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('achievementTitle')){
 			$achievementTitle = $x;
 		}
@@ -580,7 +580,7 @@ class Web extends CI_Controller {
 		}
 	}
 
-	
+
 	public function verifyEMail(){
 		$token = '';
 		if($x = $this->input->post('token')){

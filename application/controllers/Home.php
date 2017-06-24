@@ -671,6 +671,10 @@ class Home extends CI_Controller {
 				array_push($connections,$value['active']);
 			}
 		}
+		if(empty($connections)){
+			echo "khali hai ye to";
+		}
+		else{
 		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
 		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
 		echo "Connection Requests";
@@ -679,7 +683,8 @@ class Home extends CI_Controller {
 		echo "<br>";
 		echo "My Connections";
 		echo "<br>";
-		var_dump($this->data['connections']);die;
+		var_dump($this->data['connections']);
+		}
 	}
 
 	public function generateVerifyEMail(){

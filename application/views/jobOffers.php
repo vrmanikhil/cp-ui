@@ -263,7 +263,7 @@
 			method:'GET',
 			url:'/home/getLocationsSkills',
 			data:{job : '1' }
-		}).done(function(data){	
+		}).done(function(data){
 			data = JSON.parse(data)
 			locations = data.locations
 			skills = data.skills
@@ -288,7 +288,7 @@
 				}else{
 					locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
 				}
-				
+
 			}
 
 			$('#skill-list').DataTable( {
@@ -319,7 +319,7 @@
 		        	]
 		    });
 		});
-		});  
+		});
 	</script>
 </body>
 
