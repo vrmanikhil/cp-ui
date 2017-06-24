@@ -76,15 +76,12 @@
 						</a>
 
 						<?php }} else { echo "No Notifications!"; } ?>
-
-
-
-						<center>
-						<?php if($more){?>
-							<button type="submit" class="btn btn--primary notifications__load-more">Load More</button>
-						<?php }?>
-						</center>
 					</div>
+					<center>
+						<?php if($more) {?>
+						<button type="submit" class="btn btn--primary messages__load-more" onclick = "loadDoc()" id ="load-more" >Load More</button>
+						<?php } ?>
+					</center>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
@@ -95,6 +92,33 @@
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script type="text/javascript">
+		var offset = 5;
+		function loadDoc() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			 if (this.readyState == 4 && this.status == 200) {
+				var response = JSON.parse(this.responseText);
+				console.log(response);
+				var more = response.more;
+				var notifications = response.notifications;
+				console.log(notifications);	
+				for( i = 0; i < notifications.length; i++){
+					offset++;
+						var html = "<a class='flex media notification' href='"+notifications[i].link+"'><img src='"+ notifications[i].image +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--co'><span class='notification__message'><strong>"+ notifications[i].name+"</strong></span><span class='notification__message'>"+ notifications[i].notification +"</span><span class='notification__info'><span class='notification__date'>"+ notifications[i].timestamp +"</span></span></span></a>";
+						document.getElementById('notifications').innerHTML += html;
+					}
+				}
+			
+				if(notifications.length == 0 || more === false){
+				document.getElementById('load-more').style.display = "none";
+			}
+			 }
+
+				xhttp.open("GET", "<?php echo base_url('home/loadMoreNotifications/');?>"+offset, true);
+				xhttp.send();
+		};
+	</script>
 </body>
 
 </html>

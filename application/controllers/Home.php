@@ -495,10 +495,10 @@ class Home extends CI_Controller {
 		$this->load->view('notifications', $this->data);
 	}
 
-	public function loadMoreNotifications(){
-		$this->data['notifications'] = $this->home_lib->getNotifications();
-		$this->data['more'] = $this->home_lib->moreNotifications($offset);
-		echo json_encode($this->data);
+	public function loadMoreNotifications($offset){
+		$data['notifications'] = $this->home_lib->getNotifications($offset);
+		$data['more'] = $this->home_lib->moreNotifications($offset+5);
+		echo json_encode($data);
 	}
 
 	/*	SKILLS 	*/

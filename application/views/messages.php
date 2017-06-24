@@ -144,7 +144,7 @@
 						<textarea name="message" id="message" class="form__input" cols="30" rows="5" placeholder="Message"></textarea>
 					</div>
 					<div class="form-group submit-container">
-						<input type="submit" value="Send" class="btn btn--primary">
+						<input type="submit" value="Send" class="btn btn--primary" value = "data[userID]">
 					</div>
 				</form>
 			</div>
@@ -188,14 +188,14 @@
 				}
 			}
 				if(chats.length == 0 || more === false){
-				document.getElementById('load-more').style.visibility = "hidden";
+				document.getElementById('load-more').style.display = "hidden";
 			}
 			 }
 		}
 
 				xhttp.open("GET", "<?php echo base_url('messages/load-more-chats/');?>"+offset, true);
 				xhttp.send();
-			};
+		};
 			$(document).ready(function(){
 				$('.chat').click(function(){
 					chatter = $(this).attr('chatter-id');
