@@ -7,16 +7,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/home.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/jobs.css'); ?>" rel="stylesheet">
 </head>
 
 <body>
 	<?php
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
-	<?php }
-	var_dump($feeds);
-	?>
+	<?php }?>
 
 	<div class="layout-container flex flex--col">
 		<?php echo $header; ?>
@@ -53,7 +54,7 @@
 					<!-- CampusPuppy -->
 					<ins class="adsbygoogle"
 					     style="display:block"
-					     data-ad-client="ca-pub-2273757004475004"
+					     data-ad-client="ca-pub-2273757004475004"	
 					     data-ad-slot="7062717170"
 					     data-ad-format="auto"></ins>
 					<script>
@@ -84,7 +85,11 @@
 							</div>
 						</div>
 						<div class="feed-post__body">
-							<p>Posted a <?php echo $value['offerType']; ?> Offer <a href="javascript:" class="link"><b><?php echo $value['title']; ?></b></a></p>
+						<?php if($value['offerType'] == "Job") {?>
+							<p>Posted a <?php echo $value['offerType']; ?> Offer <a data-id = "<?= $value['offerID'] ?>" class="link js-view-posting-details view " name = "job" id = "viewjob<?= $value['offerID'] ?>"><b><?php echo $value['title']; ?></b></a></p>
+						<?php }else{?>
+							<p>Posted a <?php echo $value['offerType']; ?> Offer <a data-id = "<?= $value['offerID'] ?>" class="link js-view-posting-details view" name = "internship" id = "viewinternship<?= $value['offerID'] ?>"><b><?php echo $value['title']; ?></b></a></p>
+						<?php } ?>
 						</div>
 					</div>
 
@@ -109,6 +114,80 @@
 			</aside>
 		</main>
 		<?php echo $footer; ?>
+		<div class="remodal" data-remodal-id="modal">
+			<button data-remodal-action="close" class="remodal-close"></button>
+			<div class="modal-body">
+			<h1>Offer <small id = "jobTitle"></small></h1>
+			<div class="flex">
+			<div class="modal-body__left flex__item">
+			<div class="col-md-9">
+              <div class="col-sm-12">
+                <form class="form-horizontal">
+
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Job Offer Description:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDescription">Job Offer Description</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Job Start Date:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobStart">Job Start Date</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Application Deadline:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDeadline">Application Deadline</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Offer:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOffer">Offer</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOpening">Number of Openings</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Part Time Allowed:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobTime">Part Time Allowed</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Skills:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobSkill">Skills</p>
+                  </div>
+                </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3"><strong>Job Offer Location:</strong></label>
+                <div class="col-sm-9">
+                  <p class="form-control-static" id = "jobType"><?php echo "Work from Home"; ?></p>
+                </div>
+              </div>
+              </form>
+              </div>
+            </div>
+		</div>
+					<aside class="modal-body__right flex__item">
+						<center><strong>Company Profile</strong></center>
+						<br>
+						<strong id = "companyName">companyName</strong>
+						<br>
+						<p id = "companyWebsite">Company Website</p>
+						<p id = "companyDescription">Company Description</p>
+						<button type="button" class="btn--apply">APPLY</button>
+					</aside>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script>
 	var adBlockEnabled = false;
@@ -126,7 +205,72 @@
 	</script>
 
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.view').click(function(){
+				var data = null
+				id = this.id
+				type = $('#'+id).attr('name')
+				id = $('#'+id).attr('data-id')
+				if(type == 'job'){
+					url = '<?= base_url('home/getJobDetails')?>';
+					data = {jobid : id}
+				}
+				else{
+					url = '<?= base_url('home/getInternshipDetails')?>';
+					data = {internshipID : id}
+				}
+				$.get(url, data).done(function(res){
+					res = JSON.parse(res)
+					console.log(res)
+					if(type == 'job'){
+						$("#jobTitle").html(res[0].jobTitle)
+						$("#jobDescription").html(res[0].jobDescription)
+						$("#jobStart").html(res[0].startDate)
+						$("#jobDeadline").html(res[0].applicationDeadline)
+						if(res[0].offerType == "2")
+							$("#jobOffer").html("INR " + res[0].offer + " lakhs")
+						else
+							$("#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
+					}else{
+						$("#jobTitle").html(res[0].internshipTitle)
+						$("#jobDescription").html(res[0].internshipDescription)
+						$("#jobStart").html(res[0].startDate)
+						$("#jobDeadline").html(res[0].applicationDeadline)
+						if(res[0].stipendType == "4"){
+							$("#jobOffer").html("INR " + res[0].stipend)
+						}
+						else if(res[0].stipendType == "3"){
+							$("#jobOffer").html('INR ' + res[0].minimumStipend + ' - INR ' + res[0].maximumStipend)
+						}else if(res[0].stipendType == "2"){
+							$("#jobOffer").html('Expenses Covered')
+						}else {
+							$("#jobOffer").html('No Stipend')
+						}
+					}
+					$("#jobOpening").html(res[0].openings)
+					if(res[0].partTime == "1")
+						$("#jobTime").html('YES')
+					else
+						$("#jobTime").html('NO')
+					$("#jobSkill").html(res[0].skillsRequired)
+					if(res[0].jobType == "1")
+						$("#jobType").html("Work From Home")
+					else
+						$('#jobType').html(res[0].cities)
+					$("#companyName").html(res[0].companyName)
+					$("#companyWebsite").html(res[0].companyWebsite)
+					$("#companyDescription").html(res[0].companyDescription)
+				}).fail(function(){
+
+				})
+			})
+		})
+
+	</script>
 </body>
 
 </html>
