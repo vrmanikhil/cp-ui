@@ -10,6 +10,10 @@ class Home extends CI_Controller {
 		$this->data = array();
 		// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
 		// $this->data['csrf_token'] = $this->security->get_csrf_hash();
+		if(isset($_SESSION['userData'])){
+			$this->data['messages'] = $this->home_lib->fetchLatestChats(0,3);
+			$this->data['notification'] = $this->home_lib->getNotifications(0,3);	
+		}
 		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 		$this->data['headerLogin'] = $this->load->view('commonCode/headerLogin', $this->data, true);
 		$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
@@ -485,9 +489,16 @@ class Home extends CI_Controller {
 		$this->load->view('addedInternshipOffers', $this->data);
 	}
 
-	public function notifications(){
+	public function notifications($offset = 5){
 		$this->data['notifications'] = $this->home_lib->getNotifications();
+		$this->data['more'] = $this->home_lib->moreNotifications($offset);
 		$this->load->view('notifications', $this->data);
+	}
+
+	public function loadMoreNotifications(){
+		$this->data['notifications'] = $this->home_lib->getNotifications();
+		$this->data['more'] = $this->home_lib->moreNotifications($offset);
+		echo json_encode($this->data);
 	}
 
 	/*	SKILLS 	*/

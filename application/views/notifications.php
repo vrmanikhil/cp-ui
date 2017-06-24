@@ -70,7 +70,7 @@
 								<span class="notification__message"><strong><?php echo $value['name']; ?></strong></span>
 								<span class="notification__message"><?php echo $value['notification']; ?></span>
 								<span class="notification__info">
-									<span class="notification__date">19 April 2017</span>
+									<span class="notification__date"><?= $value['timestamp']?></span>
 								</span>
 							</span>
 						</a>
@@ -79,7 +79,11 @@
 
 
 
-						<center><button type="submit" class="btn btn--primary notifications__load-more">Load More</button></center>
+						<center>
+						<?php if($more){?>
+							<button type="submit" class="btn btn--primary notifications__load-more">Load More</button>
+						<?php }?>
+						</center>
 					</div>
 				</div>
 			</div>

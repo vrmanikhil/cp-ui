@@ -202,7 +202,7 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<button type="button" class="btn--apply">APPLY</button>
+						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>
@@ -250,6 +250,7 @@
 					$("#companyName").html(res[0].companyName)
 					$("#companyWebsite").html(res[0].companyWebsite)
 					$("#companyDescription").html(res[0].companyDescription)
+					$('#apply').attr('href',"<?= base_url('apply/apply?internshipID=')?>"+res[0].internshipID)
 				}).fail(function(){
 
 				})

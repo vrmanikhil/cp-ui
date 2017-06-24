@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 23, 2017 at 04:47 AM
+-- Generation Time: Jun 24, 2017 at 12:08 PM
 -- Server version: 5.6.35-cll-lve
 -- PHP Version: 5.6.30
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `colleges` (
   `logo` text NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `colleges`
@@ -178,6 +178,23 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `educationalDetails`
+--
+
+CREATE TABLE IF NOT EXISTS `educationalDetails` (
+  `educationID` int(5) NOT NULL AUTO_INCREMENT,
+  `educationType` enum('1','2','3','4') NOT NULL,
+  `description` text NOT NULL,
+  `year` int(4) NOT NULL,
+  `scoreType` enum('1','2') NOT NULL,
+  `score` int(5) NOT NULL,
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`educationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employerUsers`
 --
 
@@ -216,7 +233,8 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 (35, 'SEPS Monitoring Private Limited', '', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (36, 'Trouble Clear Consumer Solutions Private Limited', '', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (37, 'AKAL Information Systems Limited', 'HR', '<p>15 years in Business.<br />\nCMMi Level 3 &amp; ISO 9001:2008 Certified, ISO 2000 certified. 350+ Tech Experts.&nbsp;<br />\n<br />\nPresent in 6 Locations across India. 24/7 International Delivery Centre in Delhi. AKAL is a leading provider of technology solutions for global organizations looking to transform, grow and lead.&nbsp;AKAL brings IT and engineering services expertise under one roof to solve complex business problems for its clients. Working with some of the most cutting-edge technologies in the industry, AKAL is focused on creating innovative solutions and delivering exceptional service to its customers.&nbsp;What sets us apart is our commitment to methodologies &amp; best practices. We think like our customers and believe in long term partnerships with them while continually improving service quality and reducing costs.</p>\n', 'http://www.akalinfosys.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
-(38, 'Petzo India Private Limited', 'Co-Founder', '<p><strong><em>Petzo India (P) Ltd.</em></strong>is a fast-growing company serving Pets and the humans who love them. We&rsquo;re a company dedicated to the creation of products and services that make Pets Healthy.</p>\r\n\r\n<p>Today, Petzo India (P) Ltd. consists of several major properties:</p>\r\n\r\n<p><strong><em>Petzo Nourish Box:&nbsp;</em></strong>A monthly subscription Personalized food box for Pets.</p>\r\n\r\n<p><strong><em>Pet Herb:&nbsp;</em></strong>Essential Herbal supplements for Pets.</p>\r\n\r\n<p><strong><em>Petzo Research:&nbsp;</em></strong>Research based management consultation, providing market research and advisory solutions in the field of Animal Husbandry.</p>', 'http://www.petzo.in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg');
+(38, 'Petzo India Private Limited', 'Co-Founder', '<p><strong><em>Petzo India (P) Ltd.</em></strong>is a fast-growing company serving Pets and the humans who love them. We&rsquo;re a company dedicated to the creation of products and services that make Pets Healthy.</p>\r\n\r\n<p>Today, Petzo India (P) Ltd. consists of several major properties:</p>\r\n\r\n<p><strong><em>Petzo Nourish Box:&nbsp;</em></strong>A monthly subscription Personalized food box for Pets.</p>\r\n\r\n<p><strong><em>Pet Herb:&nbsp;</em></strong>Essential Herbal supplements for Pets.</p>\r\n\r\n<p><strong><em>Petzo Research:&nbsp;</em></strong>Research based management consultation, providing market research and advisory solutions in the field of Animal Husbandry.</p>', 'http://www.petzo.in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(40, 'Campus Puppy Private Limited', 'Co-Founder', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg');
 
 -- --------------------------------------------------------
 
@@ -253,7 +271,8 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`, `identit
 (14, 1, 1, 2017, ''),
 (15, 1, 2, 2018, ''),
 (16, 1, 1, 2018, ''),
-(17, 1, 6, 2017, '');
+(17, 1, 6, 2017, ''),
+(39, 1, 1, 2018, '');
 
 -- --------------------------------------------------------
 
@@ -1042,6 +1061,23 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `read` tinyint(1) NOT NULL,
   PRIMARY KEY (`messageID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `notificationID` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `image` varchar(1000) NOT NULL,
+  `notification` varchar(1000) NOT NULL,
+  `concernedUser` int(5) NOT NULL,
+  `link` varchar(1000) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`notificationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1917,7 +1953,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`userID`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `users`
@@ -1925,7 +1961,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileImage`, `coverImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayEMail`, `displayMobile`, `registrationLevel`, `active`, `created_at`) VALUES
 (1, 'Nikhil Verma', 'vrmanikhil@gmail.com', 9953017515, 'a581a9ff40d2a401f4046761dff80a4c', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg', 'http://cp.ui/assets/img/cover-002.jpg', 'M', '4', '1', 135, 1, 1, 1, 1, '5', 1, '2017-06-23 06:15:20'),
-(2, 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, '5', 1, '2017-06-14 06:48:31'),
+(2, 'Itishri Singh', 'itishri.singh12@gmail.com', 9871983065, '279759155c3878e305e032b7b5845eda', 'http://backoffice.campuspuppy.com/assets/profileImages/itishrisingh.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, '5', 1, '2017-06-24 18:04:30'),
 (3, 'Vini Maheshwari', 'vinimaheshwari02@gmail.com', 8527856687, '712e4b7a3aecab4bf2658ca3e76432a0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 181, 1, 1, 1, 0, '4', 1, '2017-06-14 06:49:13'),
 (4, 'Gautam Lal', 'gautam.lal7@gmail.com', 8527312008, '17ab69fa42fa9e6812a860f3c5d1a8aa', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 1, 0, '5', 1, '2017-06-14 06:48:22'),
 (5, 'Aishwarya Gupta', 'aishwaryagpt94@gmail.com', 9810047205, 'c571f50ffd6df41b879442dc9425f003', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 0, 1, 0, '3', 0, '2017-06-08 09:38:14'),
@@ -1949,7 +1985,7 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (23, 'Manoj Kumar Garg', 'manoj@netcreativemind.com', 9810978433, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
 (24, 'S R Mustafa', 'srmustafa73@gmail.com', 7838204509, '5baced99d0bb5e574737dc535576bc9c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-08 09:38:14'),
 (25, 'Madhu S Shivakumar', 'madhu.ss96@gmail.com', 9108642164, 'd7aad483f66d38e875ff283dc220b58e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 61, 1, 0, 1, 0, '3', 1, '2017-06-08 09:38:14'),
-(26, 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 1, '3', 1, '2017-06-08 09:38:14'),
+(26, 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma-cp.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 1, '3', 1, '2017-06-24 18:05:29'),
 (27, 'Rinku Kumar', 'rinku@1solutions.biz', 7428961976, '04b993c532201cefcdbb7b994f105355', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 06:57:48'),
 (28, 'Adid Khan', 'adid@explorecivil.net', 9973882422, 'c30761beaa3c43a3e9624603bc2e76f7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:00:30'),
 (29, 'Rohit Dutt', 'rohit@thealternativeglobal.com', 8800331664, '8a9ef653eb0a66d4f031a2110b6224be', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-13 07:02:39'),
@@ -1961,7 +1997,9 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (35, 'Bhanu Prakash Agarwal', 'bhanu.bcet27@gmail.com', 7903461334, '25f9e794323b453885f5181f1b624d0b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:14:34'),
 (36, 'Parul Singh', 'withparulsingh@gmail.com', 9873855357, '9a517c9d23fa78e7117c63de3c494d72', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '2', 135, 1, 0, 1, 0, '3', 1, '2017-06-13 07:10:07'),
 (37, 'Sukhneet Kaur', 'sukhneet@akalinfosys.com', 9871092725, '989ce6020295e0438ca30ad02cbc6ea3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, '3', 1, '2017-06-13 07:13:14'),
-(38, 'Shrikant Choudhary', 'shrikant@petzo.in', 9999966521, 'e398837d51d5eae383e4b66cf4535ea8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '5', 1, '2017-06-23 10:24:23');
+(38, 'Shrikant Choudhary', 'shrikant@petzo.in', 9999966521, 'e398837d51d5eae383e4b66cf4535ea8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, 0, '5', 1, '2017-06-23 10:24:23'),
+(39, 'Sahil Kumar Maurya', 'sahil.kr.maurya@gmail.com', 9958316967, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/sahilkrmaurya.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 1, 1, '5', 1, '2017-06-24 17:55:55'),
+(40, 'Itishri Singh', 'itishrisingh@campuspuppy.com', 9999511987, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/itishrisingh-cp.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '2', 135, 1, 1, 1, 0, '5', 1, '2017-06-24 18:03:18');
 
 -- --------------------------------------------------------
 

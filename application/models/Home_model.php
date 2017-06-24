@@ -484,13 +484,19 @@ class Home_model extends CI_Model {
 
 	public function getJobData($jobID){
 		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
-		$result = $this->db->get_where('jobOffers', array('jobID' => $jobID));
+		$this->db->join('jobSkills','jobSkills.jobID = jobOffers.jobID');
+		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName,jobOffers.applicants');
+		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
 	}
 
 	public function getInternshipData($internshipID){
 		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
-		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
+		$this->db->join('internshipSkills','internshipSkills.internshipID = internshipOffers.internshipID');
+		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID');
+		$this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName,internshipOffers.applicants');
+		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
 		return $result->result_array();
 	}
 
@@ -587,7 +593,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getFeeds(){
-		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` UNION SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID`";
+		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` UNION SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID` Order BY 'timestamp', 'DESC'";
 		$result = $this->db->query($query);
 		return $result->result_array();
 	}
@@ -642,10 +648,31 @@ class Home_model extends CI_Model {
 		return $this->db->insert('notifications', $data);
 	}
 
-	public function getNotifications(){
+	public function getNotifications($offset = 0, $limit = 5){
 		$userID = $_SESSION['userData']['userID'];
+		$this->db->order_by('notificationID', 'DESC');
+		$this->db->limit($limit, $offset);
 		$result = $this->db->get_where('notifications', array('concernedUser'=> $userID));
 		return $result->result_array();
+	}
+
+	public function apply($offerType, $offerID, $userID){
+		if($offerType=='1'){
+			$data = array(
+				'jobID' => $offerID,
+				'userID' => $userID,
+				'status' => '1'
+			);
+			return $this->db->insert('jobApplicants', $data);
+		}
+		if($offerType=='2'){
+			$data = array(
+				'internshipID' => $offerID,
+				'userID' => $userID,
+				'status' => '1'
+			);
+			return $this->db->insert('internshipApplicants', $data);
+		}
 	}
 
 }
