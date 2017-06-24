@@ -61,7 +61,7 @@
 			<div class="main-body flex__item">
 				<div class="notifications__section card">
 					<h1 class="notifications__section-title">Notifications</h1>
-					<div class="notifications">
+					<div class="notifications" id = "notifications">
 						<?php if(!empty($notifications)) { foreach ($notifications as $key => $value) { ?>
 
 						<a class="flex media notification" href="<?php echo $value['link']; ?>">
@@ -105,15 +105,15 @@
 				console.log(notifications);	
 				for( i = 0; i < notifications.length; i++){
 					offset++;
-						var html = "<a class='flex media notification' href='"+notifications[i].link+"'><img src='"+ notifications[i].image +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--co'><span class='notification__message'><strong>"+ notifications[i].name+"</strong></span><span class='notification__message'>"+ notifications[i].notification +"</span><span class='notification__info'><span class='notification__date'>"+ notifications[i].timestamp +"</span></span></span></a>";
+						var html = "<a class='flex media notification' href='"+notifications[i].link+"'><img src='"+ notifications[i].image +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>"+ notifications[i].name+"</strong></span><span class='notification__message'>"+ notifications[i].notification +"</span><span class='notification__info'><span class='notification__date'>"+ notifications[i].timestamp +"</span></span></span></a>";
 						document.getElementById('notifications').innerHTML += html;
 					}
-				}
 			
 				if(notifications.length == 0 || more === false){
 				document.getElementById('load-more').style.display = "none";
 			}
 			 }
+			}
 
 				xhttp.open("GET", "<?php echo base_url('home/loadMoreNotifications/');?>"+offset, true);
 				xhttp.send();
