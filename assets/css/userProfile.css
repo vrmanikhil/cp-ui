@@ -43,16 +43,18 @@
 	position: relative;
 }
 
-.user-information .nav>li>a {
-	text-transform: uppercase;
-	font-size: 1em;
-}
-
 .user-information .heading {
 	margin: 20px 0;
 	padding: 5px 0;
-	text-transform: uppercase;
 	position: relative;
+}
+
+.user-information .heading > span {
+	flex-grow: 1;
+}
+
+.user-information .heading > .btn {
+	border: 0;
 }
 
 .user-information .heading:after {
@@ -60,7 +62,7 @@
 	position: absolute;
 	width: 120px;
 	height: 2px;
-	background: var(--red);
+	background: var(--midnight-blue);
 	left: 0;
 	bottom: 0;
 }
@@ -85,4 +87,56 @@
 	flex-shrink: 0;
 	width: 100%;
 	max-width: 200px;
+}
+
+.horizontal-group > * {
+	flex-grow: 1;
+}
+
+.form .action-bar {
+	text-align: right;
+}
+
+.skills-container {
+	flex-wrap: wrap;
+	margin-right: -15px;
+}
+
+.skill {
+	border: 1px solid var(--grey);
+	padding: 10px;
+	width: 239px;
+	height: 130px;
+	margin: 0 10px 10px 0;
+	flex-shrink: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.skill.free:after {
+	content: 'Free';
+	position: absolute;
+	right: -22px;
+	top: 18px;
+	width: 100px;
+	text-align: center;
+	transform: rotateZ(45deg);
+	border: 1px solid var(--grey);
+	text-transform: uppercase;
+}
+
+.skill.paid:after {
+	content: 'Paid';
+	position: absolute;
+	right: -22px;
+	top: 18px;
+	width: 100px;
+	text-align: center;
+	transform: rotateZ(45deg);
+	border: 1px solid var(--grey);
+	text-transform: uppercase;
+}
+
+.skill > p {
+	margin: auto;
 }
