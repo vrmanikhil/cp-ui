@@ -54,7 +54,7 @@
 					<!-- CampusPuppy -->
 					<ins class="adsbygoogle"
 					     style="display:block"
-					     data-ad-client="ca-pub-2273757004475004"	
+					     data-ad-client="ca-pub-2273757004475004"
 					     data-ad-slot="7062717170"
 					     data-ad-format="auto"></ins>
 					<script>
@@ -75,7 +75,7 @@
 							<div class="flex media">
 								<a href="javascript:"><img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure feed-post__user-pic"></a>
 								<span class="media-body flex flex--col">
-									<a href="javascript:" class="flex__item"><span class="feed-post__username"><?php echo $value['name']; ?></span></a>
+									<a href="<?php echo base_url('user-profile/').$value['addedBy']; ?>" class="flex__item"><span class="feed-post__username"><?php echo $value['name']; ?></span></a>
 									<span class="feed-post__info flex__item">
 										<?php $timestamp = strtotime($value['timestamp']); ?>
 										<span class="feed-post__postdate"><?php echo date('d-M-Y', $timestamp); ?></span>

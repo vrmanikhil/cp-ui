@@ -619,4 +619,11 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getNotifications();
 	}
 
+	public function apply($offerType, $offerID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->apply($offerType, $offerID, $userID);
+	}
+
+
 }
