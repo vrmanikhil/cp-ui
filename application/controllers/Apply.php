@@ -39,20 +39,94 @@ class Apply extends CI_Controller {
 				if($checkSkillMatch){
 						if($jobData['applicants']=='1' && $checkSkillMatch==$jobskill){
 							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
-							echo "applied successfully";die;
+							if($apply){
+								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
+								redirect(base_url('jobs/job-offers'));
+							}
+							else{
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								redirect(base_url('jobs/job-offers'));
+							}
 						}
 						if($jobData['applicants']=='2'){
 							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
-							echo"applied successfully!! partial";die;
+							if($apply){
+								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
+								redirect(base_url('jobs/job-offers'));
+							}
+							else{
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								redirect(base_url('jobs/job-offers'));
+							}
 						}
 						else{
-							echo "unsuccessful attempt!!" ;
+							$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+							redirect(base_url('jobs/job-offers'));
 						}
 				}
 			}
 			else{
 				$apply = $this->home_lib->apply($offerType, $offerID, $userID);
-				echo"applied successfully!! 4partial";die;
+				if($apply){
+					$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
+					redirect(base_url('jobs/job-offers'));
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+					redirect(base_url('jobs/job-offers'));
+				}
+			}
+		}
+		if($offerType=='2'){
+			$internshipData = $this->home_lib->getInternshipData($offerID);
+			$internshipData = $internshipData[0];
+			$internshipSkillsRequired = $internshipData['skillIDsRequired'];
+			$internshipSkillsRequired = explode(',', $internshipSkillsRequired);
+			$internshipskill = 0 ;
+			foreach ($internshipSkillsRequired as $key => $value) {
+				$internshipskill ++ ;
+			}
+			if($internshipData['applicants']=='1' || $internshipData['applicants']=='2'){
+				$checkSkillMatch = $this->checkSkillMatch($offerType, $offerID);
+				if($checkSkillMatch){
+						if($internshipData['applicants']=='1' && $checkSkillMatch==$jobskill){
+							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
+							if($apply){
+								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
+								redirect(base_url('internships/internship-offers'));
+							}
+							else{
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								redirect(base_url('internships/internship-offers'));
+							}
+						}
+						if($internshipData['applicants']=='2'){
+							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
+							if($apply){
+								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
+								redirect(base_url('internships/internship-offers'));
+							}
+							else{
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								redirect(base_url('internships/internship-offers'));
+							}
+						}
+						else{
+							$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+							redirect(base_url('internships/internship-offers'));
+						}
+				}
+			}
+			else{
+				$apply = $this->home_lib->apply($offerType, $offerID, $userID);
+				if($apply){
+					$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
+					redirect(base_url('internships/internship-offers'));
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+					redirect(base_url('internships/internship-offers'));
+				}
 			}
 		}
 	}
