@@ -193,7 +193,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getConnectionUsernames($userID){
-		$query = "SELECT users.name, users.userID from connections join users on connections.passive = users.userID where connections.active = 2 AND status = 1 UNION SELECT users.name, users.userID from connections join users on connections.active = users.userID where connections.passive = 2 AND status = 1";
+		$query = "SELECT users.name, users.userID from connections join users on connections.passive = users.userID where connections.active = $userID AND status = 1 UNION SELECT users.name, users.userID from connections join users on connections.active = users.userID where connections.passive = $userID AND status = 1";
 		$result = $this->db->query($query);
 		$connections = $result->result_array();
 		return $connections;
