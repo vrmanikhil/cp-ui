@@ -202,7 +202,7 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<button type="button" class="btn--apply">APPLY</button>
+						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>
@@ -241,14 +241,18 @@
 						$("#jobTime").html('YES')
 					else
 						$("#jobTime").html('NO')
-					$("#jobSkill").html(res[0].skillsRequired)
-					if(res[0].internshipType == "1")
+					if(res[0].skillsRequired == null)
+						$("#jobSkill").html("No Skills Required")
+					else
+						$("#jobSkill").html(res[0].skillsRequired)
+					if(res[0].internshiptype == "1")
 						$("#jobType").html("Work From Home")
 					else
 						$('#jobType').html(res[0].cities)
 					$("#companyName").html(res[0].companyName)
 					$("#companyWebsite").html(res[0].companyWebsite)
 					$("#companyDescription").html(res[0].companyDescription)
+					$('#apply').attr('href',"<?= base_url('apply/apply?internshipID=')?>"+res[0].internshipID)
 				}).fail(function(){
 
 				})

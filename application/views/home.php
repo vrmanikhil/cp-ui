@@ -125,15 +125,15 @@
                 <form class="form-horizontal">
 
                 <div class="form-group">
-                  <label class="control-label col-sm-3"><strong>Job Offer Description:</strong></label>
+                  <label class="control-label col-sm-3"><strong>Offer Description:</strong></label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" id = "jobDescription">Job Offer Description</p>
+                    <p class="form-control-static" id = "jobDescription">Offer Description</p>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-3"><strong>Job Start Date:</strong></label>
+                  <label class="control-label col-sm-3"><strong>Start Date:</strong></label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" id = "jobStart">Job Start Date</p>
+                    <p class="form-control-static" id = "jobStart">Start Date</p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -167,7 +167,7 @@
                   </div>
                 </div>
               <div class="form-group">
-                <label class="control-label col-sm-3"><strong>Job Offer Location:</strong></label>
+                <label class="control-label col-sm-3"><strong>Location:</strong></label>
                 <div class="col-sm-9">
                   <p class="form-control-static" id = "jobType"><?php echo "Work from Home"; ?></p>
                 </div>
@@ -183,7 +183,7 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<button type="button" class="btn--apply">APPLY</button>
+						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>
@@ -235,6 +235,7 @@
 							$("#jobOffer").html("INR " + res[0].offer + " lakhs")
 						else
 							$("#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
+						$('#apply').attr('href', "<?= base_url('apply/apply?jobID=')?>"+res[0].jobID)
 					}else{
 						$("#jobTitle").html(res[0].internshipTitle)
 						$("#jobDescription").html(res[0].internshipDescription)
@@ -250,17 +251,28 @@
 						}else {
 							$("#jobOffer").html('No Stipend')
 						}
+						$('#apply').attr('href',"<?= base_url('apply/apply?internshipID=')?>"+res[0].internshipID)
 					}
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
 						$("#jobTime").html('YES')
 					else
 						$("#jobTime").html('NO')
-					$("#jobSkill").html(res[0].skillsRequired)
-					if(res[0].jobType == "1")
-						$("#jobType").html("Work From Home")
+					if(res[0].skillsRequired == null)
+						$("#jobSkill").html("No Skills Required")
 					else
-						$('#jobType').html(res[0].cities)
+						$("#jobSkill").html(res[0].skillsRequired)
+					if(type == 'job'){
+						if(res[0].jobType == "1")
+							$("#jobType").html("Work From Home")
+						else
+							$('#jobType').html(res[0].cities)
+					}else{
+						if(res[0].internshiptype == "1")
+							$("#jobType").html("Work From Home")
+						else
+							$('#jobType').html(res[0].cities)
+					}
 					$("#companyName").html(res[0].companyName)
 					$("#companyWebsite").html(res[0].companyWebsite)
 					$("#companyDescription").html(res[0].companyDescription)

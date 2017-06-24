@@ -593,7 +593,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getFeeds(){
-		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` UNION SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID`";
+		$query = "SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` UNION SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID` Order BY 'timestamp', 'DESC'";
 		$result = $this->db->query($query);
 		return $result->result_array();
 	}
@@ -648,8 +648,10 @@ class Home_model extends CI_Model {
 		return $this->db->insert('notifications', $data);
 	}
 
-	public function getNotifications(){
+	public function getNotifications($offset = 0, $limit = 5){
 		$userID = $_SESSION['userData']['userID'];
+		$this->db->order_by('notificationID', 'DESC');
+		$this->db->limit($limit, $offset);
 		$result = $this->db->get_where('notifications', array('concernedUser'=> $userID));
 		return $result->result_array();
 	}

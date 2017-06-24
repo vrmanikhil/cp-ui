@@ -613,12 +613,22 @@ public function injectClassName(&$data)
 		return $CI->homeModel->triggerNotification($concernedUser, $notificationType, $triggeredBy);
 	}
 
-	public function getNotifications(){
+	public function getNotifications($offset = 0, $limit = 5){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getNotifications();
+		return $CI->homeModel->getNotifications($offset, $limit);
 	}
 
+	public function moreNotifications($offset = 0, $limit = 5){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		$res = $CI->homeModel->getNotifications($offset, $limit);
+		if(!empty($res))
+			return true;
+		else
+			return false;
+	}
+	
 	public function apply($offerType, $offerID, $userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
