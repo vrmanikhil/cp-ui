@@ -484,13 +484,19 @@ class Home_model extends CI_Model {
 
 	public function getJobData($jobID){
 		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
-		$result = $this->db->get_where('jobOffers', array('jobID' => $jobID));
+		$this->db->join('jobSkills','jobSkills.jobID = jobOffers.jobID');
+		$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName,jobOffers.applicants');
+		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
 	}
 
 	public function getInternshipData($internshipID){
 		$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
-		$result = $this->db->get_where('internshipOffers', array('internshipID' => $internshipID));
+		$this->db->join('internshipSkills','internshipSkills.internshipID = internshipOffers.internshipID');
+		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID');
+		$this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyName,internshipOffers.applicants');
+		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
 		return $result->result_array();
 	}
 
@@ -646,6 +652,25 @@ class Home_model extends CI_Model {
 		$userID = $_SESSION['userData']['userID'];
 		$result = $this->db->get_where('notifications', array('concernedUser'=> $userID));
 		return $result->result_array();
+	}
+
+	public function apply($offerType, $offerID, $userID){
+		if($offerType=='1'){
+			$data = array(
+				'jobID' => $offerID,
+				'userID' => $userID,
+				'status' => '1'
+			);
+			return $this->db->insert('jobApplicants', $data);
+		}
+		if($offerType=='2'){
+			$data = array(
+				'internshipID' => $offerID,
+				'userID' => $userID,
+				'status' => '1'
+			);
+			return $this->db->insert('internshipApplicants', $data);
+		}
 	}
 
 }
