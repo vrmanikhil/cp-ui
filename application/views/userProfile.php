@@ -50,6 +50,58 @@
 				<div class="user__pic">
 					<img src="<?php echo $userDetails['profileImage']; ?>" alt="">
 				</div>
+				<div class="user-information">
+
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#professional-details" aria-controls="professional-details" role="tab" data-toggle="tab">Professional Details</a></li>
+						<li role="presentation"><a href="#skills" aria-controls="skills" role="tab" data-toggle="tab">Skills</a></li>
+						<li role="presentation"><a href="#personal-details" aria-controls="personal-details" role="tab" data-toggle="tab">Personal Details</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane fade in active" id="professional-details">
+							<section>
+							<h3 class="heading">Education</h3>
+							<div class="flex media align-center">
+								<img src="http://bo.campuspuppy.com//assets/uploads/college_logo/jss-logo1.png" alt="user" class="media-figure">
+								<div class="media-body">
+									<p><strong>JSS Academy of Technical Education, Noida</strong></p>
+									<p>Bachelor of Technology- Computer Science and Engineering</p>
+									<p>2012-2016</p>
+								</div>
+							</div>
+							</section>
+							<section>
+								<h3 class="heading">Work Experience</h3>
+								<p>No Work experience added</p>
+							</section>
+							<section>
+								<h3 class="heading">Projects</h3>
+								<p>No Projects added</p>
+							</section>
+							<section>
+								<h3 class="heading">Achievements</h3>
+								<p>No Achievements added</p>
+							</section>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="skills">
+							<h3 class="heading">Skills</h3>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="personal-details">
+							<h3 class="heading">Personal Details</h3>
+							<p class="flex personal-info"><strong>Sex</strong><span>Male</span></p>
+							<p class="flex personal-info"><strong>Current Location</strong><span>Not Available</span></p>
+							<p class="flex personal-info"><strong>Hometown</strong><span>Lucknow, Uttar Pradesh</span></p>
+							<p class="flex personal-info"><strong>Relationship status</strong><span>Single</span></p>
+							<p class="flex personal-info"><strong>Birthday</strong><span>30th March 1993</span></p>
+							<p class="flex personal-info"><strong>Age</strong><span>24 Years</span></p>
+							<p class="flex personal-info"><strong>Email Address</strong><span>vrmanikhil@gmail.com</span></p>
+							<p class="flex personal-info"><strong>Mobile Number</strong><span>7503705892</span></p>
+						</div>
+					</div>
+				</div>
 			</div>
 			<aside class="flex__item right-pane">
 				<div class="post card">
@@ -87,6 +139,7 @@
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/tabs.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script>
 		$(document).ready(function () {
