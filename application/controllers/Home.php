@@ -582,9 +582,18 @@ class Home extends CI_Controller {
 		$message = $this->input->post('message');
 		$recipient = $this->input->post('data');
 		$receiver = $recipient['userID'];
+		$connection = $this->home_lib->checkConnection($receiver);
+		if($receiver == $_SESSION['userData']['userID']){
+			$this->session->set_flashdata('message', array('content' => 'You Cannot Chat with Yourself.', 'class' => 'error'));
+			redirect(base_url('messages'));
+		}
+		if(empty($connection)){
+			$this->session->set_flashdata('message', array('content' => 'You need to be connected to this person to start a chat.', 'class' => 'error'));
+			redirect(base_url('messages'));
+		}
 		if(!empty($receiver)){
-			$response = $this->home_lib->sendMessage($receiver[0]['userID'], $message);
-			redirect(base_url('messages/chats/'.$receiver[0]['userID']));
+			$response = $this->home_lib->sendMessage($receiver, $message);
+			redirect(base_url('messages/chats/'.$receiver));
 		}
 	}
 

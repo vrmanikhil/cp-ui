@@ -387,8 +387,7 @@ public function injectClassName(&$data)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		$success = $CI->homemodel->sendMessage($_SESSION['userData']['userID'],
-				$receiver, $message);
+		$success = $CI->homemodel->sendMessage($_SESSION['userData']['userID'], $receiver, $message);
 		return ['success'=> $success['success'],
 				'time'=> date('d M Y  g:i A', time()),
 				'insert_id'=> $success['insert_id']];
