@@ -4,7 +4,7 @@
 @import url('/assets/css/components/footer.css');
 @import url('/assets/css/components/feed-sidepane-components.css');
 @import url('/assets/css/components/forms.css');
-
+@import url('/assets/css/components/tabs.css');
 .primary-header {
 	margin-bottom: 10px;
 }
@@ -41,4 +41,48 @@
 	border: 5px solid white;
 	top: -100px;
 	position: relative;
+}
+
+.user-information .nav>li>a {
+	text-transform: uppercase;
+	font-size: 1em;
+}
+
+.user-information .heading {
+	margin: 20px 0;
+	padding: 5px 0;
+	text-transform: uppercase;
+	position: relative;
+}
+
+.user-information .heading:after {
+	content: "";
+	position: absolute;
+	width: 120px;
+	height: 2px;
+	background: var(--red);
+	left: 0;
+	bottom: 0;
+}
+
+.user-information p {
+	margin-bottom: 5px;
+}
+
+.user-information .tab-content>.tab-pane {
+	padding: 5px;
+}
+
+.user-information .media-figure {
+	margin-right: 10px;
+}
+
+.user-information p.personal-info {
+	margin-bottom: 15px;
+}
+
+.personal-info > strong{
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 200px;
 }
