@@ -75,7 +75,7 @@
 
 			<div class="main-body flex__item">
 				<div class="messages__section card">
-					<h1 class="messages__section-title">Messages</h1>
+					<h2 class="section-title">MESSAGES</h2>
 					<div class="compose-message">
 						<a href="javascript:" class="btn btn--primary js-compose-message">
 							<i class="fa fa-pencil" aria-hidden="true"></i>

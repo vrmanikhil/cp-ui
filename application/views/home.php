@@ -65,7 +65,7 @@
 			<div class="main-body flex__item">
 				<div class="feed">
 					<div class="card">
-						<h1 style="font-size: 1rem; text-transform: uppercase; text-align: center; margin-top: 0;"><b>Job and Internship Feeds</b></h1>
+						<h2 class="section-title"><b>JOBS AND INTERNSHIPS FEEDS</b></h2>
 					</div>
 
 					<?php if(empty($feeds)) { ?>

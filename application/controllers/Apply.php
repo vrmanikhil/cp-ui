@@ -44,7 +44,7 @@ class Apply extends CI_Controller {
 								redirect(base_url('jobs/job-offers'));
 							}
 							else{
-								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 								redirect(base_url('jobs/job-offers'));
 							}
 						}
@@ -55,14 +55,18 @@ class Apply extends CI_Controller {
 								redirect(base_url('jobs/job-offers'));
 							}
 							else{
-								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 								redirect(base_url('jobs/job-offers'));
 							}
 						}
 						else{
-							$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+							$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 							redirect(base_url('jobs/job-offers'));
 						}
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+					redirect(base_url('internships/internship-offers'));
 				}
 			}
 			else{
@@ -72,7 +76,7 @@ class Apply extends CI_Controller {
 					redirect(base_url('jobs/job-offers'));
 				}
 				else{
-					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 					redirect(base_url('jobs/job-offers'));
 				}
 			}
@@ -96,7 +100,7 @@ class Apply extends CI_Controller {
 								redirect(base_url('internships/internship-offers'));
 							}
 							else{
-								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 								redirect(base_url('internships/internship-offers'));
 							}
 						}
@@ -107,14 +111,18 @@ class Apply extends CI_Controller {
 								redirect(base_url('internships/internship-offers'));
 							}
 							else{
-								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+								$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 								redirect(base_url('internships/internship-offers'));
 							}
 						}
 						else{
-							$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+							$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 							redirect(base_url('internships/internship-offers'));
 						}
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+					redirect(base_url('internships/internship-offers'));
 				}
 			}
 			else{
@@ -124,7 +132,7 @@ class Apply extends CI_Controller {
 					redirect(base_url('internships/internship-offers'));
 				}
 				else{
-					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'success'));
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
 					redirect(base_url('internships/internship-offers'));
 				}
 			}

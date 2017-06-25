@@ -56,7 +56,7 @@
 			<div class="main-body flex__item">
 				<div class="card">
 					<section>
-						<h2 class="section-title">Connections Request</h2>
+						<h2 class="section-title">CONNECTION REQUESTS</h2>
 						<div class="connections">
 							<?php foreach ($connectionRequests as $key => $value) { ?>
 							<div class="flex connection media align-center">
@@ -79,7 +79,7 @@
 				</div>
 				<div class="card">
 					<section>
-						<h2 class="section-title">My Connections</h2>
+						<h2 class="section-title">MY CONNECTIONS</h2>
 						<?php foreach ($connections as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
