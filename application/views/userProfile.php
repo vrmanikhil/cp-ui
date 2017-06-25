@@ -166,7 +166,7 @@
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
 							<h3 class="heading flex">
 								<span>Personal Details</span>
-								<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-personal-information">Edit</a>
+								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
 							</h3>
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
@@ -177,12 +177,14 @@
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
 							<h3 class="heading flex">
 								<span>Company Details</span>
-								<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-personal-information">Edit</a>
+								<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-details" class="btn btn--primary js-edit-entity">Edit</a>
 							</h3>
-							<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
-							<p class="flex personal-info"><strong>Position</strong><span><?php echo $employerDetails[0]['position']; ?></span></p>
-							<p class="flex personal-info"><strong>Company Description </strong><span><?php echo $employerDetails[0]['companyDescription']; ?></span></p>
-							<p class="flex personal-info"><strong>Company Logo</strong><span><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
+							<div class="company-details__container">
+								<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
+								<p class="flex personal-info"><strong>Position</strong><span><?php echo $employerDetails[0]['position']; ?></span></p>
+								<p class="flex personal-info"><strong>Company Description </strong><span><?php echo $employerDetails[0]['companyDescription']; ?></span></p>
+								<p class="flex personal-info"><strong>Company Logo</strong><span><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
+							</div>
 						</div>
 						<?php } ?>
 
@@ -401,6 +403,42 @@
 				<div class="form-group">
 					<label for="workDescription">Description</label>
 					<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="remodal edit-company-details" data-remodal-id="editCompanyDetails">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Company Details</h3>
+			<form action="" method="POST" class="form">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label for="companyName">Company's Name</label>
+						<input type="text" class="form__input" placeholder="Company's name" id="companyName" name="companyName">
+					</div>
+					<div class="form-group">
+						<label for="positionInCompany">Position</label>
+						<input type="text" class="form__input" placeholder="Company's name" id="positionInCompany" name="positionInCompany">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="companyDescription">Description</label>
+					<textarea name="companyDescription" id="companyDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
+				</div>
+				<div class="horizontal-group">
+					<div class="form-group">
+						<img src="" alt="" id="companyLogo">
+						<input type="hidden" name="companyLogo">
+					</div>
+					<div class="form-group">
+						<label for="logo">Company Logo</label>
+						<input type="file" class="form__input" name="logo" id="logo">
+					</div>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>

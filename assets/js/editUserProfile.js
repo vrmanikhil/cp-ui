@@ -32,7 +32,8 @@ $(document).ready(function () {
 			description: 'workDescription',
 			year: 'educationYear',
 			score: 'educationScore',
-			scoreType: 'educationScoreType'
+			scoreType: 'educationScoreType',
+			position: 'positionInCompany'
 		};
 		var json = $(this).data('json');
 		var type = $(this).data('type');
@@ -62,6 +63,14 @@ $(document).ready(function () {
 				}
 			}
 		});
+		if (type === 'edit-personal-information') {
+			formElem.find('[name="location"]').val(json['city']+', '+json['state']);
+		}
+
+		if(type === 'edit-company-details') {
+			formElem.find('img[id="companyLogo"]').attr('src', json['companyLogo'] || '');
+		}
+
 		var modal = modalElem.remodal();
 		modal.open();
 	}
