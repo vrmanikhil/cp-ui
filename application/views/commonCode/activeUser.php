@@ -19,7 +19,7 @@
 	<a href="<?php echo base_url('connections'); ?>">
 	<div class="feed-actor-module__connections-card" style="background: url('/assets/img/connections.jpg') center no-repeat; background-size: cover;">
 		<p class="feed-actor-module__connections-card-title"><b>Connections</b></p>
-		<p class="feed-actor-module__connections-count"><b>101</b></p>
+		<p class="feed-actor-module__connections-count"><b><?=$connectionCount?></b></p>
 	</div>
 	</a>
 </div>

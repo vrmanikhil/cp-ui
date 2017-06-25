@@ -118,6 +118,13 @@ class Home_lib {
 		return !empty($CI->homeModel->checkConnections($userID));
 	}
 
+	public function countConnections($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		$count = $CI->homeModel->countConnections($userID);
+		return $count[0]['count(*)'];
+	}
+
 	public function checkConnectionWithStatus($userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');

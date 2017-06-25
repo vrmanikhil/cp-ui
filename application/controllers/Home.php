@@ -8,11 +8,10 @@ class Home extends CI_Controller {
 		$this->load->helper(array('url'));
 		$this->load->library(array('Home_lib', 'session'));
 		$this->data = array();
-		// $this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
-		// $this->data['csrf_token'] = $this->security->get_csrf_hash();
 		if(isset($_SESSION['userData'])){
 			$this->data['messages'] = $this->home_lib->fetchLatestChats(0,3);
-			$this->data['notification'] = $this->home_lib->getNotifications(0,3);	
+			$this->data['notification'] = $this->home_lib->getNotifications(0,3);
+			$this->data['connectionCount'] = $this->home_lib->countConnections($_SESSION['userData']['userID']);	
 		}
 		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 		$this->data['headerLogin'] = $this->load->view('commonCode/headerLogin', $this->data, true);
