@@ -110,7 +110,7 @@
 							</p>
 							<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 view js-view-posting-details" id = "view<?= $value['internshipID'] ?>">View</a>
+								<button> data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 view js-view-posting-details" id = "view<?= $value['internshipID'] ?>">View</button>
 							</div>
 						</div>
 					</div>
