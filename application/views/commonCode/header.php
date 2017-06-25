@@ -32,7 +32,7 @@
               <div class="dropdown__content-body">
                 <div class="notifications">
                 <?php if(empty($messages)) {?>
-						<p style="text-align: center">Mo Messages Found</p>	
+						<p style="text-align: center; font-size: 13px">No Messages Found</p>	
 					<?php }else{ 
                 foreach($messages as $text) {
                 	$cls = '';
@@ -53,8 +53,9 @@
                       </span>
                     </span>
                   </a>
-                  <?php }}?>
-                  <a class="flex media notification" href="<?php echo base_url('messages'); ?>" style="font-size: 13px;"><b>See All</b></a>
+                  <?php }?>
+                  <a class="flex media notification" href="<?php echo base_url('messages'); ?>" style="font-size: 13px;font-weight: 600"><b>See All</b></a>
+                  <?php }?>
                 </div>
               </div>
             </div>
@@ -72,7 +73,7 @@
 							<div class="dropdown__content-body">
 								<div class="notifications"
 								<?php if(empty($notification)) { ?>
-									<p style="text-align: center"> No Notifications Found.</p>
+									<p style="text-align: center; font-size: 13px"> No Notifications Found.</p>
 								<?php }else{ 
 								foreach($notification as $new) {?>
 									<a class="flex media notification" href="<?=$new['link']?>">
@@ -84,8 +85,9 @@
 											</span>
 										</span>
 									</a>
-									<?php }} ?>
-									<a class="flex media notification" href="<?php echo base_url('notifications'); ?>" style="font-size: 13px;"><b>See All</b></a>
+									<?php }?>
+									<a class="flex media notification" href="<?php echo base_url('notifications'); ?>" style="font-size: 13px; font-weight: 600"><b>See All</b></a>
+									<?php }?>
 								</div>
 							</div>
 						</div>
