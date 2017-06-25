@@ -74,7 +74,10 @@
 						<li class="active">Added Job Offer</li>
 					</ol>
 				</div>
-				<?php foreach ($addedJobOffers as $key => $value) { var_dump($value['skillsRequired']);?>
+				<?php if(empty($addedJobOffers)){?>
+				<p style="text-align: center"> You Have Added No Job Offer. </p>	
+				<?php }else{
+				 foreach ($addedJobOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
 						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
@@ -91,7 +94,7 @@
 						</div>
 					</div>
 				</div>
-			<?php } ?>
+			<?php }} ?>
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>
