@@ -264,17 +264,17 @@ class Web extends CI_Controller {
 		);
 		if($achievementTitle==''||$achievementDescription==''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-			redirect(base_url());
+			redirect(base_url('user-profile/').$userID);
 		}
 		else{
 			$result = $this->home_lib->addAchievement($data);
 			if($result){
 				$this->session->set_flashdata('message', array('content'=>'Achievement successfully Added.','class'=>'success'));
-				redirect(base_url());
+				redirect(base_url('user-profile/').$userID);
 			}
 			else{
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-				redirect(base_url());
+				redirect(base_url('user-profile/').$userID);
 			}
 		}
 	}

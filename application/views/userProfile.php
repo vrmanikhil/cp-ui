@@ -65,12 +65,13 @@
 							<section>
 							<h3 class="heading">Education</h3>
 							<div class="flex media align-center">
-								<img src="http://bo.campuspuppy.com//assets/uploads/college_logo/jss-logo1.png" alt="user" class="media-figure">
+								<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
 								<div class="media-body">
-									<p><strong>JSS Academy of Technical Education, Noida</strong></p>
-									<p>Bachelor of Technology- Computer Science and Engineering</p>
-									<p>2012-2016</p>
+									<p><?php echo $value['description']; ?></p>
+									<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
+									<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo "Percentage"; } ?></p>
 								</div>
+								<?php }} ?>
 							</div>
 							</section>
 							<section>
@@ -78,21 +79,27 @@
 									<span>Work Experience</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-work-experience">Add</a>
 								</h3>
-								<p>No Work experience added</p>
+								<?php if(empty($workExperiences)) echo "<p>No Work Experiences Added</p>"; else foreach ($workExperiences as $key => $value) {
+									echo "<p><b>".$value['companyName']."</b><br>".$value['position']."<br>".$value['startMonth']."-".$value['startYear']."-".$value['endMonth']."-".$value['endYear']."<br>".$value['description']."</p>";
+								} ?>
 							</section>
 							<section>
 								<h3 class="heading flex">
 									<span>Projects</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects">Add</a>
 								</h3>
-								<p>No Projects added</p>
+								<?php if(empty($projects)) echo "<p>No Projects Added</p>"; else foreach ($projects as $key => $value) {
+									echo "<p><b>".$value['projectTitle']."</b><br><a target='_blank' href='".$value['projectLink']."'>".$value['projectLink']."</a><br>".$value['projectDescription']."</p>";
+								} ?>
 							</section>
 							<section>
 								<h3 class="heading flex">
 									<span>Achievements</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-achievements">Add</a>
 								</h3>
-								<p>No Achievements added</p>
+								<?php if(empty($achievements)) echo "<p>No Achievements Added</p>"; else foreach ($achievements as $key => $value) {
+									echo "<p><b>".$value['achievementTitle']."</b><br>".$value['achievementDescription']."</p>";
+								} ?>
 							</section>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="skills">
@@ -218,11 +225,11 @@
 		</form>
 	</div>
 	<div class="edit-achievements hidden">
-		<h3>Achievement</h3>
-		<form action="" method="POST" class="form">
+		<h3>Add Achievement</h3>
+		<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form">
 			<div class="form-group">
-				<label for="achievementName">Name</label>
-				<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementName">
+				<label for="achievementTitle">Achievement Title</label>
+				<input type="text" class="form__input" placeholder="Achievement Title" id="achievementTitle" name="achievementTitle">
 			</div>
 			<div class="form-group">
 				<label for="achievementDescription">Description</label>
