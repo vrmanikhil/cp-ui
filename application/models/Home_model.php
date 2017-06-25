@@ -199,6 +199,16 @@ class Home_model extends CI_Model {
 		return $connections;
 	}
 
+	public function countConnections($userID){
+		$this->db->select("count(*)");
+		$this->db->where('active', $userID);
+		$this->db->where('status', '1');
+		$this->db->or_where('passive', $userID);
+		$this->db->where('status', '1');
+		$result = $this->db->get('connections');
+		return $result->result_array();
+	}
+
 	public function getConnectionRequests($userID){
 		$result = $this->db->get_where('connections', array('passive'=>$userID, 'status'=> '0'));
 		return $result->result_array();

@@ -92,7 +92,9 @@
 						<li class="active">Browse Internship Offers</li>
 					</ol>
 				</div>
-				<?php foreach ($internshipOffers as $key => $value) { ?>
+				<?php if(empty($internshipOffers)) { ?>
+				<p style="text-align: center"> No Internship Offers Found.</p>
+				<?php }else{ foreach ($internshipOffers as $key => $value) { ?>
 
 				<div class="card posting-card">
 					<div class="flex media">
@@ -114,7 +116,7 @@
 					</div>
 				</div>
 
-				<?php } ?>
+				<?php } }?>
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>

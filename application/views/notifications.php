@@ -75,7 +75,7 @@
 							</span>
 						</a>
 
-						<?php }} else { echo "No Notifications!"; } ?>
+						<?php }} else {?> <p style="text-align: center">No Notifications Found</p> <?php } ?>
 					</div>
 					<center>
 						<?php if($more) {?>

@@ -68,7 +68,9 @@
 						<h1 style="font-size: 1rem; text-transform: uppercase; text-align: center; margin-top: 0;"><b>Job and Internship Feeds</b></h1>
 					</div>
 
-					<?php foreach ($feeds as $key => $value) { ?>
+					<?php if(empty($feeds)) { ?>
+				<p style="text-align: center"> No Jobs And Internships Feeds Found.</p>
+				<?php }else{ foreach ($feeds as $key => $value) { ?>
 
 					<div class="feed-post card">
 						<div class="feed-post__head">
@@ -93,7 +95,7 @@
 						</div>
 					</div>
 
-					<?php } ?>
+					<?php } }?>
 
 				</div>
 			</div>
