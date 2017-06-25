@@ -91,6 +91,11 @@ class Home extends CI_Controller {
 		$this->load->view('uploadIdentityDoc', $this->data);
 	}
 
+	public function userConnections()
+	{
+		$this->load->view('connections', $this->data);
+	}
+
 	public function userProfile($userID)
 	{
 		$this->data['userDetails'] = $this->home_lib->getUserDetails($userID);

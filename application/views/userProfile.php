@@ -67,23 +67,23 @@
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="professional-details">
 							<section>
-							<h3 class="heading flex">
-									<span>Education</span>
-									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education">Add</a>
-							</h3>
-							<div class="education-details__container">
-								<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
-									<div class="education-details">
-										<div class="action-btns">
-											<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-											<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<h3 class="heading flex">
+										<span>Education</span>
+										<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education">Add</a>
+								</h3>
+								<div class="education-details__container">
+									<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
+										<div class="education-details">
+											<div class="action-btns">
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+											</div>
+											<p><?php echo $value['description']; ?></p>
+											<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
+											<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
 										</div>
-										<p><?php echo $value['description']; ?></p>
-										<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
-										<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
-									</div>
-								<?php }} ?>
-							</div>
+									<?php }} ?>
+								</div>
 							</section>
 							<section>
 								<h3 class="heading flex">

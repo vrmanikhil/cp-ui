@@ -65,6 +65,7 @@ $route['change-password'] = 'home/changePassword';
 $route['reset-password'] = 'home/resetPassword';
 $route['notifications'] = 'home/notifications';
 $route['connections'] = 'home/connections';
+$route['user-connections'] = 'home/userConnections';
 
 $route['search'] = 'home/search';
 
