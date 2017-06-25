@@ -49,7 +49,7 @@
 				    <span class="explore-panel__link-text flex__item">Skills</span>
 				  </a>
 				</div>
-				<div class="post card">
+				<div class="post card" style="margin-top: 10px;">
 					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<!-- CampusPuppy -->
 					<ins class="adsbygoogle"
