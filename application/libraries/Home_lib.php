@@ -235,12 +235,6 @@ class Home_lib {
 		return $CI->homeModel->getUserDetails($userID);
 	}
 
-	public function getUserProjects($userID){
-		$CI = &get_instance();
-		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getUserProjects($userID);
-	}
-
 	public function checkAnswers($ans)
 	{
 		$CI = &get_instance();
@@ -412,17 +406,6 @@ public function injectClassName(&$data)
 		return $success;
 	}
 
-	public function getUserWorkEx($userID){
-		$CI = &get_instance();
-		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getUserWorkEx($userID);
-	}
-
-	public function getUserAchievements($userID){
-		$CI = &get_instance();
-		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getUserAchievements($userID);
-	}
 
 	public function getUserSkills($userID){
 		$CI = &get_instance();
@@ -635,11 +618,35 @@ public function injectClassName(&$data)
 		else
 			return false;
 	}
-	
+
 	public function apply($offerType, $offerID, $userID){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->apply($offerType, $offerID, $userID);
+	}
+
+	public function getAchievements($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAchievements($userID);
+	}
+
+	public function getProjects($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getProjects($userID);
+	}
+
+	public function getWorkExperiences($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getWorkExperiences($userID);
+	}
+
+	public function getEducationalDetails($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getEducationalDetails($userID);
 	}
 
 

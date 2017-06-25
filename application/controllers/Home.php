@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 		if(isset($_SESSION['userData'])){
 			$this->data['messages'] = $this->home_lib->fetchLatestChats(0,3);
 			$this->data['notification'] = $this->home_lib->getNotifications(0,3);
-			$this->data['connectionCount'] = $this->home_lib->countConnections($_SESSION['userData']['userID']);	
+			$this->data['connectionCount'] = $this->home_lib->countConnections($_SESSION['userData']['userID']);
 		}
 		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 		$this->data['headerLogin'] = $this->load->view('commonCode/headerLogin', $this->data, true);
@@ -96,7 +96,10 @@ class Home extends CI_Controller {
 		$this->data['userDetails'] = $this->home_lib->getUserDetails($userID);
 		$this->data['userDetails'] = $this->data['userDetails'][0];
 		$this->data['checkConnection'] = $this->home_lib->checkConnectionWithStatus($userID);
-		// var_dump($this->data['checkConnection']);die;
+		$this->data['achievements'] = $this->home_lib->getAchievements($userID);
+		$this->data['projects'] = $this->home_lib->getProjects($userID);
+		$this->data['educationalDetails'] = $this->home_lib->getEducationalDetails($userID);
+		$this->data['workExperiences'] = $this->home_lib->getWorkExperiences($userID);
 		$this->load->view('userProfile', $this->data);
 	}
 

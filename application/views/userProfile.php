@@ -65,12 +65,13 @@
 							<section>
 							<h3 class="heading">Education</h3>
 							<div class="flex media align-center">
-								<img src="http://bo.campuspuppy.com//assets/uploads/college_logo/jss-logo1.png" alt="user" class="media-figure">
+								<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
 								<div class="media-body">
-									<p><strong>JSS Academy of Technical Education, Noida</strong></p>
-									<p>Bachelor of Technology- Computer Science and Engineering</p>
-									<p>2012-2016</p>
+									<p><?php echo $value['description']; ?></p>
+									<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
+									<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo "Percentage"; } ?></p>
 								</div>
+								<?php }} ?>
 							</div>
 							</section>
 							<section>
@@ -78,21 +79,27 @@
 									<span>Work Experience</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-work-experience">Add</a>
 								</h3>
-								<p>No Work experience added</p>
+								<?php if(empty($workExperiences)) echo "<p>No Work Experiences Added</p>"; else foreach ($workExperiences as $key => $value) {
+									echo "<p><b>".$value['companyName']."</b><br>".$value['position']."<br>".$value['startMonth']."-".$value['startYear']."-".$value['endMonth']."-".$value['endYear']."<br>".$value['description']."</p>";
+								} ?>
 							</section>
 							<section>
 								<h3 class="heading flex">
 									<span>Projects</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects">Add</a>
 								</h3>
-								<p>No Projects added</p>
+								<?php if(empty($projects)) echo "<p>No Projects Added</p>"; else foreach ($projects as $key => $value) {
+									echo "<p><b>".$value['projectTitle']."</b><br><a target='_blank' href='".$value['projectLink']."'>".$value['projectLink']."</a><br>".$value['projectDescription']."</p>";
+								} ?>
 							</section>
 							<section>
 								<h3 class="heading flex">
 									<span>Achievements</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-achievements">Add</a>
 								</h3>
-								<p>No Achievements added</p>
+								<?php if(empty($achievements)) echo "<p>No Achievements Added</p>"; else foreach ($achievements as $key => $value) {
+									echo "<p><b>".$value['achievementTitle']."</b><br>".$value['achievementDescription']."</p>";
+								} ?>
 							</section>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="skills">
@@ -163,52 +170,90 @@
 			</div>
 		</div>
 	</div>
-	<div class="remodal edit-info-modal" data-remodal-id="editInfoModal">
+	<div class="remodal edit-personal-information" data-remodal-id="editPersonalInfoModal">
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
+			<h3>Personal Information</h3>
+			<form action="" method="POST" class="form">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label for="relationshipStatus">Relationship status</label>
+						<select class="select" name="relationshipStatus" id="relationshipStatus">
+							<option value="0" selected="">Single</option>
+							<option value="1">Comitted</option>
+							<option value="2">Open Relationship</option>
+							<option value="3">Married</option>
+							<option value="4">Divorced</option>
+							<option value="5">Prefer not to say</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="dateOfBirth">Date of birth</label>
+						<input type="date" name="dateOfBirth" id="dateOfBirth" class="form__input">
+					</div>
+				</div>
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label for="location">Current Location</label>
+						<select class="select" name="location" id="location">
+							<option value="0">Location 1</option>
+							<option value="1">Location 2</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="hometown">Hometown</label>
+						<select class="select" name="hometown" id="hometown">
+							<option value="0">Location 1</option>
+							<option value="1">Location 2</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="gender">Gender</label>
+						<select class="select" name="gender" id="gender">
+							<option value="m">Male</option>
+							<option value="f">Female</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
+				</div>
+			</form>
 		</div>
 	</div>
-	<div class="hidden edit-personal-information">
-		<h3>Personal Information</h3>
-		<form action="" method="POST" class="form">
-			<div class="horizontal-group">
+	<div class="remodal edit-achievements" data-remodal-id="editAchievementsModal">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Achievement</h3>
+			<form action="" method="POST" class="form">
 				<div class="form-group">
-					<label for="relationshipStatus">Relationship status</label>
-					<select class="select" name="relationshipStatus" id="relationshipStatus">
-						<option value="0" selected="">Single</option>
-						<option value="1">Comitted</option>
-						<option value="2">Open Relationship</option>
-						<option value="3">Married</option>
-						<option value="4">Divorced</option>
-						<option value="5">Prefer not to say</option>
-					</select>
+					<label for="achievementName">Name</label>
+					<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementName">
 				</div>
 				<div class="form-group">
-					<label for="dateOfBirth">Date of birth</label>
-					<input type="date" name="dateOfBirth" id="dateOfBirth" class="form__input">
+					<label for="achievementDescription">Description</label>
+					<textarea name="achievementDescription" data-ckeditor="yes" id="achievementDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
-			</div>
-			<div class="horizontal-group">
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="remodal edit-projects" data-remodal-id="editProjectsModal">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Project</h3>
+			<form action="" method="POST" class="form">
 				<div class="form-group">
-					<label for="location">Current Location</label>
-					<select class="select" name="location" id="location">
-						<option value="0">Location 1</option>
-						<option value="1">Location 2</option>
-					</select>
+					<label for="projectName">Name</label>
+					<input type="text" class="form__input" placeholder="Project name" id="projectName" name="projectName">
 				</div>
 				<div class="form-group">
-					<label for="hometown">Hometown</label>
-					<select class="select" name="hometown" id="hometown">
-						<option value="0">Location 1</option>
-						<option value="1">Location 2</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="gender">Gender</label>
-					<select class="select" name="gender" id="gender">
-						<option value="m">Male</option>
-						<option value="f">Female</option>
-					</select>
+					<label for="projectLink">Link (optional)</label>
+					<input type="text" class="form__input" placeholder="Project Link" id="projectLink" name="projectLink">
 				</div>
 			</div>
 			<div class="form-group action-bar">
@@ -218,11 +263,11 @@
 		</form>
 	</div>
 	<div class="edit-achievements hidden">
-		<h3>Achievement</h3>
-		<form action="" method="POST" class="form">
+		<h3>Add Achievement</h3>
+		<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form">
 			<div class="form-group">
-				<label for="achievementName">Name</label>
-				<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementName">
+				<label for="achievementTitle">Achievement Title</label>
+				<input type="text" class="form__input" placeholder="Achievement Title" id="achievementTitle" name="achievementTitle">
 			</div>
 			<div class="form-group">
 				<label for="achievementDescription">Description</label>
@@ -260,61 +305,79 @@
 		<form action="" method="POST" class="form">
 			<div class="horizontal-group">
 				<div class="form-group">
-					<label for="companyName">Company's Name</label>
-					<input type="text" class="form__input" placeholder="Company's name" id="companyName" name="companyName">
+					<label for="projectDescription">Description</label>
+					<textarea name="projectDescription" data-ckeditor="yes" id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
-				<div class="form-group">
-					<label for="workingPosition">Working position</label>
-					<input type="text" class="form__input" placeholder="Company's name" id="workingPosition" name="workingPosition">
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
 				</div>
-			</div>
-			<div class="horizontal-group">
-				<div class="form-group">
-					<label>Starting Date</label>
-					<div class="horizontal-group">
-						<div class="form-group">
-							<label for="startingMonth">Month</label>
-							<select name="startingMonth" id="startingMonth" class="select">
-								<option>Jan</option>
-								<option>Feb</option>
-							</select>
+			</form>
+		</div>
+	</div>
+	<div class="remodal edit-work-experience" data-remodal-id="editWorkExperienceModal">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Work Experience</h3>
+			<form action="" method="POST" class="form">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label for="companyName">Company's Name</label>
+						<input type="text" class="form__input" placeholder="Company's name" id="companyName" name="companyName">
+					</div>
+					<div class="form-group">
+						<label for="workingPosition">Working position</label>
+						<input type="text" class="form__input" placeholder="Company's name" id="workingPosition" name="workingPosition">
+					</div>
+				</div>
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label>Starting Date</label>
+						<div class="horizontal-group">
+							<div class="form-group">
+								<label for="startingMonth">Month</label>
+								<select name="startingMonth" id="startingMonth" class="select">
+									<option>Jan</option>
+									<option>Feb</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="startingYear">Year</label>
+								<select name="startingYear" id="startingYear" class="select">
+									<option>2017</option>
+								</select>
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="startingYear">Year</label>
-							<select name="startingYear" id="startingYear" class="select">
-								<option>2017</option>
-							</select>
+					</div>
+					<div class="form-group">
+						<label>Ending Date</label>
+						<div class="horizontal-group">
+							<div class="form-group">
+								<label for="endingMonth">Month</label>
+								<select name="endingMonth" id="endingMonth" class="select">
+									<option>Jan</option>
+									<option>Feb</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="endingYear">Year</label>
+								<select name="endingYear" id="endingYear" class="select">
+									<option>2017</option>
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label>Ending Date</label>
-					<div class="horizontal-group">
-						<div class="form-group">
-							<label for="endingMonth">Month</label>
-							<select name="endingMonth" id="endingMonth" class="select">
-								<option>Jan</option>
-								<option>Feb</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="endingYear">Year</label>
-							<select name="endingYear" id="endingYear" class="select">
-								<option>2017</option>
-							</select>
-						</div>
-					</div>
+					<label for="workDescription">Description</label>
+					<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="workDescription">Description</label>
-				<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
-			</div>
-			<div class="form-group action-bar">
-				<button data-remodal-action="close" class="btn">Close</button>
-				<input type="submit" class="btn btn--primary" value="Save">
-			</div>
-		</form>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
+				</div>
+			</form>
+		</div>
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>

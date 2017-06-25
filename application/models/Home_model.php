@@ -426,21 +426,6 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function getUserProjects($userID){
-		$result = $this->db->get_where('projects', array('userID' => $userID));
-		return $result->result_array();
-	}
-
-	public function getUserWorkEx($userID){
-		$result = $this->db->get_where('workExperience', array('userID' => $userID));
-		return $result->result_array();
-	}
-
-	public function getUserAchievements($userID){
-		$result = $this->db->get_where('achievements', array('userID' => $userID));
-		return $result->result_array();
-	}
-
 	public function getUserSkills($userID){
 		$this->db->join('skills', 'userSkills.skillID = skills.skillID');
 		$result = $this->db->get_where('userSkills', array('userID' => $userID));
@@ -683,6 +668,26 @@ class Home_model extends CI_Model {
 			);
 			return $this->db->insert('internshipApplicants', $data);
 		}
+	}
+
+	public function getAchievements($userID){
+		$result = $this->db->get_where('achievements', array('userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function getProjects($userID){
+		$result = $this->db->get_where('projects', array('userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function getWorkExperiences($userID){
+		$result = $this->db->get_where('workExperience', array('userID'=>$userID));
+		return $result->result_array();
+	}
+
+	public function getEducationalDetails($userID){
+		$result = $this->db->get_where('educationalDetails', array('userID'=>$userID));
+		return $result->result_array();
 	}
 
 }
