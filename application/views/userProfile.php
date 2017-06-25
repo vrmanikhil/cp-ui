@@ -64,13 +64,16 @@
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="professional-details">
 							<section>
-							<h3 class="heading">Education</h3>
+							<h3 class="heading flex">
+									<span>Education</span>
+									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education">Add</a>
+							</h3>
 							<div class="flex media align-center">
 								<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
 								<div class="media-body">
 									<p><?php echo $value['description']; ?></p>
 									<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
-									<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo "Percentage"; } ?></p>
+									<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
 								</div>
 								<?php }} ?>
 							</div>
@@ -215,6 +218,47 @@
 							<option value="f">Female</option>
 						</select>
 					</div>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="remodal edit-education" data-remodal-id="editEducationModal">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Education Details</h3>
+			<form action="" method="POST" class="form">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label for="educationType">Type</label>
+						<select class="select" name="educationType" id="educationType">
+							<option value="0" selected="">Type 1</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="educationYear">Year</label>
+						<input type="number" name="educationYear" id="educationYear" class="form__input">
+					</div>
+				</div>
+				<div class="horizontal-group">
+					<div class="form-group">
+						<label for="educationScoreType">Score Type</label>
+						<select class="select" name="educationScoreType" id="educationScoreType">
+							<option value="0">Type 1</option>
+							<option value="1">Type 2</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="educationScore">Score</label>
+						<input type="number" name="educationScore" id="educationScore" class="form__input">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="educationDescription">Description</label>
+					<textarea name="educationDescription" data-ckeditor="yes" id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
