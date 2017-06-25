@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2017 at 02:29 PM
+-- Generation Time: Jun 25, 2017 at 07:40 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -109,6 +109,20 @@ CREATE TABLE `connections` (
   `passive` int(5) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `connections`
+--
+
+INSERT INTO `connections` (`active`, `passive`, `status`) VALUES
+(18, 1, 0),
+(8, 1, 0),
+(1, 2, 1),
+(1, 3, 1),
+(1, 4, 1),
+(1, 5, 1),
+(1, 6, 1),
+(1, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -873,7 +887,8 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 CREATE TABLE `internshipApplicants` (
   `internshipID` int(5) NOT NULL,
   `userID` int(5) NOT NULL,
-  `status` enum('1','2','3','4') NOT NULL
+  `status` enum('1','2','3','4') NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -969,7 +984,8 @@ INSERT INTO `internshipSkills` (`internshipID`, `skillID`) VALUES
 CREATE TABLE `jobApplicants` (
   `jobID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
-  `status` enum('1','2','3','4') NOT NULL
+  `status` enum('1','2','3','4') NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1063,6 +1079,23 @@ CREATE TABLE `messages` (
   `read` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`messageID`, `sender`, `receiver`, `message`, `timestamp`, `read`) VALUES
+(1, 1, 2, 'Hello', '2017-06-25 13:53:01', 1),
+(2, 2, 1, 'Hey', '2017-06-25 13:56:46', 1),
+(3, 1, 2, 'How are you?', '2017-06-25 13:53:41', 0),
+(4, 2, 1, 'I am Good, you tell?', '2017-06-25 13:56:46', 1),
+(5, 1, 2, 'M fine, thank you', '2017-06-25 13:54:04', 0),
+(6, 1, 3, 'Hey', '2017-06-25 13:54:28', 0),
+(7, 1, 12, 'Hello? Howz the Cheese?', '2017-06-25 13:54:44', 0),
+(8, 1, 4, 'Gautam Bhai, Miss your GJs', '2017-06-25 13:55:10', 0),
+(9, 1, 5, 'Heyy', '2017-06-25 13:55:25', 0),
+(10, 1, 6, 'Hello Bhai', '2017-06-25 13:55:58', 0),
+(11, 1, 2, 'Send me the link for COAT', '2017-06-25 13:56:57', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -1078,6 +1111,14 @@ CREATE TABLE `notifications` (
   `link` varchar(1000) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`notificationID`, `name`, `image`, `notification`, `concernedUser`, `link`, `timestamp`) VALUES
+(1, 'Jubika Khanna', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Jubika Khanna has sent you a Connection Request.', 1, 'http://cp.ui/connections', '2017-06-25 13:49:47'),
+(2, 'Abhay Rawat', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Abhay Rawat has sent you a Connection Request.', 1, 'http://cp.ui/connections', '2017-06-25 13:50:00');
 
 -- --------------------------------------------------------
 
@@ -2224,12 +2265,12 @@ ALTER TABLE `jobOffers`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `messageID` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `messageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notificationID` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `notificationID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `passwordToken`
 --
