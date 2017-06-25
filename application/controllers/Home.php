@@ -129,7 +129,8 @@ class Home extends CI_Controller {
 		$resume['campusPuppy'] =file_get_contents("http://backoffice.campuspuppy.com/assets/images/logo.png");
 		$base64 = base64_encode($resume['campusPuppy']);
 		$resume['campusPuppy'] = 'data:image/jpeg;base64,' . $base64;	
-		if(isset($_GET['download']) == 1 && $_SESSION['userData']['accountType'] == 2){
+		if(isset($_GET['download']) == 1) 
+			if($_SESSION['userData']['accountType'] == 2){
 			$html = $this->load->view('resume', $resume, true);
 			$dompdf = new Dompdf();
 			$dompdf->loadHtml($html);
