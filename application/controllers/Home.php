@@ -704,19 +704,10 @@ class Home extends CI_Controller {
 				array_push($connections,$value['active']);
 			}
 		}
-		if(empty($connections)){
-			echo "khali hai ye to";
-		}
-		else{
+		if(!empty($connections)){
 		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
 		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
-		echo "Connection Requests";
-		echo "<br>";
-		var_dump($this->data['connectionRequests']);
-		echo "<br>";
-		echo "My Connections";
-		echo "<br>";
-		var_dump($this->data['connections']);
+		$this->load->view('connections', $this->data);
 		}
 	}
 

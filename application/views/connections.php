@@ -58,13 +58,14 @@
 					<section>
 						<h2>Connections Request</h2>
 						<div class="connections">
+							<?php foreach ($connectionRequests as $key => $value) { ?>
 							<div class="flex connection media align-center">
-								<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
 								<div class="media-body flex">
 									<div class="user-info">
-										<p><strong>Nikhil Verma</strong></p>
-										<p>B.tech</p>
-										<p>Jss Academy of Technical Education</p>
+										<p><strong><?php echo $value['name']; ?></strong></p>
+										<p><?php echo $value['email']; ?></p>
+										<p><?php echo $value['city'].", ".$value['state']; ?></p>
 									</div>
 									<div class="actions">
 										<a href="javascript:" class="btn btn--primary reject"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -72,32 +73,21 @@
 									</div>
 								</div>
 							</div>
-							<div class="flex connection media align-center">
-								<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure">
-								<div class="media-body flex">
-									<div class="user-info">
-										<p><strong>Prashant Chaudhary</strong></p>
-										<p>B.tech</p>
-										<p>Jss Academy of Technical Education</p>
-									</div>
-									<div class="actions">
-										<a href="javascript:" class="btn btn--primary reject"><i class="fa fa-times" aria-hidden="true"></i></a>
-										<a href="javascript:" class="btn btn--primary accept"><i class="fa fa-check" aria-hidden="true"></i></a>
-									</div>
-								</div>
-							</div>
+							<?php } ?>
+
 						</div>
 					</section>
 					<section>
 						<h2>My Connections</h2>
+						<?php foreach ($connections as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
-								<img src="http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg" alt="user" class="media-figure">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
 								<div class="media-body flex">
 									<div class="user-info">
-										<p><strong>Nikhil Verma</strong></p>
-										<p>B.tech</p>
-										<p>Jss Academy of Technical Education</p>
+										<p><strong><?php echo $value['name']; ?></strong></p>
+										<p><?php echo $value['email']; ?></p>
+										<p><?php echo $value['city'].", ".$value['state']; ?></p>
 									</div>
 									<div class="actions">
 										<a href="javascript:" class="btn btn--primary view-profile">View Profile</i></a>
@@ -105,6 +95,7 @@
 								</div>
 							</div>
 						</div>
+							<?php } ?>
 					</section>
 				</div>
 			</div>
