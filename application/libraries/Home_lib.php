@@ -649,5 +649,11 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getEducationalDetails($userID);
 	}
 
+	public function getEmployerDetails($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getEmployerDetails($userID);
+	}
+
 
 }

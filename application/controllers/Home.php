@@ -95,6 +95,11 @@ class Home extends CI_Controller {
 	{
 		$this->data['userDetails'] = $this->home_lib->getUserDetails($userID);
 		$this->data['userDetails'] = $this->data['userDetails'][0];
+		$accountType = $this->data['userDetails']['accountType'];
+		$this->data['employerDetails'] = '';
+		if($accountType=='2'){
+			$this->data['employerDetails'] = $this->home_lib->getEmployerDetails($userID);
+		}
 		$this->data['checkConnection'] = $this->home_lib->checkConnectionWithStatus($userID);
 		$this->data['achievements'] = $this->home_lib->getAchievements($userID);
 		$this->data['projects'] = $this->home_lib->getProjects($userID);

@@ -699,4 +699,9 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getEmployerDetails($userID){
+		$result = $this->db->get_where('employerUsers', array('userID'=>$userID));
+		return $result->result_array();
+	}
+
 }
