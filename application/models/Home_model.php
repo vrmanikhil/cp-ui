@@ -548,20 +548,29 @@ class Home_model extends CI_Model {
 
 	public function getOfferData($offerType, $offerID){
 		if($offerType=='1'){
-			$this->db->select('jobTitle,addedBy');
-			$result = $this->db->get_where('jobOffers', array('jobID'=> $offerID));
+			$this->db->join('jobSkills','jobSkills.jobID = jobOffers.jobID');
+			$this->db->join('skills', 'jobSkills.skillID = skills.skillID');
+			$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
+			$this->db->select('jobTitle,addedBy,companyName,companyLogo, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+			$result = $this->db->get_where('jobOffers', array('jobOffers.jobID'=> $offerID));
 			return $result->result_array()[0];
 		}
 		if($offerType=='2'){
-			$this->db->select('internshipTitle,addedBy');
-			$result=  $this->db->get_where('internshipOffers', array('internshipID'=> $offerID));
+			$this->db->join('internshipSkills','internshipSkills.internshipID = internshipOffers.internshipID');
+			$this->db->join('skills', 'internshipSkills.skillID = skills.skillID');
+			$this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
+			$this->db->select('internshipTitle,addedBy,companyName,companyLogo, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired');
+			$result=  $this->db->get_where('internshipOffers', array('internshipOffers.internshipID'=> $offerID));
 			return $result->result_array()[0];
 		}
 	}
 
 	public function getApplicants($offerType, $offerID){
 		$this->db->select('users.userID, users.name, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skillID) AS userSkills');
-		$this->db->join('users', 'jobApplicants.userID = users.userID');
+		if($offerType=='1'){
+		$this->db->join('users', 'jobApplicants.userID = users.userID');}
+		if($offerType=='2'){
+		$this->db->join('users', 'internshipApplicants.userID = users.userID');}
 		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
 		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
 		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');

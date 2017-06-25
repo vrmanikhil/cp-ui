@@ -786,7 +786,7 @@ class Home extends CI_Controller {
 		return $this->home_lib->getJobData($jobID);
 	}
 
-	public function applicants($offerType='', $offerID){
+	public function applicants($offerType, $offerID){
 		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
 		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
 			$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
