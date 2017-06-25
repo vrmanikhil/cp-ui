@@ -39,42 +39,54 @@
         <br>
         <dl>
             <dt>Education</dt>
-            <dd> 
-                <?php foreach($educationalDetails as $details){?>
+            <dd><?php if(!isset($educationalDetails) || $educationalDetails == NULL){
+                echo "No Educational Detail Added.";
+            }else
+                foreach($educationalDetails as $details){?>
                 <?=$details['description']?>                
                 <b>Year of Passing :</b><?= $details['year']?>
                 <p><strong>Score : </strong><?= $details['score']?></p> 
                 <?php } ?>
             </dd>
             <dd class="clear"></dd>
-            <dt>Skills</dt>
-            <dd>
-                <?php foreach($projects as $project){?>
+            <dt>Projects</dt>
+            <dd><?php if(!isset($projects) || $projects == NULL){
+                echo "No Project Added.";
+            }else
+                 foreach($projects as $project){?>
                     <li><b><?=$project['projectTitle']?></b></li>
                     <a href="<?=$project['projectLink']?>"><?=$project['projectLink']?></a>
                     <p><?=$project['projectDescription']?></p>
                 <?php } ?>
             </dd>
             <dd class="clear"></dd>
-            <dt>Projects</dt>
-            <dd>
-                <?php foreach($skills as $skill){?>
+            <dt>Skills</dt>
+            <dd><?php if(!isset($skills) || $skills == NULL){
+                echo "No Skill Added.";
+            }else
+                foreach($skills as $skill){?>
                     <li><?=$skill['skill_name']?></li>
                 <?php } ?>
             </dd>
             <dd class="clear"></dd>
             <dt>Work Experience</dt>
-            <dd>
-               <?php foreach($workExperiences as $work)?>
+            <dd><?php if(!isset($workExperiences) || $workExperiences == NULL){
+                echo "No Work Experience Added.";
+            }else
+                foreach($workExperiences as $work){?>
                     <?= $work['companyName']?><br>
                     <?= $work['position']?>
                     <?= $work['description']?>
-                    <?php echo $work['startMonth'].', '.$work['startYear'].' - '.$work['endMonth'].', '.$work['endYear']?>             
+                    <?php 
+                    echo $work['startMonth'].', '.$work['startYear'].' - '.$work['endMonth'].', '.$work['endYear'];
+                    }?>             
             </dd>
             <dd class="clear"></dd>
             <dt>Achievements</dt>
-            <dd>
-               <?php foreach($achievements as $achievement){?>
+            <dd><?php if(!isset($achievements) || $achievements == NULL){
+                echo "No Achievement Added.";
+            }else
+               foreach($achievements as $achievement){?>
                 <ul>
                     <li><b><?=$achievement['achievementTitle']?></b></li>
                     <p><?=$achievement['achievementDescription']?></p>
