@@ -147,3 +147,18 @@
 .message-btn {
 	margin-right: 5px;
 }
+
+.action-btns {
+	float: right;
+}
+
+.action-btns:after {
+	display: table;
+	content: " ";
+	clear: both;
+}
+
+.action-btns > .btn {
+	border: 0;
+	display: inline-block;
+}
