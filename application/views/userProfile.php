@@ -41,6 +41,7 @@
 								}
 							}
 							else{ ?>
+								<a href="javascript:" class="btn message-btn"><i class="fa fa-envelope" aria-hidden="true"></i></a>
 								<a href="<?php echo base_url('connections/removeConnection/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" onclick="alert('Are you sure you want to Remove the Connection?')" class="btn">Remove Connection</a>
 							<?php
 							}
@@ -226,7 +227,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Achievement</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form">
 				<div class="form-group">
 					<label for="achievementName">Name</label>
 					<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementName">
@@ -261,59 +262,6 @@
 				<input type="submit" class="btn btn--primary" value="Save">
 			</div>
 		</form>
-	</div>
-	<div class="edit-achievements hidden">
-		<h3>Add Achievement</h3>
-		<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form">
-			<div class="form-group">
-				<label for="achievementTitle">Achievement Title</label>
-				<input type="text" class="form__input" placeholder="Achievement Title" id="achievementTitle" name="achievementTitle">
-			</div>
-			<div class="form-group">
-				<label for="achievementDescription">Description</label>
-				<textarea name="achievementDescription" data-ckeditor="yes" id="achievementDescription" cols="30" rows="5" class="form__input"></textarea>
-			</div>
-			<div class="form-group action-bar">
-				<button data-remodal-action="close" class="btn">Close</button>
-				<input type="submit" class="btn btn--primary" value="Save">
-			</div>
-		</form>
-	</div>
-	<div class="edit-projects hidden">
-		<h3>Project</h3>
-		<form action="" method="POST" class="form">
-			<div class="form-group">
-				<label for="projectName">Name</label>
-				<input type="text" class="form__input" placeholder="Project name" id="projectName" name="projectName">
-			</div>
-			<div class="form-group">
-				<label for="projectLink">Link (optional)</label>
-				<input type="text" class="form__input" placeholder="Project Link" id="projectLink" name="projectLink">
-			</div>
-			<div class="form-group">
-				<label for="projectDescription">Description</label>
-				<textarea name="projectDescription" data-ckeditor="yes" id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
-			</div>
-			<div class="form-group action-bar">
-				<button data-remodal-action="close" class="btn">Close</button>
-				<input type="submit" class="btn btn--primary" value="Save">
-			</div>
-		</form>
-	</div>
-	<div class="edit-work-experience hidden">
-		<h3>Work Experience</h3>
-		<form action="" method="POST" class="form">
-			<div class="horizontal-group">
-				<div class="form-group">
-					<label for="projectDescription">Description</label>
-					<textarea name="projectDescription" data-ckeditor="yes" id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
-				</div>
-				<div class="form-group action-bar">
-					<button data-remodal-action="close" class="btn">Close</button>
-					<input type="submit" class="btn btn--primary" value="Save">
-				</div>
-			</form>
-		</div>
 	</div>
 	<div class="remodal edit-work-experience" data-remodal-id="editWorkExperienceModal">
 		<button data-remodal-action="close" class="remodal-close"></button>
