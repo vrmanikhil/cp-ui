@@ -31,7 +31,9 @@
               </div>
               <div class="dropdown__content-body">
                 <div class="notifications">
-                <?php 
+                <?php if(empty($messages)) {?>
+						<p style="text-align: center; font-size: 13px">No Messages Found</p>	
+					<?php }else{ 
                 foreach($messages as $text) {
                 	$cls = '';
 					if ($text['read'] != 1 && $_SESSION['userData']['userID'] !== $text['sender'] ) 
@@ -52,7 +54,8 @@
                     </span>
                   </a>
                   <?php }?>
-                  <a class="flex media notification" href="<?php echo base_url('messages'); ?>" style="font-size: 13px;"><b>See All</b></a>
+                  <a class="flex media notification" href="<?php echo base_url('messages'); ?>" style="font-size: 13px;font-weight: 600"><b>See All</b></a>
+                  <?php }?>
                 </div>
               </div>
             </div>
@@ -68,8 +71,11 @@
 								<p class="dropdown__content-title"><b>Notifications</b></p>
 							</div>
 							<div class="dropdown__content-body">
-								<div class="notifications">
-								<?php foreach($notification as $new) {?>
+								<div class="notifications"
+								<?php if(empty($notification)) { ?>
+									<p style="text-align: center; font-size: 13px"> No Notifications Found.</p>
+								<?php }else{ 
+								foreach($notification as $new) {?>
 									<a class="flex media notification" href="<?=$new['link']?>">
 										<img src="<?= $new['image']?>" alt="user" class="media-figure notification__feature-img">
 										<span class="media-body flex flex--col">
@@ -79,8 +85,9 @@
 											</span>
 										</span>
 									</a>
-									<?php } ?>
-									<a class="flex media notification" href="<?php echo base_url('notifications'); ?>" style="font-size: 13px;"><b>See All</b></a>
+									<?php }?>
+									<a class="flex media notification" href="<?php echo base_url('notifications'); ?>" style="font-size: 13px; font-weight: 600"><b>See All</b></a>
+									<?php }?>
 								</div>
 							</div>
 						</div>

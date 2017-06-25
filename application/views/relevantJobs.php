@@ -91,7 +91,9 @@
 						<li class="active">Relevant Job Offers</li>
 					</ol>
 				</div>
-				<?php foreach ($jobOffers as $key => $value) { ?>
+				<?php if(empty($jobOffers)) { ?>
+				<p style="text-align: center"> No Job Offers Found.</p>
+				<?php }else{ foreach ($jobOffers as $key => $value) { ?>
 
 				<div class="card posting-card">
 					<div class="flex media">
@@ -113,7 +115,7 @@
 					</div>
 				</div>
 
-				<?php } ?>
+				<?php }} ?>
 
 			</div>
 			<aside class="flex__item right-pane">
