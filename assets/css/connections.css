@@ -10,24 +10,21 @@
 	margin-bottom: 10px;
 }
 
-.main-body h2 {
-	margin: 25px 0 15px;
-	text-align: center;
-	font-size: 1.125em;
-}
-
 .connection {
 	border: 1px solid var(--grey);
 	margin-bottom: 10px;
+	padding: 5px;
 }
 
 .connection > .media-figure {
 	max-width: 100px;
 	margin-right: 10px;
+	border-radius: 100%;
 }
 
 .connection > .media-body {
 	align-items: center;
+	flex-grow: 1;
 }
 
 .connections .user-info {
@@ -50,8 +47,11 @@
 	border-radius: 100%;
 }
 
-.view-profile {
-	flex-shrink: 0;
+.connection .actions {
 	margin-right: 10px;
+	flex-shrink: 0;
+}
+
+.view-profile {
 	width: 110px;
 }
