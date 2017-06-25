@@ -117,9 +117,9 @@
 
 .skill:after {
 	position: absolute;
-	right: -22px;
-	top: 18px;
-	width: 100px;
+	right: -25px;
+	top: 26px;
+	width: 120px;
 	text-align: center;
 	transform: rotateZ(45deg);
 	background: white;
@@ -133,8 +133,9 @@
 }
 
 .skill.paid:after {
-	content: 'Paid';
-	color: var(--red);
+	content: 'Premium';
+	color: white;
+	background: var(--red);
 }
 
 .skill > p {
