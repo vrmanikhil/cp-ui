@@ -2,12 +2,9 @@ $(document).ready(function () {
 	$(document).on('click', '.js-open-edit-modal', openEditModal);
 	function openEditModal(ev) {
 		var type = $(this).data('modal-type');
-		var html = $('.'+type).html();
-		var modalElem = $('[data-remodal-id="editInfoModal"]');
+		var modalId = $('.'+type).data('remodal-id');
+		var modalElem = $('[data-remodal-id="'+modalId+'"]');
 		var modal = modalElem.remodal();
-		var modalBody = modalElem.find('.modal-body');
-		modalBody.html('');
-		modalBody.append(html);
 		modal.open();
 	}
 
