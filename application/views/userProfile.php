@@ -68,13 +68,17 @@
 									<span>Education</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education">Add</a>
 							</h3>
-							<div class="flex media align-center">
+							<div class="education-details__container">
 								<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
-								<div class="media-body">
-									<p><?php echo $value['description']; ?></p>
-									<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
-									<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
-								</div>
+									<div class="education-details">
+										<div class="action-btns">
+											<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+											<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+										</div>
+										<p><?php echo $value['description']; ?></p>
+										<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
+										<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
+									</div>
 								<?php }} ?>
 							</div>
 							</section>
@@ -83,27 +87,60 @@
 									<span>Work Experience</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-work-experience">Add</a>
 								</h3>
-								<?php if(empty($workExperiences)) echo "<p>No Work Experiences Added</p>"; else foreach ($workExperiences as $key => $value) {
-									echo "<p><b>".$value['companyName']."</b><br>".$value['position']."<br>".$value['startMonth']."-".$value['startYear']."-".$value['endMonth']."-".$value['endYear']."<br>".$value['description']."</p>";
-								} ?>
+								<div class="work-experience__container">
+									<?php if(empty($workExperiences)) echo "<p>No Work Experiences Added</p>";
+									else foreach ($workExperiences as $key => $value) { ?>
+										<div class="work-experience">
+											<div class="action-btns">
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-work-experience" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+											</div>
+											<p><strong><?= $value['companyName'] ?></strong></p>
+											<p><?= $value['position'] ?></p>
+											<p><?php echo $value['startMonth'].' '.$value['startYear'].'-'.$value['endMonth'].' '.$value['endYear'] ?></p>
+											<p><?= $value['description'] ?></p>
+										</div>
+									<?php } ?>
+								</div>
 							</section>
 							<section>
 								<h3 class="heading flex">
 									<span>Projects</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects">Add</a>
 								</h3>
-								<?php if(empty($projects)) echo "<p>No Projects Added</p>"; else foreach ($projects as $key => $value) {
-									echo "<p><b>".$value['projectTitle']."</b><br><a target='_blank' href='".$value['projectLink']."'>".$value['projectLink']."</a><br>".$value['projectDescription']."</p>";
-								} ?>
+								<div class="projects__container">
+									<?php if(empty($projects)) echo "<p>No Projects Added</p>";
+									else foreach ($projects as $key => $value) { ?>
+										<div class="project">
+											<div class="action-btns">
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-projects" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+											</div>
+											<p><strong><?= $value['projectTitle'] ?></strong></p>
+											<p><a target='_blank' href='<?= $value["projectLink"] ?>'><?= $value['projectLink'] ?></a></p>
+											<p><?= $value['projectDescription'] ?></p>
+										</div>
+									<?php } ?>
+								</div>
 							</section>
 							<section>
 								<h3 class="heading flex">
 									<span>Achievements</span>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-achievements">Add</a>
 								</h3>
-								<?php if(empty($achievements)) echo "<p>No Achievements Added</p>"; else foreach ($achievements as $key => $value) {
-									echo "<p><b>".$value['achievementTitle']."</b><br>".$value['achievementDescription']."</p>";
-								} ?>
+								<div class="achievements__container">
+									<?php if(empty($achievements)) echo "<p>No Achievements Added</p>";
+									else foreach ($achievements as $key => $value) { ?>
+										<div class="achievement">
+											<div class="action-btns">
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-achievements" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+											</div>
+											<p><strong><?= $value['achievementTitle'] ?></strong></p>
+											<p><?= $value['achievementDescription'] ?></p>
+										</div>
+									<?php } ?>
+								</div>
 							</section>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="skills">
@@ -235,7 +272,9 @@
 					<div class="form-group">
 						<label for="educationType">Type</label>
 						<select class="select" name="educationType" id="educationType">
-							<option value="0" selected="">Type 1</option>
+							<option value="1" selected="">Type 1</option>
+							<option value="2" selected="">Type 2</option>
+							<option value="3" selected="">Type 3</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -247,8 +286,9 @@
 					<div class="form-group">
 						<label for="educationScoreType">Score Type</label>
 						<select class="select" name="educationScoreType" id="educationScoreType">
-							<option value="0">Type 1</option>
-							<option value="1">Type 2</option>
+							<option value="1">Type 1</option>
+							<option value="2">Type 2</option>
+							<option value="3">Type 3</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -300,11 +340,14 @@
 					<label for="projectLink">Link (optional)</label>
 					<input type="text" class="form__input" placeholder="Project Link" id="projectLink" name="projectLink">
 				</div>
-			</div>
-			<div class="form-group action-bar">
-				<button data-remodal-action="close" class="btn">Close</button>
-				<input type="submit" class="btn btn--primary" value="Save">
-			</div>
+				<div class="form-group">
+					<label for="projectDescription">Description</label>
+					<textarea name="projectDescription" data-ckeditor="yes" id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="submit" class="btn btn--primary" value="Save">
+				</div>
 		</form>
 	</div>
 	<div class="remodal edit-work-experience" data-remodal-id="editWorkExperienceModal">
@@ -331,12 +374,15 @@
 								<select name="startingMonth" id="startingMonth" class="select">
 									<option>Jan</option>
 									<option>Feb</option>
+									<option>June</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="startingYear">Year</label>
 								<select name="startingYear" id="startingYear" class="select">
 									<option>2017</option>
+									<option>2016</option>
+									<option>2015</option>
 								</select>
 							</div>
 						</div>
@@ -349,12 +395,15 @@
 								<select name="endingMonth" id="endingMonth" class="select">
 									<option>Jan</option>
 									<option>Feb</option>
+									<option>July</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="endingYear">Year</label>
 								<select name="endingYear" id="endingYear" class="select">
 									<option>2017</option>
+									<option>2016</option>
+									<option>2015</option>
 								</select>
 							</div>
 						</div>
