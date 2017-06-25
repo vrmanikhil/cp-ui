@@ -58,6 +58,9 @@
 						<li role="presentation" class="active"><a href="#professional-details" aria-controls="professional-details" role="tab" data-toggle="tab">Professional Details</a></li>
 						<li role="presentation"><a href="#skills" aria-controls="skills" role="tab" data-toggle="tab">Skills</a></li>
 						<li role="presentation"><a href="#personal-details" aria-controls="personal-details" role="tab" data-toggle="tab">Personal Details</a></li>
+						<?php if($userDetails['accountType']=='2') { ?>
+						<li role="presentation"><a href="#company-details" aria-controls="company-details" role="tab" data-toggle="tab">Company Details</a></li>
+						<?php } ?>
 					</ul>
 
 					<!-- Tab panes -->
@@ -165,15 +168,24 @@
 								<span>Personal Details</span>
 								<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-personal-information">Edit</a>
 							</h3>
-							<p class="flex personal-info"><strong>Sex</strong><span>Male</span></p>
-							<p class="flex personal-info"><strong>Current Location</strong><span>Not Available</span></p>
-							<p class="flex personal-info"><strong>Hometown</strong><span>Lucknow, Uttar Pradesh</span></p>
-							<p class="flex personal-info"><strong>Relationship status</strong><span>Single</span></p>
-							<p class="flex personal-info"><strong>Birthday</strong><span>30th March 1993</span></p>
-							<p class="flex personal-info"><strong>Age</strong><span>24 Years</span></p>
+							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
+							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span>vrmanikhil@gmail.com</span></p>
 							<p class="flex personal-info"><strong>Mobile Number</strong><span>7503705892</span></p>
 						</div>
+						<?php if($userDetails['accountType']=='2') { ?>
+						<div role="tabpanel" class="tab-pane fade" id="company-details">
+							<h3 class="heading flex">
+								<span>Company Details</span>
+								<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-personal-information">Edit</a>
+							</h3>
+							<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
+							<p class="flex personal-info"><strong>Position</strong><span><?php echo $employerDetails[0]['position']; ?></span></p>
+							<p class="flex personal-info"><strong>Company Description </strong><span><?php echo $employerDetails[0]['companyDescription']; ?></span></p>
+							<p class="flex personal-info"><strong>Company Logo</strong><span><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
+						</div>
+						<?php } ?>
+
 					</div>
 				</div>
 			</div>
@@ -218,41 +230,18 @@
 			<form action="" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
-						<label for="relationshipStatus">Relationship status</label>
-						<select class="select" name="relationshipStatus" id="relationshipStatus">
-							<option value="0" selected="">Single</option>
-							<option value="1">Comitted</option>
-							<option value="2">Open Relationship</option>
-							<option value="3">Married</option>
-							<option value="4">Divorced</option>
-							<option value="5">Prefer not to say</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="dateOfBirth">Date of birth</label>
-						<input type="date" name="dateOfBirth" id="dateOfBirth" class="form__input">
-					</div>
-				</div>
-				<div class="horizontal-group">
-					<div class="form-group">
-						<label for="location">Current Location</label>
+						<label for="location">Location</label>
 						<select class="select" name="location" id="location">
-							<option value="0">Location 1</option>
-							<option value="1">Location 2</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="hometown">Hometown</label>
-						<select class="select" name="hometown" id="hometown">
-							<option value="0">Location 1</option>
-							<option value="1">Location 2</option>
+							<?php foreach ($locations as $key => $value) { ?>
+								<option value="<?php echo $value['cityID']; ?>"><?php echo $value['city'].", ".$value['state']; ?></option>
+							<?php } ?>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="gender">Gender</label>
 						<select class="select" name="gender" id="gender">
-							<option value="m">Male</option>
-							<option value="f">Female</option>
+							<option value="M">Male</option>
+							<option value="F">Female</option>
 						</select>
 					</div>
 				</div>

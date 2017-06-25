@@ -422,6 +422,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserDetails($userId){
+		$this->db->join('indianCities', 'users.cityID = indianCities.cityID');
 		$result = $this->db->get_where('users', array('userID' => $userId), '1');
 		return $result->result_array();
 	}
