@@ -188,7 +188,7 @@
 				}
 			}
 				if(chats.length == 0 || more === false){
-				document.getElementById('load-more').style.display = "hidden";
+				document.getElementById('load-more').style.display = "none";
 			}
 			 }
 		}
