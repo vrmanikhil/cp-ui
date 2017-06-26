@@ -820,9 +820,11 @@ class Home extends CI_Controller {
 
 	public function applicants($offerType, $offerID){
 		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
+		$this->data['offerType'] = $offerType;
+		// var_dump($this->data['offerData']);die;
 		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
 			$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
-			var_dump($this->data['applicants']);die;
+			$this->load->view('applicants', $this->data);
 		}
 		else{
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again.','class'=>'error'));

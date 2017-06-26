@@ -76,7 +76,7 @@
 				</div>
 
 				<?php if(empty($addedInternshipOffers)){?>
-				<p style="text-align: center"> You Have Added No Internship Offer. </p>	
+				<p style="text-align: center"> You Have Added No Internship Offer. </p>
 				<?php }else{ foreach ($addedInternshipOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
@@ -88,7 +88,7 @@
 							<p class="posting-card__desc"><?php echo $value['internshipTitle']; ?></p>
 							<p class="posting-card__status"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14">View Applicants</button>
+								<a href="<?php echo base_url('applicants/2/').$value['internshipID']; ?>" class="btn white midnight-blue-bg s-14">View Applicants</a>
 								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 view js-view-posting-details"  id = "view<?= $value['internshipID'] ?>">View</a>
 							</div>
 						</div>
