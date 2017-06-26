@@ -211,7 +211,7 @@ class Web extends CI_Controller {
 			$result = $this->home_lib->addWorkEx($data);
 			if($result){
 				$this->session->set_flashdata('message', array('content'=>'Work Experience successfully Added.','class'=>'success'));
-				redirect(base_url());
+				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
@@ -279,11 +279,57 @@ class Web extends CI_Controller {
 		}
 	}
 
+	public function addEducation(){
+		$educationType = '';
+		$educationYear = '';
+		$scoreType = '';
+		$score = '';
+		$description = '';
+		$userID = $_SESSION['userData']['userID'];
+		if($x = $this->input->post('educationType')){
+			$educationType = $x;
+		}
+		if($x = $this->input->post('educationYear')){
+			$educationYear = $x;
+		}
+		if($x = $this->input->post('scoreType')){
+			$scoreType = $x;
+		}
+		if($x = $this->input->post('score')){
+			$score = $x;
+		}
+		if($x = $this->input->post('description')){
+			$description = $x;
+		}
+		$data = array(
+				'educationType' => $educationType,
+				'year' => $educationYear,
+				'scoreType' => $scoreType,
+				'score' => $score,
+				'description' => $description,
+				'userID' => $userID
+			);
+		if($educationYear == '' || $educationType == '' || $scoreType == '' || $score == '' || $description == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+			redirect(base_url('skills'));
+		}else{
+			$result = $this->home_lib->addEducation($data);
+			if($result){
+				$this->session->set_flashdata('message', array('content'=>'Educational Detail Successfully Added.','class'=>'success'));
+				redirect(base_url('user-profile/'.$userID));
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('messages'));
+			}
+		}
+	}
+
 	public function addProject(){
 		$projectTitle = '';
 		$projectLink = '';
 		$projectDescription = '';
-		$userID = '';
+		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('projectTitle')){
 			$projectTitle = $x;
 		}
@@ -307,7 +353,7 @@ class Web extends CI_Controller {
 			$result = $this->home_lib->addProject($data);
 			if($result){
 				$this->session->set_flashdata('message', array('content'=>'Achievement successfully Added.','class'=>'success'));
-				redirect(base_url());
+				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
@@ -611,6 +657,18 @@ class Web extends CI_Controller {
 				redirect(base_url('verify-email/1'));
 			}
 		}
+	}
+
+	public function delete($id , $table, $name){
+		$result = $this->home_lib->delete($id, $table, $name);
+		if($result){
+				$this->session->set_flashdata('message', array('content'=>'Deletion Successful.','class'=>'success'));
+				redirect(base_url('user-profile/'.$_SESSION['userData']['userID']));
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url());
+			}
 	}
 
 }

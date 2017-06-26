@@ -415,12 +415,20 @@ class Home_model extends CI_Model {
 		return $this->db->insert('projects', $data);
 	}
 
+	public function addEducation($data){
+		return $this->db->insert('educationalDetails', $data);
+	}
+
 	public function register($data){
 		return $this->db->insert('users', $data);
 	}
 
 	public function addAchievement($data){
 		return $this->db->insert('achievements', $data);
+	}
+
+	public function delete($id, $table, $name){
+		return $this->db->delete($table, array($name => $id));
 	}
 
 	public function getUserDetails($userId){

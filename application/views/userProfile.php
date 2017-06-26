@@ -76,7 +76,7 @@
 										<div class="education-details">
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a href="<?php echo base_url('web/delete/'.$value['educationID'].'/educationalDetails/educationID')?>" class="btn btn--primary delete-education"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><?php echo $value['description']; ?></p>
 											<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
@@ -96,7 +96,7 @@
 										<div class="work-experience">
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-work-experience" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a href="<?php echo base_url('web/delete/'.$value['weID'].'/workExperience/weID')?>" class="btn btn--primary delete-work"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><strong><?= $value['companyName'] ?></strong></p>
 											<p><?= $value['position'] ?></p>
@@ -117,7 +117,7 @@
 										<div class="project">
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-projects" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a href="<?php echo base_url('web/delete/'.$value['projectID'].'/projects/projectID')?>" class="btn btn--primary delete-project"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><strong><?= $value['projectTitle'] ?></strong></p>
 											<p><a target='_blank' href='<?= $value["projectLink"] ?>'><?= $value['projectLink'] ?></a></p>
@@ -137,7 +137,7 @@
 										<div class="achievement">
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-achievements" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-												<a href="javascript:" class="btn btn--primary"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a href="<?php echo base_url('web/delete/'.$value['achievementID'].'/achievements/achievementID')?>" class="btn btn--primary delete-achievement"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><strong><?= $value['achievementTitle'] ?></strong></p>
 											<p><?= $value['achievementDescription'] ?></p>
@@ -149,18 +149,16 @@
 						<div role="tabpanel" class="tab-pane fade" id="skills">
 							<h3 class="heading">Skills</h3>
 							<div class="skills-container flex">
-								<div class="skill flex free">
-									<p>PHP</p>
-								</div>
-								<div class="skill flex paid">
-									<p>HTML</p>
-								</div>
-								<div class="skill flex paid">
-									<p>CSS</p>
-								</div>
-								<div class="skill flex free">
-									<p>JS</p>
-								</div>
+								<?php foreach($skills as $skill){
+									if($skill['skillType'] == 1){?>
+									<div class="skill flex free">
+										<p><?= $skill['skill_name']?></p>
+									</div>
+								<?php } else {?>
+									<div class="skill flex paid">
+										<p><?= $skill['skill_name']?></p>
+									</div>
+								<?php } } ?>
 							</div>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
@@ -258,7 +256,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Education Details</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?= base_url('web/addEducation')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="educationType">Type</label>
@@ -266,6 +264,7 @@
 							<option value="1" selected="">Type 1</option>
 							<option value="2" selected="">Type 2</option>
 							<option value="3" selected="">Type 3</option>
+							<option value="4" selected="">Type 4</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -276,20 +275,19 @@
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="educationScoreType">Score Type</label>
-						<select class="select" name="educationScoreType" id="educationScoreType">
+						<select class="select" name="scoreType" id="educationScoreType">
 							<option value="1">Type 1</option>
 							<option value="2">Type 2</option>
-							<option value="3">Type 3</option>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="educationScore">Score</label>
-						<input type="number" name="educationScore" id="educationScore" class="form__input">
+						<input type="number" name="score" id="educationScore" class="form__input">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="educationDescription">Description</label>
-					<textarea name="educationDescription" data-ckeditor="yes" id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
+					<textarea name="description" data-ckeditor="yes" id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -305,7 +303,7 @@
 			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form">
 				<div class="form-group">
 					<label for="achievementName">Name</label>
-					<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementName">
+					<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementTitle">
 				</div>
 				<div class="form-group">
 					<label for="achievementDescription">Description</label>
@@ -322,10 +320,10 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Project</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?= base_url('web/addProject')?>" method="POST" class="form">
 				<div class="form-group">
 					<label for="projectName">Name</label>
-					<input type="text" class="form__input" placeholder="Project name" id="projectName" name="projectName">
+					<input type="text" class="form__input" placeholder="Project name" id="projectName" name="projectTitle">
 				</div>
 				<div class="form-group">
 					<label for="projectLink">Link (optional)</label>
@@ -345,7 +343,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Work Experience</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?=base_url('web/addWorkEx')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name</label>
@@ -353,7 +351,7 @@
 					</div>
 					<div class="form-group">
 						<label for="workingPosition">Working position</label>
-						<input type="text" class="form__input" placeholder="Company's name" id="workingPosition" name="workingPosition">
+						<input type="text" class="form__input" placeholder="Company's name" id="workingPosition" name="position">
 					</div>
 				</div>
 				<div class="horizontal-group">
@@ -362,7 +360,7 @@
 						<div class="horizontal-group">
 							<div class="form-group">
 								<label for="startingMonth">Month</label>
-								<select name="startingMonth" id="startingMonth" class="select">
+								<select name="startMonth" id="startingMonth" class="select">
 									<option>Jan</option>
 									<option>Feb</option>
 									<option>June</option>
@@ -370,7 +368,7 @@
 							</div>
 							<div class="form-group">
 								<label for="startingYear">Year</label>
-								<select name="startingYear" id="startingYear" class="select">
+								<select name="startYear" id="startingYear" class="select">
 									<option>2017</option>
 									<option>2016</option>
 									<option>2015</option>
@@ -383,7 +381,7 @@
 						<div class="horizontal-group">
 							<div class="form-group">
 								<label for="endingMonth">Month</label>
-								<select name="endingMonth" id="endingMonth" class="select">
+								<select name="endMonth" id="endingMonth" class="select">
 									<option>Jan</option>
 									<option>Feb</option>
 									<option>July</option>
@@ -391,7 +389,7 @@
 							</div>
 							<div class="form-group">
 								<label for="endingYear">Year</label>
-								<select name="endingYear" id="endingYear" class="select">
+								<select name="endYear" id="endingYear" class="select">
 									<option>2017</option>
 									<option>2016</option>
 									<option>2015</option>
@@ -402,7 +400,7 @@
 				</div>
 				<div class="form-group">
 					<label for="workDescription">Description</label>
-					<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
+					<textarea name="description" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -460,6 +458,23 @@
 				var modal = $('[data-remodal-id="forgotPassword"]').remodal();
 				modal.open();
 			}
+		});
+		$(document).ready(function(){
+			$('.delete-project').click(function(){
+				alert('Are you sure you want delete the added Project??')
+			});
+
+			$('.delete-work').click(function(){
+				alert('Are you sure you want delete the added Work Experience??')
+			});
+
+			$('.delete-achievement').click(function(){
+				alert('Are you sure you want delete the added Achievement??')
+			});
+
+			$('.delete-education').click(function(){
+				alert('Are you sure you want delete the added Educational Detail??')
+			});
 		});
 	</script>
 </body>

@@ -32,7 +32,8 @@
               <div class="dropdown__content-body">
                 <div class="notifications">
                 <?php if(empty($messages)) {?>
-						<p style="text-align: center; font-size: 13px">No Messages Found</p>	
+						<p style="text-align: center; font-size: 13px">No Messages Found.</p>
+						<p style= "text-align: center; font-size: 13px"><a href="<?= base_url('messages#composeMessage')?>"><b>Click Here</b></a> to compose a new message.</p>	
 					<?php }else{ 
                 foreach($messages as $text) {
                 	$cls = '';
