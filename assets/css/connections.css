@@ -40,11 +40,13 @@
 .connection .actions > a.reject {
 	padding: 7px 8px 7px 9px;
 	border-radius: 100%;
+	background-color: var(--red);
 }
 
 .connection .actions > a.accept {
 	padding: 7px;
 	border-radius: 100%;
+	background-color: var(--green);
 }
 
 .connection .actions {

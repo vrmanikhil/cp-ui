@@ -69,7 +69,7 @@
 							<section>
 								<h3 class="heading flex">
 										<span>Education</span>
-										<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education">Add</a>
+										<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education"><i class="fa fa-plus" aria-hidden="true"></i></a>
 								</h3>
 								<div class="education-details__container">
 									<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
@@ -88,7 +88,7 @@
 							<section>
 								<h3 class="heading flex">
 									<span>Work Experience</span>
-									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-work-experience">Add</a>
+									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-work-experience"><i class="fa fa-plus" aria-hidden="true"></i></a>
 								</h3>
 								<div class="work-experience__container">
 									<?php if(empty($workExperiences)) echo "<p>No Work Experiences Added</p>";
@@ -109,7 +109,7 @@
 							<section>
 								<h3 class="heading flex">
 									<span>Projects</span>
-									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects">Add</a>
+									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects"><i class="fa fa-plus" aria-hidden="true"></i></a>
 								</h3>
 								<div class="projects__container">
 									<?php if(empty($projects)) echo "<p>No Projects Added</p>";
@@ -129,7 +129,7 @@
 							<section>
 								<h3 class="heading flex">
 									<span>Achievements</span>
-									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-achievements">Add</a>
+									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-achievements"><i class="fa fa-plus" aria-hidden="true"></i></a>
 								</h3>
 								<div class="achievements__container">
 									<?php if(empty($achievements)) echo "<p>No Achievements Added</p>";

@@ -75,8 +75,9 @@
 					</ol>
 				</div>
 
-
-				<?php foreach ($addedInternshipOffers as $key => $value) { ?>
+				<?php if(empty($addedInternshipOffers)){?>
+				<p style="text-align: center"> You Have Added No Internship Offer. </p>	
+				<?php }else{ foreach ($addedInternshipOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
 						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
@@ -93,7 +94,7 @@
 						</div>
 					</div>
 				</div>
-			<?php } ?>
+			<?php }} ?>
 
 
 			</div>
