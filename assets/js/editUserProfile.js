@@ -21,6 +21,7 @@ $(document).ready(function () {
 
 	$(document).on('click', '.js-edit-entity', openEditEntityModal);
 	function openEditEntityModal(ev) {
+		formElem.find('[value = "Save"]').attr('name', 'edit');
 		var keyMap = {
 			achievementTitle: 'achievementTitle',
 			achievementDescription: 'achievementDescription',
