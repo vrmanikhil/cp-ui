@@ -123,24 +123,24 @@ class Home extends CI_Controller {
 		$resume['educationalDetails'] = $this->data['educationalDetails'];
 		$resume['workExperiences'] = $this->data['workExperiences'];
 		$resume['skills'] = $this->data['skills'];
-		$resume['userDetails']['profileImage'] = file_get_contents($resume['userDetails']['profileImage']);
-		$base64 = base64_encode($resume['userDetails']['profileImage']);
-		$resume['userDetails']['profileImage'] = 'data:image/jpeg;base64,' . $base64;
-		$resume['campusPuppy'] =file_get_contents("http://backoffice.campuspuppy.com/assets/images/logo.png");
-		$base64 = base64_encode($resume['campusPuppy']);
-		$resume['campusPuppy'] = 'data:image/jpeg;base64,' . $base64;
 		if(isset($_GET['download']) == 1)
 			if($_SESSION['userData']['accountType'] == 2){
-			$html = $this->load->view('resume', $resume, true);
-			$dompdf = new Dompdf();
-			$dompdf->loadHtml($html);
-			$dompdf->setPaper('A4', 'landscape');
-			$dompdf->render();
-			$dompdf->stream(md5($resume['userDetails']['userID']).'.pdf');
-		}else{
-			$this->session->set_flashdata('message', array('content' => 'Oops, Something went wrong.', 'class' => 'error'));
-			redirect(base_url());
-		}
+				$resume['userDetails']['profileImage'] = file_get_contents($resume['userDetails']['profileImage']);
+				$base64 = base64_encode($resume['userDetails']['profileImage']);
+				$resume['userDetails']['profileImage'] = 'data:image/jpeg;base64,' . $base64;
+				$resume['campusPuppy'] =file_get_contents("http://backoffice.campuspuppy.com/assets/images/logo.png");
+				$base64 = base64_encode($resume['campusPuppy']);
+				$resume['campusPuppy'] = 'data:image/jpeg;base64,' . $base64;
+				$html = $this->load->view('resume', $resume, true);
+				$dompdf = new Dompdf();
+				$dompdf->loadHtml($html);
+				$dompdf->setPaper('A4', 'landscape');
+				$dompdf->render();
+				$dompdf->stream(md5($resume['userDetails']['userID']).'.pdf');
+			}else{
+				$this->session->set_flashdata('message', array('content' => 'Oops, Something went wrong.', 'class' => 'error'));
+				redirect(base_url());
+			}
 		$this->load->view('userProfile', $this->data);
 	}
 

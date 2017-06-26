@@ -618,7 +618,9 @@ public function injectClassName(&$data)
 	public function getNotifications($offset = 0, $limit = 5){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getNotifications($offset, $limit);
+		$data = $CI->homeModel->getNotifications($offset, $limit);
+		$this->fixTimestamp($data, 'timestamp', 'd M Y  g:i A');
+		return $data;
 	}
 
 	public function moreNotifications($offset = 0, $limit = 5){

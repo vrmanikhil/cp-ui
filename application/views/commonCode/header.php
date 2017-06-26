@@ -72,7 +72,7 @@
 								<p class="dropdown__content-title"><b>Notifications</b></p>
 							</div>
 							<div class="dropdown__content-body">
-								<div class="notifications"
+								<div class="notifications">
 								<?php if(empty($notification)) { ?>
 									<p style="text-align: center; font-size: 13px"> No Notifications Found.</p>
 								<?php }else{ 
