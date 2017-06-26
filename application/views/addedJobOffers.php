@@ -75,7 +75,7 @@
 					</ol>
 				</div>
 				<?php if(empty($addedJobOffers)){?>
-				<p style="text-align: center"> You Have Added No Job Offer. </p>	
+				<p style="text-align: center"> You Have Added No Job Offer. </p>
 				<?php }else{
 				 foreach ($addedJobOffers as $key => $value) { ?>
 				<div class="card posting-card">
@@ -88,7 +88,7 @@
 							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
 							<p class="posting-card__status"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14">View Applicants</button>
+								<a href=<?php echo base_url('applicants/1/').$value['jobID']; ?> class="btn white midnight-blue-bg s-14">View Applicants</a>
 								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">View</button>
 							</div>
 						</div>
