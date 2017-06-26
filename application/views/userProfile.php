@@ -155,7 +155,7 @@
 										<p><?= $skill['skill_name']?></p>
 									</div>
 								<?php } else {?>
-									<div class="skill flex paid">
+									<div class="skill flex paid">	
 										<p><?= $skill['skill_name']?></p>
 									</div>
 								<?php } } ?>

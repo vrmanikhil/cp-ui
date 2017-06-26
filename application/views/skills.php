@@ -62,17 +62,21 @@
 					<h1 class="skills__section-title"><b>My Skills</b></h1>
 					<div class="skills-container flex">
 					<?php
+					if(empty($userSkills)){?>
+						<p>You Have Added No Skill.</p>
+					<?php }else{
 						foreach($userSkills as $key => $value){
 							if($value['skillType'] == 1){?>
 								<div class="skill flex free">
 									<p><?= $value['skill_name']?></p>
 								</div>
+					
 					<?php 	}else{?>
 								<div class="skill flex paid">
 									<p><?= $value['skill_name']?></p>
 								</div>
 					<?php
-						}}
+						}}}
 					?>
 					</div>
 					<div class = "skills">
