@@ -22,18 +22,19 @@ $(document).ready(function () {
 	$(document).on('click', '.js-edit-entity', openEditEntityModal);
 	function openEditEntityModal(ev) {
 		var keyMap = {
-			achievementTitle: 'achievementName',
+			achievementTitle: 'achievementTitle',
 			achievementDescription: 'achievementDescription',
-			projectTitle: 'projectName',
-			endMonth: 'endingMonth',
-			endYear: 'endingYear',
-			startMonth: 'startingMonth',
-			startYear: 'startingYear',
+			projectTitle: 'projectTitle',
+			endMonth: 'endMonth',
+			endYear: 'endYear',
+			startMonth: 'startMonth',
+			startYear: 'startYear',
 			description: 'workDescription',
 			year: 'educationYear',
-			score: 'educationScore',
-			scoreType: 'educationScoreType',
-			position: 'positionInCompany'
+			score: 'score',
+			scoreType: 'scoreType',
+			position: 'position',
+			gender : 'gender'
 		};
 		var json = $(this).data('json');
 		var type = $(this).data('type');
@@ -64,7 +65,8 @@ $(document).ready(function () {
 			}
 		});
 		if (type === 'edit-personal-information') {
-			formElem.find('[name="location"]').val(json['city']+', '+json['state']);
+			value = json['cityID'];
+			$('select>option:eq('+--value+')').prop('selected', 'true');
 		}
 
 		if(type === 'edit-company-details') {
