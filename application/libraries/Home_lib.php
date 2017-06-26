@@ -217,6 +217,18 @@ class Home_lib {
 		return $CI->homeModel->addProject($data);
 	}
 
+	public function delete($id, $table, $name){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->delete($id, $table, $name);
+	}
+
+	public function addEducation($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->addEducation($data);
+	}
+
 	public function updateRegistrationLevel($userID, $registrationLevel){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
