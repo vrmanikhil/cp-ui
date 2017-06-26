@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once BASEPATH.'..\assets\dompdf\autoload.inc.php';
+require_once BASEPATH.'../assets/dompdf/autoload.inc.php';
 use Dompdf\Adapter\CPDF;
 use Dompdf\Dompdf;
 use Dompdf\Exception;
@@ -128,8 +128,8 @@ class Home extends CI_Controller {
 		$resume['userDetails']['profileImage'] = 'data:image/jpeg;base64,' . $base64;
 		$resume['campusPuppy'] =file_get_contents("http://backoffice.campuspuppy.com/assets/images/logo.png");
 		$base64 = base64_encode($resume['campusPuppy']);
-		$resume['campusPuppy'] = 'data:image/jpeg;base64,' . $base64;	
-		if(isset($_GET['download']) == 1) 
+		$resume['campusPuppy'] = 'data:image/jpeg;base64,' . $base64;
+		if(isset($_GET['download']) == 1)
 			if($_SESSION['userData']['accountType'] == 2){
 			$html = $this->load->view('resume', $resume, true);
 			$dompdf = new Dompdf();

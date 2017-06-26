@@ -25,6 +25,17 @@ class Apply extends CI_Controller {
 	}
 
 	public function applyForOffer($userID, $offerType, $offerID){
+		$checkAlreadyApplied = $this->home_lib->checkAlreadyApplied($userID, $offerType, $offerID);
+		if($checkAlreadyApplied){
+			$this->session->set_flashdata('message', array('content'=>'Sorry, you have Already Applied.','class'=>'error'));
+			if($offerType=='1'){
+			redirect(base_url('jobs/job-offers'));
+			}
+			if($offerType=='2'){
+			redirect(base_url('internships/internship-offers'));
+			}
+		}
+		else{
 		if($offerType=='1'){
 			$jobData = $this->home_lib->getJobData($offerID);
 			$jobData = $jobData[0];
@@ -65,7 +76,7 @@ class Apply extends CI_Controller {
 						}
 				}
 				else{
-					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+					$this->session->set_flashdata('message', array('content'=>'It seems you do not have enough skills to apply for the Job Offer.','class'=>'error'));
 					redirect(base_url('internships/internship-offers'));
 				}
 			}
@@ -121,7 +132,7 @@ class Apply extends CI_Controller {
 						}
 				}
 				else{
-					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+					$this->session->set_flashdata('message', array('content'=>'It seems you do not have enough skills to apply for the Internship Offer.','class'=>'error'));
 					redirect(base_url('internships/internship-offers'));
 				}
 			}
@@ -137,6 +148,7 @@ class Apply extends CI_Controller {
 				}
 			}
 		}
+	}
 	}
 
 	public function checkSkillMatch($offerType, $offerID){

@@ -212,6 +212,7 @@ class Home_model extends CI_Model {
 	public function getConnectionRequests($userID){
 		$this->db->join('users', 'connections.active=users.userID');
 		$this->db->join('indianCities', 'users.cityID=indianCities.cityID');
+		$this->db->select('connections.active, connections.passive, connections.status, users.name, users.profileImage, users.cityID, indianCities.city, indianCities.state, users.email');
 		$result = $this->db->get_where('connections', array('passive'=>$userID, 'status'=> '0'));
 		return $result->result_array();
 	}
@@ -705,6 +706,21 @@ class Home_model extends CI_Model {
 	public function getEmployerDetails($userID){
 		$result = $this->db->get_where('employerUsers', array('userID'=>$userID));
 		return $result->result_array();
+	}
+
+	public function checkAlreadyApplied($userID, $offerType, $offerID){
+		if($offerType=='2'){
+			$result = $this->db->get_where('internshipApplicants', array('userID'=>$userID, 'internshipID'=>$offerID));
+		}
+		if($offerType=='1'){
+			$result = $this->db->get_where('jobApplicants', array('userID'=>$userID, 'jobID'=>$offerID));
+		}
+		if ($result->num_rows() > 0) {
+			return 1;
+		}
+		else{
+			return 0;
+		}
 	}
 
 }

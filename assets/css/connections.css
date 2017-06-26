@@ -32,6 +32,10 @@
 	flex-grow: 1;
 }
 
+.connections .user-info p {
+	font-size: 14px;
+}
+
 .connection .actions > a {
 	display: inline-block;
 	border: none;

@@ -68,8 +68,8 @@
 										<p><?php echo $value['city'].", ".$value['state']; ?></p>
 									</div>
 									<div class="actions">
-										<a href="javascript:" class="btn btn--primary reject"><i class="fa fa-times" aria-hidden="true"></i></a>
-										<a href="javascript:" class="btn btn--primary accept"><i class="fa fa-check" aria-hidden="true"></i></a>
+										<a href="<?php echo base_url('connections/cancelConnectionRequest/').$value['active']."/".$value['passive']; ?>" class="btn btn--primary reject"><i class="fa fa-times" aria-hidden="true"></i></a>
+										<a href="<?php echo base_url('connections/acceptConnectionRequest/').$value['active']."/".$value['passive']; ?>" class="btn btn--primary accept"><i class="fa fa-check" aria-hidden="true"></i></a>
 									</div>
 								</div>
 							</div>
@@ -91,7 +91,7 @@
 										<p><?php echo $value['city'].", ".$value['state']; ?></p>
 									</div>
 									<div class="actions">
-										<a href="javascript:" class="btn btn--primary view-profile">View Profile</i></a>
+										<a href="<?php echo base_url('user-profile/').$value['userID']; ?>" class="btn btn--primary view-profile">View Profile</i></a>
 									</div>
 								</div>
 							</div>

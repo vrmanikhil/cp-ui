@@ -62,7 +62,7 @@ class Connections extends CI_Controller {
 	}
 
 	public function cancelConnectionRequest($user1, $user2){
-		if($user1==$user2){
+		if($user1===$user2){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/').$user1);
 		}
