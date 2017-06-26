@@ -60,3 +60,11 @@
 .form [name="message"] {
 	margin-bottom: -5px;
 }
+
+.message-input-container .form__input {
+	margin: 0;
+}
+
+.load-more-btn__container {
+	text-align: center;
+}
