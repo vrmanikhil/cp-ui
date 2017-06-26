@@ -61,16 +61,16 @@
 					</script>
 				</div>
 			</aside>
-			<div>
-			<?php if($more){?>
-				<button type="submit" id="load-more" onclick = loadDoc() class="btn btn--primary">Load More</button>
-			<?php } ?>
-			</div>
 			<div class="main-body flex__item">
 				<div class="messages__section card">
 					<h1 class="messages__section-title"><?php echo $title; ?></h1>
-					<div class="messages-container" id = "messages-container">
-					<div id = "messages"></div>
+					<div class="load-more-btn__container">
+					<?php if($more){?>
+						<button type="submit" id="load-more" onclick=loadDoc() class="btn btn--primary">Load More</button>
+					<?php } ?>
+					</div>
+					<div class="messages-container" id ="messages-container">
+					<div id="messages"></div>
 					<?php
 					$i = 0;
 					foreach (array_reverse($messages) as $key => $value) {
@@ -100,7 +100,7 @@
 						<?php
 							}
 							}
-						?>			
+						?>
 					</div>
 						<div class="horizontal-group">
 							<div class="form-group message-input-container">
@@ -210,7 +210,7 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 						}else{
 							container.addClass('receiver')
 							container.find('img').attr('src', userImage)
-						}	
+						}
 						$('#messages-container').append(container[0])
 						container.show()
 						$('#message').val('')
@@ -218,7 +218,7 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 							.prop("scrollHeight"))
 					}
 					lastId = res[i-1].messageID
-					res = 'false'; 
+					res = 'false';
 				}
 			})
 		}, 5000)
