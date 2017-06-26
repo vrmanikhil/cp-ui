@@ -61,26 +61,21 @@
 				<div class="skills__section card">
 					<h1 class="skills__section-title"><b>My Skills</b></h1>
 					<div class="skills-container flex">
-						<div class="skill flex free">
-							<p>PHP</p>
-						</div>
-						<div class="skill flex paid">
-							<p>HTML</p>
-						</div>
-						<div class="skill flex paid">
-							<p>CSS</p>
-						</div>
-						<div class="skill flex free">
-							<p>JS</p>
-						</div>
-					</div>
-					<div class="skills">
-						<?php
-						$i=0;
+					<?php
 						foreach($userSkills as $key => $value){
-							echo $i++." ".$value['skill_name']." ".$value['skillType']."<br>";
-						}
-						?>
+							if($value['skillType'] == 1){?>
+								<div class="skill flex free">
+									<p><?= $value['skill_name']?></p>
+								</div>
+					<?php 	}else{?>
+								<div class="skill flex paid">
+									<p><?= $value['skill_name']?></p>
+								</div>
+					<?php
+						}}
+					?>
+					</div>
+					<div class = "skills">
 						<h1 class="skills__section-title"><b>Add New Skill to Profile</b></h1>
 						<select class="select" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>

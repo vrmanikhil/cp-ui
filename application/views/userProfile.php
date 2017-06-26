@@ -168,8 +168,8 @@
 							</h3>
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
-							<p class="flex personal-info"><strong>Email Address</strong><span>vrmanikhil@gmail.com</span></p>
-							<p class="flex personal-info"><strong>Mobile Number</strong><span>7503705892</span></p>
+							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
+							<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
@@ -287,7 +287,7 @@
 				</div>
 				<div class="form-group">
 					<label for="educationDescription">Description</label>
-					<textarea name="description" data-ckeditor="yes" id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
+					<textarea name="educationDescription" data-ckeditor="yes" id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -400,7 +400,7 @@
 				</div>
 				<div class="form-group">
 					<label for="workDescription">Description</label>
-					<textarea name="description" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
+					<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -413,7 +413,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Company Details</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name</label>
