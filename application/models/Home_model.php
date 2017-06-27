@@ -670,6 +670,32 @@ class Home_model extends CI_Model {
 		return $this->db->insert('notifications', $data);
 	}
 
+
+	public function triggerApplyNotification($concernedUser, $triggeredBy, $offerType, $offerID, $offerTitle){
+		$notification = '';
+		$link = '';
+		$userData = $this->getUserDetails($triggeredBy);
+		$name = $userData[0]['name'];
+		$image = $userData[0]['profileImage'];
+
+		if($offerType=='1'){
+			$notification = $name." has applied for your Job Offer, <b>".$offerTitle."</b>";
+			$link = base_url('/applicants/1/').$offerID;
+		}
+		if($offerType=='2'){
+			$notification = $name." has applied for your Internship Offer, <b>".$offerTitle."</b>";
+			$link = base_url('/applicants/2/').$offerID;
+		}
+		$data = array(
+			'name' => $name,
+			'image' => $image,
+			'notification' => $notification,
+			'concernedUser' => $concernedUser,
+			'link' => $link
+		);
+		return $this->db->insert('notifications', $data);
+	}
+
 	public function getNotifications($offset = 0, $limit = 5){
 		$userID = $_SESSION['userData']['userID'];
 		$this->db->order_by('notificationID', 'DESC');

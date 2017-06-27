@@ -61,7 +61,7 @@
 				<div class="card">
 					<section>
 						<h2 class="section-title">APPLICANTS</h2>
-						<?php if(empty($applicants)) { echo "No Applicants"; } else {  foreach ($applicants as $key => $value) { ?>
+						<?php if(empty($applicants)) { echo "<center>No Applicants</center>"; } else {  foreach ($applicants as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
 								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">

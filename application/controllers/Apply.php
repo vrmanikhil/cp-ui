@@ -51,6 +51,7 @@ class Apply extends CI_Controller {
 						if($jobData['applicants']=='1' && $checkSkillMatch==$jobskill){
 							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
 							if($apply){
+								$this->home_lib->triggerApplyNotification($jobData['addedBy'], $userID, $offerType, $offerID, $jobData['jobTitle']);
 								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
 								redirect(base_url('jobs/job-offers'));
 							}
@@ -62,6 +63,7 @@ class Apply extends CI_Controller {
 						if($jobData['applicants']=='2'){
 							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
 							if($apply){
+								$this->home_lib->triggerApplyNotification($jobData['addedBy'], $userID, $offerType, $offerID, $jobData['jobTitle']);
 								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
 								redirect(base_url('jobs/job-offers'));
 							}
@@ -83,6 +85,7 @@ class Apply extends CI_Controller {
 			else{
 				$apply = $this->home_lib->apply($offerType, $offerID, $userID);
 				if($apply){
+					$this->home_lib->triggerApplyNotification($jobData['addedBy'], $userID, $offerType, $offerID, $jobData['jobTitle']);
 					$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
 					redirect(base_url('jobs/job-offers'));
 				}
@@ -107,6 +110,7 @@ class Apply extends CI_Controller {
 						if($internshipData['applicants']=='1' && $checkSkillMatch==$jobskill){
 							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
 							if($apply){
+								$this->home_lib->triggerApplyNotification($internshipData['addedBy'], $userID, $offerType, $offerID, $internshipData['internshipTitle']);
 								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
 								redirect(base_url('internships/internship-offers'));
 							}
@@ -118,6 +122,7 @@ class Apply extends CI_Controller {
 						if($internshipData['applicants']=='2'){
 							$apply = $this->home_lib->apply($offerType, $offerID, $userID);
 							if($apply){
+								$this->home_lib->triggerApplyNotification($internshipData['addedBy'], $userID, $offerType, $offerID, $internshipData['internshipTitle']);
 								$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
 								redirect(base_url('internships/internship-offers'));
 							}
@@ -139,6 +144,7 @@ class Apply extends CI_Controller {
 			else{
 				$apply = $this->home_lib->apply($offerType, $offerID, $userID);
 				if($apply){
+					$this->home_lib->triggerApplyNotification($internshipData['addedBy'], $userID, $offerType, $offerID, $internshipData['internshipTitle']);
 					$this->session->set_flashdata('message', array('content'=>'You have successfully Applied.','class'=>'success'));
 					redirect(base_url('internships/internship-offers'));
 				}
