@@ -88,7 +88,7 @@
 							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
 							<p class="posting-card__status"><strong>Status</strong> : <?php if($value['status']=='1') echo "Applied"; if($value['status']=='2') echo "<span class='red'>Rejected</span>"; if($value['status']=='3') echo "<span class='yellow'>Short-Listed</span>"; if($value['status']=='4') echo "<span class='green'>Selected</span>"; ?></p>
 							<div class="posting-card__apply">
-								<button class="btn white midnight-blue-bg s-14 js-view-posting-details">View</button>
+								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">View</button>
 							</div>
 						</div>
 					</div>
@@ -118,41 +118,73 @@
 		<div class="remodal" data-remodal-id="modal">
 			<button data-remodal-action="close" class="remodal-close"></button>
 			<div class="modal-body">
-				<h1>Offer <small>Content Writer Intern</small></h1>
-				<div class="flex">
-					<div class="modal-body__left flex__item">
-						<p><strong>Why should you join FITPASS?</strong></p>
-						<p>• <strong>Team:</strong> Work with smart and passionate people</p>
-						<p>• <strong>Growth:</strong> We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p>
-						<p>• <strong>Start-up Culture:</strong> Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p>
-						<p>• <strong>Impact:</strong> FITPASS does not function on a defined hierarchy &amp; everyone's given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p>
-						<p><strong>Here’s what you’ll do day-to-day:</strong></p>
-						<p>• Curate and create quality, fact filled content for fitness blogs and articles</p>
-						<p>• Create engaging content to be published on social media</p>
-						<p>• Drafting articles and blogs to promote SEO activities of FITPASS</p>
-						<p>• Contributing in promoting website and social media platforms through succinct, concise communication</p>
-						<p>• Build a strong product-base for FITPASS with high quality write-up</p>
-						<p>• Execute quality check of content on our website to ensure that information is accurate</p>
-						<p><strong>Who we’re looking for:</strong></p>
-						<p>• Someone with a prior work experience is a bonus, though it is not a necessity</p>
-						<p>• Preferably studying English and Journalism</p>
-						<p>• Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p>
-						<p>• Great understanding of the product</p>
-						<p>• Excellent organizational and time management skills with the drive to achieve targets</p>
-						<p>• Comfortable travelling within the city</p>
-						<p>• Ability to thrive in a highly-charged environment</p>
-						<p>• Good knowledge of MS Office</p>
-					</div>
+			<h1>Offer <small id = "jobTitle"></small></h1>
+			<div class="flex">
+			<div class="modal-body__left flex__item">
+			<div class="col-md-9">
+              <div class="col-sm-12">
+                <form class="form-horizontal">
+
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Job Offer Description:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDescription">Job Offer Description</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Job Start Date:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobStart">Job Start Date</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Application Deadline:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDeadline">Application Deadline</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Offer:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOffer">Offer</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOpening">Number of Openings</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Part Time Allowed:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobTime">Part Time Allowed</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Skills:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobSkill">Skills</p>
+                  </div>
+                </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3"><strong>Job Offer Location:</strong></label>
+                <div class="col-sm-9">
+                  <p class="form-control-static" id = "jobType"><?php echo "Work from Home"; ?></p>
+                </div>
+              </div>
+              </form>
+              </div>
+            </div>
+            </div>
 					<aside class="modal-body__right flex__item">
 						<center><strong>Company Profile</strong></center>
 						<br>
-						<strong>FITPASS</strong>
+						<strong id = "companyName">companyName</strong>
 						<br>
-						<p>https://fitpass.co.in/</p>
-						<p><strong>FITPASS</strong> is your all access pass to 1250+ gyms and fitness studios in Delhi NCR. Available on iOS &amp; android, FITPASS users can freely workout anywhere, anytime however they want - gym workouts, Yoga, Zumba, Pilates, Cross Fit, Kickboxing, MMA, spinning and many many more. Priced at Rs.999 a month only, FITPASS makes fitness super affordable and accessible.</p>
-						<p>Bolstered by a team with the strongest pedigree – Oxford, Columbia, IIT, St.Stephen's and Delhi University, with its teeth cut in UBS Investment Bank, McKinsey, the World Bank, Zomato, KPMG, etc. – we are bringing in the age of fit-tech in India!</p>
-						<p>FITPASS is defined by our insistence on providing an unparalleled customer experience.</p>
-						<p>Our team members are charged with bringing creativity, honesty, and intellectual rigor to their responsibilities in a never-ending quest to delight our customers. We have high expectations of each other and work as a team to build things we are all proud of.</p>
+						<p id = "companyWebsite">Company Website</p>
+						<p id = "companyDescription">Company Description</p>
+						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>
@@ -162,6 +194,44 @@
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.view').click(function(){
+				var data = null
+				id = this.id
+				id = $('#'+id).attr('data-id')
+				data = {jobid : id}
+				$.get('<?= base_url('home/getJobDetails')?>', data).done(function(res){
+					res = JSON.parse(res)
+					$("#jobTitle").html(res[0].jobTitle)
+					$("#jobDescription").html(res[0].jobDescription)
+					$("#jobStart").html(res[0].startDate)
+					$("#jobDeadline").html(res[0].applicationDeadline)
+					if(res[0].offerType == "2")
+						$("#jobOffer").html("INR " + res[0].offer + " lakhs")
+					else
+						$("#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
+					$("#jobOpening").html(res[0].openings)
+					if(res[0].partTime == "1")
+						$("#jobTime").html('YES')
+					else
+						$("#jobTime").html('NO')
+					$("#jobSkill").html(res[0].skillsRequired)
+					if(res[0].jobType == "1")
+						$("#jobType").html("Work From Home")
+					else
+						$('#jobType').html(res[0].cities)
+					$("#companyName").html(res[0].companyName)
+					$("#companyWebsite").html(res[0].companyWebsite)
+					$("#companyDescription").html(res[0].companyDescription)
+					$('#apply').attr('href', "<?= base_url('apply/apply?jobID=')?>"+res[0].jobID)
+				}).fail(function(){
+
+				})
+			})
+		})
+
+	</script>	
 </body>
 
 </html>
