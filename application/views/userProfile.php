@@ -227,7 +227,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Personal Information</h3>
-			<form action="<?=base_url('')?>" method="POST" class="form">
+			<form action="<?=base_url('web/editPersonalDetails')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="location">Location</label>
@@ -261,10 +261,10 @@
 					<div class="form-group">
 						<label for="educationType">Type</label>
 						<select class="select" name="educationType" id="educationType">
-							<option value="1" selected="">Type 1</option>
-							<option value="2" selected="">Type 2</option>
-							<option value="3" selected="">Type 3</option>
-							<option value="4" selected="">Type 4</option>
+							<option value="1" selected="">High School</option>
+							<option value="2" selected="">Senior Secondary or Equivalent</option>
+							<option value="3" selected="">Graduation</option>
+							<option value="4" selected="">Post-Graduation</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -276,13 +276,13 @@
 					<div class="form-group">
 						<label for="educationScoreType">Score Type</label>
 						<select class="select" name="scoreType" id="educationScoreType">
-							<option value="1">Type 1</option>
-							<option value="2">Type 2</option>
+							<option value="1">CGPA</option>
+							<option value="2">Percentage</option>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="educationScore">Score</label>
-						<input type="number" name="score" id="educationScore" class="form__input">
+						<input type="number" name="score" id="educationScore" class="form__input" minimum = "1950" maximum = "2020">
 					</div>
 				</div>
 				<div class="form-group">
@@ -363,7 +363,16 @@
 								<select name="startMonth" id="startingMonth" class="select">
 									<option>Jan</option>
 									<option>Feb</option>
+									<option>Mar</option>
+									<option>April</option>
+									<option>May</option>
 									<option>June</option>
+									<option>July</option>
+									<option>Aug</option>
+									<option>Sept</option>
+									<option>Oct</option>
+									<option>Nov</option>
+									<option>Dec</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -372,6 +381,11 @@
 									<option>2017</option>
 									<option>2016</option>
 									<option>2015</option>
+									<option>2014</option>
+									<option>2013</option>
+									<option>2012</option>
+									<option>2011</option>
+									<option>2010</option>
 								</select>
 							</div>
 						</div>
@@ -384,7 +398,16 @@
 								<select name="endMonth" id="endingMonth" class="select">
 									<option>Jan</option>
 									<option>Feb</option>
+									<option>Mar</option>
+									<option>April</option>
+									<option>May</option>
+									<option>June</option>
 									<option>July</option>
+									<option>Aug</option>
+									<option>Sept</option>
+									<option>Oct</option>
+									<option>Nov</option>
+									<option>Dec</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -393,6 +416,11 @@
 									<option>2017</option>
 									<option>2016</option>
 									<option>2015</option>
+									<option>2014</option>
+									<option>2013</option>
+									<option>2012</option>
+									<option>2011</option>
+									<option>2010</option>
 								</select>
 							</div>
 						</div>
@@ -413,7 +441,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Company Details</h3>
-			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form">
+			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form" >
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name</label>

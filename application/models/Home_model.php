@@ -428,6 +428,12 @@ class Home_model extends CI_Model {
 		return $this->db->insert('achievements', $data);
 	}
 
+	public function editPersonalDetails($data, $userID){
+		$this->db->where('userID', $userID);
+		$asda = $this->db->update('users', $data);
+		var_dump($this->db->last_query()); die();
+	}
+
 	public function delete($id, $table, $name){
 		return $this->db->delete($table, array($name => $id));
 	}

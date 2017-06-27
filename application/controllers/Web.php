@@ -205,7 +205,7 @@ class Web extends CI_Controller {
 		);
 		if($companyName==''||$position==''||$description==''||$startMonth==''||$startYear==''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-			redirect(base_url());
+			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
 			$result = $this->home_lib->addWorkEx($data);
@@ -215,7 +215,7 @@ class Web extends CI_Controller {
 			}
 			else{
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-				redirect(base_url());
+				redirect(base_url('user-profile/'.$userID));
 			}
 		}
 	}
@@ -311,7 +311,7 @@ class Web extends CI_Controller {
 			);
 		if($educationYear == '' || $educationType == '' || $scoreType == '' || $score == '' || $description == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-			redirect(base_url('skills'));
+			redirect(base_url('user-profile/'.$userID));
 		}else{
 			$result = $this->home_lib->addEducation($data);
 			if($result){
@@ -320,7 +320,7 @@ class Web extends CI_Controller {
 			}
 			else{
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-				redirect(base_url('messages'));
+				redirect(base_url('user-profile/'.$userID));
 			}
 		}
 	}
@@ -347,7 +347,7 @@ class Web extends CI_Controller {
 		);
 		if($projectTitle==''||$projectDescription==''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-			redirect(base_url());
+			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
 			$result = $this->home_lib->addProject($data);
@@ -357,7 +357,7 @@ class Web extends CI_Controller {
 			}
 			else{
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
-				redirect(base_url());
+				redirect(base_url('user-profile/'.$userID));
 			}
 		}
 	}
@@ -671,4 +671,40 @@ class Web extends CI_Controller {
 			}
 	}
 
+
+
+	public function editCompanyDetails(){
+
+	}
+
+	public function editPersonalDetails(){
+		$location = '';
+		$gender = '';
+		$userID = $_SESSION['userData']['userID'];
+		if($x = $this->input->post('location')){
+			$location = $x;
+		}
+		if($x = $this->input->post('gender')){
+			$gender = $x;
+		}
+		$data = array(
+			'cityID' => $location,
+			'gender' => $gender
+		);
+		if($location==''||$cityID==''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
+		}
+		else{
+			$result = $this->home_lib->editPersonalDetails($data, $userID);
+			if($result){
+				$this->session->set_flashdata('message', array('content'=>'Details successfully Edited.','class'=>'success'));
+				redirect(base_url('user-profile/'.$userID));
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('user-profile/'.$userID));
+			}
+		}
+	}
 }

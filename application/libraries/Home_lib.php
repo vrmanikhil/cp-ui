@@ -217,6 +217,12 @@ class Home_lib {
 		return $CI->homeModel->addProject($data);
 	}
 
+	public function editPersonalDetails($data, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editPersonalDetails($data, $userID);
+	}
+
 	public function delete($id, $table, $name){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
