@@ -164,18 +164,20 @@
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
 							<h3 class="heading flex">
 								<span>Personal Details</span>
-								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity personalDetails">Edit</a>
+								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
 							</h3>
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
-							<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
+							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
+								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
+							<?php } ?>
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
 							<h3 class="heading flex">
 								<span>Company Details</span>
-								<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-details" class="btn btn--primary js-edit-entity companyDetails">Edit</a>
+								<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-details" class="btn btn--primary js-edit-entity">Edit</a>
 							</h3>
 							<div class="company-details__container">
 								<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
@@ -256,7 +258,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Education Details</h3>
-			<form action="<?= base_url('web/addEducation')?>" method="POST" class="form">
+			<form action="<?= base_url('web/addEducation')?>" method="POST" class="form educationDet">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="educationType">Type</label>
@@ -269,7 +271,7 @@
 					</div>
 					<div class="form-group">
 						<label for="educationYear">Year</label>
-						<input type="number" name="educationYear" id="educationYear" class="form__input">
+						<input type="number" name="educationYear" id="educationYear" class="form__input" minimum = 1950 maximum = 2020>
 					</div>
 				</div>
 				<div class="horizontal-group">
@@ -282,7 +284,7 @@
 					</div>
 					<div class="form-group">
 						<label for="educationScore">Score</label>
-						<input type="number" name="score" id="educationScore" class="form__input" minimum = "1950" maximum = "2020">
+						<input type="number" name="score" id="educationScore" class="form__input" step = 0.01>
 					</div>
 				</div>
 				<div class="form-group">
@@ -300,7 +302,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Achievement</h3>
-			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form">
+			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form achievementDet">
 				<div class="form-group">
 					<label for="achievementName">Name</label>
 					<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementTitle">
@@ -320,7 +322,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Project</h3>
-			<form action="<?= base_url('web/addProject')?>" method="POST" class="form">
+			<form action="<?= base_url('web/addProject')?>" method="POST" class="form projectDet">
 				<div class="form-group">
 					<label for="projectName">Name</label>
 					<input type="text" class="form__input" placeholder="Project name" id="projectName" name="projectTitle">
@@ -343,7 +345,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Work Experience</h3>
-			<form action="<?=base_url('web/addWorkEx')?>" method="POST" class="form">
+			<form action="<?=base_url('web/addWorkEx')?>" method="POST" class="form workExDet">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name</label>

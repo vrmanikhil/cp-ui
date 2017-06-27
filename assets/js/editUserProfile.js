@@ -97,5 +97,38 @@ $(document).ready(function () {
 			$(elem)[0].selectedIndex = 0;
 		});
 	}
+
+	$('.educationDetails').click(function(){
+		$('<input>').attr({
+    		type: 'hidden',
+    		value: 'edit',
+    		name: 'type'
+			}).appendTo('.educationDet');
+		});
+
+	$('.weDetails').click(function(){
+		$('<input>').attr({
+    		type: 'hidden',
+    		value: 'edit',
+    		name: 'type'
+			}).appendTo('.workExDet');
+	});
+
+	$('.projectDetails').click(function(){
+		$('<input>').attr({
+    		type: 'hidden',
+    		value: 'edit',
+    		name: 'type'
+			}).appendTo('.projectDet');
+	});
+
+	$('.achievementDetails').click(function(){
+		$('<input>').attr({
+    		type: 'hidden',
+    		value: 'edit',
+    		name: 'type'
+			}).appendTo('.achievementDet');
+	});
+
 });
 	

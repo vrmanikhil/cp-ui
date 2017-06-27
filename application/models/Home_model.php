@@ -430,8 +430,28 @@ class Home_model extends CI_Model {
 
 	public function editPersonalDetails($data, $userID){
 		$this->db->where('userID', $userID);
-		$asda = $this->db->update('users', $data);
-		var_dump($this->db->last_query()); die();
+		return $this->db->update('users', $data);
+		
+	}
+
+	public function editEducation($data, $userID){
+		$this->db->where('userID', $userID);
+		return $this->db->update('educationalDetails', $data);
+	}
+
+	public function editWorkEx($data,$userID){
+		$this->db->where('userID', $userID);
+		return $this->db->update('workExperience', $data);
+	}
+
+	public function editProject($data,$userID){
+		$this->db->where('userID', $userID);
+		return $this->db->update('projects', $data);
+	}
+
+	public function editAchievement($data,$userID){
+		$this->db->where('userID', $userID);
+		return $this->db->update('achievements', $data);
 	}
 
 	public function delete($id, $table, $name){

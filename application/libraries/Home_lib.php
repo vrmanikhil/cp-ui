@@ -235,6 +235,36 @@ class Home_lib {
 		return $CI->homeModel->addEducation($data);
 	}
 
+	public function editEducation($data, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editEducation($data, $userID);
+	}
+
+	public function editWorkEx($data, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editWorkEx($data, $userID);
+	}
+
+	public function editProject($data, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editProject($data, $userID);
+	}
+
+	public function editAchievement($data, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editAchievement($data, $userID);
+	}
+
+	public function editCompanyDetails($data, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editCompanyDetails($data, $userID);
+	}
+
 	public function updateRegistrationLevel($userID, $registrationLevel){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
