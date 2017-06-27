@@ -101,9 +101,9 @@
 						<div style="margin-top: 10px;">
 							<?php
 							if($offerType == '1') {?>
-								<center><button data-id="<?php echo $offerData['jobID']; ?>" class="btn btn-primary view js-view-posting-details" id = "viewjob<?= $offerData['jobID'] ?>">View More</button></center>
+								<center><button data-id="<?php echo $offerData['jobID']; ?>" name = "job" class="btn btn-primary view js-view-posting-details" id = "viewjob<?= $offerData['jobID'] ?>">View More</button></center>
 							<?php }else{?>
-								<center><button data-id="<?php echo $offerData['internshipID']; ?>" class="btn btn-primary view js-view-posting-details" id = "viewinternship<?= $offerData['internshipID'] ?>">View More</button></center>
+								<center><button data-id="<?php echo $offerData['internshipID']; ?>" name = "internship" class="btn btn-primary view js-view-posting-details" id = "viewinternship<?= $offerData['internshipID'] ?>">View More</button></center>
 						<?php } ?>
 						</div>
 					</div>
