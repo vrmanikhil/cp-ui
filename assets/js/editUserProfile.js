@@ -21,7 +21,6 @@ $(document).ready(function () {
 
 	$(document).on('click', '.js-edit-entity', openEditEntityModal);
 	function openEditEntityModal(ev) {
-		formElem.find('[value = "Save"]').attr('name', 'edit');
 		var keyMap = {
 			achievementTitle: 'achievementTitle',
 			achievementDescription: 'achievementDescription',
@@ -73,7 +72,6 @@ $(document).ready(function () {
 		if(type === 'edit-company-details') {
 			formElem.find('img[id="companyLogo"]').attr('src', json['companyLogo'] || '');
 		}
-
 		var modal = modalElem.remodal();
 		modal.open();
 	}
@@ -100,3 +98,4 @@ $(document).ready(function () {
 		});
 	}
 });
+	

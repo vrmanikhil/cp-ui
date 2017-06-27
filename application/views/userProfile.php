@@ -75,7 +75,7 @@
 									<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
 										<div class="education-details">
 											<div class="action-btns">
-												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity educationDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['educationID'].'/educationalDetails/educationID')?>" class="btn btn--primary delete-education"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><?php echo $value['description']; ?></p>
@@ -95,7 +95,7 @@
 									else foreach ($workExperiences as $key => $value) { ?>
 										<div class="work-experience">
 											<div class="action-btns">
-												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-work-experience" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-work-experience" class="btn btn--primary js-edit-entity weDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['weID'].'/workExperience/weID')?>" class="btn btn--primary delete-work"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><strong><?= $value['companyName'] ?></strong></p>
@@ -116,7 +116,7 @@
 									else foreach ($projects as $key => $value) { ?>
 										<div class="project">
 											<div class="action-btns">
-												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-projects" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-projects" class="btn btn--primary js-edit-entity projectDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['projectID'].'/projects/projectID')?>" class="btn btn--primary delete-project"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><strong><?= $value['projectTitle'] ?></strong></p>
@@ -136,7 +136,7 @@
 									else foreach ($achievements as $key => $value) { ?>
 										<div class="achievement">
 											<div class="action-btns">
-												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-achievements" class="btn btn--primary js-edit-entity"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-achievements" class="btn btn--primary js-edit-entity achievementDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['achievementID'].'/achievements/achievementID')?>" class="btn btn--primary delete-achievement"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
 											<p><strong><?= $value['achievementTitle'] ?></strong></p>
@@ -164,7 +164,7 @@
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
 							<h3 class="heading flex">
 								<span>Personal Details</span>
-								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
+								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity personalDetails">Edit</a>
 							</h3>
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
@@ -175,7 +175,7 @@
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
 							<h3 class="heading flex">
 								<span>Company Details</span>
-								<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-details" class="btn btn--primary js-edit-entity">Edit</a>
+								<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-details" class="btn btn--primary js-edit-entity companyDetails">Edit</a>
 							</h3>
 							<div class="company-details__container">
 								<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
@@ -227,7 +227,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Personal Information</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?=base_url('')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="location">Location</label>
@@ -440,7 +440,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
-					<input type="submit" class="btn btn--primary" value="Save">
+					<input type="submit" class="btn btn--primary" value="Save Changes">
 				</div>
 			</form>
 		</div>
