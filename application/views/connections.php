@@ -58,7 +58,7 @@
 					<section>
 						<h2 class="section-title">CONNECTION REQUESTS</h2>
 						<div class="connections">
-							<?php foreach ($connectionRequests as $key => $value) { ?>
+							<?php if(empty($connectionRequests)) { echo "<center>No Connection Requests Found</center>"; } else { foreach ($connectionRequests as $key => $value) { ?>
 							<div class="flex connection media align-center">
 								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
 								<div class="media-body flex">
@@ -73,14 +73,14 @@
 									</div>
 								</div>
 							</div>
-							<?php } ?>
+							<?php }} ?>
 						</div>
 					</section>
 				</div>
 				<div class="card">
 					<section>
 						<h2 class="section-title">MY CONNECTIONS</h2>
-						<?php foreach ($connections as $key => $value) { ?>
+						<?php if(empty($connectionRequests)) { echo "<center>No Connections Found</center>"; } else { foreach ($connections as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
 								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
@@ -96,7 +96,7 @@
 								</div>
 							</div>
 						</div>
-							<?php } ?>
+							<?php }} ?>
 					</section>
 				</div>
 			</div>

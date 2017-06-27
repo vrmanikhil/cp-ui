@@ -59,7 +59,7 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="skills__section card">
-					<h1 class="skills__section-title"><b>My Skills</b></h1>
+					<h2 class="section-title">MY SKILLS</h2>
 					<div class="skills-container flex">
 					<?php
 					if(empty($userSkills)){?>
@@ -70,7 +70,7 @@
 								<div class="skill flex free">
 									<p><?= $value['skill_name']?></p>
 								</div>
-					
+
 					<?php 	}else{?>
 								<div class="skill flex paid">
 									<p><?= $value['skill_name']?></p>
@@ -80,7 +80,7 @@
 					?>
 					</div>
 					<div class = "skills">
-						<h1 class="skills__section-title"><b>Add New Skill to Profile</b></h1>
+						<h2 class="section-title">ADD NEW SKILL</h2>
 						<select class="select" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>
