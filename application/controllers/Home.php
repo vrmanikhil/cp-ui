@@ -739,6 +739,9 @@ class Home extends CI_Controller {
 		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
 		$this->load->view('connections', $this->data);
 		}
+		else{
+			$this->load->view('connections', $this->data);
+		}
 	}
 
 	public function generateVerifyEMail(){
