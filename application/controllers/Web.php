@@ -722,7 +722,8 @@ class Web extends CI_Controller {
 			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
-			$config['upload_path'] = base_url('/assets/uploads/');
+			
+			$config['upload_path'] = base_url('uploads/');
        		$config['allowed_types'] = 'jpg|png';
         	$config['max_size'] = 1000;
         	$config['max_width'] = 300;
@@ -734,7 +735,7 @@ class Web extends CI_Controller {
                 if ( ! $this->upload->do_upload('logo')){
                         $error = array('error' => $this->upload->display_errors());
                         var_dump($config['upload_path']);
-                        	var_dump($error); die();
+                     
                         if($error == "You did not select a file to upload."){
                         	$result = $this->home_lib->editCompanyDetails($data, $userID);
 							if($result){
@@ -752,7 +753,7 @@ class Web extends CI_Controller {
                 }
                 else{
                     $up = array('upload_data' => $this->upload->data());
-                    var_dump($up); die();
+               
                     $data['companyLogo'] = $up['upload_data']['full_path'];
                     $result = $this->home_lib->editCompanyDetails($data, $userID);
 					if($result){
