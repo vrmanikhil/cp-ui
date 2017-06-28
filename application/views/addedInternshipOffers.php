@@ -83,13 +83,17 @@
 						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
-								<strong><?php echo $_SESSION['companyName']; ?></strong>
+								<strong><?php echo $value['internshipTitle']; ?></strong>
 							</p>
-							<p class="posting-card__desc"><?php echo $value['internshipTitle']; ?></p>
 							<p class="posting-card__status"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
+							<p class="posting-card__status"><strong>Status</strong> : <?php if($value['status']=='1' && empty($value['active'])) { ?><span style="color: var(--yellow);"><b>Under Verification</b></span> <?php } ?><?php if($value['status']=='2' && $value['active']=='1') { ?><span style="color: var(--green);"><b>Active</b> </span><a style="font-size: 0.9rem">Close Job Offer</a> <?php } ?><?php if($value['status']=='3' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Rejected</b></span> <?php } ?><?php if($value['status']=='2' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Closed</b></span> <?php } ?></p>
+							<p class="posting-card__status"><strong>Application Deadline</strong> : <?php echo $value['applicationDeadline']; ?></p>
 							<div class="posting-card__apply">
 								<a href="<?php echo base_url('applicants/2/').$value['internshipID']; ?>" class="btn white midnight-blue-bg s-14">View Applicants</a>
 								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 view js-view-posting-details"  id = "view<?= $value['internshipID'] ?>">View</a>
+								<?php if($value['status']=='1' && empty($value['active'])) { ?>
+								<button data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['internshipID'] ?>">Edit</button>
+								<?php } ?>
 							</div>
 						</div>
 					</div>

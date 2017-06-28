@@ -81,15 +81,21 @@
 				<div class="card posting-card">
 					<div class="flex media">
 						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
+						<br>
+
 						<div class="media-body flex flex--col">
-							<p class="posting-card__title">
-								<strong><?php echo $_SESSION['companyName']; ?></strong>
+							<p class="posting-card__title" style="margin-bottom: 10px;">
+								<strong><?php echo $value['jobTitle']; ?></strong>
 							</p>
-							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
-							<p class="posting-card__status"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
+							<p class="posting-card__status"><strong>Skills</strong> : <span><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
+							<p class="posting-card__status"><strong>Status</strong> : <?php if($value['status']=='1' && empty($value['active'])) { ?><span style="color: var(--yellow);"><b>Under Verification</b></span> <?php } ?><?php if($value['status']=='2' && $value['active']=='1') { ?><span style="color: var(--green);"><b>Active</b> </span><a style="font-size: 0.9rem">Close Job Offer</a> <?php } ?><?php if($value['status']=='3' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Rejected</b></span> <?php } ?><?php if($value['status']=='2' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Closed</b></span> <?php } ?></p>
+							<p class="posting-card__status"><strong>Application Deadline</strong> : <?php echo $value['applicationDeadline']; ?></p>
 							<div class="posting-card__apply">
 								<a href=<?php echo base_url('applicants/1/').$value['jobID']; ?> class="btn white midnight-blue-bg s-14">View Applicants</a>
 								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">View</button>
+								<?php if($value['status']=='1' && empty($value['active'])) { ?>
+								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">Edit</button>
+								<?php } ?>
 							</div>
 						</div>
 					</div>

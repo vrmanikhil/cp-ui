@@ -258,7 +258,7 @@ class Home_model extends CI_Model {
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
 		$this->db->join('employerUsers', 'jobOffers.addedBy = employerUsers.userID');
-		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName');
+		$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, GROUP_CONCAT(jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName, jobOffers.status, jobOffers.active, jobOffers.applicationDeadline');
 		$this->db->group_by('jobOffers.jobID');
 		$this->db->order_by('jobOffers.jobID', 'DESC');
 		$result = $this->db->get_where('jobOffers', array('addedBy' => $addedBy));
@@ -270,7 +270,7 @@ class Home_model extends CI_Model {
 	  $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
 	  $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 	  $this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
-	  $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName');
+	  $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName, internshipOffers.status, internshipOffers.active, internshipOffers.applicationDeadline');
 	  $this->db->group_by('internshipOffers.internshipID');
 	  $this->db->order_by('internshipOffers.internshipID', 'DESC');
 	  $result = $this->db->get_where('internshipOffers', array('addedBy' => $addedBy));
