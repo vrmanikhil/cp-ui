@@ -807,9 +807,18 @@ class Home extends CI_Controller {
 	public function applicants($offerType, $offerID){
 		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
 		$this->data['offerType'] = $offerType;
+		$this->data['offerID'] = $offerID;
 		// var_dump($this->data['offerData']);die;
+		$filters = [];
 		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
-			$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
+			if (isset($_POST['applyfilter'])) {	
+				$filters = $_POST['filter'];
+				$this->data['applicants'] = $this->home_lib->getFilteredApplicants($offerType, $offerID, $filters);
+				$this->data['filter'] = json_encode($filters);
+			}else{
+				$this->data['filter'] = json_encode($filters);
+				$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
+			}
 			$this->load->view('applicants', $this->data);
 		}
 		else{
