@@ -92,7 +92,7 @@
 								<a href="<?php echo base_url('applicants/2/').$value['internshipID']; ?>" class="btn white midnight-blue-bg s-14">View Applicants</a>
 								<a data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 view js-view-posting-details"  id = "view<?= $value['internshipID'] ?>">View</a>
 								<?php if($value['status']=='1' && empty($value['active'])) { ?>
-								<button data-id="<?php echo $value['internshipID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['internshipID'] ?>">Edit</button>
+								<a href="<?php echo base_url('internships/edit-internship-offer/').$value['internshipID']; ?>" class="btn white midnight-blue-bg s-14">Edit</a>
 								<?php } ?>
 							</div>
 						</div>

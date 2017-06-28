@@ -431,7 +431,7 @@ class Home_model extends CI_Model {
 	public function editPersonalDetails($data, $userID){
 		$this->db->where('userID', $userID);
 		return $this->db->update('users', $data);
-		
+
 	}
 
 	public function editEducation($data, $userID){
