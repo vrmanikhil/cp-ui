@@ -301,6 +301,8 @@ class Home_model extends CI_Model {
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
 			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, jobOffers.applicants, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->where('jobOffers.status', 2);
+			$this->db->where('jobOffers.active', 1);
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
@@ -402,6 +404,8 @@ class Home_model extends CI_Model {
 	    $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
 	    $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 	    $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, internshipOffers.applicants, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+	    $this->db->where('internshipOffers.status', 2);
+			$this->db->where('internshipOffers.active', 1);
 	    $this->db->group_by('internshipOffers.internshipID');
 	    $this->db->order_by('internshipOffers.internshipID', 'DESC');
 	    $result = $this->db->get('internshipOffers');
@@ -432,6 +436,12 @@ class Home_model extends CI_Model {
 		$this->db->where('userID', $userID);
 		return $this->db->update('users', $data);
 
+	}
+
+	public function editCompanyDetails($data, $userID){
+		$this->db->where('userID', $userID);
+		return $this->db->update('employerUsers', $data);
+		
 	}
 
 	public function editEducation($data, $userID){

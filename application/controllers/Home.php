@@ -149,21 +149,6 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$this->load->view('chat-new', $this->data);
 	}
-	public function clearFilter($class, $page)
-	{
-		if($class == 1)
-		{
-			if($page == 1)
-				redirect(base_url('jobs/job-offers'));
-			else
-				redirect(base_url('job/relevant-jobs'));
-		}else{
-			if($page == 1)
-				redirect(base_url('internships/internship-offers'));
-			else
-				redirect(base_url('internships/relevant-internships'));
-		}
-	}
 	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$userID = $_SESSION['userData']['userID'];
@@ -697,7 +682,8 @@ class Home extends CI_Controller {
 		$this->data['more'] = $more;
 		$this->data['title'] = $this->data['user_name'];
 		$connection = $this->home_lib->checkConnection($chatter_id);
-		if(empty($connection)){
+		$this->data['connection'] = $connection;
+		if(empty($connection) && empty($messages)){
 			$this->session->set_flashdata('message', array('content' => 'You need to be connected to this person to start a chat.', 'class' => 'error'));
 			redirect(base_url('messages'));
 		}

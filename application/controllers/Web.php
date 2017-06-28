@@ -698,6 +698,73 @@ class Web extends CI_Controller {
 
 
 	public function editCompanyDetails(){
+		$position = '';
+		$companyName = '';
+		$companyDescription = '';
+		$userID = $_SESSION['userData']['userID'];
+		if($x = $this->input->post('position')){
+			$position = $x;
+		}
+		if($x = $this->input->post('companyName')){
+			$companyName = $x;
+		}
+		if($x = $this->input->post('companyDescription')){
+			$companyDescription = $x;
+		}
+		$data = array(
+			'position' => $position,
+			'companyName' => $companyName,
+			'companyDescription' => $companyDescription
+		);
+		
+		if($position == '' || $companyName == '' || $companyDescription == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
+		}
+		else{
+			$config['upload_path'] = base_url('/assets/uploads/');
+       		$config['allowed_types'] = 'jpg|png';
+        	$config['max_size'] = 1000;
+        	$config['max_width'] = 300;
+        	$config['max_height'] = 300;
+        	$config['file_name'] = str_replace(' ', '_', $companyName);
+
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload('logo')){
+                        $error = array('error' => $this->upload->display_errors());
+                        var_dump($config['upload_path']);
+                        	var_dump($error); die();
+                        if($error == "You did not select a file to upload."){
+                        	$result = $this->home_lib->editCompanyDetails($data, $userID);
+							if($result){
+								$this->session->set_flashdata('message', array('content'=>'Details successfully Edited.','class'=>'success'));
+								redirect(base_url('user-profile/'.$userID));
+							}
+							else{
+								$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+								redirect(base_url('user-profile/'.$userID));
+							}
+                        }else{
+                        	$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+							redirect(base_url('user-profile/'.$userID));
+                        }
+                }
+                else{
+                    $up = array('upload_data' => $this->upload->data());
+                    var_dump($up); die();
+                    $data['companyLogo'] = $up['upload_data']['full_path'];
+                    $result = $this->home_lib->editCompanyDetails($data, $userID);
+					if($result){
+						$this->session->set_flashdata('message', array('content'=>'Details successfully Edited.','class'=>'success'));
+						redirect(base_url('user-profile/'.$userID));
+					}
+					else{
+						$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+						redirect(base_url('user-profile/'.$userID));
+					}
+                }
+		}
 
 	}
 
