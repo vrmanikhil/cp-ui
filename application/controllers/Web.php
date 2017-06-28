@@ -178,7 +178,7 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('position')){
 			$position = $x;
 		}
-		if($x = $this->input->post('description')){
+		if($x = $this->input->post('workDescription')){
 			$description = $x;
 		}
 		if($x = $this->input->post('startMonth')){
@@ -208,9 +208,15 @@ class Web extends CI_Controller {
 			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
+			if(isset($_POST['type'])){
+				$type = "Edited";
+			$result = $this->home_lib->editWorkEx($data, $userID);
+		}else{
+			$type = 'Added';
 			$result = $this->home_lib->addWorkEx($data);
+		}
 			if($result){
-				$this->session->set_flashdata('message', array('content'=>'Work Experience successfully Added.','class'=>'success'));
+				$this->session->set_flashdata('message', array('content'=>'Work Experience Successfully '.$type.'.','class'=>'success'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
@@ -267,9 +273,15 @@ class Web extends CI_Controller {
 			redirect(base_url('user-profile/').$userID);
 		}
 		else{
+			if(isset($_POST['type'])){
+				$type = "Edited";
+			$result = $this->home_lib->editAchievement($data, $userID);
+		}else{
+			$type = 'Added';
 			$result = $this->home_lib->addAchievement($data);
+		}
 			if($result){
-				$this->session->set_flashdata('message', array('content'=>'Achievement successfully Added.','class'=>'success'));
+				$this->session->set_flashdata('message', array('content'=>'Achievement Successfully '.$type.'.','class'=>'success'));
 				redirect(base_url('user-profile/').$userID);
 			}
 			else{
@@ -298,7 +310,7 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('score')){
 			$score = $x;
 		}
-		if($x = $this->input->post('description')){
+		if($x = $this->input->post('educationDescription')){
 			$description = $x;
 		}
 		$data = array(
@@ -310,16 +322,22 @@ class Web extends CI_Controller {
 				'userID' => $userID
 			);
 		if($educationYear == '' || $educationType == '' || $scoreType == '' || $score == '' || $description == ''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}else{
+			if(isset($_POST['type'])){
+				$type = "Edited";
+			$result = $this->home_lib->editEducation($data, $userID);
+		}else{
+			$type = 'Added';
 			$result = $this->home_lib->addEducation($data);
+		}
 			if($result){
-				$this->session->set_flashdata('message', array('content'=>'Educational Detail Successfully Added.','class'=>'success'));
+				$this->session->set_flashdata('message', array('content'=>'Educational Detail Successfully '.$type.'.','class'=>'success'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 		}
@@ -350,9 +368,15 @@ class Web extends CI_Controller {
 			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
+			if(isset($_POST['type'])){
+				$type = "Edited";
+			$result = $this->home_lib->editProject($data, $userID);
+		}else{
+			$type = 'Added';
 			$result = $this->home_lib->addProject($data);
+		}
 			if($result){
-				$this->session->set_flashdata('message', array('content'=>'Achievement successfully Added.','class'=>'success'));
+				$this->session->set_flashdata('message', array('content'=>'Project Successfully '.$type.'.','class'=>'success'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
@@ -691,8 +715,8 @@ class Web extends CI_Controller {
 			'cityID' => $location,
 			'gender' => $gender
 		);
-		if($location==''||$cityID==''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+		if($location==''||$gender==''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
@@ -702,7 +726,7 @@ class Web extends CI_Controller {
 				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 		}
