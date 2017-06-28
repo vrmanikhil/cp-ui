@@ -717,5 +717,11 @@ public function injectClassName(&$data)
 		return $CI->homeModel->checkAlreadyApplied($userID, $offerType, $offerID);
 	}
 
+	public function getFilteredApplicants($offerType, $offerID, $filters){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getFilteredApplicants($offerType, $offerID, $filters);
+	}
+
 
 }

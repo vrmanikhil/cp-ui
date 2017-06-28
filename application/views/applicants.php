@@ -44,6 +44,28 @@
 				    <span class="explore-panel__link-text flex__item">Skills</span>
 				  </a>
 				</div>
+				<div class="card card--no-padding search-filter">
+					<form action = "<?= base_url('home/applicants/'.$offerType.'/'.$offerID)?>" method="POST">
+					<div class="card card--no-padding search-filter">
+						<div class="search-filter__head">
+							<p><strong>Filters</strong></p>
+						</div>
+						<div class="search-filter__body filters">
+							<div class="search-filter__list">
+								<input type="checkbox" name="filter[]" value='4' class="filters4"> Hired<br>
+								<input type="checkbox" name="filter[]" value='3' class="filters3"> Shortlisted<br>
+								<input type="checkbox" name="filter[]" value='2' class="filters2"> Rejected<br>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="applyfilter" value="1">
+					<a href = "<?= base_url('clear-filter/1/1')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
+					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
+				</form>
+				<div class="post card">
+					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+				</div>
+				</div>
 				<div class="post card">
 					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<!-- CampusPuppy -->
@@ -284,6 +306,18 @@
 			})
 		})
 
+	</script>
+
+	<script type="text/javascript"> 
+	var filter = <?= $filter ?>;
+	console.log(filter);
+		$(document).ready(function(){
+			for (var i = 4; i > 0;i--) {
+				if(filter.indexOf(i.toString()) != -1){
+					$('.filters'+i).prop('checked', 'true')
+				}
+			}
+		});
 	</script>
 </body>
 </html>

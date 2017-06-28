@@ -83,6 +83,7 @@
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
+				</div>
 			</aside>
 			<div class="main-body flex__item">
 				<div class="card">
