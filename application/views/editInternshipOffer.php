@@ -119,10 +119,10 @@
 					</div>
 					<label for="stipendType" class="form__label">Stipend Type</label>
 					<select id="stipendType" name="stipendType" placeholder="Stipend Type" class="form__input" required>
-						<option value="1">No Stipend</option>
-						<option value="2">Expenses Covered</option>
-						<option value="3">Offered in Range</option>
-						<option value="4">Fixed Stipend</option>
+						<option value="1" <?php if($internshipDetails['stipendType']=='1') echo "selected"; ?>>No Stipend</option>
+						<option value="2" <?php if($internshipDetails['stipendType']=='2') echo "selected"; ?>>Expenses Covered</option>
+						<option value="3" <?php if($internshipDetails['stipendType']=='3') echo "selected"; ?>>Offered in Range</option>
+						<option value="4" <?php if($internshipDetails['stipendType']=='4') echo "selected"; ?>>Fixed Stipend</option>
 					</select>
 					<div class="flex" id="offeredRange" style="display: none;">
 						<div class="form-group">
