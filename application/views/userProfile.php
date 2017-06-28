@@ -41,7 +41,7 @@
 								}
 							}
 							else{ ?>
-								<a href="javascript:" class="btn message-btn"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url('messages/chats/').$userDetails['userID']; ?>" href="javascript:" class="btn message-btn"><i class="fa fa-envelope" aria-hidden="true"></i></a>
 								<a href="<?php echo base_url('connections/removeConnection/').$userDetails['userID']."/".$_SESSION['userData']['userID']; ?>" onclick="alert('Are you sure you want to Remove the Connection?')" class="btn">Remove Connection</a>
 							<?php
 							}
@@ -155,7 +155,7 @@
 										<p><?= $skill['skill_name']?></p>
 									</div>
 								<?php } else {?>
-									<div class="skill flex paid">	
+									<div class="skill flex paid">
 										<p><?= $skill['skill_name']?></p>
 									</div>
 								<?php } } ?>

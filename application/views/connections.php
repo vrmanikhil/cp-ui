@@ -80,7 +80,7 @@
 				<div class="card">
 					<section>
 						<h2 class="section-title">MY CONNECTIONS</h2>
-						<?php if(empty($connectionRequests)) { echo "<center>No Connections Found</center>"; } else { foreach ($connections as $key => $value) { ?>
+						<?php if(empty($connections)) { echo "<center>No Connections Found</center>"; } else { foreach ($connections as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
 								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">

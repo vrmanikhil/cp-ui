@@ -511,6 +511,17 @@ class Home extends CI_Controller {
 		$this->load->view('addInternshipOffer', $this->data);
 	}
 
+	public function editInternshipOffer($internshipID){
+		$this->redirection();
+		$this->data['internshipDetails'] = $this->home_lib->getInternshipDetails($internshipID);
+		$this->data['internshipDetails'] = $this->data['internshipDetails'][0];
+		$this->data['skills'] = $this->home_lib->getSkills();
+		$this->data['locations'] = $this->home_lib->getLocations();
+		$this->load->view('editInternshipOffer', $this->data);
+	}
+
+
+
 	public function addedInternshipOffers(){
 		$this->redirection();
 		$this->data['addedInternshipOffers'] = $this->home_lib->getAddedInternshipOffers();
@@ -724,6 +735,9 @@ class Home extends CI_Controller {
 		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
 		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
 		$this->load->view('connections', $this->data);
+		}
+		else{
+			$this->load->view('connections', $this->data);
 		}
 	}
 
