@@ -12,7 +12,7 @@
 
 .skill {
 	background: var(--midnight-blue);
-	border: 1px solid var(--midnight-blue);
+	border: 1px solid #fff;
 	color: white;
 	padding: 10px;
 	width: 237px;
@@ -31,12 +31,15 @@
 	background: white;
 	font-weight: 500;
 	text-transform: uppercase;
-	border: 1px solid var(--midnight-blue);
+	border: 1px solid #fff;
 }
 
 .skill.free:after {
 	content: 'Free';
-	color: var(--midnight-blue);
+	color: white;
+	font-weight: 600;
+	background: var(--midnight-blue);
+	border-bottom: 1px solid #fff;
 }
 
 .skill.paid:after {
@@ -68,4 +71,3 @@
 	border: 0;
 	margin-top: 10px;
 }
-

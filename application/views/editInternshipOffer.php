@@ -218,6 +218,7 @@
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?= base_url('assets/ckeditor/ckeditor.js')?>"></script>
+
 	<script type="text/javascript">
 
 	 $('#stipendType').on('change',function(){
@@ -253,7 +254,7 @@
 		 }
 	 });
 	</script>
-
+	
 	<script type="text/javascript">
 
 	 $('#applicants').on('change',function(){
