@@ -301,6 +301,8 @@ class Home_model extends CI_Model {
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
 			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, jobOffers.applicants, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->where('jobOffers.status', 2);
+			$this->db->where('jobOffers.active', 1);
 			$this->db->group_by('jobOffers.jobID');
 			$this->db->order_by('jobOffers.jobID', 'DESC');
 			$result = $this->db->get('jobOffers');
@@ -372,6 +374,32 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	public function getFilteredApplicants($offerType, $offerID, $filter){
+		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
+		if($offerType=='1'){
+		$this->db->join('users', 'jobApplicants.userID = users.userID');}
+		if($offerType=='2'){
+		$this->db->join('users', 'internshipApplicants.userID = users.userID');}
+		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
+		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
+		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');
+		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID', 'left outer');
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID', 'left outer');
+		$this->db->group_by('users.userID');
+		$this->db->group_by('colleges.college_id');
+		$this->db->group_by('generalUsers.batch');
+		$this->db->group_by('courses.course_id');
+		if($offerType=='1'){
+			$this->db->where_in('jobApplicants.status', $filter);
+			$this->db->group_by('jobApplicants.timestamp');
+			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
+		if($offerType=='2'){
+			$this->db->where_in('internshipApplicants.status', $filter);
+			$this->db->group_by('internshipApplicants.timestamp');
+			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
+		return $result->result_array();
+	}
+
 	public function getinternshipOffersLocationFilters($locations){
 		if($locations != NULL){
 			$this->db->select('DISTINCT(internshipID)');
@@ -402,6 +430,8 @@ class Home_model extends CI_Model {
 	    $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
 	    $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 	    $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, internshipOffers.applicants, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+	    $this->db->where('internshipOffers.status', 2);
+			$this->db->where('internshipOffers.active', 1);
 	    $this->db->group_by('internshipOffers.internshipID');
 	    $this->db->order_by('internshipOffers.internshipID', 'DESC');
 	    $result = $this->db->get('internshipOffers');
@@ -432,6 +462,12 @@ class Home_model extends CI_Model {
 		$this->db->where('userID', $userID);
 		return $this->db->update('users', $data);
 
+	}
+
+	public function editCompanyDetails($data, $userID){
+		$this->db->where('userID', $userID);
+		return $this->db->update('employerUsers', $data);
+		
 	}
 
 	public function editEducation($data, $userID){

@@ -149,21 +149,6 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$this->load->view('chat-new', $this->data);
 	}
-	public function clearFilter($class, $page)
-	{
-		if($class == 1)
-		{
-			if($page == 1)
-				redirect(base_url('jobs/job-offers'));
-			else
-				redirect(base_url('job/relevant-jobs'));
-		}else{
-			if($page == 1)
-				redirect(base_url('internships/internship-offers'));
-			else
-				redirect(base_url('internships/relevant-internships'));
-		}
-	}
 	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$userID = $_SESSION['userData']['userID'];
@@ -697,7 +682,8 @@ class Home extends CI_Controller {
 		$this->data['more'] = $more;
 		$this->data['title'] = $this->data['user_name'];
 		$connection = $this->home_lib->checkConnection($chatter_id);
-		if(empty($connection)){
+		$this->data['connection'] = $connection;
+		if(empty($connection) && empty($messages)){
 			$this->session->set_flashdata('message', array('content' => 'You need to be connected to this person to start a chat.', 'class' => 'error'));
 			redirect(base_url('messages'));
 		}
@@ -835,9 +821,18 @@ class Home extends CI_Controller {
 	public function applicants($offerType, $offerID){
 		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
 		$this->data['offerType'] = $offerType;
+		$this->data['offerID'] = $offerID;
 		// var_dump($this->data['offerData']);die;
+		$filters = [];
 		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
-			$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
+			if (isset($_POST['applyfilter'])) {	
+				$filters = $_POST['filter'];
+				$this->data['applicants'] = $this->home_lib->getFilteredApplicants($offerType, $offerID, $filters);
+				$this->data['filter'] = json_encode($filters);
+			}else{
+				$this->data['filter'] = json_encode($filters);
+				$this->data['applicants'] = $this->home_lib->getApplicants($offerType, $offerID);
+			}
 			$this->load->view('applicants', $this->data);
 		}
 		else{

@@ -102,6 +102,7 @@
 							}
 						?>
 					</div>
+					<?php if(!empty($connection)){?>
 						<div class="horizontal-group">
 							<div class="form-group message-input-container">
 								<textarea name="message" id="message" required class="form__input" rows="1" placeholder="Type your message here"></textarea>
@@ -110,6 +111,7 @@
 								<button type="submit" id = 'send' class="btn btn--primary">Send Message</button>
 							</div>
 						</div>
+						<?php } ?>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

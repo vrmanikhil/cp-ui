@@ -443,7 +443,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Company Details</h3>
-			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form" >
+			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form" enctype="multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name</label>
@@ -451,7 +451,7 @@
 					</div>
 					<div class="form-group">
 						<label for="positionInCompany">Position</label>
-						<input type="text" class="form__input" placeholder="Company's name" id="positionInCompany" name="positionInCompany">
+						<input type="text" class="form__input" placeholder="Company's name" id="positionInCompany" name="position">
 					</div>
 				</div>
 				<div class="form-group">
