@@ -11,6 +11,7 @@
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="<?php if(isset($_SESSION['userData']['loggedIn'])){ echo base_url('assets/css/components/header.css'); } else { echo base_url('/assets/css/components/logged-out-header.css'); }  ?>" rel="stylesheet">
 	<link href="/assets/css/userProfile.css" rel="stylesheet">
+	<link href="/assets/css/croppie.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -69,15 +70,19 @@
 							<section>
 								<h3 class="heading flex">
 										<span>Education</span>
-										<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education"><i class="fa fa-plus" aria-hidden="true"></i></a>
+										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
+											<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education"><i class="fa fa-plus" aria-hidden="true"></i></a>
+										<?php } ?>
 								</h3>
 								<div class="education-details__container">
 									<?php if(empty($educationalDetails)) echo "<p>No Educational Details Found</p>"; else { foreach ($educationalDetails as $key => $value) { ?>
 										<div class="education-details">
+										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-education" class="btn btn--primary js-edit-entity educationDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['educationID'].'/educationalDetails/educationID')?>" class="btn btn--primary delete-education"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
+										<?php } ?>
 											<p><?php echo $value['description']; ?></p>
 											<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
 											<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
@@ -88,16 +93,20 @@
 							<section>
 								<h3 class="heading flex">
 									<span>Work Experience</span>
+									<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-work-experience"><i class="fa fa-plus" aria-hidden="true"></i></a>
+									<?php } ?>
 								</h3>
 								<div class="work-experience__container">
 									<?php if(empty($workExperiences)) echo "<p>No Work Experiences Added</p>";
 									else foreach ($workExperiences as $key => $value) { ?>
 										<div class="work-experience">
+										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-work-experience" class="btn btn--primary js-edit-entity weDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['weID'].'/workExperience/weID')?>" class="btn btn--primary delete-work"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
+											<?php } ?>
 											<p><strong><?= $value['companyName'] ?></strong></p>
 											<p><?= $value['position'] ?></p>
 											<p><?php echo $value['startMonth'].' '.$value['startYear'].'-'.$value['endMonth'].' '.$value['endYear'] ?></p>
@@ -109,16 +118,20 @@
 							<section>
 								<h3 class="heading flex">
 									<span>Projects</span>
+									<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects"><i class="fa fa-plus" aria-hidden="true"></i></a>
+									<?php } ?>
 								</h3>
 								<div class="projects__container">
 									<?php if(empty($projects)) echo "<p>No Projects Added</p>";
 									else foreach ($projects as $key => $value) { ?>
 										<div class="project">
+										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-projects" class="btn btn--primary js-edit-entity projectDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['projectID'].'/projects/projectID')?>" class="btn btn--primary delete-project"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
+											<?php } ?>
 											<p><strong><?= $value['projectTitle'] ?></strong></p>
 											<p><a target='_blank' href='<?= $value["projectLink"] ?>'><?= $value['projectLink'] ?></a></p>
 											<p><?= $value['projectDescription'] ?></p>
@@ -129,16 +142,20 @@
 							<section>
 								<h3 class="heading flex">
 									<span>Achievements</span>
+									<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-achievements"><i class="fa fa-plus" aria-hidden="true"></i></a>
+									<?php } ?>
 								</h3>
 								<div class="achievements__container">
 									<?php if(empty($achievements)) echo "<p>No Achievements Added</p>";
 									else foreach ($achievements as $key => $value) { ?>
 										<div class="achievement">
+										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 											<div class="action-btns">
 												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-achievements" class="btn btn--primary js-edit-entity achievementDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 												<a href="<?php echo base_url('web/delete/'.$value['achievementID'].'/achievements/achievementID')?>" class="btn btn--primary delete-achievement"><i class="fa fa-trash" aria-hidden="true"></i></a>
 											</div>
+											<?php } ?>
 											<p><strong><?= $value['achievementTitle'] ?></strong></p>
 											<p><?= $value['achievementDescription'] ?></p>
 										</div>
@@ -164,7 +181,9 @@
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
 							<h3 class="heading flex">
 								<span>Personal Details</span>
+								<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
+								<?php } ?>
 							</h3>
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
@@ -177,7 +196,9 @@
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
 							<h3 class="heading flex">
 								<span>Company Details</span>
+								<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
 								<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-details" class="btn btn--primary js-edit-entity">Edit</a>
+								<?php } ?>
 							</h3>
 							<div class="company-details__container">
 								<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
@@ -465,12 +486,18 @@
 					</div>
 					<div class="form-group">
 						<label for="logo">Company Logo</label>
-						<input type="file" class="form__input" name="logo" id="logo">
+						<input type="file" class="form__input" id="logo">
+						<input type="hidden" name="companylogo">
+					</div>
+				</div>
+				<div class = "form-group">
+					<div class = "demo">
+						<img src="" alt="" id="cropped-img">
 					</div>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
-					<input type="submit" class="btn btn--primary" value="Save Changes">
+					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
 				</div>
 			</form>
 		</div>
@@ -504,6 +531,49 @@
 
 			$('.delete-education').click(function(){
 				alert('Are you sure you want delete the added Educational Detail??')
+			});
+		});
+	</script>
+
+	<script src="<?php echo base_url('/assets/js/croppie.js'); ?>"></script>
+	<script type="text/javascript">
+	var $uploadCrop;    
+
+	function readFile(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				console.log(e);
+				$uploadCrop.croppie('bind', {
+					url: e.target.result
+				});
+				$('a.result').removeClass('hidden');
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+		else {
+			alert("Sorry - you're browser doesn't support the FileReader API");
+		}
+	}
+	$uploadCrop = $('#cropped-img').croppie({
+		viewport: {
+			width: 300,
+			height: 300,
+			type: 'square'
+		},
+		boundary: {
+			width: 350,
+			height: 350,
+		},
+		exif: false
+	});
+	$('#logo').on('change', function () { readFile(this); 
+			$uploadCrop.croppie('result', {
+				type: 'canvas',
+				size: 'original'
+			}).then(function (resp) {
+				$('#cropped-img').attr('src', resp)
+				$('input[name="companylogo"]').val(resp)
 			});
 		});
 	</script>

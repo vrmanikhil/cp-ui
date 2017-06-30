@@ -328,7 +328,6 @@ class Home_model extends CI_Model {
 		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID');
 		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
-		// var_dump($this->db->last_query()); die();
 		return $result->result_array();
 	}
 
