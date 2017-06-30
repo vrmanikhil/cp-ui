@@ -33,11 +33,11 @@
                 <div class="notifications">
                 <?php if(empty($messages)) {?>
 						<p style="text-align: center; font-size: 13px">No Messages Found.</p>
-						<p style= "text-align: center; font-size: 13px"><a href="<?= base_url('messages#composeMessage')?>"><b>Click Here</b></a> to compose a new message.</p>	
-					<?php }else{ 
+						<p style= "text-align: center; font-size: 13px"><a href="<?= base_url('messages#composeMessage')?>"><b>Click Here</b></a> to compose a new message.</p>
+					<?php }else{
                 foreach($messages as $text) {
                 	$cls = '';
-					if ($text['read'] != 1 && $_SESSION['userData']['userID'] !== $text['sender'] ) 
+					if ($text['read'] != 1 && $_SESSION['userData']['userID'] !== $text['sender'] )
 						$cls = 'unread';
 					?>
                   <a class="flex media notification <?= $cls?>" href="<?= base_url('messages/chats/'.$text['chatter_id']) ?>">
@@ -75,7 +75,7 @@
 								<div class="notifications">
 								<?php if(empty($notification)) { ?>
 									<p style="text-align: center; font-size: 13px"> No Notifications Found.</p>
-								<?php }else{ 
+								<?php }else{
 								foreach($notification as $new) {?>
 									<a class="flex media notification" href="<?=$new['link']?>">
 										<img src="<?= $new['image']?>" alt="user" class="media-figure notification__feature-img">
@@ -113,7 +113,6 @@
 						<div class="dropdown__content-body">
 							<a href="<?php echo base_url('user-profile/').$_SESSION['userData']['userID']; ?>" class="user-settings__link"><i class="fa fa-user" aria-hidden="true"></i> User Profile</a>
 							<a href="<?php echo base_url('change-password'); ?>" class="user-settings__link"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a>
-							<a href="<?php echo base_url('settings'); ?>" class="user-settings__link"><i class="fa fa-gear" aria-hidden="true"></i> Settings</a>
 							<a href="<?php echo base_url('web/logout'); ?>" class="user-settings__link"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
 						</div>
 					</div>

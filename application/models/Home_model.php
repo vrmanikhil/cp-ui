@@ -495,7 +495,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getUserDetails($userId){
-		$this->db->join('indianCities', 'users.cityID = indianCities.cityID');
+		$this->db->join('indianCities', 'users.cityID = indianCities.cityID', 'left');
 		$result = $this->db->get_where('users', array('userID' => $userId), '1');
 		return $result->result_array();
 	}
@@ -640,10 +640,11 @@ class Home_model extends CI_Model {
 	}
 
 	public function getApplicants($offerType, $offerID){
-		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
 		if($offerType=='1'){
+		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, jobApplicants.status, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
 		$this->db->join('users', 'jobApplicants.userID = users.userID');}
 		if($offerType=='2'){
+		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, internshipApplicants.status, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
 		$this->db->join('users', 'internshipApplicants.userID = users.userID');}
 		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
 		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
@@ -656,9 +657,11 @@ class Home_model extends CI_Model {
 		$this->db->group_by('courses.course_id');
 		if($offerType=='1'){
 			$this->db->group_by('jobApplicants.timestamp');
+			$this->db->group_by('jobApplicants.status');
 			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
 		if($offerType=='2'){
 			$this->db->group_by('internshipApplicants.timestamp');
+			$this->db->group_by('internshipApplicants.status');
 			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
 		return $result->result_array();
 	}
@@ -827,6 +830,33 @@ class Home_model extends CI_Model {
 	public function getCollegeDetails($collegeID){
 		$result = $this->db->get_where('colleges', array('college_id'=>$collegeID));
 		return $result->result_array();
+	}
+
+	public function checkApplicant($applicantID, $offerType, $offerID){
+		if($offerType=='1'){
+			$result = $this->db->get_where('jobApplicants', array('jobID'=>$offerID, 'userID'=>$applicantID));
+			return $result->result_array();
+		}
+		if($offerType=='2'){
+			$result = $this->db->get_where('internshipApplicants', array('internshipID'=>$offerID, 'userID'=>$applicantID));
+			return $result->result_array();
+		}
+	}
+
+	public function changeApplicantStatus($applicantID, $offerType, $offerID, $status){
+		$data = array(
+			'status' => $status
+		);
+		if($offerType=='1'){
+			$this->db->where('userID', $applicantID);
+			$this->db->where('jobID', $offerID);
+			return $this->db->update('jobApplicants', $data);
+		}
+		if($offerType=='2'){
+			$this->db->where('userID', $applicantID);
+			$this->db->where('internshipID', $offerID);
+			return $this->db->update('internshipApplicants', $data);
+		}
 	}
 
 }

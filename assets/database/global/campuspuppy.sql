@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 29, 2017 at 11:48 PM
+-- Generation Time: Jun 30, 2017 at 02:31 AM
 -- Server version: 5.6.35-cll-lve
 -- PHP Version: 5.6.30
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `colleges` (
   `logo` text NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=303 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=342 ;
 
 --
 -- Dumping data for table `colleges`
@@ -296,7 +296,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (220, 'Sachdeva insitute of technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Sachdeva_insitute_of_technology.jpg', 1),
 (221, 'Ram-Eesh Institute of engineering and technology, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ram-Eesh_Institute_of_engineering_and_technology.jpg', 1),
 (222, 'Maharana Institute of technolgy and sciences, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Maharana_Pratap_Engineering_College1.jpg', 1),
-(223, 'E-max School of engineering and apllied research, Ambala', 'http://backoffice.campuspuppy.com/assets/collegeLogo/E-max_School_of_engineering_and_apllied_research.jpg', 1),
+(223, 'E-max School of engineering and applied research, Ambala', 'http://backoffice.campuspuppy.com/assets/collegeLogo/E-max_School_of_engineering_and_apllied_research.jpg', 1),
 (224, 'Doon college of engineering and Technology, Saharanpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Doon_college_of_engineering_and_Technology.jpg', 1),
 (225, 'Asia school of engineering and management, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Asia_school_of_engineering_and_management.jpg', 1),
 (226, 'Aryabhatt College of engineering and Technology, Baghpat', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Aryabhatt_College_of_engineering_and_Technology.jpg', 1),
@@ -375,7 +375,47 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (299, 'Kali charan Nigam institute of technology, Banda', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Kali_charan_Nigam_institute_of_technology.jpg', 1),
 (300, 'K S Jain Institue of engineering and technology, Modinagar', 'http://backoffice.campuspuppy.com/assets/collegeLogo/K_S_Jain_Institue_of_engineering_and_technology.jpg', 1),
 (301, 'JMS Group of institutions, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/JMS_Group_of_institutions.jpg', 1),
-(302, 'Ishwarchand Vidya Sagar Institute of technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ishwarchand_Vidya_Sagar_Institute_of_technology.jpg', 1);
+(302, 'Ishwarchand Vidya Sagar Institute of technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ishwarchand_Vidya_Sagar_Institute_of_technology.jpg', 1),
+(303, 'IAMR College of engineering, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/IAMR_College_of_engineering.jpg', 1),
+(304, 'HMFA Memorial institute of engineering and technology, Allahabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/HMFA_Memorial_institute_of_engineering_and_technology.jpg', 1),
+(305, 'Hardayal Technical Campus, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Hardayal_Technical_Campus.jpg', 1),
+(306, 'Gokaran Narvadeshwar Instiute of technology and management, Barabanki', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Gokaran_Narvadeshwar_Instiute_of_technology_and_management.jpg', 1),
+(307, 'GCRC Group of institutions, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GCRC_Group_of_institutions.jpg', 1),
+(308, 'Focus Institute of Technology and management, Bareilly', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Focus_Institute_of_Technology_and_management.jpg', 1),
+(309, 'Eshan College of engineering, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Eshan_College_of_engineering.jpg', 1),
+(310, 'Dr. ZH Institute of technology and management, Firozabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Dr__ZH_Institute_of_technology_and_management.jpg', 1),
+(311, 'CBS College of engineering and management, Agra', 'http://backoffice.campuspuppy.com/assets/collegeLogo/CBS_College_of_engineering_and_management.jpg', 1),
+(312, 'Bon Maharaj Engineering college , Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Bon_Maharaj_Engineering_college.jpg', 1),
+(313, 'Rajarshi Rananjay Singh Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Rajarshi_Rananjay_Singh_Institute_of_management_and_technology.jpg', 1),
+(314, 'ANA College of engineering and management studies, Bareilly', 'http://backoffice.campuspuppy.com/assets/collegeLogo/ANA_College_of_engineering_and_management_studies.jpg', 1),
+(315, 'Shivam Technical campus, Khurja', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shivam_Technical_campus.jpg', 1),
+(316, 'Abhay Memorial Trust group of institutions, Allahabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Abhay_Memorial_Trust_group_of_institutions.jpg', 1),
+(317, 'Shanti Niketan Group Of Institutions, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shanti_Niketan_Group_Of_Institutions.jpg', 1),
+(318, 'Sanskriti University, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Sanskriti_University.jpg', 1),
+(319, 'FIT Engineering College , Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/FIT_Engineering_College.jpg', 1),
+(320, 'Sanskar College of engineering and technology, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Brahmanand_Institute_of_research_technology_and_management.jpg', 1),
+(321, 'Brahmanand Institute of research technology and management, Bulandshahr', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Brahmanand_Institute_of_research_technology_and_management_(2).jpg', 1),
+(322, 'Institute of technology for women, Gorakhpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Institute_of_technology_for_women.jpg', 1),
+(323, 'Dr. M C Saxena Institute of engineering and management , Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Dr__M_C_Saxena_Institute_of_engineering_and_management.jpg', 1),
+(324, 'Heeralal Yadav Insitute of technology and management , Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Heeralal_Yadav_Insitute_of_technology_and_management.jpg', 1),
+(325, 'Brahmanand group of institutions, Bulandshahr', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Brahmanand_group_of_institutions.jpg', 1),
+(326, 'SVS Educational Park, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/SVS_Educational_Park.jpg', 1);
+INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
+(327, 'R D Foundation group of Instituitions, Faculty of engineering, ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/R_D_Foundation_group_of_Instituitions,_Faculty_of_engineering_(2).jpg', 1),
+(328, 'Millenium Institute of technology, Saharanpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Millenium_Institute_of_technology.jpg', 1),
+(329, 'KLS Institute of engineering and technology, Bijnaur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/KLS_Institute_of_engineering_and_technology.jpg', 1),
+(330, 'Institute of technology and management, Maharajganj', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Institute_of_technology_and_management,_maharajaganj.jpg', 1),
+(331, 'Sri Krishna Yogi Raj technical Institute, Hathras', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Sri_Krishna_Yogi_Raj_technical_Institute.jpg', 1),
+(332, 'R B Insitute of technology, Agra', 'http://backoffice.campuspuppy.com/assets/collegeLogo/R_B_Insitute_of_technology.jpg', 1),
+(333, 'Institute of engineering and management , Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Institute_of_engineering_and_management.jpg', 1),
+(334, 'College of engineering and technology, Moradabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/College_of_engineering_and_technology.jpg', 1),
+(335, 'FIT Group of institutions, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/FIT_Group_of_institutions.jpg', 1),
+(336, 'College of engineering and Rural Technology, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/College_of_engineering_and_Rural_Technology.jpg', 1),
+(337, 'Babu Mohan Lal Arya Smarak Engineering College, Agra', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Babu_Mohan_Lal_Arya_Smarak_Engineering_College.jpg', 1),
+(338, 'NCR Technical Campus, Aligarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/NCR_Technical_Campus.jpg', 1),
+(339, 'SMS Technical Campus, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/SMS_Technical_Campus.jpg', 1),
+(340, 'SMS Institute of technology, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/SMS_Technical_Campus1.jpg', 1),
+(341, 'E-Max Group of institutions, Ambala', 'http://backoffice.campuspuppy.com/assets/collegeLogo/E-Max_Group_of_institutions.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -1158,7 +1198,8 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 CREATE TABLE IF NOT EXISTS `internshipApplicants` (
   `internshipID` int(5) NOT NULL,
   `userID` int(5) NOT NULL,
-  `status` enum('1','2','3','4') NOT NULL
+  `status` enum('1','2','3','4') NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1255,7 +1296,8 @@ INSERT INTO `internshipSkills` (`internshipID`, `skillID`) VALUES
 CREATE TABLE IF NOT EXISTS `jobApplicants` (
   `jobID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
-  `status` enum('1','2','3','4') NOT NULL
+  `status` enum('1','2','3','4') NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
