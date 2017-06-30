@@ -510,6 +510,24 @@ class Web extends CI_Controller {
 			$CI =& get_instance();
 			$CI->session->set_userdata('registrationLevel', '2');
 			$this->home_lib->updateRegistrationLevel($userID, '2');
+			$course = $this->home_lib->getCourseDetails($courseID);
+			$course = $course[0];
+			$educationType = $course['courseType'];
+			$educationYear = $batch;
+			$scoreType = '1';
+			$score = '0';
+			$college = $this->home_lib->getCollegeDetails($collegeID);
+			$college = $college[0];
+			$description = $course['course']."-".$batch.", at ".$college['college'];
+			$data = array(
+					'educationType' => $educationType,
+					'year' => $educationYear,
+					'scoreType' => $scoreType,
+					'score' => $score,
+					'description' => $description,
+					'userID' => $userID
+			);
+			$this->home_lib->addEducation($data);
 			$this->session->set_flashdata('message', array('content'=>'Details Successfully Updated.','class'=>'success'));
 			redirect(base_url());
 		}
@@ -716,7 +734,7 @@ class Web extends CI_Controller {
 			'companyName' => $companyName,
 			'companyDescription' => $companyDescription
 		);
-		
+
 		if($position == '' || $companyName == '' || $companyDescription == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));

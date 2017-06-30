@@ -723,5 +723,18 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getFilteredApplicants($offerType, $offerID, $filters);
 	}
 
+	public function getCourseDetails($courseID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getCourseDetails($courseID);
+	}
+
+	public function getCollegeDetails($collegeID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getCollegeDetails($collegeID);
+	}
+
+
 
 }

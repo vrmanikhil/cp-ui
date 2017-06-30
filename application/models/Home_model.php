@@ -467,7 +467,7 @@ class Home_model extends CI_Model {
 	public function editCompanyDetails($data, $userID){
 		$this->db->where('userID', $userID);
 		return $this->db->update('employerUsers', $data);
-		
+
 	}
 
 	public function editEducation($data, $userID){
@@ -817,6 +817,16 @@ class Home_model extends CI_Model {
 		else{
 			return 0;
 		}
+	}
+
+	public function getCourseDetails($courseID){
+		$result = $this->db->get_where('courses', array('course_id'=>$courseID));
+		return $result->result_array();
+	}
+
+	public function getCollegeDetails($collegeID){
+		$result = $this->db->get_where('colleges', array('college_id'=>$collegeID));
+		return $result->result_array();
 	}
 
 }
