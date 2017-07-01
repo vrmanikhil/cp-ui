@@ -825,4 +825,45 @@ class Web extends CI_Controller {
 		}
 	}
 
+	public function changeCoverImage(){
+		$coverImage = base_url('assets/img/cover-default.jpg');
+		$image = '';
+		if($x = $this->input->post('image')){
+			$image = $x;
+		}
+		if($image=='1'){
+			$coverImage = base_url('assets/img/cover-001.jpg');
+		}
+		if($image=='2'){
+			$coverImage = base_url('assets/img/cover-002.jpg');
+		}
+		if($image=='3'){
+			$coverImage = base_url('assets/img/cover-003.jpg');
+		}
+		if($image=='4'){
+			$coverImage = base_url('assets/img/cover-004.jpg');
+		}
+		if($image=='5'){
+			$coverImage = base_url('assets/img/cover-005.jpg');
+		}
+		if($image=='6'){
+			$coverImage = base_url('assets/img/cover-006.jpg');
+		}
+		if($image=='7'){
+			$coverImage = base_url('assets/img/cover-default.jpg');
+		}
+		$data = array(
+			'coverImage' => $coverImage
+		);
+		$result = $this->home_lib->changeCoverImage($data);
+		if($result){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Cover Image Successfully Changed.','class'=>'success'));
+			redirect(base_url('user-profile/'.$userID));
+		}
+	}
+
 }
