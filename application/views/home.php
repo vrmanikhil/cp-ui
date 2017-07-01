@@ -156,6 +156,12 @@
                     <p class="form-control-static" id = "jobOffer">Offer</p>
                   </div>
                 </div>
+                <div class="form-group duration">
+                  <label class="control-label col-sm-3"><strong>Duration:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "duration">Duration</p>
+                  </div>
+                </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
                   <div class="col-sm-9">
@@ -236,6 +242,7 @@
 					res = JSON.parse(res)
 					
 					if(type == 'job'){
+						$(".duration").hide();
 						$("#jobTitle").html(res[0].jobTitle)
 						$("#jobDescription").html(res[0].jobDescription)
 						$("#jobStart").html(res[0].startDate)
@@ -259,6 +266,12 @@
 							$("#jobOffer").html('Expenses Covered')
 						}else {
 							$("#jobOffer").html('No Stipend')
+						}
+						$(".duration").show();
+						if(res[0].durationType == '1'){
+							$("#duration").html(res[0].duration + ' months')
+						}else{
+							$("#duration").html('Flexible')
 						}
 						$('#apply').attr('href',"<?= base_url('apply/apply?internshipID=')?>"+res[0].internshipID)
 					}
