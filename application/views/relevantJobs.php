@@ -105,7 +105,7 @@
 							<p class="posting-card__desc"><?php echo $value['jobTitle']; ?></p>
 							<p class="posting-card__post-location">
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
-								<span><?php if($value['cities']==''){ echo "Work from Home"; } else { echo $value['cities']; } ?></span>
+								<span><?php if($value['jobType']=='1'){ echo "Work from Home"; } else { echo $value['cities']; } ?></span>
 							</p>
 							<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
 							<div class="posting-card__apply">

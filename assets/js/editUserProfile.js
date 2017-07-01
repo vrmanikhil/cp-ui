@@ -71,6 +71,7 @@ $(document).ready(function () {
 
 		if(type === 'edit-company-details') {
 			formElem.find('img[id="companyLogo"]').attr('src', json['companyLogo'] || '');
+			formElem.find('img[id="companyLogo"]').attr('alt', 'No Image Uploaded.');
 			formElem.find('input[id = "logo"]').attr('value',json['companyLogo']);
 		}
 		var modal = modalElem.remodal();

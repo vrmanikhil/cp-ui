@@ -35,6 +35,12 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	public function toggleMobilePrivacy($displayMobile, $userId){
+		$data['displayMobile'] = $displayMobile;
+		$this->db->where('userID', $userId);
+		return $this->db->update('users', $data);
+	}
+
 	public function checkToken($email, $tokenType){
 		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email, 'active'=>'1'));
 		return $result->result_array();
@@ -270,7 +276,7 @@ class Home_model extends CI_Model {
 	  $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
 	  $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 	  $this->db->join('employerUsers', 'internshipOffers.addedBy = employerUsers.userID');
-	  $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName, internshipOffers.status, internshipOffers.active, internshipOffers.applicationDeadline');
+	  $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers.internshipID, internshipOffers.internshipType, GROUP_CONCAT(internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(skills.skill_name) as skillsRequired, employerUsers.companyLogo, employerUsers.companyName, internshipOffers.status, internshipOffers.active, internshipOffers.applicationDeadline');
 	  $this->db->group_by('internshipOffers.internshipID');
 	  $this->db->order_by('internshipOffers.internshipID', 'DESC');
 	  $result = $this->db->get_where('internshipOffers', array('addedBy' => $addedBy));
@@ -300,7 +306,7 @@ class Home_model extends CI_Model {
 			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, jobOffers.applicants, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, jobOffers.applicants,joboffers.jobType, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->where('jobOffers.status', 2);
 			$this->db->where('jobOffers.active', 1);
 			$this->db->group_by('jobOffers.jobID');
@@ -310,7 +316,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getJobDetails($jobID){
-		$this->db->select('jobOffers.jobID, jobOffers.jobTitle, jobOffers.jobtype, jobOffers.jobDescription, jobOffers.startDate, jobOffers.durationType, jobOffers.duration, jobOffers.applicationDeadline, jobOffers.offerType, jobOffers.offer, jobOffers.minimumOffer, jobOffers.maximumOffer, jobOffers.partTime, jobOffers.openings, jobOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
+		$this->db->select('jobOffers.jobID, jobOffers.jobTitle, jobOffers.jobType, jobOffers.jobDescription, jobOffers.startDate, jobOffers.applicationDeadline, jobOffers.offerType, jobOffers.offer, jobOffers.minimumOffer, jobOffers.maximumOffer, jobOffers.partTime, jobOffers.openings, jobOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
 		$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
 		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');
 		$this->db->join('employerUsers','employerUsers.userID = jobOffers.addedBy');
@@ -321,14 +327,14 @@ class Home_model extends CI_Model {
 	}
 
 	public function getInternshipDetails($internshipID){
-		$this->db->select('internshipOffers.internshipID, internshipOffers.internshipTitle, internshipOffers.internshiptype, internshipOffers.internshipDescription, internshipOffers.startDate, internshipOffers.durationType, internshipOffers.duration, internshipOffers.applicationDeadline, internshipOffers.stipendType, internshipOffers.stipend, internshipOffers.minimumStipend, internshipOffers.maximumStipend, internshipOffers.partTime, internshipOffers.openings, internshipOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription');
+		$this->db->select('internshipOffers.internshipID, internshipOffers.internshipTitle, internshipOffers.internshipType, internshipOffers.internshipDescription, internshipOffers.startDate, internshipOffers.applicationDeadline, internshipOffers.stipendType, internshipOffers.stipend, internshipOffers.minimumStipend, internshipOffers.maximumStipend, internshipOffers.partTime, internshipOffers.openings, internshipOffers.addedBy, employerUsers.companyName, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyWebsite, employerUsers.companyDescription, internshipOffers.durationType, internshipOffers.duration');
 		$this->db->join('internshipLocations', 'internshipOffers.internshipID = internshipLocations.internshipID', 'left outer');
 		$this->db->join('indianCities', 'internshipLocations.cityID = indianCities.cityID', 'left outer');
 		$this->db->join('employerUsers','employerUsers.userID = internshipOffers.addedBy');
 		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID');
 		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
-		// var_dump($this->db->last_query()); die();
+		var_dump($this->db->last_query()); die();
 		return $result->result_array();
 	}
 
@@ -429,7 +435,7 @@ class Home_model extends CI_Model {
 	    $this->db->join('employerUsers', 'internshipOffers.addedBy=employerUsers.userID');
 	    $this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
 	    $this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
-	    $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, internshipOffers.applicants, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+	    $this->db->select('internshipOffers.internshipTitle, internshipOffers.addedBy, internshipOffers. internshipID, internshipOffers.internshipType, internshipOffers.applicants, GROUP_CONCAT(DISTINCT internshipSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT internshipLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
 	    $this->db->where('internshipOffers.status', 2);
 			$this->db->where('internshipOffers.active', 1);
 	    $this->db->group_by('internshipOffers.internshipID');
