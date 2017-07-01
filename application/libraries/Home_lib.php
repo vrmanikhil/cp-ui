@@ -741,6 +741,18 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getCollegeDetails($collegeID);
 	}
 
+	public function checkApplicant($applicantID, $offerType, $offerID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkApplicant($applicantID, $offerType, $offerID);
+	}
+
+	public function changeApplicantStatus($applicantID, $offerType, $offerID, $status){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->changeApplicantStatus($applicantID, $offerType, $offerID, $status);
+	}
+
 
 
 }

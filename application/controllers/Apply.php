@@ -189,5 +189,36 @@ class Apply extends CI_Controller {
 		}
 	}
 
+	public function changeApplicantStatus($applicantID, $offerType, $offerID, $status){
+		$applicant = $this->home_lib->checkApplicant($applicantID, $offerType, $offerID);
+		if(empty($applicant)){
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+			redirect(base_url('applicants/'.$offerType.'/'.$offerID));
+		}
+		else{
+			$applicantStatus = $applicant[0]['status'];
+			if($applicantStatus == $status){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('applicants/'.$offerType.'/'.$offerID));
+			}
+			if($applicantStatus == '2'){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('applicants/'.$offerType.'/'.$offerID));
+			}
+			if(($applicantStatus=='1'||$applicantStatus=='3') && ($status=='2' || $status == '4' || $status == '3')){
+				$result = $this->home_lib->changeApplicantStatus($applicantID, $offerType, $offerID, $status);
+				if($result){
+					$this->session->set_flashdata('message', array('content'=>'Applicant Status successfully Changed.','class'=>'success'));
+					redirect(base_url('applicants/'.$offerType.'/'.$offerID));
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+					redirect(base_url('applicants/'.$offerType.'/'.$offerID));
+				}
+			}
+		}
+	}
+
+
 
 }

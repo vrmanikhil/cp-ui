@@ -833,7 +833,7 @@ class Home extends CI_Controller {
 		// var_dump($this->data['offerData']);die;
 		$filters = [];
 		if($this->data['offerData']['addedBy']===$_SESSION['userData']['userID']){
-			if (isset($_POST['applyfilter'])) {	
+			if (isset($_POST['applyfilter'])) {
 				$filters = $_POST['filter'];
 				$this->data['applicants'] = $this->home_lib->getFilteredApplicants($offerType, $offerID, $filters);
 				$this->data['filter'] = json_encode($filters);

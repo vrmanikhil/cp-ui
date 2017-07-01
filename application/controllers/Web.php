@@ -396,7 +396,7 @@ class Web extends CI_Controller {
 			redirect(base_url());
 		}
 		else{
-		$this->resetPasswordEMail('vrmanikhil@gmail.com');
+		$this->resetPasswordEMail($email);
 		$this->session->set_flashdata('message', array('content'=>'Password Reset Instructions have been successfully Sent.','class'=>'success'));
 		redirect(base_url());
 		}

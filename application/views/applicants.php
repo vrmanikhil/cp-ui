@@ -92,8 +92,20 @@
 										<p style="font-size: 18px;"><a href="<?php echo base_url('user-profile/').$value['userID']; ?>"><strong><?php echo $value['name']; ?></strong></a></p>
 										<p><?php echo $value['course']."-".$value['batch']; ?></p>
 										<p><?php echo $value['college']; ?></p>
-										<p><?php echo "<b>Skills: </b>".$value['userSkills']; ?></p>
+										<p><?php if(empty($value['userSkills'])){ echo "<b>Skills: </b>No Skills Added"; } else { echo "<b>Skills: </b>".$value['userSkills']; } ?></p>
 										<p style="margin-top: 8px; float:right;"><a href="<?php echo base_url('user-profile/').$value['userID']."?download=1"; ?>" class="btn" style="color: white; background: var(--midnight-blue);"><i class="fa fa-download" aria-hidden="true"></i></a><a target="_blank" href="<?php echo base_url('user-profile/').$value['userID']; ?>" class="btn" style="margin-left: 5px; color: white; background: var(--midnight-blue);"><i class="fa fa-eye" aria-hidden="true"></i></a><a class="btn" style="margin-left: 5px; color: white; background: var(--midnight-blue);"><i class="fa fa-plus" aria-hidden="true"></i> Add to Compare</a></p>
+										<p style="margin-top: 8px; float: right;">
+											<?php if($value['status']=='1' || $value['status']=='3') { ?>
+											<a href="<?php echo base_url('apply/changeApplicantStatus/'.$value['userID'].'/'.$offerType.'/'.$offerID.'/4'); ?>" style="color: var(--green);"><b>Hire</b></a>
+											<?php } ?>
+											<?php if($value['status']=='1') { ?>
+											<a href="<?php echo base_url('apply/changeApplicantStatus/'.$value['userID'].'/'.$offerType.'/'.$offerID.'/3'); ?>" style="color: var(--yellow); margin-left: 8px;"><b>Shortlist</b></a>
+											<?php } ?>
+											<?php if($value['status']=='1' || $value['status']=='3') { ?>
+											<a href="<?php echo base_url('apply/changeApplicantStatus/'.$value['userID'].'/'.$offerType.'/'.$offerID.'/2'); ?>" style="color: var(--red); margin-left: 8px;"><b>Reject</b></a>
+											<?php } ?>
+										</p>
+
 									</div>
 								</div>
 							</div>
@@ -222,7 +234,7 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						
+
 					</aside>
 				</div>
 			</div>
@@ -275,7 +287,7 @@
 						}else {
 							$("#jobOffer").html('No Stipend')
 						}
-						
+
 					}
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
@@ -308,7 +320,7 @@
 
 	</script>
 
-	<script type="text/javascript"> 
+	<script type="text/javascript">
 	var filter = <?= $filter ?>;
 	console.log(filter);
 		$(document).ready(function(){
