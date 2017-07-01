@@ -63,14 +63,15 @@
 				</div>
 			</aside>
 			<div class="main-body flex__item">
-				<div class="feed">
+				<div class="feed" id = "feed">
 					<div class="card">
 						<h2 class="section-title"><b>JOBS AND INTERNSHIPS FEEDS</b></h2>
 					</div>
 
 					<?php if(empty($feeds)) { ?>
 				<p style="text-align: center"> No Jobs And Internships Feeds Found.</p>
-				<?php }else{ foreach ($feeds as $key => $value) { ?>
+				<?php }else{ $i=0;
+					foreach ($feeds as $key => $value) { $i++;?>
 
 					<div class="feed-post card">
 						<div class="feed-post__head">
@@ -79,9 +80,7 @@
 								<span class="media-body flex flex--col">
 									<a href="<?php echo base_url('user-profile/').$value['addedBy']; ?>" class="flex__item"><span class="feed-post__username"><?php echo $value['name']; ?></span></a>
 									<span class="feed-post__info flex__item">
-										<?php $timestamp = strtotime($value['timestamp']); ?>
-										<span class="feed-post__postdate"><?php echo date('d-M-Y', $timestamp); ?></span>
-										<span class="feed-post__posttime"><?php echo date('g:i a', $timestamp); ?></span>
+										<span class="feed-post__postdate"><?= $value['timestamp'] ?></span>
 									</span>
 								</span>
 							</div>
@@ -98,6 +97,12 @@
 					<?php } }?>
 
 				</div>
+				<center>
+						<?php if($more) {?>
+						<button type="submit" class="btn btn--primary messages__load-more" onclick = "loadDoc()" id ="load-more" >Load More</button>
+						<?php }else{
+							} ?>
+				</center>
 			</div>
 			<aside class="flex__item right-pane">
 				<?php echo $activeUser; ?>
@@ -217,6 +222,7 @@
 				id = this.id
 				type = $('#'+id).attr('name')
 				id = $('#'+id).attr('data-id')
+				console.log(id);
 				if(type == 'job'){
 					url = '<?= base_url('home/getJobDetails')?>';
 					data = {jobid : id}
@@ -270,7 +276,7 @@
 						else
 							$('#jobType').html(res[0].cities)
 					}else{
-						if(res[0].internshiptype == "1")
+						if(res[0].internshipType == "1")
 							$("#jobType").html("Work From Home")
 						else
 							$('#jobType').html(res[0].cities)
@@ -285,6 +291,37 @@
 		})
 
 	</script>
+
+	<script type="text/javascript">
+		var offset = <?php echo $i; ?>;
+		function loadDoc() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			 if (this.readyState == 4 && this.status == 200) {
+				var response = JSON.parse(this.responseText);
+				console.log(response);
+				var more = response.more;
+				var feeds = response.feeds;
+				for( i = 0; i < feeds.length; i++){
+					offset++;
+					if(feeds[i].offerType == 'Internship'){
+						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'internship' id = 'viewinternship"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
+						document.getElementById('feed').innerHTML += html;
+					}else{
+						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'job' id = 'viewjob"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
+						document.getElementById('feed').innerHTML += html;
+				}
+			}
+				if(feeds.length == 0 || more === false){
+				document.getElementById('load-more').style.display = "none";
+			}
+			 }
+		}
+
+				xhttp.open("GET", "<?php echo base_url('home/getMoreFeeds/');?>"+offset, true);
+				xhttp.send();
+		};
+		</script>
 </body>
 
 </html>

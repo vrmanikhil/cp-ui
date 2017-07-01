@@ -634,10 +634,18 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getSearchResults($query);
 	}
 
-	public function getFeeds(){
+	public function getFeeds($offset = 0){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getFeeds();
+		$data = $CI->homeModel->getFeeds(6, $offset);
+		$this->fixTimestamp($data, 'timestamp', 'd M Y  g:i A');
+		return $data;
+	}
+
+	public function moreFeeds($offset){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return !empty($CI->homeModel->getFeeds(6,$offset));
 	}
 
 	public function checkConnectionExist($user1, $user2){
