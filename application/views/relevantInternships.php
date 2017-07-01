@@ -77,8 +77,8 @@
 						</div>
 					</div>
 					<input type="hidden" name="filter" value="1">
-					<center>
-					<a href = "<?= base_url('clear-filter/1/1')?>"  style = "color: var(--midnight-blue); text-decoration: none;"><b>Clear Filters</b></a>
+          <center>
+					<button class = "clear-filter" style = "width: 45%">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 					</center>
 				</form>
@@ -173,6 +173,12 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Duration:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "duration">Duration</p>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobOpening">Number of Openings</p>
@@ -241,6 +247,11 @@
 						$("#jobOffer").html('Expenses Covered')
 					}else {
 						$("#jobOffer").html('No Stipend')
+					}
+					if(res[0].durationType == '1'){
+						$("#duration").html(res[0].duration + ' months')
+					}else{
+						$("#duration").html('Flexible')
 					}
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
@@ -333,7 +344,13 @@
 		        	]
 		    });
 		});
-		});
+		});  
+
+	$('.clear-filter').click(function(){
+		$('.search-filter').empty();
+		window.location.href = "<?= base_url('internships/relevant-internships')?>";
+	})
+
 	</script>
 </body>
 

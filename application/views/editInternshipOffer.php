@@ -124,34 +124,37 @@
 						<option value="3" <?php if($internshipDetails['stipendType']=='3') echo "selected"; ?>>Offered in Range</option>
 						<option value="4" <?php if($internshipDetails['stipendType']=='4') echo "selected"; ?>>Fixed Stipend</option>
 					</select>
+					<?php if($internshipDetails['stipendType']=='3'){?>
 					<div class="flex" id="offeredRange" style="display: none;">
 						<div class="form-group">
 							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
-							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input" value = "<?= $internshipDetails['minimumStipend']?>">
 						</div>
 						<div class="form-group">
 							<label for="maximumStipend" class="form__label">Maximum Stipend</label>
-							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input" value = "<?= $internshipDetails['minimumStipend']?>">
 						</div>
 					</div>
+					<?php } if($internshipDetails['stipendType']=='4'){?>
 					<div id="fixedStipend" style="display: none;">
 					<label for="stipend" class="form__label">Stipend</label>
-					<input type="text" id="stipend" name="stipend" placeholder="Stipend" class="form__input">
+					<input type="text" id="stipend" name="stipend" placeholder="Stipend" class="form__input" value = "<?= $internshipDetails['stipend']?>">
 					</div>
+					<?php } ?>
 					<div class="flex">
 						<div class="form-group">
 							<label for="applicants" class="form__label">Applicant Type</label>
 							<select type="text" id="applicants" name="applicants" placeholder="Applicant Type" class="form__input" required>
-								<option value="3">Anyone can Apply</option>
-								<option value="1">100% Match with Skills</option>
-								<option value="2">Partial Match</option>
+								<option value="3" <?php if($internshipDetails['applicants']=='3') echo "selected"; ?>>Anyone can Apply</option>
+								<option value="1" <?php if($internshipDetails['applicants']=='1') echo "selected"; ?>>100% Match with Skills</option>
+								<option value="2" <?php if($internshipDetails['applicants']=='2') echo "selected"; ?>>Partial Match</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="internshipType" class="form__label">Internship Type</label>
 							<select type="text" name="internshipType" id="internshipType" placeholder="Internship Type" class="form__input" required>
-								<option value="1">Work from Home</option>
-								<option value="2">In-Office/On-Field</option>
+								<option value="1" <?php if($internshipDetails['internshipType']=='1') echo "selected"; ?>>Work from Home</option>
+								<option value="2" <?php if($internshipDetails['internshipType']=='2') echo "selected"; ?>>In-Office/On-Field</option>
 							</select>
 						</div>
 					</div>

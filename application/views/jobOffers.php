@@ -76,8 +76,9 @@
 						</div>
 					</div>
 					<input type="hidden" name="filter" value="1">
-					<center>
-					<a onclick="location.reload(true);"  style = "color: var(--midnight-blue); text-decoration: none;"><b>Clear Filters</b></a>
+
+          <center>
+					<button class = "clear-filter" style = "width: 45%">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 					</center>
 				</form>
@@ -326,6 +327,10 @@
 		    });
 		});
 		});
+	$('.clear-filter').click(function(){
+		$('.search-filter').empty();
+		window.location.href = "<?= base_url('jobs/job-offers')?>";
+	})
 	</script>
 </body>
 

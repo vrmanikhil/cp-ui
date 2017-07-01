@@ -174,7 +174,7 @@
                 <div class="form-group">
                   <label class="control-label col-sm-3"><strong>Duration:</strong></label>
                   <div class="col-sm-9">
-                    <p class="form-control-static" id = "duration">Number of Openings</p>
+                    <p class="form-control-static" id = "duration">Duration</p>
                   </div>
                 </div>
                 <div class="form-group">
