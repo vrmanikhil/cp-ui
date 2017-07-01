@@ -454,33 +454,6 @@ class Web extends CI_Controller {
 		}
 	}
 
-
-
-	private function statusChangeEMail($email='', $offerType='', $offerID=''){
-		$emailData['offerType'] = $offerType;
-		if($offerType=='1'){
-			$offerData = $this->home_lib->getJobData($offerID);
-			$emailData['offerTitle'] = $offerData[0]['jobTitle'];
-			$emailData['company'] = $offerData[0]['companyName'];
-		}
-		if($offerType=='2'){
-			$offerData = $this->home_lib->getInternshipData($offerID);
-			$emailData['offerTitle'] = $offerData[0]['internshipTitle'];
-			$emailData['company'] = $offerData[0]['companyName'];
-		}
-		$this->load->helper('mail_helper');
-		$message =  $this->load->view('emailers/status-change', $emailData, true);
-		$data = array(
-			'sendToEmail' => $email,
-			'fromName' => 'CampusPuppy Private Limited',
-			'fromEmail' => 'no-reply@campuspuppy.com',
-			'subject' => 'Status Change for Applied Offer|CampusPuppy Private Limited',
-			'message' => $message,
-			'using' =>'pepipost'
-		);
-		sendEmail($data);
-	}
-
 	public function addEducationalDetails(){
 		$collegeID = '';
 		$courseID = '';
