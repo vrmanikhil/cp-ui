@@ -76,10 +76,12 @@
 						</div>
 					</div>
 					<input type="hidden" name="filter" value="1">
-					<a href = "<?= base_url('clear-filter/1/1')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
-					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
+					<center>
+					<a onclick="location.reload(true);"  style = "color: var(--midnight-blue); text-decoration: none;"><b>Clear Filters</b></a>
+					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
+					</center>
 				</form>
-				<div class="post card">
+				<div class="post card" style="margin-top: 10px;">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
 			</aside>

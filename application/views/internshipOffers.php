@@ -77,10 +77,12 @@
 						</div>
 					</div>
 					<input type="hidden" name="filter" value="1">
-					<a href = "<?= base_url('clear-filter/1/1')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
-					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
+					<center>
+					<a href = "<?= base_url('clear-filter/1/1')?>"  style = "color: var(--midnight-blue); text-decoration: none;"><b>Clear Filters</b></a>
+					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
+					</center>
 				</form>
-				<div class="post card">
+				<div class="post card" style="margin-top: 10px;">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
 			</aside>
@@ -276,7 +278,7 @@
 			method:'GET',
 			url:'/home/getLocationsSkills',
 			data:{job : '0' }
-		}).done(function(data){	
+		}).done(function(data){
 			data = JSON.parse(data)
 			locations = data.locations
 			skills = data.skills
@@ -301,7 +303,7 @@
 				}else{
 					locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
 				}
-				
+
 			}
 
 			$('#skill-list').DataTable( {
@@ -332,7 +334,7 @@
 		        	]
 		    });
 		});
-		});  
+		});
 	</script>
 </body>
 
