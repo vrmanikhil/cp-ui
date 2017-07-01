@@ -97,6 +97,7 @@
 					<?php } }?>
 
 				</div>
+				<div id = "feeds"></div>
 				<center>
 						<?php if($more) {?>
 						<button type="submit" class="btn btn--primary messages__load-more" onclick = "loadDoc()" id ="load-more" >Load More</button>
@@ -217,7 +218,7 @@
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('.view').click(function(){
+			$('body').on('click', '.view', function(){
 				var data = null
 				id = this.id
 				type = $('#'+id).attr('name')
@@ -295,6 +296,7 @@
 	<script type="text/javascript">
 		var offset = <?php echo $i; ?>;
 		function loadDoc() {
+				unbind();
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 			 if (this.readyState == 4 && this.status == 200) {
@@ -306,10 +308,10 @@
 					offset++;
 					if(feeds[i].offerType == 'Internship'){
 						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'internship' id = 'viewinternship"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
-						document.getElementById('feed').innerHTML += html;
+						document.getElementById('feeds').innerHTML += html;
 					}else{
 						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'job' id = 'viewjob"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
-						document.getElementById('feed').innerHTML += html;
+						document.getElementById('feeds').innerHTML += html;
 				}
 			}
 				if(feeds.length == 0 || more === false){
@@ -317,9 +319,16 @@
 			}
 			 }
 		}
-
+bind();
 				xhttp.open("GET", "<?php echo base_url('home/getMoreFeeds/');?>"+offset, true);
 				xhttp.send();
+
+				function unbind(){
+					$(".view").unbind('click')
+				}
+				function bind(){
+					$(".view").bind('click')
+				}
 		};
 		</script>
 </body>

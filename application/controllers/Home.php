@@ -68,7 +68,7 @@ class Home extends CI_Controller {
 	public function getMoreFeeds($offset){
 		$data['offset'] = $offset;
 		$data['feeds'] = $this->home_lib->getFeeds($offset);
-		$data['more'] = $this->home_lib->moreFeeds($offset+6);
+		$data['more'] = $this->home_lib->moreFeeds($offset+2);
 		echo json_encode($data);
 	}
 

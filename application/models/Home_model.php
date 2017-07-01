@@ -698,8 +698,8 @@ class Home_model extends CI_Model {
 	}
 
 	public function getFeeds($limit = 6, $offset = 0){
-		$limit /= 2;
-		$offset /= 2;
+		$limit = ceil($limit/2);
+		$offset = ceil($offset/2);
 		$query = "(SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` WHERE (`jobOffers`.`status` = 2 AND `jobOffers`.`active` = 1) LIMIT $limit OFFSET $offset) UNION ALL (SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID` WHERE (`internshipOffers`.`status` = 2 AND `internshipOffers`.`active` = 1) LIMIT $limit OFFSET $offset) Order BY timestamp DESC";
 		$result = $this->db->query($query);
 		return $result->result_array();
