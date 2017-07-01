@@ -223,6 +223,7 @@
 				data = {jobid : id}
 				$.get('<?= base_url('home/getJobDetails')?>', data).done(function(res){
 					res = JSON.parse(res)
+					console.log(res);
 					$("#jobTitle").html(res[0].jobTitle)
 					$("#jobDescription").html(res[0].jobDescription)
 					$("#jobStart").html(res[0].startDate)
