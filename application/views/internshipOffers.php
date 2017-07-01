@@ -172,6 +172,12 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Duration:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "duration">Number of Openings</p>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
                   <div class="col-sm-9">
                     <p class="form-control-static" id = "jobOpening">Number of Openings</p>
@@ -239,6 +245,11 @@
 						$("#jobOffer").html('Expenses Covered')
 					}else {
 						$("#jobOffer").html('No Stipend')
+					}
+					if(res[0].durationType == '1'){
+						$("#duration").html(res[0].duration + ' months')
+					}else{
+						$("#duration").html('Flexible')
 					}
 					$("#jobOpening").html(res[0].openings)
 					if(res[0].partTime == "1")
