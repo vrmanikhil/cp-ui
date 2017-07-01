@@ -208,6 +208,15 @@ class Apply extends CI_Controller {
 			if(($applicantStatus=='1'||$applicantStatus=='3') && ($status=='2' || $status == '4' || $status == '3')){
 				$result = $this->home_lib->changeApplicantStatus($applicantID, $offerType, $offerID, $status);
 				if($result){
+					if($offerType=='1'){
+						$notificationType = '3';
+					}
+					else{
+						$notificationType = '4';
+					}
+					$this->home_lib->triggerNotification($applicantID, $notificationType, $_SESSION['userData']['userID']);
+					$applicantEMail = $this->home_lib->getUserDetails($applicantID)[0]['email'];
+					$this->statusChangeEMail($applicantEMail,$offerType, $offerID);
 					$this->session->set_flashdata('message', array('content'=>'Applicant Status successfully Changed.','class'=>'success'));
 					redirect(base_url('applicants/'.$offerType.'/'.$offerID));
 				}
@@ -217,6 +226,31 @@ class Apply extends CI_Controller {
 				}
 			}
 		}
+	}
+
+	private function statusChangeEMail($email='', $offerType='', $offerID=''){
+		$emailData['offerType'] = $offerType;
+		if($offerType=='1'){
+			$offerData = $this->home_lib->getJobData($offerID);
+			$emailData['offerTitle'] = $offerData[0]['jobTitle'];
+			$emailData['company'] = $offerData[0]['companyName'];
+		}
+		if($offerType=='2'){
+			$offerData = $this->home_lib->getInternshipData($offerID);
+			$emailData['offerTitle'] = $offerData[0]['internshipTitle'];
+			$emailData['company'] = $offerData[0]['companyName'];
+		}
+		$this->load->helper('mail_helper');
+		$message =  $this->load->view('emailers/status-change', $emailData, true);
+		$data = array(
+			'sendToEmail' => $email,
+			'fromName' => 'CampusPuppy Private Limited',
+			'fromEmail' => 'no-reply@campuspuppy.com',
+			'subject' => 'Status Change for Applied Offer|CampusPuppy Private Limited',
+			'message' => $message,
+			'using' =>'pepipost'
+		);
+		sendEmail($data);
 	}
 
 

@@ -716,6 +716,10 @@ class Home_model extends CI_Model {
 		$userData = $this->getUserDetails($triggeredBy);
 		$name = $userData[0]['name'];
 		$image = $userData[0]['profileImage'];
+		if($_SESSION['userData']['accountType']==='2'){
+			$name = $_SESSION['companyName'];
+			$image = $_SESSION['companyLogo'];
+		}
 
 		if($notificationType=='1'){
 			$notification = $name." has sent you a Connection Request.";
@@ -725,6 +729,15 @@ class Home_model extends CI_Model {
 			$notification = $name." has accepted your Connection Request.";
 			$link = base_url('/connections');
 		}
+		if($notificationType=='3'){
+			$notification = "Status has changed for your applied Job Offer at ".$name;
+			$link = base_url('jobs/applied-job-offers');
+		}
+		if($notificationType=='4'){
+			$notification = "Status has changed for your applied Internship Offer at ".$name;
+			$link = base_url('internships/applied-internship-offers');
+		}
+
 		$data = array(
 			'name' => $name,
 			'image' => $image,
