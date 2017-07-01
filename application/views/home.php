@@ -234,7 +234,7 @@
 				}
 				$.get(url, data).done(function(res){
 					res = JSON.parse(res)
-					console.log(res)
+					
 					if(type == 'job'){
 						$("#jobTitle").html(res[0].jobTitle)
 						$("#jobDescription").html(res[0].jobDescription)
@@ -296,7 +296,6 @@
 	<script type="text/javascript">
 		var offset = <?php echo $i; ?>;
 		function loadDoc() {
-				unbind();
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 			 if (this.readyState == 4 && this.status == 200) {
@@ -319,16 +318,10 @@
 			}
 			 }
 		}
-bind();
 				xhttp.open("GET", "<?php echo base_url('home/getMoreFeeds/');?>"+offset, true);
 				xhttp.send();
 
-				function unbind(){
-					$(".view").unbind('click')
-				}
-				function bind(){
-					$(".view").bind('click')
-				}
+				
 		};
 		</script>
 </body>

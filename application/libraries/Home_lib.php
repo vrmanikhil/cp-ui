@@ -637,7 +637,7 @@ public function injectClassName(&$data)
 	public function getFeeds($offset = 0){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		$data = $CI->homeModel->getFeeds(2, $offset);
+		$data = $CI->homeModel->getFeeds(6, $offset);
 		$this->fixTimestamp($data, 'timestamp', 'd M Y  g:i A');
 		return $data;
 	}
