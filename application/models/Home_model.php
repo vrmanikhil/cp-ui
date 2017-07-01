@@ -329,7 +329,7 @@ class Home_model extends CI_Model {
 		$this->db->join('jobLocations', 'jobOffers.jobID = jobLocations.jobID', 'left outer');
 		$this->db->join('indianCities', 'jobLocations.cityID = indianCities.cityID', 'left outer');
 		$this->db->join('employerUsers','employerUsers.userID = jobOffers.addedBy');
-		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID');
+		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 		$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
 		$result = $this->db->get_where('jobOffers', array('jobOffers.jobID' => $jobID));
 		return $result->result_array();
@@ -340,10 +340,11 @@ class Home_model extends CI_Model {
 		$this->db->join('internshipLocations', 'internshipOffers.internshipID = internshipLocations.internshipID', 'left outer');
 		$this->db->join('indianCities', 'internshipLocations.cityID = indianCities.cityID', 'left outer');
 		$this->db->join('employerUsers','employerUsers.userID = internshipOffers.addedBy');
-		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID');
+		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID', 'left outer');
 		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
+		$this->db->group_by('internshipOffers.internshipID');
 		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
-		// var_dump($this->db->last_query()); die();
+		var_dump($this->db->last_query()); die();
 		return $result->result_array();
 	}
 
