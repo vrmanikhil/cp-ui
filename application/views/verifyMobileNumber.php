@@ -22,12 +22,12 @@
 				<div class="main-body flex__item flex flex--col">
 					<div class="verify-number-container">
 						<h2>Verify Mobile Number</h2>
-						<form class="form" action="" method="post">
+						<form class="form" action="<?php echo base_url('web/verifyMobile'); ?>" method="post">
 						<div class="form-group">
-							<label for="otp" class="form__label">OTP</label>
-							<input type="text" name="otp" id="otp" placeholder="Enter your OTP" class="form__input">
+							<label for="otp" class="form__label">One Time Password</label>
+							<input type="text" name="otp" id="otp" maxlength="4" placeholder="Enter your OTP" class="form__input">
 							<div class="resend-otp">
-								<a href="javascript:">Resend OTP</a>
+								<a href="<?php echo base_url('verify-mobile-number/8800'); ?>">Resend OTP</a>
 							</div>
 						</div>
 						<div class="form-group">

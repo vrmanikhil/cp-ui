@@ -46,6 +46,11 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkOTP($mobile){
+		$result = $this->db->get_where('otp', array('mobile' => $mobile, 'active'=>'1'));
+		return $result->result_array();
+	}
+
 	public function updateRegistrationLevel($userID, $registrationLevel){
 		$data = array(
                'registrationLevel' => $registrationLevel
@@ -251,6 +256,10 @@ class Home_model extends CI_Model {
 		return $this->db->insert('passwordToken', $data);
 	}
 
+	public function insertOTP($data){
+		return $this->db->insert('otp', $data);
+	}
+
 	public function map_intern_locations($data){
 		return $this->db->insert_batch('internshipLocations', $data);
 	}
@@ -306,7 +315,7 @@ class Home_model extends CI_Model {
 			$this->db->join('employerUsers', 'jobOffers.addedBy=employerUsers.userID');
 			$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');
 			$this->db->join('skills', 'jobSkills.skillID = skills.skillID', 'left outer');
-			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers. jobID, jobOffers.applicants,joboffers.jobType, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
+			$this->db->select('jobOffers.jobTitle, jobOffers.addedBy, jobOffers.jobID, jobOffers.applicants, jobOffers.jobType, GROUP_CONCAT(DISTINCT jobSkills.skillID) as skillIDsRequired, GROUP_CONCAT(DISTINCT skills.skill_name) as skillsRequired, GROUP_CONCAT(DISTINCT jobLocations.cityID) as cityIDs,GROUP_CONCAT(DISTINCT indianCities.city) as cities, employerUsers.companyName, employerUsers.companyLogo');
 			$this->db->where('jobOffers.status', 2);
 			$this->db->where('jobOffers.active', 1);
 			$this->db->group_by('jobOffers.jobID');
@@ -334,7 +343,7 @@ class Home_model extends CI_Model {
 		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID');
 		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
-		var_dump($this->db->last_query()); die();
+		// var_dump($this->db->last_query()); die();
 		return $result->result_array();
 	}
 
@@ -599,6 +608,14 @@ class Home_model extends CI_Model {
 		$this->db->where('email', $email);
 		$this->db->where('tokenType', $tokenType);
 		return $this->db->update('passwordToken', $data);
+	}
+
+	public function deactivateOTP($mobile){
+		$data = array(
+			'active' => '0'
+		);
+		$this->db->where('mobile', $mobile);
+		return $this->db->update('otp', $data);
 	}
 
 	public function getConnectionProfiles($connections){

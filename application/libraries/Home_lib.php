@@ -16,6 +16,7 @@ class Home_lib {
 				'email' => $email,
 				'name' => $userData['name'],
 				'userID' => $userData['userID'],
+				'mobile' => $userData['mobile'],
 				'accountType' => $userData['accountType'],
 				);
 			if($userData['accountType']=='1'){
@@ -199,10 +200,22 @@ class Home_lib {
 		return $CI->homeModel->checkToken($email, $tokenType);
 	}
 
+	public function checkOTP($mobile){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkOTP($mobile);
+	}
+
 	public function insertPasswordToken($data){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->insertPasswordToken($data);
+	}
+
+	public function insertOTP($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->insertOTP($data);
 	}
 
 	public function deleteInternship($internshipID){
@@ -577,6 +590,12 @@ public function injectClassName(&$data)
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->deactivateToken($email, $tokenType);
+	}
+
+	public function deactivateOTP($mobile){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->deactivateOTP($mobile);
 	}
 
 	public function getConnectionProfiles($connections){

@@ -86,9 +86,41 @@ class Home extends CI_Controller {
 
 
 
-	public function verifyMobileNumber()
-	{
+	public function verifyMobileNumber($redirection=''){
+		if($redirection=='1'){
+			$this->load->view('verifyMobileNumber', $this->data);
+		}
+		else{
+		$this->generateOTP();
 		$this->load->view('verifyMobileNumber', $this->data);
+		}
+	}
+
+	private function generateOTP(){
+		date_default_timezone_set("Asia/Kolkata");
+		$mobile = $_SESSION['userData']['mobile'];
+		$checkOTP = $this->home_lib->checkOTP($mobile);
+		$currentTime = strtotime(date("d M Y H:i:s"));
+		if($checkOTP){
+			$expiry = $checkOTP[0]['expiry'];
+			$timeDifference = $expiry-$currentTime;
+			if($timeDifference>0 && $timeDifference<7200){
+				echo "Your Mobile Number Verification Token is: ".$checkOTP[0]['otp'].". The token is valid for only next 2 hours.";
+			}
+		}
+		else {
+			$otp = rand(1000,9999);
+			$expiry = $currentTime + 7200;
+			$otpData = array(
+				'otp' => $otp,
+				'mobile' => $mobile,
+				'generatedAt' => $currentTime,
+				'expiry' => $expiry,
+				'active' => '1'
+			);
+			$this->home_lib->insertOTP($otpData);
+			echo "Your Mobile Number Verification Token is: ".$otp.". The token is valid for only next 2 hours.";
+		}
 	}
 
 	public function uploadUdentityDoc()

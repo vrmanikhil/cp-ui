@@ -674,6 +674,38 @@ class Web extends CI_Controller {
 		}
 	}
 
+	public function verifyMobile(){
+		$otp = '';
+		if($x = $this->input->post('otp')){
+			$otp = $x;
+		}
+		$email = $_SESSION['userData']['mobile'];
+		$checkOTP = $this->home_lib->checkOTP($mobile);
+		$currentTime = strtotime(date("d M Y H:i:s"));
+		if($checkOTP){
+			$expiry = $checkOTP[0]['expiry'];
+			$timeDifference = $expiry-$currentTime;
+			if($timeDifference>0 && $timeDifference<7200){
+				if($checkOTP[0]['token']===$otp){
+					$this->home_lib->deactivateOTP($mobile);
+					$this->home_lib->updateRegistrationLevel($_SESSION['userData']['userID'], '4');
+					$CI = &get_instance();
+					$CI->session->set_userdata('registrationLevel', '4');
+					$this->session->set_flashdata('message', array('content'=>'Mobile Number Successfully Verified','class'=>'success'));
+					redirect(base_url());
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'The Entered OTP is Not Valid. Please Try Again.','class'=>'error'));
+					redirect(base_url('verify-mobile-number/1'));
+				}
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'The Entered OTP has Expired. Please Request New Token.','class'=>'error'));
+				redirect(base_url('verify-mobile-number/1'));
+			}
+		}
+	}
+
 	public function delete($id , $table, $name){
 		$result = $this->home_lib->delete($id, $table, $name);
 		if($result){
@@ -718,7 +750,7 @@ class Web extends CI_Controller {
 			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
-			
+
 			$config['upload_path'] = 'assets/uploads/';
        		$config['allowed_types'] = 'jpg|png';
         	$config['max_size'] = 1000;
