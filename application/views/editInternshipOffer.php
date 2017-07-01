@@ -90,7 +90,7 @@
 							<label for="partTime" class="form__label">Part Time Allowed</label>
 							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
 								<option value="1" <?php if($internshipDetails['partTime']=='1') echo "selected"; ?>>Yes</option>
-								<option value="2" <?php if($internshipDetails['partTime']=='1') echo "selected"; ?>>No</option>
+								<option value="2" <?php if($internshipDetails['partTime']=='2') echo "selected"; ?>>No</option>
 							</select>
 						</div>
 					</div>

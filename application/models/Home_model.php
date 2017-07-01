@@ -334,7 +334,7 @@ class Home_model extends CI_Model {
 		$this->db->join('internshipSkills', 'internshipOffers.internshipID = internshipSkills.internshipID');
 		$this->db->join('skills', 'internshipSkills.skillID = skills.skillID', 'left outer');
 		$result = $this->db->get_where('internshipOffers', array('internshipOffers.internshipID' => $internshipID));
-		var_dump($this->db->last_query()); die();
+		// var_dump($this->db->last_query()); die();
 		return $result->result_array();
 	}
 
@@ -679,8 +679,10 @@ class Home_model extends CI_Model {
 		return $this->db->query($query)->result_array();
 	}
 
-	public function getFeeds(){
-		$query = "(SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID`) UNION ALL (SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID`) Order BY timestamp DESC";
+	public function getFeeds($limit = 6, $offset = 0){
+		$limit /= 2;
+		$offset /= 2;
+		$query = "(SELECT `jobOffers`.`jobTitle` AS `title`, `jobOffers`.`jobID` AS `offerID`, 'Job' AS `offerType`, `jobOffers`.`addedBy` AS `addedBy`, `users`.`name`, `users`.`profileImage`, `jobOffers`.`timestamp` from `jobOffers` JOIN `users` ON `jobOffers`.`addedBy`=`users`.`userID` WHERE (`jobOffers`.`status` = 2 AND `jobOffers`.`active` = 1) LIMIT $limit OFFSET $offset) UNION ALL (SELECT `internshipOffers`.`internshipTitle` AS `title`, `internshipOffers`.`internshipID` AS `offerID`, 'Internship' AS `offerType`, `internshipOffers`.`addedBy`, `users`.`name`, `users`.`profileImage` AS `addedBy`, `internshipOffers`.`timestamp` from `internshipOffers` JOIN `users` ON `internshipOffers`.`addedBy`=`users`.`userID` WHERE (`internshipOffers`.`status` = 2 AND `internshipOffers`.`active` = 1) LIMIT $limit OFFSET $offset) Order BY timestamp DESC";
 		$result = $this->db->query($query);
 		return $result->result_array();
 	}

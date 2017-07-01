@@ -61,7 +61,15 @@ class Home extends CI_Controller {
 	public function home(){
 		$this->redirection();
 		$this->data['feeds'] = $this->home_lib->getFeeds();
+		$this->data['more'] = $this->home_lib->moreFeeds(6);
 		$this->load->view('home', $this->data);
+	}
+
+	public function getMoreFeeds($offset){
+		$data['offset'] = $offset;
+		$data['feeds'] = $this->home_lib->getFeeds($offset);
+		$data['more'] = $this->home_lib->moreFeeds($offset+6);
+		echo json_encode($data);
 	}
 
 	public function educationDetails(){

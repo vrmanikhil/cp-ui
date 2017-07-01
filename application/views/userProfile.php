@@ -188,17 +188,17 @@
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
-							<span>
+							<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){
+								if($userDetails['displayMobile'] == 1){?>
+								<a href="<?=base_url('home/toggleMobilePrivacy/0/'.$_SESSION['userData']['userID'])?>" style ="float:right" class="btn btn--primary js-edit-entity">Hide Mobile</a>
+								<?php }else{?>
+								<a href="<?= base_url('home/toggleMobilePrivacy/1/'.$_SESSION['userData']['userID'])?>" style= "float: right" class="btn btn--primary js-edit-entity">Show Mobile</a>
+							<?php } }?>
 							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 							<?php } ?>
-							<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){
-								if($userDetails['displayMobile'] == 1){?>
-								<a href="<?=base_url('home/toggleMobilePrivacy/0/'.$_SESSION['userData']['userID'])?>" class="btn btn--primary js-edit-entity">Hide Mobile</a>
-								<?php }else{?>
-								<a href="<?= base_url('home/toggleMobilePrivacy/1/'.$_SESSION['userData']['userID'])?>" class="btn btn--primary js-edit-entity">Show Mobile</a>
-							<?php } }?>
-							</span>
+							
+							
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
