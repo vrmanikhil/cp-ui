@@ -78,9 +78,8 @@
 					</div>
 					<input type="hidden" name="filter" value="1">
 					<center>
-					<a href = "<?= base_url('clear-filter/1/1')?>"  style = "color: var(--midnight-blue); text-decoration: none;"><b>Clear Filters</b></a>
+					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
-					</center>
 				</form>
 				<div class="post card" style="margin-top: 10px;">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
@@ -346,6 +345,10 @@
 		    });
 		});
 		});
+	$('.clear-filter').click(function(){
+		$('.search-filter').empty();
+		window.location.href = "<?= base_url('internships/internship-offers')?>";
+	})
 	</script>
 </body>
 

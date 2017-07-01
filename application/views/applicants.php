@@ -63,8 +63,8 @@
 						</div>
 					</div>
 					<input type="hidden" name="applyfilter" value="1">
-					<a href = "<?= base_url('clear-filter/1/1')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
-					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
+					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
+					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 				</form>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
@@ -352,6 +352,10 @@
 				}
 			}
 		});
+		$('.clear-filter').click(function(){
+		$('.search-filter').empty();
+		window.location.href = "<?= base_url('applicants/').$offerType.'/'.$offerID?>";
+	})
 	</script>
 </body>
 </html>

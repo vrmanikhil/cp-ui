@@ -78,9 +78,8 @@
 					</div>
 					<input type="hidden" name="filter" value="1">
           <center>
-					<button class = "clear-filter" style = "width: 45%">Clear Filters</button>
+					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
-					</center>
 				</form>
 				<div class="post card" style="margin-top: 10px;">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">

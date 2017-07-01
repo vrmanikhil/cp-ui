@@ -389,32 +389,6 @@ class Home_model extends CI_Model {
 		}
 	}
 
-	public function getFilteredApplicants($offerType, $offerID, $filter){
-		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
-		if($offerType=='1'){
-		$this->db->join('users', 'jobApplicants.userID = users.userID');}
-		if($offerType=='2'){
-		$this->db->join('users', 'internshipApplicants.userID = users.userID');}
-		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
-		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
-		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');
-		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID', 'left outer');
-		$this->db->join('skills', 'userSkills.skillID = skills.skillID', 'left outer');
-		$this->db->group_by('users.userID');
-		$this->db->group_by('colleges.college_id');
-		$this->db->group_by('generalUsers.batch');
-		$this->db->group_by('courses.course_id');
-		if($offerType=='1'){
-			$this->db->where_in('jobApplicants.status', $filter);
-			$this->db->group_by('jobApplicants.timestamp');
-			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
-		if($offerType=='2'){
-			$this->db->where_in('internshipApplicants.status', $filter);
-			$this->db->group_by('internshipApplicants.timestamp');
-			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
-		return $result->result_array();
-	}
-
 	public function getinternshipOffersLocationFilters($locations){
 		if($locations != NULL){
 			$this->db->select('DISTINCT(internshipID)');
@@ -683,6 +657,35 @@ class Home_model extends CI_Model {
 			$this->db->group_by('jobApplicants.status');
 			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
 		if($offerType=='2'){
+			$this->db->group_by('internshipApplicants.timestamp');
+			$this->db->group_by('internshipApplicants.status');
+			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
+		return $result->result_array();
+	}
+
+	public function getFilteredApplicants($offerType, $offerID, $filter){
+		if($offerType=='1'){
+		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, jobApplicants.status, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
+		$this->db->join('users', 'jobApplicants.userID = users.userID');}
+		if($offerType=='2'){
+		$this->db->select('users.userID, users.name, users.profileImage, colleges.college, courses.course, generalUsers.batch, timestamp, internshipApplicants.status, GROUP_CONCAT(DISTINCT userSkills.skillID) AS userSkillIDs,GROUP_CONCAT(DISTINCT skills.skill_name) AS userSkills');
+		$this->db->join('users', 'internshipApplicants.userID = users.userID');}
+		$this->db->join('generalUsers', 'users.userID = generalUsers.userID');
+		$this->db->join('colleges', 'generalUsers.collegeID = colleges.college_id');
+		$this->db->join('courses', 'generalUsers.courseID = courses.course_id');
+		$this->db->join('userSkills', 'generalUsers.userID = userSkills.userID', 'left outer');
+		$this->db->join('skills', 'userSkills.skillID = skills.skillID', 'left outer');
+		$this->db->group_by('users.userID');
+		$this->db->group_by('colleges.college_id');
+		$this->db->group_by('generalUsers.batch');
+		$this->db->group_by('courses.course_id');
+		if($offerType=='1'){
+			$this->db->where_in('jobApplicants.status', $filter);
+			$this->db->group_by('jobApplicants.timestamp');
+			$this->db->group_by('jobApplicants.status');
+			$result = $this->db->get_where('jobApplicants', array('jobID'=> $offerID));}
+		if($offerType=='2'){
+			$this->db->where_in('internshipApplicants.status', $filter);
 			$this->db->group_by('internshipApplicants.timestamp');
 			$this->db->group_by('internshipApplicants.status');
 			$result=  $this->db->get_where('internshipApplicants', array('internshipID'=> $offerID));}
