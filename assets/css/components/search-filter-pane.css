@@ -22,7 +22,7 @@
 }
 
 .search-filter__list {
-	max-height: 110px;
+	max-height: 170px;
 	overflow-y: scroll;
 }
 
