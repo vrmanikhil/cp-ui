@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Jun 30, 2017 at 02:31 AM
+-- Generation Time: Jul 01, 2017 at 10:02 AM
 -- Server version: 5.6.35-cll-lve
 -- PHP Version: 5.6.30
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `colleges` (
   `logo` text NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=342 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=352 ;
 
 --
 -- Dumping data for table `colleges`
@@ -122,7 +122,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (46, 'Maharaja surajmal Institute of Technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/MSIT.jpg', 1),
 (47, 'Ambedkar Institute of technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ambedkar_Institute_Of_Technology.jpg', 1),
 (48, 'Delhi Technological University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DTU.jpg', 1),
-(49, 'Guru Teg Bahadur Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GTBIT.jpg', 1),
+(49, 'Guru Teg Bahadur Institute of Technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GTBIT.jpg', 1),
 (50, 'HMR Institute of technology and management, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/HMR.jpg', 1),
 (51, 'JIMS Engineering and management, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/JIMS.jpg', 1),
 (52, 'BBDNITM, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BBDNITM.jpg', 1),
@@ -415,7 +415,17 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (338, 'NCR Technical Campus, Aligarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/NCR_Technical_Campus.jpg', 1),
 (339, 'SMS Technical Campus, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/SMS_Technical_Campus.jpg', 1),
 (340, 'SMS Institute of technology, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/SMS_Technical_Campus1.jpg', 1),
-(341, 'E-Max Group of institutions, Ambala', 'http://backoffice.campuspuppy.com/assets/collegeLogo/E-Max_Group_of_institutions.jpg', 1);
+(341, 'E-Max Group of institutions, Ambala', 'http://backoffice.campuspuppy.com/assets/collegeLogo/E-Max_Group_of_institutions.jpg', 1),
+(342, 'Delhi Institute of tool engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Delhi_Institute_of_tool_engineering.jpg', 1),
+(343, 'CH Brahm Prakash Government Engineering College, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/CH Brahm Prakash Government Engineering College.jpg', 1),
+(344, 'Delhi Technical Campus, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Delhi_Technical_Campus.jpg', 1),
+(345, 'Indian Instiute of Technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/IIT_Delhi.jpg', 1),
+(346, 'Panipat Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Panipat_Institute_of_engineering_and_technology.jpg', 1),
+(347, 'Geeta group of institutions, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Geeta_group_of_institutions.jpg', 1),
+(348, 'Indraprastha institute of information technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Indraprastha_institute_of_information_technology.jpg', 1),
+(349, 'University School of information Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/USIT.jpg', 1),
+(350, 'Shiv Nadar University, Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shiv_Nadar_University.jpg', 1),
+(351, 'GNIT girls institute of technology, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GNIT_girls_institute_of_technology.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -1408,6 +1418,22 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `link` varchar(1000) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`notificationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otp`
+--
+
+CREATE TABLE IF NOT EXISTS `otp` (
+  `otpID` int(5) NOT NULL AUTO_INCREMENT,
+  `mobile` bigint(11) NOT NULL,
+  `otp` int(4) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `generatedAt` bigint(12) NOT NULL,
+  `expiry` bigint(12) NOT NULL,
+  PRIMARY KEY (`otpID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
