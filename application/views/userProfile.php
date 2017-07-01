@@ -188,9 +188,17 @@
 							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
+							<span>
 							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 							<?php } ?>
+							<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){
+								if($userDetails['displayMobile'] == 1){?>
+								<a href="<?=base_url('home/toggleMobilePrivacy/0/'.$_SESSION['userData']['userID'])?>" class="btn btn--primary js-edit-entity">Hide Mobile</a>
+								<?php }else{?>
+								<a href="<?= base_url('home/toggleMobilePrivacy/1/'.$_SESSION['userData']['userID'])?>" class="btn btn--primary js-edit-entity">Show Mobile</a>
+							<?php } }?>
+							</span>
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
@@ -486,13 +494,13 @@
 					</div>
 					<div class="form-group">
 						<label for="logo">Company Logo</label>
-						<input type="file" class="form__input" id="logo">
+						<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
 						<input type="hidden" name="companylogo">
 					</div>
 				</div>
 				<div class = "form-group">
-					<div class = "demo">
-						<img src="" alt="" id="cropped-img">
+					<div class = "demo" style = "display:none">
+						<img src="" alt="" id="cropped-img" hidden>
 					</div>
 				</div>
 				<div class="form-group action-bar">
@@ -543,12 +551,11 @@
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
-				console.log(e);
 				$uploadCrop.croppie('bind', {
 					url: e.target.result
 				});
-				$('a.result').removeClass('hidden');
-			}
+				$('.demo').show();
+			}	
 			reader.readAsDataURL(input.files[0]);
 		}
 		else {
@@ -567,15 +574,18 @@
 		},
 		exif: false
 	});
-	$('#logo').on('change', function () { readFile(this); 
+	$('#logo').on('change', function () { readFile(this)
+		Croppie();});
+	 	function Croppie(ev) { 
 			$uploadCrop.croppie('result', {
 				type: 'canvas',
-				size: 'original'
+				size: 'original',
+				format: 'jpeg'
 			}).then(function (resp) {
 				$('#cropped-img').attr('src', resp)
 				$('input[name="companylogo"]').val(resp)
 			});
-		});
+		};
 	</script>
 </body>
 </html>

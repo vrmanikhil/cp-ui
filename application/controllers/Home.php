@@ -144,6 +144,14 @@ class Home extends CI_Controller {
 		$this->load->view('userProfile', $this->data);
 	}
 
+	public function toggleMobilePrivacy($displayMobile, $userID){
+		if($this->home_lib->toggleMobilePrivacy($displayMobile, $userID))
+			redirect(base_url('user-profile/'.$userID));
+		else
+			$this->session->set_flashdata('message', array('content' => 'Oops, Something went wrong.', 'class' => 'error'));
+			redirect(base_url());
+	}
+
 	public function chatNew()
 	{
 		$this->redirection();

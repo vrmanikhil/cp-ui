@@ -719,6 +719,7 @@ class Web extends CI_Controller {
 		$position = '';
 		$companyName = '';
 		$companyDescription = '';
+		$companyLogo = '';
 		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('position')){
 			$position = $x;
@@ -729,6 +730,10 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('companyDescription')){
 			$companyDescription = $x;
 		}
+		if($x = $this->input->post('companyLogo')){
+			$companyLogo = $x;
+		}
+		var_dump($companyLogo);die();
 		$data = array(
 			'position' => $position,
 			'companyName' => $companyName,

@@ -37,6 +37,12 @@ class Home_lib {
 		return 0;
 	}
 
+	public function toggleMobilePrivacy($display, $userId){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->toggleMobilePrivacy($display, $userId);
+	}
+
 	public function auth(){
 		$CI = & get_instance();
 		$CI->load->library('session');
