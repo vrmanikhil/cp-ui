@@ -415,7 +415,8 @@ class Home extends CI_Controller {
 			}else{
 				$filteredLocationinternshipIDs = [];
 				}
-				$this->data['filterskills'] =	json_encode($skill);
+				if(isset($skill))
+				$this->data['filterskills'] =json_encode($skill);
 			if(isset($location))
 				$this->data['filterlocations'] =json_encode($location);
 			$filteredinternshipIDs = array_unique(array_merge($filteredLocationinternshipIDs, $filteredSkillinternshipIDs));

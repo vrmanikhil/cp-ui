@@ -77,7 +77,7 @@
 						</div>
 					</div>
 					<input type="hidden" name="filter" value="1">
-					<a href = "<?= base_url('clear-filter/1/1')?>"><button class = "apply-filter" style = "width: 45%">Clear Filters</button></a>
+					<button class = "clear-filter" style = "width: 45%">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "width: 45%" value = "Apply Filter">
 				</form>
 				<div class="post card">
@@ -343,6 +343,11 @@
 		    });
 		});
 		});  
+
+	$('.clear-filter').click(function(){
+		$('.search-filter').empty();
+		window.location.href = "<?= base_url('internships/relevant-internships')?>";
+	})
 	</script>
 </body>
 
