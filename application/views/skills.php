@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Skills|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/skills.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -86,7 +86,9 @@
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>
 							<?php } ?>
 						</select>
-						<center><button type="submit" class="btn btn--primary notifications__load-more" id = 'take_test'>Take Test</button></center>
+						<center>
+							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+							<button type="submit" class="btn btn--primary notifications__load-more" id = 'take_test'>Take Test</button></center>
 					</div>
 				</div>
 			</div>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>chat</title>
+	<title>Chat|CampusPuppy</title>
 </head>
 <body>
-<?php 
+<?php
 	echo($usr."<br>");
 	echo($title."<br>");
 	$i = 0;
@@ -19,7 +19,7 @@
 			?>
 			<div>
 			<?php
-		
+
 		echo($value['message']."     " .$value['timestamp']. "<br><br>");
 
 		?>
@@ -28,7 +28,7 @@
 		<?php
 	}else{?>
 	<div style = "float: right; font-weight: bold">
-		<?php 
+		<?php
 		echo($value['message']."     " .$value['timestamp']."<br><br>");
 		?>
 	</div>
@@ -50,6 +50,7 @@
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
+										<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 										<button id="send" class="login-button register-button" style="margin-top:20px;">Send Message</button>
 									</div>
 								</div>
@@ -87,7 +88,7 @@ var offset = <?php echo $i; ?>;
 			}
 		}
 		   }
-		  
+
   			xhttp.open("POST", "<?php echo base_url('messages/load-more-messages/'). $usr.'/';?>" + offset, true);
   			xhttp.send();
   		};

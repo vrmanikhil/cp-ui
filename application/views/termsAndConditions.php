@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Terms And Conditions|CampusPuppy</title>
-	<link href="/assets/css/content.css" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/content.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
@@ -46,6 +46,16 @@
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
+	<script>
+		$(document).ready(function () {
+			$(document).on('click', '.js-forgot-password', openForgotPsswdModal);
+			function openForgotPsswdModal(ev) {
+				var modal = $('[data-remodal-id="forgotPassword"]').remodal();
+				modal.open();
+			}
+		});
+	</script>
 </body>
 
 </html>

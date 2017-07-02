@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Added Job Offer|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -188,7 +188,9 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
+						<a href = "" id = "apply">
+							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+							<button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>

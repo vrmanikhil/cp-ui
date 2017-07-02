@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Messages|CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
@@ -144,6 +144,7 @@
 						<textarea name="message" id="message" class="form__input" cols="30" rows="5" placeholder="Message"></textarea>
 					</div>
 					<div class="form-group submit-container">
+						<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 						<input type="submit" value="Send" class="btn btn--primary" value = "data[userID]">
 					</div>
 				</form>

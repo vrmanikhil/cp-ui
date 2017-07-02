@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Reset Password | CampusPuppy</title>
+	<title>Reset Password|CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
@@ -38,6 +38,7 @@
 									<a href="javascript:">Resend Link</a>
 								</div>
 							</div>
+							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 							<input type="hidden" name="email" value="<?php echo $this->input->get('email'); ?>">
 							<input type="hidden" name="token" value="<?php echo $this->input->get('token'); ?>">
 							<div class="form-group">

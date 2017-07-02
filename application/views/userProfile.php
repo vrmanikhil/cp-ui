@@ -5,13 +5,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User | CampusPuppy</title>
+	<title>User|CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="<?php if(isset($_SESSION['userData']['loggedIn'])){ echo base_url('assets/css/components/header.css'); } else { echo base_url('/assets/css/components/logged-out-header.css'); }  ?>" rel="stylesheet">
-	<link href="/assets/css/userProfile.css" rel="stylesheet">
-	<link href="/assets/css/croppie.css" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/userProfile.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/croppie.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -197,8 +197,8 @@
 							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 							<?php } ?>
-							
-							
+
+
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
@@ -248,6 +248,7 @@
 						<input type="email" class="form__input" id="forgot-psswd-email" name="email" placeholder="E-Mail Address" required>
 					</div>
 					<div class="form-group">
+						<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 						<input type="submit" value="Send Me Instructions" class="btn btn--primary">
 					</div>
 				</form>
@@ -278,6 +279,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type="submit" class="btn btn--primary" value="Save">
 				</div>
 			</form>
@@ -322,6 +324,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type="submit" class="btn btn--primary" value="Save">
 				</div>
 			</form>
@@ -342,6 +345,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type="submit" class="btn btn--primary" value="Save">
 				</div>
 			</form>
@@ -366,6 +370,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type="submit" class="btn btn--primary" value="Save">
 				</div>
 		</form>
@@ -463,6 +468,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type="submit" class="btn btn--primary" value="Save">
 				</div>
 			</form>
@@ -505,6 +511,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
 				</div>
 			</form>
@@ -545,7 +552,7 @@
 
 	<script src="<?php echo base_url('/assets/js/croppie.js'); ?>"></script>
 	<script type="text/javascript">
-	var $uploadCrop;    
+	var $uploadCrop;
 
 	function readFile(input) {
 		if (input.files && input.files[0]) {
@@ -555,7 +562,7 @@
 					url: e.target.result
 				});
 				$('.demo').show();
-			}	
+			}
 			reader.readAsDataURL(input.files[0]);
 		}
 		else {
@@ -576,7 +583,7 @@
 	});
 	$('#logo').on('change', function () { readFile(this)
 		Croppie();});
-	 	function Croppie(ev) { 
+	 	function Croppie(ev) {
 			$uploadCrop.croppie('result', {
 				type: 'canvas',
 				size: 'original',

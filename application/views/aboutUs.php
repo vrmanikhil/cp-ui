@@ -44,8 +44,36 @@
 		</main>
 		<?php echo $footer; ?>
 	</div>
+	<div class="remodal forgot-psswd-modal" data-remodal-id="forgotPassword">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<div class="forgot-psswd-form-container">
+				<h2>Forgot your Password?</h2>
+				<form method="get" class="form forgot-psswd-form" action="<?php echo base_url('web/forgotPassword'); ?>">
+					<div class="form-group">
+						<label for="forgot-psswd-email" class="form__label">Registered E-Mail</label>
+						<input type="email" class="form__input" id="forgot-psswd-email" name="email" placeholder="E-Mail Address" required>
+					</div>
+					<div class="form-group">
+						<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+						<input type="submit" value="Send Me Instructions" class="btn btn--primary">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
+	<script>
+		$(document).ready(function () {
+			$(document).on('click', '.js-forgot-password', openForgotPsswdModal);
+			function openForgotPsswdModal(ev) {
+				var modal = $('[data-remodal-id="forgotPassword"]').remodal();
+				modal.open();
+			}
+		});
+	</script>
 </body>
 
 </html>

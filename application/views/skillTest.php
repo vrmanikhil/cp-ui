@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Skill Test|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/skillTest.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -85,6 +85,7 @@
 					<button class="btn btn-primary testButton" id="next-button">Next</button>
 					</div>
 					<div class="<!-- submitButton -->" id="submitButton">
+						<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 						<button class="btn btn-primary testButton" id="final-submit">Submit</button>
 					</div>
 				</div>

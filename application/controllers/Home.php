@@ -18,6 +18,8 @@ class Home extends CI_Controller {
 			$this->data['notification'] = $this->home_lib->getNotifications(0,3);
 			$this->data['connectionCount'] = $this->home_lib->countConnections($_SESSION['userData']['userID']);
 		}
+		$this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
+		$this->data['csrf_token'] = $this->security->get_csrf_hash();
 		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 		$this->data['headerLogin'] = $this->load->view('commonCode/headerLogin', $this->data, true);
 		$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);

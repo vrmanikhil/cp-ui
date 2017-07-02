@@ -3,9 +3,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Applicants | CampusPuppy</title>
+	<title>Applicants|CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
-	<link href="/assets/css/applicants.css" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/applicants.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -63,6 +63,7 @@
 						</div>
 					</div>
 					<input type="hidden" name="applyfilter" value="1">
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 				</form>

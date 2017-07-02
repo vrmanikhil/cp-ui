@@ -15,6 +15,7 @@
           <a href="javascript:" class="forgot-psswd js-forgot-password">Forgot Password?</a>
         </div>
         <div class="from-group flex">
+          <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
           <button type="submit" class="btn btn--primary">LOGIN</button>
         </div>
       </form>
@@ -32,6 +33,7 @@
           <input type="email" class="form__input" id="forgot-psswd-email" name="email" placeholder="E-Mail Address" required>
         </div>
         <div class="form-group">
+          <input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
           <input type="submit" value="Send Me Instructions" class="btn btn--primary">
         </div>
       </form>

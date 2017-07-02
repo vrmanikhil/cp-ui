@@ -8,9 +8,9 @@
 				<button type="submit" class="search-bar__submit-btn">
 					<img src="<?php echo base_url('/assets/img/icons/magnifying-glass.png'); ?>" alt="search-icon" class="icoen icon--sm">
 				</button>
+				<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 				<input type="search" name="query" id="inputSearch" placeholder="Search" class="form-control">
 			</form>
-
 
 		</div>
 		<div class="primary-menu flex__item flex">
