@@ -268,6 +268,126 @@ class Home_model extends CI_Model {
 		return $this->db->insert_batch('internshipSkills', $data);
 	}
 
+	public function editInternship($data, $internshipID){
+		$this->db->where('internshipID', $internshipID);
+		return $this->db->update('internshipOffers', $data);
+	}
+
+	public function editInternSkills($data, $internshipID){
+		$ret = true;
+		$current = $_SESSION['userData']['current'];
+		foreach($data as $newskill){
+			$pos = array_search($newskill['skillID'], $current['skillIDs']);
+			if(is_int($pos)){
+				unset($current['skillIDs'][$pos]);
+			}else{
+				$result = $this->db->insert('internshipSkills', $newskill);
+				if($result)
+					$ret = true;
+				else
+					$ret = false;
+			}
+		}
+		if(!empty($current['skillIDs']))
+		foreach ($current['skillIDs'] as $key => $value) {
+			$this->db->where('internshipID', $internshipID);
+			$this->db->where('skillID', $value);
+			$result = $this->db->delete('internshipSkills');
+			if($result)
+				$ret = true;
+			else
+				$ret = false;	
+		}
+		return $ret;
+	}
+	public function editInternLocations($data, $internshipID){
+		$ret = true;
+		$current = $_SESSION['userData']['current'];
+		foreach($data as $newlocation){
+			$pos = array_search($newlocation['cityID'], $current['cityIDs']);
+			if(is_int($pos)){
+				unset($current['cityIDs'][$pos]);
+			}else{
+				$result = $this->db->insert('internshipLocations', $newlocation);
+				if($result)
+					$ret = true;
+				else
+					$ret = false;
+			}
+		}
+		if(!empty($current['cityIDs']))
+		foreach ($current['cityIDs'] as $key => $value) {
+			$this->db->where('internshipID', $internshipID);
+			$this->db->where('cityID', $value);
+			$result = $this->db->delete('internshipLocations');	
+			if($result)
+				$ret = true;
+			else
+				$ret = false;
+		}
+		return $ret;
+	}
+
+	public function editJob($data, $jobID){
+		$this->db->where('jobID', $jobID);
+		return $this->db->update('jobOffers', $data);
+	}
+
+	public function editJobSkills($data, $jobID){
+		$ret = true;
+		$current = $_SESSION['userData']['current'];
+		foreach($data as $newskill){
+			$pos = array_search($newskill['skillID'], $current['skillIDs']);
+			if(is_int($pos)){
+				unset($current['skillIDs'][$pos]);
+			}else{
+				$result = $this->db->insert('jobSkills', $newskill);
+				if($result)
+					$ret = true;
+				else
+					$ret = false;
+			}
+		}
+		if(!empty($current['skillIDs']))
+		foreach ($current['skillIDs'] as $key => $value) {
+			$this->db->where('jobID', $jobID);
+			$this->db->where('skillID', $value);
+			$result = $this->db->delete('jobSkills');
+			if($result)
+				$ret = true;
+			else
+				$ret = false;	
+		}
+		return $ret;
+	}
+	public function editJobLocations($data, $jobID){
+		$ret = true;
+		$current = $_SESSION['userData']['current'];
+		foreach($data as $newlocation){
+			$pos = array_search($newlocation['cityID'], $current['cityIDs']);
+			if(is_int($pos)){
+				unset($current['cityIDs'][$pos]);
+			}else{
+				$result = $this->db->insert('jobLocations', $newlocation);
+				if($result)
+					$ret = true;
+				else
+					$ret = false;
+			}
+		}
+		if(!empty($current['cityIDs']))
+		foreach ($current['cityIDs'] as $key => $value) {
+			$this->db->where('jobID', $jobID);
+			$this->db->where('cityID', $value);
+			$result = $this->db->delete('jobLocations');	
+			if($result)
+				$ret = true;
+			else
+				$ret = false;
+		}
+		return $ret;
+	}
+
 	public function getAddedJobOffers(){
 		$addedBy = $_SESSION['userData']['userID'];
 		$this->db->join('jobSkills', 'jobOffers.jobID = jobSkills.jobID', 'left outer');

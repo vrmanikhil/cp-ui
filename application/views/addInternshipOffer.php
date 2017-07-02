@@ -323,7 +323,7 @@
 		  locations.city_name = $('#locations').find(":selected").val();
 		  locations.location_id = $('#locations').find(":selected").attr('location-id');
 		  if(!isAlreadyPresent(locations.location_id)){
-		    var html='<p class="skill location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+		    var html='<p class="location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
 		    selectedLocations.push(locations);
 		    $('.selectedLocations').append(html);
 		  }

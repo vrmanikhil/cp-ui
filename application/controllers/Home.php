@@ -617,17 +617,38 @@ class Home extends CI_Controller {
 
 	public function editInternshipOffer($internshipID){
 		$this->redirection();
-		if($_SESSION['userData']['accountType']=='2'){
-			$this->data['internshipDetails'] = $this->home_lib->getInternshipDetails($internshipID);
-			$this->data['internshipDetails'] = $this->data['internshipDetails'][0];
-			$this->data['skills'] = $this->home_lib->getSkills();
-			$this->data['locations'] = $this->home_lib->getLocations();
-			$this->load->view('editInternshipOffer', $this->data);
-		}
+if($_SESSION['userData']['accountType']=='2'){
+		$this->data['internshipDetails'] = $this->home_lib->getInternshipDetails($internshipID);
+		$this->data['internshipDetails'] = $this->data['internshipDetails'][0];
+		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['internshipDetails']['skillIDsRequired']);
+		$_SESSION['userData']['current']['cityIDs'] = explode(',',$this->data['internshipDetails']['cityIDs']);
+		$this->data['skills'] = $this->home_lib->getSkills();
+		$this->data['locations'] = $this->home_lib->getLocations();
+		$_SESSION['userData']['editInternshipId'] = $internshipID;
+		$this->load->view('editInternshipOffer', $this->data);
+    }
 		else{
 			redirect(base_url('home'));
 		}
 	}
+
+	public function editJobOffer($jobID){
+		$this->redirection();
+    if($_SESSION['userData']['accountType']=='2'){
+		$this->data['jobDetails'] = $this->home_lib->getJobDetails($jobID);
+		$this->data['jobDetails'] = $this->data['jobDetails'][0];
+		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['jobDetails']['skillIDsRequired']);
+		$_SESSION['userData']['current']['cityIDs'] = explode(',',$this->data['jobDetails']['cityIDs']);
+		$this->data['skills'] = $this->home_lib->getSkills();
+		$this->data['locations'] = $this->home_lib->getLocations();
+		$_SESSION['userData']['editJobId'] = $jobID;
+		$this->load->view('editJobOffer', $this->data);
+    }
+		else{
+			redirect(base_url('home'));
+		}
+	}
+
 
 	public function addedInternshipOffers(){
 		$this->redirection();

@@ -76,7 +76,7 @@
 				</div>
 				<div class="add-offer__section card">
 					<h1 class="add-offer__section-title">Edit Internship Offer</h1>
-					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/addInternshipOffer'); ?>">
+					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/editInternshipOffer'); ?>">
 					<label for="internshipOfferTitle" class="form__label">Internship Offer Title</label>
 					<input type="text" id="internshipOfferTitle" name="internshipOfferTitle" placeholder="Internship Offer Title" class="form__input" value="<?php echo $internshipDetails['internshipTitle']; ?>" required>
 					<label for="internshipOfferDescription" class="form__label">Internship Offer Description</label>
@@ -124,8 +124,8 @@
 						<option value="3" <?php if($internshipDetails['stipendType']=='3') echo "selected"; ?>>Offered in Range</option>
 						<option value="4" <?php if($internshipDetails['stipendType']=='4') echo "selected"; ?>>Fixed Stipend</option>
 					</select>
-					<?php if($internshipDetails['stipendType']=='3'){?>
-					<div class="flex" id="offeredRange" style="display: none;">
+					
+					<div class="flex" id="offeredRange" <?php if($internshipDetails['stipendType']=='3'){}else{?> style="display: none;"<?php } ?>>
 						<div class="form-group">
 							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
 							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input" value = "<?= $internshipDetails['minimumStipend']?>">
@@ -135,12 +135,11 @@
 							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input" value = "<?= $internshipDetails['minimumStipend']?>">
 						</div>
 					</div>
-					<?php } if($internshipDetails['stipendType']=='4'){?>
-					<div id="fixedStipend" style="display: none;">
+					
+					<div id="fixedStipend" <?php if($internshipDetails['stipendType']=='4'){}else{?> style="display: none;"<?php }?>>
 					<label for="stipend" class="form__label">Stipend</label>
 					<input type="text" id="stipend" name="stipend" placeholder="Stipend" class="form__input" value = "<?= $internshipDetails['stipend']?>">
 					</div>
-					<?php } ?>
 					<div class="flex">
 						<div class="form-group">
 							<label for="applicants" class="form__label">Applicant Type</label>
@@ -158,7 +157,7 @@
 							</select>
 						</div>
 					</div>
-					<div id="skillsDiv" style="display:none;">
+					<div id="skillsDiv" <?php if($internshipDetails['applicants'] != 3){}else{?> style="display:none;"<?php }?>>
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Skills</label>
@@ -174,10 +173,18 @@
 					</div>
 					<div class="selectedSkills">
 						<label class="form__label">Skill(s) Required-</label>
-						<input type="hidden" name="selected_skills">
+						<?php if($internshipDetails['skillsRequired'] != NULL){?>
+							<?php $skillsRequired = explode(",", $internshipDetails['skillsRequired']);
+							$skillIDsRequired = explode(",", $internshipDetails['skillIDsRequired']);?>
+						 <?php for($i = 0; $i < sizeof($skillsRequired);$i++){
+						 	$skill[$i] = ['skillname' => $skillsRequired[$i], 'skillID' => $skillIDsRequired[$i]];		
+						 	?>
+						<p class="skill"><?=$skillsRequired[$i]?><a href="javascript:" class = "skillrem" data-skill="<?= $skillsRequired[$i]?>" index="<?=$i?>" skill-id="<?=$skillIDsRequired[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
+						<?php }}else{$skill = [];}?>
+						<input type="hidden" name="selected_skills" value = '<?=json_encode($skill)?>'>
 					</div>
 					</div>
-					<div id="cityLocations" style="display: none;">
+					<div id="cityLocations" <?php if($internshipDetails['internshipType'] != 1){}else{?> style="display:none;"<?php }?>>
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Locations</label>
@@ -193,11 +200,21 @@
 					</div>
 					<div class="selectedLocations">
 						<label class="form__label">Internship Location(s)-</label>
-						<input type="hidden" name="selected_locations">
+						<?php if($internshipDetails['cities'] != NULL){?>
+							<?php $cities = explode(",", $internshipDetails['cities']);
+							$cityIDs = explode(",", $internshipDetails['cityIDs']);?>	
+						<?php for($i = 0; $i < sizeof($cities);$i++){
+							$location[$i] = ['city_name' => $cities[$i], 'location_id' => $cityIDs[$i]];
+							?>
+						<p class="	location"><?= $cities[$i]?><a href="javascript:" class = "locrem"  data-location="<?=$cities[$i]?>" index="<?=$i?>" location-id="<?=$cityIDs[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
+						<?php }}else{$location = [];} ?>
+						<input type="hidden" name="selected_locations" value = '<?=json_encode($location)?>'>
 					</div>
 					</div>
+
+					<input type="submit" value="Edit Internship" class="btn btn--primary add-offer__form-submit">
 					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
+					
 				</form>
 				</div>
 			</div>
@@ -278,19 +295,18 @@
 		</script>
 
 		<script>
-  	var skills_arr =[]
-  	var selectedSkills = [];
-
+  		var skills_arr =[]
+  		var selectedSkills = <?=json_encode($skill)?>;
   	$(document).on('click','.addSkill',function(){
-  	  var skill ={}
+  	  var skill = {}
   	  skill.skillname = $('#skills').find(":selected").val();
   	  skill.skillID = $('#skills').find(":selected").attr('skill-id');
   		if(!isAlreadyPresentSkill(skill.skillID)){
-  	    var html='<p class="skill">'+skill.skillname+
-  			' <a href="javascript:" data-skill="'+skill.skillname+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+  	    var html='<p class="skill">'+skill.skillname+'<a href="javascript:" data-skill="'+skill.skillname+'" index="'+selectedSkills.length+'" skill-id="'+skill.skillID+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
   	    selectedSkills.push(skill);
   	    $('.selectedSkills').append(html);
   	  }
+
   	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
   	});
 
@@ -304,6 +320,7 @@
   	        })
   	        return alreadyPresent
   	    }
+
   	$(document).on('click','.skill a',function(){
   	  var skill = $(this).attr('data-skill');
   	 	var parent = $(this).parent();
@@ -313,21 +330,21 @@
   	    delete selectedSkills[$(this).attr('index')]
   	    $(this).parent().remove();
   	  }
+
   	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
   	});
-
+  
   	</script>
 
 		<script>
 		var locations_arr =[]
-		var selectedLocations = [];
-
+		var selectedLocations = <?=json_encode($location)?>;
 		$(document).on('click','.addLocation',function(){
 		  var locations ={};
 		  locations.city_name = $('#locations').find(":selected").val();
 		  locations.location_id = $('#locations').find(":selected").attr('location-id');
 		  if(!isAlreadyPresent(locations.location_id)){
-		    var html='<p class="skill location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
+		    var html='<p class="location">'+locations.city_name+' <a href="javascript:" data-location="'+locations.city_name+'" index="'+selectedLocations.length+'" location-id="'+locations.location_id+'"><i class="fa fa-times red" aria-hidden="true"></i></a></p>';
 		    selectedLocations.push(locations);
 		    $('.selectedLocations').append(html);
 		  }
