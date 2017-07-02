@@ -833,6 +833,45 @@ public function injectClassName(&$data)
 		return $CI->homeModel->getIdentityDocumentStatus();
 	}
 
+	public function uploadImage($image, $type ,$path = 'assets/uploads/'){
+		if(empty($image)){
+			return false;
+		}
+		$upload_path = $path;
+		$filename = implode('_', json_decode($this->fetch_user_details('name'), true));
+		$upload_path .= $filename.'_'.(new DateTime())->format('d-m-Y H:i:s');
+		$ifp = fopen($upload_path, "wb");
+		$data = explode(',', $image);
+		fwrite($ifp, base64_decode($data[1]));
+		fclose($ifp);
+		if($this->validateImage($upload_path)){
+			if($type == 'Company' ){
+				$CI = &get_instance();
+				$CI->load->model('home_model','homeModel');
+				return $CI->homeModel->updateCompanyLogo();
+			}else{
+				$CI = &get_instance();
+				$CI->load->model('home_model','homeModel');
+				return $CI->homeModel->updateProfileImage();
+			} 
+		}else{
+			return false;
+		}
+		return false;
+	}
 
+	public function validateImage($file)
+	{
+		$data = getimagesize($file);
+		if($data[0] > 300 || $data[1] > 300){
+			$this->set_flashdata('error', 'Image dimensions must be under 300 * 300.');
+			return false;
+		}else if(filesize($file) > 2048000){
+			$this->set_flashdata('error', 'The file size must be under 2MB.');
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 }

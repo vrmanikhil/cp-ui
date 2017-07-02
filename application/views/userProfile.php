@@ -218,7 +218,10 @@
 									<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-logo" class="btn btn--primary js-edit-entity">Update Logo</a>
 									<?php } ?>
 								</h3>
-								<p class="flex personal-info"><strong>Company Logo</strong><span><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
+								<div class = "currentLogo">
+									<strong>Company Logo</strong>
+									<p class="flex personal-info"><span style ="padding-left: 30%"><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
+								</div>
 							</div>
 						</div>
 						<?php } ?>
@@ -511,30 +514,35 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Company Logo</h3>
-			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form" enctype="multipart/form-data">
+			<form action="<?= base_url('web/editCompanyLogo')?>" method="POST" class="form" enctype="multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<img src="" alt="" id="companyLogo">
 						<input type="hidden" name="companyLogo">
 					</div>
 					<div class="form-group">
-						<label for="logo">Company Logo</label>
-						<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
-						<input type="hidden" name="companylogo">
+						<div class = 'inputLogo'>
+							<label for="logo">Company Logo</label>
+							<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
+						</div>
 					</div>
 				</div>
 
 				<div class = "form-group">
 					<div class = "demo" style = "display:none">
-						<img src="" alt="" id="cropped-img" hidden>
+						<img src="" alt="" id="cropped-img" hidden style ="padding-left: 25%">
 					</div>
 				</div>
 				<div class="form-group action-bar">
-					<button data-remodal-action="close" class="btn">Close</button>
+					<button data-remodal-action="close" class="btn submit-changes" style="display: none">Close</button>
 					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-					<button type = 'submit'  class="btn btn--primary upload-result">Upload Image</button>
+					<input type = 'submit'  class="btn btn--primary submit-changes" value="Save Changes" style ="display: none">
 				</div>
 			</form>
+			<div class="form-group action-bar" style="float: right">
+				<button data-remodal-action="close" class="btn upload-result">Close</button>
+				<button class="btn btn--primary upload-result">Upload Image</button>
+			</div>
 		</div>
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
@@ -606,11 +614,18 @@
 	$('.upload-result').on('click', function () {
 			$uploadCrop.croppie('result',{
 				type: 'canvas',
-				size: 'viewport'
+				size: 'viewport',
+				format:'jpeg'
 			}).then(function (resp) {
 				console.log(resp)
+				$('.upload-result').hide();
+				$('.submit-changes').show();
+				$('.cr-boundary').hide();
+				$('.cr-slider-wrap').hide();
+				$('.inputLogo').hide();
 				$('#cropped-img').attr('src', resp)
-				$('input[name="companylogo"]').val(resp)
+				$('#cropped-img').show()
+				$('input[name="companyLogo"]').val(resp)
 			});
 		});
 	</script>
