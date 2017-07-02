@@ -59,7 +59,7 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="skills__section card">
-					<h2 class="section-title">MY SKILLS</h2>
+					<h2 class="section-title"><b>MY SKILLS</b></h2>
 					<div class="skills-container flex">
 					<?php
 					if(empty($userSkills)){?>
@@ -80,7 +80,7 @@
 					?>
 					</div>
 					<div class = "skills">
-						<h2 class="section-title">ADD NEW SKILL</h2>
+						<h2 class="section-title"><b>ADD NEW SKILL</b></h2>
 						<select class="select" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>

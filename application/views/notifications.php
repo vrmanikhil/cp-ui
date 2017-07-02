@@ -60,7 +60,7 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="notifications__section card">
-					<h2 class="section-title">NOTIFICATIONS</h2>
+					<h2 class="section-title"><b>NOTIFICATIONS</b></h2>
 					<div class="notifications" id = "notifications">
 						<?php if(!empty($notifications)) { foreach ($notifications as $key => $value) { ?>
 

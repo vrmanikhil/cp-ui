@@ -66,7 +66,7 @@
 					</ol>
 				</div>
 				<div class="change-password__section card">
-					<h2 class="section-title">CHANGE PASSWORD</h2>
+					<h2 class="section-title"><b>CHANGE PASSWORD</b></h2>
 					<form class="change-password__form form" method="post" action="<?php echo base_url('web/changePassword'); ?>">
 					<label for="currentPassword" class="form__label">Current Password</label>
 					<input type="password" id="currentPassword" name="currentPassword" placeholder="Current Password" class="form__input">
