@@ -84,7 +84,7 @@
 					<button class="btn btn-primary testButton" id="previous-button">Previous</button>
 					<button class="btn btn-primary testButton" id="next-button">Next</button>
 					</div>
-					<div class="submitButton" id="submitButton">
+					<div class="<!-- submitButton -->" id="submitButton">
 						<button class="btn btn-primary testButton" id="final-submit">Submit</button>
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 			var c = tmp--,m=(c/60)>>0,s=(c-m*60)+'';
 			timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
 			if (c<1) {
-				// submitAnswers(eventKey);
+				submitAnswers(eventKey);
 			}
 
 		},1000);
