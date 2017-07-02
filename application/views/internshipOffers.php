@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Internship Offers|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -79,6 +79,7 @@
 					<input type="hidden" name="filter" value="1">
 					<center>
 					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 				</form>
 				<div class="post card" style="margin-top: 10px;">
@@ -211,7 +212,9 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
+						<a href = "" id = "apply">
+							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+							<button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>

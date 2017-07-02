@@ -3,11 +3,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Upload Identity Doc | CampusPuppy</title>
+	<title>Upload Identity Document|CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
-	<link href="/assets/css/upload-identity-doc.css" rel="stylesheet">
+	<link href="<?php echo base_url('/assets/css/upload-identity-doc.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -24,15 +24,16 @@
 				<div class="main-body flex__item flex flex--col">
 					<div class="upload-identity-doc-container">
 						<h2>Upload Identity Document</h2>
-						<form class="form upload-identity__form" action="" method="post">
+						<form class="form upload-identity__form" action="<?php echo base_url('web/uploadIdentityDocument'); ?>" method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="identityDoc" class="form__label">Identity Doc</label>
-							<input type="file" name="file" id="identityDoc" class="form__input">
+							<label for="identityDoc" class="form__label">Choose Identity Document for Upload</label>
+							<input type="file" name="identityDoc" id="identityDoc" class="form__input">
 							<div class="show-instructions">
 								<a href="javascript:" class="js-upload-instructions">Instructions</a>
 							</div>
 						</div>
 						<div class="form-group">
+							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 							<input type="submit" value="Upload" class="btn btn--primary">
 						</div>
 						</form>

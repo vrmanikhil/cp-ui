@@ -18,6 +18,8 @@ class Home extends CI_Controller {
 			$this->data['notification'] = $this->home_lib->getNotifications(0,3);
 			$this->data['connectionCount'] = $this->home_lib->countConnections($_SESSION['userData']['userID']);
 		}
+		$this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
+		$this->data['csrf_token'] = $this->security->get_csrf_hash();
 		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
 		$this->data['headerLogin'] = $this->load->view('commonCode/headerLogin', $this->data, true);
 		$this->data['footer'] = $this->load->view('commonCode/footer', $this->data, true);
@@ -73,38 +75,61 @@ class Home extends CI_Controller {
 	}
 
 	public function educationDetails(){
-		$this->data['colleges'] = $this->home_lib->getColleges();
-		$this->data['courses'] = $this->home_lib->getCourses();
-		$this->load->view('educationDetails', $this->data);
+		$this->redirection();
+		if(($_SESSION['userData']['accountType']=='1') && ($_SESSION['registrationLevel']=='1')){
+			$this->data['colleges'] = $this->home_lib->getColleges();
+			$this->data['courses'] = $this->home_lib->getCourses();
+			$this->load->view('educationDetails', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function employerDetails(){
-		$this->load->view('employerDetails', $this->data);
+		$this->redirection();
+		if(($_SESSION['userData']['accountType']=='2') && ($_SESSION['registrationLevel']=='1')){
+			$this->load->view('employerDetails', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function verifyEMail($redirection=''){
-		if($redirection=='1'){
+		$this->redirection();
+		if($_SESSION['registrationLevel']=='2'){
+			if($redirection=='1'){
+				$this->load->view('verifyEMail', $this->data);
+			}
+			else{
+			$this->generateVerifyEMail();
 			$this->load->view('verifyEMail', $this->data);
+			}
 		}
 		else{
-		$this->generateVerifyEMail();
-		$this->load->view('verifyEMail', $this->data);
+			redirect(base_url('home'));
 		}
 	}
 
-
-
 	public function verifyMobileNumber($redirection=''){
-		if($redirection=='1'){
+		$this->redirection();
+		if($_SESSION['registrationLevel']=='3'){
+			if($redirection=='1'){
+				$this->load->view('verifyMobileNumber', $this->data);
+			}
+			else{
+			$this->generateOTP();
 			$this->load->view('verifyMobileNumber', $this->data);
+			}
 		}
 		else{
-		$this->generateOTP();
-		$this->load->view('verifyMobileNumber', $this->data);
+			redirect(base_url('home'));
 		}
 	}
 
 	private function generateOTP(){
+		$this->redirection();
 		date_default_timezone_set("Asia/Kolkata");
 		$mobile = $_SESSION['userData']['mobile'];
 		$checkOTP = $this->home_lib->checkOTP($mobile);
@@ -131,18 +156,23 @@ class Home extends CI_Controller {
 		}
 	}
 
-	public function uploadUdentityDoc()
-	{
-		$this->load->view('uploadIdentityDoc', $this->data);
+	public function uploadUdentityDoc(){
+		$this->redirection();
+		if($_SESSION['registrationLevel']=='4'){
+			$this->load->view('uploadIdentityDoc', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
-	public function userConnections()
-	{
+	public function userConnections(){
+		$this->redirection();
 		$this->load->view('connections', $this->data);
 	}
 
-	public function userProfile($userID)
-	{
+	public function userProfile($userID){
+		$this->redirection();
 		$this->data['userDetails'] = $this->home_lib->getUserDetails($userID);
 		$this->data['userDetails'] = $this->data['userDetails'][0];
 		$accountType = $this->data['userDetails']['accountType'];
@@ -185,6 +215,7 @@ class Home extends CI_Controller {
 	}
 
 	public function toggleMobilePrivacy($displayMobile, $userID){
+		$this->redirection();
 		if($this->home_lib->toggleMobilePrivacy($displayMobile, $userID))
 			redirect(base_url('user-profile/'.$userID));
 		else
@@ -199,6 +230,7 @@ class Home extends CI_Controller {
 	}
 	//Job Offers- Normal Users
 	public function relevantJobs(){
+		$this->redirection();
 		$userID = $_SESSION['userData']['userID'];
 		$userSkills = array();
 		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
@@ -278,8 +310,8 @@ class Home extends CI_Controller {
 		}
 	}
 
-
 	public function getLocationsSkills(){
+		$this->redirection();
 		$job = $_GET['job'];
 		$data['locations'] = $this->home_lib->getRelevantLocations($job);
 		$data['skills'] = $this->home_lib->getRelevantSkills($job);
@@ -287,6 +319,7 @@ class Home extends CI_Controller {
 	}
 
 	public function jobOffers(){
+		$this->redirection();
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers();
 		$this->data['filterskills'] = 'false';
 		$this->data['filterlocations'] = 'false';
@@ -341,11 +374,13 @@ class Home extends CI_Controller {
 	}
 
 	public function appliedJobOffers(){
+		$this->redirection();
 		$this->data['appliedJobOffers'] = $this->home_lib->getAppliedJobOffers();
 		$this->load->view('appliedJobOffers', $this->data);
 	}
 
 	public function getJobDetails(){
+		$this->redirection();
 		$jobID = $this->input->get('jobid');
 		$jobDetails = $this->home_lib->getJobDetails($jobID);
 		$jobDetails['cities'] = "Some Random Cities";
@@ -354,6 +389,7 @@ class Home extends CI_Controller {
 	}
 
 	public function getInternshipDetails(){
+		$this->redirection();
 		$internshipID = $this->input->get('internshipID');
 		$internshipDetails = $this->home_lib->getInternshipDetails($internshipID);
 		$internshipDetails['cities'] = "Some Random Cities";
@@ -364,6 +400,7 @@ class Home extends CI_Controller {
 	//Internship Offers- Normal Users
 
 	public function relevantInternships(){
+		$this->redirection();
 		$userID = $_SESSION['userData']['userID'];
 		$userSkills = array();
 		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
@@ -440,6 +477,7 @@ class Home extends CI_Controller {
 	}
 
 	public function internshipOffers(){
+		$this->redirection();
 		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
 		$this->data['filterskills'] = 'false';
 		$this->data['filterlocations'] = 'false';
@@ -490,6 +528,7 @@ class Home extends CI_Controller {
 	}
 
 	public function appliedInternshipOffers(){
+		$this->redirection();
 		$this->data['appliedInternshipOffers'] = $this->home_lib->getAppliedInternshipOffers();
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
@@ -530,6 +569,7 @@ class Home extends CI_Controller {
 	}
 
 	public function search(){
+		$this->redirection();
 		$query = '';
 		if($x = $this->input->get('query')){
 			$query = $x;
@@ -542,26 +582,42 @@ class Home extends CI_Controller {
 
 	public function addJobOffer(){
 		$this->redirection();
-		$this->data['locations'] = $this->home_lib->getLocations();
-		$this->data['skills'] = $this->home_lib->getSkills();
-		$this->load->view('addJobOffer', $this->data);
+		if($_SESSION['userData']['accountType']=='2'){
+			$this->data['locations'] = $this->home_lib->getLocations();
+			$this->data['skills'] = $this->home_lib->getSkills();
+			$this->load->view('addJobOffer', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function addedJobOffers(){
 		$this->redirection();
-		$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
-		$this->load->view('addedJobOffers', $this->data);
+		if($_SESSION['userData']['accountType']=='2'){
+			$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
+			$this->load->view('addedJobOffers', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function addInternshipOffer(){
 		$this->redirection();
-		$this->data['skills'] = $this->home_lib->getSkills();
-		$this->data['locations'] = $this->home_lib->getLocations();
-		$this->load->view('addInternshipOffer', $this->data);
+		if($_SESSION['userData']['accountType']=='2'){
+			$this->data['skills'] = $this->home_lib->getSkills();
+			$this->data['locations'] = $this->home_lib->getLocations();
+			$this->load->view('addInternshipOffer', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function editInternshipOffer($internshipID){
 		$this->redirection();
+if($_SESSION['userData']['accountType']=='2'){
 		$this->data['internshipDetails'] = $this->home_lib->getInternshipDetails($internshipID);
 		$this->data['internshipDetails'] = $this->data['internshipDetails'][0];
 		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['internshipDetails']['skillIDsRequired']);
@@ -570,10 +626,15 @@ class Home extends CI_Controller {
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$_SESSION['userData']['editInternshipId'] = $internshipID;
 		$this->load->view('editInternshipOffer', $this->data);
+    }
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function editJobOffer($jobID){
 		$this->redirection();
+    if($_SESSION['userData']['accountType']=='2'){
 		$this->data['jobDetails'] = $this->home_lib->getJobDetails($jobID);
 		$this->data['jobDetails'] = $this->data['jobDetails'][0];
 		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['jobDetails']['skillIDsRequired']);
@@ -582,21 +643,33 @@ class Home extends CI_Controller {
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$_SESSION['userData']['editJobId'] = $jobID;
 		$this->load->view('editJobOffer', $this->data);
+    }
+		else{
+			redirect(base_url('home'));
+		}
 	}
+
 
 	public function addedInternshipOffers(){
 		$this->redirection();
-		$this->data['addedInternshipOffers'] = $this->home_lib->getAddedInternshipOffers();
-		$this->load->view('addedInternshipOffers', $this->data);
+		if($_SESSION['userData']['accountType']=='2'){
+			$this->data['addedInternshipOffers'] = $this->home_lib->getAddedInternshipOffers();
+			$this->load->view('addedInternshipOffers', $this->data);
+		}
+		else{
+			redirect(base_url('home'));
+		}
 	}
 
 	public function notifications($offset = 5){
+		$this->redirection();
 		$this->data['notifications'] = $this->home_lib->getNotifications();
 		$this->data['more'] = $this->home_lib->moreNotifications($offset);
 		$this->load->view('notifications', $this->data);
 	}
 
 	public function loadMoreNotifications($offset){
+		$this->redirection();
 		$data['notifications'] = $this->home_lib->getNotifications($offset);
 		$data['more'] = $this->home_lib->moreNotifications($offset+5);
 		echo json_encode($data);
@@ -615,6 +688,7 @@ class Home extends CI_Controller {
 
 	public function skillTest()
 	{
+		$this->redirection();
 		if($this->home_lib->isInTest()){
 			$this->session->unset_userdata('skill_data');
 			$this->session->unset_userdata('test_settings');
@@ -633,6 +707,7 @@ class Home extends CI_Controller {
 	}
 
 	public function getskillTestGuidelines($get_id = NULL){
+		$this->redirection();
 		if(!empty($get_id)) {
 			$flag = 0;
 			$skills = $this->home_lib->getUserSkills($_SESSION['userData']['userID']);
@@ -659,9 +734,9 @@ class Home extends CI_Controller {
 	}
 
 	public function skillTestGuidelines(){
+		$this->redirection();
 		$test_settings = $this->home_lib->getTestSettings($this->session->userdata('skill_id'));
 		$test_questions = $this->home_lib->getTestQuestions($this->session->userdata('skill_id'));
-
 		if(!empty($test_settings[0]['skillID'])) {
 			if($test_settings[0]['numberQuestions'] <= $test_questions[0]['count(question_id)']){
 				$this->session->set_userdata(['test_settings' => $test_settings]);
@@ -686,11 +761,13 @@ class Home extends CI_Controller {
 
 	public function composeMessage()
 	{
+		$this->redirection();
 		$connections = $this->home_lib->getConnectionUsernames($_SESSION['userData']['userID']);
 		return $connections;
 	}
 
 	public function sendComposedMessage(){
+		$this->redirection();
 		$message = $this->input->post('message');
 		$recipient = $this->input->post('data');
 		$receiver = $recipient['userID'];
@@ -711,6 +788,7 @@ class Home extends CI_Controller {
 
 	public function messages()
 	{
+		$this->redirection();
 		if($_SESSION['userData']['loggedIn']){
 			$number = $this->session->userdata('chats');
 			$this->data['latest_chats'] = $this->home_lib->fetchLatestChats();
@@ -725,6 +803,7 @@ class Home extends CI_Controller {
 	}
 
 	public function loadMoreChats($offset){
+		$this->redirection();
 		$number = $this->session->userdata('chats');
 		$dat['number'] = $number;
 		$dat['latest_chats'] = $this->home_lib->fetchLatestChats($offset);
@@ -734,6 +813,7 @@ class Home extends CI_Controller {
 
 	public function chat($chatter_id)
 	{
+		$this->redirection();
 		$this->home_lib->markAsRead($chatter_id);
 		$messages = $this->home_lib->fetchConversation($chatter_id);
 		$this->data['usr'] = $chatter_id;
@@ -755,6 +835,7 @@ class Home extends CI_Controller {
 
 	public function loadMoreMessages($user, $offset)
 	{
+		$this->redirection();
 		$messages = $this->home_lib->fetchConversation($user, $offset);
 		echo json_encode(['content'=> $messages, 'more'=> $this->home_lib->loadMoreMessages($user, $offset+5)]);
 		die;
@@ -762,6 +843,7 @@ class Home extends CI_Controller {
 
 	public function sendMessage()
 	{
+		$this->redirection();
 		$message = $this->input->post('message');
 		$receiver = $this->input->post('to');
 		$response = $this->home_lib->sendMessage($receiver, $message);
@@ -770,6 +852,7 @@ class Home extends CI_Controller {
 
 	public function checkForNewMessages()
 	{
+		$this->redirection();
 		$last_id = $_GET['last_id'];
 		$user = $_GET['from'];
 		$new_msgs = $this->home_lib->checkForNewMessages($user, $last_id);
@@ -803,7 +886,8 @@ class Home extends CI_Controller {
 		}
 	}
 
-	public function generateVerifyEMail(){
+	private function generateVerifyEMail(){
+		$this->redirection();
 		date_default_timezone_set("Asia/Kolkata");
 		$email = $_SESSION['userData']['email'];
 		$checkToken = $this->home_lib->checkToken($email, '1');
@@ -877,10 +961,12 @@ class Home extends CI_Controller {
 	}
 
 	public function getJobData($jobID){
+		$this->redirection();
 		return $this->home_lib->getJobData($jobID);
 	}
 
 	public function applicants($offerType, $offerID){
+		$this->redirection();
 		$this->data['offerData'] = $this->home_lib->getOfferData($offerType, $offerID);
 		$this->data['offerType'] = $offerType;
 		$this->data['offerID'] = $offerID;
@@ -903,10 +989,51 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function getProfileVerified(){
+		$this->redirection();
+		if($_SESSION['registrationLevel']=='3'){
+			redirect(base_url('verify-mobile-number/8800'));
+		}
+		$identityDocumentStatus = $this->home_lib->getIdentityDocumentStatus();
+		$identityDocumentStatus = $identityDocumentStatus[0]['identityDocumentStatus'];
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='1')){
+			redirect(base_url('upload-identity-document'));
+		}
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='2')){
+			$this->session->set_flashdata('message', array('content'=>'Identity Document is Successfully Uploaded. Your account will be verified in next 24-48 hours','class'=>'success'));
+			redirect(base_url('home'));
+		}
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='3')){
+			$this->session->set_flashdata('message', array('content'=>'Identity Document Uploaded has been rejected during verification process. Please Try Again','class'=>'error'));
+			redirect(base_url('upload-identity-document'));
+		}
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='4')){
+			$this->home_lib->updateRegistrationLevel($_SESSION['userData']['userID'], '5');
+			$CI = &get_instance();
+			$CI->session->set_userdata('registrationLevel', '5');
+			$this->session->set_flashdata('message', array('content'=>'Your Account is Verified Successfully','class'=>'success'));
+			redirect(base_url('home'));
+		}
+		if($_SESSION['registrationLevel']=='5'){
+			$this->session->set_flashdata('message', array('content'=>'Your Account is Already Verified.','class'=>'success'));
+			redirect(base_url('home'));
+		}
+	}
+
 	public function test(){
 		require_once(APPPATH.'libraries/textlocal.class.php');
-		$textlocal=new textlocal('nikhilverma@campuspuppy.com','e215398a8820abd2c7a11a6cd5b1009d');
-		$textlocal->sendSms('917503705892','Your car - KA01 HG 9999 - is due for service on July 24th, please text SERVICE to 92205 92205 for a callback','FORDIN');
+		// $textlocal=new textlocal('nikhilverma@campuspuppy.com','e452269c41987e43f456a46e60e62d911f3c9e6eb1bcc2a7a0ce0f3f713d3b6e');
+		// $number = array('917503705892');
+		// $textlocal->sendSms($number,'Your car - KA01 HG 9999 - is due for service on July 24th, please text SERVICE to 92205 92205 for a callback','Nikhil');
+
+	$Textlocal = new Textlocal(false, false, 'XcQQZeh+jqo-buQS7k3YzzjQUmL38xklsYhHbAxUWY	');
+
+	$numbers = array(919958316967);
+	$sender = 'TXTLCL';
+	$message = 'This is your message';
+
+	$response = $Textlocal->sendSms($numbers, $message, $sender);
+	print_r($response);
 	}
 
 }

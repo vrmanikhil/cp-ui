@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Add Internship Offer|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/add-offer.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -193,6 +193,7 @@
 						<input type="hidden" name="selected_locations">
 					</div>
 					</div>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>

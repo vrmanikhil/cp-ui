@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Edit Internship Offer|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/add-offer.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -211,7 +211,10 @@
 						<input type="hidden" name="selected_locations" value = '<?=json_encode($location)?>'>
 					</div>
 					</div>
+
 					<input type="submit" value="Edit Internship" class="btn btn--primary add-offer__form-submit">
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+					
 				</form>
 				</div>
 			</div>
@@ -272,7 +275,7 @@
 		 }
 	 });
 	</script>
-	
+
 	<script type="text/javascript">
 
 	 $('#applicants').on('change',function(){

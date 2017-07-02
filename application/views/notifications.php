@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Notifications|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/notifications.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -60,7 +60,7 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="notifications__section card">
-					<h2 class="section-title">NOTIFICATIONS</h2>
+					<h2 class="section-title"><b>NOTIFICATIONS</b></h2>
 					<div class="notifications" id = "notifications">
 						<?php if(!empty($notifications)) { foreach ($notifications as $key => $value) { ?>
 

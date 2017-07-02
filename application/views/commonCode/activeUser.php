@@ -8,7 +8,7 @@
 	<div class=" feed-actor-module__actor-meta">
 		<p class="text-center feed-actor-module__name"><a href="<?php echo base_url('user-profile/').$_SESSION['userData']['userID']; ?>"><?php echo $_SESSION['userData']['name']; ?></a><?php if($_SESSION['registrationLevel']=='5'){ ?><i class="fa fa-check-circle" aria-hidden="true" style="color: #2980b9;"></i><?php } ?></p>
 		<?php if($_SESSION['registrationLevel']!='5') { ?>
-		<p><center><a style="font-size: 12px;"><b>Get your Profile Verified</b></a></center></p>
+		<p><center><a href="<?php echo base_url('home/getProfileVerified'); ?>" style="font-size: 12px;"><b>Get your Profile Verified</b></a></center></p>
 		<?php } ?>
 
 		<div class="media flex">

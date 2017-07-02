@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Relevant Internships|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -78,6 +78,7 @@
 					</div>
 					<input type="hidden" name="filter" value="1">
           <center>
+						<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 				</form>
@@ -343,7 +344,7 @@
 		        	]
 		    });
 		});
-		});  
+		});
 
 	$('.clear-filter').click(function(){
 		$('.search-filter').empty();

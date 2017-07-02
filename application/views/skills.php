@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CampusPuppy</title>
+	<title>Skills|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/skills.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -59,7 +59,7 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="skills__section card">
-					<h2 class="section-title">MY SKILLS</h2>
+					<h2 class="section-title"><b>MY SKILLS</b></h2>
 					<div class="skills-container flex">
 					<?php
 					if(empty($userSkills)){?>
@@ -80,13 +80,15 @@
 					?>
 					</div>
 					<div class = "skills">
-						<h2 class="section-title">ADD NEW SKILL</h2>
+						<h2 class="section-title"><b>ADD NEW SKILL</b></h2>
 						<select class="select" id="skills">
 							<?php foreach ($skills as $key => $value) { ?>
 								<option value="<?php echo $value['skillID']; ?>"><?php echo $value['skill_name']; ?></option>
 							<?php } ?>
 						</select>
-						<center><button type="submit" class="btn btn--primary notifications__load-more" id = 'take_test'>Take Test</button></center>
+						<center>
+							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+							<button type="submit" class="btn btn--primary notifications__load-more" id = 'take_test'>Take Test</button></center>
 					</div>
 				</div>
 			</div>

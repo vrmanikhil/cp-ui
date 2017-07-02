@@ -2,7 +2,7 @@
 <html>
 <head>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-     <title></title>
+     <title>CampusPuppy</title>
      <style type="text/css">
         * { margin: 0; padding: 0; }
         body { font: 16px Helvetica, Sans-Serif; color: #283e4a; line-height: 24px}
@@ -43,9 +43,9 @@
                 echo "No Educational Detail Added.";
             }else
                 foreach($educationalDetails as $details){?>
-                <?=$details['description']?>                
+                <?=$details['description']?>
                 <b>Year of Passing :</b><?= $details['year']?>
-                <p><strong>Score : </strong><?= $details['score']?></p> 
+                <p><strong>Score : </strong><?= $details['score']?></p>
                 <?php } ?>
             </dd>
             <dd class="clear"></dd>
@@ -77,9 +77,9 @@
                     <?= $work['companyName']?><br>
                     <?= $work['position']?>
                     <?= $work['description']?>
-                    <?php 
+                    <?php
                     echo $work['startMonth'].', '.$work['startYear'].' - '.$work['endMonth'].', '.$work['endYear'];
-                    }?>             
+                    }?>
             </dd>
             <dd class="clear"></dd>
             <dt>Achievements</dt>
