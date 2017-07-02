@@ -42,12 +42,14 @@ class Home_model extends CI_Model {
 	}
 
 	public function checkToken($email, $tokenType){
-		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email, 'active'=>'1'));
+		$this->db->order_by('tokenID', 'DESC');
+		$result = $this->db->get_where('passwordToken', array('tokenType' => $tokenType, 'email' => $email, 'active'=>'1'), '1');
 		return $result->result_array();
 	}
 
 	public function checkOTP($mobile){
-		$result = $this->db->get_where('otp', array('mobile' => $mobile, 'active'=>'1'));
+		$this->db->order_by('otpID', 'DESC');
+		$result = $this->db->get_where('otp', array('mobile' => $mobile, 'active'=>'1'), '1');
 		return $result->result_array();
 	}
 
@@ -296,7 +298,7 @@ class Home_model extends CI_Model {
 			if($result)
 				$ret = true;
 			else
-				$ret = false;	
+				$ret = false;
 		}
 		return $ret;
 	}
@@ -319,7 +321,7 @@ class Home_model extends CI_Model {
 		foreach ($current['cityIDs'] as $key => $value) {
 			$this->db->where('internshipID', $internshipID);
 			$this->db->where('cityID', $value);
-			$result = $this->db->delete('internshipLocations');	
+			$result = $this->db->delete('internshipLocations');
 			if($result)
 				$ret = true;
 			else
@@ -356,7 +358,7 @@ class Home_model extends CI_Model {
 			if($result)
 				$ret = true;
 			else
-				$ret = false;	
+				$ret = false;
 		}
 		return $ret;
 	}
@@ -379,7 +381,7 @@ class Home_model extends CI_Model {
 		foreach ($current['cityIDs'] as $key => $value) {
 			$this->db->where('jobID', $jobID);
 			$this->db->where('cityID', $value);
-			$result = $this->db->delete('jobLocations');	
+			$result = $this->db->delete('jobLocations');
 			if($result)
 				$ret = true;
 			else

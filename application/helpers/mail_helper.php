@@ -19,13 +19,13 @@ function sendEmailUsingSMTP($data)
   'protocol' => "smtp",
   'smtp_host' => "ssl://smtp.gmail.com",
   'smtp_port' => 465,
-  'smtp_user' => "no-reply@campuspuppy.com", 
-  'smtp_pass' => "vrmanikhil", 
+  'smtp_user' => "no-reply@campuspuppy.com",
+  'smtp_pass' => "vrmanikhil",
   'mailtype' => "html",
   'charset' => "utf-8",
   'wordwrap' => TRUE,
   'newline' => "\r\n"
-  );    
+  );
   $ci->email->initialize($config);
   $ci->email->from($data['fromEmail'], $data['fromName']);
   $ci->email->to($data['sendToEmail']);
@@ -54,7 +54,7 @@ function sendEmailUsingPepipost($data)
   $data['content']= $content;
   $data['recipients']= $to;
   $apiresult = callApi(@$api_type,@$action,$data);
-  echo trim($apiresult); 
+  // echo trim($apiresult); 
 }
 
 function callApi($api_type='', $api_activity='', $api_input='')

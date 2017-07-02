@@ -75,15 +75,12 @@ class Home extends CI_Controller {
 	}
 
 	public function educationDetails(){
-		$this->redirection();
-		if(($_SESSION['userData']['accountType']=='1') && ($_SESSION['registrationLevel']=='1')){
+		// $this->redirection();
 			$this->data['colleges'] = $this->home_lib->getColleges();
 			$this->data['courses'] = $this->home_lib->getCourses();
 			$this->load->view('educationDetails', $this->data);
-		}
-		else{
-			redirect(base_url('home'));
-		}
+			// redirect(base_url('home'));
+
 	}
 
 	public function employerDetails(){
@@ -97,8 +94,8 @@ class Home extends CI_Controller {
 	}
 
 	public function verifyEMail($redirection=''){
-		$this->redirection();
-		if($_SESSION['registrationLevel']=='2'){
+		// $this->redirection();
+		// if($_SESSION['registrationLevel']=='2'){
 			if($redirection=='1'){
 				$this->load->view('verifyEMail', $this->data);
 			}
@@ -106,10 +103,10 @@ class Home extends CI_Controller {
 			$this->generateVerifyEMail();
 			$this->load->view('verifyEMail', $this->data);
 			}
-		}
-		else{
-			redirect(base_url('home'));
-		}
+		// }
+		// else{
+		// 	redirect(base_url('home'));
+		// }
 	}
 
 	public function verifyMobileNumber($redirection=''){
@@ -129,7 +126,6 @@ class Home extends CI_Controller {
 	}
 
 	private function generateOTP(){
-		$this->redirection();
 		date_default_timezone_set("Asia/Kolkata");
 		$mobile = $_SESSION['userData']['mobile'];
 		$checkOTP = $this->home_lib->checkOTP($mobile);
@@ -138,7 +134,22 @@ class Home extends CI_Controller {
 			$expiry = $checkOTP[0]['expiry'];
 			$timeDifference = $expiry-$currentTime;
 			if($timeDifference>0 && $timeDifference<7200){
-				echo "Your Mobile Number Verification Token is: ".$checkOTP[0]['otp'].". The token is valid for only next 2 hours.";
+				$msg = "Your Mobile Number Verification Token is: ".$checkOTP[0]['otp'].". The token is valid for only next 2 hours.";
+				$this->sendSMS($mobile, $msg);
+			}
+			else{
+				$otp = rand(1000,9999);
+				$expiry = $currentTime + 7200;
+				$otpData = array(
+					'otp' => $otp,
+					'mobile' => $mobile,
+					'generatedAt' => $currentTime,
+					'expiry' => $expiry,
+					'active' => '1'
+				);
+				$this->home_lib->insertOTP($otpData);
+				$msg =  "Your Mobile Number Verification Token is: ".$otp.". The token is valid for only next 2 hours.";
+				$this->sendSMS($mobile, $msg);
 			}
 		}
 		else {
@@ -152,7 +163,8 @@ class Home extends CI_Controller {
 				'active' => '1'
 			);
 			$this->home_lib->insertOTP($otpData);
-			echo "Your Mobile Number Verification Token is: ".$otp.". The token is valid for only next 2 hours.";
+			$msg =  "Your Mobile Number Verification Token is: ".$otp.". The token is valid for only next 2 hours.";
+			$this->sendSMS($mobile, $msg);
 		}
 	}
 
@@ -887,7 +899,6 @@ if($_SESSION['userData']['accountType']=='2'){
 	}
 
 	private function generateVerifyEMail(){
-		$this->redirection();
 		date_default_timezone_set("Asia/Kolkata");
 		$email = $_SESSION['userData']['email'];
 		$checkToken = $this->home_lib->checkToken($email, '1');
@@ -897,6 +908,33 @@ if($_SESSION['userData']['accountType']=='2'){
 			$timeDifference = $expiry-$currentTime;
 			if($timeDifference>0 && $timeDifference<7200){
 				$emailData['token'] = $checkToken[0]['token'];
+				$this->load->helper('mail_helper');
+				$message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
+				$data = array(
+					'sendToEmail' => $email,
+					'fromName' => 'CampusPuppy Private Limited',
+					'fromEmail' => 'no-reply@campuspuppy.com',
+					'subject' => 'Verify E-Mail|CampusPuppy Private Limited',
+					'message' => $message,
+					'using' =>'pepipost'
+				);
+				sendEmail($data);
+			}
+			else{
+				$token = "Quickbrownfoxjumpedoveralazydog0123456789".md5($email);
+				$token = str_shuffle($token);
+				$token = substr($token, 0,8);
+				$expiry = $currentTime + 7200;
+				$tokenData = array(
+					'token' => $token,
+					'email' => $email,
+					'tokenType' => '1',
+					'generatedAt' => $currentTime,
+					'expiry' => $expiry,
+					'active' => '1'
+				);
+				$this->home_lib->insertPasswordToken($tokenData);
+				$emailData['token'] = $token;
 				$this->load->helper('mail_helper');
 				$message =  $this->load->view('emailers/verifyE-Mail', $emailData, true);
 				$data = array(
@@ -1020,20 +1058,36 @@ if($_SESSION['userData']['accountType']=='2'){
 		}
 	}
 
-	public function test(){
-		require_once(APPPATH.'libraries/textlocal.class.php');
-		// $textlocal=new textlocal('nikhilverma@campuspuppy.com','e452269c41987e43f456a46e60e62d911f3c9e6eb1bcc2a7a0ce0f3f713d3b6e');
-		// $number = array('917503705892');
-		// $textlocal->sendSms($number,'Your car - KA01 HG 9999 - is due for service on July 24th, please text SERVICE to 92205 92205 for a callback','Nikhil');
-
-	$Textlocal = new Textlocal(false, false, 'XcQQZeh+jqo-buQS7k3YzzjQUmL38xklsYhHbAxUWY	');
-
-	$numbers = array(919958316967);
-	$sender = 'TXTLCL';
-	$message = 'This is your message';
-
-	$response = $Textlocal->sendSms($numbers, $message, $sender);
-	print_r($response);
-	}
+	public function sendSMS($mobile, $msg){
+		$authKey = "163538ADD0UybtU59590664";
+		$mobileNumber = $mobile;
+		$senderId = "CPUPPY";
+		$message = urlencode($msg);
+		$route = "4";
+		$postData = array(
+		    'authkey' => $authKey,
+		    'mobiles' => $mobileNumber,
+		    'message' => $message,
+		    'sender' => $senderId,
+		    'route' => $route
+		);
+		$url="http://api.msg91.com/api/sendhttp.php";
+		$ch = curl_init();
+		curl_setopt_array($ch, array(
+		    CURLOPT_URL => $url,
+		    CURLOPT_RETURNTRANSFER => true,
+		    CURLOPT_POST => true,
+		    CURLOPT_POSTFIELDS => $postData
+		    //,CURLOPT_FOLLOWLOCATION => true
+		));
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		$output = curl_exec($ch);
+		if(curl_errno($ch)){
+	  // echo 'error:' . curl_error($ch);
+		}
+		curl_close($ch);
+		// echo $output;
+		}
 
 }
