@@ -95,9 +95,7 @@
 }
 
 .user-settings {
-	min-width: 125px;
-	max-width: 165px;
-	width: auto;
+	width: 165px;
 	min-height: auto;
 }
 
