@@ -532,7 +532,7 @@
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
 					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
+					<button type = 'submit'  class="btn btn--primary upload-result">Upload Image</button>
 				</div>
 			</form>
 		</div>
@@ -602,7 +602,8 @@
 		},
 		exif: false
 	});
-	$('#logo').on('change', function () { readFile(this)
+	$('#logo').on('change', function () { readFile(this)});
+	$('.upload-result').on('click', function () {
 			$uploadCrop.croppie('result',{
 				type: 'canvas',
 				size: 'viewport'
