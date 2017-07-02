@@ -198,3 +198,19 @@
 #userProfilePic {
 	max-width: 100px;
 }
+
+.cover-pic-option > input[type="radio"] {
+	bottom: 0;
+	left: 70px;
+	margin: 0;
+}
+
+.cover-pic-option > img {
+	max-width: 150px;
+	display: block;
+	width: 100%;
+}
+
+.edit-user-cover-pic .action-bar {
+	margin-top: 30px;
+}

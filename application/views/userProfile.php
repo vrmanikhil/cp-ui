@@ -25,7 +25,7 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item card">
 				<div class="user__cover-pic" style="background: url('<?php echo $userDetails['coverImage']; ?>') center no-repeat; background-size: cover;">
-					<a href="javascript:" class="btn edit-cover-pic-btn js-edit-cover-pic"><i class="fa fa-camera" aria-hidden="true"></i> Change cover Image</a>
+					<a href="javascript:" class="btn edit-cover-pic-btn js-edit-entity" data-json='' data-type="edit-user-cover-pic"><i class="fa fa-camera" aria-hidden="true"></i> Change cover Image</a>
 				</div>
 				<div class="user__name flex">
 					<p><?php echo $userDetails['name']; ?></p>
@@ -545,6 +545,70 @@
 			</form>
 		</div>
 	</div>
+	<div class="remodal edit-user-cover-pic" data-remodal-id="editUserCoverPic">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Edit Cover Pic</h3>
+			<form action="" method="POST" class="form">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+								<img src="/assets/img/cover-001.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-002.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-003.jpg" alt="">
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="horizontal-group">
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-004.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-005.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-006.jpg" alt="">
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
+				</div>
+			</form>
+		</div>
+	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/remodal.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/tabs.js'); ?>"></script>
@@ -611,7 +675,7 @@
 	});
 	$('#logo').on('change', function () { readFile(this)
 		Croppie();});
-	 	function Croppie(ev) {
+		function Croppie(ev) {
 			$uploadCrop.croppie('result', {
 				type: 'canvas',
 				size: 'original',
