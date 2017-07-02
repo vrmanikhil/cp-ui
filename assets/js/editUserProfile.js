@@ -16,9 +16,9 @@ $(document).ready(function () {
 			if (isCkeditor === 'yes') {
 				CKEDITOR.replace($(elem).attr('id'));
 			}
+
 		});
 	})();
-
 	$(document).on('click', '.js-edit-entity', openEditEntityModal);
 	function openEditEntityModal(ev) {
 		var keyMap = {
@@ -74,6 +74,11 @@ $(document).ready(function () {
 			formElem.find('img[id="companyLogo"]').attr('alt', 'No Image Uploaded.');
 			formElem.find('input[id = "logo"]').attr('value',json['companyLogo']);
 		}
+
+		if (type === 'edit-user-profile-pic') {
+			formElem.find('img[id="userProfilePic"]').attr('src', json['userProfilePic'] || '');
+		}
+
 		var modal = modalElem.remodal();
 		modal.open();
 	}
@@ -133,4 +138,4 @@ $(document).ready(function () {
 	});
 
 });
-	
+
