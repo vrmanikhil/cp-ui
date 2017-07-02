@@ -1039,5 +1039,28 @@ class Home_model extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getFilename($type, $userId){
+		if($type == 'company'){
+			$this->db->select('companyName');
+			$this->db->where('userID', $userId);
+			$result = $this->db->get('employerUsers')->result_array();
+			$result = $result[0]['companyName'];
+		}else{
+			$this->db->select('name');
+			$this->db->where('userID', $userId);
+			$result = $this->db->get('users')->result_array();
+			$result = $result[0]['name'];
+		}
+		return str_replace(' ', '_', $result).$userId;
+	}
+	public function updateCompanyLogo($userId, $logo){
+		var_dump($logo);
+		$this->db->where('userID', $userId);
+		return $this->db->update('employerUsers', $logo);
+	}
 
+	public function updateProfileImage($userId, $logo){
+		$this->db->where('userID', $userId);
+		return $this->db->update('users', $logo);
+	}
 }

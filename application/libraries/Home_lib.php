@@ -837,22 +837,23 @@ public function injectClassName(&$data)
 		if(empty($image)){
 			return false;
 		}
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		var_dump(base_url());
 		$upload_path = $path;
-		$filename = implode('_', json_decode($this->fetch_user_details('name'), true));
-		$upload_path .= $filename.'_'.(new DateTime())->format('d-m-Y H:i:s');
+		$name = $CI->homeModel->getFilename($type,$_SESSION['userData']['userID']);
+		$upload_path .= $name.'_'.str_replace(['-',':'],'',(new DateTime())->format('d-m-YH:i:s')).'.jpg';
 		$ifp = fopen($upload_path, "wb");
 		$data = explode(',', $image);
 		fwrite($ifp, base64_decode($data[1]));
 		fclose($ifp);
+		var_dump($upload_path);
 		if($this->validateImage($upload_path)){
-			if($type == 'Company' ){
-				$CI = &get_instance();
-				$CI->load->model('home_model','homeModel');
-				return $CI->homeModel->updateCompanyLogo();
+			if($type == 'company' ){
+				$logo['companyLogo'] = base_url($upload_path);
+				return $CI->homeModel->updateCompanyLogo($_SESSION['userData']['userID'], $logo);
 			}else{
-				$CI = &get_instance();
-				$CI->load->model('home_model','homeModel');
-				return $CI->homeModel->updateProfileImage();
+				return $CI->homeModel->updateProfileImage($_SESSION['userData']['userID'], base_url($upload_path));
 			} 
 		}else{
 			return false;

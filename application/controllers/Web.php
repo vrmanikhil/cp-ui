@@ -767,6 +767,7 @@ class Web extends CI_Controller {
 
 	public function editCompanyLogo(){
 		$companyLogo = '';
+		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('companyLogo')){
 			$companyLogo = $x;			
 		}
@@ -774,7 +775,7 @@ class Web extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}else{
-            $result = $this->home_lib->uploadImage($companyLogo, 'Company', 'assets/uploads/CompanyLogo/');
+            $result = $this->home_lib->uploadImage($companyLogo, 'company', 'assets/uploads/CompanyLogo/');
 			if($result){
 				$this->session->set_flashdata('message', array('content'=>'Logo Successfully changed.','class'=>'success'));
 				redirect(base_url('user-profile/'.$userID));
@@ -784,7 +785,6 @@ class Web extends CI_Controller {
 				redirect(base_url('user-profile/'.$userID));
 			}
         }
-		var_dump($companyLogo);
 	}
 
 	public function editPersonalDetails(){
