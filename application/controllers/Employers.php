@@ -383,7 +383,7 @@ class Employers extends CI_Controller {
 					}
 			$_SESSION['userData']['editInternshipId'] = NULL;
 			$_SESSION['userData']['current'] = NULL;
-			$this->session->set_flashdata('message', array('content'=>'Internship Offer Successfully Added.','class'=>'success'));
+			$this->session->set_flashdata('message', array('content'=>'Internship Offer Successfully Edited.','class'=>'success'));
 			redirect(base_url('internships/internship-offers'));
 			}
 	}
@@ -474,35 +474,35 @@ class Employers extends CI_Controller {
 		date_default_timezone_set("Asia/Kolkata");
 		$today = date('Y-m-d');
 		if($jobOfferTitle == '' || $jobOfferDescription == '' || $openings == '' || $partTime == '' || $startDate == '' || $applicationDeadline == '' || $salaryType == '' || $applicants == '' || $jobType == ''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if($salaryType == '1' && $minimumOffer == ''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if($salaryType == '1' && $maximumOffer == ''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again3','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if($salaryType == '2' && $salary == ''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again4','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if($applicants == '1' || $applicants == '2'){
 			if($selected_skills == ''){
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again5','class'=>'error'));
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('jobs/edit-job-offer/'.$jobID));
 			}
 		}
 		if($jobType == '2'){
 			if($selected_locations == ''){
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again6','class'=>'error'));
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('jobs/edit-job-offer/'.$jobID));
 			}
 		}
 		if (!($d1 && $d1->format('Y-m-d') === $startDate)){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again7','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if ($startDate < $today){
@@ -510,7 +510,7 @@ class Employers extends CI_Controller {
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if (!($d2 && $d2->format('Y-m-d') === $applicationDeadline)){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again8','class'=>'error'));
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
 		if ($applicationDeadline < $today){
@@ -535,7 +535,7 @@ class Employers extends CI_Controller {
 					array_push($try,['skillID'=>$value['skillID']['skillID'],'jobID'=>$jobID]);}
 					$this->load->model('home_model','homeModel');
 					if (!$this->homeModel->editJobSkills($try, $jobID)){
-						$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again9','class'=>'error'));
+						$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 						redirect(base_url('jobs/edit-job-offer/'.$jobID));
 					}
 				}
@@ -551,13 +551,13 @@ class Employers extends CI_Controller {
 						array_push($try,['cityID'=>$value['cityID']['location_id'],'jobID'=>$jobID]);}
 						$this->load->model('home_model','homeModel');
 						if (!$this->homeModel->editJobLocations($try,$jobID)){
-							$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again10','class'=>'error'));
+							$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 							redirect(base_url('jobs/edit-job-offer/'.$jobID));
 						}
 					}
 					$_SESSION['userData']['editJobId'] = NULL;
 			$_SESSION['userData']['current'] = NULL;
-			$this->session->set_flashdata('message', array('content'=>'Job Offer Successfully Added.','class'=>'success'));
+			$this->session->set_flashdata('message', array('content'=>'Job Offer Successfully Edited.','class'=>'success'));
 			redirect(base_url('jobs/job-offers'));
 			}
 	}

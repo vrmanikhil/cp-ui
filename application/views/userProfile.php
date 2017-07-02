@@ -212,6 +212,12 @@
 								<p class="flex personal-info"><strong>Company Name</strong><span><?php echo $employerDetails[0]['companyName']; ?></span></p>
 								<p class="flex personal-info"><strong>Position</strong><span><?php echo $employerDetails[0]['position']; ?></span></p>
 								<p class="flex personal-info"><strong>Company Description </strong><span><?php echo $employerDetails[0]['companyDescription']; ?></span></p>
+								<h3 class="heading flex">
+									<span>Company Logo</span>
+									<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
+									<a href="javascript:" data-json='<?= json_encode($employerDetails[0]) ?>' data-type="edit-company-logo" class="btn btn--primary js-edit-entity">Update Logo</a>
+									<?php } ?>
+								</h3>
 								<p class="flex personal-info"><strong>Company Logo</strong><span><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
 							</div>
 						</div>
@@ -478,7 +484,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Company Details</h3>
-			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form" enctype="multipart/form-data">
+			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name</label>
@@ -493,6 +499,19 @@
 					<label for="companyDescription">Description</label>
 					<textarea name="companyDescription" id="companyDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
 				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="remodal edit-company-logo" data-remodal-id="editCompanyLogo">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Company Logo</h3>
+			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form" enctype="multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<img src="" alt="" id="companyLogo">
@@ -504,6 +523,7 @@
 						<input type="hidden" name="companylogo">
 					</div>
 				</div>
+
 				<div class = "form-group">
 					<div class = "demo" style = "display:none">
 						<img src="" alt="" id="cropped-img" hidden>
@@ -558,6 +578,7 @@
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
+				console.log(e.target.result)
 				$uploadCrop.croppie('bind', {
 					url: e.target.result
 				});
@@ -582,17 +603,15 @@
 		exif: false
 	});
 	$('#logo').on('change', function () { readFile(this)
-		Croppie();});
-	 	function Croppie(ev) {
-			$uploadCrop.croppie('result', {
+			$uploadCrop.croppie('result',{
 				type: 'canvas',
-				size: 'original',
-				format: 'jpeg'
+				size: 'viewport'
 			}).then(function (resp) {
+				console.log(resp)
 				$('#cropped-img').attr('src', resp)
 				$('input[name="companylogo"]').val(resp)
 			});
-		};
+		});
 	</script>
 </body>
 </html>
