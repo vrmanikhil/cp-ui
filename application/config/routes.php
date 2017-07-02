@@ -97,6 +97,7 @@ $route['internships/applied-internship-offers'] = 'home/appliedInternshipOffers'
 //Job Offers- Employers
 
 $route['jobs/add-job-offer'] = 'home/addJobOffer';
+$route['jobs/edit-job-offer/(:num)'] = 'home/editJobOffer/$1';
 $route['jobs/added-job-offer'] = 'home/addedJobOffers';
 
 //Internship Offers- Employers

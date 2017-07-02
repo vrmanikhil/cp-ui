@@ -564,12 +564,23 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$this->data['internshipDetails'] = $this->home_lib->getInternshipDetails($internshipID);
 		$this->data['internshipDetails'] = $this->data['internshipDetails'][0];
+		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['internshipDetails']['skillIDsRequired']);
+		$_SESSION['userData']['current']['cityIDs'] = explode(',',$this->data['internshipDetails']['cityIDs']);
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
+		$_SESSION['userData']['editInternshipId'] = $internshipID;
 		$this->load->view('editInternshipOffer', $this->data);
 	}
 
-
+	public function editJobOffer($jobID){
+		$this->redirection();
+		$this->data['jobDetails'] = $this->home_lib->getJobDetails($jobID);
+		$this->data['jobDetails'] = $this->data['jobDetails'][0];
+		$this->data['skills'] = $this->home_lib->getSkills();
+		$this->data['locations'] = $this->home_lib->getLocations();
+		$_SESSION['userData']['editJobId'] = $jobID;
+		$this->load->view('editJobOffer', $this->data);
+	}
 
 	public function addedInternshipOffers(){
 		$this->redirection();

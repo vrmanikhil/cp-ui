@@ -182,6 +182,24 @@ class Home_lib {
 		return $CI->homeModel->addInternship($data);
 	}
 
+	public function editInternship($data, $internshipID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editInternship($data, $internshipID);
+	}
+
+	public function editInternSkills($data, $internshipID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editInternSkills($data, $internshipID);
+	}
+
+	public function editInternLocations($data, $internshipID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->editInternLocations($data, $internshipID);
+	}
+
 	public function register($data){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
