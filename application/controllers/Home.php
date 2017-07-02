@@ -587,7 +587,7 @@ class Home extends CI_Controller {
 			$query = $x;
 		}
 		$this->data['searchResults'] = $this->home_lib->getSearchResults($query);
-		var_dump($this->data['searchResults']);die;
+		// var_dump($this->data['searchResults']);die;
 		$this->load->view('search', $this->data);
 	}
 

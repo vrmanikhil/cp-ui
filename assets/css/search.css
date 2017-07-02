@@ -5,6 +5,57 @@
 @import url('/assets/css/components/footer.css');
 @import url('/assets/css/components/forms.css');
 @import url('/assets/css/components/feed-sidepane-components.css');
-@import url('/assets/css/components/search-filter-pane.css');
-@import url('/assets/css/components/feed-post.css');
-@import url('/assets/css/components/feed-sidepane-components.css');
+@import url('/assets/css/components/tabs.css');
+@import url('/assets/css/components/postings.css');
+@import url('/assets/css/components/modal.css');
+
+.globalContainer > .main-body {
+	max-width: 744px;
+}
+
+.posting-card {
+	border: 1px solid var(--semi-light-grey);
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.account {
+	border: 1px solid var(--grey);
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+.account > .media-figure {
+	max-width: 100px;
+	margin-right: 10px;
+	border-radius: 100%;
+}
+
+.account > .media-body {
+	align-items: center;
+	flex-grow: 1;
+}
+
+.account .user-info {
+	margin-right: 10px;
+	flex-grow: 1;
+}
+
+.account .user-info p {
+	font-size: 14px;
+}
+
+.account .actions > a {
+	display: inline-block;
+	border: none;
+}
+
+.account .actions {
+	margin-right: 10px;
+	flex-shrink: 0;
+}
+
+.view-profile {
+	width: 110px;
+}
+

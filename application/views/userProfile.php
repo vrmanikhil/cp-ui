@@ -203,8 +203,6 @@
 							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 							<?php } ?>
-
-
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
@@ -222,7 +220,6 @@
 							</div>
 						</div>
 						<?php } ?>
-
 					</div>
 				</div>
 			</div>
