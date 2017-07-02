@@ -853,7 +853,8 @@ public function injectClassName(&$data)
 				$logo['companyLogo'] = base_url($upload_path);
 				return $CI->homeModel->updateCompanyLogo($_SESSION['userData']['userID'], $logo);
 			}else{
-				return $CI->homeModel->updateProfileImage($_SESSION['userData']['userID'], base_url($upload_path));
+				$picture['profileImage'] = base_url($upload_path);
+				return $CI->homeModel->updateProfileImage($_SESSION['userData']['userID'], $picture);
 			} 
 		}else{
 			return false;

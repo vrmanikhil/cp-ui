@@ -787,6 +787,28 @@ class Web extends CI_Controller {
         }
 	}
 
+	public function editUserProfilePic(){
+		$profilePic = '';
+		$userID = $_SESSION['userData']['userID'];
+		if($x = $this->input->post('profilePic')){
+			$profilePic = $x;			
+		}
+		if($profilePic == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
+		}else{
+            $result = $this->home_lib->uploadImage($profilePic, 'profile', 'assets/uploads/ProfileImage/');
+			if($result){
+				$this->session->set_flashdata('message', array('content'=>'Profile Image Successfully changed.','class'=>'success'));
+				redirect(base_url('user-profile/'.$userID));
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('user-profile/'.$userID));
+			}
+        }
+	}
+
 	public function editPersonalDetails(){
 		$location = '';
 		$gender = '';

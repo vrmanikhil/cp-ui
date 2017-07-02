@@ -521,12 +521,12 @@
 				<div class="horizontal-group">
 					<div class="form-group">
 						<img src="" alt="" id="companyLogo">
-						<input type="hidden" name="companyLogo">
 					</div>
 					<div class="form-group">
 						<div class = 'inputLogo'>
 							<label for="logo">Company Logo</label>
 							<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
+							<input type="hidden" name="companyLogo">
 						</div>
 					</div>
 				</div>
@@ -552,22 +552,33 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Edit Profile Pic</h3>
-			<form action="" method="POST" class="form" enctype="multipart/form-data">
+			<form action="<?= base_url('web/editUserProfilePic')?>" method="POST" class="form" enctype="multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<img src="" alt="" id="userProfilePic">
 					</div>
 					<div class="form-group">
-						<label for="updatedUserPic">Upload Profile Pic</label>
-						<input type="file" class="form__input updatedUserPic" id="updatedUserPic" accept="image/*" name = img[]>
-						<input type="hidden" name="userProfilePic">
+						<div class = "inputPic">
+							<label for="updatedUserPic">Upload Profile Pic</label>
+							<input type="file" class="form__input updatedUserPic" id="updatedUserPic" accept="image/*" name = img[]>
+							<input type="hidden" name="profilePic">
+						</div>
+					</div>
+				</div>
+				<div class = "form-group">
+					<div class = "crop" style = "display:none">
+						<img src="" alt="" id="cropped-pic" hidden style ="padding-left: 25%">
 					</div>
 				</div>
 				<div class="form-group action-bar">
-					<button data-remodal-action="close" class="btn">Close</button>
-					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
+					<button data-remodal-action="close" class="btn save_pic" style="display: none">Close</button>
+					<input type = 'submit'  class="btn btn--primary save_pic" value="Save Changes" style="display: none">
 				</div>
 			</form>
+				<div class="form-group action-bar" style="float: right">
+					<button data-remodal-action="close" class="btn upload-pic">Close</button>
+					<button class="btn btn--primary upload-pic">Upload Image</button>
+				</div>
 		</div>
 	</div>
 	<div class="remodal edit-user-cover-pic" data-remodal-id="editUserCoverPic">
@@ -715,6 +726,57 @@
 				$('#cropped-img').attr('src', resp)
 				$('#cropped-img').show()
 				$('input[name="companyLogo"]').val(resp)
+			});
+		});
+	</script>
+	<script type="text/javascript">
+	var $uploadImage;
+
+	function readFile(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				console.log(e.target.result)
+				$uploadImage.croppie('bind', {
+					url: e.target.result
+				});
+				$('.crop').show();
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+		else {
+			alert("Sorry - you're browser doesn't support the FileReader API");
+		}
+	}
+	$uploadImage = $('#cropped-pic').croppie({
+		viewport: {
+			width: 300,
+			height: 300,
+			type: 'square'
+		},
+		boundary: {
+			width: 350,
+			height: 350,
+		},
+		exif: false
+	});
+	$('#updatedUserPic').on('change', function () { readFile(this)});
+	$('.upload-pic').on('click', function () {
+			$uploadImage.croppie('result',{
+				type: 'canvas',
+				size: 'viewport',
+				format:'jpeg'
+			}).then(function (resp) {
+				console.log(resp)
+				$('.upload-pic').hide();
+				$('.save_pic').show();
+				$('.cr-boundary').hide();
+				$('.cr-slider-wrap').hide();
+				$('.inputPic').hide();
+				$('#cropped-pic').attr('src', resp)
+				$('#cropped-pic').show()
+				$('input[name="profilePic"]').val(resp)
+				$('#userProfilePic').hide()
 			});
 		});
 	</script>

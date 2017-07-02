@@ -1059,8 +1059,8 @@ class Home_model extends CI_Model {
 		return $this->db->update('employerUsers', $logo);
 	}
 
-	public function updateProfileImage($userId, $logo){
+	public function updateProfileImage($userId, $image){
 		$this->db->where('userID', $userId);
-		return $this->db->update('users', $logo);
+		return $this->db->update('users', $image);
 	}
 }
