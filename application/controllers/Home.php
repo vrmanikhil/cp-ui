@@ -878,6 +878,7 @@ if($_SESSION['userData']['accountType']=='2'){
 	public function connections(){
 		$this->redirection();
 		$userID = $_SESSION['userData']['userID'];
+		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
 		$connections = array();
 		foreach ($this->data['connections'] as $key => $value) {
@@ -888,14 +889,12 @@ if($_SESSION['userData']['accountType']=='2'){
 				array_push($connections,$value['active']);
 			}
 		}
+		var_dump($connections);
 		if(!empty($connections)){
 		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
-		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
 		$this->load->view('connections', $this->data);
 		}
-		else{
-			$this->load->view('connections', $this->data);
-		}
+		$this->load->view('connections', $this->data);
 	}
 
 	private function generateVerifyEMail(){
