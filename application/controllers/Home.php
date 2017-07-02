@@ -890,6 +890,36 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function getProfileVerified(){
+		if($_SESSION['registrationLevel']=='3'){
+			redirect(base_url('verify-mobile-number/8800'));
+		}
+		$identityDocumentStatus = $this->home_lib->getIdentityDocumentStatus();
+		$identityDocumentStatus = $identityDocumentStatus[0]['identityDocumentStatus'];
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='1')){
+			redirect(base_url('upload-identity-document'));
+		}
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='2')){
+			$this->session->set_flashdata('message', array('content'=>'Identity Document is Successfully Uploaded. Your account will be verified in next 24-48 hours','class'=>'success'));
+			redirect(base_url('home'));
+		}
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='3')){
+			$this->session->set_flashdata('message', array('content'=>'Identity Document Uploaded has been rejected during verification process. Please Try Again','class'=>'error'));
+			redirect(base_url('upload-identity-document'));
+		}
+		if(($_SESSION['registrationLevel']=='4') && ($identityDocumentStatus=='4')){
+			$this->home_lib->updateRegistrationLevel($_SESSION['userData']['userID'], '5');
+			$CI = &get_instance();
+			$CI->session->set_userdata('registrationLevel', '5');
+			$this->session->set_flashdata('message', array('content'=>'Your Account is Verified Successfully','class'=>'success'));
+			redirect(base_url('home'));
+		}
+		if($_SESSION['registrationLevel']=='5'){
+			$this->session->set_flashdata('message', array('content'=>'Your Account is Already Verified.','class'=>'success'));
+			redirect(base_url('home'));
+		}
+	}
+
 	public function test(){
 		require_once(APPPATH.'libraries/textlocal.class.php');
 		// $textlocal=new textlocal('nikhilverma@campuspuppy.com','e452269c41987e43f456a46e60e62d911f3c9e6eb1bcc2a7a0ce0f3f713d3b6e');
@@ -898,7 +928,7 @@ class Home extends CI_Controller {
 
 	$Textlocal = new Textlocal(false, false, 'XcQQZeh+jqo-buQS7k3YzzjQUmL38xklsYhHbAxUWY	');
 
-	$numbers = array(917503705892);
+	$numbers = array(919958316967);
 	$sender = 'TXTLCL';
 	$message = 'This is your message';
 

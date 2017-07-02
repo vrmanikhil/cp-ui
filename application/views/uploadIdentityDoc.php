@@ -24,10 +24,10 @@
 				<div class="main-body flex__item flex flex--col">
 					<div class="upload-identity-doc-container">
 						<h2>Upload Identity Document</h2>
-						<form class="form upload-identity__form" action="" method="post">
+						<form class="form upload-identity__form" action="<?php echo base_url('web/uploadIdentityDocument'); ?>" method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="identityDoc" class="form__label">Identity Doc</label>
-							<input type="file" name="file" id="identityDoc" class="form__input">
+							<label for="identityDoc" class="form__label">Choose Identity Document for Upload</label>
+							<input type="file" name="identityDoc" id="identityDoc" class="form__input">
 							<div class="show-instructions">
 								<a href="javascript:" class="js-upload-instructions">Instructions</a>
 							</div>
