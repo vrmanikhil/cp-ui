@@ -576,6 +576,8 @@ class Home extends CI_Controller {
 		$this->redirection();
 		$this->data['jobDetails'] = $this->home_lib->getJobDetails($jobID);
 		$this->data['jobDetails'] = $this->data['jobDetails'][0];
+		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['jobDetails']['skillIDsRequired']);
+		$_SESSION['userData']['current']['cityIDs'] = explode(',',$this->data['jobDetails']['cityIDs']);
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$_SESSION['userData']['editJobId'] = $jobID;

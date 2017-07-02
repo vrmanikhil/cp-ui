@@ -109,7 +109,7 @@
 						<option value="1" <?php if($jobDetails['offerType']=='1') echo "selected"; ?>>Offered in Range</option>
 						<option value="2" <?php if($jobDetails['offerType']=='2') echo "selected"; ?>>Fixed Offer</option>
 					</select>
-					<div class="flex" id="offeredRange">
+					<div class="flex" id="offeredRange" <?php if($jobDetails['offerType']=='1'){}else{?> style="display: none;"<?php } ?>>
 						<div class="form-group">
 							<label for="minimumOffer" class="form__label">Minimum Salary Offered</label>
 							<input type="text" id="minimumOffer" name="minimumOffer" placeholder="Minimum Salary (in lakhs)" class="form__input" value = "<?= $jobDetails['minimumOffer']?>">
@@ -119,7 +119,7 @@
 							<input type="text" id="maximumOffer" name="maximumOffer" placeholder="Maximum Salary (in lakhs)" class="form__input" value = "<?= $jobDetails['maximumOffer']?>">
 						</div>
 					</div>
-					<div id="salaryOffered" style="display: none;">
+					<div id="salaryOffered" <?php if($jobDetails['offerType']=='2'){}else{?> style="display: none;"<?php } ?>>
 					<label for="salary" class="form__label">Salary Offer</label>
 					<input type="text" id="salary" name="salary" placeholder="Salary Offered (in lakhs)" class="form__input" value = "<?= $jobDetails['offer']?>">
 					</div>
@@ -194,7 +194,7 @@
 						<input type="hidden" name="selected_locations" value = '<?=json_encode($location)?>'>
 					</div>
 					</div>
-					<input type="submit" value="Add Job Offer" class="btn btn--primary add-offer__form-submit">
+					<input type="submit" value="Edit Job Offer" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>
 			</div>

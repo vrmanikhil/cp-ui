@@ -211,7 +211,7 @@
 						<input type="hidden" name="selected_locations" value = '<?=json_encode($location)?>'>
 					</div>
 					</div>
-					<input type="submit" value="Add Internship" class="btn btn--primary add-offer__form-submit">
+					<input type="submit" value="Edit Internship" class="btn btn--primary add-offer__form-submit">
 				</form>
 				</div>
 			</div>
