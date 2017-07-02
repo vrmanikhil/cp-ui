@@ -491,6 +491,8 @@ class Web extends CI_Controller {
 			$score = '0';
 			$college = $this->home_lib->getCollegeDetails($collegeID);
 			$college = $college[0];
+			$CI->session->set_userdata('collegeLogo', $college['collegeLogo']);
+			$CI->session->set_userdata('collegeName', $college['college']);
 			$description = $course['course']."-".$batch.", at ".$college['college'];
 			$data = array(
 					'educationType' => $educationType,
@@ -534,6 +536,9 @@ class Web extends CI_Controller {
 			$CI =& get_instance();
 			$CI->session->set_userdata('registrationLevel', '2');
 			$this->home_lib->updateRegistrationLevel($userID, '2');
+			$companyLogo = "http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg";
+			$CI->session->set_userdata('companyName', $companyName);
+			$CI->session->set_userdata('companyLogo', $companyLogo);
 			$this->session->set_flashdata('message', array('content'=>'Details Successfully Updated.','class'=>'success'));
 			redirect(base_url());
 		}
@@ -679,20 +684,20 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('otp')){
 			$otp = $x;
 		}
-		$email = $_SESSION['userData']['mobile'];
+		$mobile = $_SESSION['userData']['mobile'];
 		$checkOTP = $this->home_lib->checkOTP($mobile);
 		$currentTime = strtotime(date("d M Y H:i:s"));
 		if($checkOTP){
 			$expiry = $checkOTP[0]['expiry'];
 			$timeDifference = $expiry-$currentTime;
 			if($timeDifference>0 && $timeDifference<7200){
-				if($checkOTP[0]['token']===$otp){
+				if($checkOTP[0]['otp']===$otp){
 					$this->home_lib->deactivateOTP($mobile);
 					$this->home_lib->updateRegistrationLevel($_SESSION['userData']['userID'], '4');
 					$CI = &get_instance();
 					$CI->session->set_userdata('registrationLevel', '4');
 					$this->session->set_flashdata('message', array('content'=>'Mobile Number Successfully Verified','class'=>'success'));
-					redirect(base_url());
+					redirect(base_url('upload-identity-document'));
 				}
 				else{
 					$this->session->set_flashdata('message', array('content'=>'The Entered OTP is Not Valid. Please Try Again.','class'=>'error'));
@@ -863,6 +868,37 @@ class Web extends CI_Controller {
 		else{
 			$this->session->set_flashdata('message', array('content'=>'Cover Image Successfully Changed.','class'=>'success'));
 			redirect(base_url('user-profile/'.$userID));
+		}
+	}
+
+	public function uploadIdentityDocument(){
+		$identityDocument = '';
+		$this->load->library('upload');
+	 	$config['upload_path'] = 'identityDocument';
+	 	$config['allowed_types'] = 'jpg|jpeg|png|JPG|pdf|doc|docx';
+	 	$config['max_size']	= '3000';
+	 	$this->upload->initialize($config);
+	 	$result = $this->upload->do_upload('identityDoc');
+	 	$x = $this->upload->data();
+		$base_url = base_url();
+		$identityDocument = $base_url.'identityDocument/'.$x['file_name'];
+		if($result){
+			$data = array(
+				'identityDocument' => $identityDocument,
+				'identityDocumentStatus' => '2'
+			);
+			if($this->home_lib->uploadIdentityDocument($data)){
+				$this->session->set_flashdata('message', array('content'=>'Identity Document Successfully Uploaded. Your account will be verified in next 24-48 hours','class'=>'success'));
+				redirect(base_url('home'));
+			}
+			else{
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('upload-identity-document'));
+			}
+		}
+		else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Check Upload Instructions.','class'=>'error'));
+			redirect(base_url('upload-identity-document'));
 		}
 	}
 

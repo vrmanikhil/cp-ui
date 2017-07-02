@@ -786,6 +786,18 @@ public function injectClassName(&$data)
 		return $CI->homeModel->changeCoverImage($data);
 	}
 
+	public function uploadIdentityDocument($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->uploadIdentityDocument($data);
+	}
+
+	public function getIdentityDocumentStatus(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getIdentityDocumentStatus();
+	}
+
 
 
 }

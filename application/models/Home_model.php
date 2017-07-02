@@ -905,5 +905,17 @@ class Home_model extends CI_Model {
 		return $this->db->update('users', $data);
 	}
 
+	public function uploadIdentityDocument($data){
+		$this->db->where('userID', $_SESSION['userData']['userID']);
+		return $this->db->update('users', $data);
+	}
+
+	public function getIdentityDocumentStatus(){
+		$this->db->select('identityDocumentStatus');
+		$this->db->where('userID', $_SESSION['userData']['userID']);
+		$result = $this->db->get('users');
+		return $result->result_array();
+	}
+
 
 }
