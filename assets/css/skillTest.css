@@ -7,24 +7,22 @@
 
 .mcq {
 	text-align: left;
-	margin-top: 8px;
-	margin-bottom: 12px;
+	margin: 10px 0;
 }
 
 .options label {
 	transition: background-color .3s, ease-in;
-	font-size: 15px;
-	display: inline-block;
+	font-size: 0.9375rem;
+	flex-grow: 1;
 	cursor: pointer;
-	position: relative;
-	background-color: none;
+	background: none;
 	color: #222;
-	border: 1px solid #d4d4d4;
-	padding: 2%;
-	width: 80%;
+	border: 1px solid var(--semi-light-grey);
+	padding: 10px 8px;
 	text-align: left;
-	margin: 8px;
+	margin: 0 0 0 10px;
 	font-weight: bold;
+	text-transform: none !important;
 }
 
 .options input[type="radio"] {
@@ -32,21 +30,38 @@
 }
 
 .options input[type="radio"]:checked+label {
-	background: #283e4a;
-	color: #fff;
+	background: var(--midnight-blue);
+	color: white;
+	border-color: var(--midnight-blue);
 }
 
 .opt {
 	background-color: #283e4a;
-	padding: 2.2%;
-	border: 1px solid #d4d4d4;
+	padding: 7px 10px;
 	color: white;
 	font-weight: bold;
 }
 
+.option {
+	align-items: flex-start;
+	margin-bottom: 15px;
+}
+
 .testButton{
-	background-color: #283e4a;
-	border: 1px solid #d4d4d4;
+	background-color: var(--midnight-blue);
 	color: white;
-	padding: 2.2%;
+	padding: 8px 10px;
+}
+
+.skill-name {
+	flex-grow: 1;
+}
+
+#next-button {
+	margin-left: auto;
+}
+
+.submitButton {
+	margin-top: 15px;
+	text-align: center;
 }
