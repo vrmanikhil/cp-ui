@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User|CampusPuppy</title>
+	<title>User | CampusPuppy</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
@@ -24,7 +24,9 @@
 		<?php if(isset($_SESSION['userData']['loggedIn'])){ echo $header; } else { echo $headerLogin; } ?>
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item card">
-				<div class="user__cover-pic" style="background: url('<?php echo $userDetails['coverImage']; ?>') center no-repeat; background-size: cover;"></div>
+				<div class="user__cover-pic" style="background: url('<?php echo $userDetails['coverImage']; ?>') center no-repeat; background-size: cover;">
+					<a href="javascript:" class="btn edit-cover-pic-btn js-edit-entity" data-json='' data-type="edit-user-cover-pic"><i class="fa fa-camera" aria-hidden="true"></i> Change cover Image</a>
+				</div>
 				<div class="user__name flex">
 					<p><?php echo $userDetails['name']; ?></p>
 					<?php if($userDetails['userID']!=$_SESSION['userData']['userID']){ ?>
@@ -51,6 +53,10 @@
 				</div>
 				<div class="user__pic">
 					<img src="<?php echo $userDetails['profileImage']; ?>" alt="">
+					<?php $data = array('userProfilePic' => $userDetails['profileImage']); ?>
+					<div class="edit-user-pic">
+						<a class="edit-user-pic-btn js-edit-entity" data-json='<?= json_encode($data) ?>' data-type="edit-user-profile-pic" href="javascript:"><i class="fa fa-camera" aria-hidden="true"></i></a>
+					</div>
 				</div>
 				<div class="user-information">
 
@@ -71,7 +77,7 @@
 								<h3 class="heading flex">
 										<span>Education</span>
 										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
-											<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-education"><i class="fa fa-plus" aria-hidden="true"></i></a>
+											<a href="javascript:" class="btn btn--primary js-open-edit-modal"  data-modal-type="edit-education"><i class="fa fa-plus" aria-hidden="true"></i></a>
 										<?php } ?>
 								</h3>
 								<div class="education-details__container">
@@ -197,8 +203,6 @@
 							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 							<?php } ?>
-
-
 						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
@@ -225,7 +229,6 @@
 							</div>
 						</div>
 						<?php } ?>
-
 					</div>
 				</div>
 			</div>
@@ -543,6 +546,92 @@
 				<button data-remodal-action="close" class="btn upload-result">Close</button>
 				<button class="btn btn--primary upload-result">Upload Image</button>
 			</div>
+		</div>
+	</div>
+	<div class="remodal edit-user-profile-pic" data-remodal-id="editUserProfilePic">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Edit Profile Pic</h3>
+			<form action="" method="POST" class="form" enctype="multipart/form-data">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<img src="" alt="" id="userProfilePic">
+					</div>
+					<div class="form-group">
+						<label for="updatedUserPic">Upload Profile Pic</label>
+						<input type="file" class="form__input updatedUserPic" id="updatedUserPic" accept="image/*" name = img[]>
+						<input type="hidden" name="userProfilePic">
+					</div>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="remodal edit-user-cover-pic" data-remodal-id="editUserCoverPic">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Edit Cover Pic</h3>
+			<form action="" method="POST" class="form">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+								<img src="/assets/img/cover-001.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-002.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-003.jpg" alt="">
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="horizontal-group">
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-004.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-005.jpg" alt="">
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="radio">
+							<label class="cover-pic-option">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+								<img src="/assets/img/cover-006.jpg" alt="">
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn">Close</button>
+					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
+				</div>
+			</form>
 		</div>
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
