@@ -892,8 +892,18 @@ class Home extends CI_Controller {
 
 	public function test(){
 		require_once(APPPATH.'libraries/textlocal.class.php');
-		$textlocal=new textlocal('nikhilverma@campuspuppy.com','e215398a8820abd2c7a11a6cd5b1009d');
-		$textlocal->sendSms('917503705892','Your car - KA01 HG 9999 - is due for service on July 24th, please text SERVICE to 92205 92205 for a callback','FORDIN');
+		// $textlocal=new textlocal('nikhilverma@campuspuppy.com','e452269c41987e43f456a46e60e62d911f3c9e6eb1bcc2a7a0ce0f3f713d3b6e');
+		// $number = array('917503705892');
+		// $textlocal->sendSms($number,'Your car - KA01 HG 9999 - is due for service on July 24th, please text SERVICE to 92205 92205 for a callback','Nikhil');
+
+	$Textlocal = new Textlocal(false, false, 'XcQQZeh+jqo-buQS7k3YzzjQUmL38xklsYhHbAxUWY	');
+
+	$numbers = array(917503705892);
+	$sender = 'TXTLCL';
+	$message = 'This is your message';
+
+	$response = $Textlocal->sendSms($numbers, $message, $sender);
+	print_r($response);
 	}
 
 }
