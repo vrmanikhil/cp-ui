@@ -843,9 +843,11 @@ class Web extends CI_Controller {
 	public function changeCoverImage(){
 		$coverImage = base_url('assets/img/cover-default.jpg');
 		$image = '';
-		if($x = $this->input->post('image')){
+		$userID = $_SESSION['userData']['userID'];
+		if($x = $this->input->post('optionsRadios')){
 			$image = $x;
 		}
+
 		if($image=='1'){
 			$coverImage = base_url('assets/img/cover-001.jpg');
 		}
@@ -868,7 +870,7 @@ class Web extends CI_Controller {
 			'coverImage' => $coverImage
 		);
 		$result = $this->home_lib->changeCoverImage($data);
-		if($result){
+		if(!$result){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}

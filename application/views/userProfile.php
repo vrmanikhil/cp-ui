@@ -572,6 +572,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn save_pic" style="display: none">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type = 'submit'  class="btn btn--primary save_pic" value="Save Changes" style="display: none">
 				</div>
 			</form>
@@ -585,12 +586,12 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Update Cover Image</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?= base_url('web/changeCoverImage')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>
+								<input type="radio" name="optionsRadios" id="optionsRadios" value="1" checked>
 								<img src="<?php echo base_url('/assets/img/cover-001.jpg'); ?>" alt="">
 							</label>
 						</div>

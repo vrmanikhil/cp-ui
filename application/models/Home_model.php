@@ -1056,12 +1056,15 @@ class Home_model extends CI_Model {
 		return str_replace(' ', '_', $result).$userId;
 	}
 	public function updateCompanyLogo($userId, $logo){
-		var_dump($logo);
+		$CI =& get_instance();
+		$CI->session->set_userdata('companyLogo', $logo['companyLogo']);
 		$this->db->where('userID', $userId);
 		return $this->db->update('employerUsers', $logo);
 	}
 
 	public function updateProfileImage($userId, $image){
+		$CI =& get_instance();
+		$CI->session->set_userdata('profileImage', $image['profileImage']);
 		$this->db->where('userID', $userId);
 		return $this->db->update('users', $image);
 	}
