@@ -584,30 +584,30 @@
 	<div class="remodal edit-user-cover-pic" data-remodal-id="editUserCoverPic">
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
-			<h3>Edit Cover Pic</h3>
+			<h3>Update Cover Image</h3>
 			<form action="" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-								<img src="/assets/img/cover-001.jpg" alt="">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>
+								<img src="<?php echo base_url('/assets/img/cover-001.jpg'); ?>" alt="">
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-								<img src="/assets/img/cover-002.jpg" alt="">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="2">
+								<img src="<?php echo base_url('/assets/img/cover-002.jpg'); ?>" alt="">
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-								<img src="/assets/img/cover-003.jpg" alt="">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="3">
+								<img src="<?php echo base_url('/assets/img/cover-003.jpg'); ?>" alt="">
 							</label>
 						</div>
 					</div>
@@ -616,30 +616,31 @@
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-								<img src="/assets/img/cover-004.jpg" alt="">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="4">
+								<img src="<?php echo base_url('/assets/img/cover-004.jpg'); ?>" alt="">
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-								<img src="/assets/img/cover-005.jpg" alt="">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="5">
+								<img src="<?php echo base_url('/assets/img/cover-005.jpg'); ?>" alt="">
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-								<img src="/assets/img/cover-006.jpg" alt="">
+								<input type="radio" name="optionsRadios" id="optionsRadios1" value="6">
+								<img src="<?php echo base_url('/assets/img/cover-006.jpg'); ?>" alt="">
 							</label>
 						</div>
 					</div>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type = 'submit'  class="btn btn--primary upload-result" value="Save Changes">
 				</div>
 			</form>

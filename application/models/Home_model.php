@@ -1023,6 +1023,8 @@ class Home_model extends CI_Model {
 	}
 
 	public function changeCoverImage($data){
+		$CI =& get_instance();
+		$CI->session->set_userdata('coverImage', $data['coverImage']);
 		$this->db->where('userID', $_SESSION['userData']['userID']);
 		return $this->db->update('users', $data);
 	}

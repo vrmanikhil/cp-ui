@@ -769,7 +769,7 @@ class Web extends CI_Controller {
 		$companyLogo = '';
 		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('companyLogo')){
-			$companyLogo = $x;			
+			$companyLogo = $x;
 		}
 		if($companyLogo == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
@@ -791,7 +791,7 @@ class Web extends CI_Controller {
 		$profilePic = '';
 		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('profilePic')){
-			$profilePic = $x;			
+			$profilePic = $x;
 		}
 		if($profilePic == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
@@ -863,9 +863,6 @@ class Web extends CI_Controller {
 		}
 		if($image=='6'){
 			$coverImage = base_url('assets/img/cover-006.jpg');
-		}
-		if($image=='7'){
-			$coverImage = base_url('assets/img/cover-default.jpg');
 		}
 		$data = array(
 			'coverImage' => $coverImage
