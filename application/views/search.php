@@ -70,7 +70,7 @@
 					<li role="presentation"><a href="#internships" aria-controls="internships" role="tab" data-toggle="tab">Internship Offers</a></li>
 					<li role="presentation"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Job Offers</a></li>
 				</ul>
-				<>
+			
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="accounts">
@@ -112,7 +112,7 @@
 										<strong><?php echo $value['other']; ?></strong>
 									</p>
 									<p class="posting-card__desc"><?php echo $value['name']; ?></p>
-									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="viewinternship" style="width: 30%;">View</button>
+									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" name = "internship" id="viewinternship<?=$value['userID']?>" style="width: 30%;">View</button>
 								</div>
 							</div>
 						</div>
@@ -135,7 +135,7 @@
 										<strong><?php echo $value['other']; ?></strong>
 									</p>
 									<p class="posting-card__desc"><?php echo $value['name']; ?></p>
-									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7" style="width: 30%;">View</button>
+									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" name = "job" id="viewjob<?=$value['userID']?>" style="width: 30%;">View</button>
 								</div>
 							</div>
 						</div>
@@ -170,42 +170,79 @@
 		<div class="remodal" data-remodal-id="modal">
 			<button data-remodal-action="close" class="remodal-close"></button>
 			<div class="modal-body">
-				<h1>Job Offer <small>Content Writer Intern</small></h1>
-				<div class="flex">
-					<div class="modal-body__left flex__item">
-						<p><strong>Why should you join FITPASS?</strong></p>
-						<p>• <strong>Team:</strong> Work with smart and passionate people</p>
-						<p>• <strong>Growth:</strong> We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p>
-						<p>• <strong>Start-up Culture:</strong> Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p>
-						<p>• <strong>Impact:</strong> FITPASS does not function on a defined hierarchy &amp; everyone's given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p>
-						<p><strong>Here’s what you’ll do day-to-day:</strong></p>
-						<p>• Curate and create quality, fact filled content for fitness blogs and articles</p>
-						<p>• Create engaging content to be published on social media</p>
-						<p>• Drafting articles and blogs to promote SEO activities of FITPASS</p>
-						<p>• Contributing in promoting website and social media platforms through succinct, concise communication</p>
-						<p>• Build a strong product-base for FITPASS with high quality write-up</p>
-						<p>• Execute quality check of content on our website to ensure that information is accurate</p>
-						<p><strong>Who we’re looking for:</strong></p>
-						<p>• Someone with a prior work experience is a bonus, though it is not a necessity</p>
-						<p>• Preferably studying English and Journalism</p>
-						<p>• Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p>
-						<p>• Great understanding of the product</p>
-						<p>• Excellent organizational and time management skills with the drive to achieve targets</p>
-						<p>• Comfortable travelling within the city</p>
-						<p>• Ability to thrive in a highly-charged environment</p>
-						<p>• Good knowledge of MS Office</p>
-					</div>
+			<h1>Offer <small id = "jobTitle"></small></h1>
+			<div class="flex">
+			<div class="modal-body__left flex__item">
+			<div class="col-md-9">
+              <div class="col-sm-12">
+                <form class="form-horizontal">
+
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Offer Description:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDescription">Offer Description</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Start Date:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobStart">Start Date</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Application Deadline:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobDeadline">Application Deadline</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Offer:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOffer">Offer</p>
+                  </div>
+                </div>
+                <div class="form-group duration">
+                  <label class="control-label col-sm-3"><strong>Duration:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "duration">Duration</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Number of Openings:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobOpening">Number of Openings</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Part Time Allowed:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobTime">Part Time Allowed</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3"><strong>Skills:</strong></label>
+                  <div class="col-sm-9">
+                    <p class="form-control-static" id = "jobSkill">Skills</p>
+                  </div>
+                </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3"><strong>Location:</strong></label>
+                <div class="col-sm-9">
+                  <p class="form-control-static" id = "jobType"><?php echo "Work from Home"; ?></p>
+                </div>
+              </div>
+              </form>
+              </div>
+            </div>
+		</div>
 					<aside class="modal-body__right flex__item">
 						<center><strong>Company Profile</strong></center>
 						<br>
-						<strong>FITPASS</strong>
+						<strong id = "companyName">companyName</strong>
 						<br>
-						<p>https://fitpass.co.in/</p>
-						<p><strong>FITPASS</strong> is your all access pass to 1250+ gyms and fitness studios in Delhi NCR. Available on iOS &amp; android, FITPASS users can freely workout anywhere, anytime however they want - gym workouts, Yoga, Zumba, Pilates, Cross Fit, Kickboxing, MMA, spinning and many many more. Priced at Rs.999 a month only, FITPASS makes fitness super affordable and accessible.</p>
-						<p>Bolstered by a team with the strongest pedigree – Oxford, Columbia, IIT, St.Stephen's and Delhi University, with its teeth cut in UBS Investment Bank, McKinsey, the World Bank, Zomato, KPMG, etc. – we are bringing in the age of fit-tech in India!</p>
-						<p>FITPASS is defined by our insistence on providing an unparalleled customer experience.</p>
-						<p>Our team members are charged with bringing creativity, honesty, and intellectual rigor to their responsibilities in a never-ending quest to delight our customers. We have high expectations of each other and work as a team to build things we are all proud of.</p>
-						<button type="button" class="btn--apply">APPLY</button>
+						<p id = "companyWebsite">Company Website</p>
+						<p id = "companyDescription">Company Description</p>
+						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
 					</aside>
 				</div>
 			</div>
@@ -216,6 +253,88 @@
 	<script src="<?php echo base_url('/assets/js/tabs.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/jobs.js'); ?>"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('body').on('click', '.view', function(){
+				var data = null
+				id = this.id
+				type = $('#'+id).attr('name')
+				id = $('#'+id).attr('data-id')
+				console.log(id);
+				if(type == 'job'){
+					url = '<?= base_url('home/getJobDetails')?>';
+					data = {jobid : id}
+				}
+				else{
+					url = '<?= base_url('home/getInternshipDetails')?>';
+					data = {internshipID : id}
+				}
+				$.get(url, data).done(function(res){
+					res = JSON.parse(res)
 
+					if(type == 'job'){
+						$(".duration").hide();
+						$("#jobTitle").html(res[0].jobTitle)
+						$("#jobDescription").html(res[0].jobDescription)
+						$("#jobStart").html(res[0].startDate)
+						$("#jobDeadline").html(res[0].applicationDeadline)
+						if(res[0].offerType == "2")
+							$("#jobOffer").html("INR " + res[0].offer + " lakhs")
+						else
+							$("#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
+						$('#apply').attr('href', "<?= base_url('apply/apply?jobID=')?>"+res[0].jobID)
+					}else{
+						$("#jobTitle").html(res[0].internshipTitle)
+						$("#jobDescription").html(res[0].internshipDescription)
+						$("#jobStart").html(res[0].startDate)
+						$("#jobDeadline").html(res[0].applicationDeadline)
+						if(res[0].stipendType == "4"){
+							$("#jobOffer").html("INR " + res[0].stipend)
+						}
+						else if(res[0].stipendType == "3"){
+							$("#jobOffer").html('INR ' + res[0].minimumStipend + ' - INR ' + res[0].maximumStipend)
+						}else if(res[0].stipendType == "2"){
+							$("#jobOffer").html('Expenses Covered')
+						}else {
+							$("#jobOffer").html('No Stipend')
+						}
+						$(".duration").show();
+						if(res[0].durationType == '1'){
+							$("#duration").html(res[0].duration + ' months')
+						}else{
+							$("#duration").html('Flexible')
+						}
+						$('#apply').attr('href',"<?= base_url('apply/apply?internshipID=')?>"+res[0].internshipID)
+					}
+					$("#jobOpening").html(res[0].openings)
+					if(res[0].partTime == "1")
+						$("#jobTime").html('YES')
+					else
+						$("#jobTime").html('NO')
+					if(res[0].skillsRequired == null)
+						$("#jobSkill").html("No Skills Required")
+					else
+						$("#jobSkill").html(res[0].skillsRequired)
+					if(type == 'job'){
+						if(res[0].jobType == "1")
+							$("#jobType").html("Work From Home")
+						else
+							$('#jobType').html(res[0].cities)
+					}else{
+						if(res[0].internshipType == "1")
+							$("#jobType").html("Work From Home")
+						else
+							$('#jobType').html(res[0].cities)
+					}
+					$("#companyName").html(res[0].companyName)
+					$("#companyWebsite").html(res[0].companyWebsite)
+					$("#companyDescription").html(res[0].companyDescription)
+				}).fail(function(){
+
+				})
+			})
+		})
+
+	</script>
 </body>
 </html>
