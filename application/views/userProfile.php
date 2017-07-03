@@ -572,6 +572,7 @@
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn save_pic" style="display: none">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 					<input type = 'submit'  class="btn btn--primary save_pic" value="Save Changes" style="display: none">
 				</div>
 			</form>
