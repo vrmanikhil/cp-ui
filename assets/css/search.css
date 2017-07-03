@@ -10,7 +10,7 @@
 @import url('/assets/css/components/modal.css');
 
 .globalContainer > .main-body {
-	max-width: 744px;
+	max-width: 504px;
 }
 
 .posting-card {
@@ -58,4 +58,3 @@
 .view-profile {
 	width: 110px;
 }
-

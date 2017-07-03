@@ -817,7 +817,7 @@ class Home_model extends CI_Model {
 	public function getSearchResults($query){
 		$term = $this->db->escape($query);
 		$term = str_replace("'", "", $query);
-		$query = "(select userID, name, 'users' as tbl from users where name like '%$term%') union (select internshipID,internshipTitle, 'internships' as tbl from internshipOffers where internshipTitle like '%$term%') union (select jobID,jobTitle, 'jobs' as tbl from jobOffers where jobTitle like '%$term%')";
+		$query = "(select userID, name, profileImage, email AS other, 'users' as tbl from users where ((name like '%$term%') OR (email like '%$term%'))) union (select internshipID,internshipTitle, employerUsers.companyLogo, employerUsers.companyName,  'internships' as tbl from internshipOffers JOIN employerUsers ON internshipOffers.addedBy=employerUsers.userID where ((internshipTitle like '%$term%') OR (companyName like '%$term%'))) union (select jobID,jobTitle, employerUsers.companyLogo, employerUsers.companyName, 'jobs' as tbl from jobOffers JOIN employerUsers ON jobOffers.addedBy=employerUsers.userID where ((jobTitle like '%$term%') OR (companyName like '%$term%')))";
 		return $this->db->query($query)->result_array();
 	}
 

@@ -21,152 +21,131 @@
 	<div class="layout-container flex flex--col">
 		<?php echo $header; ?>
 		<main class="flex main-container globalContainer">
+			<aside class="flex__item left-pane">
+				<div class="explore-panel card flex">
+				  <a href="<?php echo base_url('jobs/add-job-offer'); ?>" class="explore-panel__link active flex flex--col flex__item align-center">
+				    <span class="explore-panel__link-icon-container">
+							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 50.2 50.2" class="briefcase-icon">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#briefcase-icon"></use>
+							</svg>
+				    </span>
+				    <span class="explore-panel__link-text flex__item">Jobs</span>
+				  </a>
+				  <a href="<?php echo base_url('internships/add-internship-offer'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
+				    <span class="explore-panel__link-icon-container">
+							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 31.387 31.386" class="computer-icon">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#computer-icon"></use>
+							</svg>
+				    </span>
+				    <span class="explore-panel__link-text flex__item">Internships</span>
+				  </a>
+				  <a href="<?php echo base_url('skills'); ?>" class="explore-panel__link flex flex--col flex__item align-center">
+				    <span class="explore-panel__link-icon-container">
+							<svg version="1.1" width="45" height="45" x="0" y="0" viewBox="0 0 232.7 232.7" class="skills-icon">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/img/svg-sprite.svg#skills-icon"></use>
+							</svg>
+				    </span>
+				    <span class="explore-panel__link-text flex__item">Skills</span>
+				  </a>
+				</div>
+				<div class="post card" style="margin-top: 10px;">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- CampusPuppy -->
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-client="ca-pub-2273757004475004"
+					     data-ad-slot="7062717170"
+					     data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</aside>
 			<div class="main-body flex__item card">
 				<h2 class="section-title"><strong>Search Results</strong></h2>
+				<p>Search Results for <strong><i><?php echo $_GET['query']; ?></i></strong></p>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#accounts" aria-controls="accounts" role="tab" data-toggle="tab">Accounts</a></li>
-					<li role="presentation"><a href="#companyAccounts" aria-controls="companyAccounts" role="tab" data-toggle="tab">Company Accounts</a></li>
-					<li role="presentation"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Job Offers</a></li>
+					<li role="presentation" class="active"><a href="#accounts" aria-controls="accounts" role="tab" data-toggle="tab">User Accounts</a></li>
 					<li role="presentation"><a href="#internships" aria-controls="internships" role="tab" data-toggle="tab">Internship Offers</a></li>
+					<li role="presentation"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Job Offers</a></li>
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="accounts">
-						<div class="flex account media align-center">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg" alt="user" class="media-figure">
-							<div class="media-body flex">
-								<div class="user-info">
-									<p><strong>Nikhil Verma</strong></p>
-									<p>vrmanikhil@gmail.com</p>
-									<p>Noida, UP</p>
-								</div>
-								<div class="actions">
-									<a href="javascript:" class="btn btn--primary view-profile">View Profile</i></a>
-								</div>
-							</div>
-						</div>
-						<div class="flex account media align-center">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg" alt="user" class="media-figure">
-							<div class="media-body flex">
-								<div class="user-info">
-									<p><strong>Nikhil Verma</strong></p>
-									<p>vrmanikhil@gmail.com</p>
-									<p>Noida, UP</p>
-								</div>
-								<div class="actions">
-									<a href="javascript:" class="btn btn--primary view-profile">View Profile</i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane fade in" id="companyAccounts">
-						<div class="flex account media align-center">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg" alt="user" class="media-figure">
-							<div class="media-body flex">
-								<div class="user-info">
-									<p><strong>Nikhil Verma</strong></p>
-									<p>vrmanikhil@gmail.com</p>
-									<p>Noida, UP</p>
-								</div>
-								<div class="actions">
-									<a href="javascript:" class="btn btn--primary view-profile">View Profile</i></a>
-								</div>
-							</div>
-						</div>
-						<div class="flex account media align-center">
-							<img src="http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg" alt="user" class="media-figure">
-							<div class="media-body flex">
-								<div class="user-info">
-									<p><strong>Nikhil Verma</strong></p>
-									<p>vrmanikhil@gmail.com</p>
-									<p>Noida, UP</p>
-								</div>
-								<div class="actions">
-									<a href="javascript:" class="btn btn--primary view-profile">View Profile</i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane fade in" id="jobs">
-						<div class="posting-card">
-							<div class="flex media">
-								<img src="http://backoffice.campuspuppy.com/assets/companyLogo/fitpass.jpg" alt="user" class="media-figure posting-card__img">
-								<div class="media-body flex flex--col">
-									<p class="posting-card__title">
-										<strong>Fitpass</strong>
-									</p>
-									<p class="posting-card__desc">ABC</p>
-									<p class="posting-card__post-location">
-										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										<span>New Delhi</span>
-									</p>
-									<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;">No Specific Skills Required</span></p>
-									<div class="posting-card__apply">
-										<button data-id="7" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7">View</button>
+						<?php $i=0; foreach ($searchResults as $key => $value) {
+							if($value['tbl']==='users'){
+								$i++;
+							 ?>
+							<div class="flex account media align-center">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
+								<div class="media-body flex">
+									<div class="user-info">
+										<p><strong><?php echo $value['name']; ?></strong></p>
+										<p><?php echo $value['other']; ?></p>
+									</div>
+									<div class="actions">
+										<a href="<?php echo base_url('user-profile/').$value['userID']; ?>" class="btn btn--primary view-profile">View Profile</i></a>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="posting-card">
-							<div class="flex media">
-								<img src="http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg" alt="user" class="media-figure posting-card__img">
-								<div class="media-body flex flex--col">
-									<p class="posting-card__title">
-										<strong>Fitpass</strong>
-									</p>
-									<p class="posting-card__desc">ABC</p>
-									<p class="posting-card__post-location">
-										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										<span>New Delhi</span>
-									</p>
-									<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;">No Specific Skills Required</span></p>
-									<div class="posting-card__apply">
-										<button data-id="7" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7">View</button>
-									</div>
-								</div>
+						<?php }}
+						if($i==0){ ?>
+							<div class="flex account media align-center">
+								<?php 	echo "No Results Under Users"; ?>
 							</div>
-						</div>
+							<?php
+						}
+						 ?>
+
+
 					</div>
 					<div role="tabpanel" class="tab-pane fade in" id="internships">
+						<?php $j=0; foreach ($searchResults as $key => $value) {
+							if($value['tbl']==='internships'){ $j++; ?>
 						<div class="posting-card">
 							<div class="flex media">
-								<img src="http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg" alt="user" class="media-figure posting-card__img">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure posting-card__img">
 								<div class="media-body flex flex--col">
-									<p class="posting-card__title">
-										<strong>Fitpass</strong>
+									<p class="posting-card__title" style="margin-top: 25px;">
+										<strong><?php echo $value['other']; ?></strong>
 									</p>
-									<p class="posting-card__desc">ABC</p>
-									<p class="posting-card__post-location">
-										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										<span>New Delhi</span>
-									</p>
-									<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;">No Specific Skills Required</span></p>
-									<div class="posting-card__apply">
-										<button data-id="7" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7">View</button>
-									</div>
+									<p class="posting-card__desc"><?php echo $value['name']; ?></p>
+									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7" style="width: 30%;">View</button>
 								</div>
 							</div>
 						</div>
+							<?php }}
+							if($j==0){ ?>
+								<div class="posting-card">
+									<?php echo "No Results Under Internship Offers"; ?>
+								</div>
+							<?php }
+							 ?>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in" id="jobs">
+						<?php $k=0; foreach ($searchResults as $key => $value) {
+							if($value['tbl']==='jobs'){ $k++; ?>
 						<div class="posting-card">
 							<div class="flex media">
 								<img src="http://backoffice.campuspuppy.com/assets/companyLogo/fitpass.jpg" alt="user" class="media-figure posting-card__img">
 								<div class="media-body flex flex--col">
-									<p class="posting-card__title">
-										<strong>Fitpass</strong>
+									<p class="posting-card__title" style="margin-top: 25px;">
+										<strong><?php echo $value['other']; ?></strong>
 									</p>
-									<p class="posting-card__desc">ABC</p>
-									<p class="posting-card__post-location">
-										<i class="fa fa-map-marker" aria-hidden="true"></i>
-										<span>New Delhi</span>
-									</p>
-									<p class="posting-card__status" style="font-size: 0.9rem;"><strong>Skills</strong> : <span style="font-size: 0.9rem;">No Specific Skills Required</span></p>
-									<div class="posting-card__apply">
-										<button data-id="7" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7">View</button>
-									</div>
+									<p class="posting-card__desc"><?php echo $value['name']; ?></p>
+									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7" style="width: 30%;">View</button>
 								</div>
 							</div>
 						</div>
+						<?php }}
+						if($k==0){ ?>
+							<div class="posting-card">
+								<?php echo "No Results Under Job Offers"; ?>
+							</div>
+						<?php }
+						 ?>
+
 					</div>
 				</div>
 			</div>
