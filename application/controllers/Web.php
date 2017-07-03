@@ -771,7 +771,8 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('companyLogo')){
 			$companyLogo = $x;
 		}
-		if($companyLogo == ''){
+		// var_dump($companyLogo); die();
+		if($companyLogo == '' || $companyLogo == 'data:,'){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}else{
@@ -793,7 +794,7 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('profilePic')){
 			$profilePic = $x;
 		}
-		if($profilePic == ''){
+		if($profilePic == '' || $profilePic == 'data:,'){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}else{

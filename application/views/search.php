@@ -70,6 +70,7 @@
 					<li role="presentation"><a href="#internships" aria-controls="internships" role="tab" data-toggle="tab">Internship Offers</a></li>
 					<li role="presentation"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Job Offers</a></li>
 				</ul>
+				<>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="accounts">
@@ -111,7 +112,7 @@
 										<strong><?php echo $value['other']; ?></strong>
 									</p>
 									<p class="posting-card__desc"><?php echo $value['name']; ?></p>
-									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="view7" style="width: 30%;">View</button>
+									<button data-id="<?php echo $value['userID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id="viewinternship" style="width: 30%;">View</button>
 								</div>
 							</div>
 						</div>

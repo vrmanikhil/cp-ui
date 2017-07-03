@@ -2,6 +2,7 @@ $(document).ready(function () {
 	$(document).on('click', '.js-open-edit-modal', openEditModal);
 	function openEditModal(ev) {
 		var type = $(this).data('modal-type');
+		
 		emptyForm(type);
 		var modalId = $('.'+type).data('remodal-id');
 		var modalElem = $('[data-remodal-id="'+modalId+'"]');
@@ -38,6 +39,7 @@ $(document).ready(function () {
 		};
 		var json = $(this).data('json');
 		var type = $(this).data('type');
+		if(type != 'edit-user-cover-pic')
 		emptyForm(type);
 		if (type === 'edit-education') {
 			keyMap.description = 'educationDescription';
