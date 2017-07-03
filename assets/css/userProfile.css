@@ -199,6 +199,10 @@
 	max-width: 100px;
 }
 
+#logo {
+	max-width: 100px;
+}
+
 .cover-pic-option > input[type="radio"] {
 	bottom: 0;
 	left: 70px;

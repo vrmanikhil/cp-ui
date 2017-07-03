@@ -87,7 +87,7 @@ $(document).ready(function () {
 		formElem = $('.' + formClass);
 		if (formElem.length === 0) return;
 		$.each(formElem.find('input'), function (index, elem) {
-			if ($(elem).attr('type') !== 'submit') {
+			if ($(elem).attr('type') !== 'submit' && $(elem).attr('name') !== 'csrf_test_name') {
 				$(elem).val('');
 			}
 
