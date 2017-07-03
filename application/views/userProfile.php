@@ -513,41 +513,6 @@
 			</form>
 		</div>
 	</div>
-	<div class="remodal edit-company-logo" data-remodal-id="editCompanyLogo">
-		<button data-remodal-action="close" class="remodal-close"></button>
-		<div class="modal-body">
-			<h3>Company Logo</h3>
-			<form action="<?= base_url('web/editCompanyLogo')?>" method="POST" class="form" enctype="multipart/form-data">
-				<div class="horizontal-group">
-					<div class="form-group">
-						<img src="" alt="" id="companyLogo">
-					</div>
-					<div class="form-group">
-						<div class = 'inputLogo'>
-							<label for="logo">Company Logo</label>
-							<input type="file" class="form__input logo" id="updatedUserPic" accept="image/*" name = img[]>
-							<input type="hidden" name="companyLogo">
-						</div>
-					</div>
-				</div>
-
-				<div class = "form-group">
-					<div class = "demo" style = "display:none">
-						<img src="" alt="" id="cropped-img" hidden style ="padding-left: 25%">
-					</div>
-				</div>
-				<div class="form-group action-bar">
-					<button data-remodal-action="close" class="btn submit-changes" style="display: none">Close</button>
-					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-					<input type = 'submit'  class="btn btn--primary submit-changes" value="Save Changes" style ="display: none">
-				</div>
-			</form>
-			<div class="form-group action-bar" style="float: right">
-				<button data-remodal-action="close" class="btn upload-result">Close</button>
-				<button class="btn btn--primary upload-result">Upload Image</button>
-			</div>
-		</div>
-	</div>
 	<div class="remodal edit-user-profile-pic" data-remodal-id="editUserProfilePic">
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
@@ -580,6 +545,41 @@
 					<button data-remodal-action="close" class="btn upload-pic">Close</button>
 					<button class="btn btn--primary upload-pic">Upload Image</button>
 				</div>
+		</div>
+	</div>
+	<div class="remodal edit-company-logo" data-remodal-id="editCompanyLogo">
+		<button data-remodal-action="close" class="remodal-close"></button>
+		<div class="modal-body">
+			<h3>Company Logo</h3>
+			<form action="<?= base_url('web/editCompanyLogo')?>" method="POST" class="form" enctype="multipart/form-data">
+				<div class="horizontal-group">
+					<div class="form-group">
+						<img src="" alt="" id="companyLogo">
+					</div>
+					<div class="form-group">
+						<div class = 'inputLogo'>
+							<label for="logo">Company Logo</label>
+							<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
+							<input type="hidden" name="companyLogo">
+						</div>
+					</div>
+				</div>
+
+				<div class = "form-group">
+					<div class = "demo" style = "display:none">
+						<img src="" alt="" id="cropped-img" hidden style ="padding-left: 25%">
+					</div>
+				</div>
+				<div class="form-group action-bar">
+					<button data-remodal-action="close" class="btn submit-changes" style="display: none">Close</button>
+					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+					<input type = 'submit'  class="btn btn--primary submit-changes" value="Save Changes" style ="display: none">
+				</div>
+			</form>
+			<div class="form-group action-bar" style="float: right">
+				<button data-remodal-action="close" class="btn upload-result">Close</button>
+				<button class="btn btn--primary upload-result">Upload Image</button>
+			</div>
 		</div>
 	</div>
 	<div class="remodal edit-user-cover-pic" data-remodal-id="editUserCoverPic">
@@ -653,6 +653,7 @@
 	<script src="<?php echo base_url('/assets/ckeditor/ckeditor.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/editUserProfile.js'); ?>"></script>
+	<script src="<?php echo base_url('/assets/js/croppie.js'); ?>"></script>
 	<script>
 		$(document).ready(function () {
 			$(document).on('click', '.js-forgot-password', openForgotPsswdModal);
@@ -680,11 +681,10 @@
 		});
 	</script>
 
-	<script src="<?php echo base_url('/assets/js/croppie.js'); ?>"></script>
 	<script type="text/javascript">
 	var $uploadCrop;
 
-	function readFile(input) {
+	function readImgFile(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
@@ -712,7 +712,8 @@
 		},
 		exif: false
 	});
-	$('#logo').on('change', function () { readFile(this)});
+	
+	$('#logo').on('change', function () { readImgFile(this)});
 	$('.upload-result').on('click', function () {
 			$uploadCrop.croppie('result',{
 				type: 'canvas',
@@ -738,7 +739,6 @@
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function (e) {
-				console.log(e.target.result)
 				$uploadImage.croppie('bind', {
 					url: e.target.result
 				});
