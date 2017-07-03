@@ -525,7 +525,7 @@
 					<div class="form-group">
 						<div class = 'inputLogo'>
 							<label for="logo">Company Logo</label>
-							<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
+							<input type="file" class="form__input logo" id="updatedUserPic" accept="image/*" name = img[]>
 							<input type="hidden" name="companyLogo">
 						</div>
 					</div>
