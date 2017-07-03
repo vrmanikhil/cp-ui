@@ -847,7 +847,6 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('optionsRadios')){
 			$image = $x;
 		}
-
 		if($image=='1'){
 			$coverImage = base_url('assets/img/cover-001.jpg');
 		}
