@@ -585,12 +585,12 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Update Cover Image</h3>
-			<form action="" method="POST" class="form">
+			<form action="<?= base_url('web/changeCoverImage')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<div class="radio">
 							<label class="cover-pic-option">
-								<input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>
+								<input type="radio" name="optionsRadios" id="optionsRadios" value="1" checked>
 								<img src="<?php echo base_url('/assets/img/cover-001.jpg'); ?>" alt="">
 							</label>
 						</div>
