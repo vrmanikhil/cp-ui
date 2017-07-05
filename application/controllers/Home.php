@@ -179,6 +179,7 @@ class Home extends CI_Controller {
 
 	public function userProfile($userID){
 		$this->redirection();
+		$this->data['userID'] = $userID;
 		$this->data['userDetails'] = $this->home_lib->getUserDetails($userID);
 		$this->data['userDetails'] = $this->data['userDetails'][0];
 		$accountType = $this->data['userDetails']['accountType'];
@@ -875,7 +876,7 @@ if($_SESSION['userData']['accountType']=='2'){
 		$this->data['connectionRequests'] = $this->home_lib->getConnectionRequests($userID);
 		$this->data['connections'] = $this->home_lib->getConnections($userID);
 		$connections = array();
-		foreach ($this->data['connections'] as $key => $value) {
+		foreach ($this->data['connections'] as $key => $value){
 			if($value['active']==$userID){
 				array_push($connections,$value['passive']);
 			}
@@ -883,12 +884,13 @@ if($_SESSION['userData']['accountType']=='2'){
 				array_push($connections,$value['active']);
 			}
 		}
-		var_dump($connections);
 		if(!empty($connections)){
-		$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
+			$this->data['connections'] = $this->home_lib->getConnectionProfiles($connections);
+			$this->load->view('connections', $this->data);
+		}
+		else{
 		$this->load->view('connections', $this->data);
 		}
-		$this->load->view('connections', $this->data);
 	}
 
 	private function generateVerifyEMail(){

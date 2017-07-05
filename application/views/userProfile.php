@@ -25,7 +25,9 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item card">
 				<div class="user__cover-pic" style="background: url('<?php echo $userDetails['coverImage']; ?>') center no-repeat; background-size: cover;">
+					<?php if($userID == $_SESSION['userData']['userID']){ ?>
 					<a href="javascript:" class="btn edit-cover-pic-btn js-edit-entity" data-json='' data-type="edit-user-cover-pic"><i class="fa fa-camera" aria-hidden="true"></i> Change cover Image</a>
+					<?php } ?>
 				</div>
 				<div class="user__name flex">
 					<p><?php echo $userDetails['name']; ?></p>
@@ -54,9 +56,11 @@
 				<div class="user__pic">
 					<img src="<?php echo $userDetails['profileImage']; ?>" alt="">
 					<?php $data = array('userProfilePic' => $userDetails['profileImage']); ?>
+					<?php if($userID == $_SESSION['userData']['userID']){ ?>
 					<div class="edit-user-pic">
 						<a class="edit-user-pic-btn js-edit-entity" data-json='<?= json_encode($data) ?>' data-type="edit-user-profile-pic" href="javascript:"><i class="fa fa-camera" aria-hidden="true"></i></a>
 					</div>
+					<?php } ?>
 				</div>
 				<div class="user-information">
 
@@ -712,7 +716,7 @@
 		},
 		exif: false
 	});
-	
+
 	$('#logo').on('change', function () { readImgFile(this)});
 	$('.upload-result').on('click', function () {
 			$uploadCrop.croppie('result',{

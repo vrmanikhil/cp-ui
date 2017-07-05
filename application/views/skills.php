@@ -63,7 +63,7 @@
 					<div class="skills-container flex">
 					<?php
 					if(empty($userSkills)){?>
-						<p>You Have Added No Skill.</p>
+						<p>No Skill(s) Added to the Profile.</p>
 					<?php }else{
 						foreach($userSkills as $key => $value){
 							if($value['skillType'] == 1){?>

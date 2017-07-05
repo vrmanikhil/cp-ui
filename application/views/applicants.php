@@ -48,7 +48,7 @@
 				    <span class="explore-panel__link-text flex__item">Skills</span>
 				  </a>
 				</div>
-				<div class="card card--no-padding search-filter">
+				<div class="card card--no-padding search-filter" style="margin-top: 10px;">
 					<form action = "<?= base_url('home/applicants/'.$offerType.'/'.$offerID)?>" method="POST">
 					<div class="card card--no-padding search-filter">
 						<div class="search-filter__head">
@@ -67,11 +67,8 @@
 					<button class = "clear-filter apply-filter" style = "color: var(--midnight-blue); font-weight: bold; background: var(--white); padding: 7px; border:none">Clear Filters</button>
 					<input type = "submit" class = "apply-filter" name = "submit" style = "background: var(--midnight-blue); color: white; padding: 7px; border: 1px solid var(--midnight-blue); text-decoration: none; width: 45%" value = "Apply Filter">
 				</form>
-				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
 				</div>
-				</div>
-				<div class="post card">
+				<div class="post card" style="margin-top: 10px;">
 					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<!-- CampusPuppy -->
 					<ins class="adsbygoogle"

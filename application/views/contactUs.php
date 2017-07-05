@@ -54,7 +54,7 @@
 							</div>
 							<div class="form-group">
 								<label for="mobile" class="form__label">Mobile Number</label>
-								<input type="text" id="mobile" name="mobile" placeholder="Mobile Number" class="form__input" required>
+								<input type="text" id="mobile" name="mobile" maxlength="10" placeholder="Mobile Number" class="form__input" required>
 							</div>
 						</div>
 						<div class="form-group">
