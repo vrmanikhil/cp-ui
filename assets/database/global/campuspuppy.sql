@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.18
--- https://www.phpmyadmin.net
+-- version 4.5.4.1deb2ubuntu1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Jul 02, 2017 at 02:45 AM
--- Server version: 5.6.35-cll-lve
--- PHP Version: 5.6.30
+-- Host: localhost
+-- Generation Time: Jul 05, 2017 at 01:03 PM
+-- Server version: 5.7.18-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `campuspuppy`
@@ -26,13 +26,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE IF NOT EXISTS `achievements` (
-  `achievementID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `achievements` (
+  `achievementID` int(5) NOT NULL,
   `achievementTitle` text NOT NULL,
   `achievementDescription` text NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`achievementID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -40,13 +39,11 @@ CREATE TABLE IF NOT EXISTS `achievements` (
 -- Table structure for table `adminAuth`
 --
 
-CREATE TABLE IF NOT EXISTS `adminAuth` (
-  `adminID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adminAuth` (
+  `adminID` int(5) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`adminID`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adminAuth`
@@ -61,13 +58,12 @@ INSERT INTO `adminAuth` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE IF NOT EXISTS `colleges` (
-  `college_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `colleges` (
+  `college_id` int(5) NOT NULL,
   `college` varchar(255) NOT NULL,
   `logo` text NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=352 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `colleges`
@@ -97,7 +93,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (21, 'ITM, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Untitled_design.jpg', 1),
 (22, 'CGC, Mohali ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/CGC,_Mohali.jpg', 1),
 (23, 'University Institute Of Engineering and Technology, Chandigarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/UIET.jpg', 1),
-(24, 'Netaji Subhas Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/NSIT.jpg', 1),
+(24, 'Netaji Subhas Institute of Technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/NSIT.jpg', 1),
 (25, 'Northern India Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/NIEC.jpg', 1),
 (26, 'SRM University (NCR Campus)', 'http://backoffice.campuspuppy.com/assets/collegeLogo/SRM.jpg', 1),
 (27, 'KIET Group Of Institutions, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/KIET.jpg', 1),
@@ -116,7 +112,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (40, 'Ansal Institute of Technology, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ansal_Institute_of_Technology.jpg', 1),
 (41, 'Bhagwan Parshuram Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BPIT.jpg', 1),
 (42, 'Govind Ballabh Pant Engineering College, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GB_Pant_Engineering_College.jpg', 1),
-(43, 'Guru Premsukh Memorial College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Guru_Premsukh_Memorial_College_of_Engineering.jpg', 1),
+(43, 'Guru Premsukh Memorial College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Guru_Premsukh_Memorial_College_of_Engineering.jpg', 1),
 (44, 'Indira Gandhi Delhi Technical University for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/IGDTW.jpg', 1),
 (45, 'Maharaja Agrasen Institute of Technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/MAIT.jpg', 1),
 (46, 'Maharaja surajmal Institute of Technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/MSIT.jpg', 1),
@@ -126,7 +122,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (50, 'HMR Institute of technology and management, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/HMR.jpg', 1),
 (51, 'JIMS Engineering and management, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/JIMS.jpg', 1),
 (52, 'BBDNITM, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BBDNITM.jpg', 1),
-(53, 'Shree ram swaroop memorial college, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shree_ram_swaroop_memorial_college,Lucknow.jpg', 1),
+(53, 'Shri ram swaroop memorial college, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shree_ram_swaroop_memorial_college,Lucknow.jpg', 1),
 (54, 'JECRC University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/JECRC.jpg', 1),
 (55, 'Banasthali University, Jaipur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Banasthali_University.jpg', 1),
 (56, 'Jaipur National University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Jaipur_National_University.jpg', 1),
@@ -140,7 +136,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (64, 'YMCA University of Science and technology, Faridabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/YMCA_University.jpg', 1),
 (65, 'World College Of Technology and Management, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/WCTM.jpg', 1),
 (66, 'Aryan Institue Of Technology, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Aryan_Institute_of_Technology.jpg', 1),
-(67, 'Bharati Vidyapeeth''s College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/bhartiya_Vidyapeeth.jpg', 1),
+(67, 'Bharati Vidyapeeth\'s College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/bhartiya_Vidyapeeth.jpg', 1),
 (68, 'Dronacharya College of Engineering, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DCE,greater_Noida.jpg', 1),
 (69, 'BML Munjal University, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BML_Munjal.jpg', 1),
 (70, 'Bennett University, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Bennett_University.jpg', 1),
@@ -158,7 +154,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (82, 'Sarvottam Institute of Technology and management, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Sarvottam_Institute_of_Technology_and_management.jpg', 1),
 (83, 'Integral University, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Integral_University.jpg', 1),
 (84, 'Central Institute Of Plastics Engineering and Technology, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Central_Institute_Of_plastics_engineering_and_technology.jpg', 1),
-(85, 'Merrut Institute of Engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/MIET.jpg', 1),
+(85, 'Meerut Institute of Engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/MIET.jpg', 1),
 (86, 'IMS Engineering College, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/IMS_Engineerig_college.jpg', 1),
 (87, 'Noida International University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Noida_International_University.jpg', 1),
 (88, 'Government Engineering College, Banda', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Govt__engineering_college.jpg', 1),
@@ -207,7 +203,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (131, 'Shambhunath institute Of Engineering and Technology, Allahbad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shambhunath_institute_Of_Engineering_and_Technology.jpg', 1),
 (132, 'Saroj Insitute Of Technology and Management, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Saroj_Insitute_Of_Technology_and_Management.jpg', 1),
 (133, 'Rameshwaram Institute Of Technology and Management, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Rameshwaram_Institute_Of_Technology_and_Management.jpg', 1),
-(134, 'Goel Institute Of tEchnology and Management, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Goel_Institute_Of_tEchnology_and_Management.jpg', 1),
+(134, 'Goel Institute Of Technology and Management, Lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Goel_Institute_Of_tEchnology_and_Management.jpg', 1),
 (135, 'BSA College of engineering and technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BSA_College_of_engineering_and_technology.jpg', 1),
 (136, 'Bharat Institute of Technology, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Bharat_Institute_of_Technology.jpg', 1),
 (137, 'ACE College of Engineering and Management, Agra', 'http://backoffice.campuspuppy.com/assets/collegeLogo/ACE_College_of_Engineering_and_Management.jpg', 1),
@@ -355,7 +351,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (279, 'DNS College of engineering and technology, Amroha', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DNS_College_of_engineering_and_technology.jpg', 1),
 (280, 'Divya Jyoti College of Engineering and technology, Modinagar', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Divya Jyoti College of Engineering and technology.jpg', 1),
 (281, 'Ganeshi lal Narayandas Agrawal Institute of technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ganeshi_lal_Narayandas_Agrawal_Institute_of_technology.jpg', 1),
-(282, 'Women''s Institute of engineering and technology, Sitapur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Womens_Institute_of_engineering_and_technology.jpg', 1),
+(282, 'Women\'s Institute of engineering and technology, Sitapur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Womens_Institute_of_engineering_and_technology.jpg', 1),
 (283, 'Vidya Bhavan college of engineering and technology, Kanpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Vidya_Bhavan_college_of_engineering_and_technology.jpg', 1),
 (284, 'Venkateshwara Institute of technology, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Venkateshwar Institute of technology.jpg', 1),
 (285, 'Veer Kunwar Institute of Technology, Bijnaur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Veer_Kunwar_Institute_of_Technology.jpg', 1),
@@ -425,7 +421,27 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (348, 'Indraprastha institute of information technology, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Indraprastha_institute_of_information_technology.jpg', 1),
 (349, 'University School of information Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/USIT.jpg', 1),
 (350, 'Shiv Nadar University, Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Shiv_Nadar_University.jpg', 1),
-(351, 'GNIT girls institute of technology, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GNIT_girls_institute_of_technology.jpg', 1);
+(351, 'GNIT girls institute of technology, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/GNIT_girls_institute_of_technology.jpg', 1),
+(352, 'Motilal Nehru National Institute of Technology, Allahabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Motilal_Nehru_National_Institute_of_Technology.jpg', 1),
+(353, 'Indian Insititute of technology (Banaras Hindu University), Varanasi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Indian_Insititute_of_technology,_Banaras_Hindu_University.jpg', 1),
+(354, 'National Institute of Technology, Kurukshetra', 'http://backoffice.campuspuppy.com/assets/collegeLogo/National_Institute_of_Technology,kurukshetra.jpg', 1),
+(355, 'PEC University of technology, Chandigarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/PEC_University_of_technology.jpg', 1),
+(356, 'Indian Institute of information technology, Allahabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Indian_Institute_of_information_technology,Allahabad.jpg', 1),
+(357, 'Jamia Hamdard, New Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Jamia_Hamdard.jpg', 1),
+(358, 'Madan Mohan Malaviya University Of Technology, Gorakhpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Madan_Mohan_Malaviya_University_Of_Technology.jpg', 1),
+(359, 'Zakir Hussain College of engineering and technology, Aligarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Zakir_Hussain_College_of_engineering_and_technology.jpg', 1),
+(360, 'Kurukshetra University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Kurukshetra_University.jpg', 1),
+(361, 'Deenbandhu Chotu Ram University of science and technology, Murthal', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Deenbandhu_Chotu_Ram_University_of_science_and_technology.jpg', 1),
+(362, 'Maharishi Markandeshwar University, Mullana', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Maharishi_Markandeshwar_University.jpg', 1),
+(363, 'The NorthCap University, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/The_NorthCap_University.jpg', 1),
+(364, 'Guru Jambeshwar University of science and technology, Hisar', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Guru_Jambeshwar_University_of_science_and_technology.jpg', 1),
+(365, 'Bundelkhand University, Jhansi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Bundelkhand_University.jpg', 1),
+(366, 'Chandigarh College of engineering and Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Chandigarh_College_of_engineering_and_Technology.jpg', 1),
+(367, 'University of engineering and technology, Rohtak', 'http://backoffice.campuspuppy.com/assets/collegeLogo/University_of_engineering_and_technology,_Rohtak.jpg', 1),
+(368, 'Rajiv Gandhi Institute of petroleum technology, Rae bareli', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Rajiv_Gandhi_Institute_of_petroleum_technology.jpg', 1),
+(369, 'PDM University, Bahadurgarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/PDM_University.jpg', 1),
+(370, 'Mukesh Patel School of Technology Management and Engineering, Mumbai', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Mukesh_Patel_School_of_Technology_and_engineering.jpg', 1),
+(371, 'Don Bosco Institute of technology, Bangalore', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Don_Bosco_Institute_of_technology,_Bangalore.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -433,7 +449,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 -- Table structure for table `connections`
 --
 
-CREATE TABLE IF NOT EXISTS `connections` (
+CREATE TABLE `connections` (
   `active` int(5) NOT NULL,
   `passive` int(5) NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -445,16 +461,15 @@ CREATE TABLE IF NOT EXISTS `connections` (
 -- Table structure for table `contactMessages`
 --
 
-CREATE TABLE IF NOT EXISTS `contactMessages` (
-  `contactID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contactMessages` (
+  `contactID` int(5) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
   `message` text NOT NULL,
   `messageRead` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`contactID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -462,23 +477,22 @@ CREATE TABLE IF NOT EXISTS `contactMessages` (
 -- Table structure for table `content`
 --
 
-CREATE TABLE IF NOT EXISTS `content` (
-  `content_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `content` (
+  `content_id` int(5) NOT NULL,
   `aboutUs` text NOT NULL,
   `termsAndConditions` text NOT NULL,
   `privacyPolicy` text NOT NULL,
   `coat` text NOT NULL,
   `facebook` varchar(255) NOT NULL,
-  `twitter` varchar(255) NOT NULL,
-  PRIMARY KEY (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `twitter` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `content`
 --
 
 INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPolicy`, `coat`, `facebook`, `twitter`) VALUES
-(1, '<p>Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual&rsquo;s specific skill set and expertise in it. Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what&rsquo;s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p><p>At Campus Puppy, we aspire to give the upcoming students a platform which will link them to their desired employers. What makes us stand apart from others in the market is our promise of providing the students with only high quality professional networking experience. And we will ensure this via a set of channels which will authenticate all the users through a verification procedure.</p><p>Our aim is to help the young minds reach a step closer to their dream job. A job that is not just their dream job but also a perfect job for them. Perfect, by the means that a job which will have the skills you possess and love. A student will no longer have to compromise with the job he gets during recruitment drives in his campus, rather he will get a job/internship of his choice.<br />Employers can use the portal to cut down the time wasted in manually filtering the applicants who apply for a job opening. The portal through a large number of filters brings down to say 200 from 1000 applicants. Through virtual campus drive, companies get only the skill specific candidates appropriate to the job opening in their company. Our aim is to connect employers and desired candidates. Point in consideration is that, we don&rsquo;t want to interfere in any company&rsquo;s recruitment process, we just want to give them a more sorted list of students, on which they can still complete their very own recruitment process. We are helping companies to cut down their cost on physical resources and the time wasted by the recruiting employers on a campus drive to set up an entire process for about 1000 students of a campus. We want to provide them with a platform where they can just select a required n number of students on which they can complete their recruitment process. These filters include academic qualification criteria of students, the skills they have, etc. Moreover employers are ensured that the student&rsquo;s are genuine, their details are authentic, and the skills they have are verified.</p><p>We, at Campus Puppy aim to pioneer in the field of professional networking and employment. The students can look for internships and jobs on our portal and the employers can get in touch with the desired applicants on the basis of the skills they possess.</p><p>For us our emphasis is always on the students who struggle through their initial years finding the suitable job and the companies who waste their resources looking up for the best suitable candidate for the job profile.<br /><br />The industry we are catering to is an education Tech cum Human Resource industry which is an evergreen industry. Students graduating every year will want jobs and on the parallel lines companies want to recruit young talents. Thus CampusPuppy which is basically a bridge between the students and the companies will always be in work flow and trying to bridge the gap. We intend to use the industry workflow to our advantage as the market needs in this sector will never die. This is one industry which will always be in a need for this gap to be filled and CampusPuppy will make that happen.</p><p>We have also struggled in our graduation period to find a job of our skill set, and we know exactly how it is important for a person to get a job in the field of his/her own expertise. We have been a part of this experience and thus understand the loop holes in this sector and will be able to fill this gap through our experience and confidence. This experience will be our power play in getting success as CampusPuppy.<br /><br />Legally we are a Private Limited Company. Advantage of owning a private limited company is that the financial liability of shareholders is limited to their shares. Therefore, if a private limited company was in financial trouble and had to close, shareholders would not risk losing their personal assets. Shareholders must also agree to the sale or transfer of shares; therefore, the risk of hostile takeovers is low.&nbsp;</p><p><!--[if gte vml 1]><v:shapetype\r\n id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"\r\n path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">\r\n <v:stroke joinstyle="miter"/>\r\n <v:formulas>\r\n  <v:f eqn="if lineDrawn pixelLineWidth 0"/>\r\n  <v:f eqn="sum @0 1 0"/>\r\n  <v:f eqn="sum 0 0 @1"/>\r\n  <v:f eqn="prod @2 1 2"/>\r\n  <v:f eqn="prod @3 21600 pixelWidth"/>\r\n  <v:f eqn="prod @3 21600 pixelHeight"/>\r\n  <v:f eqn="sum @0 0 1"/>\r\n  <v:f eqn="prod @6 1 2"/>\r\n  <v:f eqn="prod @7 21600 pixelWidth"/>\r\n  <v:f eqn="sum @8 21600 0"/>\r\n  <v:f eqn="prod @7 21600 pixelHeight"/>\r\n  <v:f eqn="sum @10 21600 0"/>\r\n </v:formulas>\r\n <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>\r\n <o:lock v:ext="edit" aspectratio="t"/>\r\n</v:shapetype><v:shape id="Picture_x0020_5" o:spid="_x0000_s1026" type="#_x0000_t75"\r\n style=''position:absolute;margin-left:272.25pt;margin-top:60pt;width:116.25pt;\r\n height:37.5pt;z-index:-1;visibility:visible;mso-wrap-style:square;\r\n mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;\r\n mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;\r\n mso-position-horizontal-relative:page;mso-position-vertical:absolute;\r\n mso-position-vertical-relative:page'' o:allowincell="f">\r\n <v:imagedata src="file:///C:\\Users\\NICSI\\AppData\\Local\\Temp\\msohtmlclip1\\01\\clip_image001.jpg"\r\n  o:title="" chromakey="white"/>\r\n <w:wrap anchorx="page" anchory="page"/>\r\n</v:shape><![endif]--></p><p>&nbsp;</p>', '<p>The cornerstone of our business is to focus on our Members first. We protect your personal information using industry &shy;standard safeguards. We may share your information with your consent or as required by law, and we will always let you know when we make significant changes to this <strong>Terms and Conditions.</strong></p><p><strong>Statement of Rights and Responsibilities </strong>This Statement of Rights and Responsibilities (&quot;Statement,&quot; &quot;Terms,&quot; or &quot;SRR&quot;) derives from the CampusPuppy Principles, and is our terms of service that governs our relationship with users and others who interact with CampusPuppy, as well as CampusPuppy brands, products and services, which we call the &ldquo;CampusPuppy Services&rdquo; or &ldquo;Services&rdquo;. By using or accessing the CampusPuppy Services, you agree to this Statement, as updated from time to time in accordance with the section below. Additionally, you will find resources at the end of this document that help you understand how CampusPuppy works. Because CampusPuppyprovides a wide range of Services, we may ask you to review and accept supplemental terms that apply to your interaction with a specific app, product, or service. To the extent those supplemental terms conflict with this SRR, the supplemental terms associated with the app, product, or service govern with respect to your use of such app, product or service to the extent of the conflict.</p><p>&nbsp;</p><p><strong>1. Amendments</strong></p><p>&nbsp;1. We&rsquo;ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</p><p>2. If we make changes to policies, guidelines or other terms referenced in or incorporated by this Statement, we may provide notice on the Site Governance Page.</p><p>3. Your continued use of the CampusPuppy Services, following notice of the changes to our terms, policies or guidelines, constitutes your acceptance of our amended terms, policies or guidelines.</p><p>&nbsp;4. Termination If you violate the letter or spirit of this Statement, or otherwise create risk or possible legal exposure for us, we can stop providing all or part of Facebook to you. We will notify you by email or at the next time you attempt to access your account. You may also delete your account or disable your application at any time.</p><p>&nbsp;<strong>2. Disputes</strong></p><p>&nbsp;1. You will resolve any claim, cause of action or dispute (claim) you have with us arising out of or relating to this Statement or CampusPuppy exclusively in the Delhi District Court, and you agree to submit to the personal jurisdiction of such courts for the purpose of litigating all such claims. The laws of the Country(India) will govern this Statement, as well as any claim that might arise between you and us, without regard to conflict of law provisions.</p><p>2. If anyone brings a claim against us related to your actions, content or information on CampusPuppy, you will indemnify and hold us harmless from and against all damages, losses, and expenses of any kind (including reasonable legal fees and costs) related to such claim. Although we provide rules for user conduct, we do not control or direct users&#39; actions on CampusPuppy and are not responsible for the content or information users transmit or share on CampusPuppy. We are not responsible for any offensive, inappropriate, obscene, unlawful or otherwise objectionable content or information you may encounter on CampusPuppy. We are not responsible for the conduct, whether online or offline, of any user of CampusPuppy.</p><p>3. WE TRY TO KEEP CAMPUSPUPPY UP, BUG&shy;FREE, AND SAFE, BUT YOU USE IT AT YOUR OWN RISK. WE ARE PROVIDING CAMPUSPUPPY AS IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON&shy;INFRINGEMENT. WE DO NOT GUARANTEE THAT CAMPUSPUPPY WILL ALWAYS BE SAFE, SECURE OR ERROR&shy;FREE OR THAT CAMPUSPUPPY WILL ALWAYS FUNCTION WITHOUT DISRUPTIONS, DELAYS OR IMPERFECTIONS. CAMPUSPUPPY IS NOT RESPONSIBLE FOR THE ACTIONS, CONTENT, INFORMATION, OR DATA OF THIRD PARTIES, AND YOU RELEASE US, OUR DIRECTORS, OFFICERS, EMPLOYEES, AND AGENTS FROM ANY CLAIMS AND DAMAGES, KNOWN AND UNKNOWN, ARISING OUT OF OR IN ANY WAY CONNECTED WITH ANY CLAIM YOU HAVE AGAINST ANY SUCH THIRD PARTIES.<br />&nbsp;</p><p>&nbsp;<strong>3</strong><strong>. Safety:</strong><br /><br />We do our best to keep CampusPuppy safe, but we cannot guarantee it. We need your help to keep it safe, which includes the following commitments by you:</p><p>1. You will not post unauthorized commercial communications (such as spam) on CampusPuppy.</p><p>2. You will not collect users&#39; content or information, or otherwise access CampusPuppy , using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.</p><p>3. You will not engage in unlawful multi&shy;level marketing, such as a pyramid scheme, on CampusPuppy.</p><p>4. You will not upload viruses or other malicious code.</p><p>5. You will not solicit login information or access an account belonging to someone else.</p><p>6. You will not bully, intimidate, or harass any user.</p><p>7. You will not post content that: is hate speech, threatening, or pornographic? incites violence? or contains nudity or graphic or gratuitous violence.</p><p>8. You will not develop or operate a third&shy; party application containing alcohol&shy;related, dating or other mature content (including advertisements) without appropriate age based restrictions.</p><p>9. You will not use CampusPuppy to do anything unlawful, misleading, malicious, or discriminatory.</p><p>10. You will not do anything that could disable, overburden, or impair the proper working or appearance of CampusPuppy, such as a denial of service attack or interference with page rendering or other CampusPuppy functionality.</p><p>11. You will not facilitate or encourage any violations of this Statement or our policies.<br /><br /><br /><strong>4. Registration:</strong><br /><br />To create an account on CampusPuppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, your postal code, job title, college details and company) to help you build your profile and to provide you more customized services (for example: language&shy;specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p>CampusPuppy users provide their real names and information, and we need your help to keep it that way. Here are some commitments you make to us relating to registering and maintaining the security of your account:</p><p>1. You will not provide any false personal information on CampusPuppy, or create an account for anyone other than yourself without permission.</p><p>2. You will not create more than one personal account.</p><p>3. If we disable your account, you will not create another one without our permission.</p><p>4. You will not use your personal timeline primarily for your own commercial gain, and will use a Facebook Page for such purposes.</p><p>5. You will not use CampusPuppy if you are under 18.</p><p>6. You will not use CampusPuppy if you are a convicted sex offender.</p><p>7. You will keep your contact information accurate and up&shy;to&shy;date.</p><p>8. You will not share your password (or in the case of developers, your secret key), let anyone else access your account, or do anything else that might jeopardize the security of your account. 9. You will not transfer your account (including any Page or application you administer) to anyone without first getting our written permission. 1</p><p>10. If you select a username or similar identifier for your account or Page, we reserve the right to remove or reclaim it if we believe it is appropriate (such as when a trademark owner complains about a username that does not closely relate to a user&#39;s actual name).</p><p>&nbsp;</p><p><strong>5. Sharing Information:</strong><br /><br />You own all of the content and information you post on CampusPuppy, and you can control how it is shared through your privacy and application settings. In addition:</p><p>1. For content that is covered by intellectual property rights, like photos and videos (IP content), you specifically give us the following permission, subject to your privacy and application settings: you grant us a non&shy;exclusive, transferable, sub&shy;licensable, royalty&shy;free, worldwide license to use any IP content that you post on or in connection with Facebook (IP License). This IP License ends when you delete your IP content or your account unless your content has been shared with others, and they have not deleted it.</p><p>2. When you delete IP content, it is deleted in a manner similar to emptying the recycle bin on a computer. However, you understand that removed content may persist in backup copies for a reasonable period of time (but will not be available to others).</p><p>3. When you use an application, the application may ask for your permission to access your content and information as well as content and information that others have shared with you. &nbsp;We require applications to respect your privacy, and your agreement with that application will control how the application can use, store, and transfer that content and information. &nbsp;(To learn more about Platform, including how you can control what information other people may share with applications, read our Data Policy and Platform Page.)</p><p>4. When you publish content or information using the Public setting, it means that you are allowing everyone, including people off of CampusPuppy, to access and use that information, and to associate it with you (i.e., your name and profile picture).</p><p>5. We always appreciate your feedback or other suggestions about CampusPuppy, but you understand that we may use your feedback or suggestions without any obligation to compensate you for them (just as you have no obligation to offer them).</p><p><br /><strong>Consent to CampusPuppy Processing Information About You</strong></p><p>You agree that information you provide on your profile can be seen by others and used by us as described in this Privacy Policy and our User Agreement.</p><p>The personal information that you provide to us may reveal or allow others to identify aspects of your life that are not expressly stated on your profile (for example, your picture or your name may reveal your gender). By providing personal information to us when you create or update your account and profile, you are expressly and voluntarily accepting the terms and conditions of our User Agreement and freely accepting and agreeing to our processing of your personal information in ways set out by this Privacy Policy. Supplying to us any information deemed &ldquo;sensitive&rdquo; by applicable law is entirely voluntary on your part. You can withdraw or modify your consent to our collection and processing of the information you provide at any time, in accordance with the terms of this Privacy Policy and the User Agreement, by changing your account settings or your profile on CampusPuppy or by closing your CampusPuppy account.</p><p><br />&nbsp;</p>', '<p><strong>Campus Puppy&rsquo;s</strong> mission is to connect the world&rsquo;s professionals to allow them to be more productive and successful. Our registered users (&ldquo;Members&rdquo;) share their professional identities, engage with their network, exchange knowledge and professional insights, post and view relevant content, and find business and career opportunities. Content on some of our services is also visible to unregistered viewers (&ldquo;Visitors&rdquo;). We believe that our services allow our Members to effectively compete and achieve their full career potential. The cornerstone of our business is to focus on our Members first.</p><p>Maintaining your trust is our top priority, so we adhere to the following principles to protect your privacy:</p><p>We protect your personal information and will only provide it to third parties:</p><p>(1) with your consent?</p><p>(2) where it is necessary to carry out your instructions?</p><p>(3) as reasonably necessary in order to provide our features and functionality to you?</p><p>(4) when we reasonably believe it is required by law, subpoena or other legal process? or</p><p>(5) as necessary to enforce our User Agreement or protect the rights, property, or safety of Campus Puppy, our Members and Visitors, and the public.</p><p>We have implemented appropriate security safeguards designed to protect your information in accordance with industry standards.</p><p>We may modify this Privacy Policy from time to time, and if we make material changes to it, we will provide notice through our Service, or by other means so that you may review the changes before you continue to use our Services. If you object to any changes, you may close your account. Continuing to use our Services after we publish or communicate a notice about any changes to this Privacy Policy means that you are consenting to the changes.</p><p>&nbsp;<br /><strong>1. Data Controllers</strong></p><p>Our Privacy Policy applies to any Member or Visitor. We collect information when you use our Services to offer you a personalized and relevant experience, including growing your network and enabling business opportunities. If you have any concern about providing information to us or having such information displayed on our Services or otherwise used in any manner permitted in this Privacy Policy and the User Agreement, you should not become a Member. If you have already registered, you can close your accounts.</p><p><strong>2. Consent</strong></p><p>If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy (which includes our Cookie Policy and other documents referenced in this Privacy Policy) and agree to the User Agreement. We provide you choices that allow you to opt-out or control how we use and share your data.</p><p>&nbsp;<strong>3. Change</strong></p><p>We may modify this Privacy Policy, and if we make material changes to it, we will provide notice through our Services, or by other means, to provide you the opportunity to review the changes before they become effective. If you object to any changes, you may close your account. Your continued use of our Services after we publish or send a notice about our changes to this Privacy Policy means that you are consenting to the updated Privacy Policy.</p><p><strong>A. Information We Collect</strong></p><p><strong>1. Registration</strong></p><p>To create an account on Campus Puppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, &nbsp;job title, and company) to help you build your profile and to provide you more customized services (for example: language&shy; specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your Campus Puppy profile. We may also ask for your credit card details if you purchase certain additional services.</p><p><strong>2. Profile Information</strong></p><p>We collect information when you fill out a profile. A complete Campus Puppy profile that includes professional details &ndash; like your job title, education, and skills &ndash; helps you get found by other people for opportunities. After you create an account, you may choose to provide additional information on your Campus Puppy profile, such as descriptions of your skills, professional experience, and educational background. You can list honors, awards, professional affiliations, Group memberships, networking objectives, companies or individuals that you follow, and other information including content. Providing additional information enables you to derive more benefit from our Services by helping you express your professional identity? find other professionals, opportunities, and information? and help recruiters and business opportunities find you. It also enables us to serve you ads and other relevant content on and off of our Services.</p><p>&nbsp;</p><p><strong>B. Information we collect:</strong></p><p><strong>1. Customer Service</strong></p><p>We collect information when you contact us for customer support. When you contact our customer support services, we may have to access your InMails, Groups and other contributions to our Services and collect the information we need to categorize your question, respond to it, and, if applicable, investigate any breach of our User Agreement or this Privacy Policy. We also use this information to track potential problems and trends and customize our support responses to better serve you. We do not use this information for advertising.</p><p><strong>2. Using the Campus Puppy Site</strong></p><p>We collect information when you visit our Services &nbsp;and interact with advertising on and off our Services.</p><p>If you are logged in on Campus Puppy.com, &nbsp;one of our cookies on your device identifies you, your usage information and the log data , such as your IP address, will be associated by us with your account. Even if you&rsquo;re not logged into a Service, we log information about devices used to access our Services, including IP address.</p><p><strong>3. Messages</strong></p><p>We collect information about you when you send, receive, or engage with messages in connection with our Services.</p><p>&nbsp;<strong>4. Log Files, IP Addresses, and Information About Your Computer and Mobile Device</strong></p><p>&nbsp;We collect information from the devices and networks that you use to access our Services. When you visit or leave our Services (whether as a Member or Visitor) by clicking a hyperlink or when you view a third &shy;party site that includes our plugin or cookies (or similar technology), we automatically receive the URL of the site from which you came or the one to which you are directed. Also, advertisers receive the URL of the page that you are on when you click an ad on or through our Services. We also receive the internet protocol (&ldquo;IP&rdquo;) address of your computer or the proxy server that you use to access the web, your computer operating system details, your type of web browser, your mobile device (including your mobile device identifier provided by your mobile device operating system), your mobile operating system (if you are accessing Campus Puppy using a mobile device), and the name of your ISP or your mobile carrier. We may also receive location data passed to us from third &shy;party services or GPS &shy;enabled devices that you have set up, which we use to show you local information for fraud prevention and security purposes. Most mobile devices allow you to prevent real time location data being sent to us, and of course we will honor your settings.</p><p>&nbsp;<strong>5. Others</strong></p><p>Our Services are a dynamic, innovative environment, which means we are always seeking to improve the Services we offer you. We often introduce new features, some of which may result in the collection of new information. Furthermore, new partnerships or corporate acquisitions may result in new features, and we may potentially collect new types of information. If we start collecting substantially new types of personal information and materially change how we handle your data, we will modify this Privacy Policy and notify you.</p><p><strong>C. How We Use Your Data</strong></p><p>How we use your personal data will depend on which Services you use, how you use those Services and the choices you make in your settings. We use the data that we have about you to provide, support, personalize and make our Services (including ads) more relevant and useful to you and others.</p><p>&nbsp;<strong>1.&nbsp;</strong><strong>Services</strong></p><p>Our Services help you connect with others, find and be found for work and business opportunities, stay informed, get training and be more productive.</p><p>We use your data to authenticate you and authorize access to our Services.</p><p><strong>&nbsp;2. Stay Connected</strong></p><p>Our Services allow you to stay in touch, in communication and up to date with colleagues, partners, clients, and other professional contacts. To do so, you will &ldquo;connect&rdquo; with the professionals who you choose, and who also wish to &ldquo;connect&rdquo; with you. When you connect, you will be able to search each others&rsquo; connections in order to exchange professional opportunities.</p><p>We will use data about you and enable you to invite others to become a Member and connect with you. It is your choice whether to invite someone to our Services, send a connection request, or allow another Member to become your connection. When you invite someone to connect with you, your invitation will include your name, photo, network and contact information. We will send invitation reminders to the person you invited.</p><p><strong>3. Career</strong></p><p>Our Services allow you to explore careers, evaluate educational opportunities, and seek out, and be found for, career opportunities. Your profile can be found by those looking to hire (for a job) or be hired by you. We will use your data to recommend jobs, show you and others who work at a company, in an industry, function or location or have certain skills and connections.</p><p><strong>&nbsp;4. Productivity</strong></p><p>Our Services allow you to collaborate with colleagues, search for potential clients, customers, partners and others to do business with. Our Services allow you to communicate with other professionals and schedule and prepare meetings with them.</p><p><strong>5. Communications</strong></p><p>We contact you and enable communications between members. We offer settings to control what and how often you receive some types of messages.</p><p>We will contact you through email, notices posted on our website, messages to your Campus Puppy inbox, and other ways through our Services, including text messages and push notifications. We will send you messages about the availability of our Services, security, or other service-related issues. We also send messages about how to use the Services, network updates, reminders, job suggestions and promotional messages from us and our partners. You may change your communication<a href="https://www.linkedin.com/psettings/messages"> </a>preferences at any time. Please be aware that you cannot opt out of receiving service messages from us, including security and legal notices.</p><p>We also enable communications between you and others through our Services, including for example invitations, InMail, groups and messages between connections.</p><p><strong>6. Advertising</strong></p><p>We serve you tailored ads both on and off of our Services. We offer you choices to opt out of interest based ads, but you cannot opt out of seeing generic ads.</p><p>We target (and measure the performance of) ads to Members, Visitors and others both on and off of our Services through a variety of ad networks and exchanges, using the following data, whether separately or combined:</p><ul><li><p>Data from advertising technologies on and off of our Services, like web beacons, pixels, ad tags, cookies, and device identifiers;</p></li><li><p>Member-provided information (e.g., contact information, title and industry);</p></li><li><p>Data from your use of our Services (e.g., search history, feed, content you read, who you follow or is following you, connections, groups participation, page visits, videos you watch, clicking on an ad, etc.), including as described in Section 1.3;</p></li><li><p>Information from others (e.g. advertising partners, publishers and data aggregators);</p></li><li><p>Information inferred from data described above (e.g., using job titles to infer age, industry, seniority, and compensation bracket; or names to infer gender).</p></li></ul><p>We will show you ads called sponsored content which look like similar non-sponsored content, except that they are labeled ads or sponsored.</p><p><strong>7. Marketing</strong></p><p>We use data and content about Members for invitations and communications promoting membership and network growth, engagement and our Services.</p><p><strong>D. Developing Services and Research</strong></p><p><strong>1. Service Development</strong></p><p>We use data, including public feedback, to conduct research and development for the further development of our Services in order to provide you and others with a better, more intuitive and personalized experience, drive membership growth and engagement on our Services, and help connect professionals to each other and to economic opportunity.</p><p><strong>2. Other Research</strong></p><p>We seek to create economic opportunity for members of the global workforce and to help them be more productive and successful. We use the data available to us to research social, economic and workplace trends such as jobs availability and skills needed for these jobs and policies that help bridge the gap in various industries and geographic areas. &nbsp;</p><p><strong>3. Customer Support</strong></p><p>We use the data (which can include your communications) needed to investigate, respond to and resolve complaints and Service issues (e.g., bugs).</p><p><strong>4. Security and Investigations</strong></p><p>We use your data (including your communications) if we think it&rsquo;s necessary for security purposes or to investigate possible fraud or other violations of our User Agreement or this Privacy Policy and/or attempts to harm our Members or Visitors.</p><p><strong>E. How We Share Information</strong></p><p><strong>&nbsp;1. Our Services</strong></p><p>Any information you include on your profile and any content you post or social action (e.g. likes, follows, comments, shares) you take on our Services will be seen by others.</p><p><strong>&nbsp;2. Service Providers</strong></p><p>We use others to help us provide our Services (e.g., maintenance, analysis, audit, payments, fraud detection, marketing and development). They will have access to your information as reasonably necessary to perform these tasks on our behalf and are obligated to not to disclose or use it for other purposes.</p><p><strong>&nbsp;3. Legal Disclosures</strong></p><p>We may need to share your data when we believe it&rsquo;s required by law or to protect your and our rights and security.</p><p>It is possible that we will need to disclose information about you when required by law, or other legal process or if we have a good faith belief that disclosure is reasonably necessary to</p><p>(1) investigate, prevent, or take action regarding suspected or actual illegal activities or to assist government enforcement agencies;</p><p>(2) enforce our agreements with you,</p><p>(3) investigate and defend ourselves against any third-party claims or allegations,</p><p>(4) protect the security or integrity of our Service (such as by sharing with companies facing similar threats); or</p><p>(5) exercise or protect the rights and safety of Campus Puppy, our Members, personnel, or others. We attempt to notify Members about legal demands for their personal data when appropriate in our judgment, unless prohibited by law or court order or when the request is an emergency. We may dispute such demands when we believe, in our discretion, that the requests are overbroad, vague or lack proper authority, but we do not promise to challenge every demand.</p><p>&nbsp;<strong>F. Your Choices &amp; Obligations</strong></p><p><strong>1. Data Retention</strong></p><p>We retain the personal data you provide while your account is in existence or as needed to provide you Services. Even if you only use our Services when looking for a new job every few years, we will retain your information and keep your profile open until you decide to close your account. In some cases we choose to retain certain information (e.g., visits to sites carrying our &ldquo;share with Campus Puppy&rdquo; or &ldquo;apply with Campus Puppy&rdquo; plugins without clicking on the plugin) in a depersonalized or aggregated form.</p><p><strong>&nbsp;2. Account Closure</strong></p><p>We retain your personal data even after you have closed your account if reasonably necessary to comply with our legal obligations (including law enforcement requests), meet regulatory requirements, resolve disputes, maintain security, prevent fraud and abuse, enforce our User Agreement, or fulfill your request to &ldquo;unsubscribe&rdquo; from further messages from us. We will retain de-personalized information after your account has been closed.</p><p>Information you have shared with others will remain visible after you closed your account or deleted the information from your own profile or mailbox, and we do not control data that other Members copied out of our Services. Groups content associated with closed accounts will show an unknown user as the source. Your profile may continue to be displayed in the services of others until they refresh their cache.</p><p><strong>&nbsp;G. Other Important Information</strong></p><p><strong>1. Security</strong></p><p>We monitor for and try to prevent security breaches. Please use the security features available through our Services.</p><p>We implement security safeguards designed to protect your data, such as HTTPS. We regularly monitor our systems for possible vulnerabilities and attacks. However, we cannot warrant the security of any information that you send us. There is no guarantee that data may not be accessed, disclosed, altered, or destroyed by breach of any of our physical, technical, or managerial safeguards.&nbsp;</p><p><strong>2. Contact Information</strong></p><p>If you have questions or complaints regarding this Policy, please first contact Campus Puppy online. You can also reach us by physical mail. If contacting us does not resolve your complaint, you have more options.</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>This is the Test Privacy Policy Page3f</p>', 'https://www.facebook.com/campuspuppy', 'https://www.twitter.com/campuspuppy');
+(1, '<p>Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual&rsquo;s specific skill set and expertise in it. Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what&rsquo;s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p><p>At Campus Puppy, we aspire to give the upcoming students a platform which will link them to their desired employers. What makes us stand apart from others in the market is our promise of providing the students with only high quality professional networking experience. And we will ensure this via a set of channels which will authenticate all the users through a verification procedure.</p><p>Our aim is to help the young minds reach a step closer to their dream job. A job that is not just their dream job but also a perfect job for them. Perfect, by the means that a job which will have the skills you possess and love. A student will no longer have to compromise with the job he gets during recruitment drives in his campus, rather he will get a job/internship of his choice.<br />Employers can use the portal to cut down the time wasted in manually filtering the applicants who apply for a job opening. The portal through a large number of filters brings down to say 200 from 1000 applicants. Through virtual campus drive, companies get only the skill specific candidates appropriate to the job opening in their company. Our aim is to connect employers and desired candidates. Point in consideration is that, we don&rsquo;t want to interfere in any company&rsquo;s recruitment process, we just want to give them a more sorted list of students, on which they can still complete their very own recruitment process. We are helping companies to cut down their cost on physical resources and the time wasted by the recruiting employers on a campus drive to set up an entire process for about 1000 students of a campus. We want to provide them with a platform where they can just select a required n number of students on which they can complete their recruitment process. These filters include academic qualification criteria of students, the skills they have, etc. Moreover employers are ensured that the student&rsquo;s are genuine, their details are authentic, and the skills they have are verified.</p><p>We, at Campus Puppy aim to pioneer in the field of professional networking and employment. The students can look for internships and jobs on our portal and the employers can get in touch with the desired applicants on the basis of the skills they possess.</p><p>For us our emphasis is always on the students who struggle through their initial years finding the suitable job and the companies who waste their resources looking up for the best suitable candidate for the job profile.<br /><br />The industry we are catering to is an education Tech cum Human Resource industry which is an evergreen industry. Students graduating every year will want jobs and on the parallel lines companies want to recruit young talents. Thus CampusPuppy which is basically a bridge between the students and the companies will always be in work flow and trying to bridge the gap. We intend to use the industry workflow to our advantage as the market needs in this sector will never die. This is one industry which will always be in a need for this gap to be filled and CampusPuppy will make that happen.</p><p>We have also struggled in our graduation period to find a job of our skill set, and we know exactly how it is important for a person to get a job in the field of his/her own expertise. We have been a part of this experience and thus understand the loop holes in this sector and will be able to fill this gap through our experience and confidence. This experience will be our power play in getting success as CampusPuppy.<br /><br />Legally we are a Private Limited Company. Advantage of owning a private limited company is that the financial liability of shareholders is limited to their shares. Therefore, if a private limited company was in financial trouble and had to close, shareholders would not risk losing their personal assets. Shareholders must also agree to the sale or transfer of shares; therefore, the risk of hostile takeovers is low.&nbsp;</p><p><!--[if gte vml 1]><v:shapetype\r\n id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"\r\n path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">\r\n <v:stroke joinstyle="miter"/>\r\n <v:formulas>\r\n  <v:f eqn="if lineDrawn pixelLineWidth 0"/>\r\n  <v:f eqn="sum @0 1 0"/>\r\n  <v:f eqn="sum 0 0 @1"/>\r\n  <v:f eqn="prod @2 1 2"/>\r\n  <v:f eqn="prod @3 21600 pixelWidth"/>\r\n  <v:f eqn="prod @3 21600 pixelHeight"/>\r\n  <v:f eqn="sum @0 0 1"/>\r\n  <v:f eqn="prod @6 1 2"/>\r\n  <v:f eqn="prod @7 21600 pixelWidth"/>\r\n  <v:f eqn="sum @8 21600 0"/>\r\n  <v:f eqn="prod @7 21600 pixelHeight"/>\r\n  <v:f eqn="sum @10 21600 0"/>\r\n </v:formulas>\r\n <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>\r\n <o:lock v:ext="edit" aspectratio="t"/>\r\n</v:shapetype><v:shape id="Picture_x0020_5" o:spid="_x0000_s1026" type="#_x0000_t75"\r\n style=\'position:absolute;margin-left:272.25pt;margin-top:60pt;width:116.25pt;\r\n height:37.5pt;z-index:-1;visibility:visible;mso-wrap-style:square;\r\n mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;\r\n mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;\r\n mso-position-horizontal-relative:page;mso-position-vertical:absolute;\r\n mso-position-vertical-relative:page\' o:allowincell="f">\r\n <v:imagedata src="file:///C:\\Users\\NICSI\\AppData\\Local\\Temp\\msohtmlclip1\\01\\clip_image001.jpg"\r\n  o:title="" chromakey="white"/>\r\n <w:wrap anchorx="page" anchory="page"/>\r\n</v:shape><![endif]--></p><p>&nbsp;</p>', '<p>The cornerstone of our business is to focus on our Members first. We protect your personal information using industry &shy;standard safeguards. We may share your information with your consent or as required by law, and we will always let you know when we make significant changes to this <strong>Terms and Conditions.</strong></p><p><strong>Statement of Rights and Responsibilities </strong>This Statement of Rights and Responsibilities (&quot;Statement,&quot; &quot;Terms,&quot; or &quot;SRR&quot;) derives from the CampusPuppy Principles, and is our terms of service that governs our relationship with users and others who interact with CampusPuppy, as well as CampusPuppy brands, products and services, which we call the &ldquo;CampusPuppy Services&rdquo; or &ldquo;Services&rdquo;. By using or accessing the CampusPuppy Services, you agree to this Statement, as updated from time to time in accordance with the section below. Additionally, you will find resources at the end of this document that help you understand how CampusPuppy works. Because CampusPuppyprovides a wide range of Services, we may ask you to review and accept supplemental terms that apply to your interaction with a specific app, product, or service. To the extent those supplemental terms conflict with this SRR, the supplemental terms associated with the app, product, or service govern with respect to your use of such app, product or service to the extent of the conflict.</p><p>&nbsp;</p><p><strong>1. Amendments</strong></p><p>&nbsp;1. We&rsquo;ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</p><p>2. If we make changes to policies, guidelines or other terms referenced in or incorporated by this Statement, we may provide notice on the Site Governance Page.</p><p>3. Your continued use of the CampusPuppy Services, following notice of the changes to our terms, policies or guidelines, constitutes your acceptance of our amended terms, policies or guidelines.</p><p>&nbsp;4. Termination If you violate the letter or spirit of this Statement, or otherwise create risk or possible legal exposure for us, we can stop providing all or part of Facebook to you. We will notify you by email or at the next time you attempt to access your account. You may also delete your account or disable your application at any time.</p><p>&nbsp;<strong>2. Disputes</strong></p><p>&nbsp;1. You will resolve any claim, cause of action or dispute (claim) you have with us arising out of or relating to this Statement or CampusPuppy exclusively in the Delhi District Court, and you agree to submit to the personal jurisdiction of such courts for the purpose of litigating all such claims. The laws of the Country(India) will govern this Statement, as well as any claim that might arise between you and us, without regard to conflict of law provisions.</p><p>2. If anyone brings a claim against us related to your actions, content or information on CampusPuppy, you will indemnify and hold us harmless from and against all damages, losses, and expenses of any kind (including reasonable legal fees and costs) related to such claim. Although we provide rules for user conduct, we do not control or direct users&#39; actions on CampusPuppy and are not responsible for the content or information users transmit or share on CampusPuppy. We are not responsible for any offensive, inappropriate, obscene, unlawful or otherwise objectionable content or information you may encounter on CampusPuppy. We are not responsible for the conduct, whether online or offline, of any user of CampusPuppy.</p><p>3. WE TRY TO KEEP CAMPUSPUPPY UP, BUG&shy;FREE, AND SAFE, BUT YOU USE IT AT YOUR OWN RISK. WE ARE PROVIDING CAMPUSPUPPY AS IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON&shy;INFRINGEMENT. WE DO NOT GUARANTEE THAT CAMPUSPUPPY WILL ALWAYS BE SAFE, SECURE OR ERROR&shy;FREE OR THAT CAMPUSPUPPY WILL ALWAYS FUNCTION WITHOUT DISRUPTIONS, DELAYS OR IMPERFECTIONS. CAMPUSPUPPY IS NOT RESPONSIBLE FOR THE ACTIONS, CONTENT, INFORMATION, OR DATA OF THIRD PARTIES, AND YOU RELEASE US, OUR DIRECTORS, OFFICERS, EMPLOYEES, AND AGENTS FROM ANY CLAIMS AND DAMAGES, KNOWN AND UNKNOWN, ARISING OUT OF OR IN ANY WAY CONNECTED WITH ANY CLAIM YOU HAVE AGAINST ANY SUCH THIRD PARTIES.<br />&nbsp;</p><p>&nbsp;<strong>3</strong><strong>. Safety:</strong><br /><br />We do our best to keep CampusPuppy safe, but we cannot guarantee it. We need your help to keep it safe, which includes the following commitments by you:</p><p>1. You will not post unauthorized commercial communications (such as spam) on CampusPuppy.</p><p>2. You will not collect users&#39; content or information, or otherwise access CampusPuppy , using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.</p><p>3. You will not engage in unlawful multi&shy;level marketing, such as a pyramid scheme, on CampusPuppy.</p><p>4. You will not upload viruses or other malicious code.</p><p>5. You will not solicit login information or access an account belonging to someone else.</p><p>6. You will not bully, intimidate, or harass any user.</p><p>7. You will not post content that: is hate speech, threatening, or pornographic? incites violence? or contains nudity or graphic or gratuitous violence.</p><p>8. You will not develop or operate a third&shy; party application containing alcohol&shy;related, dating or other mature content (including advertisements) without appropriate age based restrictions.</p><p>9. You will not use CampusPuppy to do anything unlawful, misleading, malicious, or discriminatory.</p><p>10. You will not do anything that could disable, overburden, or impair the proper working or appearance of CampusPuppy, such as a denial of service attack or interference with page rendering or other CampusPuppy functionality.</p><p>11. You will not facilitate or encourage any violations of this Statement or our policies.<br /><br /><br /><strong>4. Registration:</strong><br /><br />To create an account on CampusPuppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, your postal code, job title, college details and company) to help you build your profile and to provide you more customized services (for example: language&shy;specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p>CampusPuppy users provide their real names and information, and we need your help to keep it that way. Here are some commitments you make to us relating to registering and maintaining the security of your account:</p><p>1. You will not provide any false personal information on CampusPuppy, or create an account for anyone other than yourself without permission.</p><p>2. You will not create more than one personal account.</p><p>3. If we disable your account, you will not create another one without our permission.</p><p>4. You will not use your personal timeline primarily for your own commercial gain, and will use a Facebook Page for such purposes.</p><p>5. You will not use CampusPuppy if you are under 18.</p><p>6. You will not use CampusPuppy if you are a convicted sex offender.</p><p>7. You will keep your contact information accurate and up&shy;to&shy;date.</p><p>8. You will not share your password (or in the case of developers, your secret key), let anyone else access your account, or do anything else that might jeopardize the security of your account. 9. You will not transfer your account (including any Page or application you administer) to anyone without first getting our written permission. 1</p><p>10. If you select a username or similar identifier for your account or Page, we reserve the right to remove or reclaim it if we believe it is appropriate (such as when a trademark owner complains about a username that does not closely relate to a user&#39;s actual name).</p><p>&nbsp;</p><p><strong>5. Sharing Information:</strong><br /><br />You own all of the content and information you post on CampusPuppy, and you can control how it is shared through your privacy and application settings. In addition:</p><p>1. For content that is covered by intellectual property rights, like photos and videos (IP content), you specifically give us the following permission, subject to your privacy and application settings: you grant us a non&shy;exclusive, transferable, sub&shy;licensable, royalty&shy;free, worldwide license to use any IP content that you post on or in connection with Facebook (IP License). This IP License ends when you delete your IP content or your account unless your content has been shared with others, and they have not deleted it.</p><p>2. When you delete IP content, it is deleted in a manner similar to emptying the recycle bin on a computer. However, you understand that removed content may persist in backup copies for a reasonable period of time (but will not be available to others).</p><p>3. When you use an application, the application may ask for your permission to access your content and information as well as content and information that others have shared with you. &nbsp;We require applications to respect your privacy, and your agreement with that application will control how the application can use, store, and transfer that content and information. &nbsp;(To learn more about Platform, including how you can control what information other people may share with applications, read our Data Policy and Platform Page.)</p><p>4. When you publish content or information using the Public setting, it means that you are allowing everyone, including people off of CampusPuppy, to access and use that information, and to associate it with you (i.e., your name and profile picture).</p><p>5. We always appreciate your feedback or other suggestions about CampusPuppy, but you understand that we may use your feedback or suggestions without any obligation to compensate you for them (just as you have no obligation to offer them).</p><p><br /><strong>Consent to CampusPuppy Processing Information About You</strong></p><p>You agree that information you provide on your profile can be seen by others and used by us as described in this Privacy Policy and our User Agreement.</p><p>The personal information that you provide to us may reveal or allow others to identify aspects of your life that are not expressly stated on your profile (for example, your picture or your name may reveal your gender). By providing personal information to us when you create or update your account and profile, you are expressly and voluntarily accepting the terms and conditions of our User Agreement and freely accepting and agreeing to our processing of your personal information in ways set out by this Privacy Policy. Supplying to us any information deemed &ldquo;sensitive&rdquo; by applicable law is entirely voluntary on your part. You can withdraw or modify your consent to our collection and processing of the information you provide at any time, in accordance with the terms of this Privacy Policy and the User Agreement, by changing your account settings or your profile on CampusPuppy or by closing your CampusPuppy account.</p><p><br />&nbsp;</p>', '<p><strong>Campus Puppy&rsquo;s</strong> mission is to connect the world&rsquo;s professionals to allow them to be more productive and successful. Our registered users (&ldquo;Members&rdquo;) share their professional identities, engage with their network, exchange knowledge and professional insights, post and view relevant content, and find business and career opportunities. Content on some of our services is also visible to unregistered viewers (&ldquo;Visitors&rdquo;). We believe that our services allow our Members to effectively compete and achieve their full career potential. The cornerstone of our business is to focus on our Members first.</p><p>Maintaining your trust is our top priority, so we adhere to the following principles to protect your privacy:</p><p>We protect your personal information and will only provide it to third parties:</p><p>(1) with your consent?</p><p>(2) where it is necessary to carry out your instructions?</p><p>(3) as reasonably necessary in order to provide our features and functionality to you?</p><p>(4) when we reasonably believe it is required by law, subpoena or other legal process? or</p><p>(5) as necessary to enforce our User Agreement or protect the rights, property, or safety of Campus Puppy, our Members and Visitors, and the public.</p><p>We have implemented appropriate security safeguards designed to protect your information in accordance with industry standards.</p><p>We may modify this Privacy Policy from time to time, and if we make material changes to it, we will provide notice through our Service, or by other means so that you may review the changes before you continue to use our Services. If you object to any changes, you may close your account. Continuing to use our Services after we publish or communicate a notice about any changes to this Privacy Policy means that you are consenting to the changes.</p><p>&nbsp;<br /><strong>1. Data Controllers</strong></p><p>Our Privacy Policy applies to any Member or Visitor. We collect information when you use our Services to offer you a personalized and relevant experience, including growing your network and enabling business opportunities. If you have any concern about providing information to us or having such information displayed on our Services or otherwise used in any manner permitted in this Privacy Policy and the User Agreement, you should not become a Member. If you have already registered, you can close your accounts.</p><p><strong>2. Consent</strong></p><p>If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy (which includes our Cookie Policy and other documents referenced in this Privacy Policy) and agree to the User Agreement. We provide you choices that allow you to opt-out or control how we use and share your data.</p><p>&nbsp;<strong>3. Change</strong></p><p>We may modify this Privacy Policy, and if we make material changes to it, we will provide notice through our Services, or by other means, to provide you the opportunity to review the changes before they become effective. If you object to any changes, you may close your account. Your continued use of our Services after we publish or send a notice about our changes to this Privacy Policy means that you are consenting to the updated Privacy Policy.</p><p><strong>A. Information We Collect</strong></p><p><strong>1. Registration</strong></p><p>To create an account on Campus Puppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, &nbsp;job title, and company) to help you build your profile and to provide you more customized services (for example: language&shy; specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your Campus Puppy profile. We may also ask for your credit card details if you purchase certain additional services.</p><p><strong>2. Profile Information</strong></p><p>We collect information when you fill out a profile. A complete Campus Puppy profile that includes professional details &ndash; like your job title, education, and skills &ndash; helps you get found by other people for opportunities. After you create an account, you may choose to provide additional information on your Campus Puppy profile, such as descriptions of your skills, professional experience, and educational background. You can list honors, awards, professional affiliations, Group memberships, networking objectives, companies or individuals that you follow, and other information including content. Providing additional information enables you to derive more benefit from our Services by helping you express your professional identity? find other professionals, opportunities, and information? and help recruiters and business opportunities find you. It also enables us to serve you ads and other relevant content on and off of our Services.</p><p>&nbsp;</p><p><strong>B. Information we collect:</strong></p><p><strong>1. Customer Service</strong></p><p>We collect information when you contact us for customer support. When you contact our customer support services, we may have to access your InMails, Groups and other contributions to our Services and collect the information we need to categorize your question, respond to it, and, if applicable, investigate any breach of our User Agreement or this Privacy Policy. We also use this information to track potential problems and trends and customize our support responses to better serve you. We do not use this information for advertising.</p><p><strong>2. Using the Campus Puppy Site</strong></p><p>We collect information when you visit our Services &nbsp;and interact with advertising on and off our Services.</p><p>If you are logged in on Campus Puppy.com, &nbsp;one of our cookies on your device identifies you, your usage information and the log data , such as your IP address, will be associated by us with your account. Even if you&rsquo;re not logged into a Service, we log information about devices used to access our Services, including IP address.</p><p><strong>3. Messages</strong></p><p>We collect information about you when you send, receive, or engage with messages in connection with our Services.</p><p>&nbsp;<strong>4. Log Files, IP Addresses, and Information About Your Computer and Mobile Device</strong></p><p>&nbsp;We collect information from the devices and networks that you use to access our Services. When you visit or leave our Services (whether as a Member or Visitor) by clicking a hyperlink or when you view a third &shy;party site that includes our plugin or cookies (or similar technology), we automatically receive the URL of the site from which you came or the one to which you are directed. Also, advertisers receive the URL of the page that you are on when you click an ad on or through our Services. We also receive the internet protocol (&ldquo;IP&rdquo;) address of your computer or the proxy server that you use to access the web, your computer operating system details, your type of web browser, your mobile device (including your mobile device identifier provided by your mobile device operating system), your mobile operating system (if you are accessing Campus Puppy using a mobile device), and the name of your ISP or your mobile carrier. We may also receive location data passed to us from third &shy;party services or GPS &shy;enabled devices that you have set up, which we use to show you local information for fraud prevention and security purposes. Most mobile devices allow you to prevent real time location data being sent to us, and of course we will honor your settings.</p><p>&nbsp;<strong>5. Others</strong></p><p>Our Services are a dynamic, innovative environment, which means we are always seeking to improve the Services we offer you. We often introduce new features, some of which may result in the collection of new information. Furthermore, new partnerships or corporate acquisitions may result in new features, and we may potentially collect new types of information. If we start collecting substantially new types of personal information and materially change how we handle your data, we will modify this Privacy Policy and notify you.</p><p><strong>C. How We Use Your Data</strong></p><p>How we use your personal data will depend on which Services you use, how you use those Services and the choices you make in your settings. We use the data that we have about you to provide, support, personalize and make our Services (including ads) more relevant and useful to you and others.</p><p>&nbsp;<strong>1.&nbsp;</strong><strong>Services</strong></p><p>Our Services help you connect with others, find and be found for work and business opportunities, stay informed, get training and be more productive.</p><p>We use your data to authenticate you and authorize access to our Services.</p><p><strong>&nbsp;2. Stay Connected</strong></p><p>Our Services allow you to stay in touch, in communication and up to date with colleagues, partners, clients, and other professional contacts. To do so, you will &ldquo;connect&rdquo; with the professionals who you choose, and who also wish to &ldquo;connect&rdquo; with you. When you connect, you will be able to search each others&rsquo; connections in order to exchange professional opportunities.</p><p>We will use data about you and enable you to invite others to become a Member and connect with you. It is your choice whether to invite someone to our Services, send a connection request, or allow another Member to become your connection. When you invite someone to connect with you, your invitation will include your name, photo, network and contact information. We will send invitation reminders to the person you invited.</p><p><strong>3. Career</strong></p><p>Our Services allow you to explore careers, evaluate educational opportunities, and seek out, and be found for, career opportunities. Your profile can be found by those looking to hire (for a job) or be hired by you. We will use your data to recommend jobs, show you and others who work at a company, in an industry, function or location or have certain skills and connections.</p><p><strong>&nbsp;4. Productivity</strong></p><p>Our Services allow you to collaborate with colleagues, search for potential clients, customers, partners and others to do business with. Our Services allow you to communicate with other professionals and schedule and prepare meetings with them.</p><p><strong>5. Communications</strong></p><p>We contact you and enable communications between members. We offer settings to control what and how often you receive some types of messages.</p><p>We will contact you through email, notices posted on our website, messages to your Campus Puppy inbox, and other ways through our Services, including text messages and push notifications. We will send you messages about the availability of our Services, security, or other service-related issues. We also send messages about how to use the Services, network updates, reminders, job suggestions and promotional messages from us and our partners. You may change your communication<a href="https://www.linkedin.com/psettings/messages"> </a>preferences at any time. Please be aware that you cannot opt out of receiving service messages from us, including security and legal notices.</p><p>We also enable communications between you and others through our Services, including for example invitations, InMail, groups and messages between connections.</p><p><strong>6. Advertising</strong></p><p>We serve you tailored ads both on and off of our Services. We offer you choices to opt out of interest based ads, but you cannot opt out of seeing generic ads.</p><p>We target (and measure the performance of) ads to Members, Visitors and others both on and off of our Services through a variety of ad networks and exchanges, using the following data, whether separately or combined:</p><ul><li><p>Data from advertising technologies on and off of our Services, like web beacons, pixels, ad tags, cookies, and device identifiers;</p></li><li><p>Member-provided information (e.g., contact information, title and industry);</p></li><li><p>Data from your use of our Services (e.g., search history, feed, content you read, who you follow or is following you, connections, groups participation, page visits, videos you watch, clicking on an ad, etc.), including as described in Section 1.3;</p></li><li><p>Information from others (e.g. advertising partners, publishers and data aggregators);</p></li><li><p>Information inferred from data described above (e.g., using job titles to infer age, industry, seniority, and compensation bracket; or names to infer gender).</p></li></ul><p>We will show you ads called sponsored content which look like similar non-sponsored content, except that they are labeled ads or sponsored.</p><p><strong>7. Marketing</strong></p><p>We use data and content about Members for invitations and communications promoting membership and network growth, engagement and our Services.</p><p><strong>D. Developing Services and Research</strong></p><p><strong>1. Service Development</strong></p><p>We use data, including public feedback, to conduct research and development for the further development of our Services in order to provide you and others with a better, more intuitive and personalized experience, drive membership growth and engagement on our Services, and help connect professionals to each other and to economic opportunity.</p><p><strong>2. Other Research</strong></p><p>We seek to create economic opportunity for members of the global workforce and to help them be more productive and successful. We use the data available to us to research social, economic and workplace trends such as jobs availability and skills needed for these jobs and policies that help bridge the gap in various industries and geographic areas. &nbsp;</p><p><strong>3. Customer Support</strong></p><p>We use the data (which can include your communications) needed to investigate, respond to and resolve complaints and Service issues (e.g., bugs).</p><p><strong>4. Security and Investigations</strong></p><p>We use your data (including your communications) if we think it&rsquo;s necessary for security purposes or to investigate possible fraud or other violations of our User Agreement or this Privacy Policy and/or attempts to harm our Members or Visitors.</p><p><strong>E. How We Share Information</strong></p><p><strong>&nbsp;1. Our Services</strong></p><p>Any information you include on your profile and any content you post or social action (e.g. likes, follows, comments, shares) you take on our Services will be seen by others.</p><p><strong>&nbsp;2. Service Providers</strong></p><p>We use others to help us provide our Services (e.g., maintenance, analysis, audit, payments, fraud detection, marketing and development). They will have access to your information as reasonably necessary to perform these tasks on our behalf and are obligated to not to disclose or use it for other purposes.</p><p><strong>&nbsp;3. Legal Disclosures</strong></p><p>We may need to share your data when we believe it&rsquo;s required by law or to protect your and our rights and security.</p><p>It is possible that we will need to disclose information about you when required by law, or other legal process or if we have a good faith belief that disclosure is reasonably necessary to</p><p>(1) investigate, prevent, or take action regarding suspected or actual illegal activities or to assist government enforcement agencies;</p><p>(2) enforce our agreements with you,</p><p>(3) investigate and defend ourselves against any third-party claims or allegations,</p><p>(4) protect the security or integrity of our Service (such as by sharing with companies facing similar threats); or</p><p>(5) exercise or protect the rights and safety of Campus Puppy, our Members, personnel, or others. We attempt to notify Members about legal demands for their personal data when appropriate in our judgment, unless prohibited by law or court order or when the request is an emergency. We may dispute such demands when we believe, in our discretion, that the requests are overbroad, vague or lack proper authority, but we do not promise to challenge every demand.</p><p>&nbsp;<strong>F. Your Choices &amp; Obligations</strong></p><p><strong>1. Data Retention</strong></p><p>We retain the personal data you provide while your account is in existence or as needed to provide you Services. Even if you only use our Services when looking for a new job every few years, we will retain your information and keep your profile open until you decide to close your account. In some cases we choose to retain certain information (e.g., visits to sites carrying our &ldquo;share with Campus Puppy&rdquo; or &ldquo;apply with Campus Puppy&rdquo; plugins without clicking on the plugin) in a depersonalized or aggregated form.</p><p><strong>&nbsp;2. Account Closure</strong></p><p>We retain your personal data even after you have closed your account if reasonably necessary to comply with our legal obligations (including law enforcement requests), meet regulatory requirements, resolve disputes, maintain security, prevent fraud and abuse, enforce our User Agreement, or fulfill your request to &ldquo;unsubscribe&rdquo; from further messages from us. We will retain de-personalized information after your account has been closed.</p><p>Information you have shared with others will remain visible after you closed your account or deleted the information from your own profile or mailbox, and we do not control data that other Members copied out of our Services. Groups content associated with closed accounts will show an unknown user as the source. Your profile may continue to be displayed in the services of others until they refresh their cache.</p><p><strong>&nbsp;G. Other Important Information</strong></p><p><strong>1. Security</strong></p><p>We monitor for and try to prevent security breaches. Please use the security features available through our Services.</p><p>We implement security safeguards designed to protect your data, such as HTTPS. We regularly monitor our systems for possible vulnerabilities and attacks. However, we cannot warrant the security of any information that you send us. There is no guarantee that data may not be accessed, disclosed, altered, or destroyed by breach of any of our physical, technical, or managerial safeguards.&nbsp;</p><p><strong>2. Contact Information</strong></p><p>If you have questions or complaints regarding this Policy, please first contact Campus Puppy online. You can also reach us by physical mail. If contacting us does not resolve your complaint, you have more options.</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>This is the Test Privacy Policy Page3f</p>', 'https://www.facebook.com/campuspuppy', 'https://www.twitter.com/campuspuppy');
 
 -- --------------------------------------------------------
 
@@ -486,14 +500,13 @@ INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPo
 -- Table structure for table `courses`
 --
 
-CREATE TABLE IF NOT EXISTS `courses` (
-  `course_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses` (
+  `course_id` int(5) NOT NULL,
   `course` varchar(255) NOT NULL,
   `duration` int(3) NOT NULL,
   `courseType` enum('1','2','3','4') NOT NULL DEFAULT '3',
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
@@ -506,7 +519,8 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `courseType`, `active`
 (4, 'Master of Computer Application', 3, '3', 1),
 (5, 'Bachelor of Technology- Electronics and Communication Engineering', 4, '3', 1),
 (6, 'Bachelor of Technology- Mechanical Engineering	', 4, '3', 1),
-(7, 'Bachelor of Technology- Electrical Engineering', 4, '3', 1);
+(7, 'Bachelor of Technology- Electrical Engineering', 4, '3', 1),
+(8, 'Master of Buisness Administration-Technology', 5, '4', 1);
 
 -- --------------------------------------------------------
 
@@ -514,16 +528,97 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `courseType`, `active`
 -- Table structure for table `educationalDetails`
 --
 
-CREATE TABLE IF NOT EXISTS `educationalDetails` (
-  `educationID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `educationalDetails` (
+  `educationID` int(5) NOT NULL,
   `educationType` enum('1','2','3','4') NOT NULL,
   `description` text NOT NULL,
   `year` int(4) NOT NULL,
   `scoreType` enum('1','2') NOT NULL,
   `score` int(5) NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`educationID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `educationalDetails`
+--
+
+INSERT INTO `educationalDetails` (`educationID`, `educationType`, `description`, `year`, `scoreType`, `score`, `userID`) VALUES
+(1, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 65),
+(2, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 66),
+(3, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 67),
+(4, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 68),
+(5, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 69),
+(6, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 70),
+(7, '3', 'Bachelor of Technology- Information Technology-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 71),
+(8, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 72),
+(9, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 73),
+(10, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 75),
+(11, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at Noida Institute of Engineering and Technology', 2017, '1', 0, 76),
+(12, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 77),
+(13, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 78),
+(14, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 79),
+(15, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 80),
+(16, '3', 'Bachelor of Technology- Computer Science and Engineering-2013, at JSS Academy of Technical Education, Noida', 2013, '1', 0, 81),
+(17, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 82),
+(18, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 84),
+(19, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 85),
+(20, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 86),
+(21, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 87),
+(22, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 88),
+(23, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 89),
+(24, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 90),
+(25, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 91),
+(26, '3', 'Bachelor of Technology- Information Technology-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 92),
+(27, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 93),
+(28, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 94),
+(29, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 95),
+(30, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 96),
+(31, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 97),
+(32, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 98),
+(33, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 99),
+(34, '3', 'Bachelor of Technology- Information Technology-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 100),
+(35, '3', 'Bachelor of Technology- Information Technology-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 101),
+(36, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 102),
+(37, '3', 'Bachelor of Technology- Information Technology-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 103),
+(38, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 104),
+(39, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 105),
+(40, '3', 'Bachelor of Technology- Computer Science and Engineering-2013, at Greater Noida Institute of Technology, Greater Noida', 2013, '1', 0, 106),
+(41, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 107),
+(42, '3', 'Bachelor of Technology- Computer Science and Engineering-2013, at Manav Rachna International University (MRIU), Faridabad', 2013, '1', 0, 108),
+(43, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 109),
+(44, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 111),
+(45, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 112),
+(46, '3', 'Bachelor of Technology- Information Technology-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 113),
+(47, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 114),
+(48, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 115),
+(49, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 118),
+(50, '3', 'Bachelor of Technology- Computer Science and Engineering-2007, at ABES Engineering College, Ghaziabad', 2007, '1', 0, 119),
+(51, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at Amity University, Noida', 2017, '1', 0, 120),
+(52, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 121),
+(53, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 122),
+(54, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 124),
+(55, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 125),
+(56, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 126),
+(57, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 127),
+(58, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 128),
+(59, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 129),
+(60, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 130),
+(61, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 131),
+(62, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 132),
+(63, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 133),
+(64, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 134),
+(65, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 135),
+(66, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 136),
+(67, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 137),
+(68, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 138),
+(69, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 139),
+(70, '3', 'Bachelor of Technology- Information Technology-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 142),
+(71, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 143),
+(72, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 144),
+(73, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 145),
+(74, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 150),
+(75, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at Delhi Technological University', 2017, '1', 0, 152),
+(76, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at YMCA University of Science and technology, Faridabad', 2017, '1', 0, 155);
 
 -- --------------------------------------------------------
 
@@ -531,14 +626,13 @@ CREATE TABLE IF NOT EXISTS `educationalDetails` (
 -- Table structure for table `employerUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `employerUsers` (
+CREATE TABLE `employerUsers` (
   `userID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg',
-  UNIQUE KEY `userID` (`userID`)
+  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -575,7 +669,7 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 -- Table structure for table `generalUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `generalUsers` (
+CREATE TABLE `generalUsers` (
   `userID` int(5) NOT NULL,
   `collegeID` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
@@ -610,7 +704,96 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`) VALUES
 (44, 1, 5, 2017),
 (45, 1, 1, 2017),
 (46, 4, 1, 2013),
-(47, 1, 2, 2018);
+(47, 1, 2, 2018),
+(48, 1, 5, 2017),
+(49, 1, 1, 2020),
+(50, 1, 2, 2019),
+(51, 1, 2, 2017),
+(52, 1, 2, 2017),
+(53, 1, 2, 2019),
+(54, 56, 5, 2018),
+(56, 4, 1, 2018),
+(58, 1, 1, 2017),
+(59, 1, 7, 2020),
+(61, 85, 1, 2018),
+(63, 1, 5, 2019),
+(64, 1, 1, 2019),
+(65, 1, 1, 2017),
+(66, 1, 2, 2018),
+(67, 1, 1, 2017),
+(68, 1, 1, 2017),
+(69, 1, 2, 2018),
+(70, 1, 1, 2019),
+(71, 1, 2, 2017),
+(72, 1, 1, 2018),
+(73, 1, 5, 2018),
+(75, 1, 1, 2019),
+(76, 33, 1, 2017),
+(77, 1, 2, 2019),
+(78, 1, 1, 2017),
+(79, 1, 1, 2018),
+(80, 1, 1, 2018),
+(81, 1, 1, 2013),
+(82, 1, 1, 2017),
+(84, 1, 1, 2018),
+(85, 1, 1, 2018),
+(86, 1, 2, 2018),
+(87, 1, 1, 2018),
+(88, 1, 1, 2017),
+(89, 1, 5, 2017),
+(90, 1, 1, 2016),
+(91, 1, 1, 2016),
+(92, 1, 2, 2017),
+(93, 1, 5, 2016),
+(94, 1, 5, 2019),
+(95, 1, 2, 2019),
+(96, 1, 1, 2016),
+(97, 1, 1, 2017),
+(98, 1, 1, 2019),
+(99, 1, 1, 2017),
+(100, 1, 2, 2017),
+(101, 1, 2, 2017),
+(102, 1, 1, 2017),
+(103, 1, 2, 2016),
+(104, 1, 1, 2018),
+(105, 1, 1, 2019),
+(106, 2, 1, 2013),
+(107, 1, 1, 2018),
+(108, 38, 1, 2013),
+(109, 1, 2, 2019),
+(111, 1, 1, 2019),
+(112, 1, 1, 2016),
+(113, 1, 2, 2016),
+(114, 1, 2, 2018),
+(115, 1, 1, 2017),
+(118, 1, 5, 2018),
+(119, 4, 1, 2007),
+(120, 6, 1, 2017),
+(121, 1, 2, 2018),
+(122, 1, 1, 2019),
+(124, 1, 2, 2018),
+(125, 1, 2, 2018),
+(126, 1, 1, 2018),
+(127, 1, 2, 2018),
+(128, 1, 2, 2018),
+(129, 1, 2, 2018),
+(130, 1, 2, 2018),
+(131, 1, 2, 2018),
+(132, 1, 2, 2018),
+(133, 1, 2, 2018),
+(134, 1, 2, 2018),
+(135, 1, 2, 2018),
+(136, 1, 2, 2018),
+(137, 1, 2, 2018),
+(138, 1, 2, 2018),
+(139, 1, 1, 2016),
+(142, 1, 2, 2016),
+(143, 1, 1, 2018),
+(144, 1, 5, 2017),
+(145, 1, 2, 2019),
+(150, 1, 2, 2018),
+(152, 48, 1, 2017),
+(155, 64, 1, 2017);
 
 -- --------------------------------------------------------
 
@@ -618,12 +801,11 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`) VALUES
 -- Table structure for table `indianCities`
 --
 
-CREATE TABLE IF NOT EXISTS `indianCities` (
-  `cityID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `indianCities` (
+  `cityID` int(5) NOT NULL,
   `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
-  PRIMARY KEY (`cityID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=568 ;
+  `state` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `indianCities`
@@ -1204,7 +1386,7 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 -- Table structure for table `internshipApplicants`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipApplicants` (
+CREATE TABLE `internshipApplicants` (
   `internshipID` int(5) NOT NULL,
   `userID` int(5) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL,
@@ -1217,7 +1399,7 @@ CREATE TABLE IF NOT EXISTS `internshipApplicants` (
 -- Table structure for table `internshipLocations`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipLocations` (
+CREATE TABLE `internshipLocations` (
   `internshipID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1239,8 +1421,8 @@ INSERT INTO `internshipLocations` (`internshipID`, `cityID`) VALUES
 -- Table structure for table `internshipOffers`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipOffers` (
-  `internshipID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `internshipOffers` (
+  `internshipID` int(5) NOT NULL,
   `internshipTitle` varchar(255) NOT NULL,
   `internshipType` enum('1','2') NOT NULL,
   `internshipDescription` text NOT NULL,
@@ -1258,9 +1440,8 @@ CREATE TABLE IF NOT EXISTS `internshipOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`internshipID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `internshipOffers`
@@ -1268,10 +1449,10 @@ CREATE TABLE IF NOT EXISTS `internshipOffers` (
 
 INSERT INTO `internshipOffers` (`internshipID`, `internshipTitle`, `internshipType`, `internshipDescription`, `startDate`, `applicationDeadline`, `stipendType`, `minimumStipend`, `maximumStipend`, `stipend`, `durationType`, `duration`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
 (1, 'Sales and Marketing Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do Day-to-Day:</strong></p><p>&bull; Engaging with customers to understand their lifestyle and fitness requirements, suggesting fitness options based on their needs and ensuring closure of leads towards conversion</p><p>&bull; Identifying zones/localities with maximum demand for fitness studios and working closely with the Business Development Team to maximise customer satisfaction</p><p>&bull; Providing quality service to customers by giving fitness options based on their requirements, assisting in final purchase and addressing their concerns</p><p>&bull; Provide feedback to our Technology team to improve the website and application basis feedback received from customers</p><p>&bull; Provide world class user support through emails, phone calls and social media to&nbsp;<em>FITPASS Customers</em></p><p>&bull; Hustle with one of the most hard-working teams in the country</p><p>&bull; Contribute to building the team and the organisation for long term success</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organisational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p>', '2017-08-01', '2017-07-15', '2', 0, 0, 0, '1', 6, '2', 100, '3', '2', 0, 18, '2017-06-28 05:51:49'),
-(2, 'Business Development Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do day-to-day:</strong></p><p>&bull; A field intensive role where you need to identifying key players in the industry through extensive market research and convert them into FITPASS partners</p><p>&bull; Imparting necessary training to partnered fitness studios to help them use the CRM system to their maximum advantage</p><p>&bull; Connecting with partnered fitness studios and conducting meetings regularly to maintain long-term relationships and address their concerns</p><p>&bull; Work closely with the Product and Technology team to improve services basis feedback received</p><p>&bull; Working closely with the Branding and Marketing team to increase customer engagement with the brand and with the product</p><p>&bull; Developing strategies for the expansion of FITPASS pan India</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organizational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p><p>&bull; Hustler</p>', '2017-08-01', '2017-07-31', '2', 0, 0, 0, '1', 6, '1', 5, '3', '1', 0, 18, '2017-06-23 09:45:24'),
-(3, 'Web Development Intern Required', '1', '<p>We are looking for an outstanding Web Developer intern to be responsible for the coding innovative design and layout of our website. He/she will build our website from concept all the way to completion from the bottom up fashioning everything from the home page to site layout and function.Familiarity with PHP, Java script, My SQL language and related frameworks.</p><p><strong>Core Responsibilities include:</strong></p><ul><li>Design website from scratch</li><li>Database management</li><li>API integration</li></ul>', '2017-08-01', '2017-07-31', '4', 0, 0, 5000, '1', 8, '2', 1, '2', '1', 0, 38, '2017-06-23 10:27:58'),
-(4, 'Content Writer Intern Required', '2', '<p>The ideal candidate is someone majoring in Journalism, Communications, or Marketing, with an interest in writing lifestyle content, a goal of learning 1 more about content generation and distribution, and a love of dogs. This internship will give him/her the opportunity to write a ton, work with other writers with experience writing for various publications and businesses, and a chance be in a fast-past startup environment where creativity is encouraged.</p><p><strong>Responsibilities:</strong></p><ul><li>Develop content ideas</li><li>Assist with writing blog articles</li><li>Assist with content calendar</li><li>Assist with sharing blog content</li><li>Assist with various marketing needs (anything from creating videos, to photography, to social media, to helping at events-- this can vary depending on his/her interests and/or skillset!)</li></ul><p><strong>What they&#39;ll get out of it:</strong></p><ul><li>How to write engaging blog posts</li><li>How to write content for a variety of audiences</li><li>How to use Wordpress</li><li>Best practices for sharing content on social channels</li><li>SEO best practices</li><li>They&#39;ll leave with a great portfolio of writing they would do to use for applying to full-time jobs in the future!</li><li>Plus, they&#39;ll get to work with a close and dynamic team with expertise in a range of areas</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '3', '1', 0, 38, '2017-06-23 10:28:01'),
-(5, 'Graphic Designer Intern', '2', '<p>A super star designer with a sharp eye to help create memorable visual elements for our marketing team, who will also be part of the User Experience Design and Prototyping team, a very talented and innovative UX strategist and developer who follows a lean UX approach to creating and building experiences for the Indian and international markets, someone with a great sensibility and who can turn around work on a tight schedule.</p><p>Responsibilities include:</p><ul><li>Assisting in designing supporting material</li><li>Providing design for digital efforts.</li><li>Creating Infographics and short videos.</li><li>UX/UI design</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '2', '1', 0, 38, '2017-06-23 10:28:05');
+(2, 'Business Development Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do day-to-day:</strong></p><p>&bull; A field intensive role where you need to identifying key players in the industry through extensive market research and convert them into FITPASS partners</p><p>&bull; Imparting necessary training to partnered fitness studios to help them use the CRM system to their maximum advantage</p><p>&bull; Connecting with partnered fitness studios and conducting meetings regularly to maintain long-term relationships and address their concerns</p><p>&bull; Work closely with the Product and Technology team to improve services basis feedback received</p><p>&bull; Working closely with the Branding and Marketing team to increase customer engagement with the brand and with the product</p><p>&bull; Developing strategies for the expansion of FITPASS pan India</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organizational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p><p>&bull; Hustler</p>', '2017-08-01', '2017-07-31', '2', 0, 0, 0, '1', 6, '1', 5, '3', '2', 0, 18, '2017-07-03 10:25:33'),
+(3, 'Web Development Intern Required', '1', '<p>We are looking for an outstanding Web Developer intern to be responsible for the coding innovative design and layout of our website. He/she will build our website from concept all the way to completion from the bottom up fashioning everything from the home page to site layout and function.Familiarity with PHP, Java script, My SQL language and related frameworks.</p><p><strong>Core Responsibilities include:</strong></p><ul><li>Design website from scratch</li><li>Database management</li><li>API integration</li></ul>', '2017-08-01', '2017-07-31', '4', 0, 0, 5000, '1', 8, '2', 1, '2', '2', 0, 38, '2017-07-03 10:25:35'),
+(4, 'Content Writer Intern Required', '2', '<p>The ideal candidate is someone majoring in Journalism, Communications, or Marketing, with an interest in writing lifestyle content, a goal of learning 1 more about content generation and distribution, and a love of dogs. This internship will give him/her the opportunity to write a ton, work with other writers with experience writing for various publications and businesses, and a chance be in a fast-past startup environment where creativity is encouraged.</p><p><strong>Responsibilities:</strong></p><ul><li>Develop content ideas</li><li>Assist with writing blog articles</li><li>Assist with content calendar</li><li>Assist with sharing blog content</li><li>Assist with various marketing needs (anything from creating videos, to photography, to social media, to helping at events-- this can vary depending on his/her interests and/or skillset!)</li></ul><p><strong>What they&#39;ll get out of it:</strong></p><ul><li>How to write engaging blog posts</li><li>How to write content for a variety of audiences</li><li>How to use Wordpress</li><li>Best practices for sharing content on social channels</li><li>SEO best practices</li><li>They&#39;ll leave with a great portfolio of writing they would do to use for applying to full-time jobs in the future!</li><li>Plus, they&#39;ll get to work with a close and dynamic team with expertise in a range of areas</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '3', '2', 0, 38, '2017-07-03 10:25:36'),
+(5, 'Graphic Designer Intern', '2', '<p>A super star designer with a sharp eye to help create memorable visual elements for our marketing team, who will also be part of the User Experience Design and Prototyping team, a very talented and innovative UX strategist and developer who follows a lean UX approach to creating and building experiences for the Indian and international markets, someone with a great sensibility and who can turn around work on a tight schedule.</p><p>Responsibilities include:</p><ul><li>Assisting in designing supporting material</li><li>Providing design for digital efforts.</li><li>Creating Infographics and short videos.</li><li>UX/UI design</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '2', '2', 0, 38, '2017-07-03 10:25:37');
 
 -- --------------------------------------------------------
 
@@ -1279,7 +1460,7 @@ INSERT INTO `internshipOffers` (`internshipID`, `internshipTitle`, `internshipTy
 -- Table structure for table `internshipSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `internshipSkills` (
+CREATE TABLE `internshipSkills` (
   `internshipID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1302,7 +1483,7 @@ INSERT INTO `internshipSkills` (`internshipID`, `skillID`) VALUES
 -- Table structure for table `jobApplicants`
 --
 
-CREATE TABLE IF NOT EXISTS `jobApplicants` (
+CREATE TABLE `jobApplicants` (
   `jobID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL,
@@ -1315,7 +1496,7 @@ CREATE TABLE IF NOT EXISTS `jobApplicants` (
 -- Table structure for table `jobLocations`
 --
 
-CREATE TABLE IF NOT EXISTS `jobLocations` (
+CREATE TABLE `jobLocations` (
   `jobID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1336,8 +1517,8 @@ INSERT INTO `jobLocations` (`jobID`, `cityID`) VALUES
 -- Table structure for table `jobOffers`
 --
 
-CREATE TABLE IF NOT EXISTS `jobOffers` (
-  `jobID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jobOffers` (
+  `jobID` int(5) NOT NULL,
   `jobTitle` varchar(255) NOT NULL,
   `jobType` enum('1','2') NOT NULL,
   `jobDescription` text NOT NULL,
@@ -1353,17 +1534,16 @@ CREATE TABLE IF NOT EXISTS `jobOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`jobID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jobOffers`
 --
 
 INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `startDate`, `applicationDeadline`, `offerType`, `minimumOffer`, `maximumOffer`, `offer`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
-(1, 'JAVA Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li>Candidate should have very strong technical background in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Exception handling, Collections API, Multithreading with latest concurrency package, Best practices&nbsp;(such as avoiding code duplication, avoiding hard coded values etc.), Design patterns</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB</li><li>Experience in implementing JMS messaging services</li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech (Comp./ EEE)/ MCA (regular) with around &nbsp;(0 &ndash; 1) yrs. of exp. as a Java Developer with exp. in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns with an I.T./ Software Service Company.&nbsp;</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB,</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts, Hibernate.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Built MVC based Web Application Using JSP/Spring framework.</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 10, '2', '1', 0, 37, '2017-06-23 10:27:45'),
-(2, '.NET Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li><p>Full Life Cycle application development.</p></li><li><p>Designing, coding and debugging applications.</p></li><li><p>Software analysis, code analysis, requirements analysis, software review, identification of code metrics, system risk analysis, software reliability analysis.</p></li><li><p>Software modelling and simulation</p></li><li><p>Software testing and quality assurance</p></li><li><p>Performance tuning, improvement, balancing, usability, automation.</p></li><li><p>Support, maintain and document software functionality.</p></li><li><p>Integrate software with existing systems.</p></li><li><p>Should have strong knowledge in Oracle/ MS SQL and MySQL Database.</p></li><li><p>Strong in handling Oracle 10g/ SQL Database of large distributed production environment.</p></li><li><p>Database administration of databases such as Oracle/ MS SQL Server.</p></li><li><p>Should have knowledge of configuration, stored procedure, Joining / Unions, Indexing &amp; shrinking DB, QC of DB.</p></li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech. (Comp./ EEE)/ MCA (regular) with around one &nbsp;(0 - 1) yrs. of exp. as dot NET developer with an I.T./ Software Development Company.</li><li>Candidates must have 60 % marks (from 10th to Higher degree).</li><li>Must have strong basic concepts in ASP.Net 4.0, C#, VB.Net, C#, Framework (2.0, 3.5,4.0, 4.5) HTML &amp; Java Script, &nbsp; ADO.Net, Windows/ Web Application, Web/Web service, WCF, MVC, &amp; JS/ JQuery.</li><li>MSP (Microsoft Software Professional) Certified developer is preferred.</li><li>Should have strong basic concepts of Database (Oracle and/ or SQL Server) and Database Query is must for end developer.</li><li>Strong in basic OOPs with Ajax &amp; Controls, XML and HTML</li><li>Programming Analytical Skills</li><li>Good knowledge of Design Patterns</li><li>Experience of working in n-Tier architecture.</li><li>Should be a Team Player</li><li>Highly logical and analytical in approach</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 5, '2', '1', 0, 37, '2017-06-23 10:27:47');
+(1, 'JAVA Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li>Candidate should have very strong technical background in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Exception handling, Collections API, Multithreading with latest concurrency package, Best practices&nbsp;(such as avoiding code duplication, avoiding hard coded values etc.), Design patterns</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB</li><li>Experience in implementing JMS messaging services</li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech (Comp./ EEE)/ MCA (regular) with around &nbsp;(0 &ndash; 1) yrs. of exp. as a Java Developer with exp. in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns with an I.T./ Software Service Company.&nbsp;</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB,</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts, Hibernate.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Built MVC based Web Application Using JSP/Spring framework.</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 10, '2', '2', 0, 37, '2017-07-03 10:26:05'),
+(2, '.NET Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li><p>Full Life Cycle application development.</p></li><li><p>Designing, coding and debugging applications.</p></li><li><p>Software analysis, code analysis, requirements analysis, software review, identification of code metrics, system risk analysis, software reliability analysis.</p></li><li><p>Software modelling and simulation</p></li><li><p>Software testing and quality assurance</p></li><li><p>Performance tuning, improvement, balancing, usability, automation.</p></li><li><p>Support, maintain and document software functionality.</p></li><li><p>Integrate software with existing systems.</p></li><li><p>Should have strong knowledge in Oracle/ MS SQL and MySQL Database.</p></li><li><p>Strong in handling Oracle 10g/ SQL Database of large distributed production environment.</p></li><li><p>Database administration of databases such as Oracle/ MS SQL Server.</p></li><li><p>Should have knowledge of configuration, stored procedure, Joining / Unions, Indexing &amp; shrinking DB, QC of DB.</p></li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech. (Comp./ EEE)/ MCA (regular) with around one &nbsp;(0 - 1) yrs. of exp. as dot NET developer with an I.T./ Software Development Company.</li><li>Candidates must have 60 % marks (from 10th to Higher degree).</li><li>Must have strong basic concepts in ASP.Net 4.0, C#, VB.Net, C#, Framework (2.0, 3.5,4.0, 4.5) HTML &amp; Java Script, &nbsp; ADO.Net, Windows/ Web Application, Web/Web service, WCF, MVC, &amp; JS/ JQuery.</li><li>MSP (Microsoft Software Professional) Certified developer is preferred.</li><li>Should have strong basic concepts of Database (Oracle and/ or SQL Server) and Database Query is must for end developer.</li><li>Strong in basic OOPs with Ajax &amp; Controls, XML and HTML</li><li>Programming Analytical Skills</li><li>Good knowledge of Design Patterns</li><li>Experience of working in n-Tier architecture.</li><li>Should be a Team Player</li><li>Highly logical and analytical in approach</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 5, '2', '2', 0, 37, '2017-07-03 10:26:06');
 
 -- --------------------------------------------------------
 
@@ -1371,7 +1551,7 @@ INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `star
 -- Table structure for table `jobSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `jobSkills` (
+CREATE TABLE `jobSkills` (
   `jobID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1392,15 +1572,14 @@ INSERT INTO `jobSkills` (`jobID`, `skillID`) VALUES
 -- Table structure for table `messages`
 --
 
-CREATE TABLE IF NOT EXISTS `messages` (
-  `messageID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messages` (
+  `messageID` int(5) NOT NULL,
   `sender` int(5) NOT NULL,
   `receiver` int(5) NOT NULL,
   `message` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `read` tinyint(1) NOT NULL,
-  PRIMARY KEY (`messageID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `read` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1408,16 +1587,15 @@ CREATE TABLE IF NOT EXISTS `messages` (
 -- Table structure for table `notifications`
 --
 
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `notificationID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notifications` (
+  `notificationID` int(5) NOT NULL,
   `name` varchar(255) NOT NULL,
   `image` varchar(1000) NOT NULL,
   `notification` varchar(1000) NOT NULL,
   `concernedUser` int(5) NOT NULL,
   `link` varchar(1000) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`notificationID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1425,15 +1603,14 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 -- Table structure for table `otp`
 --
 
-CREATE TABLE IF NOT EXISTS `otp` (
-  `otpID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `otp` (
+  `otpID` int(5) NOT NULL,
   `mobile` bigint(11) NOT NULL,
   `otp` int(4) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
-  `expiry` bigint(12) NOT NULL,
-  PRIMARY KEY (`otpID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `expiry` bigint(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1441,16 +1618,22 @@ CREATE TABLE IF NOT EXISTS `otp` (
 -- Table structure for table `passwordToken`
 --
 
-CREATE TABLE IF NOT EXISTS `passwordToken` (
-  `tokenID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `passwordToken` (
+  `tokenID` int(5) NOT NULL,
   `token` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `tokenType` enum('1','2') NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
   `expiry` bigint(12) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tokenID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `active` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `passwordToken`
+--
+
+INSERT INTO `passwordToken` (`tokenID`, `token`, `email`, `tokenType`, `generatedAt`, `expiry`, `active`) VALUES
+(1, '66ob1v29', 'ayushiayushi224@gmail.com', '1', 1499103439, 1499110639, 1);
 
 -- --------------------------------------------------------
 
@@ -1458,14 +1641,13 @@ CREATE TABLE IF NOT EXISTS `passwordToken` (
 -- Table structure for table `projects`
 --
 
-CREATE TABLE IF NOT EXISTS `projects` (
-  `projectID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `projects` (
+  `projectID` int(5) NOT NULL,
   `projectTitle` text NOT NULL,
   `projectLink` text NOT NULL,
   `projectDescription` text NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`projectID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1473,8 +1655,8 @@ CREATE TABLE IF NOT EXISTS `projects` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE IF NOT EXISTS `questions` (
-  `question_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `questions` (
+  `question_id` int(5) NOT NULL,
   `question` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
@@ -1482,9 +1664,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `option4` text NOT NULL,
   `answer` enum('1','2','3','4') NOT NULL,
   `skillID` int(5) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=704 ;
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
@@ -2202,12 +2383,11 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- Table structure for table `skills`
 --
 
-CREATE TABLE IF NOT EXISTS `skills` (
-  `skillID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `skills` (
+  `skillID` int(5) NOT NULL,
   `skill_name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`skillID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `skills`
@@ -2244,13 +2424,12 @@ INSERT INTO `skills` (`skillID`, `skill_name`, `active`) VALUES
 -- Table structure for table `testSettings`
 --
 
-CREATE TABLE IF NOT EXISTS `testSettings` (
-  `skillID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `testSettings` (
+  `skillID` int(5) NOT NULL,
   `numberQuestions` int(5) NOT NULL,
   `timeAllowed` int(5) NOT NULL,
-  `passingCriteria` int(5) NOT NULL,
-  PRIMARY KEY (`skillID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `passingCriteria` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `testSettings`
@@ -2287,8 +2466,8 @@ INSERT INTO `testSettings` (`skillID`, `numberQuestions`, `timeAllowed`, `passin
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `userID` int(5) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
@@ -2298,19 +2477,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `gender` enum('M','F') NOT NULL,
   `relationshipStatus` enum('1','2','3','4') NOT NULL DEFAULT '4',
   `accountType` enum('1','2') NOT NULL,
-  `cityID` int(5) NOT NULL,
-  `emailVerified` tinyint(1) NOT NULL,
-  `mobileVerified` tinyint(1) NOT NULL,
-  `displayMobile` tinyint(1) NOT NULL,
-  `identityDocument` text NOT NULL,
-  `identityDocumentStatus` enum('1','2','3','4') NOT NULL,
-  `registrationLevel` enum('1','2','3','4','5') NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+  `cityID` int(5) DEFAULT '135',
+  `emailVerified` tinyint(1) NOT NULL DEFAULT '0',
+  `mobileVerified` tinyint(1) NOT NULL DEFAULT '0',
+  `displayMobile` tinyint(1) NOT NULL DEFAULT '0',
+  `identityDocument` text,
+  `identityDocumentStatus` enum('1','2','3','4') DEFAULT NULL,
+  `registrationLevel` enum('1','2','3','4','5') DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -2364,7 +2540,115 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (45, 'Himanshu Dixit', 'himdxt@gmail.com', 7827426960, '664d242a7528bf4230386c9ac1a437f8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 0, 0, '', '1', '3', 1, '2017-06-29 06:04:40'),
 (46, 'Rahul Singh', 'rsrahul400@gmail.com', 9058737958, 'd197ca9e9074dfa7cbf19060ba2e1ade', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 0, 0, '', '1', '3', 1, '2017-06-29 06:05:36'),
 (47, 'Shelvi Garg', 'smileshelvi@gmail.com', 9910552971, '06a3af235c5ab0838dd175a8d9cf9bd0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, '', '1', '4', 1, '2017-06-29 06:11:12'),
-(48, 'Chandra Prabha', 'chandraprabhayadav4238@gmail.com', 8130053701, '2f5e14e97b7420678bd2a7fa12c11f61', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 0, 0, 0, '', '1', '1', 1, '2017-06-29 06:15:25');
+(48, 'Chandra Prabha', 'chandraprabhayadav4238@gmail.com', 8130053701, '2f5e14e97b7420678bd2a7fa12c11f61', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 0, 0, 0, '', '1', '2', 1, '2017-07-03 10:09:49'),
+(49, 'Atul Mishra', 'atul.mishra1@yahoo.in', 9999853296, '367cde6ef1fc3e07ebe63476bb4a6c3f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:09:49'),
+(50, 'Vibha Bhasin', 'renukarakesh11@gmail.com', 7983039837, 'a28618d40429df6340a4caf6050183f3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:09:49'),
+(51, 'Kashif Ansari', 'kashifansari58@gmail.com', 9540474305, 'bf44e36c639df4d5a9aab9b6b302319f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:09:49'),
+(52, 'Tannya Seth', 'tannyaseth@gmail.com', 8130188763, 'a68b11b3c493037903de6a2f7368af19', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:09:49'),
+(53, 'Himani Panwar', 'himanipanwar34@gmail.com', 8800187605, '951e3bc541cce556d2f4cdc929882a41', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:09:49'),
+(54, 'Sachin Yadav', 'ysachinyadav73@gmail.com', 7733069356, '15285722f9def45c091725aee9c387cb', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:09:49'),
+(55, 'Saloni Verma', 'verma97saloni@gmail.com', 9899634937, 'e3293c84f035a0e3e51ddb105a8ba0b4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-03 09:54:24'),
+(56, 'Kriti Jha', 'jha.kriti19@gmail.com', 9958440640, '693699da7659d622a47e944f03d46106', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-07-03 09:56:51'),
+(57, 'Satvik Kukreja', 'satvikk89@gmail.com', 8527371316, 'cfe743afb968e9be6f9d58070ade1343', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-03 09:58:30'),
+(58, 'Mirza Aiman Beg', 'mirzaaiman33@gmail.com', 7065135734, '70daa79fa50fc74974b9fd9627c1df32', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:04:54'),
+(59, 'Kumar Rohit', 'krrohitch@gmail.com', 7080479665, '3a8fb37aab26d29d7054459601f077df', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:04:47'),
+(60, 'Sahil Thakur', 'sahilthakur1955@gmail.com', 9582959395, '399c68db84c6d19b9cdaa7fea18c3404', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-03 10:11:14'),
+(61, 'Akarshit Verma', 'akaverma007@gmail.com', 9473650148, '797c2bd825ce85014ea1fb78a611c20d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, '3', '5', 1, '2017-07-03 10:19:30'),
+(62, 'Abhishek Pathak', 'abhishekp1996@gmail.com', 7838644850, 'ec19ce36ee3e753dc7a23a8297b06925', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, '1', '1', 1, '2017-07-03 10:23:14'),
+(63, 'Rajat Pandey', 'chat2rajat111@gmail.com', 9457628755, '38c9763a890f896a771906a969608ae1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:24:22'),
+(64, 'Aditya Agarwal', 'adityaa803@gmail.com', 9911502984, 'f9266143aa6bf7c8f38361a70218eeb9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 0, 0, NULL, NULL, '2', 1, '2017-07-03 10:28:50'),
+(65, 'Nitin Pawar', 'nitinpawarme@gmail.com', 7834855418, 'ca7f39f8747a2dae7fb6021abee34794', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:01:29'),
+(66, 'Anoop Kumar', 'anoopkumarritika05@gmail.com', 7065172733, 'ac6234821420cb3d86c016c6f4e3d212', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:22:50'),
+(67, 'Siddhant Mishra', 'itsmesiddhant@gmail.com', 9015285074, '0c54549226b9e86483cbf301573f65dc', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:25:56'),
+(68, 'Saurabh Singh', 'saurabh112.varansi@gmail.com', 9910976235, 'f607a90a63188d809d298e9696e32398', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:27:37'),
+(69, 'Mayank Gupta', 'mayankgupta8995@gmail.com', 9910860617, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:29:13'),
+(70, 'Ambuj Mittal', 'ambujmittal7@gmail.com', 9711382927, 'baf6d9eae916879e7fb7763fbc884900', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:31:16'),
+(71, 'Saransh Verma', 'saranshverma1992@gmail.com', 9990288535, 'ba97d71d99455d828ffdb5b0b5bbfd8d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:32:32'),
+(72, 'Shubham Sharma', 'shubhamnandan@gmail.com', 9910828711, '1130b4d83347bc3c0a41ecf8f4eca1e6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:33:45'),
+(73, 'Abhikhya Ashi', 'abhikhya.ashi@gmail.com', 8285355518, '51275d5225029ff15d526053e68c3a37', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:35:18'),
+(74, 'Ayush Srivastava', 'officialayush02@gmail.com', 9990535540, '975ec1420b00533f71764b1d35aac40e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-03 17:36:17'),
+(75, 'Ayushi Kapoor', 'ayushiayushi224@gmail.com', 8376830550, '29715647dcbcfba9c487bb275f80d5ce', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:37:17'),
+(76, 'Manikanth Devarakonda', 'manikanth.sri@gmail.com', 8800264952, '9d30eb4f3c2ddd99a29036b05a19a0bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:40:49'),
+(77, 'Divya Singhal', 'dsinghal498@gmail.com', 8744034909, '621dc3e728c34c2233d13bdf191ec24f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:41:43'),
+(78, 'Chanpreet Singh', 'chanpreets10@gmail.com', 9873495610, '3600c262b81d2e9099e84df1d6bb6af5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:42:44'),
+(79, 'Arti Gupta', 'arti2306gupta@gmail.com', 7042247955, '793a263e4e9ba7a64c1ecb6e078ab35c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:43:54'),
+(80, 'Raghawendra Singh', 'ragh1995@hotmail.com', 9717034866, 'dd2d1b67ac5a5eb44ba3644af1632362', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:45:53'),
+(81, 'Rishabh Jain', 'rishabh.jn141@gmail.com', 9555477726, 'aa602ae518e4191437dd0cd58702f791', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:47:15'),
+(82, 'Rohan Singh', 'rohan.singh277@gmail.com', 7065315474, '7277f61533d620629db3759d6ad7fce3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:48:20'),
+(83, 'Vaishnavi Verma', 'vaishnavi95verma@gmail.com', 9560107792, 'e617f28e5870ef0096449e684164f9e2', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-03 17:49:10'),
+(84, 'Akarsh Gupta', 'akarshgupta1996@gmail.com', 7042234912, 'e32cd0eaec4ce6a7c318703faf1d3c80', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:50:07'),
+(85, 'Rishabh Jain', 'rishabhjain2018@gmail.com', 8375867839, '55f55cb70c1c9e9f841992337c0a2a16', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:51:11'),
+(86, 'Nishant Pratap Singh', 'singhnishant411@gmail.com', 7042234911, '87d318939e07d06398075c50e755d484', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:52:23'),
+(87, 'Ankit Jain', 'ankitjain28may77@gmail.com', 8447269408, '87fe7ca061ef2bf8173d178a40bb84a3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:53:15'),
+(88, 'Shubhi Khare', 'shubhiverma712@gmail.com', 8447607229, '882f25069fbe6fdfefd90dd51bbaf9c1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:53:57'),
+(89, 'Shubham Gupta', 'subham.g.1995@gmail.com', 9911523840, '456f4707ac6df71b5d63d5cd417931e4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:58:26'),
+(90, 'Akash Tewari', 'ashstriker12393@gmail.com', 9971846461, '4dc252f255f9f59584690ae2710c3c13', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:58:01'),
+(91, 'Anurag Garg', 'anuraggarg2893@gmail.com', 7042668184, '1ea9aa1e6ff3e31a9dc5272cc21fe014', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 17:59:20'),
+(92, 'Prashant Verma', 'prashant.verma2703@gmail.com', 8588813026, 'be681f91ef88b1cc942573beb6a51888', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:00:52'),
+(93, 'Shubham Vashishtha', 'shubhamvashishthasv@gmail.com', 9711752739, '82c665ca878effd38e9386bec128dada', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:01:37'),
+(94, 'Akash Pandey', 'akashpandeyjmi@gmail.com', 9811026922, '7d9b15c4a24ab12c5c28e37274026e70', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:02:31'),
+(95, 'Vibha Bhasin', 'vvibha2015@gmail.com', 9412263826, '4d58eabbf2605e082e4c8a1346f51662', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:03:55'),
+(96, 'Vrinda Mittal', 'vrindamittal13@gmail.com', 9999198148, '15c276aa2fa8690b95b5e1628b75e979', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:04:50'),
+(97, 'Asna Farooqui', 'asnamailme8@gmail.com', 8585921136, '6e49991b84217fd4a594a4091f59e20f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:06:02'),
+(98, 'Himanshu Agrawal', 'himanshuagrawal1998@gmail.com', 9654379609, '3f153889c715eff98f3526bb1b8acc11', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:07:47'),
+(99, 'Shantanu Singh', 'shantanu9noida@gmail.com', 9971906154, '42615f22461deb9425122d717744116c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:09:39'),
+(100, 'Kanishk Sharma', 'kanishksharma3012@gmail.com', 8860488735, 'e37aa174837df9eed877e842ea606b4d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:10:37'),
+(101, 'Shivangi Bajapi', 'shivi.bajpai1@gmail.com', 9650116757, 'd3330edd1373cda9ed2c4adad4e3bc04', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:12:41'),
+(102, 'Ayush Nigam', 'ayushnigamsworld@gmail.com', 8587917996, '9aaeb9725604d128b9c7351b1eddaa78', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:13:52'),
+(103, 'Oshin Gupta', 'oshin18nov@gmail.com', 7428950265, 'd8e454f8661a59423fcd530214f28697', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:15:36'),
+(104, 'Nivedita Singh', 'niv.singh25@gmail.com', 9953177822, '1f039f24a592579cc2e74e71ac95c8b3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:16:17'),
+(105, 'Rishabh Kumar', 'rishabh299603@gmail.com', 7209970030, '6eadcca1ccc94db2093dcbc136ea4057', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:17:47'),
+(106, 'Manish Kaushik', 'im.manishkaushik@gmail.com', 9911459468, '1c6a9c6d8d7f1d4f067d44c186cf4336', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:20:03'),
+(107, 'Shivangi Garg', 'garg.shivangi2496@gmai.com', 9818474626, '3f76818f507fe7eb6422bd0703c64c88', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:20:57'),
+(108, 'Ayush Gupta', 'ayush.gupta.personal@gmail.com', 9899934475, '0c979ed3e35af36cd38da2194a4e3ff9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:21:50'),
+(109, 'Ayush Mishra', 'mishraayush400@gmail.com', 9871635781, '4a2603147a5bab0b0b9d83d93b9bdd12', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-03 18:22:44'),
+(110, 'Aishwarya D', 'aishwarya.m.deshpande@gmail.com', 8286821687, '0d43ed585b4da5b22be57e884dbb5d85', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-03 18:24:27'),
+(111, 'Dhruv Gupta', 'dhrush97@gmail.com', 9873380927, '4d8ddb9e617c96ba8aa6af082bc83941', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:35:55'),
+(112, 'Deshraj Yadav', 'deshrajdry@gmail.com', 9555344456, 'bdc9f911fc1815be478a47f89b69e751', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:36:39'),
+(113, 'Panchhi Sahu', 'panchhisahu4@gmail.com', 8285925431, 'a2ca3e255236631ad0d8b34904f4a15d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:37:30'),
+(114, 'Anurah Srivastav', 'anusri675@gmail.com', 9717105158, '32aff71d38d77a695a48e7916f16c6b5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:38:19'),
+(115, 'Pratyush Gupta', 'guptapratyush1993@gmail.com', 9560176503, 'a2bb1ff300cea5138046aa71558e4fd4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:39:15'),
+(116, 'Syed Alay', 'syedalay.ibrahimnazeef@gmail.com', 9874969333, '9105b741bfb0ad571bbe7096de4c399e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 06:39:50'),
+(117, 'Yathartha Shekhar', '98yatharth@gmail.com', 9639214615, 'f1528f6372b9e530070716cd250b1bdd', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 06:45:17'),
+(118, 'Shreyam Kela', 'shreyamkela@gmail.com', 9971204208, 'f0d3167660f9aef330d4f44fba127175', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:46:06'),
+(119, 'Bhavshant Sirohi', 'bhavshant.sirohi@gmail.com', 9808203803, '5006b5931970bc79f10a9b07ffe3d495', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:47:23'),
+(120, 'Kartikey Agarwal', 'kta136@gmail.com', 9634500005, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:49:08'),
+(121, 'Rishika Wadhwani', 'srishika214@gmail.com', 9971293585, 'ec02c59dee6faaca3189bace969c22d3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:50:22'),
+(122, 'Dhruv Srivastava', 'sridhruv@yahoo.com', 9917475447, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:51:27'),
+(123, 'Kushagra Pande', 'pkush2310@gmail.com', 8826788930, '09726305e74bab5e09c9d6c9672e6085', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 06:52:39'),
+(124, 'Ashima Vashishth', 'vashishth.ashima@gmail.com', 9958139708, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:55:37'),
+(125, 'Akul Sharma', 'akul.sharma007@gmail.com', 9599064409, 'adbf5a778175ee757c34d0eba4e932bc', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:56:20'),
+(126, 'Diksha Sharma', 'sharma.diksha2595@gmail.com', 8375835126, '1e1e13e9d41fae8419816673a0dfbbec', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:56:59'),
+(127, 'Sourabh Goel', 'sourabhgoyal178@gmail.com', 8010812652, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:57:34'),
+(128, 'Abhinav Singh', 'abhinavjssit1@gmail.com', 9718676097, 'e2a521bc01c1ca09e173bcf65bcc97e9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 06:59:48'),
+(129, 'Sandeep Kumar', 'sandeep94158@gmail.com', 8802150063, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:00:38'),
+(130, 'Neha Sharma', 'neha12565@gmail.com', 8588905303, '0aa1ea9a5a04b78d4581dd6d17742627', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:01:08'),
+(131, 'Shashank Sharma', 'shashanksharma1997.ss@gmail.com', 9718471756, 'eba7da2e259201df6be6d44ea109f71a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:05:07'),
+(132, 'Abhishek Guha', 'abhi.guha.jss97@gmail.com', 9718585176, '922ec9531b1f94add983a8ce2ebdc97b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:06:10'),
+(133, 'Divyanshu Verma', 'divyanshuvrm10@gmail.com', 9643903611, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:06:50'),
+(134, 'Akshay Vashistha', 'akshayvashistha1995@gmail.com', 8860660862, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:07:24'),
+(135, 'Prince Katiyar', 'princekatiyar018@gmail.com', 9873053966, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:08:14'),
+(136, 'Dimple Mahal', 'dimplemahalkv@gmail.com', 7042541069, 'b5b037a78522671b89a2c1b21d9b80c6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:08:50'),
+(137, 'Vijay Chaurasia', 'vijayprakash060895@gmail.com', 7827205031, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:09:51'),
+(138, 'Prateek Singh', 'prateek.14arya@gmail.com', 9911844341, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:10:44'),
+(139, 'Neha Singh', 'nehavsingh.94@gmail.com', 7899909387, '74d36c0725346b3b3d0d30cbe0edd219', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:11:42'),
+(140, 'Harshita Goyal', 'hga567@gmail.com', 8890296461, 'adbf5a778175ee757c34d0eba4e932bc', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:12:45'),
+(141, 'Bhawana Singh', 'singh.bhawana2@gmail.com', 8384915589, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:13:22'),
+(142, 'Priyanshi Agarwal', 'priyanshi2403@hotmail.com', 8506991027, '2d4b2243126bbe7d82bbef36bf0a87b4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:13:47'),
+(143, 'Shivani Prakash Gupta', 'shivani.prakash1995@gmail.com', 7408165064, 'dcfd118559931b1c0f45719f65071428', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:14:25'),
+(144, 'Arunima Agarwal', 'aru_agarwal95@rediffmail.com', 9953033631, 'ef956fba1acf7bbd0a1d142f32dbc6f0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:15:03'),
+(145, 'Nishith Jaiswal', 'jnishith01@gmail.com', 9582736108, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:15:56'),
+(146, 'Aman Raheja', 'amanraheja12@gmail.com', 7417758232, '7555051b6d8a2dca27a29f9cb0d2e3a6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:16:48'),
+(147, 'Vasundhra Sharma', 'sharmavasundhra95@gmail.com', 9990197575, '3f76818f507fe7eb6422bd0703c64c88', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:19:30'),
+(148, 'Shwetank Vishnu', 'shwetankv007@gmail.com', 9501318175, '25a610580ae3921ef8b6fae01af88770', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:20:07'),
+(149, 'Vikas Rawat', 'vikasrawat1234@gmail.com', 8765575647, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:20:47'),
+(150, 'Akshay Gangwar', 'akki.gr34@gmail.com', 9560339473, 'e71c27c3ee34c7e07c04d95cd97d571d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:21:44'),
+(151, 'Abhimanyu Kapoor', 'abhimanyukapoor11@gmail.com', 9654489002, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:22:19'),
+(152, 'Varun Jain', 'varunj.dce@gmail.com', 8376846196, '67117df1e2ca460c52084ca261aa85e8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:24:15'),
+(153, 'Amit Kumar', 'amitwordpress296@gmail.com', 9334334573, '3f76818f507fe7eb6422bd0703c64c88', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:25:58'),
+(154, 'Vikas Sharma', 'vikas@getwebed.com', 9643447707, 'b5b037a78522671b89a2c1b21d9b80c6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:26:26'),
+(155, 'Kunal Budhiraja', 'kb8495@gmail.com', 8901321739, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-05 07:27:19'),
+(156, 'Shrey Sakhuja', 'shreysakhuja@hotmail.com', 9045220308, '0dc73621efbe8d64dd6446f0832c8790', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://cp.ui/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-05 07:28:08');
 
 -- --------------------------------------------------------
 
@@ -2372,7 +2656,7 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE IF NOT EXISTS `userSkills` (
+CREATE TABLE `userSkills` (
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
   `score` float NOT NULL,
@@ -2386,8 +2670,8 @@ CREATE TABLE IF NOT EXISTS `userSkills` (
 -- Table structure for table `workExperience`
 --
 
-CREATE TABLE IF NOT EXISTS `workExperience` (
-  `weID` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `workExperience` (
+  `weID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -2395,10 +2679,246 @@ CREATE TABLE IF NOT EXISTS `workExperience` (
   `startYear` int(4) NOT NULL,
   `endMonth` varchar(255) NOT NULL,
   `endYear` int(4) NOT NULL,
-  `userID` int(5) NOT NULL,
-  PRIMARY KEY (`weID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `userID` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `achievements`
+--
+ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`achievementID`);
+
+--
+-- Indexes for table `adminAuth`
+--
+ALTER TABLE `adminAuth`
+  ADD PRIMARY KEY (`adminID`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `colleges`
+--
+ALTER TABLE `colleges`
+  ADD PRIMARY KEY (`college_id`);
+
+--
+-- Indexes for table `contactMessages`
+--
+ALTER TABLE `contactMessages`
+  ADD PRIMARY KEY (`contactID`);
+
+--
+-- Indexes for table `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`content_id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `educationalDetails`
+--
+ALTER TABLE `educationalDetails`
+  ADD PRIMARY KEY (`educationID`);
+
+--
+-- Indexes for table `employerUsers`
+--
+ALTER TABLE `employerUsers`
+  ADD UNIQUE KEY `userID` (`userID`);
+
+--
+-- Indexes for table `indianCities`
+--
+ALTER TABLE `indianCities`
+  ADD PRIMARY KEY (`cityID`);
+
+--
+-- Indexes for table `internshipOffers`
+--
+ALTER TABLE `internshipOffers`
+  ADD PRIMARY KEY (`internshipID`);
+
+--
+-- Indexes for table `jobOffers`
+--
+ALTER TABLE `jobOffers`
+  ADD PRIMARY KEY (`jobID`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`messageID`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notificationID`);
+
+--
+-- Indexes for table `otp`
+--
+ALTER TABLE `otp`
+  ADD PRIMARY KEY (`otpID`);
+
+--
+-- Indexes for table `passwordToken`
+--
+ALTER TABLE `passwordToken`
+  ADD PRIMARY KEY (`tokenID`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`projectID`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
+
+--
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`skillID`);
+
+--
+-- Indexes for table `testSettings`
+--
+ALTER TABLE `testSettings`
+  ADD PRIMARY KEY (`skillID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userID`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `mobile` (`mobile`);
+
+--
+-- Indexes for table `workExperience`
+--
+ALTER TABLE `workExperience`
+  ADD PRIMARY KEY (`weID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `achievements`
+--
+ALTER TABLE `achievements`
+  MODIFY `achievementID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `adminAuth`
+--
+ALTER TABLE `adminAuth`
+  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `colleges`
+--
+ALTER TABLE `colleges`
+  MODIFY `college_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=372;
+--
+-- AUTO_INCREMENT for table `contactMessages`
+--
+ALTER TABLE `contactMessages`
+  MODIFY `contactID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `content`
+--
+ALTER TABLE `content`
+  MODIFY `content_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `course_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `educationalDetails`
+--
+ALTER TABLE `educationalDetails`
+  MODIFY `educationID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `indianCities`
+--
+ALTER TABLE `indianCities`
+  MODIFY `cityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
+--
+-- AUTO_INCREMENT for table `internshipOffers`
+--
+ALTER TABLE `internshipOffers`
+  MODIFY `internshipID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `jobOffers`
+--
+ALTER TABLE `jobOffers`
+  MODIFY `jobID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `messageID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notificationID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `otp`
+--
+ALTER TABLE `otp`
+  MODIFY `otpID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `passwordToken`
+--
+ALTER TABLE `passwordToken`
+  MODIFY `tokenID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `projectID` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=704;
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `testSettings`
+--
+ALTER TABLE `testSettings`
+  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+--
+-- AUTO_INCREMENT for table `workExperience`
+--
+ALTER TABLE `workExperience`
+  MODIFY `weID` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
