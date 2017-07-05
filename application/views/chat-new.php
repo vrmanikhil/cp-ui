@@ -108,7 +108,7 @@
 								<textarea name="message" id="message" required class="form__input" rows="1" placeholder="Type your message here"></textarea>
 							</div>
 							<div class="form-group">
-								<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
+								<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>" id = 'csrf'>
 								<button type="submit" id = 'send' class="btn btn--primary">Send Message</button>
 							</div>
 						</div>
@@ -161,7 +161,7 @@ var chatterImage = '<?= $profileImage ?>';
 			}
 			}
 		   }
-  			xhttp.open("POST", "<?php echo base_url('messages/load-more-messages/'). $usr.'/';?>" + offset, true);
+  			xhttp.open("GET", "<?php echo base_url('messages/load-more-messages/'). $usr.'/';?>" + offset, true);
   			xhttp.send();
   		}
 
@@ -170,14 +170,16 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
   			$('#send').click(function(){
 			msg = $('#message').val().trim();
 			i = 0;
-			data = {message: msg, to: <?php echo $usr; ?>}
+			value = $("#csrf").val();
 			if(msg != ''){
-				$.post('<?php echo base_url('messages/send-message'); ?>', data).done(function(res){
+				$.post('<?php echo base_url('messages/send-message'); ?>', {message: msg, to: <?php echo $usr; ?>, <?= $csrf_token_name?> : value}).done(function(res){
 					res = JSON.parse(res)
 					new_lastId = res.insert_id
 					time = res.time
+					value = res.csrf
 					res = res.success
 					if(res){
+						$('#csrf').val(value) 
 						container = $('.wrap').clone()
 						container.removeClass('wrap')
 						container.find('.time').html(time)
@@ -191,7 +193,7 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 						lastId = new_lastId
 					}
 				}).fail(function(){
-
+					
 				})
 			}
 		})

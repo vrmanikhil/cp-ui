@@ -493,7 +493,8 @@ public function injectClassName(&$data)
 		$success = $CI->homemodel->sendMessage($_SESSION['userData']['userID'], $receiver, $message);
 		return ['success'=> $success['success'],
 				'time'=> date('d M Y  g:i A', time()),
-				'insert_id'=> $success['insert_id']];
+				'insert_id'=> $success['insert_id'],
+				'csrf'=>$CI->security->get_csrf_hash()];
 	}
 
 	public function checkForNewMessages($chatter, $lastid)
