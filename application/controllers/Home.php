@@ -1084,5 +1084,4 @@ if($_SESSION['userData']['accountType']=='2'){
 		curl_close($ch);
 		// echo $output;
 		}
-
 }
