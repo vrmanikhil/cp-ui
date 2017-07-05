@@ -239,11 +239,11 @@ class Web extends CI_Controller {
         $userID = $_SESSION['userData']['userID'];
         $num_ques = $test_settings[0]['numberQuestions'];
         switch ($this->home_lib->addSkill($score, $userID, $skill_id, $num_ques)) {
-        	case 0: $msg = ['error', "You marked $score% of the answers correct and were unable to clear the skill test. Better luck next time."];
+        	case 0: $msg = ['error', "You marked $score% of the Answers Correct and were unable to Clear the Skill Test. Better Luck Next Time."];
         		break;
-        	case 1: $msg = ['success', "Congratulations you marked $score% of the answers correct and skill was successfully added to your profile."];
+        	case 1: $msg = ['success', "Congratulations you marked $score% of the answers correct and skill was Successfully added to your Profile."];
         		break;
-        	default: $msg = ['error', "Some Error Occured"];
+        	default: $msg = ['error', "Some Error Occured. Please Try Again."];
         		break;
         }
         $this->session->set_flashdata('message', array('content' => $msg[1], 'class' => $msg[0]));

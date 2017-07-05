@@ -700,7 +700,7 @@ if($_SESSION['userData']['accountType']=='2'){
 			$this->session->unset_userdata('skill_data');
 			$this->session->unset_userdata('test_settings');
 			$this->session->set_userdata('in_test', false);
-			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during test.', 'class' => 'error'));
+			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during Skill Test.', 'class' => 'error'));
 			redirect(base_url('skills'));
 		}
 		$this->session->set_userdata('in_test', true);
@@ -754,11 +754,11 @@ if($_SESSION['userData']['accountType']=='2'){
 				$this->data['title'] = 'Skill Test Guidelines';
 				$this->load->view('skillTestGuidelines', $this->data);
 			}else{
-				$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
+				$this->session->set_flashdata('message', array('content' => 'Something Went Wrong. Please Try Again.', 'class' => 'error'));
 				redirect(base_url('skills'));
 			}
 		}else{
-			$this->session->set_flashdata('message', array('content' => 'The Skill you have selected is not available for the Time Being. Thank You for your Co-operation.', 'class' => 'error'));
+			$this->session->set_flashdata('message', array('content' => 'Something Went Wrong. Please Try Again.', 'class' => 'error'));
 			redirect(base_url('skills'));
 		}
 	}
