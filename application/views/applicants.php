@@ -104,7 +104,7 @@
 											<?php if($value['status']=='3') { echo '<span style="color: var(--yellow);">Short-Listed</span>'; } ?>
 											<?php if($value['status']=='4') { echo '<span style="color: var(--green);">Selected</span>'; } ?>
 										</p>
-										<p style="margin-top: 8px; float:right;"><a href="<?php echo base_url('user-profile/').$value['userID']."?download=1"; ?>" class="btn" style="color: white; background: var(--midnight-blue);"><i class="fa fa-download" aria-hidden="true"></i></a><a target="_blank" href="<?php echo base_url('user-profile/').$value['userID']; ?>" class="btn" style="margin-left: 5px; color: white; background: var(--midnight-blue);"><i class="fa fa-eye" aria-hidden="true"></i></a><a class="btn" style="margin-left: 5px; color: white; background: var(--midnight-blue);"><i class="fa fa-plus" aria-hidden="true"></i> Add to Compare</a></p>
+										<p style="margin-top: 8px; float:right;"><a href="<?php echo base_url('user-profile/').$value['userID']."?download=1"; ?>" class="btn" style="color: white; background: var(--midnight-blue);"><i class="fa fa-download" aria-hidden="true"></i></a><a target="_blank" href="<?php echo base_url('user-profile/').$value['userID']; ?>" class="btn" style="margin-left: 5px; color: white; background: var(--midnight-blue);"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
 										<p style="margin-top: 8px; float: right;">
 											<?php if($value['status']=='1' || $value['status']=='3') { ?>
 											<a href="<?php echo base_url('apply/changeApplicantStatus/'.$value['userID'].'/'.$offerType.'/'.$offerID.'/4'); ?>" style="color: var(--green);"><b>Hire</b></a>

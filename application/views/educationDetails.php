@@ -42,7 +42,7 @@
 								</div>
 								<div class="form-group">
 									<label for="batch" class="form__label">Batch</label>
-									<input type="text" placeholder="Batch" id="batch" class="form__input" name="batch">
+									<input type="text" maxlength="4" placeholder="Batch" id="batch" class="form__input" name="batch">
 								</div>
 							</div>
 							<div class="form-group">

@@ -84,13 +84,7 @@ class Home extends CI_Controller {
 	}
 
 	public function employerDetails(){
-		$this->redirection();
-		if(($_SESSION['userData']['accountType']=='2') && ($_SESSION['registrationLevel']=='1')){
-			$this->load->view('employerDetails', $this->data);
-		}
-		else{
-			redirect(base_url('home'));
-		}
+		$this->load->view('employerDetails', $this->data);
 	}
 
 	public function verifyEMail($redirection=''){

@@ -48,10 +48,9 @@
 		<div class="modal-body">
 			<p><strong>Why should you join FITPASS ?</strong></p>
 			<ul>
-				<li><strong>Team:</strong> Work with smart and passionate people</li>
-				<li><strong>Growth:</strong> We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</li>
-				<li><strong>Start-up Culture:</strong> Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</li>
-				<li><strong>Impact:</strong> FITPASS does not function on a defined hierarchy &amp; everyone's given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</li>
+				<li>Maximum Upload Size for the document is 3 MB.</li>
+				<li>The allowed format include jpg, jpeg, png, JPG, pdf,doc and docx.</li>
+				<li>The upload identity document must clearly mention the firm name, employee name and designation for Employer Accounts. For General Users (or job/internship seekers), the identity document must clearly have college/university name, student name, and course enrolled.</li>
 			</ul>
 		</div>
 	</div>
