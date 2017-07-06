@@ -911,4 +911,28 @@ class Web extends CI_Controller {
 		}
 	}
 
+	public function closeOffer($offerType, $offerID){
+		$result = $this->home_lib->closeOffer($offerType, $offerID);
+		if($result){
+			if($offerType=='1'){
+				$this->session->set_flashdata('message', array('content'=>'Job Offer Successfully Closed.','class'=>'success'));
+				redirect(base_url('jobs/added-job-offer'));
+			}
+			if($offerType=='2'){
+				$this->session->set_flashdata('message', array('content'=>'Internship Offer Successfully Closed.','class'=>'success'));
+				redirect(base_url('internships/added-internship-offer'));
+			}
+		}
+		else{
+			if($offerType=='1'){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('jobs/added-job-offer'));
+			}
+			if($offerType=='2'){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('internships/added-internship-offer'));
+			}
+		}
+	}
+	
 }

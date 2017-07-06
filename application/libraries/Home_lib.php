@@ -877,4 +877,10 @@ public function injectClassName(&$data)
 		}
 	}
 
+	public function closeOffer($offerType, $offerID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->closeOffer($offerType, $offerID);
+	}
+
 }

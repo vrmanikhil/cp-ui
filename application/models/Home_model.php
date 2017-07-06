@@ -1068,4 +1068,19 @@ class Home_model extends CI_Model {
 		$this->db->where('userID', $userId);
 		return $this->db->update('users', $image);
 	}
+
+	public function closeOffer($offerType, $offerID){
+		$data = array(
+			active => '0'
+		);
+		if($offerType=='1'){
+			$this->db->where('jobID', $offerID);
+			return $this->db->update('jobOffers', $data);
+		}
+		if($offerType=='2'){
+			$this->db->where('internshipID', $offerID);
+			return $this->db->update('internshipOffers', $data);
+		}
+	}
+
 }
