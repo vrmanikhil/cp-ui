@@ -278,27 +278,28 @@
 			for(var i = 0 ; i < skills.length; i++){
 				if(filterskills){
 					if(filterskills.indexOf(skills[i].skillID) !== -1){
-						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+" checked>" + skills[i].skill_name];
+						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+" checked> " + skills[i].skill_name];
 					}else{
-						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+">" + skills[i].skill_name];
+						skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+"> " + skills[i].skill_name];
 					}
 				}else{
-					skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+">" + skills[i].skill_name];
+					skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+"> " + skills[i].skill_name];
 				}
 			}
+			
 			for(var i = 0 ; i < locations.length; i++){
 				if(filterlocations){
 					if(filterlocations.indexOf(locations[i].cityID) !== -1){
-						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+" checked>" + locations[i].city];
+						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+" checked> " + locations[i].city];
 					}else{
-						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
+						locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+"> " + locations[i].city];
 					}
 				}else{
-					locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+">" + locations[i].city];
+					locate[i] = ["<input type = 'checkbox' class = 'locations' name = 'location[]' value = "+locations[i].cityID+"> " + locations[i].city];
 				}
 
 			}
-
+			
 			$('#skill-list').DataTable( {
 		    	"oLanguage": {
 		  						"sSearch": '<label><strong>Search</strong></label>',
