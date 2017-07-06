@@ -20,7 +20,7 @@
 	<?php }?>
 	<div class="layout-container flex flex--col">
 		<?php if(isset($_SESSION['userData']['loggedIn'])){ echo $header; } else { echo $headerLogin; } ?>
-		<main class="flex main-container globalContainer">
+		<main class="flex main-container globalContainer" style="margin-top: 10px;">
 			<div class="main-body flex__item">
 				<div class="card">
 					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;"><b>CampusPuppy Online Assessment Test(COAT)</b></h1>

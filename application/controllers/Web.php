@@ -491,7 +491,7 @@ class Web extends CI_Controller {
 			$score = '0';
 			$college = $this->home_lib->getCollegeDetails($collegeID);
 			$college = $college[0];
-			$CI->session->set_userdata('collegeLogo', $college['collegeLogo']);
+			$CI->session->set_userdata('collegeLogo', $college['logo']);
 			$CI->session->set_userdata('collegeName', $college['college']);
 			$description = $course['course']."-".$batch.", at ".$college['college'];
 			$data = array(

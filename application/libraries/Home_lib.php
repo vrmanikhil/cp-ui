@@ -856,7 +856,7 @@ public function injectClassName(&$data)
 			}else{
 				$picture['profileImage'] = base_url($upload_path);
 				return $CI->homeModel->updateProfileImage($_SESSION['userData']['userID'], $picture);
-			} 
+			}
 		}else{
 			return false;
 		}
