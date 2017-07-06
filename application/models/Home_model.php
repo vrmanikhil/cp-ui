@@ -866,6 +866,8 @@ class Home_model extends CI_Model {
 		}
 
 		if($notificationType=='1'){
+			$name = $userData[0]['name'];
+			$image = $userData[0]['profileImage'];
 			$notification = $name." has sent you a Connection Request.";
 			$link = base_url('/connections');
 		}
