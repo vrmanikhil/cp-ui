@@ -341,6 +341,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredSkillJobIDs = [];
+				$skill = [];
 			}
 
 			if(isset($_POST['location'])){
@@ -352,6 +353,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredLocationJobIDs = [];
+				$location = [];
 				}
 				// var_dump(json_encode($skill));
 				// var_dump(json_encode($location));
@@ -444,6 +446,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredSkillinternshipIDs = [];
+				$skill = [];
 			}
 
 			if(isset($_POST['location'])){
@@ -455,6 +458,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredLocationinternshipIDs = [];
+				$location = []; 
 				}
 				if(isset($skill))
 				$this->data['filterskills'] =json_encode($skill);
@@ -493,6 +497,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredSkillinternshipIDs = [];
+				$skill = [];
 			}
 
 			if(isset($_POST['location'])){
@@ -504,6 +509,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredLocationinternshipIDs = [];
+				$location = [];
 				}
 				$this->data['filterskills'] =	json_encode($skill);
 			if(isset($location))
