@@ -10,6 +10,7 @@
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/jobs.css'); ?>" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -306,7 +307,7 @@
 					skill[i] = ["<input type = 'checkbox' class = 'skills' name = 'skill[]' value = "+skills[i].skillID+"> " + skills[i].skill_name];
 				}
 			}
-		
+
 			for(var i = 0 ; i < locations.length; i++){
 				if(filterlocations){
 					if(filterlocations.indexOf(locations[i].cityID) !== -1){
@@ -319,7 +320,7 @@
 				}
 
 			}
-			
+
 			$('#skill-list').DataTable( {
 		    	"oLanguage": {
 		  						"sSearch": '<label><strong>Search</strong></label>',

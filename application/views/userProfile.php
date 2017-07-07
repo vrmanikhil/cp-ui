@@ -13,6 +13,7 @@
 	<link href="<?php echo base_url('/assets/css/userProfile.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/croppie.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -320,7 +321,7 @@
 					<div class="form-group">
 						<label for="educationYear">Year</label>
 						<select name="educationYear" id="educationYear" class="select">
-							<?php 
+							<?php
 								for($i = $year; $i>=1980; $i++){?>
 								<option><?= $i?></option>
 							<?php } ?>
@@ -436,7 +437,7 @@
 							<div class="form-group">
 								<label for="startingYear">Year</label>
 								<select name="startYear" id="startingYear" class="select">
-									<?php 
+									<?php
 								for($i = $year; $i>=1980; $i++){?>
 								<option><?= $i?></option>
 							<?php } ?>
@@ -467,7 +468,7 @@
 							<div class="form-group">
 								<label for="endingYear">Year</label>
 								<select name="endYear" id="endingYear" class="select">
-									<?php 
+									<?php
 								for($i = $year; $i>=1980; $i++){?>
 								<option><?= $i?></option>
 							<?php } ?>
