@@ -64,7 +64,7 @@ class Home_lib {
 	public function getJobOffersSkillFilters($skills){
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getJobOffersSkillFilters($skills);
+		return $CI->homeModel->getJobOffersSkillFilters($skills)
 	}
 	public function getinternshipOffersLocationFilters($location){
 		$CI = &get_instance();

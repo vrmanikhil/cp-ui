@@ -485,41 +485,66 @@ class Home_model extends CI_Model {
 		return $result;
 	}
 	public function getJobOffersSkillFilters($skills){
+		$skill = implode(',', $skills);
 		if($skills != NULL){
-			$this->db->select('DISTINCT(jobID)');
-			$this->db->where_in('skillID', $skills);
-			return $this->db->get('jobSkills')->result_array();
-			// var_dump($this->db->last_query()); var_dump($result->result_array()); die;
+			if(in_array('0', $skills)){
+				$result = $this->db->query("SELECT jobID FROM jobOffers WHERE applicants = '3' AND status = '2' AND active = 1  UNION SELECT jobID FROM jobSkills WHERE skillID in ($skill)");
+				return $result->result_array();
+			}else{
+				$this->db->select('DISTINCT(jobID)');
+				$this->db->where_in('skillID', $skills);
+				return $this->db->get('jobSkills')->result_array();
+		}
 		}else{
 			return null;
 		}
 	}
 
 	public function getJobOffersLocationFilters($locations){
+		$location = implode(',', $locations);
 		if($locations != NULL){
-			$this->db->select('DISTINCT(jobID)');
-			$this->db->where_in('cityID', $locations);
-			return $this->db->get('jobLocations')->result_array();
+			if(in_array('0', $locations)){
+				$result = $this->db->query("SELECT jobID FROM jobOffers WHERE jobType = '1' AND status = '2' AND active = 1 UNION SELECT jobID FROM jobLocations WHERE cityID in ($location)");
+				return $result->result_array();
+			}else{
+				$this->db->select('DISTINCT(jobID)');
+				$this->db->where_in('cityID', $locations);
+				return $this->db->get('jobLocations')->result_array();
+		}
 		}else{
 			return null;
 		}
 	}
 
 	public function getinternshipOffersSkillFilters($skills){
+		$skill = implode(',', $skills);
 		if($skills != NULL){
-			$this->db->select('DISTINCT(internshipID)');
-			$this->db->where_in('skillID', $skills);
-			return $this->db->get('internshipSkills')->result_array();
+			if(in_array('0', $skills)){
+				$result = $this->db->query("SELECT internshipID FROM internshipOffers WHERE applicants = '3' AND status = '2' AND active = 1 UNION SELECT internshipID FROM internshipSkills WHERE skillID in ($skill)");
+				// var_dump($this->db->last_query()); die;
+				return $result->result_array(); 
+			}else{
+				$this->db->select('DISTINCT(internshipID)');
+				$this->db->where_in('skillID', $skills);
+				return $this->db->get('internshipSkills')->result_array();
+		}
 		}else{
 			return null;
 		}
 	}
 
 	public function getinternshipOffersLocationFilters($locations){
+		$location = implode(',', $locations);
 		if($locations != NULL){
-			$this->db->select('DISTINCT(internshipID)');
-			$this->db->where_in('cityID', $locations);
-			return $this->db->get('internshipLocations')->result_array();
+			if(in_array('0', $locations)){
+				$result = $this->db->query("SELECT internshipID FROM internshipOffers WHERE internshipType = '1' AND status = '2' AND active = 1 UNION SELECT internshipID FROM internshipLocations WHERE cityID in ($location)");
+				// var_dump($this->db->last_query()); die;
+				return $result->result_array(); 
+			}else{
+				$this->db->select('DISTINCT(internshipID)');
+				$this->db->where_in('cityID', $locations);
+				return $this->db->get('internshipLocations')->result_array();
+		}
 		}else{
 			return null;
 		}
