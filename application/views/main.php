@@ -22,7 +22,7 @@
 		<header class="primary-header flex__item">
 			<div class="globalContainer flex">
 				<a href="<?php echo base_url(); ?>" class="flex__item">
-					<img alt="logo" src="<?php echo base_url('/assets/img/logo-white.png'); ?>" class="logo">
+					<img  alt="logo" src="<?php echo base_url('/assets/img/logo-white.png'); ?>" class="logo">
 				</a>
 				<div class="login-form-container flex">
 					<form method="post" action="<?php echo base_url('web/doLogin'); ?>" class="flex login-form form">

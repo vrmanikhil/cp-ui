@@ -77,7 +77,7 @@
 						$i++;
 						if($value['class'] == "sender"){?>
 						<div class="flex media user-message chat receiver" id = "message<?= $i ?>">
-							<img src="<?php echo $_SESSION['profileImage']?>" alt="user" class="media-figure notification__feature-img">
+							<img  src="<?php echo $_SESSION['profileImage']?>" alt='user profile' class="media-figure notification__feature-img">
 							<span class="media-body flex flex--col">
 								<span class="notification__message"><?php echo $value['message'];?></span>
 								<span class="notification__info">
@@ -89,7 +89,7 @@
 						}else{
 						?>
 						<div class="flex media user-message chat sender" id =  "message<?= $i ?>">
-							<img src="<?php echo $profileImage; ?>" alt="user" class="media-figure notification__feature-img">
+							<img  src="<?php echo $profileImage; ?>" alt="user profile" class="media-figure notification__feature-img">
 							<span class="media-body flex flex--col">
 								<span class="notification__message"><?php echo $value['message'];?></span>
 								<span class="notification__info">
@@ -123,7 +123,7 @@
 	</div>
 
 	<div class="flex media user-message chat wrap" style = "display: none">
-		<img src="" alt="user" class="media-figure notification__feature-img">
+		<img  src="" alt="user image" class="media-figure notification__feature-img">
 		<span class="media-body flex flex--col">
 			<span class="notification__message msg"></span>
 			<span class="notification__info">
@@ -148,11 +148,11 @@ var chatterImage = '<?= $profileImage ?>';
 		    	offset++;
 		    	if(chats[i].class === 'sender' ){
 		    		var elChild = document.createElement("div");
-		    		elChild.innerHTML = "<div class='flex media user-message chat receiver' id = 'message" + offset + "'><img src='"+ userImage +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'>"+ chats[i].message +"</span><span class='notification__info'><span class='notification__date'>"+ chats[i].timestamp +"</span></span></span></div>";
+		    		elChild.innerHTML = "<div class='flex media user-message chat receiver' id = 'message" + offset + "'><img  src='"+ userImage +"' alt='user profile' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'>"+ chats[i].message +"</span><span class='notification__info'><span class='notification__date'>"+ chats[i].timestamp +"</span></span></span></div>";
 		    		document.getElementById('messages-container').insertBefore(elChild, document.getElementById("messages-container").firstChild);
 		    	}else{
 		    		var elChild = document.createElement("div");
-		    		elChild.innerHTML = "<div class='flex media user-message chat sender' id = 'message" + offset + "'><img src='"+ chatterImage +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'>"+ chats[i].message +"</span><span class='notification__info'><span class='notification__date'>"+ chats[i].timestamp +"</span></span></span></div>";
+		    		elChild.innerHTML = "<div class='flex media user-message chat sender' id = 'message" + offset + "'><img src='"+ chatterImage +"' alt='user profile' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'>"+ chats[i].message +"</span><span class='notification__info'><span class='notification__date'>"+ chats[i].timestamp +"</span></span></span></div>";
 		    		document.getElementById('messages-container').insertBefore(elChild,document.getElementById("messages-container").firstChild);
 		    }
 			}

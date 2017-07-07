@@ -96,7 +96,7 @@
 							}
 					?>
 							<a class="flex media user-message chat <?= $cls ?>" chatter-id="<?= $chat['chatter_id']?>" href="<?php echo base_url('messages/chats/').$chat['chatter_id'];?>">
-								<img src="<?php echo $chat['profile_image'];?>" alt="user" class="media-figure notification__feature-img">
+								<img src="<?php echo $chat['profile_image'];?>" alt="user profile" class="media-figure notification__feature-img">
 								<span class="media-body flex flex--col">
 									<span class="notification__message"><strong><?php echo $chat['chatter']?></strong></span>
 									<?php if($chat['chatter_id'] !== $chat['sender']) {?>
@@ -176,14 +176,14 @@
 				for( i = 0; i < chats.length; i++){
 					offset++;
 					if(chats[i].chatter_id !== chats[i].sender ){
-						var html = "<a class='flex media user-message chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+						var html = "<a class='flex media user-message chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user profile' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
 						document.getElementById('messages-container').innerHTML += html;
 					}else{
 						if(chats[i].read  != 0){
-						var html = "<a class='flex media user-message chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'>	</i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+						var html = "<a class='flex media user-message chat' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user profile' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'>	</i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
 						document.getElementById('messages-container').innerHTML += html;
 					}else{
-						var html = "<a class='flex media user-message chat unread' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'></i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
+						var html = "<a class='flex media user-message chat unread' chatter-id='" + chats[i].chatter_id + "' href='<?php echo base_url('messages/chats/');?>" + chats[i].chatter_id + "'><img src='" + chats[i].profile_image + "' alt='user profile' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>" + chats[i].chatter + "</strong></span><span class='notification__message'><i class = 'fa fa-reply'></i>" + chats[i].message + "</span><span class='notification__info'><span class='notification__date'>" + chats[i].timestamp + "</span></span></span></a>";
 						document.getElementById('messages-container').innerHTML += html;
 					}
 				}

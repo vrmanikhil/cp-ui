@@ -55,7 +55,7 @@
 					<?php } ?>
 				</div>
 				<div class="user__pic">
-					<img src="<?php echo $userDetails['profileImage']; ?>" alt="">
+					<img src="<?php echo $userDetails['profileImage']; ?>" alt="user profile">
 					<?php $data = array('userProfilePic' => $userDetails['profileImage']); ?>
 					<?php if($userID == $_SESSION['userData']['userID']){ ?>
 					<div class="edit-user-pic">
@@ -229,7 +229,7 @@
 								</h3>
 								<div class = "currentLogo">
 									<strong>Company Logo</strong>
-									<p class="flex personal-info"><span style ="padding-left: 30%"><img src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
+									<p class="flex personal-info"><span style ="padding-left: 30%"><img alt="company logo"  src="<?php echo $employerDetails[0]['companyLogo']; ?>"></span></p>
 								</div>
 							</div>
 						</div>
@@ -522,7 +522,7 @@
 			<form action="<?= base_url('web/editUserProfilePic')?>" method="POST" class="form" enctype="multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
-						<img src="" alt="" id="userProfilePic">
+						<img src="" alt="user profile" id="userProfilePic">
 					</div>
 					<div class="form-group">
 						<div class = "inputPic">
@@ -534,7 +534,7 @@
 				</div>
 				<div class = "form-group">
 					<div class = "crop" style = "display:none">
-						<img src="" alt="" id="cropped-pic" hidden style ="padding-left: 25%">
+						<img src="" alt="user profile" id="cropped-pic" hidden style ="padding-left: 25%">
 					</div>
 				</div>
 				<div class="form-group action-bar">
@@ -556,7 +556,7 @@
 			<form action="<?= base_url('web/editCompanyLogo')?>" method="POST" class="form" enctype="multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
-						<img src="" alt="" id="companyLogo">
+						<img src="" alt="comapny logo" id="companyLogo">
 					</div>
 					<div class="form-group">
 						<div class = 'inputLogo'>
@@ -569,7 +569,7 @@
 
 				<div class = "form-group">
 					<div class = "demo" style = "display:none">
-						<img src="" alt="" id="cropped-img" hidden style ="padding-left: 25%">
+						<img src="" alt="cropped image" id="cropped-img" hidden style ="padding-left: 25%">
 					</div>
 				</div>
 				<div class="form-group action-bar">
@@ -594,7 +594,7 @@
 						<div class="radio">
 							<label class="cover-pic-option">
 								<input type="radio" name="optionsRadios" id="optionsRadios" value="1" checked>
-								<img src="<?php echo base_url('/assets/img/cover-001.jpg'); ?>" alt="">
+								<img src="<?php echo base_url('/assets/img/cover-001.jpg'); ?>" alt="cover image">
 							</label>
 						</div>
 					</div>
@@ -602,7 +602,7 @@
 						<div class="radio">
 							<label class="cover-pic-option">
 								<input type="radio" name="optionsRadios" id="optionsRadios1" value="2">
-								<img src="<?php echo base_url('/assets/img/cover-002.jpg'); ?>" alt="">
+								<img src="<?php echo base_url('/assets/img/cover-002.jpg'); ?>" alt="cover image">
 							</label>
 						</div>
 					</div>
@@ -610,7 +610,7 @@
 						<div class="radio">
 							<label class="cover-pic-option">
 								<input type="radio" name="optionsRadios" id="optionsRadios1" value="3">
-								<img src="<?php echo base_url('/assets/img/cover-003.jpg'); ?>" alt="">
+								<img src="<?php echo base_url('/assets/img/cover-003.jpg'); ?>" alt="cover image">
 							</label>
 						</div>
 					</div>
@@ -620,7 +620,7 @@
 						<div class="radio">
 							<label class="cover-pic-option">
 								<input type="radio" name="optionsRadios" id="optionsRadios1" value="4">
-								<img src="<?php echo base_url('/assets/img/cover-004.jpg'); ?>" alt="">
+								<img src="<?php echo base_url('/assets/img/cover-004.jpg'); ?>" alt="cover image">
 							</label>
 						</div>
 					</div>
@@ -628,7 +628,7 @@
 						<div class="radio">
 							<label class="cover-pic-option">
 								<input type="radio" name="optionsRadios" id="optionsRadios1" value="5">
-								<img src="<?php echo base_url('/assets/img/cover-005.jpg'); ?>" alt="">
+								<img src="<?php echo base_url('/assets/img/cover-005.jpg'); ?>" alt="cover image">
 							</label>
 						</div>
 					</div>
@@ -636,7 +636,7 @@
 						<div class="radio">
 							<label class="cover-pic-option">
 								<input type="radio" name="optionsRadios" id="optionsRadios1" value="6">
-								<img src="<?php echo base_url('/assets/img/cover-006.jpg'); ?>" alt="">
+								<img src="<?php echo base_url('/assets/img/cover-006.jpg'); ?>" alt="cover image">
 							</label>
 						</div>
 					</div>

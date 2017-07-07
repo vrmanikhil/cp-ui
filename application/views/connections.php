@@ -60,7 +60,7 @@
 						<div class="connections">
 							<?php if(empty($connectionRequests)) { echo "<center>No Connection Requests Found</center>"; } else { foreach ($connectionRequests as $key => $value) { ?>
 							<div class="flex connection media align-center">
-								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
+								<img  alt = 'user profile'  src="<?php echo $value['profileImage']; ?>" class="media-figure">
 								<div class="media-body flex">
 									<div class="user-info">
 										<p><strong><?php echo $value['name']; ?></strong></p>
@@ -83,7 +83,7 @@
 						<?php if(empty($connections)) { echo "<center>No Connections Found</center>"; } else { foreach ($connections as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
-								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user profile" class="media-figure">
 								<div class="media-body flex">
 									<div class="user-info">
 										<p><strong><?php echo $value['name']; ?></strong></p>

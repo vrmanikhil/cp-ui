@@ -24,7 +24,7 @@
 		<main class="flex main-container globalContainer">
 			<div class="main-body flex__item">
 				<div class="card">
-					<img src="<?php echo base_url('assets/img/404.jpg'); ?>" style="width: 100%;">
+					<img alt = "404 error" src="<?php echo base_url('assets/img/404.jpg'); ?>" style="width: 100%;">
 				</div>
 			</div>
 			<aside class="flex__item right-pane">

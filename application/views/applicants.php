@@ -88,7 +88,7 @@
 						<?php if(empty($applicants)) { echo "<center>No Applicants</center>"; } else {  foreach ($applicants as $key => $value) { ?>
 						<div class="connections">
 							<div class="flex connection media align-center">
-								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user profile" class="media-figure">
 								<div class="media-body flex">
 									<div class="user-info">
 										<p style="font-size: 18px;"><a href="<?php echo base_url('user-profile/').$value['userID']; ?>"><strong><?php echo $value['name']; ?></strong></a></p>
@@ -128,7 +128,7 @@
 					<h2 class="section-title">Offer Details</h2>
 					<div class="feed-actor-module__profile-image-container">
 						<a href="javascript:">
-							<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="" style="margin-top:45px;" class="feed-actor-module__profile-image">
+							<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="company logo" style="margin-top:45px;" class="feed-actor-module__profile-image">
 						</a>
 					</div>
 					<div class=" feed-actor-module__actor-meta">

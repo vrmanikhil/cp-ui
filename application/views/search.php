@@ -79,7 +79,7 @@
 								$i++;
 							 ?>
 							<div class="flex account media align-center">
-								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user profile" class="media-figure">
 								<div class="media-body flex">
 									<div class="user-info">
 										<p><strong><?php echo $value['name']; ?></strong></p>
@@ -106,7 +106,7 @@
 							if($value['tbl']==='internships'){ $j++; ?>
 						<div class="posting-card">
 							<div class="flex media">
-								<img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure posting-card__img">
+								<img src="<?php echo $value['profileImage']; ?>" alt="user profile" class="media-figure posting-card__img">
 								<div class="media-body flex flex--col">
 									<p class="posting-card__title" style="margin-top: 25px;">
 										<strong><?php echo $value['other']; ?></strong>
@@ -129,7 +129,7 @@
 							if($value['tbl']==='jobs'){ $k++; ?>
 						<div class="posting-card">
 							<div class="flex media">
-								<img src="http://backoffice.campuspuppy.com/assets/companyLogo/fitpass.jpg" alt="user" class="media-figure posting-card__img">
+								<img src="http://backoffice.campuspuppy.com/assets/companyLogo/fitpass.jpg" alt="fitpass logo" class="media-figure posting-card__img">
 								<div class="media-body flex flex--col">
 									<p class="posting-card__title" style="margin-top: 25px;">
 										<strong><?php echo $value['other']; ?></strong>

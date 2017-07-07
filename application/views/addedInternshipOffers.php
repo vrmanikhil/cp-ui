@@ -80,7 +80,7 @@
 				<?php }else{ foreach ($addedInternshipOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
+						<img  src="<?php echo $_SESSION['companyLogo']; ?>" alt="company logo" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
 								<strong><?php echo $value['internshipTitle']; ?></strong>

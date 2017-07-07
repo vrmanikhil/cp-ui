@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="page-wrap">
-        <img src="<?=$userDetails['profileImage']?>" id="pic">
+        <img  alt = "user profile" src="<?=$userDetails['profileImage']?>" id="pic">
         <div id="contact-info" class="contact">
             <h1 class="name"><?=$userDetails['name']?></h1>
             <p>
@@ -96,7 +96,7 @@
             <dd class="clear"></dd>
             <dd  id="logo" style="text-align: center">
                 <b>Powered By</b><br>
-                <img src="<?= $campusPuppy?>" id = "logopic">
+                <img  alt = "logo" src="<?= $campusPuppy?>" id = "logopic">
             </dd>
         </dl>
         <div class="clear"></div>

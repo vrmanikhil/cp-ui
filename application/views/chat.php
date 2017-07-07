@@ -9,7 +9,7 @@
 	echo($title."<br>");
 	$i = 0;
 	?>
-	<img src ="<?php echo $profile_image;?>">
+	<img  alt = 'profile image' src ="<?php echo $profile_image;?>">
 	<br><br><br>
 	<div id = "chat">
 	<?php

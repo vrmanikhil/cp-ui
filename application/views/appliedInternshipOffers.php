@@ -80,7 +80,7 @@
 
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="<?php echo $value['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $value['companyLogo']; ?>" alt="comapny logo" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
 								<strong><?php echo $value['companyName']; ?></strong>

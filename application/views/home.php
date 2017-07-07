@@ -77,7 +77,7 @@
 					<div class="feed-post card">
 						<div class="feed-post__head">
 							<div class="flex media">
-								<a href="javascript:"><img src="<?php echo $value['profileImage']; ?>" alt="user" class="media-figure feed-post__user-pic"></a>
+								<a href="javascript:"><img  src="<?php echo $value['profileImage']; ?>" alt="user profile" class="media-figure feed-post__user-pic"></a>
 								<span class="media-body flex flex--col">
 									<a href="<?php echo base_url('user-profile/').$value['addedBy']; ?>" class="flex__item"><span class="feed-post__username"><?php echo $value['name']; ?></span></a>
 									<span class="feed-post__info flex__item">
@@ -320,10 +320,10 @@
 				for( i = 0; i < feeds.length; i++){
 					offset++;
 					if(feeds[i].offerType == 'Internship'){
-						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'internship' id = 'viewinternship"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
+						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user image' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'internship' id = 'viewinternship"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
 						document.getElementById('feeds').innerHTML += html;
 					}else{
-						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'job' id = 'viewjob"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
+						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user image' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'job' id = 'viewjob"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
 						document.getElementById('feeds').innerHTML += html;
 				}
 			}

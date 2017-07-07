@@ -47,7 +47,7 @@
 					</a>
 				</div>
 				<div class="post card">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+					<img src="/assets/img/showcase/CP1.png" alt="contact us" style="width: 100%;">
 				</div>
 			</aside>
 			<div class="main-body flex__item">

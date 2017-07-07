@@ -80,7 +80,7 @@
 				 foreach ($addedJobOffers as $key => $value) { ?>
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
+						<img src="<?php echo $_SESSION['companyLogo']; ?>" alt="company logo" class="media-figure posting-card__img">
 						<br>
 
 						<div class="media-body flex flex--col">

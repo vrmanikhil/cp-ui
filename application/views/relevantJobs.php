@@ -83,7 +83,7 @@
 					</center>
 				</form>
 				<div class="post card" style="margin-top: 10px;">
-					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
+					<img src="/assets/img/showcase/CP1.png" alt="contact us" style="width: 100%;">
 				</div>
 			</aside>
 			<div class="main-body flex__item">
@@ -100,7 +100,7 @@
 
 				<div class="card posting-card">
 					<div class="flex media">
-						<img src="<?php echo $value['companyLogo']; ?>" alt="user" class="media-figure posting-card__img">
+						<img  src="<?php echo $value['companyLogo']; ?>" alt="company logo" class="media-figure posting-card__img">
 						<div class="media-body flex flex--col">
 							<p class="posting-card__title">
 								<strong><?php echo $value['companyName']; ?></strong>

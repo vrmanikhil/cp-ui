@@ -65,7 +65,7 @@
 						<?php if(!empty($notifications)) { foreach ($notifications as $key => $value) { ?>
 
 						<a class="flex media notification" href="<?php echo $value['link']; ?>">
-							<img src="<?php echo $value['image']; ?>" alt="user" class="media-figure notification__feature-img">
+							<img  src="<?php echo $value['image']; ?>" alt="user profile" class="media-figure notification__feature-img">
 							<span class="media-body flex flex--col">
 								<span class="notification__message"><strong><?php echo $value['name']; ?></strong></span>
 								<span class="notification__message"><?php echo $value['notification']; ?></span>
@@ -105,7 +105,7 @@
 				console.log(notifications);
 				for( i = 0; i < notifications.length; i++){
 					offset++;
-						var html = "<a class='flex media notification' href='"+notifications[i].link+"'><img src='"+ notifications[i].image +"' alt='user' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>"+ notifications[i].name+"</strong></span><span class='notification__message'>"+ notifications[i].notification +"</span><span class='notification__info'><span class='notification__date'>"+ notifications[i].timestamp +"</span></span></span></a>";
+						var html = "<a class='flex media notification' href='"+notifications[i].link+"'><img  src='"+ notifications[i].image +"' alt='user profile' class='media-figure notification__feature-img'><span class='media-body flex flex--col'><span class='notification__message'><strong>"+ notifications[i].name+"</strong></span><span class='notification__message'>"+ notifications[i].notification +"</span><span class='notification__info'><span class='notification__date'>"+ notifications[i].timestamp +"</span></span></span></a>";
 						document.getElementById('notifications').innerHTML += html;
 					}
 
