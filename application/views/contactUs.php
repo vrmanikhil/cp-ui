@@ -27,14 +27,13 @@
 				<h1 class="title">We'd Love to Hear from You</h1>
 				<div class="flex">
 					<div class="left">
-						<p><strong>Reach Us</strong></p>
-						<p><strong>Mobile : </strong> +91-7503705892</p>
-						<p><strong>E-Mail : </strong> <a href="mailto:hello@campuspuppy.com">hello@campuspuppy.com</a></p>
+						<p><strong style = "font-weight: 700">Mobile : </strong> +91-7503705892</p>
+						<p><strong style = "font-weight: 700">E-Mail : </strong> <a href="mailto:hello@campuspuppy.com">hello@campuspuppy.com</a></p>
 						<address>
-							<strong>Registered Office: </strong> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
+							<strong style = "font-weight: 700">Registered Office: </strong><br> Campus Puppy Private Limited, TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
 						</address>
 						<address>
-							<strong>Office Address: </strong><br>TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
+							<strong style = "font-weight: 700">Office Address: </strong><br>TBI, Shriram Institute of Industrial Research, 19, University Road, New Delhi
 						</address>
 					</div>
 					<div class="right">
@@ -42,24 +41,24 @@
 					</div>
 				</div>
 				<div class="contact-us__container">
-					<p><strong>Drop Us a Message</strong></p>
+					<p><strong style = "font-weight: 700">Drop Us a Message</strong></p>
 					<form class="form" method="post" action="<?php echo base_url('web/contactUs'); ?>">
 						<div class="horizontal-group">
 							<div class="form-group">
-								<label class="form__label" for="name">Name</label>
+								<label class="form__label" for="name"><strong style = "font-weight: 600">Name</strong></label>
 								<input type="text" id="name" name="name" placeholder="Name" class="form__input" required>
 							</div>
 							<div class="form-group">
-								<label for="email" class="form__label">E-Mail Address</label>
+								<label for="email" class="form__label"><strong style = "font-weight: 600">E-Mail Address</strong></label>
 								<input type="email" id="email" name="email" placeholder="E-Mail Address" class="form__input" required>
 							</div>
 							<div class="form-group">
-								<label for="mobile" class="form__label">Mobile Number</label>
+								<label for="mobile" class="form__label"><strong style = "font-weight: 600">Mobile Number</strong></label>
 								<input type="text" id="mobile" name="mobile" maxlength="10" placeholder="Mobile Number" class="form__input" required>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="message" class="form__label">Message</label>
+							<label for="message" class="form__label"><strong style = "font-weight: 600">Message</strong></label>
 						<textarea class="form__input" name="message" id="message" cols="30" rows="5"></textarea>
 						</div>
 						<div class="form__group">
