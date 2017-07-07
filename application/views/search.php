@@ -93,7 +93,7 @@
 							</div>
 						<?php }}
 						if($i==0){ ?>
-							<div class="flex account media align-center">
+							<div class="posting-card">
 								<?php 	echo "No Results Under Users"; ?>
 							</div>
 							<?php
