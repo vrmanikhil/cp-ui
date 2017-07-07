@@ -479,13 +479,17 @@ class Home_model extends CI_Model {
 		$this->db->select($table . '.cityID, indianCities.city, indianCities.state');
 		$this->db->join('indianCities',$table.'.cityID = indianCities.cityID');
 		$result = $this->db->get($table);
-		return $result->result_array();
+		$result = $result->result_array();
+		$data = ['cityID'=> '0', 'city'=>'Work From Home'];
+		array_push($result, $data);
+		return $result;
 	}
 	public function getJobOffersSkillFilters($skills){
 		if($skills != NULL){
 			$this->db->select('DISTINCT(jobID)');
 			$this->db->where_in('skillID', $skills);
 			return $this->db->get('jobSkills')->result_array();
+			// var_dump($this->db->last_query()); var_dump($result->result_array()); die;
 		}else{
 			return null;
 		}
@@ -530,8 +534,10 @@ class Home_model extends CI_Model {
 		$this->db->select($table . '.skillID, skills.skill_name');
 		$this->db->join('skills',$table.'.skillID = skills.skillID');
 		$result = $this->db->get_where($table, array('skills.active' => 1 ));
-		return $result->result_array();
-
+		$result = $result->result_array();
+		$data = ['skillID'=>'0', 'skill_name'=>'No Skill Required'];
+		array_push($result, $data);
+		return $result;
 	}
 
 	public function getInternshipOffers(){

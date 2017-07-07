@@ -17,6 +17,7 @@
 
 <body>
 	<?php
+		$year = date('Y');
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
@@ -318,7 +319,12 @@
 					</div>
 					<div class="form-group">
 						<label for="educationYear">Year</label>
-						<input type="number" name="educationYear" id="educationYear" class="form__input" minimum = 1950 maximum = 2020>
+						<select name="educationYear" id="educationYear" class="select">
+							<?php 
+								for($i = 1980; $i<=$year; $i++){?>
+								<option><?= $i?></option>
+							<?php } ?>
+						</select>
 					</div>
 				</div>
 				<div class="horizontal-group">
@@ -430,14 +436,10 @@
 							<div class="form-group">
 								<label for="startingYear">Year</label>
 								<select name="startYear" id="startingYear" class="select">
-									<option>2017</option>
-									<option>2016</option>
-									<option>2015</option>
-									<option>2014</option>
-									<option>2013</option>
-									<option>2012</option>
-									<option>2011</option>
-									<option>2010</option>
+									<?php 
+										for($i = 1980; $i<=$year; $i++){?>
+										<option><?= $i?></option>
+									<?php } ?>
 								</select>
 							</div>
 						</div>
@@ -465,14 +467,10 @@
 							<div class="form-group">
 								<label for="endingYear">Year</label>
 								<select name="endYear" id="endingYear" class="select">
-									<option>2017</option>
-									<option>2016</option>
-									<option>2015</option>
-									<option>2014</option>
-									<option>2013</option>
-									<option>2012</option>
-									<option>2011</option>
-									<option>2010</option>
+									<?php 
+										for($i = 1980; $i<=$year; $i++){?>
+										<option><?= $i?></option>
+									<?php } ?>
 								</select>
 							</div>
 						</div>
