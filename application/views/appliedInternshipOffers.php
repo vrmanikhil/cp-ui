@@ -76,7 +76,7 @@
 					</ol>
 				</div>
 
-				<?php if(empty($appliedInternshipOffers)) { echo "You have not applied for any Internship Yet."; } else { foreach ($appliedInternshipOffers as $key => $value) { ?>
+				<?php if(empty($appliedInternshipOffers)) { echo "<center>You have not applied for any Internship Yet.</center>"; } else { foreach ($appliedInternshipOffers as $key => $value) { ?>
 
 				<div class="card posting-card">
 					<div class="flex media">
