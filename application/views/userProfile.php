@@ -321,8 +321,8 @@
 						<label for="educationYear">Year</label>
 						<select name="educationYear" id="educationYear" class="select">
 							<?php 
-								for($i = $year; $i>=1980; $i++){?>
-								<option><?= $i?></option>
+								for($i = $year; $i>=1980; $i--){?>
+									<option><?= $i?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -437,9 +437,9 @@
 								<label for="startingYear">Year</label>
 								<select name="startYear" id="startingYear" class="select">
 									<?php 
-								for($i = $year; $i>=1980; $i++){?>
-								<option><?= $i?></option>
-							<?php } ?>
+										for($i = $year; $i>=1980; $i--){?>
+											<option><?= $i?></option>
+									<?php } ?>
 								</select>
 							</div>
 						</div>
@@ -468,9 +468,9 @@
 								<label for="endingYear">Year</label>
 								<select name="endYear" id="endingYear" class="select">
 									<?php 
-								for($i = $year; $i>=1980; $i++){?>
-								<option><?= $i?></option>
-							<?php } ?>
+										for($i = $year; $i>=1980; $i--){?>
+											<option><?= $i?></option>
+									<?php } ?>
 								</select>
 							</div>
 						</div>

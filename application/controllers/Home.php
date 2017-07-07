@@ -269,6 +269,7 @@ class Home extends CI_Controller {
 		$this->data['filterlocations'] = 'false';
 		if(isset($_POST))
 		if($this->input->post('filter')  == 1){
+			// var_dump($_POST); die;
 			if(isset($_POST['skill'])){
 				$skill = $_POST['skill'];
 				$filteredSkillJobIDs =  array();
@@ -300,12 +301,9 @@ class Home extends CI_Controller {
 			if(isset($location))
 				$this->data['filterlocations'] =json_encode($location);
 			$filteredJobIDs = array_unique(array_merge($filteredLocationJobIDs, $filteredSkillJobIDs));
-
 			$jobIDs = array();
 			$i = 0;
-			if(empty($filteredJobIDs)){
-				$this->load->view('relevantJobs', $this->data);
-			}else{
+			
 				foreach ($this->data['jobOffers'] as $key => $value) {
 					if(!in_array($value['jobID'], $filteredJobIDs)){
 						unset($this->data['jobOffers'][$i]);
@@ -313,7 +311,7 @@ class Home extends CI_Controller {
 					$i++;
 				}
 				$this->load->view('relevantJobs', $this->data);
-			}
+			
 		}else{
 			$this->load->view('relevantJobs', $this->data);
 		}
@@ -366,9 +364,6 @@ class Home extends CI_Controller {
 
 			$jobIDs = array();
 			$i = 0;
-			if(empty($filteredJobIDs)){
-				$this->load->view('jobOffers', $this->data);
-			}else{
 				foreach ($this->data['jobOffers'] as $key => $value) {
 					if(!in_array($value['jobID'], $filteredJobIDs)){
 						unset($this->data['jobOffers'][$i]);
@@ -376,7 +371,7 @@ class Home extends CI_Controller {
 					$i++;
 				}
 				$this->load->view('jobOffers', $this->data);
-			}
+			
 		}else{
 			$this->load->view('jobOffers', $this->data);
 		}
@@ -469,9 +464,6 @@ class Home extends CI_Controller {
 
 			$internshipIDs = array();
 			$i = 0;
-			if(empty($filteredinternshipIDs)){
-				$this->load->view('relevantinternships', $this->data);
-			}else{
 				foreach ($this->data['internshipOffers'] as $key => $value) {
 					if(!in_array($value['internshipID'], $filteredinternshipIDs)){
 						unset($this->data['internshipOffers'][$i]);
@@ -479,7 +471,7 @@ class Home extends CI_Controller {
 					$i++;
 				}
 				$this->load->view('relevantInternships', $this->data);
-			}
+			
 		}else{
 			$this->load->view('relevantInternships', $this->data);
 		}
@@ -520,17 +512,13 @@ class Home extends CI_Controller {
 
 			$internshipIDs = array();
 			$i = 0;
-			if(empty($filteredinternshipIDs)){
-				$this->load->view('internshipOffers', $this->data);
-			}else{
-				foreach ($this->data['internshipOffers'] as $key => $value) {
+				foreach ($this->data['internshipOffers'] as $key => $value) {	
 					if(!in_array($value['internshipID'], $filteredinternshipIDs)){
 						unset($this->data['internshipOffers'][$i]);
 					}
 					$i++;
 				}
 				$this->load->view('internshipOffers', $this->data);
-			}
 		}else{
 			$this->load->view('internshipOffers', $this->data);
 		}

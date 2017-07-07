@@ -77,9 +77,10 @@ class Home_lib {
 		return $CI->homeModel->getinternshipOffersSkillFilters($skills);
 	}
 	public function getJobOffersLocationFilters($location){
+		var_dump($location);
 		$CI = &get_instance();
 		$CI->load->model('home_model','homeModel');
-		return $CI->homeModel->getJobOffersLocationFilters($location);
+		return $CI->homeModel->getJobOffersLocationFilters($location); 
 	}
 
 	public function getAddedInternshipOffers(){
