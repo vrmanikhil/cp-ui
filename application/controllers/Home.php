@@ -278,6 +278,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredSkillJobIDs = [];
+				$skill = [];
 			}
 
 			if(isset($_POST['location'])){
@@ -289,6 +290,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredLocationJobIDs = [];
+				$location = [];
 				}
 				// var_dump(json_encode($skill));
 				// var_dump(json_encode($location));
@@ -778,6 +780,10 @@ if($_SESSION['userData']['accountType']=='2'){
 		$message = $this->input->post('message');
 		$recipient = $this->input->post('data');
 		$receiver = $recipient['userID'];
+		if($receiver ==  "data[userID]"){
+			$this->session->set_flashdata('message', array('content' => 'Some Error Occured, Please Try Again.', 'class' => 'error'));
+			redirect(base_url('messages'));
+		}
 		$connection = $this->home_lib->checkConnection($receiver);
 		if($receiver == $_SESSION['userData']['userID']){
 			$this->session->set_flashdata('message', array('content' => 'You Cannot Chat with Yourself.', 'class' => 'error'));

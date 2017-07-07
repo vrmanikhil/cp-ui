@@ -193,6 +193,10 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('endYear')){
 			$endYear = $x;
 		}
+		if(strtotime($endMonth.' '.$endYear) < strtotime($startMonth.' '.$startYear)){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
+		}
 		$data = array(
 			'companyName' => $companyName,
 			'position' => $position,
@@ -309,6 +313,17 @@ class Web extends CI_Controller {
 		}
 		if($x = $this->input->post('score')){
 			$score = $x;
+		}
+		if($scoreType == 1){
+			if(!($score > 0.0 && $score < 10.0)){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('user-profile/'.$userID));
+			}
+		}else{
+			if(!($score > 0 && $score < 100)){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('user-profile/'.$userID));
+			}
 		}
 		if($x = $this->input->post('educationDescription')){
 			$description = $x;
