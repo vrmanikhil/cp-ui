@@ -8,7 +8,7 @@
 	<title>Edit Internship Offer|CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/add-offer.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -124,7 +124,7 @@
 						<option value="3" <?php if($internshipDetails['stipendType']=='3') echo "selected"; ?>>Offered in Range</option>
 						<option value="4" <?php if($internshipDetails['stipendType']=='4') echo "selected"; ?>>Fixed Stipend</option>
 					</select>
-					
+
 					<div class="flex" id="offeredRange" <?php if($internshipDetails['stipendType']=='3'){}else{?> style="display: none;"<?php } ?>>
 						<div class="form-group">
 							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
@@ -135,7 +135,7 @@
 							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input" value = "<?= $internshipDetails['minimumStipend']?>">
 						</div>
 					</div>
-					
+
 					<div id="fixedStipend" <?php if($internshipDetails['stipendType']=='4'){}else{?> style="display: none;"<?php }?>>
 					<label for="stipend" class="form__label">Stipend</label>
 					<input type="text" id="stipend" name="stipend" placeholder="Stipend" class="form__input" value = "<?= $internshipDetails['stipend']?>">
@@ -177,7 +177,7 @@
 							<?php $skillsRequired = explode(",", $internshipDetails['skillsRequired']);
 							$skillIDsRequired = explode(",", $internshipDetails['skillIDsRequired']);?>
 						 <?php for($i = 0; $i < sizeof($skillsRequired);$i++){
-						 	$skill[$i] = ['skillname' => $skillsRequired[$i], 'skillID' => $skillIDsRequired[$i]];		
+						 	$skill[$i] = ['skillname' => $skillsRequired[$i], 'skillID' => $skillIDsRequired[$i]];
 						 	?>
 						<p class="skill"><?=$skillsRequired[$i]?><a href="javascript:" class = "skillrem" data-skill="<?= $skillsRequired[$i]?>" index="<?=$i?>" skill-id="<?=$skillIDsRequired[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
 						<?php }}else{$skill = [];}?>
@@ -202,7 +202,7 @@
 						<label class="form__label">Internship Location(s)-</label>
 						<?php if($internshipDetails['cities'] != NULL){?>
 							<?php $cities = explode(",", $internshipDetails['cities']);
-							$cityIDs = explode(",", $internshipDetails['cityIDs']);?>	
+							$cityIDs = explode(",", $internshipDetails['cityIDs']);?>
 						<?php for($i = 0; $i < sizeof($cities);$i++){
 							$location[$i] = ['city_name' => $cities[$i], 'location_id' => $cityIDs[$i]];
 							?>
@@ -214,7 +214,7 @@
 
 					<input type="submit" value="Edit Internship" class="btn btn--primary add-offer__form-submit">
 					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-					
+
 				</form>
 				</div>
 			</div>
@@ -333,7 +333,7 @@
 
   	  $("input[name=\"selected_skills\"]").val(JSON.stringify(selectedSkills));
   	});
-  
+
   	</script>
 
 		<script>

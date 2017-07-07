@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu1
--- http://www.phpmyadmin.net
+-- version 4.0.10.18
+-- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 05, 2017 at 02:57 PM
--- Server version: 5.7.18-0ubuntu0.16.04.1
--- PHP Version: 7.0.15-0ubuntu0.16.04.4
+-- Host: localhost:3306
+-- Generation Time: Jul 07, 2017 at 03:33 AM
+-- Server version: 5.6.35-cll-lve
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `campuspuppy`
@@ -26,12 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE `achievements` (
-  `achievementID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `achievements` (
+  `achievementID` int(5) NOT NULL AUTO_INCREMENT,
   `achievementTitle` text NOT NULL,
   `achievementDescription` text NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`achievementID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -39,11 +40,13 @@ CREATE TABLE `achievements` (
 -- Table structure for table `adminAuth`
 --
 
-CREATE TABLE `adminAuth` (
-  `adminID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adminAuth` (
+  `adminID` int(5) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`adminID`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `adminAuth`
@@ -58,12 +61,13 @@ INSERT INTO `adminAuth` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE `colleges` (
-  `college_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `colleges` (
+  `college_id` int(5) NOT NULL AUTO_INCREMENT,
   `college` varchar(255) NOT NULL,
-  `logo` text NOT NULL,
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `logo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg',
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`college_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1156 ;
 
 --
 -- Dumping data for table `colleges`
@@ -136,7 +140,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (64, 'YMCA University of Science and technology, Faridabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/YMCA_University.jpg', 1),
 (65, 'World College Of Technology and Management, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/WCTM.jpg', 1),
 (66, 'Aryan Institue Of Technology, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Aryan_Institute_of_Technology.jpg', 1),
-(67, 'Bharati Vidyapeeth\'s College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/bhartiya_Vidyapeeth.jpg', 1),
+(67, 'Bharati Vidyapeeth''s College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/bhartiya_Vidyapeeth.jpg', 1),
 (68, 'Dronacharya College of Engineering, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DCE,greater_Noida.jpg', 1),
 (69, 'BML Munjal University, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BML_Munjal.jpg', 1),
 (70, 'Bennett University, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Bennett_University.jpg', 1),
@@ -351,7 +355,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (279, 'DNS College of engineering and technology, Amroha', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DNS_College_of_engineering_and_technology.jpg', 1),
 (280, 'Divya Jyoti College of Engineering and technology, Modinagar', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Divya Jyoti College of Engineering and technology.jpg', 1),
 (281, 'Ganeshi lal Narayandas Agrawal Institute of technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ganeshi_lal_Narayandas_Agrawal_Institute_of_technology.jpg', 1),
-(282, 'Women\'s Institute of engineering and technology, Sitapur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Womens_Institute_of_engineering_and_technology.jpg', 1),
+(282, 'Women''s Institute of engineering and technology, Sitapur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Womens_Institute_of_engineering_and_technology.jpg', 1),
 (283, 'Vidya Bhavan college of engineering and technology, Kanpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Vidya_Bhavan_college_of_engineering_and_technology.jpg', 1),
 (284, 'Venkateshwara Institute of technology, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Venkateshwar Institute of technology.jpg', 1),
 (285, 'Veer Kunwar Institute of Technology, Bijnaur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Veer_Kunwar_Institute_of_Technology.jpg', 1),
@@ -441,7 +445,793 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (368, 'Rajiv Gandhi Institute of petroleum technology, Rae bareli', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Rajiv_Gandhi_Institute_of_petroleum_technology.jpg', 1),
 (369, 'PDM University, Bahadurgarh', 'http://backoffice.campuspuppy.com/assets/collegeLogo/PDM_University.jpg', 1),
 (370, 'Mukesh Patel School of Technology Management and Engineering, Mumbai', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Mukesh_Patel_School_of_Technology_and_engineering.jpg', 1),
-(371, 'Don Bosco Institute of technology, Bangalore', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Don_Bosco_Institute_of_technology,_Bangalore.jpg', 1);
+(371, 'Don Bosco Institute of technology, Bangalore', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Don_Bosco_Institute_of_technology,_Bangalore.jpg', 1),
+(372, 'J K Institute of apllied physics and Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(373, 'Dr. Ambedkar Institute of technology for Handicapped', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(374, 'GLA University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(375, 'Ambedkar Insitute of advanced communication technologies and research ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(376, 'babasaheb bhimrao ambedkar University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(377, 'Galaxy Group Of institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(378, 'Shobhit University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(379, 'Gateway Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(380, 'Dayalbagh Educational Institute', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(381, 'National Dairy Research Institute ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(382, 'Chaudhary Charan Singh Haryana Agricultural University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(383, 'Indian Institute of Carpet Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(384, 'Ganga Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(385, 'Sam Higginbottom Institute of agricultural , Technology and Science', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(386, 'Dr BR Ambedkar University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(387, 'Aditya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(388, 'Indraprastha College for Women ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(389, 'Rajiv Gandhi Institute of Information technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(390, 'Satya Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(391, 'TERI University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(392, 'Babu Banarsi Das Northern Indian Insitute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(393, 'Ch Devi lal State insitute of engineeirng and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(394, 'Swami Vivekanand Subharti University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(395, 'National Institute of Aeronautical Engineering Research and Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(396, 'Raj kumar Goel Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(397, 'NGF College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(398, 'Apeejay Stya University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(399, 'The Technological Institute of textile and Sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(400, 'National Institute of food technology and entrepreneurship and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(401, 'Dr. SS Bhatnagar University Institute of Chemical Engineering and Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(402, 'Rajkiya Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(403, 'S G T University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(404, 'MERI College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(405, 'Seth Jai Parkash Mukand Lal Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(406, 'Lingaya''s University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(407, 'Dr. K N Modi Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(408, 'Kurukshetra Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(409, 'Babu Banarsi Das Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(410, 'Ambala College of engineering and applied research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(411, 'International Maritime Institute', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(412, 'Asia Pacific Institute of Inforamtion technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(413, 'Shri Ram Mukti Smarak College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(414, 'Chandra Shekhar Azad University of Agriculture and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(415, 'Lucknow Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(416, 'Bhagat Phool Singh Mahila Vishwavidyalaya', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(417, 'Guru Nanak Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(418, 'Glocal University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(419, 'Hindu College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(420, 'Raj kumar goel institute of technology Aand management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(421, 'Lucknow Model Instititute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(422, 'Delhi Insitute of technology, Management and Research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(423, 'Delhi Insitute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(424, 'Delhi College of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(425, 'Aravali College of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(426, 'University School of Chemical Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(427, 'Doon Valley Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(428, 'Kamla Nehru Institute of physical and social sciences engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(429, 'Mahaveer Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(430, 'Echelon Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(431, 'KIIT College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(432, 'Kanpur Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(433, 'Galaxy Global Imperial Technical Campus', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(434, 'Delhi Technical Campus', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(435, 'Baba Saheb Ambedkar Technical Education Society', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(436, 'Tirupati College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(437, 'Samalkha Group of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(438, 'Advanced College of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(439, 'SR Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(440, 'Bhagwan Parshuram College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(441, 'Vaish College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(442, 'Maharishi Ved Vyas Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(443, 'BS Angpuria Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(444, 'Mukesh Patel school of technology management and engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(445, 'CBS Group of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(446, 'St. Andrews Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(447, 'University school of bio-technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(448, 'Rawal Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(449, 'Prannath Parnami Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(450, 'MVN University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(451, 'Geeta Institute of mangement and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(452, 'DAV College of engineering and technology ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(453, 'Akido College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(454, 'Advanced Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(455, 'Bhagwan Mahavir Instiute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(456, 'Maharana Pratap Mangla Devi Institute of computer science technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(457, 'International Institute of enginerring and Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(458, 'Institute of information technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(459, 'Delhi Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(460, 'Bhiwani Institute of technology  and sciences ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(461, 'Al-Falah School of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(462, 'Greater Noida College of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(463, 'GD Goenka School Of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(464, 'Bimla Devi Educational Society''s Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(465, 'RP Inderprastha Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(466, 'PM College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(467, 'Jan Nayak Ch. Devi Lal Memorial College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(468, 'BRCM College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(469, 'Asian Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(470, 'Applied College of management and Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(471, 'GITM Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(472, 'NIILM University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(473, 'Dalal Global Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(474, 'South Point Institute of Tchnology and Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(475, 'Shivalik Institute of Engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(476, 'SGT Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(477, 'Sat Priya School of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(478, 'Rayat-Bahra Innovative Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(479, 'Institute of Technology and sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(480, 'ICL Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(481, 'Haryana College of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(482, 'Global Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(483, 'Ganpati Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(484, 'Brown Hills College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(485, 'Apex Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(486, 'Agra Public college of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(487, 'Rattan Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(488, 'Jai Prakash Mukund Lal Innovative engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(489, 'Narendra Deva University of agriculture and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(490, 'Baba Sahab Dr. Bhim Rao Ambedkar College of agricultural engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(491, 'Lingaya''s Institute of management and technology for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(492, 'DR College of enginnering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(493, 'NC College  of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(494, 'Technology education and research institute ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(495, 'Suraj College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(496, 'SSLD Vashney Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(497, 'Savera educational trust group of institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(498, 'Sat Kabir Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(499, 'Panchkula Engineering college ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(500, 'Om institute  of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(501, 'Matu Ram institute of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(502, 'Manav Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(503, 'Karnal Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(504, 'Ishwar Institute of technology and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(505, 'International Institute of technology and business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(506, 'Institute of science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(507, 'Haryana Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(508, 'Galaxy Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(509, 'BLS Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(510, 'Bharat Institute of technology ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(511, 'Bhabha Institute of science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(512, 'Global Research Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(513, 'Maharishi Markandeshwar Group of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(514, 'Shri Krishan Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(515, 'Pt. LR College of Technology technical campus', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(516, 'Rao Pahlad Singh Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(517, 'Yamuna Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(518, 'Yaduvanshi College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(519, 'World Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(520, 'Tek Chand Mann Colleg of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(521, 'Swami Devi Dyal Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(522, 'Subharti Institute of technology and engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(523, 'Somany PG Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(524, 'Shri Balwant Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(525, 'Shri Ram Mulkh College of technical Education', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(526, 'Shanti Niketan College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(527, 'SD Mewat Institute of engineering andd technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(528, 'Royal Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(529, 'Modern Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(530, 'Kalpi Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(531, 'International Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(532, 'Indus Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(533, 'Gurgaon College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(534, 'Doon College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(535, 'Darsh Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(536, 'Birla Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(537, 'Nehru Gram Bharti University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(538, 'Lingaya''s GVKS Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(539, 'Maharana Pratap Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(540, 'Satyug Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(541, 'Mata Rajkaur Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(542, 'Dayanad Dinanath Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(543, 'Universal Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(544, 'Swami Devi dyal College of echnical Education', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(545, 'Sonipat Institute of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(546, 'Shrinathji Institute for technical education', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(547, 'Shri Krishna College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(548, 'Shree Siddhivinayak Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(549, 'SB Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(550, 'Rukmini Devi College of engineering and allied sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(551, 'Rishi Chadha Vishvas Girls Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(552, 'Rama Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(553, 'Kalka Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(554, 'Haryana Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(555, 'Gold Field Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(556, 'ESAR College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(557, 'Doon Valley college of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(558, 'Devender Singh Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(559, 'Bhagwant Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(560, 'Ayodhya Prasad Management Institute and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(561, 'Awadh Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(562, 'Apostle Institute of technology for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(563, 'Anupama College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(564, 'Haryana Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(565, 'Hindustan Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(566, 'Shri Ram College of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(567, 'Al Falah University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(568, 'Jaypee University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(569, 'Maharishi University of information technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(570, 'Birla Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(571, 'Shobhit University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(572, 'Sai Nath College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(573, 'Naraini Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(574, 'Krishna Vidyapeeth Of Management And Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(575, 'Prince Institute of innovative technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(576, 'KITE School of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(577, 'Bhagwan Mahaveer College of engineering and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(578, 'VIIT College of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(579, 'Shree Ram Mulkh Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(580, 'BM Group of Institutions ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(581, 'Shri Baba Mast Nath Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(582, 'RN College of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(583, 'Guru Nanak Dev University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(584, 'Anubhav Institute of engineering and Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(585, 'Allahabad Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(586, 'SD Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(587, 'Murli Manohar Agrawal Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(588, 'Institute of people''s science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(589, 'Gyan Bharti Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(590, 'Excel Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(591, 'Gurgaon College of engineering for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(592, 'Jind Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(593, 'RN College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(594, 'Amani Engineering college', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(595, 'Jagannath University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(596, 'Chaudhary Ranbir Singh University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(597, 'Rajkiya Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(598, 'Mahaveer Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(599, 'Mahatma Gandhi universe Institute ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(600, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(601, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(602, 'Vardey Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(603, 'Shri Ram Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(604, 'NC Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(605, 'Institute of advanced management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(606, 'Faculty of engineering shanti Niketan Trust''s group of institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(607, 'Asian Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(608, 'Modern Institute of management for women ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(609, 'RB Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(610, 'Institute of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(611, 'Muzaffarnagar Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(612, 'Rohtak Institute of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(613, 'School of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(614, 'Shri Ram College of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(615, 'CSM Group of institutions ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(616, 'maharana pratap college of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(617, 'Maa Saraswati Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(618, 'Alliance College of engineering and design', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(619, 'Presidency University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(620, 'New Horizon college of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(621, 'National Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(622, 'Manipal Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(623, 'RV College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(624, 'PES University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(625, 'Christ University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(626, 'Bangalore insitute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(627, 'BMS Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(628, 'Acharya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(629, 'Dayananda Sagar College Of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(630, 'PES Institute of technology, Bangalore south campus', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(631, 'University Visvesvaraya College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(632, 'Sir M Visvesvaraya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(633, 'Nitte Meenakshi Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(634, 'The National Institute of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(635, 'Reva Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(636, 'MS Ramaiah University of applied sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(637, 'Siddaganga Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(638, 'The oxford college of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(639, 'Bangalore university', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(640, 'KLE Technological University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(641, 'Amrita School of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(642, 'Dayanand Sagar Academy of Technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(643, 'MVJ College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(644, 'BNM Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(645, 'Dr. Ambedkar Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(646, 'JSS Mahavidyalaya Sri Jayachamarajendra College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(647, 'RNS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(648, 'Reva University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(649, 'Dayananda Sagar University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(650, 'SJB Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(651, 'JSS Academy of tcehnical education', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(652, 'Don Bosco Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(653, 'Vidyavardhaka College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(654, 'Jain University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(655, 'PES Collefe of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(656, 'CMR Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(657, 'SDM College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(658, 'NIE Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(659, 'ACS College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(660, 'NMAM Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(661, 'KLS Global Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(662, 'Indian Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(663, 'School of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(664, 'KLE Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(665, 'Cambridge Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(666, 'AMC Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(667, 'St. Joseph Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(668, 'Visvesvaraya Technological University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(669, 'MS Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(670, 'Bapuji Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(671, 'GITAM School of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(672, 'Rajarajeswari College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(673, 'Sapthagiri College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(674, 'Sahyadri College of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(675, 'Basaveshwar Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(676, 'Global Academy of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(677, 'Sri Sriram College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(678, 'PES Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(679, 'Maharaja Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(680, 'Jawaharlal Nehru National College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(681, 'HKBK College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(682, 'T John Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(683, 'Sri Venkateshwar College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(684, 'Sambhram Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(685, 'Banglore college of engineering adn technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(686, 'Sri Siddhartha Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(687, 'Magalore institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(688, 'Univeristy of Mysore', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(689, 'KNS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(690, 'East West institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(691, 'Atria Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(692, 'Malnad College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(693, 'City engineering college ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(694, 'KLE Dr. MS Sheshgiri College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(695, 'Brindavan College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(696, 'SJC Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(697, 'Rajiv Gandhi Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(698, 'Nagarjuna College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(699, 'Bangalore technological University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(700, 'Adichunchanagiri Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(701, 'KS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(702, 'KLE Socieety''s B V Bhoomraddi Colleg of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(703, 'KS School of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(704, 'Jain College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(705, 'Ballari Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(706, 'Alva''s Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(707, 'Academy for technical and management excellence', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(708, 'RR Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(709, 'University of agricultural sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(710, 'University BDT College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(711, 'Sri Revana siddeshwara Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(712, 'Sri Krishna Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(713, 'Sai Vidya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(714, 'GM Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(715, 'Amruta Institute of engineering and management sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(716, 'Alpha college of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(717, 'SEA College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1);
+INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
+(718, 'Jyothy Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(719, 'East Point College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(720, 'Canara engineering college', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(721, 'APS Colleg of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(722, 'Srinivas Instiute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(723, 'Channabasaveshwara Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(724, 'Vemana Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(725, 'Vivekananda Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(726, 'Vidya Vikas Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(727, 'Sri Dharmasthala Manjunatheshwara Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(728, 'PA College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(729, 'BTL  Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(730, 'HKE Society''s PDA College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(731, 'GSSS Institute of engineering and technology for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(732, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(733, 'Government Sri Krishanarajendra Sliver jubilee Technological Institute', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(734, 'BGS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(735, 'PNS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(736, 'Shree Devi Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(737, 'BLDEA''s VP Dr. PG Halakatti College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(738, 'Shri Madhwa Vadiraja Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(739, 'KLS Vishwanathrao Deshpande Rural Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(740, 'Karavali Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(741, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(742, 'Akshaya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(743, 'Nandi Institute of technology and management sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(744, 'Amrita Vishwa Vidyapeetham ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(745, 'Mangalore Marine College and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(746, 'SG Balekundri Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(747, 'Jain Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(748, 'Coorg Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(749, 'KLE College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(750, 'Moodlakatte Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(751, 'Gopalan College of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(752, 'Mysore college of engineering and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(753, 'Sampoorna Institute of technology and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(754, 'Islamiah Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(755, 'Vijay Vittala Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(756, 'Rao Bahadur Y Mahabaleshwarappa Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(757, 'Basava Academy of  Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(758, 'Appa Institute of engineering and teechnology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(759, 'Ghousia College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(760, 'Shri Pillappa College pf engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(761, 'Vivekananda College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(762, 'SJM Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(763, 'RL Jalappa Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(764, 'Achutha Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(765, 'SCT Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(766, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(767, 'Jnana Vikas Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(768, 'Angadi Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(769, 'AGM Rural College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(770, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(771, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(772, 'KVG College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(773, 'Impact College of engineering and applied sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(774, 'Bearys Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(775, 'Siddhartha Institute of aeronautical Engineering and Information technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(776, 'Adarsha Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(777, 'Anjuman Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(778, 'Srinivas School of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(779, 'Shaikh College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(780, 'Rajeev Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(781, 'Khaja Banda Nawaz College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(782, 'Bheemana Khandre Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(783, 'Sha-Shib College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(784, 'HMS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(785, 'Dr. Sri Sri Sri Shivakumara Mahaswamy College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(786, 'Auden Technology and Management Academy ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(787, 'Yellamma Dasappa Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(788, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(789, 'Sri Taralbalu Jagadguru institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(790, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(791, 'SJPN Trust''s Hirasugar Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(792, 'NDRK Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(793, 'VSM''s Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(794, 'Smt. Kamala and Sri Venkappa M Agadi College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(795, 'Shridevi Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(796, 'Shetty Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(797, 'SECAB Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(798, 'Prasanna College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(799, 'Navodaya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(800, 'Nadgir Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(801, 'Maratha Mandal Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(802, 'KCT Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(803, 'Guru Nanak Dev Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(804, 'Godutai Engineering College for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(805, 'G Madegowda Institute of tecehnology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(806, 'Dr. T Thimmaiah Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(807, 'Bahubali College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(808, 'Sri Vidya Vinayaka Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(809, 'Tontadarya College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(810, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(811, 'Ekalavya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(812, 'Dr. MV Shetty Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(813, 'Kalpataru Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(814, 'Karnataka Veterinary, Animal and Fisheries Sciences University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(815, 'RTE Society''s Rural Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(816, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(817, 'C Byregowda Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(818, 'Proudadevaraya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(819, 'Sri Krishna School of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(820, 'Lingarajappa Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(821, 'GSS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(822, 'Rai Technology University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(823, 'HKE Society''s SLN College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(824, 'Government Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(825, 'Veerappa Nisty Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(826, 'Sri Belimatha mahasamsthana Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(827, 'East Point College of engineering for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(828, 'Basavakalyan Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(829, 'Cauvery Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(830, 'Girijabai Sail Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(831, 'Sri Basaveshwara Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(832, 'PNS Women''s Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(833, 'Gopal reddy College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(834, 'Government Tool Room and Training Center', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(835, 'Biluru Gurubasava Mahaswamiji Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(836, 'Jain AGM Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(837, 'PES Institute of technology ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(838, 'Mysore Royal Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(839, 'Central Institute of plastics engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(840, 'Yenepoya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(841, 'AJ Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(842, 'Maharaja Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(843, 'Harlal Instititute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(844, 'Bharati Vidyapeeth''s Institute of management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(845, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(846, 'ABV- Indian Institute of Information Technology and Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(847, 'Acharya Bangalore B-School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(848, 'Acharya Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(849, 'Acharya Nagarjuna University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(850, 'Acropolis Faculty of Management and Research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(851, 'Adani Institute of Infrastructure Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(852, 'Adhiyamaan College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(853, 'AIMS Institutes', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(854, 'AISECT University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(855, 'Alliance School of Business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(856, 'Amity Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(857, 'Amrita School of Business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(858, '3 Amrut Mody School of Management, Ahmedabad University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(859, 'Andhra University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(860, 'Anna University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(861, 'Apeejay School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(862, 'Army Institute of Management and Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(863, 'Army Institute of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(864, 'Asia Pacific Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(865, 'Asian School of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(866, 'Baba Farid College of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(867, 'Babu Banarasi Das NAtional Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(868, 'Badruka College opst graduate centre', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(869, 'Balaji Institute of international business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(870, 'Balaji Institute of management and human resource development ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(871, 'Balaji Institute of modern management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(872, 'Balaji Institute of telecom and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(873, 'Bannari Amman Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(874, 'Bapuji Academy of management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(875, 'Bapuji Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(876, 'Berhampur University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(877, 'Bharathidasan Institute of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(878, 'Bharati Vidyapeeth Abhijeet Kadam Institute of management and social sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(879, 'Bharati Vidyapeeth''s Institute of management and entrepreneurship development', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(880, 'Bharati Vidyapeeth''s Instituteof management studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(881, 'Bharatiya Vidya Bhavan''s Usha and lakshmi mittal Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(882, 'Birla Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(883, 'Birla Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(884, 'BK School of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(885, 'BS Anangpuria Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(886, 'C K Shah Vijaypurwala Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(887, 'Calcutta Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(888, 'Centre for management development', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(889, 'Centurion University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(890, 'CH Institute of management and commerce', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(891, 'Chaitanya Bharti Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(892, 'Chandigarh business school of administration', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(893, 'Chandigarh University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(894, 'Chandragupt Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(895, 'Chitkara Business School ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(896, 'Christ University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(897, 'College of management and Economics Studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(898, 'DAV Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(899, 'Dayananda Sagar Colleg of arts science and commerce', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(900, 'DC School of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(901, 'Deenbandhu Chhotu Ram University of science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(902, 'Delhi School of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(903, 'Department of business economics', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(904, 'Department of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(905, 'Dapartment of management sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(906, 'Department of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(907, 'Department of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(908, 'Department of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(909, 'Department of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(910, 'Dev Bhoomi Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(911, 'Dharmsinh Desai university', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(912, 'Dhruva College of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(913, 'Disha Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(914, 'Doon Business School ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(915, 'Dr. CV Raman University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(916, 'Dr. VN Bedekar Institute of management sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(917, 'Durgadevi Saraf Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(918, 'Easwari Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(919, 'Entrepreneurship Development and Management Processes International', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(920, 'Entrepreneurship Development Institute of India', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(921, 'Erode Builder Education trust group of institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(922, 'Faculty of management studies, Banaras Hindu University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(923, 'Faculty of management studies,MRIU', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(924, 'Faculty of management studies,MS Patel Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(925, 'Faculty of management studies,University of Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(926, 'FLAME University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(927, 'FORE School of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(928, 'Fortune Institute of international business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(929, 'Gian Jyoti Institute of mangement and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(930, 'GIBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(931, 'GITAM Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(932, 'GLA University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(933, 'Global business school and research centre', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(934, 'Global business school ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(935, 'Gnanam School of business ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(936, 'Gnanamni Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(937, 'GNVS Institute of managment', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(938, 'Goa Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(939, 'Great Lakes Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(940, 'GRG School of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(941, 'Guru Nanak Dev University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(942, 'Hallmark business school', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(943, 'Himachal Pradesh university business school', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(944, 'Hindustan University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(945, 'Hyderabad Business School, GITAM University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(946, 'IBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(947, 'IBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(948, 'IBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(949, 'IBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(950, 'IBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(951, 'IBS Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(952, 'IES Management college and research centre ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(953, 'IILM graduate school of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(954, 'IIM FOSTIIMA Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(955, 'Indian Institute of foreign Trade', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(956, 'Indian Institute of forest management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(957, 'Indian Institute of health management research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(958, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(959, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(960, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(961, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(962, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(963, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(964, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(965, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(966, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(967, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(968, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(969, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(970, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(971, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(972, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(973, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(974, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(975, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(976, 'Indian Institute of social welfare and business managment', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(977, 'Indian Institute of technology, Indian School of Mines', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(978, 'Indian Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(979, 'Indian Institute of tourism and travel management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(980, 'Indian School of business ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(981, 'Indra School of business studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(982, 'Indus Business Academy ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(983, 'Indus Business Academy ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(984, 'Indus Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(985, 'Institute for financial Management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(986, 'Institute for future education entrepreneurship and leadership', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(987, 'Institute of technology and mangement ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(988, 'Institute of business mangement and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(989, 'Institute of business mangement and research,IPS Academy', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(990, 'Institute of cooperativeand corporate management research training', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(991, 'Institute of finance and international management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(992, 'Institute of management studies, Devi Ahilya University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(993, 'Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(994, 'Institute of management studies,Ranchi University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(995, 'Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(996, 'Institute of management technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(997, 'Institute of management technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(998, 'Institute of management technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(999, 'Institute of public enterprise', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1000, 'Institute of rural management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1001, 'Institute of rural management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1002, 'Institute of science and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1003, 'International Institute of management studies ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1004, 'International Institute of professional Studies, Devi Ahilya University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1005, 'International School of business and media', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1006, 'ITM Business School ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1007, 'ITM Business School ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1008, 'ITM School of business ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1009, 'ITS Institute of technology and science', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1010, 'Jagan Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1011, 'Jagannath International Management School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1012, 'Jagran Lakecity University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1013, 'Jaipuria Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1014, 'Jaipuria Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1015, 'Jaipuria Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1016, 'Jaipuria Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1017, 'Jamnalai Bajaj Institute of managment studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1018, 'Jawaharlal Nehru School of management studies, Assam University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1019, 'Jawaharlal Nehru Technological University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1020, 'Jaypee business school', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1021, 'Jindal global business school', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1022, 'Justice KS Hegde Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1023, 'Karunya University Business School ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1024, 'Kaziranga University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1025, 'KCT Business School ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1026, 'KIIT School of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1027, 'KIIT School of rural management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1028, 'Kirloskar Institute of advanced management studies ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1029, 'Kirloskar Institute of advanced management studies ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1030, 'Kj Somaiya Institute of management studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1031, 'KLS Institute of management education and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1032, 'Knowledge business school', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1033, 'Koshys Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1034, 'Lal Bahadur Shastri Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1035, 'Loyola Institute of business administration', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1036, 'MAEER''s MIT School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1037, 'MAEER"S MIT School of business ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1038, 'Malaviya National  Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1039, 'Management development Institute', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1040, 'Manipal University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1041, 'MICA', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1042, 'MIT School of telecom management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1043, 'Mittal School of business,LPU', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1044, 'MM Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1045, 'Mody University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1046, 'MOP Vaishnav College for women ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1047, 'Motilal Nehru National Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1048, 'MS Ramaiah Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1049, 'Myra School of business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1050, 'Narsee Monjee Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1051, 'National Institute of agricultural Extension management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1052, 'National Institute of financial Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1053, 'National Institute of industrial Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1054, 'National Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1055, 'National Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1056, 'National Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1057, 'National Insurance Acedemy', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1058, 'New Delhi Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1059, 'NIILM Centre for management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1060, 'Nirma University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1061, 'North Eastern Regional Institute of science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1062, 'NSHM Knowledge Campus', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1063, 'NTPC School of business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1064, 'Pondicherry University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1065, 'Prestige Institute of management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1066, 'Prin. LN Welingkar Institute of management development and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1067, 'Prin. LN Welingkar Institute of management development and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1068, 'PSG Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1069, 'Pt. Ravishankar Shukla University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1070, 'Pune Institute of busines management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1071, 'Quantum School of Business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1072, 'Rajagirir Centre for business studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1073, 'Rajalakshmi Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1074, 'Rajiv Gandhi Indian Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1075, 'Regional College of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1076, 'Royal School of Business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1077, 'RVS Institute of management studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1078, 'RVS Technical Campus', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1079, 'SA Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1080, 'Sai Balaji International Institute of management sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1081, 'Sairam Institute of management sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1082, 'Sambhram Academy of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1083, 'Sandip Institute of technology and research centre', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1084, 'Sardar Patel University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1085, 'Sardar Vallabh Bhai Patel International school of textile management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1086, 'School of inspired leadership', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1087, 'School of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1088, 'School of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1089, 'School of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1090, 'School of petroleum management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1091, 'SCMS Cochin School Of Business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1092, 'SCMS School of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1093, 'Shailesh Mehta School of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1094, 'Shri Dharamsthala Manjunatheshwara Institute for management development', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1095, 'Shri Ram Murti Smarak International Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1096, 'Shri Sant Gajanan Maharaj College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1097, 'Siddaganga Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1098, 'SIES College of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1099, 'Siva Sivani Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1100, 'Skyline Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1101, 'SNS College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1102, 'Sona School of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1103, 'SP Jain Institute of management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1104, 'Sreenidhi Institute of science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1105, 'Sri Krishna College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1106, 'Sri Krishna Institute of management centre for excellence in management education', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1107, 'SRM University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1108, 'SSN School of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1109, 'St. Josephs Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1110, 'Sunstone Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1111, 'Surana College centre for post graduate studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1112, 'Suryadatta Institute of management and information research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1113, 'Sydenham Institute of management studies,research and entrepreneurship education', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1114, 'Symbiosis Centre for information technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1115, 'Symbiosis Centre for management and human resource development', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1116, 'Symbiosis Institute of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1117, 'Symbiosis Institute of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1118, 'Symbiosis Institute of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1119, 'Symbiosis Institute of computer studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1120, 'Symbiosis Institute of international business', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1121, 'Symbiosis Institute of Management Studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1122, 'Symbiosis Institute of Media and Communication ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1123, 'Symbiosis Institute of operations management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1124, 'Symbiosis Institute of telecom management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1);
+INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
+(1125, 'TA Pai Management Institute ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1126, 'Tata Institute of social sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1127, 'Taxila Business Schools', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1128, 'Tezpur University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1129, 'Thiagarajar School of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1130, 'Tula''s Institute, The engineering and management college', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1131, 'unique Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1132, 'United Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1133, 'Universal Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1134, 'University Business School,Panjab University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1135, 'University of lucknow', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1136, 'University of North Bengal', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1137, 'Utkal University ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1138, 'Vaikunth Mehta National Institute of Coopearative Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1139, 'Vel Tech Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1140, 'Vel Tech Dr. Rangrajan Dr. Sakunthala Technical Unversity', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1141, 'Velammal Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1142, 'VES Institute of management studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1143, 'Vidyalankar Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1144, 'Vidyavardhaka College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1145, 'Vignana Jyothi Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1146, 'Vinod Gupta School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1147, 'Vishwa Vishwani Institute of Systems and Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1148, 'Vishwakarma Institute of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1149, 'VIT Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1150, 'Warangal Institute of Management  ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1151, 'Woxsen School of Business ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1152, 'Xavier Institute of Management and Entrepreneurship', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1153, 'Xavier Institute of Management and Entrepreneurship', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1154, 'Xavier Institute of Social Service', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1155, 'XLRI - Xavier School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -449,7 +1239,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 -- Table structure for table `connections`
 --
 
-CREATE TABLE `connections` (
+CREATE TABLE IF NOT EXISTS `connections` (
   `active` int(5) NOT NULL,
   `passive` int(5) NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -461,15 +1251,16 @@ CREATE TABLE `connections` (
 -- Table structure for table `contactMessages`
 --
 
-CREATE TABLE `contactMessages` (
-  `contactID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `contactMessages` (
+  `contactID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
   `message` text NOT NULL,
   `messageRead` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`contactID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -477,22 +1268,23 @@ CREATE TABLE `contactMessages` (
 -- Table structure for table `content`
 --
 
-CREATE TABLE `content` (
-  `content_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `content` (
+  `content_id` int(5) NOT NULL AUTO_INCREMENT,
   `aboutUs` text NOT NULL,
   `termsAndConditions` text NOT NULL,
   `privacyPolicy` text NOT NULL,
   `coat` text NOT NULL,
   `facebook` varchar(255) NOT NULL,
-  `twitter` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `twitter` varchar(255) NOT NULL,
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `content`
 --
 
 INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPolicy`, `coat`, `facebook`, `twitter`) VALUES
-(1, '<p>Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual&rsquo;s specific skill set and expertise in it. Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what&rsquo;s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p><p>At Campus Puppy, we aspire to give the upcoming students a platform which will link them to their desired employers. What makes us stand apart from others in the market is our promise of providing the students with only high quality professional networking experience. And we will ensure this via a set of channels which will authenticate all the users through a verification procedure.</p><p>Our aim is to help the young minds reach a step closer to their dream job. A job that is not just their dream job but also a perfect job for them. Perfect, by the means that a job which will have the skills you possess and love. A student will no longer have to compromise with the job he gets during recruitment drives in his campus, rather he will get a job/internship of his choice.<br />Employers can use the portal to cut down the time wasted in manually filtering the applicants who apply for a job opening. The portal through a large number of filters brings down to say 200 from 1000 applicants. Through virtual campus drive, companies get only the skill specific candidates appropriate to the job opening in their company. Our aim is to connect employers and desired candidates. Point in consideration is that, we don&rsquo;t want to interfere in any company&rsquo;s recruitment process, we just want to give them a more sorted list of students, on which they can still complete their very own recruitment process. We are helping companies to cut down their cost on physical resources and the time wasted by the recruiting employers on a campus drive to set up an entire process for about 1000 students of a campus. We want to provide them with a platform where they can just select a required n number of students on which they can complete their recruitment process. These filters include academic qualification criteria of students, the skills they have, etc. Moreover employers are ensured that the student&rsquo;s are genuine, their details are authentic, and the skills they have are verified.</p><p>We, at Campus Puppy aim to pioneer in the field of professional networking and employment. The students can look for internships and jobs on our portal and the employers can get in touch with the desired applicants on the basis of the skills they possess.</p><p>For us our emphasis is always on the students who struggle through their initial years finding the suitable job and the companies who waste their resources looking up for the best suitable candidate for the job profile.<br /><br />The industry we are catering to is an education Tech cum Human Resource industry which is an evergreen industry. Students graduating every year will want jobs and on the parallel lines companies want to recruit young talents. Thus CampusPuppy which is basically a bridge between the students and the companies will always be in work flow and trying to bridge the gap. We intend to use the industry workflow to our advantage as the market needs in this sector will never die. This is one industry which will always be in a need for this gap to be filled and CampusPuppy will make that happen.</p><p>We have also struggled in our graduation period to find a job of our skill set, and we know exactly how it is important for a person to get a job in the field of his/her own expertise. We have been a part of this experience and thus understand the loop holes in this sector and will be able to fill this gap through our experience and confidence. This experience will be our power play in getting success as CampusPuppy.<br /><br />Legally we are a Private Limited Company. Advantage of owning a private limited company is that the financial liability of shareholders is limited to their shares. Therefore, if a private limited company was in financial trouble and had to close, shareholders would not risk losing their personal assets. Shareholders must also agree to the sale or transfer of shares; therefore, the risk of hostile takeovers is low.&nbsp;</p><p><!--[if gte vml 1]><v:shapetype\r\n id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"\r\n path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">\r\n <v:stroke joinstyle="miter"/>\r\n <v:formulas>\r\n  <v:f eqn="if lineDrawn pixelLineWidth 0"/>\r\n  <v:f eqn="sum @0 1 0"/>\r\n  <v:f eqn="sum 0 0 @1"/>\r\n  <v:f eqn="prod @2 1 2"/>\r\n  <v:f eqn="prod @3 21600 pixelWidth"/>\r\n  <v:f eqn="prod @3 21600 pixelHeight"/>\r\n  <v:f eqn="sum @0 0 1"/>\r\n  <v:f eqn="prod @6 1 2"/>\r\n  <v:f eqn="prod @7 21600 pixelWidth"/>\r\n  <v:f eqn="sum @8 21600 0"/>\r\n  <v:f eqn="prod @7 21600 pixelHeight"/>\r\n  <v:f eqn="sum @10 21600 0"/>\r\n </v:formulas>\r\n <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>\r\n <o:lock v:ext="edit" aspectratio="t"/>\r\n</v:shapetype><v:shape id="Picture_x0020_5" o:spid="_x0000_s1026" type="#_x0000_t75"\r\n style=\'position:absolute;margin-left:272.25pt;margin-top:60pt;width:116.25pt;\r\n height:37.5pt;z-index:-1;visibility:visible;mso-wrap-style:square;\r\n mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;\r\n mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;\r\n mso-position-horizontal-relative:page;mso-position-vertical:absolute;\r\n mso-position-vertical-relative:page\' o:allowincell="f">\r\n <v:imagedata src="file:///C:\\Users\\NICSI\\AppData\\Local\\Temp\\msohtmlclip1\\01\\clip_image001.jpg"\r\n  o:title="" chromakey="white"/>\r\n <w:wrap anchorx="page" anchory="page"/>\r\n</v:shape><![endif]--></p><p>&nbsp;</p>', '<p>The cornerstone of our business is to focus on our Members first. We protect your personal information using industry &shy;standard safeguards. We may share your information with your consent or as required by law, and we will always let you know when we make significant changes to this <strong>Terms and Conditions.</strong></p><p><strong>Statement of Rights and Responsibilities </strong>This Statement of Rights and Responsibilities (&quot;Statement,&quot; &quot;Terms,&quot; or &quot;SRR&quot;) derives from the CampusPuppy Principles, and is our terms of service that governs our relationship with users and others who interact with CampusPuppy, as well as CampusPuppy brands, products and services, which we call the &ldquo;CampusPuppy Services&rdquo; or &ldquo;Services&rdquo;. By using or accessing the CampusPuppy Services, you agree to this Statement, as updated from time to time in accordance with the section below. Additionally, you will find resources at the end of this document that help you understand how CampusPuppy works. Because CampusPuppyprovides a wide range of Services, we may ask you to review and accept supplemental terms that apply to your interaction with a specific app, product, or service. To the extent those supplemental terms conflict with this SRR, the supplemental terms associated with the app, product, or service govern with respect to your use of such app, product or service to the extent of the conflict.</p><p>&nbsp;</p><p><strong>1. Amendments</strong></p><p>&nbsp;1. We&rsquo;ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</p><p>2. If we make changes to policies, guidelines or other terms referenced in or incorporated by this Statement, we may provide notice on the Site Governance Page.</p><p>3. Your continued use of the CampusPuppy Services, following notice of the changes to our terms, policies or guidelines, constitutes your acceptance of our amended terms, policies or guidelines.</p><p>&nbsp;4. Termination If you violate the letter or spirit of this Statement, or otherwise create risk or possible legal exposure for us, we can stop providing all or part of Facebook to you. We will notify you by email or at the next time you attempt to access your account. You may also delete your account or disable your application at any time.</p><p>&nbsp;<strong>2. Disputes</strong></p><p>&nbsp;1. You will resolve any claim, cause of action or dispute (claim) you have with us arising out of or relating to this Statement or CampusPuppy exclusively in the Delhi District Court, and you agree to submit to the personal jurisdiction of such courts for the purpose of litigating all such claims. The laws of the Country(India) will govern this Statement, as well as any claim that might arise between you and us, without regard to conflict of law provisions.</p><p>2. If anyone brings a claim against us related to your actions, content or information on CampusPuppy, you will indemnify and hold us harmless from and against all damages, losses, and expenses of any kind (including reasonable legal fees and costs) related to such claim. Although we provide rules for user conduct, we do not control or direct users&#39; actions on CampusPuppy and are not responsible for the content or information users transmit or share on CampusPuppy. We are not responsible for any offensive, inappropriate, obscene, unlawful or otherwise objectionable content or information you may encounter on CampusPuppy. We are not responsible for the conduct, whether online or offline, of any user of CampusPuppy.</p><p>3. WE TRY TO KEEP CAMPUSPUPPY UP, BUG&shy;FREE, AND SAFE, BUT YOU USE IT AT YOUR OWN RISK. WE ARE PROVIDING CAMPUSPUPPY AS IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON&shy;INFRINGEMENT. WE DO NOT GUARANTEE THAT CAMPUSPUPPY WILL ALWAYS BE SAFE, SECURE OR ERROR&shy;FREE OR THAT CAMPUSPUPPY WILL ALWAYS FUNCTION WITHOUT DISRUPTIONS, DELAYS OR IMPERFECTIONS. CAMPUSPUPPY IS NOT RESPONSIBLE FOR THE ACTIONS, CONTENT, INFORMATION, OR DATA OF THIRD PARTIES, AND YOU RELEASE US, OUR DIRECTORS, OFFICERS, EMPLOYEES, AND AGENTS FROM ANY CLAIMS AND DAMAGES, KNOWN AND UNKNOWN, ARISING OUT OF OR IN ANY WAY CONNECTED WITH ANY CLAIM YOU HAVE AGAINST ANY SUCH THIRD PARTIES.<br />&nbsp;</p><p>&nbsp;<strong>3</strong><strong>. Safety:</strong><br /><br />We do our best to keep CampusPuppy safe, but we cannot guarantee it. We need your help to keep it safe, which includes the following commitments by you:</p><p>1. You will not post unauthorized commercial communications (such as spam) on CampusPuppy.</p><p>2. You will not collect users&#39; content or information, or otherwise access CampusPuppy , using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.</p><p>3. You will not engage in unlawful multi&shy;level marketing, such as a pyramid scheme, on CampusPuppy.</p><p>4. You will not upload viruses or other malicious code.</p><p>5. You will not solicit login information or access an account belonging to someone else.</p><p>6. You will not bully, intimidate, or harass any user.</p><p>7. You will not post content that: is hate speech, threatening, or pornographic? incites violence? or contains nudity or graphic or gratuitous violence.</p><p>8. You will not develop or operate a third&shy; party application containing alcohol&shy;related, dating or other mature content (including advertisements) without appropriate age based restrictions.</p><p>9. You will not use CampusPuppy to do anything unlawful, misleading, malicious, or discriminatory.</p><p>10. You will not do anything that could disable, overburden, or impair the proper working or appearance of CampusPuppy, such as a denial of service attack or interference with page rendering or other CampusPuppy functionality.</p><p>11. You will not facilitate or encourage any violations of this Statement or our policies.<br /><br /><br /><strong>4. Registration:</strong><br /><br />To create an account on CampusPuppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, your postal code, job title, college details and company) to help you build your profile and to provide you more customized services (for example: language&shy;specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p>CampusPuppy users provide their real names and information, and we need your help to keep it that way. Here are some commitments you make to us relating to registering and maintaining the security of your account:</p><p>1. You will not provide any false personal information on CampusPuppy, or create an account for anyone other than yourself without permission.</p><p>2. You will not create more than one personal account.</p><p>3. If we disable your account, you will not create another one without our permission.</p><p>4. You will not use your personal timeline primarily for your own commercial gain, and will use a Facebook Page for such purposes.</p><p>5. You will not use CampusPuppy if you are under 18.</p><p>6. You will not use CampusPuppy if you are a convicted sex offender.</p><p>7. You will keep your contact information accurate and up&shy;to&shy;date.</p><p>8. You will not share your password (or in the case of developers, your secret key), let anyone else access your account, or do anything else that might jeopardize the security of your account. 9. You will not transfer your account (including any Page or application you administer) to anyone without first getting our written permission. 1</p><p>10. If you select a username or similar identifier for your account or Page, we reserve the right to remove or reclaim it if we believe it is appropriate (such as when a trademark owner complains about a username that does not closely relate to a user&#39;s actual name).</p><p>&nbsp;</p><p><strong>5. Sharing Information:</strong><br /><br />You own all of the content and information you post on CampusPuppy, and you can control how it is shared through your privacy and application settings. In addition:</p><p>1. For content that is covered by intellectual property rights, like photos and videos (IP content), you specifically give us the following permission, subject to your privacy and application settings: you grant us a non&shy;exclusive, transferable, sub&shy;licensable, royalty&shy;free, worldwide license to use any IP content that you post on or in connection with Facebook (IP License). This IP License ends when you delete your IP content or your account unless your content has been shared with others, and they have not deleted it.</p><p>2. When you delete IP content, it is deleted in a manner similar to emptying the recycle bin on a computer. However, you understand that removed content may persist in backup copies for a reasonable period of time (but will not be available to others).</p><p>3. When you use an application, the application may ask for your permission to access your content and information as well as content and information that others have shared with you. &nbsp;We require applications to respect your privacy, and your agreement with that application will control how the application can use, store, and transfer that content and information. &nbsp;(To learn more about Platform, including how you can control what information other people may share with applications, read our Data Policy and Platform Page.)</p><p>4. When you publish content or information using the Public setting, it means that you are allowing everyone, including people off of CampusPuppy, to access and use that information, and to associate it with you (i.e., your name and profile picture).</p><p>5. We always appreciate your feedback or other suggestions about CampusPuppy, but you understand that we may use your feedback or suggestions without any obligation to compensate you for them (just as you have no obligation to offer them).</p><p><br /><strong>Consent to CampusPuppy Processing Information About You</strong></p><p>You agree that information you provide on your profile can be seen by others and used by us as described in this Privacy Policy and our User Agreement.</p><p>The personal information that you provide to us may reveal or allow others to identify aspects of your life that are not expressly stated on your profile (for example, your picture or your name may reveal your gender). By providing personal information to us when you create or update your account and profile, you are expressly and voluntarily accepting the terms and conditions of our User Agreement and freely accepting and agreeing to our processing of your personal information in ways set out by this Privacy Policy. Supplying to us any information deemed &ldquo;sensitive&rdquo; by applicable law is entirely voluntary on your part. You can withdraw or modify your consent to our collection and processing of the information you provide at any time, in accordance with the terms of this Privacy Policy and the User Agreement, by changing your account settings or your profile on CampusPuppy or by closing your CampusPuppy account.</p><p><br />&nbsp;</p>', '<p><strong>Campus Puppy&rsquo;s</strong> mission is to connect the world&rsquo;s professionals to allow them to be more productive and successful. Our registered users (&ldquo;Members&rdquo;) share their professional identities, engage with their network, exchange knowledge and professional insights, post and view relevant content, and find business and career opportunities. Content on some of our services is also visible to unregistered viewers (&ldquo;Visitors&rdquo;). We believe that our services allow our Members to effectively compete and achieve their full career potential. The cornerstone of our business is to focus on our Members first.</p><p>Maintaining your trust is our top priority, so we adhere to the following principles to protect your privacy:</p><p>We protect your personal information and will only provide it to third parties:</p><p>(1) with your consent?</p><p>(2) where it is necessary to carry out your instructions?</p><p>(3) as reasonably necessary in order to provide our features and functionality to you?</p><p>(4) when we reasonably believe it is required by law, subpoena or other legal process? or</p><p>(5) as necessary to enforce our User Agreement or protect the rights, property, or safety of Campus Puppy, our Members and Visitors, and the public.</p><p>We have implemented appropriate security safeguards designed to protect your information in accordance with industry standards.</p><p>We may modify this Privacy Policy from time to time, and if we make material changes to it, we will provide notice through our Service, or by other means so that you may review the changes before you continue to use our Services. If you object to any changes, you may close your account. Continuing to use our Services after we publish or communicate a notice about any changes to this Privacy Policy means that you are consenting to the changes.</p><p>&nbsp;<br /><strong>1. Data Controllers</strong></p><p>Our Privacy Policy applies to any Member or Visitor. We collect information when you use our Services to offer you a personalized and relevant experience, including growing your network and enabling business opportunities. If you have any concern about providing information to us or having such information displayed on our Services or otherwise used in any manner permitted in this Privacy Policy and the User Agreement, you should not become a Member. If you have already registered, you can close your accounts.</p><p><strong>2. Consent</strong></p><p>If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy (which includes our Cookie Policy and other documents referenced in this Privacy Policy) and agree to the User Agreement. We provide you choices that allow you to opt-out or control how we use and share your data.</p><p>&nbsp;<strong>3. Change</strong></p><p>We may modify this Privacy Policy, and if we make material changes to it, we will provide notice through our Services, or by other means, to provide you the opportunity to review the changes before they become effective. If you object to any changes, you may close your account. Your continued use of our Services after we publish or send a notice about our changes to this Privacy Policy means that you are consenting to the updated Privacy Policy.</p><p><strong>A. Information We Collect</strong></p><p><strong>1. Registration</strong></p><p>To create an account on Campus Puppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, &nbsp;job title, and company) to help you build your profile and to provide you more customized services (for example: language&shy; specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your Campus Puppy profile. We may also ask for your credit card details if you purchase certain additional services.</p><p><strong>2. Profile Information</strong></p><p>We collect information when you fill out a profile. A complete Campus Puppy profile that includes professional details &ndash; like your job title, education, and skills &ndash; helps you get found by other people for opportunities. After you create an account, you may choose to provide additional information on your Campus Puppy profile, such as descriptions of your skills, professional experience, and educational background. You can list honors, awards, professional affiliations, Group memberships, networking objectives, companies or individuals that you follow, and other information including content. Providing additional information enables you to derive more benefit from our Services by helping you express your professional identity? find other professionals, opportunities, and information? and help recruiters and business opportunities find you. It also enables us to serve you ads and other relevant content on and off of our Services.</p><p>&nbsp;</p><p><strong>B. Information we collect:</strong></p><p><strong>1. Customer Service</strong></p><p>We collect information when you contact us for customer support. When you contact our customer support services, we may have to access your InMails, Groups and other contributions to our Services and collect the information we need to categorize your question, respond to it, and, if applicable, investigate any breach of our User Agreement or this Privacy Policy. We also use this information to track potential problems and trends and customize our support responses to better serve you. We do not use this information for advertising.</p><p><strong>2. Using the Campus Puppy Site</strong></p><p>We collect information when you visit our Services &nbsp;and interact with advertising on and off our Services.</p><p>If you are logged in on Campus Puppy.com, &nbsp;one of our cookies on your device identifies you, your usage information and the log data , such as your IP address, will be associated by us with your account. Even if you&rsquo;re not logged into a Service, we log information about devices used to access our Services, including IP address.</p><p><strong>3. Messages</strong></p><p>We collect information about you when you send, receive, or engage with messages in connection with our Services.</p><p>&nbsp;<strong>4. Log Files, IP Addresses, and Information About Your Computer and Mobile Device</strong></p><p>&nbsp;We collect information from the devices and networks that you use to access our Services. When you visit or leave our Services (whether as a Member or Visitor) by clicking a hyperlink or when you view a third &shy;party site that includes our plugin or cookies (or similar technology), we automatically receive the URL of the site from which you came or the one to which you are directed. Also, advertisers receive the URL of the page that you are on when you click an ad on or through our Services. We also receive the internet protocol (&ldquo;IP&rdquo;) address of your computer or the proxy server that you use to access the web, your computer operating system details, your type of web browser, your mobile device (including your mobile device identifier provided by your mobile device operating system), your mobile operating system (if you are accessing Campus Puppy using a mobile device), and the name of your ISP or your mobile carrier. We may also receive location data passed to us from third &shy;party services or GPS &shy;enabled devices that you have set up, which we use to show you local information for fraud prevention and security purposes. Most mobile devices allow you to prevent real time location data being sent to us, and of course we will honor your settings.</p><p>&nbsp;<strong>5. Others</strong></p><p>Our Services are a dynamic, innovative environment, which means we are always seeking to improve the Services we offer you. We often introduce new features, some of which may result in the collection of new information. Furthermore, new partnerships or corporate acquisitions may result in new features, and we may potentially collect new types of information. If we start collecting substantially new types of personal information and materially change how we handle your data, we will modify this Privacy Policy and notify you.</p><p><strong>C. How We Use Your Data</strong></p><p>How we use your personal data will depend on which Services you use, how you use those Services and the choices you make in your settings. We use the data that we have about you to provide, support, personalize and make our Services (including ads) more relevant and useful to you and others.</p><p>&nbsp;<strong>1.&nbsp;</strong><strong>Services</strong></p><p>Our Services help you connect with others, find and be found for work and business opportunities, stay informed, get training and be more productive.</p><p>We use your data to authenticate you and authorize access to our Services.</p><p><strong>&nbsp;2. Stay Connected</strong></p><p>Our Services allow you to stay in touch, in communication and up to date with colleagues, partners, clients, and other professional contacts. To do so, you will &ldquo;connect&rdquo; with the professionals who you choose, and who also wish to &ldquo;connect&rdquo; with you. When you connect, you will be able to search each others&rsquo; connections in order to exchange professional opportunities.</p><p>We will use data about you and enable you to invite others to become a Member and connect with you. It is your choice whether to invite someone to our Services, send a connection request, or allow another Member to become your connection. When you invite someone to connect with you, your invitation will include your name, photo, network and contact information. We will send invitation reminders to the person you invited.</p><p><strong>3. Career</strong></p><p>Our Services allow you to explore careers, evaluate educational opportunities, and seek out, and be found for, career opportunities. Your profile can be found by those looking to hire (for a job) or be hired by you. We will use your data to recommend jobs, show you and others who work at a company, in an industry, function or location or have certain skills and connections.</p><p><strong>&nbsp;4. Productivity</strong></p><p>Our Services allow you to collaborate with colleagues, search for potential clients, customers, partners and others to do business with. Our Services allow you to communicate with other professionals and schedule and prepare meetings with them.</p><p><strong>5. Communications</strong></p><p>We contact you and enable communications between members. We offer settings to control what and how often you receive some types of messages.</p><p>We will contact you through email, notices posted on our website, messages to your Campus Puppy inbox, and other ways through our Services, including text messages and push notifications. We will send you messages about the availability of our Services, security, or other service-related issues. We also send messages about how to use the Services, network updates, reminders, job suggestions and promotional messages from us and our partners. You may change your communication<a href="https://www.linkedin.com/psettings/messages"> </a>preferences at any time. Please be aware that you cannot opt out of receiving service messages from us, including security and legal notices.</p><p>We also enable communications between you and others through our Services, including for example invitations, InMail, groups and messages between connections.</p><p><strong>6. Advertising</strong></p><p>We serve you tailored ads both on and off of our Services. We offer you choices to opt out of interest based ads, but you cannot opt out of seeing generic ads.</p><p>We target (and measure the performance of) ads to Members, Visitors and others both on and off of our Services through a variety of ad networks and exchanges, using the following data, whether separately or combined:</p><ul><li><p>Data from advertising technologies on and off of our Services, like web beacons, pixels, ad tags, cookies, and device identifiers;</p></li><li><p>Member-provided information (e.g., contact information, title and industry);</p></li><li><p>Data from your use of our Services (e.g., search history, feed, content you read, who you follow or is following you, connections, groups participation, page visits, videos you watch, clicking on an ad, etc.), including as described in Section 1.3;</p></li><li><p>Information from others (e.g. advertising partners, publishers and data aggregators);</p></li><li><p>Information inferred from data described above (e.g., using job titles to infer age, industry, seniority, and compensation bracket; or names to infer gender).</p></li></ul><p>We will show you ads called sponsored content which look like similar non-sponsored content, except that they are labeled ads or sponsored.</p><p><strong>7. Marketing</strong></p><p>We use data and content about Members for invitations and communications promoting membership and network growth, engagement and our Services.</p><p><strong>D. Developing Services and Research</strong></p><p><strong>1. Service Development</strong></p><p>We use data, including public feedback, to conduct research and development for the further development of our Services in order to provide you and others with a better, more intuitive and personalized experience, drive membership growth and engagement on our Services, and help connect professionals to each other and to economic opportunity.</p><p><strong>2. Other Research</strong></p><p>We seek to create economic opportunity for members of the global workforce and to help them be more productive and successful. We use the data available to us to research social, economic and workplace trends such as jobs availability and skills needed for these jobs and policies that help bridge the gap in various industries and geographic areas. &nbsp;</p><p><strong>3. Customer Support</strong></p><p>We use the data (which can include your communications) needed to investigate, respond to and resolve complaints and Service issues (e.g., bugs).</p><p><strong>4. Security and Investigations</strong></p><p>We use your data (including your communications) if we think it&rsquo;s necessary for security purposes or to investigate possible fraud or other violations of our User Agreement or this Privacy Policy and/or attempts to harm our Members or Visitors.</p><p><strong>E. How We Share Information</strong></p><p><strong>&nbsp;1. Our Services</strong></p><p>Any information you include on your profile and any content you post or social action (e.g. likes, follows, comments, shares) you take on our Services will be seen by others.</p><p><strong>&nbsp;2. Service Providers</strong></p><p>We use others to help us provide our Services (e.g., maintenance, analysis, audit, payments, fraud detection, marketing and development). They will have access to your information as reasonably necessary to perform these tasks on our behalf and are obligated to not to disclose or use it for other purposes.</p><p><strong>&nbsp;3. Legal Disclosures</strong></p><p>We may need to share your data when we believe it&rsquo;s required by law or to protect your and our rights and security.</p><p>It is possible that we will need to disclose information about you when required by law, or other legal process or if we have a good faith belief that disclosure is reasonably necessary to</p><p>(1) investigate, prevent, or take action regarding suspected or actual illegal activities or to assist government enforcement agencies;</p><p>(2) enforce our agreements with you,</p><p>(3) investigate and defend ourselves against any third-party claims or allegations,</p><p>(4) protect the security or integrity of our Service (such as by sharing with companies facing similar threats); or</p><p>(5) exercise or protect the rights and safety of Campus Puppy, our Members, personnel, or others. We attempt to notify Members about legal demands for their personal data when appropriate in our judgment, unless prohibited by law or court order or when the request is an emergency. We may dispute such demands when we believe, in our discretion, that the requests are overbroad, vague or lack proper authority, but we do not promise to challenge every demand.</p><p>&nbsp;<strong>F. Your Choices &amp; Obligations</strong></p><p><strong>1. Data Retention</strong></p><p>We retain the personal data you provide while your account is in existence or as needed to provide you Services. Even if you only use our Services when looking for a new job every few years, we will retain your information and keep your profile open until you decide to close your account. In some cases we choose to retain certain information (e.g., visits to sites carrying our &ldquo;share with Campus Puppy&rdquo; or &ldquo;apply with Campus Puppy&rdquo; plugins without clicking on the plugin) in a depersonalized or aggregated form.</p><p><strong>&nbsp;2. Account Closure</strong></p><p>We retain your personal data even after you have closed your account if reasonably necessary to comply with our legal obligations (including law enforcement requests), meet regulatory requirements, resolve disputes, maintain security, prevent fraud and abuse, enforce our User Agreement, or fulfill your request to &ldquo;unsubscribe&rdquo; from further messages from us. We will retain de-personalized information after your account has been closed.</p><p>Information you have shared with others will remain visible after you closed your account or deleted the information from your own profile or mailbox, and we do not control data that other Members copied out of our Services. Groups content associated with closed accounts will show an unknown user as the source. Your profile may continue to be displayed in the services of others until they refresh their cache.</p><p><strong>&nbsp;G. Other Important Information</strong></p><p><strong>1. Security</strong></p><p>We monitor for and try to prevent security breaches. Please use the security features available through our Services.</p><p>We implement security safeguards designed to protect your data, such as HTTPS. We regularly monitor our systems for possible vulnerabilities and attacks. However, we cannot warrant the security of any information that you send us. There is no guarantee that data may not be accessed, disclosed, altered, or destroyed by breach of any of our physical, technical, or managerial safeguards.&nbsp;</p><p><strong>2. Contact Information</strong></p><p>If you have questions or complaints regarding this Policy, please first contact Campus Puppy online. You can also reach us by physical mail. If contacting us does not resolve your complaint, you have more options.</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>This is the Test Privacy Policy Page3f</p>', 'https://www.facebook.com/campuspuppy', 'https://www.twitter.com/campuspuppy');
+(1, '<p>Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual&rsquo;s specific skill set and expertise in it. Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what&rsquo;s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p><p>At Campus Puppy, we aspire to give the upcoming students a platform which will link them to their desired employers. What makes us stand apart from others in the market is our promise of providing the students with only high quality professional networking experience. And we will ensure this via a set of channels which will authenticate all the users through a verification procedure.</p><p>Our aim is to help the young minds reach a step closer to their dream job. A job that is not just their dream job but also a perfect job for them. Perfect, by the means that a job which will have the skills you possess and love. A student will no longer have to compromise with the job he gets during recruitment drives in his campus, rather he will get a job/internship of his choice.<br />Employers can use the portal to cut down the time wasted in manually filtering the applicants who apply for a job opening. The portal through a large number of filters brings down to say 200 from 1000 applicants. Through virtual campus drive, companies get only the skill specific candidates appropriate to the job opening in their company. Our aim is to connect employers and desired candidates. Point in consideration is that, we don&rsquo;t want to interfere in any company&rsquo;s recruitment process, we just want to give them a more sorted list of students, on which they can still complete their very own recruitment process. We are helping companies to cut down their cost on physical resources and the time wasted by the recruiting employers on a campus drive to set up an entire process for about 1000 students of a campus. We want to provide them with a platform where they can just select a required n number of students on which they can complete their recruitment process. These filters include academic qualification criteria of students, the skills they have, etc. Moreover employers are ensured that the student&rsquo;s are genuine, their details are authentic, and the skills they have are verified.</p><p>We, at Campus Puppy aim to pioneer in the field of professional networking and employment. The students can look for internships and jobs on our portal and the employers can get in touch with the desired applicants on the basis of the skills they possess.</p><p>For us our emphasis is always on the students who struggle through their initial years finding the suitable job and the companies who waste their resources looking up for the best suitable candidate for the job profile.<br /><br />The industry we are catering to is an education Tech cum Human Resource industry which is an evergreen industry. Students graduating every year will want jobs and on the parallel lines companies want to recruit young talents. Thus CampusPuppy which is basically a bridge between the students and the companies will always be in work flow and trying to bridge the gap. We intend to use the industry workflow to our advantage as the market needs in this sector will never die. This is one industry which will always be in a need for this gap to be filled and CampusPuppy will make that happen.</p><p>We have also struggled in our graduation period to find a job of our skill set, and we know exactly how it is important for a person to get a job in the field of his/her own expertise. We have been a part of this experience and thus understand the loop holes in this sector and will be able to fill this gap through our experience and confidence. This experience will be our power play in getting success as CampusPuppy.<br /><br />Legally we are a Private Limited Company. Advantage of owning a private limited company is that the financial liability of shareholders is limited to their shares. Therefore, if a private limited company was in financial trouble and had to close, shareholders would not risk losing their personal assets. Shareholders must also agree to the sale or transfer of shares; therefore, the risk of hostile takeovers is low.&nbsp;</p><p><!--[if gte vml 1]><v:shapetype\r\n id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"\r\n path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">\r\n <v:stroke joinstyle="miter"/>\r\n <v:formulas>\r\n  <v:f eqn="if lineDrawn pixelLineWidth 0"/>\r\n  <v:f eqn="sum @0 1 0"/>\r\n  <v:f eqn="sum 0 0 @1"/>\r\n  <v:f eqn="prod @2 1 2"/>\r\n  <v:f eqn="prod @3 21600 pixelWidth"/>\r\n  <v:f eqn="prod @3 21600 pixelHeight"/>\r\n  <v:f eqn="sum @0 0 1"/>\r\n  <v:f eqn="prod @6 1 2"/>\r\n  <v:f eqn="prod @7 21600 pixelWidth"/>\r\n  <v:f eqn="sum @8 21600 0"/>\r\n  <v:f eqn="prod @7 21600 pixelHeight"/>\r\n  <v:f eqn="sum @10 21600 0"/>\r\n </v:formulas>\r\n <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>\r\n <o:lock v:ext="edit" aspectratio="t"/>\r\n</v:shapetype><v:shape id="Picture_x0020_5" o:spid="_x0000_s1026" type="#_x0000_t75"\r\n style=''position:absolute;margin-left:272.25pt;margin-top:60pt;width:116.25pt;\r\n height:37.5pt;z-index:-1;visibility:visible;mso-wrap-style:square;\r\n mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;\r\n mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;\r\n mso-position-horizontal-relative:page;mso-position-vertical:absolute;\r\n mso-position-vertical-relative:page'' o:allowincell="f">\r\n <v:imagedata src="file:///C:\\Users\\NICSI\\AppData\\Local\\Temp\\msohtmlclip1\\01\\clip_image001.jpg"\r\n  o:title="" chromakey="white"/>\r\n <w:wrap anchorx="page" anchory="page"/>\r\n</v:shape><![endif]--></p><p>&nbsp;</p>', '<p>The cornerstone of our business is to focus on our Members first. We protect your personal information using industry &shy;standard safeguards. We may share your information with your consent or as required by law, and we will always let you know when we make significant changes to this <strong>Terms and Conditions.</strong></p><p><strong>Statement of Rights and Responsibilities </strong>This Statement of Rights and Responsibilities (&quot;Statement,&quot; &quot;Terms,&quot; or &quot;SRR&quot;) derives from the CampusPuppy Principles, and is our terms of service that governs our relationship with users and others who interact with CampusPuppy, as well as CampusPuppy brands, products and services, which we call the &ldquo;CampusPuppy Services&rdquo; or &ldquo;Services&rdquo;. By using or accessing the CampusPuppy Services, you agree to this Statement, as updated from time to time in accordance with the section below. Additionally, you will find resources at the end of this document that help you understand how CampusPuppy works. Because CampusPuppyprovides a wide range of Services, we may ask you to review and accept supplemental terms that apply to your interaction with a specific app, product, or service. To the extent those supplemental terms conflict with this SRR, the supplemental terms associated with the app, product, or service govern with respect to your use of such app, product or service to the extent of the conflict.</p><p>&nbsp;</p><p><strong>1. Amendments</strong></p><p>&nbsp;1. We&rsquo;ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</p><p>2. If we make changes to policies, guidelines or other terms referenced in or incorporated by this Statement, we may provide notice on the Site Governance Page.</p><p>3. Your continued use of the CampusPuppy Services, following notice of the changes to our terms, policies or guidelines, constitutes your acceptance of our amended terms, policies or guidelines.</p><p>&nbsp;4. Termination If you violate the letter or spirit of this Statement, or otherwise create risk or possible legal exposure for us, we can stop providing all or part of Facebook to you. We will notify you by email or at the next time you attempt to access your account. You may also delete your account or disable your application at any time.</p><p>&nbsp;<strong>2. Disputes</strong></p><p>&nbsp;1. You will resolve any claim, cause of action or dispute (claim) you have with us arising out of or relating to this Statement or CampusPuppy exclusively in the Delhi District Court, and you agree to submit to the personal jurisdiction of such courts for the purpose of litigating all such claims. The laws of the Country(India) will govern this Statement, as well as any claim that might arise between you and us, without regard to conflict of law provisions.</p><p>2. If anyone brings a claim against us related to your actions, content or information on CampusPuppy, you will indemnify and hold us harmless from and against all damages, losses, and expenses of any kind (including reasonable legal fees and costs) related to such claim. Although we provide rules for user conduct, we do not control or direct users&#39; actions on CampusPuppy and are not responsible for the content or information users transmit or share on CampusPuppy. We are not responsible for any offensive, inappropriate, obscene, unlawful or otherwise objectionable content or information you may encounter on CampusPuppy. We are not responsible for the conduct, whether online or offline, of any user of CampusPuppy.</p><p>3. WE TRY TO KEEP CAMPUSPUPPY UP, BUG&shy;FREE, AND SAFE, BUT YOU USE IT AT YOUR OWN RISK. WE ARE PROVIDING CAMPUSPUPPY AS IS WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON&shy;INFRINGEMENT. WE DO NOT GUARANTEE THAT CAMPUSPUPPY WILL ALWAYS BE SAFE, SECURE OR ERROR&shy;FREE OR THAT CAMPUSPUPPY WILL ALWAYS FUNCTION WITHOUT DISRUPTIONS, DELAYS OR IMPERFECTIONS. CAMPUSPUPPY IS NOT RESPONSIBLE FOR THE ACTIONS, CONTENT, INFORMATION, OR DATA OF THIRD PARTIES, AND YOU RELEASE US, OUR DIRECTORS, OFFICERS, EMPLOYEES, AND AGENTS FROM ANY CLAIMS AND DAMAGES, KNOWN AND UNKNOWN, ARISING OUT OF OR IN ANY WAY CONNECTED WITH ANY CLAIM YOU HAVE AGAINST ANY SUCH THIRD PARTIES.<br />&nbsp;</p><p>&nbsp;<strong>3</strong><strong>. Safety:</strong><br /><br />We do our best to keep CampusPuppy safe, but we cannot guarantee it. We need your help to keep it safe, which includes the following commitments by you:</p><p>1. You will not post unauthorized commercial communications (such as spam) on CampusPuppy.</p><p>2. You will not collect users&#39; content or information, or otherwise access CampusPuppy , using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.</p><p>3. You will not engage in unlawful multi&shy;level marketing, such as a pyramid scheme, on CampusPuppy.</p><p>4. You will not upload viruses or other malicious code.</p><p>5. You will not solicit login information or access an account belonging to someone else.</p><p>6. You will not bully, intimidate, or harass any user.</p><p>7. You will not post content that: is hate speech, threatening, or pornographic? incites violence? or contains nudity or graphic or gratuitous violence.</p><p>8. You will not develop or operate a third&shy; party application containing alcohol&shy;related, dating or other mature content (including advertisements) without appropriate age based restrictions.</p><p>9. You will not use CampusPuppy to do anything unlawful, misleading, malicious, or discriminatory.</p><p>10. You will not do anything that could disable, overburden, or impair the proper working or appearance of CampusPuppy, such as a denial of service attack or interference with page rendering or other CampusPuppy functionality.</p><p>11. You will not facilitate or encourage any violations of this Statement or our policies.<br /><br /><br /><strong>4. Registration:</strong><br /><br />To create an account on CampusPuppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, your postal code, job title, college details and company) to help you build your profile and to provide you more customized services (for example: language&shy;specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p>CampusPuppy users provide their real names and information, and we need your help to keep it that way. Here are some commitments you make to us relating to registering and maintaining the security of your account:</p><p>1. You will not provide any false personal information on CampusPuppy, or create an account for anyone other than yourself without permission.</p><p>2. You will not create more than one personal account.</p><p>3. If we disable your account, you will not create another one without our permission.</p><p>4. You will not use your personal timeline primarily for your own commercial gain, and will use a Facebook Page for such purposes.</p><p>5. You will not use CampusPuppy if you are under 18.</p><p>6. You will not use CampusPuppy if you are a convicted sex offender.</p><p>7. You will keep your contact information accurate and up&shy;to&shy;date.</p><p>8. You will not share your password (or in the case of developers, your secret key), let anyone else access your account, or do anything else that might jeopardize the security of your account. 9. You will not transfer your account (including any Page or application you administer) to anyone without first getting our written permission. 1</p><p>10. If you select a username or similar identifier for your account or Page, we reserve the right to remove or reclaim it if we believe it is appropriate (such as when a trademark owner complains about a username that does not closely relate to a user&#39;s actual name).</p><p>&nbsp;</p><p><strong>5. Sharing Information:</strong><br /><br />You own all of the content and information you post on CampusPuppy, and you can control how it is shared through your privacy and application settings. In addition:</p><p>1. For content that is covered by intellectual property rights, like photos and videos (IP content), you specifically give us the following permission, subject to your privacy and application settings: you grant us a non&shy;exclusive, transferable, sub&shy;licensable, royalty&shy;free, worldwide license to use any IP content that you post on or in connection with Facebook (IP License). This IP License ends when you delete your IP content or your account unless your content has been shared with others, and they have not deleted it.</p><p>2. When you delete IP content, it is deleted in a manner similar to emptying the recycle bin on a computer. However, you understand that removed content may persist in backup copies for a reasonable period of time (but will not be available to others).</p><p>3. When you use an application, the application may ask for your permission to access your content and information as well as content and information that others have shared with you. &nbsp;We require applications to respect your privacy, and your agreement with that application will control how the application can use, store, and transfer that content and information. &nbsp;(To learn more about Platform, including how you can control what information other people may share with applications, read our Data Policy and Platform Page.)</p><p>4. When you publish content or information using the Public setting, it means that you are allowing everyone, including people off of CampusPuppy, to access and use that information, and to associate it with you (i.e., your name and profile picture).</p><p>5. We always appreciate your feedback or other suggestions about CampusPuppy, but you understand that we may use your feedback or suggestions without any obligation to compensate you for them (just as you have no obligation to offer them).</p><p><br /><strong>Consent to CampusPuppy Processing Information About You</strong></p><p>You agree that information you provide on your profile can be seen by others and used by us as described in this Privacy Policy and our User Agreement.</p><p>The personal information that you provide to us may reveal or allow others to identify aspects of your life that are not expressly stated on your profile (for example, your picture or your name may reveal your gender). By providing personal information to us when you create or update your account and profile, you are expressly and voluntarily accepting the terms and conditions of our User Agreement and freely accepting and agreeing to our processing of your personal information in ways set out by this Privacy Policy. Supplying to us any information deemed &ldquo;sensitive&rdquo; by applicable law is entirely voluntary on your part. You can withdraw or modify your consent to our collection and processing of the information you provide at any time, in accordance with the terms of this Privacy Policy and the User Agreement, by changing your account settings or your profile on CampusPuppy or by closing your CampusPuppy account.</p><p><br />&nbsp;</p>', '<p><strong>Campus Puppy&rsquo;s</strong> mission is to connect the world&rsquo;s professionals to allow them to be more productive and successful. Our registered users (&ldquo;Members&rdquo;) share their professional identities, engage with their network, exchange knowledge and professional insights, post and view relevant content, and find business and career opportunities. Content on some of our services is also visible to unregistered viewers (&ldquo;Visitors&rdquo;). We believe that our services allow our Members to effectively compete and achieve their full career potential. The cornerstone of our business is to focus on our Members first.</p><p>Maintaining your trust is our top priority, so we adhere to the following principles to protect your privacy:</p><p>We protect your personal information and will only provide it to third parties:</p><p>(1) with your consent?</p><p>(2) where it is necessary to carry out your instructions?</p><p>(3) as reasonably necessary in order to provide our features and functionality to you?</p><p>(4) when we reasonably believe it is required by law, subpoena or other legal process? or</p><p>(5) as necessary to enforce our User Agreement or protect the rights, property, or safety of Campus Puppy, our Members and Visitors, and the public.</p><p>We have implemented appropriate security safeguards designed to protect your information in accordance with industry standards.</p><p>We may modify this Privacy Policy from time to time, and if we make material changes to it, we will provide notice through our Service, or by other means so that you may review the changes before you continue to use our Services. If you object to any changes, you may close your account. Continuing to use our Services after we publish or communicate a notice about any changes to this Privacy Policy means that you are consenting to the changes.</p><p>&nbsp;<br /><strong>1. Data Controllers</strong></p><p>Our Privacy Policy applies to any Member or Visitor. We collect information when you use our Services to offer you a personalized and relevant experience, including growing your network and enabling business opportunities. If you have any concern about providing information to us or having such information displayed on our Services or otherwise used in any manner permitted in this Privacy Policy and the User Agreement, you should not become a Member. If you have already registered, you can close your accounts.</p><p><strong>2. Consent</strong></p><p>If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy (which includes our Cookie Policy and other documents referenced in this Privacy Policy) and agree to the User Agreement. We provide you choices that allow you to opt-out or control how we use and share your data.</p><p>&nbsp;<strong>3. Change</strong></p><p>We may modify this Privacy Policy, and if we make material changes to it, we will provide notice through our Services, or by other means, to provide you the opportunity to review the changes before they become effective. If you object to any changes, you may close your account. Your continued use of our Services after we publish or send a notice about our changes to this Privacy Policy means that you are consenting to the updated Privacy Policy.</p><p><strong>A. Information We Collect</strong></p><p><strong>1. Registration</strong></p><p>To create an account on Campus Puppy, you must provide us with at least your name, email address and/or mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, &nbsp;job title, and company) to help you build your profile and to provide you more customized services (for example: language&shy; specific profile pages, updates, content, more relevant ads and career opportunities). You understand that, by creating an account, we and others will be able to identify you by your Campus Puppy profile. We may also ask for your credit card details if you purchase certain additional services.</p><p><strong>2. Profile Information</strong></p><p>We collect information when you fill out a profile. A complete Campus Puppy profile that includes professional details &ndash; like your job title, education, and skills &ndash; helps you get found by other people for opportunities. After you create an account, you may choose to provide additional information on your Campus Puppy profile, such as descriptions of your skills, professional experience, and educational background. You can list honors, awards, professional affiliations, Group memberships, networking objectives, companies or individuals that you follow, and other information including content. Providing additional information enables you to derive more benefit from our Services by helping you express your professional identity? find other professionals, opportunities, and information? and help recruiters and business opportunities find you. It also enables us to serve you ads and other relevant content on and off of our Services.</p><p>&nbsp;</p><p><strong>B. Information we collect:</strong></p><p><strong>1. Customer Service</strong></p><p>We collect information when you contact us for customer support. When you contact our customer support services, we may have to access your InMails, Groups and other contributions to our Services and collect the information we need to categorize your question, respond to it, and, if applicable, investigate any breach of our User Agreement or this Privacy Policy. We also use this information to track potential problems and trends and customize our support responses to better serve you. We do not use this information for advertising.</p><p><strong>2. Using the Campus Puppy Site</strong></p><p>We collect information when you visit our Services &nbsp;and interact with advertising on and off our Services.</p><p>If you are logged in on Campus Puppy.com, &nbsp;one of our cookies on your device identifies you, your usage information and the log data , such as your IP address, will be associated by us with your account. Even if you&rsquo;re not logged into a Service, we log information about devices used to access our Services, including IP address.</p><p><strong>3. Messages</strong></p><p>We collect information about you when you send, receive, or engage with messages in connection with our Services.</p><p>&nbsp;<strong>4. Log Files, IP Addresses, and Information About Your Computer and Mobile Device</strong></p><p>&nbsp;We collect information from the devices and networks that you use to access our Services. When you visit or leave our Services (whether as a Member or Visitor) by clicking a hyperlink or when you view a third &shy;party site that includes our plugin or cookies (or similar technology), we automatically receive the URL of the site from which you came or the one to which you are directed. Also, advertisers receive the URL of the page that you are on when you click an ad on or through our Services. We also receive the internet protocol (&ldquo;IP&rdquo;) address of your computer or the proxy server that you use to access the web, your computer operating system details, your type of web browser, your mobile device (including your mobile device identifier provided by your mobile device operating system), your mobile operating system (if you are accessing Campus Puppy using a mobile device), and the name of your ISP or your mobile carrier. We may also receive location data passed to us from third &shy;party services or GPS &shy;enabled devices that you have set up, which we use to show you local information for fraud prevention and security purposes. Most mobile devices allow you to prevent real time location data being sent to us, and of course we will honor your settings.</p><p>&nbsp;<strong>5. Others</strong></p><p>Our Services are a dynamic, innovative environment, which means we are always seeking to improve the Services we offer you. We often introduce new features, some of which may result in the collection of new information. Furthermore, new partnerships or corporate acquisitions may result in new features, and we may potentially collect new types of information. If we start collecting substantially new types of personal information and materially change how we handle your data, we will modify this Privacy Policy and notify you.</p><p><strong>C. How We Use Your Data</strong></p><p>How we use your personal data will depend on which Services you use, how you use those Services and the choices you make in your settings. We use the data that we have about you to provide, support, personalize and make our Services (including ads) more relevant and useful to you and others.</p><p>&nbsp;<strong>1.&nbsp;</strong><strong>Services</strong></p><p>Our Services help you connect with others, find and be found for work and business opportunities, stay informed, get training and be more productive.</p><p>We use your data to authenticate you and authorize access to our Services.</p><p><strong>&nbsp;2. Stay Connected</strong></p><p>Our Services allow you to stay in touch, in communication and up to date with colleagues, partners, clients, and other professional contacts. To do so, you will &ldquo;connect&rdquo; with the professionals who you choose, and who also wish to &ldquo;connect&rdquo; with you. When you connect, you will be able to search each others&rsquo; connections in order to exchange professional opportunities.</p><p>We will use data about you and enable you to invite others to become a Member and connect with you. It is your choice whether to invite someone to our Services, send a connection request, or allow another Member to become your connection. When you invite someone to connect with you, your invitation will include your name, photo, network and contact information. We will send invitation reminders to the person you invited.</p><p><strong>3. Career</strong></p><p>Our Services allow you to explore careers, evaluate educational opportunities, and seek out, and be found for, career opportunities. Your profile can be found by those looking to hire (for a job) or be hired by you. We will use your data to recommend jobs, show you and others who work at a company, in an industry, function or location or have certain skills and connections.</p><p><strong>&nbsp;4. Productivity</strong></p><p>Our Services allow you to collaborate with colleagues, search for potential clients, customers, partners and others to do business with. Our Services allow you to communicate with other professionals and schedule and prepare meetings with them.</p><p><strong>5. Communications</strong></p><p>We contact you and enable communications between members. We offer settings to control what and how often you receive some types of messages.</p><p>We will contact you through email, notices posted on our website, messages to your Campus Puppy inbox, and other ways through our Services, including text messages and push notifications. We will send you messages about the availability of our Services, security, or other service-related issues. We also send messages about how to use the Services, network updates, reminders, job suggestions and promotional messages from us and our partners. You may change your communication<a href="https://www.linkedin.com/psettings/messages"> </a>preferences at any time. Please be aware that you cannot opt out of receiving service messages from us, including security and legal notices.</p><p>We also enable communications between you and others through our Services, including for example invitations, InMail, groups and messages between connections.</p><p><strong>6. Advertising</strong></p><p>We serve you tailored ads both on and off of our Services. We offer you choices to opt out of interest based ads, but you cannot opt out of seeing generic ads.</p><p>We target (and measure the performance of) ads to Members, Visitors and others both on and off of our Services through a variety of ad networks and exchanges, using the following data, whether separately or combined:</p><ul><li><p>Data from advertising technologies on and off of our Services, like web beacons, pixels, ad tags, cookies, and device identifiers;</p></li><li><p>Member-provided information (e.g., contact information, title and industry);</p></li><li><p>Data from your use of our Services (e.g., search history, feed, content you read, who you follow or is following you, connections, groups participation, page visits, videos you watch, clicking on an ad, etc.), including as described in Section 1.3;</p></li><li><p>Information from others (e.g. advertising partners, publishers and data aggregators);</p></li><li><p>Information inferred from data described above (e.g., using job titles to infer age, industry, seniority, and compensation bracket; or names to infer gender).</p></li></ul><p>We will show you ads called sponsored content which look like similar non-sponsored content, except that they are labeled ads or sponsored.</p><p><strong>7. Marketing</strong></p><p>We use data and content about Members for invitations and communications promoting membership and network growth, engagement and our Services.</p><p><strong>D. Developing Services and Research</strong></p><p><strong>1. Service Development</strong></p><p>We use data, including public feedback, to conduct research and development for the further development of our Services in order to provide you and others with a better, more intuitive and personalized experience, drive membership growth and engagement on our Services, and help connect professionals to each other and to economic opportunity.</p><p><strong>2. Other Research</strong></p><p>We seek to create economic opportunity for members of the global workforce and to help them be more productive and successful. We use the data available to us to research social, economic and workplace trends such as jobs availability and skills needed for these jobs and policies that help bridge the gap in various industries and geographic areas. &nbsp;</p><p><strong>3. Customer Support</strong></p><p>We use the data (which can include your communications) needed to investigate, respond to and resolve complaints and Service issues (e.g., bugs).</p><p><strong>4. Security and Investigations</strong></p><p>We use your data (including your communications) if we think it&rsquo;s necessary for security purposes or to investigate possible fraud or other violations of our User Agreement or this Privacy Policy and/or attempts to harm our Members or Visitors.</p><p><strong>E. How We Share Information</strong></p><p><strong>&nbsp;1. Our Services</strong></p><p>Any information you include on your profile and any content you post or social action (e.g. likes, follows, comments, shares) you take on our Services will be seen by others.</p><p><strong>&nbsp;2. Service Providers</strong></p><p>We use others to help us provide our Services (e.g., maintenance, analysis, audit, payments, fraud detection, marketing and development). They will have access to your information as reasonably necessary to perform these tasks on our behalf and are obligated to not to disclose or use it for other purposes.</p><p><strong>&nbsp;3. Legal Disclosures</strong></p><p>We may need to share your data when we believe it&rsquo;s required by law or to protect your and our rights and security.</p><p>It is possible that we will need to disclose information about you when required by law, or other legal process or if we have a good faith belief that disclosure is reasonably necessary to</p><p>(1) investigate, prevent, or take action regarding suspected or actual illegal activities or to assist government enforcement agencies;</p><p>(2) enforce our agreements with you,</p><p>(3) investigate and defend ourselves against any third-party claims or allegations,</p><p>(4) protect the security or integrity of our Service (such as by sharing with companies facing similar threats); or</p><p>(5) exercise or protect the rights and safety of Campus Puppy, our Members, personnel, or others. We attempt to notify Members about legal demands for their personal data when appropriate in our judgment, unless prohibited by law or court order or when the request is an emergency. We may dispute such demands when we believe, in our discretion, that the requests are overbroad, vague or lack proper authority, but we do not promise to challenge every demand.</p><p>&nbsp;<strong>F. Your Choices &amp; Obligations</strong></p><p><strong>1. Data Retention</strong></p><p>We retain the personal data you provide while your account is in existence or as needed to provide you Services. Even if you only use our Services when looking for a new job every few years, we will retain your information and keep your profile open until you decide to close your account. In some cases we choose to retain certain information (e.g., visits to sites carrying our &ldquo;share with Campus Puppy&rdquo; or &ldquo;apply with Campus Puppy&rdquo; plugins without clicking on the plugin) in a depersonalized or aggregated form.</p><p><strong>&nbsp;2. Account Closure</strong></p><p>We retain your personal data even after you have closed your account if reasonably necessary to comply with our legal obligations (including law enforcement requests), meet regulatory requirements, resolve disputes, maintain security, prevent fraud and abuse, enforce our User Agreement, or fulfill your request to &ldquo;unsubscribe&rdquo; from further messages from us. We will retain de-personalized information after your account has been closed.</p><p>Information you have shared with others will remain visible after you closed your account or deleted the information from your own profile or mailbox, and we do not control data that other Members copied out of our Services. Groups content associated with closed accounts will show an unknown user as the source. Your profile may continue to be displayed in the services of others until they refresh their cache.</p><p><strong>&nbsp;G. Other Important Information</strong></p><p><strong>1. Security</strong></p><p>We monitor for and try to prevent security breaches. Please use the security features available through our Services.</p><p>We implement security safeguards designed to protect your data, such as HTTPS. We regularly monitor our systems for possible vulnerabilities and attacks. However, we cannot warrant the security of any information that you send us. There is no guarantee that data may not be accessed, disclosed, altered, or destroyed by breach of any of our physical, technical, or managerial safeguards.&nbsp;</p><p><strong>2. Contact Information</strong></p><p>If you have questions or complaints regarding this Policy, please first contact Campus Puppy online. You can also reach us by physical mail. If contacting us does not resolve your complaint, you have more options.</p><p>&nbsp;</p><p>&nbsp;</p>', '<p>The employment scenario of the 21st century is evolving and with it are the expectations of the companies from the job and internship aspirants. Companies receive thousands of resumes each day with one not really different from the other. Thus showcasing the verified skills that candidates possess is a parameter that will be credible for the companies to differentiate. Here CampusPuppy steps in by introducing COAT which is a robust system made on machine learning for, automated evaluation of your skill sets. COAT is the assessment exam that gives students the option to choose the particular skill set in which they want to specialize in and not focusing on a predefined set or course specific sets.&nbsp;<br />\nIt goes beyond and provides industry recognized credentials and connects you to opportunities from across the spectrum. It further connects you to leading organizations with jobs in the specific skill sets that the candidate possesses.</p>\n\n<p><br />\n<strong>What&rsquo;s in for the students?</strong></p>\n\n<p>COAT is a bridge that helps students reach their dream destination. Coat is an exam that helps students to get recognized among the companies which are leading in the skill set that the student specializes in. Students are given an option of taking the test only for the skill sets they are good at and not a predefined test. This enhances the confidence as well as the chances of getting mapped with core companies of that domain. As we are a symbol of loyalty as a company, we inculcate trust through our bridging techniques with the help of COAT and get students reach their dream job.</p>\n\n<p><strong>What&rsquo;s in for the colleges?</strong></p>\n\n<p>The success of an institution is measured by how employable its students are! It is the responsibility of an institute to uphold its name by ensuring that the students passing out are both talented as well as employable. The institute today should focus on the quality of skills that its student possesses and not the quantity of students getting placed.. This is where COAT comes in!</p>\n\n<p>COAT provides a robust system to understand where the students of the particular institute stand today in the competitive world of jobs and employment. Students can judge where they actually stand in the specific skills they want to specialize in. This way, institutes will get their students placed in core companies which is actually the perfect job for the student and not just a run in the mill. COAT gives a measure that evaluates the students capability in particular skills and further improve.</p>', 'https://www.facebook.com/campuspuppy', 'https://www.twitter.com/campuspuppy');
 
 -- --------------------------------------------------------
 
@@ -500,13 +1292,14 @@ INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPo
 -- Table structure for table `courses`
 --
 
-CREATE TABLE `courses` (
-  `course_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `courses` (
+  `course_id` int(5) NOT NULL AUTO_INCREMENT,
   `course` varchar(255) NOT NULL,
   `duration` int(3) NOT NULL,
   `courseType` enum('1','2','3','4') NOT NULL DEFAULT '3',
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `courses`
@@ -528,15 +1321,16 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `courseType`, `active`
 -- Table structure for table `educationalDetails`
 --
 
-CREATE TABLE `educationalDetails` (
-  `educationID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `educationalDetails` (
+  `educationID` int(5) NOT NULL AUTO_INCREMENT,
   `educationType` enum('1','2','3','4') NOT NULL,
   `description` text NOT NULL,
   `year` int(4) NOT NULL,
   `scoreType` enum('1','2') NOT NULL,
   `score` int(5) NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`educationID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `educationalDetails`
@@ -618,44 +1412,7 @@ INSERT INTO `educationalDetails` (`educationID`, `educationType`, `description`,
 (73, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 145),
 (74, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 150),
 (75, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at Delhi Technological University', 2017, '1', 0, 152),
-(76, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at YMCA University of Science and technology, Faridabad', 2017, '1', 0, 155),
-(77, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 1),
-(78, '3', 'Bachelor of Technology- Information Technology-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 2),
-(79, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 3),
-(80, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 4),
-(81, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at Greater Noida Institute of Technology, Greater Noida', 2017, '1', 0, 5),
-(82, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 6),
-(83, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 7),
-(84, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 8),
-(85, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 9),
-(86, '3', 'Bachelor of Technology- Information Technology-2017, at Jaypee Institute of Information Technology, Sector 62, Noida', 2017, '1', 0, 10),
-(87, '3', 'Bachelor of Technology- Information Technology-2017, at Jaypee Institute of Information Technology, Sector 62, Noida', 2017, '1', 0, 11),
-(88, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 12),
-(89, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 13),
-(90, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 14),
-(91, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 15),
-(92, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 16),
-(93, '3', 'Bachelor of Technology- Mechanical Engineering	-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 17),
-(94, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 39),
-(95, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at JSS Academy of Technical Education, Noida', 2015, '1', 0, 41),
-(96, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 43),
-(97, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 44),
-(98, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 45),
-(99, '3', 'Bachelor of Technology- Computer Science and Engineering-2013, at ABES Engineering College, Ghaziabad', 2013, '1', 0, 46),
-(100, '3', 'Bachelor of Technology- Information Technology-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 47),
-(101, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 48),
-(102, '3', 'Bachelor of Technology- Computer Science and Engineering-2020, at JSS Academy of Technical Education, Noida', 2020, '1', 0, 49),
-(103, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 50),
-(104, '3', 'Bachelor of Technology- Information Technology-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 51),
-(105, '3', 'Bachelor of Technology- Information Technology-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 52),
-(106, '3', 'Bachelor of Technology- Information Technology-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 53),
-(107, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2018, at Jaipur National University', 2018, '1', 0, 54),
-(108, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at ABES Engineering College, Ghaziabad', 2018, '1', 0, 56),
-(109, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 58),
-(110, '3', 'Bachelor of Technology- Electrical Engineering-2020, at JSS Academy of Technical Education, Noida', 2020, '1', 0, 59),
-(111, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at Meerut Institute of Engineering and technology', 2018, '1', 0, 61),
-(112, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 63),
-(113, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at JSS Academy of Technical Education, Noida', 2019, '1', 0, 64);
+(76, '3', 'Bachelor of Technology- Computer Science and Engineering-2017, at YMCA University of Science and technology, Faridabad', 2017, '1', 0, 155);
 
 -- --------------------------------------------------------
 
@@ -663,13 +1420,14 @@ INSERT INTO `educationalDetails` (`educationID`, `educationType`, `description`,
 -- Table structure for table `employerUsers`
 --
 
-CREATE TABLE `employerUsers` (
+CREATE TABLE IF NOT EXISTS `employerUsers` (
   `userID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'
+  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg',
+  UNIQUE KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -706,7 +1464,7 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 -- Table structure for table `generalUsers`
 --
 
-CREATE TABLE `generalUsers` (
+CREATE TABLE IF NOT EXISTS `generalUsers` (
   `userID` int(5) NOT NULL,
   `collegeID` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
@@ -838,11 +1596,12 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`) VALUES
 -- Table structure for table `indianCities`
 --
 
-CREATE TABLE `indianCities` (
-  `cityID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `indianCities` (
+  `cityID` int(5) NOT NULL AUTO_INCREMENT,
   `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `state` varchar(255) NOT NULL,
+  PRIMARY KEY (`cityID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=568 ;
 
 --
 -- Dumping data for table `indianCities`
@@ -1423,7 +2182,7 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 -- Table structure for table `internshipApplicants`
 --
 
-CREATE TABLE `internshipApplicants` (
+CREATE TABLE IF NOT EXISTS `internshipApplicants` (
   `internshipID` int(5) NOT NULL,
   `userID` int(5) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL,
@@ -1436,7 +2195,7 @@ CREATE TABLE `internshipApplicants` (
 -- Table structure for table `internshipLocations`
 --
 
-CREATE TABLE `internshipLocations` (
+CREATE TABLE IF NOT EXISTS `internshipLocations` (
   `internshipID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1458,8 +2217,8 @@ INSERT INTO `internshipLocations` (`internshipID`, `cityID`) VALUES
 -- Table structure for table `internshipOffers`
 --
 
-CREATE TABLE `internshipOffers` (
-  `internshipID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `internshipOffers` (
+  `internshipID` int(5) NOT NULL AUTO_INCREMENT,
   `internshipTitle` varchar(255) NOT NULL,
   `internshipType` enum('1','2') NOT NULL,
   `internshipDescription` text NOT NULL,
@@ -1475,21 +2234,22 @@ CREATE TABLE `internshipOffers` (
   `openings` int(3) NOT NULL,
   `applicants` enum('1','2','3') NOT NULL,
   `status` enum('1','2','3') NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`internshipID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `internshipOffers`
 --
 
 INSERT INTO `internshipOffers` (`internshipID`, `internshipTitle`, `internshipType`, `internshipDescription`, `startDate`, `applicationDeadline`, `stipendType`, `minimumStipend`, `maximumStipend`, `stipend`, `durationType`, `duration`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
-(1, 'Sales and Marketing Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do Day-to-Day:</strong></p><p>&bull; Engaging with customers to understand their lifestyle and fitness requirements, suggesting fitness options based on their needs and ensuring closure of leads towards conversion</p><p>&bull; Identifying zones/localities with maximum demand for fitness studios and working closely with the Business Development Team to maximise customer satisfaction</p><p>&bull; Providing quality service to customers by giving fitness options based on their requirements, assisting in final purchase and addressing their concerns</p><p>&bull; Provide feedback to our Technology team to improve the website and application basis feedback received from customers</p><p>&bull; Provide world class user support through emails, phone calls and social media to&nbsp;<em>FITPASS Customers</em></p><p>&bull; Hustle with one of the most hard-working teams in the country</p><p>&bull; Contribute to building the team and the organisation for long term success</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organisational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p>', '2017-08-01', '2017-07-15', '2', 0, 0, 0, '1', 6, '2', 100, '3', '2', 1, 18, '2017-07-05 09:22:44'),
-(2, 'Business Development Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do day-to-day:</strong></p><p>&bull; A field intensive role where you need to identifying key players in the industry through extensive market research and convert them into FITPASS partners</p><p>&bull; Imparting necessary training to partnered fitness studios to help them use the CRM system to their maximum advantage</p><p>&bull; Connecting with partnered fitness studios and conducting meetings regularly to maintain long-term relationships and address their concerns</p><p>&bull; Work closely with the Product and Technology team to improve services basis feedback received</p><p>&bull; Working closely with the Branding and Marketing team to increase customer engagement with the brand and with the product</p><p>&bull; Developing strategies for the expansion of FITPASS pan India</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organizational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p><p>&bull; Hustler</p>', '2017-08-01', '2017-07-31', '2', 0, 0, 0, '1', 6, '1', 5, '3', '2', 1, 18, '2017-07-05 09:22:48'),
-(3, 'Web Development Intern Required', '2', '<p>We are looking for an outstanding Web Developer intern to be responsible for the coding innovative design and layout of our website. He/she will build our website from concept all the way to completion from the bottom up fashioning everything from the home page to site layout and function.Familiarity with PHP, Java script, My SQL language and related frameworks.</p><p><strong>Core Responsibilities include:</strong></p><ul><li>Design website from scratch</li><li>Database management</li><li>API integration</li></ul>', '2017-08-01', '2017-07-31', '4', 0, 0, 5000, '1', 8, '2', 1, '2', '2', 1, 38, '2017-07-05 09:24:00'),
-(4, 'Content Writer Intern Required', '2', '<p>The ideal candidate is someone majoring in Journalism, Communications, or Marketing, with an interest in writing lifestyle content, a goal of learning 1 more about content generation and distribution, and a love of dogs. This internship will give him/her the opportunity to write a ton, work with other writers with experience writing for various publications and businesses, and a chance be in a fast-past startup environment where creativity is encouraged.</p><p><strong>Responsibilities:</strong></p><ul><li>Develop content ideas</li><li>Assist with writing blog articles</li><li>Assist with content calendar</li><li>Assist with sharing blog content</li><li>Assist with various marketing needs (anything from creating videos, to photography, to social media, to helping at events-- this can vary depending on his/her interests and/or skillset!)</li></ul><p><strong>What they&#39;ll get out of it:</strong></p><ul><li>How to write engaging blog posts</li><li>How to write content for a variety of audiences</li><li>How to use Wordpress</li><li>Best practices for sharing content on social channels</li><li>SEO best practices</li><li>They&#39;ll leave with a great portfolio of writing they would do to use for applying to full-time jobs in the future!</li><li>Plus, they&#39;ll get to work with a close and dynamic team with expertise in a range of areas</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '3', '2', 1, 38, '2017-07-05 09:22:55'),
-(5, 'Graphic Designer Intern', '2', '<p>A super star designer with a sharp eye to help create memorable visual elements for our marketing team, who will also be part of the User Experience Design and Prototyping team, a very talented and innovative UX strategist and developer who follows a lean UX approach to creating and building experiences for the Indian and international markets, someone with a great sensibility and who can turn around work on a tight schedule.</p><p>Responsibilities include:</p><ul><li>Assisting in designing supporting material</li><li>Providing design for digital efforts.</li><li>Creating Infographics and short videos.</li><li>UX/UI design</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '2', '2', 1, 38, '2017-07-05 09:22:57');
+(1, 'Sales and Marketing Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do Day-to-Day:</strong></p><p>&bull; Engaging with customers to understand their lifestyle and fitness requirements, suggesting fitness options based on their needs and ensuring closure of leads towards conversion</p><p>&bull; Identifying zones/localities with maximum demand for fitness studios and working closely with the Business Development Team to maximise customer satisfaction</p><p>&bull; Providing quality service to customers by giving fitness options based on their requirements, assisting in final purchase and addressing their concerns</p><p>&bull; Provide feedback to our Technology team to improve the website and application basis feedback received from customers</p><p>&bull; Provide world class user support through emails, phone calls and social media to&nbsp;<em>FITPASS Customers</em></p><p>&bull; Hustle with one of the most hard-working teams in the country</p><p>&bull; Contribute to building the team and the organisation for long term success</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organisational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p>', '2017-08-01', '2017-07-15', '2', 0, 0, 0, '1', 6, '2', 100, '3', '2', 0, 18, '2017-06-28 05:51:49'),
+(2, 'Business Development Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do day-to-day:</strong></p><p>&bull; A field intensive role where you need to identifying key players in the industry through extensive market research and convert them into FITPASS partners</p><p>&bull; Imparting necessary training to partnered fitness studios to help them use the CRM system to their maximum advantage</p><p>&bull; Connecting with partnered fitness studios and conducting meetings regularly to maintain long-term relationships and address their concerns</p><p>&bull; Work closely with the Product and Technology team to improve services basis feedback received</p><p>&bull; Working closely with the Branding and Marketing team to increase customer engagement with the brand and with the product</p><p>&bull; Developing strategies for the expansion of FITPASS pan India</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organizational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p><p>&bull; Hustler</p>', '2017-08-01', '2017-07-31', '2', 0, 0, 0, '1', 6, '1', 5, '3', '2', 0, 18, '2017-07-03 10:25:33'),
+(3, 'Web Development Intern Required', '1', '<p>We are looking for an outstanding Web Developer intern to be responsible for the coding innovative design and layout of our website. He/she will build our website from concept all the way to completion from the bottom up fashioning everything from the home page to site layout and function.Familiarity with PHP, Java script, My SQL language and related frameworks.</p><p><strong>Core Responsibilities include:</strong></p><ul><li>Design website from scratch</li><li>Database management</li><li>API integration</li></ul>', '2017-08-01', '2017-07-31', '4', 0, 0, 5000, '1', 8, '2', 1, '2', '2', 0, 38, '2017-07-03 10:25:35'),
+(4, 'Content Writer Intern Required', '2', '<p>The ideal candidate is someone majoring in Journalism, Communications, or Marketing, with an interest in writing lifestyle content, a goal of learning 1 more about content generation and distribution, and a love of dogs. This internship will give him/her the opportunity to write a ton, work with other writers with experience writing for various publications and businesses, and a chance be in a fast-past startup environment where creativity is encouraged.</p><p><strong>Responsibilities:</strong></p><ul><li>Develop content ideas</li><li>Assist with writing blog articles</li><li>Assist with content calendar</li><li>Assist with sharing blog content</li><li>Assist with various marketing needs (anything from creating videos, to photography, to social media, to helping at events-- this can vary depending on his/her interests and/or skillset!)</li></ul><p><strong>What they&#39;ll get out of it:</strong></p><ul><li>How to write engaging blog posts</li><li>How to write content for a variety of audiences</li><li>How to use Wordpress</li><li>Best practices for sharing content on social channels</li><li>SEO best practices</li><li>They&#39;ll leave with a great portfolio of writing they would do to use for applying to full-time jobs in the future!</li><li>Plus, they&#39;ll get to work with a close and dynamic team with expertise in a range of areas</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '3', '2', 0, 38, '2017-07-03 10:25:36'),
+(5, 'Graphic Designer Intern', '2', '<p>A super star designer with a sharp eye to help create memorable visual elements for our marketing team, who will also be part of the User Experience Design and Prototyping team, a very talented and innovative UX strategist and developer who follows a lean UX approach to creating and building experiences for the Indian and international markets, someone with a great sensibility and who can turn around work on a tight schedule.</p><p>Responsibilities include:</p><ul><li>Assisting in designing supporting material</li><li>Providing design for digital efforts.</li><li>Creating Infographics and short videos.</li><li>UX/UI design</li></ul>', '2017-08-01', '2017-07-15', '4', 0, 0, 5000, '1', 6, '1', 1, '2', '2', 0, 38, '2017-07-03 10:25:37');
 
 -- --------------------------------------------------------
 
@@ -1497,7 +2257,7 @@ INSERT INTO `internshipOffers` (`internshipID`, `internshipTitle`, `internshipTy
 -- Table structure for table `internshipSkills`
 --
 
-CREATE TABLE `internshipSkills` (
+CREATE TABLE IF NOT EXISTS `internshipSkills` (
   `internshipID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1520,7 +2280,7 @@ INSERT INTO `internshipSkills` (`internshipID`, `skillID`) VALUES
 -- Table structure for table `jobApplicants`
 --
 
-CREATE TABLE `jobApplicants` (
+CREATE TABLE IF NOT EXISTS `jobApplicants` (
   `jobID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL,
@@ -1533,7 +2293,7 @@ CREATE TABLE `jobApplicants` (
 -- Table structure for table `jobLocations`
 --
 
-CREATE TABLE `jobLocations` (
+CREATE TABLE IF NOT EXISTS `jobLocations` (
   `jobID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1554,8 +2314,8 @@ INSERT INTO `jobLocations` (`jobID`, `cityID`) VALUES
 -- Table structure for table `jobOffers`
 --
 
-CREATE TABLE `jobOffers` (
-  `jobID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `jobOffers` (
+  `jobID` int(5) NOT NULL AUTO_INCREMENT,
   `jobTitle` varchar(255) NOT NULL,
   `jobType` enum('1','2') NOT NULL,
   `jobDescription` text NOT NULL,
@@ -1569,18 +2329,19 @@ CREATE TABLE `jobOffers` (
   `openings` int(3) NOT NULL,
   `applicants` enum('1','2','3') NOT NULL,
   `status` enum('1','2','3') NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`jobID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `jobOffers`
 --
 
 INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `startDate`, `applicationDeadline`, `offerType`, `minimumOffer`, `maximumOffer`, `offer`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
-(1, 'JAVA Developer Required', '2', '<p><strong>Job Responsibilities:</strong></p><ul><li>Candidate should have very strong technical background in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Exception handling, Collections API, Multithreading with latest concurrency package, Best practices&nbsp;(such as avoiding code duplication, avoiding hard coded values etc.), Design patterns</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB</li><li>Experience in implementing JMS messaging services</li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech (Comp./ EEE)/ MCA (regular) with around &nbsp;(0 &ndash; 1) yrs. of exp. as a Java Developer with exp. in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns with an I.T./ Software Service Company.&nbsp;</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB,</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts, Hibernate.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Built MVC based Web Application Using JSP/Spring framework.</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 10, '2', '2', 1, 37, '2017-07-05 09:22:16'),
-(2, '.NET Developer Required', '2', '<p><strong>Job Responsibilities:</strong></p><ul><li><p>Full Life Cycle application development.</p></li><li><p>Designing, coding and debugging applications.</p></li><li><p>Software analysis, code analysis, requirements analysis, software review, identification of code metrics, system risk analysis, software reliability analysis.</p></li><li><p>Software modelling and simulation</p></li><li><p>Software testing and quality assurance</p></li><li><p>Performance tuning, improvement, balancing, usability, automation.</p></li><li><p>Support, maintain and document software functionality.</p></li><li><p>Integrate software with existing systems.</p></li><li><p>Should have strong knowledge in Oracle/ MS SQL and MySQL Database.</p></li><li><p>Strong in handling Oracle 10g/ SQL Database of large distributed production environment.</p></li><li><p>Database administration of databases such as Oracle/ MS SQL Server.</p></li><li><p>Should have knowledge of configuration, stored procedure, Joining / Unions, Indexing &amp; shrinking DB, QC of DB.</p></li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech. (Comp./ EEE)/ MCA (regular) with around one &nbsp;(0 - 1) yrs. of exp. as dot NET developer with an I.T./ Software Development Company.</li><li>Candidates must have 60 % marks (from 10th to Higher degree).</li><li>Must have strong basic concepts in ASP.Net 4.0, C#, VB.Net, C#, Framework (2.0, 3.5,4.0, 4.5) HTML &amp; Java Script, &nbsp; ADO.Net, Windows/ Web Application, Web/Web service, WCF, MVC, &amp; JS/ JQuery.</li><li>MSP (Microsoft Software Professional) Certified developer is preferred.</li><li>Should have strong basic concepts of Database (Oracle and/ or SQL Server) and Database Query is must for end developer.</li><li>Strong in basic OOPs with Ajax &amp; Controls, XML and HTML</li><li>Programming Analytical Skills</li><li>Good knowledge of Design Patterns</li><li>Experience of working in n-Tier architecture.</li><li>Should be a Team Player</li><li>Highly logical and analytical in approach</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 5, '2', '2', 1, 37, '2017-07-05 09:22:18');
+(1, 'JAVA Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li>Candidate should have very strong technical background in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Exception handling, Collections API, Multithreading with latest concurrency package, Best practices&nbsp;(such as avoiding code duplication, avoiding hard coded values etc.), Design patterns</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB</li><li>Experience in implementing JMS messaging services</li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech (Comp./ EEE)/ MCA (regular) with around &nbsp;(0 &ndash; 1) yrs. of exp. as a Java Developer with exp. in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns with an I.T./ Software Service Company.&nbsp;</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB,</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts, Hibernate.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Built MVC based Web Application Using JSP/Spring framework.</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 10, '2', '2', 0, 37, '2017-07-03 10:26:05'),
+(2, '.NET Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li><p>Full Life Cycle application development.</p></li><li><p>Designing, coding and debugging applications.</p></li><li><p>Software analysis, code analysis, requirements analysis, software review, identification of code metrics, system risk analysis, software reliability analysis.</p></li><li><p>Software modelling and simulation</p></li><li><p>Software testing and quality assurance</p></li><li><p>Performance tuning, improvement, balancing, usability, automation.</p></li><li><p>Support, maintain and document software functionality.</p></li><li><p>Integrate software with existing systems.</p></li><li><p>Should have strong knowledge in Oracle/ MS SQL and MySQL Database.</p></li><li><p>Strong in handling Oracle 10g/ SQL Database of large distributed production environment.</p></li><li><p>Database administration of databases such as Oracle/ MS SQL Server.</p></li><li><p>Should have knowledge of configuration, stored procedure, Joining / Unions, Indexing &amp; shrinking DB, QC of DB.</p></li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech. (Comp./ EEE)/ MCA (regular) with around one &nbsp;(0 - 1) yrs. of exp. as dot NET developer with an I.T./ Software Development Company.</li><li>Candidates must have 60 % marks (from 10th to Higher degree).</li><li>Must have strong basic concepts in ASP.Net 4.0, C#, VB.Net, C#, Framework (2.0, 3.5,4.0, 4.5) HTML &amp; Java Script, &nbsp; ADO.Net, Windows/ Web Application, Web/Web service, WCF, MVC, &amp; JS/ JQuery.</li><li>MSP (Microsoft Software Professional) Certified developer is preferred.</li><li>Should have strong basic concepts of Database (Oracle and/ or SQL Server) and Database Query is must for end developer.</li><li>Strong in basic OOPs with Ajax &amp; Controls, XML and HTML</li><li>Programming Analytical Skills</li><li>Good knowledge of Design Patterns</li><li>Experience of working in n-Tier architecture.</li><li>Should be a Team Player</li><li>Highly logical and analytical in approach</li></ul>', '2017-08-01', '2017-07-15', '1', 1.2, 1.8, 0, '2', 5, '2', '2', 0, 37, '2017-07-03 10:26:06');
 
 -- --------------------------------------------------------
 
@@ -1588,7 +2349,7 @@ INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `star
 -- Table structure for table `jobSkills`
 --
 
-CREATE TABLE `jobSkills` (
+CREATE TABLE IF NOT EXISTS `jobSkills` (
   `jobID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1609,14 +2370,15 @@ INSERT INTO `jobSkills` (`jobID`, `skillID`) VALUES
 -- Table structure for table `messages`
 --
 
-CREATE TABLE `messages` (
-  `messageID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `messages` (
+  `messageID` int(5) NOT NULL AUTO_INCREMENT,
   `sender` int(5) NOT NULL,
   `receiver` int(5) NOT NULL,
   `message` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `read` tinyint(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `read` tinyint(1) NOT NULL,
+  PRIMARY KEY (`messageID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1624,15 +2386,16 @@ CREATE TABLE `messages` (
 -- Table structure for table `notifications`
 --
 
-CREATE TABLE `notifications` (
-  `notificationID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `notificationID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `image` varchar(1000) NOT NULL,
   `notification` varchar(1000) NOT NULL,
   `concernedUser` int(5) NOT NULL,
   `link` varchar(1000) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`notificationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1640,14 +2403,15 @@ CREATE TABLE `notifications` (
 -- Table structure for table `otp`
 --
 
-CREATE TABLE `otp` (
-  `otpID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `otp` (
+  `otpID` int(5) NOT NULL AUTO_INCREMENT,
   `mobile` bigint(11) NOT NULL,
   `otp` int(4) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
-  `expiry` bigint(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `expiry` bigint(12) NOT NULL,
+  PRIMARY KEY (`otpID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1655,15 +2419,16 @@ CREATE TABLE `otp` (
 -- Table structure for table `passwordToken`
 --
 
-CREATE TABLE `passwordToken` (
-  `tokenID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `passwordToken` (
+  `tokenID` int(5) NOT NULL AUTO_INCREMENT,
   `token` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `tokenType` enum('1','2') NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
   `expiry` bigint(12) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tokenID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `passwordToken`
@@ -1678,13 +2443,14 @@ INSERT INTO `passwordToken` (`tokenID`, `token`, `email`, `tokenType`, `generate
 -- Table structure for table `projects`
 --
 
-CREATE TABLE `projects` (
-  `projectID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `projects` (
+  `projectID` int(5) NOT NULL AUTO_INCREMENT,
   `projectTitle` text NOT NULL,
   `projectLink` text NOT NULL,
   `projectDescription` text NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`projectID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1692,8 +2458,8 @@ CREATE TABLE `projects` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `question_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `question_id` int(5) NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
@@ -1701,8 +2467,9 @@ CREATE TABLE `questions` (
   `option4` text NOT NULL,
   `answer` enum('1','2','3','4') NOT NULL,
   `skillID` int(5) NOT NULL,
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=704 ;
 
 --
 -- Dumping data for table `questions`
@@ -2420,11 +3187,12 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- Table structure for table `skills`
 --
 
-CREATE TABLE `skills` (
-  `skillID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `skills` (
+  `skillID` int(5) NOT NULL AUTO_INCREMENT,
   `skill_name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`skillID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `skills`
@@ -2461,12 +3229,13 @@ INSERT INTO `skills` (`skillID`, `skill_name`, `active`) VALUES
 -- Table structure for table `testSettings`
 --
 
-CREATE TABLE `testSettings` (
-  `skillID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `testSettings` (
+  `skillID` int(5) NOT NULL AUTO_INCREMENT,
   `numberQuestions` int(5) NOT NULL,
   `timeAllowed` int(5) NOT NULL,
-  `passingCriteria` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `passingCriteria` int(5) NOT NULL,
+  PRIMARY KEY (`skillID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `testSettings`
@@ -2503,8 +3272,8 @@ INSERT INTO `testSettings` (`skillID`, `numberQuestions`, `timeAllowed`, `passin
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
@@ -2522,8 +3291,11 @@ CREATE TABLE `users` (
   `identityDocumentStatus` enum('1','2','3','4') DEFAULT NULL,
   `registrationLevel` enum('1','2','3','4','5') DEFAULT '1',
   `active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `mobile` (`mobile`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=157 ;
 
 --
 -- Dumping data for table `users`
@@ -2693,7 +3465,7 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE `userSkills` (
+CREATE TABLE IF NOT EXISTS `userSkills` (
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
   `score` float NOT NULL,
@@ -2707,8 +3479,8 @@ CREATE TABLE `userSkills` (
 -- Table structure for table `workExperience`
 --
 
-CREATE TABLE `workExperience` (
-  `weID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `workExperience` (
+  `weID` int(5) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -2716,246 +3488,10 @@ CREATE TABLE `workExperience` (
   `startYear` int(4) NOT NULL,
   `endMonth` varchar(255) NOT NULL,
   `endYear` int(4) NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`weID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `achievements`
---
-ALTER TABLE `achievements`
-  ADD PRIMARY KEY (`achievementID`);
-
---
--- Indexes for table `adminAuth`
---
-ALTER TABLE `adminAuth`
-  ADD PRIMARY KEY (`adminID`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- Indexes for table `colleges`
---
-ALTER TABLE `colleges`
-  ADD PRIMARY KEY (`college_id`);
-
---
--- Indexes for table `contactMessages`
---
-ALTER TABLE `contactMessages`
-  ADD PRIMARY KEY (`contactID`);
-
---
--- Indexes for table `content`
---
-ALTER TABLE `content`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`course_id`);
-
---
--- Indexes for table `educationalDetails`
---
-ALTER TABLE `educationalDetails`
-  ADD PRIMARY KEY (`educationID`);
-
---
--- Indexes for table `employerUsers`
---
-ALTER TABLE `employerUsers`
-  ADD UNIQUE KEY `userID` (`userID`);
-
---
--- Indexes for table `indianCities`
---
-ALTER TABLE `indianCities`
-  ADD PRIMARY KEY (`cityID`);
-
---
--- Indexes for table `internshipOffers`
---
-ALTER TABLE `internshipOffers`
-  ADD PRIMARY KEY (`internshipID`);
-
---
--- Indexes for table `jobOffers`
---
-ALTER TABLE `jobOffers`
-  ADD PRIMARY KEY (`jobID`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`messageID`);
-
---
--- Indexes for table `notifications`
---
-ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notificationID`);
-
---
--- Indexes for table `otp`
---
-ALTER TABLE `otp`
-  ADD PRIMARY KEY (`otpID`);
-
---
--- Indexes for table `passwordToken`
---
-ALTER TABLE `passwordToken`
-  ADD PRIMARY KEY (`tokenID`);
-
---
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`projectID`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`);
-
---
--- Indexes for table `skills`
---
-ALTER TABLE `skills`
-  ADD PRIMARY KEY (`skillID`);
-
---
--- Indexes for table `testSettings`
---
-ALTER TABLE `testSettings`
-  ADD PRIMARY KEY (`skillID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `mobile` (`mobile`);
-
---
--- Indexes for table `workExperience`
---
-ALTER TABLE `workExperience`
-  ADD PRIMARY KEY (`weID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `achievements`
---
-ALTER TABLE `achievements`
-  MODIFY `achievementID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `adminAuth`
---
-ALTER TABLE `adminAuth`
-  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `colleges`
---
-ALTER TABLE `colleges`
-  MODIFY `college_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=372;
---
--- AUTO_INCREMENT for table `contactMessages`
---
-ALTER TABLE `contactMessages`
-  MODIFY `contactID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `content`
---
-ALTER TABLE `content`
-  MODIFY `content_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `courses`
---
-ALTER TABLE `courses`
-  MODIFY `course_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `educationalDetails`
---
-ALTER TABLE `educationalDetails`
-  MODIFY `educationID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
---
--- AUTO_INCREMENT for table `indianCities`
---
-ALTER TABLE `indianCities`
-  MODIFY `cityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
---
--- AUTO_INCREMENT for table `internshipOffers`
---
-ALTER TABLE `internshipOffers`
-  MODIFY `internshipID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `jobOffers`
---
-ALTER TABLE `jobOffers`
-  MODIFY `jobID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `messages`
---
-ALTER TABLE `messages`
-  MODIFY `messageID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `notifications`
---
-ALTER TABLE `notifications`
-  MODIFY `notificationID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `otp`
---
-ALTER TABLE `otp`
-  MODIFY `otpID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `passwordToken`
---
-ALTER TABLE `passwordToken`
-  MODIFY `tokenID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `projectID` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=704;
---
--- AUTO_INCREMENT for table `skills`
---
-ALTER TABLE `skills`
-  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `testSettings`
---
-ALTER TABLE `testSettings`
-  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
---
--- AUTO_INCREMENT for table `workExperience`
---
-ALTER TABLE `workExperience`
-  MODIFY `weID` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

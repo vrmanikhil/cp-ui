@@ -10,6 +10,7 @@
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/jobs.css'); ?>" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -76,7 +77,7 @@
 					</ol>
 				</div>
 
-				<?php foreach ($appliedJobOffers as $key => $value) { ?>
+				<?php if(empty($appliedJobOffers)) { echo "<center>You have not applied for any Job Offer Yet.</center>"; } else { foreach ($appliedJobOffers as $key => $value) { ?>
 
 				<div class="card posting-card">
 					<div class="flex media">
@@ -94,7 +95,7 @@
 					</div>
 				</div>
 
-				<?php } ?>
+				<?php }} ?>
 
 
 			</div>

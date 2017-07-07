@@ -123,6 +123,12 @@ class Employers extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/add-internship-offer'));
 		}
+		if($stipendType == '3'){
+			if($maximumStipend<$minimumStipend){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('internships/add-internship-offer'));
+			}
+		}
 		if($stipendType == '3' && $stipend == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/add-internship-offer'));
@@ -309,7 +315,7 @@ class Employers extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/edit-internship-offer/'.$internshipID));
 		}
-		if($stipendType == '3' && $stipend == ''){
+		if($stipendType == '4' && $stipend == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/edit-internship-offer/'.$internshipID));
 		}
@@ -485,6 +491,12 @@ class Employers extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
 		}
+		if($salaryType == '1'){
+			if($minimumOffer>$maximumOffer){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
+				redirect(base_url('jobs/edit-job-offer/'.$jobID));
+			}
+		}
 		if($salaryType == '2' && $salary == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('jobs/edit-job-offer/'.$jobID));
@@ -658,6 +670,12 @@ class Employers extends CI_Controller {
 		if($salaryType == '1' && $maximumOffer == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again3','class'=>'error'));
 			redirect(base_url('jobs/add-job-offer'));
+		}
+		if($salaryType=='1'){
+			if($minimumOffer>$maximumOffer){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again3','class'=>'error'));
+				redirect(base_url('jobs/add-job-offer'));
+			}
 		}
 		if($salaryType == '2' && $salary == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again4','class'=>'error'));

@@ -11,6 +11,7 @@
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/search.css'); ?>" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -70,7 +71,7 @@
 					<li role="presentation"><a href="#internships" aria-controls="internships" role="tab" data-toggle="tab">Internship Offers</a></li>
 					<li role="presentation"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Job Offers</a></li>
 				</ul>
-			
+
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="accounts">

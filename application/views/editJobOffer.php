@@ -8,6 +8,8 @@
 	<title>CampusPuppy</title>
 	<link href="<?php echo base_url('/assets/css/add-offer.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
+
 </head>
 
 <body>
@@ -73,7 +75,7 @@
 						<li class="active">Add Job Offer</li>
 					</ol>
 				</div>
-				
+
 				<div class="add-offer__section card">
 					<h1 class="add-offer__section-title">Add Job Offer</h1>
 					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/editJobOffer'); ?>">
@@ -160,7 +162,7 @@
 							<?php $skillsRequired = explode(",", $jobDetails['skillsRequired']);
 							$skillIDsRequired = explode(",", $jobDetails['skillIDsRequired']);?>
 						 <?php for($i = 0; $i < sizeof($skillsRequired);$i++){
-						 	$skill[$i] = ['skillname' => $skillsRequired[$i], 'skillID' => $skillIDsRequired[$i]];		
+						 	$skill[$i] = ['skillname' => $skillsRequired[$i], 'skillID' => $skillIDsRequired[$i]];
 						 	?>
 						<p class="skill"><?=$skillsRequired[$i]?><a href="javascript:" data-skill="<?= $skillsRequired[$i]?>" index="<?=$i?>" skill-id="<?=$skillIDsRequired[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
 						<?php }}else{$skill = [];}?>
@@ -185,7 +187,7 @@
 						<label class="form__label">Internship Location(s)-</label>
 						<?php if($jobDetails['cities'] != NULL){?>
 							<?php $cities = explode(",", $jobDetails['cities']);
-							$cityIDs = explode(",", $jobDetails['cityIDs']);?>	
+							$cityIDs = explode(",", $jobDetails['cityIDs']);?>
 						<?php for($i = 0; $i < sizeof($cities);$i++){
 							$location[$i] = ['city_name' => $cities[$i], 'location_id' => $cityIDs[$i]];
 							?>

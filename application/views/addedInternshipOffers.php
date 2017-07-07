@@ -10,6 +10,7 @@
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/jobs.css'); ?>" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -86,7 +87,7 @@
 								<strong><?php echo $value['internshipTitle']; ?></strong>
 							</p>
 							<p class="posting-card__status"><strong>Skills</strong> : <span style="font-size: 0.9rem;"><?php if($value['skillsRequired'] == ''){ echo "No Specific Skills Required"; } else { echo $value['skillsRequired']; } ?></span></p>
-							<p class="posting-card__status"><strong>Status</strong> : <?php if($value['status']=='1' && empty($value['active'])) { ?><span style="color: var(--yellow);"><b>Under Verification</b></span> <?php } ?><?php if($value['status']=='2' && $value['active']=='1') { ?><span style="color: var(--green);"><b>Active</b> </span><a style="font-size: 0.9rem">Close Job Offer</a> <?php } ?><?php if($value['status']=='3' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Rejected</b></span> <?php } ?><?php if($value['status']=='2' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Closed</b></span> <?php } ?></p>
+							<p class="posting-card__status"><strong>Status</strong> : <?php if($value['status']=='1' && ($value['active']=='1')) { ?><span style="color: var(--yellow);"><b>Under Verification</b></span> <?php } ?><?php if($value['status']=='2' && $value['active']=='1') { ?><span style="color: var(--green);"><b>Active</b> </span><a href="<?php echo base_url('web/closeOffer/2/'.$value['internshipID']); ?>" style="font-size: 0.9rem">Close Internship Offer</a> <?php } ?><?php if($value['status']=='3' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Rejected</b></span> <?php } ?><?php if($value['status']=='2' && empty($value['active'])) { ?><span style="color: var(--red);"><b>Closed</b></span> <?php } ?></p>
 							<p class="posting-card__status"><strong>Application Deadline</strong> : <?php echo $value['applicationDeadline']; ?></p>
 							<div class="posting-card__apply">
 								<a href="<?php echo base_url('applicants/2/').$value['internshipID']; ?>" class="btn white midnight-blue-bg s-14">View Applicants</a>

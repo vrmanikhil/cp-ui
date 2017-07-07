@@ -856,7 +856,7 @@ public function injectClassName(&$data)
 			}else{
 				$picture['profileImage'] = base_url($upload_path);
 				return $CI->homeModel->updateProfileImage($_SESSION['userData']['userID'], $picture);
-			} 
+			}
 		}else{
 			return false;
 		}
@@ -875,6 +875,12 @@ public function injectClassName(&$data)
 		}else{
 			return true;
 		}
+	}
+
+	public function closeOffer($offerType, $offerID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->closeOffer($offerType, $offerID);
 	}
 
 }

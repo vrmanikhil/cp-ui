@@ -11,6 +11,7 @@
 	<link href="<?php echo base_url('/assets/css/remodal.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="<?php if(isset($_SESSION['userData']['loggedIn'])){ echo base_url('assets/css/components/header.css'); } else { echo base_url('/assets/css/components/logged-out-header.css'); }  ?>" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
 	<?php }?>
 	<div class="layout-container flex flex--col">
 		<?php if(isset($_SESSION['userData']['loggedIn'])){ echo $header; } else { echo $headerLogin; } ?>
-		<main class="flex main-container globalContainer">
+		<main class="flex main-container globalContainer" style="margin-top: 10px;">
 			<div class="main-body flex__item">
 				<div class="card">
 					<h1 style="font-size: 1rem; text-transform: uppercase; text-align: left; margin-top: 0;"><b>Terms And Conditions</b></h1>

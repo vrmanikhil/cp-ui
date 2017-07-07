@@ -243,11 +243,11 @@ class Web extends CI_Controller {
         $userID = $_SESSION['userData']['userID'];
         $num_ques = $test_settings[0]['numberQuestions'];
         switch ($this->home_lib->addSkill($score, $userID, $skill_id, $num_ques)) {
-        	case 0: $msg = ['error', "You marked $score% of the answers correct and were unable to clear the skill test. Better luck next time."];
+        	case 0: $msg = ['error', "You marked $score% of the Answers Correct and were unable to Clear the Skill Test. Better Luck Next Time."];
         		break;
-        	case 1: $msg = ['success', "Congratulations you marked $score% of the answers correct and skill was successfully added to your profile."];
+        	case 1: $msg = ['success', "Congratulations you marked $score% of the answers correct and skill was Successfully added to your Profile."];
         		break;
-        	default: $msg = ['error', "Some Error Occured"];
+        	default: $msg = ['error', "Some Error Occured. Please Try Again."];
         		break;
         }
         $this->session->set_flashdata('message', array('content' => $msg[1], 'class' => $msg[0]));
@@ -506,7 +506,7 @@ class Web extends CI_Controller {
 			$score = '0';
 			$college = $this->home_lib->getCollegeDetails($collegeID);
 			$college = $college[0];
-			$CI->session->set_userdata('collegeLogo', $college['collegeLogo']);
+			$CI->session->set_userdata('collegeLogo', $college['logo']);
 			$CI->session->set_userdata('collegeName', $college['college']);
 			$description = $course['course']."-".$batch.", at ".$college['college'];
 			$data = array(
@@ -926,4 +926,28 @@ class Web extends CI_Controller {
 		}
 	}
 
+	public function closeOffer($offerType, $offerID){
+		$result = $this->home_lib->closeOffer($offerType, $offerID);
+		if($result){
+			if($offerType=='1'){
+				$this->session->set_flashdata('message', array('content'=>'Job Offer Successfully Closed.','class'=>'success'));
+				redirect(base_url('jobs/added-job-offer'));
+			}
+			if($offerType=='2'){
+				$this->session->set_flashdata('message', array('content'=>'Internship Offer Successfully Closed.','class'=>'success'));
+				redirect(base_url('internships/added-internship-offer'));
+			}
+		}
+		else{
+			if($offerType=='1'){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('jobs/added-job-offer'));
+			}
+			if($offerType=='2'){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong. Please Try Again.','class'=>'error'));
+				redirect(base_url('internships/added-internship-offer'));
+			}
+		}
+	}
+	
 }

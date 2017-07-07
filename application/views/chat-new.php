@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/chat.css'); ?>" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
 </head>
 
 <body>
@@ -179,7 +180,7 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 					value = res.csrf
 					res = res.success
 					if(res){
-						$('#csrf').val(value) 
+						$('#csrf').val(value)
 						container = $('.wrap').clone()
 						container.removeClass('wrap')
 						container.find('.time').html(time)
@@ -193,7 +194,7 @@ var	lastId = <?php echo $messages[0]['messageID']; ?>;
 						lastId = new_lastId
 					}
 				}).fail(function(){
-					
+
 				})
 			}
 		})
