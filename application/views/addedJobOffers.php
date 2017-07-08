@@ -95,7 +95,7 @@
 								<a href=<?php echo base_url('applicants/1/').$value['jobID']; ?> class="btn white midnight-blue-bg s-14">View Applicants</a>
 								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">View</button>
 								<?php if($value['status']=='1') { ?>
-								<button data-id="<?php echo $value['jobID']; ?>" class="btn white midnight-blue-bg s-14 js-view-posting-details view" id = "view<?= $value['jobID'] ?>">Edit</button>
+								<a href="<?php echo base_url('jobs/edit-job-offer/').$value['jobID']; ?>" class="btn white midnight-blue-bg s-14">Edit</a>
 								<?php } ?>
 							</div>
 						</div>

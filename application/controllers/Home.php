@@ -75,21 +75,28 @@ class Home extends CI_Controller {
 	}
 
 	public function educationDetails(){
-		// $this->redirection();
+		if($_SESSION['userData']['loggedIn'] && ($_SESSION['registrationLevel']=='1' && ($_SESSION['userData']['accountType']=='1'))){
 			$this->data['colleges'] = $this->home_lib->getColleges();
 			$this->data['courses'] = $this->home_lib->getCourses();
 			$this->load->view('educationDetails', $this->data);
-			// redirect(base_url('home'));
+		}
+		else{
+			redirect(base_url());
+		}
 
 	}
 
 	public function employerDetails(){
-		$this->load->view('employerDetails', $this->data);
+		if($_SESSION['userData']['loggedIn'] && ($_SESSION['registrationLevel']=='1' && ($_SESSION['userData']['accountType']=='1'))){
+			$this->load->view('employerDetails', $this->data);
+		}
+		else{
+			redirect(base_url());
+		}
 	}
 
 	public function verifyEMail($redirection=''){
-		// $this->redirection();
-		// if($_SESSION['registrationLevel']=='2'){
+		if($_SESSION['userData']['loggedIn'] && ($_SESSION['registrationLevel']=='2')){
 			if($redirection=='1'){
 				$this->load->view('verifyEMail', $this->data);
 			}
@@ -97,10 +104,10 @@ class Home extends CI_Controller {
 			$this->generateVerifyEMail();
 			$this->load->view('verifyEMail', $this->data);
 			}
-		// }
-		// else{
-		// 	redirect(base_url('home'));
-		// }
+		}
+		else{
+			redirect(base_url());
+		}
 	}
 
 	public function verifyMobileNumber($redirection=''){
@@ -303,7 +310,7 @@ class Home extends CI_Controller {
 			$filteredJobIDs = array_unique(array_merge($filteredLocationJobIDs, $filteredSkillJobIDs));
 			$jobIDs = array();
 			$i = 0;
-			
+
 				foreach ($this->data['jobOffers'] as $key => $value) {
 					if(!in_array($value['jobID'], $filteredJobIDs)){
 						unset($this->data['jobOffers'][$i]);
@@ -311,7 +318,7 @@ class Home extends CI_Controller {
 					$i++;
 				}
 				$this->load->view('relevantJobs', $this->data);
-			
+
 		}else{
 			$this->load->view('relevantJobs', $this->data);
 		}
@@ -373,7 +380,7 @@ class Home extends CI_Controller {
 					$i++;
 				}
 				$this->load->view('jobOffers', $this->data);
-			
+
 		}else{
 			$this->load->view('jobOffers', $this->data);
 		}
@@ -458,7 +465,7 @@ class Home extends CI_Controller {
 				}
 			}else{
 				$filteredLocationinternshipIDs = [];
-				$location = []; 
+				$location = [];
 				}
 				if(isset($skill))
 				$this->data['filterskills'] =json_encode($skill);
@@ -475,7 +482,7 @@ class Home extends CI_Controller {
 					$i++;
 				}
 				$this->load->view('relevantInternships', $this->data);
-			
+
 		}else{
 			$this->load->view('relevantInternships', $this->data);
 		}
@@ -518,7 +525,7 @@ class Home extends CI_Controller {
 
 			$internshipIDs = array();
 			$i = 0;
-				foreach ($this->data['internshipOffers'] as $key => $value) {	
+				foreach ($this->data['internshipOffers'] as $key => $value) {
 					if(!in_array($value['internshipID'], $filteredinternshipIDs)){
 						unset($this->data['internshipOffers'][$i]);
 					}
@@ -633,7 +640,7 @@ if($_SESSION['userData']['accountType']=='2'){
 		}
 		else{
 			$this->session->set_flashdata('message', array('content' => 'Something Went Wrong, Please Try Again.', 'class' => 'error'));
-			redirect(base_url('home'));	
+			redirect(base_url('home'));
 		}
     }
 		else{
