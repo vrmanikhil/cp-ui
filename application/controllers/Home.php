@@ -652,11 +652,12 @@ if($_SESSION['userData']['accountType']=='2'){
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$_SESSION['userData']['editJobId'] = $jobID;
-		if($_SESSION['userData']['userID'] == $this->data['jobDetails']['addedBy'] && $this->data['jobDetails']['status'] == 1)
+		if($_SESSION['userData']['userID'] == $this->data['jobDetails']['addedBy'] && $this->data['jobDetails']['status'] == 1){
 			$this->load->view('editJobOffer', $this->data);
-		else
+		}else{
 			$this->session->set_flashdata('message', array('content' => 'Something Went Wrong, Please Try Again.', 'class' => 'error'));
 			redirect(base_url('home'));
+		}
     }
 		else{
 			redirect(base_url('home'));
