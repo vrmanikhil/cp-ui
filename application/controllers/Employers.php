@@ -129,7 +129,7 @@ class Employers extends CI_Controller {
 				redirect(base_url('internships/add-internship-offer'));
 			}
 		}
-		if($stipendType == '3' && $stipend == ''){
+		if($stipendType == '4' && $stipend == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('internships/add-internship-offer'));
 		}
