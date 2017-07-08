@@ -628,9 +628,16 @@ if($_SESSION['userData']['accountType']=='2'){
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$_SESSION['userData']['editInternshipId'] = $internshipID;
-		$this->load->view('editInternshipOffer', $this->data);
+		if($_SESSION['userData']['userID'] == $this->data['internshipDetails']['addedBy'] && $this->data['internshipDetails']['status'] == 1){
+			$this->load->view('editInternshipOffer', $this->data);
+		}
+		else{
+			$this->session->set_flashdata('message', array('content' => 'Something Went Wrong, Please Try Again.', 'class' => 'error'));
+			redirect(base_url('home'));	
+		}
     }
 		else{
+			die();
 			redirect(base_url('home'));
 		}
 	}
@@ -645,7 +652,12 @@ if($_SESSION['userData']['accountType']=='2'){
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->data['locations'] = $this->home_lib->getLocations();
 		$_SESSION['userData']['editJobId'] = $jobID;
-		$this->load->view('editJobOffer', $this->data);
+		if($_SESSION['userData']['userID'] == $this->data['jobDetails']['addedBy'] && $this->data['jobDetails']['status'] == 1){
+			$this->load->view('editJobOffer', $this->data);
+		}else{
+			$this->session->set_flashdata('message', array('content' => 'Something Went Wrong, Please Try Again.', 'class' => 'error'));
+			redirect(base_url('home'));
+		}
     }
 		else{
 			redirect(base_url('home'));
