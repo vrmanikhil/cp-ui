@@ -53,11 +53,11 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="card flex">
-					<p class="skill-name">Skill Test: <strong><?php echo $skill_data['skill_name']; ?></strong></p>
+					<p class="skill-name" style = "font-weight: 800">Skill Test: <strong style="font-weight: 600"><?php echo $skill_data['skill_name']; ?></strong></p>
 					<div id="timer"></div>
 				</div>
 				<div class="card">
-					<label><strong>Question : <sec id = "ques-no"></sec></strong></label>
+					<label><strong style = "font-weight: 600">Question : <sec id = "ques-no"></sec></strong></label>
 					<p class="mcq" id="ques-content"></p>
 					<div class="options">
 							<div class="option flex">
