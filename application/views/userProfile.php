@@ -178,7 +178,7 @@
 						<div role="tabpanel" class="tab-pane fade" id="skills">
 							<h3 class="heading">Skills</h3>
 							<div class="skills-container flex">
-								<?php foreach($skills as $skill){
+								<?php if(empty($skills)) { echo "<center>No Skills Added to Profile.</center>"; } else { foreach($skills as $skill){
 									if($skill['skillType'] == 1){?>
 									<div class="skill flex free">
 										<p><?= $skill['skill_name']?></p>
@@ -187,7 +187,7 @@
 									<div class="skill flex paid">
 										<p><?= $skill['skill_name']?></p>
 									</div>
-								<?php } } ?>
+								<?php } } } ?>
 							</div>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
@@ -202,9 +202,9 @@
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
 							<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){
 								if($userDetails['displayMobile'] == 1){?>
-								<a href="<?=base_url('home/toggleMobilePrivacy/0/'.$_SESSION['userData']['userID'])?>" style ="float:right" class="btn btn--primary js-edit-entity">Hide Mobile</a>
+								<a href="<?=base_url('home/toggleMobilePrivacy/0/'.$_SESSION['userData']['userID'])?>" style ="float:right" class="btn btn--primary js-edit-entity">Hide Mobile Number from Others</a>
 								<?php }else{?>
-								<a href="<?= base_url('home/toggleMobilePrivacy/1/'.$_SESSION['userData']['userID'])?>" style= "float: right" class="btn btn--primary js-edit-entity">Show Mobile</a>
+								<a href="<?= base_url('home/toggleMobilePrivacy/1/'.$_SESSION['userData']['userID'])?>" style= "float: right" class="btn btn--primary js-edit-entity">Show Mobile Number to Others</a>
 							<?php } }?>
 							<?php if($userDetails['displayMobile'] == 1 || $_SESSION['userData']['userID'] == $userDetails['userID']){?>
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
@@ -310,8 +310,8 @@
 			<form action="<?= base_url('web/addEducation')?>" method="POST" class="form educationDet">
 				<div class="horizontal-group">
 					<div class="form-group">
-						<label for="educationType">Type</label>
-						<select class="select" name="educationType" id="educationType">
+						<label for="educationType">Education Type <span style="color: red; font-size: 12px;">required</span></label>
+						<select class="select" name="educationType" id="educationType" required>
 							<option value="1" selected="">High School</option>
 							<option value="2" selected="">Senior Secondary or Equivalent</option>
 							<option value="3" selected="">Graduation</option>
@@ -319,10 +319,10 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="educationYear">Year</label>
-						<select name="educationYear" id="educationYear" class="select">
+						<label for="educationYear">Year <span style="color: red; font-size: 12px;">required</span></label>
+						<select name="educationYear" required id="educationYear" class="select">
 
-							<?php 
+							<?php
 								for($i = $year; $i>=1980; $i--){?>
 									<option><?= $i?></option>
 
@@ -332,20 +332,20 @@
 				</div>
 				<div class="horizontal-group">
 					<div class="form-group">
-						<label for="educationScoreType">Score Type</label>
-						<select class="select" name="scoreType" id="educationScoreType">
+						<label for="educationScoreType">Score Type <span style="color: red; font-size: 12px;">required</span></label>
+						<select class="select" name="scoreType" required id="educationScoreType">
 							<option value="1">CGPA</option>
 							<option value="2">Percentage</option>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="educationScore">Score</label>
-						<input type="number" name="score" id="educationScore" class="form__input" step = 0.01>
+						<label for="educationScore">Score <span style="color: red; font-size: 12px;">required</span></label>
+						<input type="number" name="score" id="educationScore" required class="form__input" step = 0.01>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="educationDescription">Description</label>
-					<textarea name="educationDescription" data-ckeditor="yes" id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
+					<label for="educationDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
+					<textarea name="educationDescription" data-ckeditor="yes" required id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -361,12 +361,12 @@
 			<h3>Achievement</h3>
 			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form achievementDet">
 				<div class="form-group">
-					<label for="achievementName">Name</label>
-					<input type="text" class="form__input" placeholder="Achievement name" id="achievementName" name="achievementTitle">
+					<label for="achievementName">Name <span style="color: red; font-size: 12px;">required</span></label>
+					<input type="text" class="form__input" placeholder="Achievement Name" required id="achievementName" name="achievementTitle">
 				</div>
 				<div class="form-group">
-					<label for="achievementDescription">Description</label>
-					<textarea name="achievementDescription" data-ckeditor="yes" id="achievementDescription" cols="30" rows="5" class="form__input"></textarea>
+					<label for="achievementDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
+					<textarea name="achievementDescription" data-ckeditor="yes" required id="achievementDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -382,16 +382,16 @@
 			<h3>Project</h3>
 			<form action="<?= base_url('web/addProject')?>" method="POST" class="form projectDet">
 				<div class="form-group">
-					<label for="projectName">Name</label>
-					<input type="text" class="form__input" placeholder="Project name" id="projectName" name="projectTitle">
+					<label for="projectName">Name <span style="color: red; font-size: 12px;">required</span></label>
+					<input type="text" class="form__input" placeholder="Project name" required id="projectName" name="projectTitle">
 				</div>
 				<div class="form-group">
-					<label for="projectLink">Link (optional)</label>
+					<label for="projectLink">Link</label>
 					<input type="text" class="form__input" placeholder="Project Link" id="projectLink" name="projectLink">
 				</div>
 				<div class="form-group">
-					<label for="projectDescription">Description</label>
-					<textarea name="projectDescription" data-ckeditor="yes" id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
+					<label for="projectDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
+					<textarea name="projectDescription" data-ckeditor="yes" required id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -407,17 +407,17 @@
 			<form action="<?=base_url('web/addWorkEx')?>" method="POST" class="form workExDet">
 				<div class="horizontal-group">
 					<div class="form-group">
-						<label for="companyName">Company's Name</label>
+						<label for="companyName">Company's Name <span style="color: red; font-size: 12px;">required</span></label>
 						<input type="text" class="form__input" placeholder="Company's name" id="companyName" name="companyName">
 					</div>
 					<div class="form-group">
-						<label for="workingPosition">Working position</label>
+						<label for="workingPosition">Working position <span style="color: red; font-size: 12px;">required</span></label>
 						<input type="text" class="form__input" placeholder="Company's name" id="workingPosition" name="position">
 					</div>
 				</div>
 				<div class="horizontal-group">
 					<div class="form-group">
-						<label>Starting Date</label>
+						<label>Starting Date <span style="color: red; font-size: 12px;">required</span></label>
 						<div class="horizontal-group">
 							<div class="form-group">
 								<label for="startingMonth">Month</label>
@@ -440,7 +440,7 @@
 								<label for="startingYear">Year</label>
 								<select name="startYear" id="startingYear" class="select">
 
-									<?php 
+									<?php
 										for($i = $year; $i>=1980; $i--){?>
 											<option><?= $i?></option>
 									<?php } ?>
@@ -450,7 +450,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label>Ending Date</label>
+						<label>Ending Date <span style="color: red; font-size: 12px;">required</span></label>
 						<div class="horizontal-group">
 							<div class="form-group">
 								<label for="endingMonth">Month</label>
@@ -473,7 +473,7 @@
 								<label for="endingYear">Year</label>
 								<select name="endYear" id="endingYear" class="select">
 
-									<?php 
+									<?php
 										for($i = $year; $i>=1980; $i--){?>
 											<option><?= $i?></option>
 									<?php } ?>
@@ -484,7 +484,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="workDescription">Description</label>
+					<label for="workDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
 					<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
@@ -502,16 +502,16 @@
 			<form action="<?= base_url('web/editCompanyDetails')?>" method="POST" class="form">
 				<div class="horizontal-group">
 					<div class="form-group">
-						<label for="companyName">Company's Name</label>
+						<label for="companyName">Company's Name <span style="color: red; font-size: 12px;">required</span></label>
 						<input type="text" class="form__input" placeholder="Company's name" id="companyName" name="companyName">
 					</div>
 					<div class="form-group">
-						<label for="positionInCompany">Position</label>
+						<label for="positionInCompany">Position <span style="color: red; font-size: 12px;">required</span></label>
 						<input type="text" class="form__input" placeholder="Company's name" id="positionInCompany" name="position">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="companyDescription">Description</label>
+					<label for="companyDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
 					<textarea name="companyDescription" id="companyDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
 				</div>
 				<div class="form-group action-bar">
@@ -533,8 +533,8 @@
 					</div>
 					<div class="form-group">
 						<div class = "inputPic">
-							<label for="updatedUserPic">Upload Profile Pic</label>
-							<input type="file" class="form__input updatedUserPic" id="updatedUserPic" accept="image/*" name = img[]>
+							<label for="updatedUserPic">Upload Profile Image <span style="color: red; font-size: 12px;">required</span></label>
+							<input type="file" class="form__input updatedUserPic" id="updatedUserPic" required accept="image/*" name = img[]>
 							<input type="hidden" name="profilePic">
 						</div>
 					</div>
@@ -567,8 +567,8 @@
 					</div>
 					<div class="form-group">
 						<div class = 'inputLogo'>
-							<label for="logo">Company Logo</label>
-							<input type="file" class="form__input logo" id="logo" accept="image/*" name = img[]>
+							<label for="logo">Company Logo <span style="color: red; font-size: 12px;">required</span></label>
+							<input type="file" class="form__input logo" id="logo" required accept="image/*" name = img[]>
 							<input type="hidden" name="companyLogo">
 						</div>
 					</div>
