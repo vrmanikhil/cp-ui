@@ -199,7 +199,9 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
+						<?php if($_SESSION['userData']['accountType'] != 2){?>
+							<a href = "" id = "apply"><button type="button" class="btn--apply">APPLY</button></a>
+						<?php } ?>
 					</aside>
 				</div>
 			</div>
@@ -253,7 +255,8 @@
 							$("#jobOffer").html("INR " + res[0].offer + " lakhs")
 						else
 							$("#jobOffer").html('INR ' + res[0].minimumOffer + ' lakhs - INR ' + res[0].maximumOffer + ' lakhs')
-						$('#apply').attr('href', "<?= base_url('apply/apply?jobID=')?>"+res[0].jobID)
+						if(<?= $_SESSION['userData']['accountType']?> != 2)
+							$('#apply').attr('href', "<?= base_url('apply/apply?jobID=')?>"+res[0].jobID)
 					}else{
 						$("#jobTitle").html(res[0].internshipTitle)
 						$("#jobDescription").html(res[0].internshipDescription)
@@ -275,6 +278,7 @@
 						}else{
 							$("#duration").html('Flexible')
 						}
+						if(<?= $_SESSION['userData']['accountType']?> != 2)
 						$('#apply').attr('href',"<?= base_url('apply/apply?internshipID=')?>"+res[0].internshipID)
 					}
 					$("#jobOpening").html(res[0].openings)

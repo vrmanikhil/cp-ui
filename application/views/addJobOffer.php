@@ -119,7 +119,7 @@
 						<option value="1" <?php if($inputs['offerType'] == 1){echo "selected";}?>>Offered in Range</option>
 						<option value="2" <?php if($inputs['offerType'] == 2){echo "selected";}?>>Fixed Offer</option>
 					</select>
-					<div class="flex" id="offeredRange" <?php if($inputs['offerType']=='1'){}else{?> style="display: none;"<?php } ?>>
+					<div class="flex" id="offeredRange" <?php if($inputs['offerType']=='1' || $inputs['offerType'] == ''){}else{?> style="display: none;"<?php } ?>>
 						<div class="form-group">
 							<?php if(!isset($inputs['minimumOffer'])){$inputs['minimumOffer'] = '';}?>
 							<label for="minimumOffer" class="form__label">Minimum Salary Offered</label>
