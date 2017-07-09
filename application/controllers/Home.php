@@ -245,6 +245,9 @@ class Home extends CI_Controller {
 	//Job Offers- Normal Users
 	public function relevantJobs(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$userID = $_SESSION['userData']['userID'];
 		$userSkills = array();
 		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
@@ -334,6 +337,9 @@ class Home extends CI_Controller {
 
 	public function jobOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->data['jobOffers'] = $this->home_lib->getJobOffers();
 		$this->data['filterskills'] = 'false';
 		$this->data['filterlocations'] = 'false';
@@ -388,6 +394,9 @@ class Home extends CI_Controller {
 
 	public function appliedJobOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->data['appliedJobOffers'] = $this->home_lib->getAppliedJobOffers();
 		$this->load->view('appliedJobOffers', $this->data);
 	}
@@ -414,6 +423,9 @@ class Home extends CI_Controller {
 
 	public function relevantInternships(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$userID = $_SESSION['userData']['userID'];
 		$userSkills = array();
 		foreach ($this->home_lib->getUserSkills($userID) as $key => $value) {
@@ -490,6 +502,9 @@ class Home extends CI_Controller {
 
 	public function internshipOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->data['internshipOffers'] = $this->home_lib->getInternshipOffers();
 		$this->data['filterskills'] = 'false';
 		$this->data['filterlocations'] = 'false';
@@ -539,6 +554,9 @@ class Home extends CI_Controller {
 
 	public function appliedInternshipOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$this->data['appliedInternshipOffers'] = $this->home_lib->getAppliedInternshipOffers();
 		$this->load->view('appliedInternshipOffers', $this->data);
 	}
@@ -592,6 +610,9 @@ class Home extends CI_Controller {
 
 	public function addJobOffer(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		if($_SESSION['userData']['accountType']=='2'){
 			if(isset($_SESSION['presub']) && $_SESSION['presub']){
 				$this->data['input'] = $_SESSION['data'];
@@ -609,6 +630,9 @@ class Home extends CI_Controller {
 
 	public function addedJobOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		if($_SESSION['userData']['accountType']=='2'){
 			$this->data['addedJobOffers'] = $this->home_lib->getAddedJobOffers();
 			$this->load->view('addedJobOffers', $this->data);
@@ -620,6 +644,9 @@ class Home extends CI_Controller {
 
 	public function addInternshipOffer(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		if($_SESSION['userData']['accountType']=='2'){
 			if(isset($_SESSION['presub']) && $_SESSION['presub']){
 				$this->data['input'] = $_SESSION['data'];
@@ -637,7 +664,10 @@ class Home extends CI_Controller {
 
 	public function editInternshipOffer($internshipID){
 		$this->redirection();
-if($_SESSION['userData']['accountType']=='2'){
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
+		if($_SESSION['userData']['accountType']=='2'){
 		$this->data['internshipDetails'] = $this->home_lib->getInternshipDetails($internshipID);
 		$this->data['internshipDetails'] = $this->data['internshipDetails'][0];
 		$_SESSION['userData']['current']['skillIDs'] = explode(',',$this->data['internshipDetails']['skillIDsRequired']);
@@ -661,6 +691,9 @@ if($_SESSION['userData']['accountType']=='2'){
 
 	public function editJobOffer($jobID){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
     if($_SESSION['userData']['accountType']=='2'){
 		$this->data['jobDetails'] = $this->home_lib->getJobDetails($jobID);
 		$this->data['jobDetails'] = $this->data['jobDetails'][0];
@@ -684,6 +717,9 @@ if($_SESSION['userData']['accountType']=='2'){
 
 	public function addedInternshipOffers(){
 		$this->redirection();
+		if($_SESSION['userData']['accountType']=='1'){
+			redirect(base_url());
+		}
 		if($_SESSION['userData']['accountType']=='2'){
 			$this->data['addedInternshipOffers'] = $this->home_lib->getAddedInternshipOffers();
 			$this->load->view('addedInternshipOffers', $this->data);

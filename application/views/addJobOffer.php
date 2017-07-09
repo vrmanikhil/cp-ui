@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<?php 
+	<?php
 	if(isset($input)){
 		$inputs = $input['inputs'];
 	}
@@ -171,10 +171,10 @@
 					</div>
 					<div class="selectedSkills">
 						<label class="form__label">Skill(s) Required-</label>
-						<?php  if(isset($input['skillInp']) && $input['skillInp'] != NULL){ 
+						<?php  if(isset($input['skillInp']) && $input['skillInp'] != NULL){
 							$skill_name =array_column($input['skillInp'],'skillname');
-							$skillID = array_column($input['skillInp'], 'skillID');?>	
-						 <?php 
+							$skillID = array_column($input['skillInp'], 'skillID');?>
+						 <?php
 						 $skill = [];
 						 for($i = 0; $i < sizeof($skill_name);$i++){
 						 	$skill[$i] = ['skillname' => $skill_name[$i], 'skillID' => $skillID[$i]];
@@ -203,7 +203,7 @@
 						<?php if(isset($input['cityInp']) && $input['cityInp'] != NULL){
 							$city =array_column($input['cityInp'],'city');
 							$cityID = array_column($input['cityInp'], 'cityID');?>
-						<?php 
+						<?php
 						$location = [];
 						for($i = 0; $i < sizeof($city);$i++){
 							$location[$i] = ['city_name' => $city[$i], 'location_id' => $cityID[$i]];
