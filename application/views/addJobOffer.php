@@ -12,8 +12,11 @@
 </head>
 
 <body>
-	<?php
-	if($message['content']!=''){?>
+	<?php 
+	if(isset($input)){
+		$inputs = $input['inputs'];
+	}
+	if(isset($message) && $message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
 
@@ -78,69 +81,81 @@
 					<h1 class="add-offer__section-title">Add Job Offer</h1>
 					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/addJobOffer'); ?>">
 					<label for="jobOfferTitle" class="form__label">Job Offer Title</label>
-					<input type="text" id="jobOfferTitle" name="jobOfferTitle" placeholder="Job Offer Title" class="form__input" required>
+					<?php if(!isset($inputs['jobTitle'])){$inputs['jobTitle'] = '';}?>
+					<input type="text" id="jobOfferTitle" name="jobOfferTitle" placeholder="Job Offer Title" value = "<?=$inputs['jobTitle']?>" class="form__input" required>
+					<?php if(!isset($inputs['jobDescription'])){$inputs['jobDescription'] = '';}?>
 					<label for="jobOfferDescription" class="form__label">Job Offer Description</label>
-					<textarea id="jobOfferDescription" name="jobOfferDescription" placeholder="Job Offer Description" class="form__input" required></textarea>
+					<textarea id="jobOfferDescription" name="jobOfferDescription" placeholder="Job Offer Description" class="form__input" required><?=$inputs['jobDescription']?></textarea>
 					<div class="flex">
 						<div class="form-group">
+						<?php if(!isset($inputs['openings'])){$inputs['openings'] = '';}?>
 							<label for="openings" class="form__label">Number of Openings</label>
-							<input type="text" id="openings" name="openings" placeholder="Number of Openings" class="form__input" required>
+							<input type="text" id="openings" name="openings" placeholder="Number of Openings" value = "<?=$inputs['openings']?>" class="form__input" required>
 						</div>
 						<div class="form-group">
+						<?php if(!isset($inputs['partTime'])){$inputs['partTime']= '';}?>
 							<label for="partTime" class="form__label">Part Time Allowed</label>
 							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
-								<option value="1">Yes</option>
-								<option value="2">No</option>
+								<option value="1" <?php if($inputs['partTime'] == 1){echo "selected";}?>>Yes</option>
+								<option value="2" <?php if($inputs['partTime'] == 2){echo "selected";}?>>No</option>
 							</select>
 						</div>
 					</div>
 					<div class="flex">
 						<div class="form-group">
+							<?php if(!isset($inputs['startDate'])){$inputs['startDate'] = '';}?>
 							<label for="startDate" class="form__label">Joining Date</label>
-							<input type="date" id="startDate" name="startDate" placeholder="Start Date" class="form__input" required>
+							<input type="date" id="startDate" name="startDate" placeholder="Start Date" value="<?=$inputs['startDate']?>" class="form__input" required>
 						</div>
 						<div class="form-group">
+							<?php if(!isset($inputs['applicationDeadline'])){$inputs['applicationDeadline'] = '';}?>
 							<label for="applicationDeadline" class="form__label">Application Deadline</label>
-							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
+							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" value = "<?= $inputs['applicationDeadline']?>" class="form__input" required>
 						</div>
 					</div>
+					<?php if(!isset($inputs['offerType'])){$inputs['offerType'] = '';}?>
 					<label for="salaryType" class="form__label">Salary Type</label>
 					<select id="salaryType" name="salaryType" placeholder="Salary Type" class="form__input" required>
-						<option value="1">Offered in Range</option>
-						<option value="2">Fixed Offer</option>
+						<option value="1" <?php if($inputs['offerType'] == 1){echo "selected";}?>>Offered in Range</option>
+						<option value="2" <?php if($inputs['offerType'] == 2){echo "selected";}?>>Fixed Offer</option>
 					</select>
-					<div class="flex" id="offeredRange">
+					<div class="flex" id="offeredRange" <?php if($inputs['offerType']=='1'){}else{?> style="display: none;"<?php } ?>>
 						<div class="form-group">
+							<?php if(!isset($inputs['minimumOffer'])){$inputs['minimumOffer'] = '';}?>
 							<label for="minimumOffer" class="form__label">Minimum Salary Offered</label>
-							<input type="text" id="minimumOffer" name="minimumOffer" placeholder="Minimum Salary (in lakhs)" class="form__input">
+							<input type="text" id="minimumOffer" name="minimumOffer" placeholder="Minimum Salary (in lakhs)" value = "<?= $inputs['minimumOffer']?>" class="form__input">
 						</div>
 						<div class="form-group">
+							<?php if(!isset($inputs['maximumOffer'])){$inputs['maximumOffer'] = '';}?>
 							<label for="maximumOffer" class="form__label">Maximum Salary Offered</label>
-							<input type="text" id="maximumOffer" name="maximumOffer" placeholder="Maximum Salary (in lakhs)" class="form__input">
+							<input type="text" id="maximumOffer" name="maximumOffer" placeholder="Maximum Salary (in lakhs)" value = "<?= $inputs['maximumOffer']?>" class="form__input">
 						</div>
 					</div>
-					<div id="salaryOffered" style="display: none;">
+					<div id="salaryOffered" <?php if($inputs['offerType']=='2'){}else{?> style="display: none;"<?php } ?>>
+					<?php if(!isset($inputs['salary'])){$inputs['salary'] = '';}?>
 					<label for="salary" class="form__label">Salary Offer</label>
-					<input type="text" id="salary" name="salary" placeholder="Salary Offered (in lakhs)" class="form__input">
+					<input type="text" id="salary" name="salary" placeholder="Salary Offered (in lakhs)" value = "<?= $inputs['salary']?>" class="form__input">
 					</div>
 					<div class="flex">
 						<div class="form-group">
+							<?php if(!isset($inputs['applicants'])){$inputs['applicants'] = '';}?>
 							<label for="applicants" class="form__label">Applicant Type</label>
 							<select type="text" id="applicants" name="applicants" placeholder="Applicant Type" class="form__input" required>
-								<option value="3">Anyone can Apply</option>
-								<option value="1">100% Match with Skills</option>
-								<option value="2">Partial Match</option>
+								<option value="3" <?php if($inputs['applicants'] == 3){echo "selected";}?>>Anyone can Apply</option>
+								<option value="1" <?php if($inputs['applicants'] == 1){echo "selected";}?>>100% Match with Skills</option>
+								<option value="2" <?php if($inputs['applicants'] == 2){echo "selected";}?>>Partial Match</option>
 							</select>
 						</div>
 						<div class="form-group">
+						<?php if(!isset($inputs['jobType'])){$inputs['jobType'] = '';}?>
 							<label for="jobType" class="form__label">Job Type</label>
 							<select type="text" id="jobType" name="jobType" placeholder="Applicant Type" class="form__input" required>
-								<option value="1">Work from Home</option>
-								<option value="2">In-Office/On-Field</option>
+								<option value="1" <?php if($inputs['jobType'] == 1){echo "selected";}?>>Work from Home</option>
+								<option value="2" <?php if($inputs['jobType'] == 2){echo "selected";}?>>In-Office/On-Field</option>
 							</select>
 						</div>
 					</div>
-					<div id="skillsDiv" style="display:none;">
+					<div id="skillsDiv" <?php if($inputs['applicants'] == 1 || $inputs['applicants'] == 2){}else{?> style="display:none;"<?php }?>>
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Skills</label>
@@ -156,10 +171,20 @@
 					</div>
 					<div class="selectedSkills">
 						<label class="form__label">Skill(s) Required-</label>
-						<input type="hidden" name="selected_skills">
+						<?php  if(isset($input['skillInp']) && $input['skillInp'] != NULL){ 
+							$skill_name =array_column($input['skillInp'],'skillname');
+							$skillID = array_column($input['skillInp'], 'skillID');?>	
+						 <?php 
+						 $skill = [];
+						 for($i = 0; $i < sizeof($skill_name);$i++){
+						 	$skill[$i] = ['skillname' => $skill_name[$i], 'skillID' => $skillID[$i]];
+						 	?>
+						<p class="skill"><?=$skill_name[$i]?><a href="javascript:" data-skill="<?= $skill_name[$i]?>" index="<?=$i?>" skill-id="<?=$skillID[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
+						<?php }}else{$skill = [];}?>
+						<input type="hidden" name="selected_skills" value = '<?=json_encode($skill)?>'>
 					</div>
 					</div>
-					<div id="cityLocations" style="display: none;">
+					<div id="cityLocations" <?php if($inputs['jobType'] == 2){}else{?> style="display:none;"<?php }?>>
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Locations</label>
@@ -175,7 +200,17 @@
 					</div>
 					<div class="selectedLocations">
 						<label class="form__label">Job Location(s)-</label>
-						<input type="hidden" name="selected_locations">
+						<?php if(isset($input['cityInp']) && $input['cityInp'] != NULL){
+							$city =array_column($input['cityInp'],'city');
+							$cityID = array_column($input['cityInp'], 'cityID');?>
+						<?php 
+						$location = [];
+						for($i = 0; $i < sizeof($city);$i++){
+							$location[$i] = ['city_name' => $city[$i], 'location_id' => $cityID[$i]];
+							?>
+						<p class="location"><?= $city[$i]?><a href="javascript:" data-location="<?=$city[$i]?>" index="<?=$i?>" location-id="<?=$cityID[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
+						<?php }}else{$location = [];} ?>
+						<input type="hidden" name="selected_locations" value = '<?=json_encode($location)?>'>
 					</div>
 					</div>
 					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
@@ -257,7 +292,7 @@
 		</script>
 		<script>
   	var skills_arr =[]
-  	var selectedSkills = [];
+  	var selectedSkills = <?php if(isset($skill)){echo json_encode($skill);}else{ echo '[]';}?>;
 
   	$(document).on('click','.addSkill',function(){
   	  var skill ={}
@@ -298,7 +333,7 @@
 
 		<script>
 		var locations_arr =[]
-		var selectedLocations = [];
+		var selectedLocations = <?php if(isset($location)){echo json_encode($location);}else{ echo '[]';}?>;
 
 		$(document).on('click','.addLocation',function(){
 		  var locations ={};

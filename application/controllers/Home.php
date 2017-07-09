@@ -586,6 +586,11 @@ class Home extends CI_Controller {
 	public function addJobOffer(){
 		$this->redirection();
 		if($_SESSION['userData']['accountType']=='2'){
+			if(isset($_SESSION['presub']) && $_SESSION['presub']){
+				$this->data['input'] = $_SESSION['data'];
+				$_SESSION['presub'] = false;
+				$_SESSION['data'] = NULL;
+			}
 			$this->data['locations'] = $this->home_lib->getLocations();
 			$this->data['skills'] = $this->home_lib->getSkills();
 			$this->load->view('addJobOffer', $this->data);
@@ -609,6 +614,11 @@ class Home extends CI_Controller {
 	public function addInternshipOffer(){
 		$this->redirection();
 		if($_SESSION['userData']['accountType']=='2'){
+			if(isset($_SESSION['presub']) && $_SESSION['presub']){
+				$this->data['input'] = $_SESSION['data'];
+				$_SESSION['presub'] = false;
+				$_SESSION['data'] = NULL;
+			}
 			$this->data['skills'] = $this->home_lib->getSkills();
 			$this->data['locations'] = $this->home_lib->getLocations();
 			$this->load->view('addInternshipOffer', $this->data);
