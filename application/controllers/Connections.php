@@ -34,6 +34,9 @@ class Connections extends CI_Controller {
 	}
 
 	public function requestConnection($user1, $user2){
+		if($user2!=$_SESSION['userData']['userID']){
+			redirect(base_url());
+		}
 		if($user1==$user2){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/').$user1);
@@ -62,6 +65,9 @@ class Connections extends CI_Controller {
 	}
 
 	public function cancelConnectionRequest($user1, $user2){
+		if($user2!=$_SESSION['userData']['userID']){
+			redirect(base_url());
+		}
 		if($user1===$user2){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/').$user1);
@@ -84,6 +90,9 @@ class Connections extends CI_Controller {
 	}
 
 	public function acceptConnectionRequest($user1, $user2){
+		if($user2!=$_SESSION['userData']['userID']){
+			redirect(base_url());
+		}
 		if($user1==$user2){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/').$user1);
