@@ -14,6 +14,9 @@
 
 <body>
 	<?php
+	if(isset($input)){
+		$inputs = $input['inputs'];
+	}
 	if($message['content']!=''){?>
 	<div class="message <?=$message['class']?>"><p><?=$message['content']?></p></div>
 	<?php }?>
@@ -79,84 +82,99 @@
 					<h1 class="add-offer__section-title">Add Internship Offer</h1>
 					<form class="add-offer__form form" method="post" action="<?php echo base_url('employers/addInternshipOffer'); ?>">
 					<label for="internshipOfferTitle" class="form__label">Internship Offer Title</label>
-					<input type="text" id="internshipOfferTitle" name="internshipOfferTitle" placeholder="Internship Offer Title" class="form__input" required>
+					<?php if(!isset($inputs['internshipTitle'])){$inputs['internshipTitle'] = '';}?>
+					<input type="text" id="internshipOfferTitle" name="internshipOfferTitle" placeholder="Internship Offer Title" value = "<?=$inputs['internshipTitle']?>"  class="form__input" required>
 					<label for="internshipOfferDescription" class="form__label">Internship Offer Description</label>
-					<textarea id="internshipOfferDescription" name="internshipOfferDescription" placeholder="Internship Offer Description" class="form__input" required></textarea>
+					<?php if(!isset($inputs['internshipDescription'])){$inputs['internshipDescription'] = '';}?>
+					<textarea id="internshipOfferDescription" name="internshipOfferDescription" placeholder="Internship Offer Description" class="form__input" required><?=$inputs['internshipDescription']?></textarea>
 					<div class="flex">
 						<div class="form-group">
+						<?php if(!isset($inputs['openings'])){$inputs['openings'] = '';}?>
 							<label for="openings" class="form__label">Number of Openings</label>
-							<input type="text" id="openings" name="openings" placeholder="Number of Openings" class="form__input" required>
+							<input type="text" id="openings" name="openings" placeholder="Number of Openings" value = "<?=$inputs['openings']?>" class="form__input" required>
 						</div>
 						<div class="form-group">
+						<?php if(!isset($inputs['partTime'])){$inputs['partTime']= '';}?>
 							<label for="partTime" class="form__label">Part Time Allowed</label>
 							<select type="text" id="partTime" name="partTime" placeholder="Part Time Allowed" class="form__input" required>
-								<option value="1">Yes</option>
-								<option value="2">No</option>
+								<option value="1" <?php if($inputs['partTime'] == 1){echo "selected";}?>>Yes</option>
+								<option value="2" <?php if($inputs['partTime'] == 2){echo "selected";}?>>No</option>
 							</select>
 						</div>
 					</div>
 					<div class="flex">
 						<div class="form-group">
+						<?php if(!isset($inputs['startDate'])){$inputs['startDate'] = '';}?>
 							<label for="startDate" class="form__label">Internship Start Date</label>
-							<input type="date" id="startDate" name="startDate" placeholder="Internship Start Date" class="form__input" required>
+							<input type="date" id="startDate" name="startDate" placeholder="Internship Start Date" value="<?=$inputs['startDate']?>" class="form__input" required>
 						</div>
 						<div class="form-group">
+						<?php if(!isset($inputs['applicationDeadline'])){$inputs['applicationDeadline'] = '';}?>
 							<label for="applicationDeadline" class="form__label">Application Deadline</label>
-							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" class="form__input" required>
+							<input type="date" id="applicationDeadline" name="applicationDeadline" placeholder="Application Deadline" value = "<?= $inputs['applicationDeadline']?>" class="form__input" required>
 						</div>
 					</div>
 					<div class="flex">
 						<div class="form-group">
+						<?php if(!isset($inputs['durationType'])){$inputs['durationType'] = '';}?>
 							<label for="durationType" class="form__label">Duration Type</label>
 							<select type="text" id="durationType" name="durationType" placeholder="Duration Type" class="form__input" required>
-								<option value="1">Fixed</option>
-								<option value="2">Flexible</option>
+								<option value="1" <?php if($inputs['durationType'] == 1){echo "selected";}?>>Fixed</option>
+								<option value="2" <?php if($inputs['durationType'] == 2){echo "selected";}?>>Flexible</option>
 							</select>
 						</div>
 						<div class="form-group" id="durationValue">
+						<?php if(!isset($inputs['duration'])){$inputs['duration'] = '';}?>
 							<label for="duration" class="form__label">Duration (in weeks)</label>
-							<input type="text" id="duration" name="duration" placeholder="Duration" class="form__input">
+							<input type="text" id="duration" name="duration" placeholder="Duration" value="<?=$inputs['duration']?>" class="form__input">
 						</div>
 					</div>
+					<?php if(!isset($inputs['stipendType'])){$inputs['stipendType'] = '';}?>
 					<label for="stipendType" class="form__label">Stipend Type</label>
 					<select id="stipendType" name="stipendType" placeholder="Stipend Type" class="form__input" required>
-						<option value="1">No Stipend</option>
-						<option value="2">Expenses Covered</option>
-						<option value="3">Offered in Range</option>
-						<option value="4">Fixed Stipend</option>
+						<option value="1" <?php if($inputs['stipendType'] == 1){echo "selected";}?>>No Stipend</option>
+						<option value="2" <?php if($inputs['stipendType'] == 2){echo "selected";}?>>Expenses Covered</option>
+						<option value="3" <?php if($inputs['stipendType'] == 3){echo "selected";}?>>Offered in Range</option>
+						<option value="4" <?php if($inputs['stipendType'] == 4){echo "selected";}?>>Fixed Stipend</option>
 					</select>
-					<div class="flex" id="offeredRange" style="display: none;">
+					
+					<div class="flex" id="offeredRange" <?php if($inputs['stipendType']=='3'){}else{?> style="display: none;"<?php } ?>>
 						<div class="form-group">
+						<?php if(!isset($inputs['minimumStipend'])){$inputs['minimumStipend'] = '';}?>
 							<label for="minimumStipend" class="form__label">Minimum Stipend</label>
-							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" class="form__input">
+							<input type="text" id="minimumStipend" name="minimumStipend" placeholder="Minimum Stipend" value = "<?= $inputs['minimumStipend']?>" class="form__input">
 						</div>
 						<div class="form-group">
+						<?php if(!isset($inputs['maximumStipend'])){$inputs['maximumStipend'] = '';}?>
 							<label for="maximumStipend" class="form__label">Maximum Stipend</label>
-							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" class="form__input">
+							<input type="text" id="maximumStipend" name="maximumStipend" placeholder="Maximum Stipend" value = "<?= $inputs['maximumStipend']?>" class="form__input">
 						</div>
 					</div>
-					<div id="fixedStipend" style="display: none;">
+					<div id="fixedStipend" <?php if($inputs['stipendType']=='4'){}else{?> style="display: none;"<?php }?>>
+					<?php if(!isset($inputs['stipend'])){$inputs['stipend'] = '';}?>
 					<label for="stipend" class="form__label">Stipend</label>
-					<input type="text" id="stipend" name="stipend" placeholder="Stipend" class="form__input">
+					<input type="text" id="stipend" name="stipend" placeholder="Stipend" value = "<?= $inputs['stipend']?>" class="form__input">
 					</div>
 					<div class="flex">
 						<div class="form-group">
+							<?php if(!isset($inputs['applicants'])){$inputs['applicants'] = '';}?>
 							<label for="applicants" class="form__label">Applicant Type</label>
 							<select type="text" id="applicants" name="applicants" placeholder="Applicant Type" class="form__input" required>
-								<option value="3">Anyone can Apply</option>
-								<option value="1">100% Match with Skills</option>
-								<option value="2">Partial Match</option>
+								<option value="3" <?php if($inputs['applicants'] == 3){echo "selected";}?>>Anyone can Apply</option>
+								<option value="1" <?php if($inputs['applicants'] == 1){echo "selected";}?>>100% Match with Skills</option>
+								<option value="2" <?php if($inputs['applicants'] == 2){echo "selected";}?>>Partial Match</option>
 							</select>
 						</div>
 						<div class="form-group">
+						<?php if(!isset($inputs['internshipType'])){$inputs['internshipType'] = '';}?>
 							<label for="internshipType" class="form__label">Internship Type</label>
-							<select type="text" name="internshipType" id="internshipType" placeholder="Internship Type" class="form__input" required>
-								<option value="1">Work from Home</option>
-								<option value="2">In-Office/On-Field</option>
+							<select type="text" id="internshipType" name="internshipType" placeholder="Applicant Type" class="form__input" required>
+								<option value="1" <?php if($inputs['internshipType'] == 1){echo "selected";}?>>Work from Home</option>
+								<option value="2" <?php if($inputs['internshipType'] == 2){echo "selected";}?>>In-Office/On-Field</option>
 							</select>
 						</div>
 					</div>
-					<div id="skillsDiv" style="display:none;">
+					<div id="skillsDiv" <?php if($inputs['applicants'] == 1 || $inputs['applicants'] == 2){}else{?> style="display:none;"<?php }?>>
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Skills</label>
@@ -172,10 +190,20 @@
 					</div>
 					<div class="selectedSkills">
 						<label class="form__label">Skill(s) Required-</label>
-						<input type="hidden" name="selected_skills">
+						<?php  if(isset($input['skillInp']) && $input['skillInp'] != NULL){ 
+							$skill_name =array_column($input['skillInp'],'skillname');
+							$skillID = array_column($input['skillInp'], 'skillID');?>	
+						 <?php 
+						 $skill = [];
+						 for($i = 0; $i < sizeof($skill_name);$i++){
+						 	$skill[$i] = ['skillname' => $skill_name[$i], 'skillID' => $skillID[$i]];
+						 	?>
+						<p class="skill"><?=$skill_name[$i]?><a href="javascript:" data-skill="<?= $skill_name[$i]?>" index="<?=$i?>" skill-id="<?=$skillID[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
+						<?php }}else{$skill = [];}?>
+						<input type="hidden" name="selected_skills" value = '<?=json_encode($skill)?>'>
 					</div>
 					</div>
-					<div id="cityLocations" style="display: none;">
+					<div id="cityLocations" <?php if($inputs['internshipType'] == 2){}else{?> style="display:none;"<?php }?>>
 					<div class="flex">
 						<div class="form-group" style="width: 85%;">
 							<label class="form__label">Locations</label>
@@ -191,7 +219,17 @@
 					</div>
 					<div class="selectedLocations">
 						<label class="form__label">Internship Location(s)-</label>
-						<input type="hidden" name="selected_locations">
+						<?php if(isset($input['cityInp']) && $input['cityInp'] != NULL){
+							$city =array_column($input['cityInp'],'city');
+							$cityID = array_column($input['cityInp'], 'cityID');?>
+						<?php 
+						$location = [];
+						for($i = 0; $i < sizeof($city);$i++){
+							$location[$i] = ['city_name' => $city[$i], 'location_id' => $cityID[$i]];
+							?>
+						<p class="location"><?= $city[$i]?><a href="javascript:" data-location="<?=$city[$i]?>" index="<?=$i?>" location-id="<?=$cityID[$i]?>"><i class="fa fa-times red" aria-hidden="true"></i></a></p>
+						<?php }}else{$location = [];} ?>
+						<input type="hidden" name="selected_locations" value = '<?=json_encode($location)?>'>
 					</div>
 					</div>
 					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
@@ -276,7 +314,7 @@
 
 		<script>
   	var skills_arr =[]
-  	var selectedSkills = [];
+  	var selectedSkills = <?php if(isset($skill)){echo json_encode($skill);}else{ echo '[]';}?>;
 
   	$(document).on('click','.addSkill',function(){
   	  var skill ={}
@@ -317,7 +355,7 @@
 
 		<script>
 		var locations_arr =[]
-		var selectedLocations = [];
+		var selectedLocations = <?php if(isset($location)){echo json_encode($location);}else{ echo '[]';}?>;
 
 		$(document).on('click','.addLocation',function(){
 		  var locations ={};
