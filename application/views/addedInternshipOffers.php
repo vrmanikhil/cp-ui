@@ -194,9 +194,8 @@
 						<br>
 						<p id = "companyWebsite">Company Website</p>
 						<p id = "companyDescription">Company Description</p>
-						<a href = "" id = "apply">
-							<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-							<button type="button" class="btn--apply">APPLY</button></a>
+						
+							
 					</aside>
 				</div>
 			</div>
