@@ -99,6 +99,7 @@
 											<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
 											<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
 										</div>
+										<br>
 									<?php }} ?>
 								</div>
 							</section>
