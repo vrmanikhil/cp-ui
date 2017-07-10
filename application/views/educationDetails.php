@@ -27,9 +27,10 @@
 							<div class="form-group">
 								<label class="form__label" for="college-name">College Name</label>
 								<select name="collegeID" class="select" id="college-name">
-									<?php foreach ($colleges as $key => $value) { ?>
+									<?php foreach ($colleges as $key => $value) { 
+										if($value['college_id'] != 1156){?>
 										<option value="<?php echo $value['college_id']; ?>"><?php echo $value['college']; ?></option>
-									<?php } ?>
+									<?php } }?>
 								</select>
 							</div>
 							<div class="horizontal-group">
@@ -46,6 +47,11 @@
 									<input type="text" maxlength="4" placeholder="Batch" id="batch" class="form__input" name="batch">
 								</div>
 							</div>
+							<div class = "horizontal-group" style="width:100%">
+							<div class="form-group" style = "width:100%; text-align: right" class="nocollege">
+									<input type="checkbox" id="nocollege" name="" value="1156" >&nbsp;College Not listed
+							</div>
+							</div>
 							<div class="form-group">
 								<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 								<input type="submit" class="btn btn--primary" value="Next">
@@ -60,5 +66,20 @@
 
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#nocollege").change(function(){
+				if($("#nocollege").is(":checked")){	
+					$("#college-name").prop('disabled',true);
+					$("#college-name").prop('name',"")
+					$("#nocollege").prop("name","collegeID")
+				}else{
+					$("#college-name").prop('disabled',false);
+					$("#college-name").prop('name',"collegeID")
+					$("#nocollege").prop("name","")
+				}
+			});
+		});
+	</script>
 	</body>
 </html>
