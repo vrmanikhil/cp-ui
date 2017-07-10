@@ -97,7 +97,7 @@
 										<?php } ?>
 											<p><?php echo $value['description']; ?></p>
 											<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
-											<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo "CGPA"; else { echo " Percentage"; } ?></p>
+											<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo " CGPA"; else { echo " Percentage"; } ?></p>
 										</div>
 									<?php }} ?>
 								</div>
@@ -197,7 +197,7 @@
 								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
 								<?php } ?>
 							</h3>
-							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
+							<p class="flex personal-info"><strong>Gender</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } if($userDetails['gender']==="F") { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
 							<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){
