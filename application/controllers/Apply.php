@@ -25,6 +25,9 @@ class Apply extends CI_Controller {
 	}
 
 	public function applyForOffer($userID, $offerType, $offerID){
+		if($_SESSION['userData']['accountType']=='2'){
+			redirect(base_url());
+		}
 		$checkAlreadyApplied = $this->home_lib->checkAlreadyApplied($userID, $offerType, $offerID);
 		if($checkAlreadyApplied){
 			$this->session->set_flashdata('message', array('content'=>'Sorry, you have Already Applied.','class'=>'error'));

@@ -198,7 +198,7 @@
 								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
 								<?php } ?>
 							</h3>
-							<p class="flex personal-info"><strong>Sex</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } else { echo "Female"; } ?></span></p>
+							<p class="flex personal-info"><strong>Gender</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } if($userDetails['gender']==="F") { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
 							<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){
