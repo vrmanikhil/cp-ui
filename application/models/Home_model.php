@@ -522,7 +522,7 @@ class Home_model extends CI_Model {
 			if(in_array('0', $skills)){
 				$result = $this->db->query("SELECT internshipID FROM internshipOffers WHERE applicants = '3' AND status = '2' AND active = 1 UNION SELECT internshipID FROM internshipSkills WHERE skillID in ($skill)");
 				// var_dump($this->db->last_query()); die;
-				return $result->result_array(); 
+				return $result->result_array();
 			}else{
 				$this->db->select('DISTINCT(internshipID)');
 				$this->db->where_in('skillID', $skills);
@@ -539,7 +539,7 @@ class Home_model extends CI_Model {
 			if(in_array('0', $locations)){
 				$result = $this->db->query("SELECT internshipID FROM internshipOffers WHERE internshipType = '1' AND status = '2' AND active = 1 UNION SELECT internshipID FROM internshipLocations WHERE cityID in ($location)");
 				// var_dump($this->db->last_query()); die;
-				return $result->result_array(); 
+				return $result->result_array();
 			}else{
 				$this->db->select('DISTINCT(internshipID)');
 				$this->db->where_in('cityID', $locations);
@@ -904,6 +904,8 @@ class Home_model extends CI_Model {
 			$link = base_url('/connections');
 		}
 		if($notificationType=='2'){
+			$name = $userData[0]['name'];
+			$image = $userData[0]['profileImage'];
 			$notification = $name." has accepted your Connection Request.";
 			$link = base_url('/connections');
 		}
