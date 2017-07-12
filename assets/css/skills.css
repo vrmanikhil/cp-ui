@@ -35,7 +35,7 @@
 }
 
 .skill.free:after {
-	content: 'Free';
+	content: 'free';
 	color: white;
 	font-weight: 600;
 	background: var(--midnight-blue);

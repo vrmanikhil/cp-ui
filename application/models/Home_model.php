@@ -614,6 +614,7 @@ class Home_model extends CI_Model {
 
 	public function editEducation($data, $userID){
 		$this->db->where('userID', $userID);
+		$this->db->where('educationType', $data['educationType']);
 		return $this->db->update('educationalDetails', $data);
 	}
 
