@@ -315,12 +315,12 @@ class Web extends CI_Controller {
 			$score = $x;
 		}
 		if($scoreType == 1){
-			if(!($score > 0.0 && $score < 10.0)){
+			if(!($score >= 0.0 && $score <= 10.0)){
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 		}else{
-			if(!($score > 0 && $score < 100)){
+			if(!($score >= 0 && $score <= 100)){
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('user-profile/'.$userID));
 			}

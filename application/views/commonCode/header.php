@@ -11,17 +11,16 @@
 				<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
 				<input type="search" name="query" id="inputSearch" placeholder="Search" class="form-control">
 			</form>
-
 		</div>
 		<div class="primary-menu flex__item flex">
-			<div class="primary-menu__item dropdown__container js-dropdown__container">
+			<div class="primary-menu__item dropdown__container home js-dropdown__container">
 				<div class="menu-link__container">
 					<a href="/" class="menu-link dropdown__item">
 						<img src="<?php echo base_url('/assets/img/icons/home.png'); ?>" alt="home" class="icon">
 					</a>
 				</div>
 				<div class="menu-link__container">
-          <a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
+          <a href="javascript:" class="menu-link dropdown__item messageDropdown js-dropdown__item" data-content ="">
             <img src="<?php echo base_url('/assets/img/icons/envelope.png'); ?>" alt="envelope" class="icon">
           </a>
           <div class="dropdown__html hidden">
@@ -34,7 +33,7 @@
                 <?php if(empty($messages)) {?>
 						<p style="text-align: center; font-size: 13px">No Messages Found.</p>
 						<p style= "text-align: center; font-size: 13px"><a href="<?= base_url('messages#composeMessage')?>"><b>Click Here</b></a> to compose a new message.</p>
-					<?php }else{
+					<?php }else{$i = 0;
                 foreach($messages as $text) {
                 	$cls = '';
 					if ($text['read'] != 1 && $_SESSION['userData']['userID'] !== $text['sender'] )
@@ -54,7 +53,7 @@
                       </span>
                     </span>
                   </a>
-                  <?php }?>
+                  <?php $i++; }?>
                   <a class="flex media notification" href="<?php echo base_url('messages'); ?>" style="font-size: 13px;font-weight: 600"><b>See All</b></a>
                   <?php }?>
                 </div>
@@ -63,7 +62,7 @@
           </div>
         </div>
 				<div class="menu-link__container">
-					<a href="javascript:" class="menu-link dropdown__item js-dropdown__item">
+					<a href="javascript:" class="menu-link dropdown__item notificationDropdown js-dropdown__item" data-content = "5">
 						<img src="<?php echo base_url('/assets/img/icons/world.png'); ?>" alt="world" class="icon">
 					</a>
 					<div class="dropdown__html hidden">
@@ -75,7 +74,7 @@
 								<div class="notifications">
 								<?php if(empty($notification)) { ?>
 									<p style="text-align: center; font-size: 13px"> No Notifications Found.</p>
-								<?php }else{
+								<?php }else{ $j = 0;
 								foreach($notification as $new) {?>
 									<a class="flex media notification" href="<?=$new['link']?>">
 										<img src="<?= $new['image']?>" alt="user" class="media-figure notification__feature-img">
@@ -86,7 +85,7 @@
 											</span>
 										</span>
 									</a>
-									<?php }?>
+									<?php $j++;}?>
 									<a class="flex media notification" href="<?php echo base_url('notifications'); ?>" style="font-size: 13px; font-weight: 600"><b>See All</b></a>
 									<?php }?>
 								</div>
@@ -122,3 +121,65 @@
 		</div>
 	</div>
 </header>
+<!-- <script type="text/javascript">
+var	lastMessageId = <?php if(isset($messages[0]['messageID'])){echo $messages[0]['messageID'];}else{ echo "0";} ?>;
+	window.setInterval(function(){
+			var data = {last_id: lastMessageId, from: <?php echo $usr; ?>}
+			$.get('<?= base_url('messages/checkForNewMessages')?>', data).done(function(res){
+				res = JSON.parse(res);
+				if(res != false){
+					for (var i = 0; i < res.length; i++){
+						container = $('.wrap').clone()
+						container.removeClass('wrap')
+						container.find('.time').html(res[i].timestamp)
+						container.find('.msg').html(res[i].message)
+						console.log(res[i].class)
+						if(res[i].class == "receiver"){
+							container.find('img').attr('src', chatterImage)
+							container.addClass('sender')
+						}else{
+							container.addClass('receiver')
+							container.find('img').attr('src', userImage)
+						}
+						$('#messages-container').append(container[0])
+						container.show()
+						$('#message').val('')
+						$('#chat').scrollTop($('#chat')
+							.prop("scrollHeight"))
+					}
+					lastMessageId = res[i-1].messageID
+					res = 'false';
+				}
+			})
+		}, 5000);
+var	lastNotificationId = <?php if(isset($notification[0]['notificationID'])){echo $notification[0]['notificationID'];}else{ echo "0";} ?>;
+		window.setInterval(function(){
+				var data = {last_id: lastNotificationId, from: <?php echo $usr; ?>}
+				$.get('<?= base_url('messages/checkForNewMessages')?>', data).done(function(res){
+					res = JSON.parse(res);
+					if(res != false){
+						for (var i = 0; i < res.length; i++){
+							container = $('.wrap').clone()
+							container.removeClass('wrap')
+							container.find('.time').html(res[i].timestamp)
+							container.find('.msg').html(res[i].message)
+							console.log(res[i].class)
+							if(res[i].class == "receiver"){
+								container.find('img').attr('src', chatterImage)
+								container.addClass('sender')
+							}else{
+								container.addClass('receiver')
+								container.find('img').attr('src', userImage)
+							}
+							$('#messages-container').append(container[0])
+							container.show()
+							$('#message').val('')
+							$('#chat').scrollTop($('#chat')
+								.prop("scrollHeight"))
+						}
+						lastNotificationId = res[i-1].notificationID
+						res = 'false';
+					}
+				})
+			}, 5000)
+</script> -->
