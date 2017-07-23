@@ -12,6 +12,10 @@
 	<link href="<?php echo base_url('/assets/css/remodal-default-theme.css'); ?>" rel="stylesheet">
 	<link href="<?php if(isset($_SESSION['userData']['loggedIn'])){ echo base_url('assets/css/components/header.css'); } else { echo base_url('/assets/css/components/logged-out-header.css'); }  ?>" rel="stylesheet">
 	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
+	
+	<script type="text/javascript">
+	if (screen.width <= 800) { window.location.replace("http://m.campuspuppy.com/terms-and-conditions"); }
+	</script>
 </head>
 
 <body>

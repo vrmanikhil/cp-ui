@@ -18,7 +18,6 @@ class Home extends CI_Controller {
 			$this->data['notification'] = $this->home_lib->getNotifications(0,3);
 			$this->data['connectionCount'] = $this->home_lib->countConnections($_SESSION['userData']['userID']);
 		}
-		date_default_timezone_set('Asia/Kolkata');
 		$this->data['csrf_token_name'] = $this->security->get_csrf_token_name();
 		$this->data['csrf_token'] = $this->security->get_csrf_hash();
 		$this->data['header'] = $this->load->view('commonCode/header', $this->data, true);
@@ -88,7 +87,7 @@ class Home extends CI_Controller {
 	}
 
 	public function employerDetails(){
-		if($_SESSION['userData']['loggedIn'] && ($_SESSION['registrationLevel']=='1' && ($_SESSION['userData']['accountType']=='1'))){
+		if($_SESSION['userData']['loggedIn'] && ($_SESSION['registrationLevel']=='1' && ($_SESSION['userData']['accountType']=='2'))){
 			$this->load->view('employerDetails', $this->data);
 		}
 		else{

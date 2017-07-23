@@ -656,6 +656,7 @@ class Home_model extends CI_Model {
 	}
 
 	public function getCourses(){
+		$this->db->order_by('course', 'ASC');
 		$result = $this->db->get_where('courses', array('active' => '1'));
 		return $result->result_array();
 	}

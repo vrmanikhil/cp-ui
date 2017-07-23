@@ -186,22 +186,6 @@ a {
 	position: relative;
 }
 
-.notificationalert:after {
-	position: absolute;
-	right: -5px;
-	top: -5px;
-	width: 10px;
-	text-align: center;
-	background: var(--red);
-	content: attr(data-content);
-	color: white;
-	font-size: .6em;
-	display: flex;
-	align-items: center;
-	justify-content:center;
-	height: 10px;
-}
-
 .dropdown__pane {
 	position: absolute;
 	right: -50px;

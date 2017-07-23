@@ -99,8 +99,7 @@
 											<p><strong>Year: </strong><?php echo  $value['year']; ?></p>
 											<p><strong>Score: </strong><?php echo  $value['score']; ?><?php if($value['scoreType']=="1") echo " CGPA"; else { echo " Percentage"; } ?></p>
 										</div>
-										<br>
-									<?php }} ?>
+									<?php echo "<br>"; }} ?>
 								</div>
 							</section>
 							<section>
@@ -125,7 +124,7 @@
 											<p><?php echo $value['startMonth'].' '.$value['startYear'].'-'.$value['endMonth'].' '.$value['endYear'] ?></p>
 											<p><?= $value['description'] ?></p>
 										</div>
-									<?php } ?>
+									<?php echo "<br>"; } ?>
 								</div>
 							</section>
 							<section>
@@ -149,7 +148,7 @@
 											<p><a target='_blank' href='<?= $value["projectLink"] ?>'><?= $value['projectLink'] ?></a></p>
 											<p><?= $value['projectDescription'] ?></p>
 										</div>
-									<?php } ?>
+									<?php echo "<br>";} ?>
 								</div>
 							</section>
 							<section>
@@ -172,7 +171,7 @@
 											<p><strong><?= $value['achievementTitle'] ?></strong></p>
 											<p><?= $value['achievementDescription'] ?></p>
 										</div>
-									<?php } ?>
+									<?php echo "<br>";} ?>
 								</div>
 							</section>
 						</div>

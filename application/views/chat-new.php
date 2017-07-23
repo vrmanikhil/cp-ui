@@ -166,7 +166,7 @@ var chatterImage = '<?= $profileImage ?>';
   			xhttp.send();
   		}
 
-var	lastId = <?php if(isset($messages[0]['messageID'])){echo $messages[0]['messageID'];}else{ echo "0";} ?>;
+var	lastId = <?php if(isset($messages[0]['messageID'])){ echo $messages[0]['messageID']; } else { echo "0"; } ?>;
   		$(document).ready(function(){
   			$('#send').click(function(){
 			msg = $('#message').val().trim();

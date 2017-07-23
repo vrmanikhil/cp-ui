@@ -13,6 +13,10 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('/assets/css/jobs.css'); ?>" rel="stylesheet">
 	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/x-icon">
+	
+	<script type="text/javascript">
+	if (screen.width <= 800) { window.location.replace("http://m.campuspuppy.com/"); }
+	</script>
 </head>
 
 <body>
@@ -325,10 +329,10 @@
 				for( i = 0; i < feeds.length; i++){
 					offset++;
 					if(feeds[i].offerType == 'Internship'){
-						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'internship' id = 'viewinternship"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
+						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://www.campuspuppy.com/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'internship' id = 'viewinternship"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
 						document.getElementById('feeds').innerHTML += html;
 					}else{
-						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://cp.ui/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'job' id = 'viewjob"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
+						var html = "<div class='feed-post card'><div class='feed-post__head'><div class='flex media'><a href='javascript:''><img src='"+ feeds[i].profileImage +"' alt='user' class='media-figure feed-post__user-pic'></a><span class='media-body flex flex--col'><a href='http://www.campuspuppy.com/user-profile/"+ feeds[i].addedBy +"' class='flex__item'><span class='feed-post__username'>"+feeds[i].name+"</span></a><span class='feed-post__info flex__item'><span class='feed-post__postdate'>"+feeds[i].timestamp+"</span></span></span></div></div><div class='feed-post__body'><p>Posted a "+feeds[i].offerType+" Offer <a data-id = '"+ feeds[i].offerID +"' class='link js-view-posting-details view' name = 'job' id = 'viewjob"+ feeds[i].offerID +"'><b>"+feeds[i].title+"</b></a></p></div></div>";
 						document.getElementById('feeds').innerHTML += html;
 				}
 			}
@@ -343,6 +347,17 @@
 
 		};
 		</script>
+		
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73411066-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 
 </html>
