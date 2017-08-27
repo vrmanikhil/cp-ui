@@ -935,6 +935,17 @@ class Home extends CI_Controller {
 		die;
 	}
 
+	public function checkForNewNotifications(){
+		$this->rdirection();
+		$last_id = $_GET['last_id'];
+		$newNots = $this->home_lib->checkForNewNotifications($last_id);
+		if(!$newNots)
+			echo 'false'
+		else
+			echo json_encode($newNots);
+		die;
+	}
+
 	public function connections(){
 		$this->redirection();
 		$userID = $_SESSION['userData']['userID'];
