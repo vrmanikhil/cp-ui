@@ -509,6 +509,17 @@ public function injectClassName(&$data)
 		return $success;
 	}
 
+	public function checkForNewMessages($lastid)
+	{
+		$CI = &get_instance();
+		$CI->load->model('Home_model', 'homemodel');
+		$success = $CI->homemodel->checkForNewNotifications($_SESSION['userData']['userID'], $lastid);
+		if($success){
+			$this->fixTimestamp($success, 'timestamp', 'd M Y  g:i A');
+			$this->injectClassName($success);
+		}
+		return $success;
+	}
 
 	public function getUserSkills($userID){
 		$CI = &get_instance();

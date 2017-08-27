@@ -115,10 +115,11 @@
 		questions = JSON.parse(atob("<?php echo $question_string; ?>"));
 		var eventKey = "<?php echo $skill_data['skill_name']?>_test";
 		time = <?php echo $test_settings[0]['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
-		setInterval(function () {
+		var interval = setInterval(function () {
 			var c = tmp--,m=(c/60)>>0,s=(c-m*60)+'';
 			timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
 			if (c<1) {
+				clearInterval(interval);
 				submitAnswers(eventKey);
 			}
 
@@ -235,10 +236,17 @@
 
 		function submitAnswers(eventKey) {
 			var data =JSON.stringify(getAnswers(eventKey));
-			document.cookie = "data = " + data;
 			if (data) {
 				localStorage.clear();
-				window.location.replace('<?php echo base_url('skills/submit-answers');?>');
+				data = {
+					answers:data
+				}
+				console.log(data);
+				$.post('<?php echo base_url('web/submitAnswers');?>', {data: data, <?php echo $csrf_token_name; ?> : "<?php echo $csrf_token; ?>"}).done(function(res){
+					if(res){
+						window.location.replace('<?php echo base_url('skills');?>');
+					}
+				});
 			} else {
 				alert('Some error occured');
 			}
