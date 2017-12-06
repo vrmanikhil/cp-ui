@@ -762,20 +762,27 @@ class Home extends CI_Controller {
 	public function skillTest()
 	{
 		$this->redirection();
-		if($this->home_lib->isInTest()){
-			$this->session->unset_userdata('skill_data');
-			$this->session->unset_userdata('test_settings');
-			$this->session->set_userdata('in_test', false);
-			$this->session->set_flashdata('message', array('content' => 'Page Reload not Allowed during Skill Test.', 'class' => 'error'));
+		if($_SESSION['userData']['intest']){
+			$_SESSION['questionData'] = NULL;
+			$skill_id = $_SESSION['userData']['currentSkill'];
+			$_SESSION['userData']['currentSkill'] = NULL;
+			$_SESSION['userData']['currentSkillName'] = NULL;
+			$_SESSION['userData'][$skill_id]['totalScore'] = NULL;
+			$_SESSION['userData'][$skill_id]['skips'] = NULL;
+			$_SESSION['userData'][$skill_id]['skipStatus'] = NULL;
+			$_SESSION['userData'][$skill_id]['totalTime'] = NULL;
+			$_SESSION['userData'][$skill_id]['level'] = NULL;
+			$_SESSION['userData'][$skill_id]['responses'] = NULL;
+			$_SESSION['userData']['intest'] = false;
+			$this->session->set_flashdata('message', array('content'=>'Page Reload Not allowed During test.','class'=>'error'));
 			redirect(base_url('skills'));
 		}
-		$this->session->set_userdata('in_test', true);
-		$skill_data = $this->session->userdata('skill_data');
-		$test_settings = $this->session->userdata('test_settings');
-		$this->data['questions'] = $this->home_lib->getQuestions($test_settings[0]['numberQuestions'], $skill_data['skillID']);
-		$this->data['question_string'] = base64_encode(json_encode($this->data['questions']));
-		$this->data['test_settings'] = $test_settings;
-		$this->data['skill_data'] = $skill_data;
+		$_SESSION['userData']['intest'] = true;
+		$this->data['skillData']['skillID'] = $_SESSION['userData']['currentSkill'];
+		$this->data['skillData']['skillName'] = $_SESSION['userData']['currentSkillName'];
+		$this->data['questionData'] = $_SESSION['questionData'];
+		$this->data['totalTime'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['totalTime'];
+		$this->data['skips'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['skips'];
 		$this->load->view('skillTest', $this->data);
 	}
 

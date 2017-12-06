@@ -1221,6 +1221,77 @@ class Home_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function getTestSetup(){
+		$coatDB = $this->load->database('coatDB', TRUE);
+		$result = $coatDB->get_where('testSetup', array('testID'=>'1'));
+		return $result->result_array();
+	}
+
+	public function getQuestionDetails($level, $skillID, $max = 0){
+		 $coatDB = $this->load->database('coatDB', TRUE);
+		$coatDB->select('question_id, question, option1, option2, option3, option4, expert_time');
+		$coatDB->where('difficulty_level', $level);
+		if(!empty($_SESSION['userData'][$skillID]['responses']))
+		$coatDB->where_not_in('question_id', $_SESSION['userData'][$skillID]['responses']);
+		$coatDB->where('skill_id', $skillID);
+		$coatDB->order_by('RAND()');
+		$result = $coatDB->get('questions',1);
+		if(empty($result->result_array())){
+			if($level <= 0){
+				return false;
+			}
+			if($level<8){
+				if($max == 0){
+					$level++;
+					return $this->getQuestionDetails($level, $skillID, $max);
+				}else{
+					$level--;
+					return $this->getQuestionDetails($level, $skillID, 1);
+				}
+			}elseif($level == 8){
+				$level-- ;
+				return $this->getQuestionDetails($level, $skillID, 1);
+			}
+		}
+		return $result->result_array();
+	}
+
+	public function getSkips($userID, $skillID){
+		 $coatDB = $this->load->database('coatDB', TRUE);
+		$coatDB->select('count(correct) as skips');
+		$coatDB->join('questions', 'questions.question_id = responses.questionID');
+		$result = $coatDB->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID, 'responses.correct' => '-1'));
+		return $result->result_array();
+	}
+
+	public function getTotalScore($userID, $skillID){
+		 $coatDB = $this->load->database('coatDB', TRUE);
+		$coatDB->select('SUM(score) as total');
+		$coatDB->join('questions', 'questions.question_id = responses.questionID');
+		$result = $coatDB->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID));
+		return $result->result_array();
+	}
+
+	public function getTimeConsumed($userID, $skillID){
+		 $coatDB = $this->load->database('coatDB', TRUE);
+		$coatDB->select('SUM(timeConsumed) as time');
+		$coatDB->join('questions', 'questions.question_id = responses.questionID');
+		$result = $coatDB->get_where('responses',array('responses.userID'=> $userID, 'questions.skill_id'=> $skillID));
+		return $result->result_array();
+	}
+
+	public function updateResponse($data){
+		 $coatDB = $this->load->database('coatDB', TRUE);
+		return $coatDB->insert('responses', $data);
+	}
+
+	public function getAnswer($questionID){
+		 $coatDB = $this->load->database('coatDB', TRUE);
+		$coatDB->select('answer');
+		$coatDB->where('question_id', $questionID);
+		return $coatDB->get('questions')->result_array();
+	}
+
 
 	/////////////////////////////////////////////////////////////////////////////
 

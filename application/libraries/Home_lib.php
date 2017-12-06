@@ -963,7 +963,44 @@ public function injectClassName(&$data)
 		return $CI->homeModel->checkReportGenerated($userID);
 	}
 
-	
+	public function getTestSetup(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getTestSetup();
+	}
+
+	public function getQuestionDetails($level, $skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getQuestionDetails($level, $skillID);
+	}
+
+	public function updateResponse($data){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->updateResponse($data);
+	}
+
+	public function checkAnswer($questionID, $answer, $test = 0){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		if($test == 1){
+		$correctAnswer = $CI->homeModel->getTestAnswer($questionID)[0]['answer'];
+		}else{
+			$correctAnswer = $CI->homeModel->getAnswer($questionID)[0]['answer'];
+		}
+		if($answer == $correctAnswer){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+	public function getSkillData($skill_id){
+		$CI = &get_instance();
+		$CI->load->model('home_model', 'homeModel');
+		return $CI->homeModel->getSkillData($skill_id);
+	}
 
 	///////////////////////////////////////////////////////////////
 
