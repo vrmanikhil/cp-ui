@@ -26,6 +26,10 @@ class Home extends CI_Controller {
 		$this->data['activeUser'] = $this->load->view('commonCode/activeUser', $this->data, true);
 		$this->data['userNavigation'] = $this->load->view('commonCode/userNavigation', $this->data, true);
 		$this->data['message'] = ($v = $this->session->flashdata('message'))?$v:array('content'=>'','class'=>'');
+		$maintainance = 0;
+		if($maintainance=='1'){
+			echo "<center><h1>Website is Under Maintainance</h1><h3>We will be back soon.</h3></center>";die;
+		}
 	}
 
 	private function redirection(){
@@ -747,6 +751,7 @@ class Home extends CI_Controller {
 
 	public function skills(){
 		$this->redirection();
+		$this->data['reportGenerated'] = $this->home_lib->checkReportGenerated($_SESSION['userData']['userID']);
 		$this->data['userSkills'] = $this->home_lib->getUserSkills($_SESSION['userData']['userID']);
 		$this->data['skills'] = $this->home_lib->getSkills();
 		$this->load->view('skills', $this->data);
@@ -932,17 +937,6 @@ class Home extends CI_Controller {
 			echo 'false';
 		else
 			echo json_encode($new_msgs);
-		die;
-	}
-
-	public function checkForNewNotifications(){
-		$this->rdirection();
-		$last_id = $_GET['last_id'];
-		$newNots = $this->home_lib->checkForNewNotifications($last_id);
-		if(!$newNots)
-			echo 'false'
-		else
-			echo json_encode($newNots);
 		die;
 	}
 
@@ -1160,4 +1154,92 @@ class Home extends CI_Controller {
 		curl_close($ch);
 		// echo $output;
 		}
+		////////////////////////////////
+		public function report(){
+			$userID = $this->input->get('userID');
+			if($userID!=$_SESSION['userData']['userID']){
+				$this->session->set_flashdata('message', array('content'=>'Something Went Wrong.','class'=>'error'));
+				redirect(base_url('skills'));
+			}
+			$coatID = $this->home_lib->getCOATUserID($userID);
+			$userID = $coatID[0]['COATuserID'];
+			$this->data['reportContent'] = $this->home_lib->getReportContent();
+			$this->data['userDetails'] = $this->home_lib->getUserDetailsReport($userID);
+			$this->data['userDetails'] = $this->data['userDetails'][0];
+			$userSkills = $this->home_lib->getUserSkillsReport($userID);
+			$this->data['skillsUser'] = array();
+			foreach ($userSkills as $key => $value){
+				$sum = 0;
+				$attempts = 0;
+				$correctAttempts = 0;
+				$responses = $this->home_lib->getResponses($userID, $value['skillID']);
+				$averageAttempts = $this->home_lib->getAverageAttempts($value['skillID']);
+				$averageScore = $this->home_lib->getAverageScore($value['skillID']);
+				$averageScore = $averageScore[0]['averageScore'];
+				$averageAttempts = $averageAttempts[0]['avg'];
+				$averageAttempts = floor($averageAttempts);
+				$averageCorrectAttempts = $this->home_lib->getAverageCorrectAttempts($value['skillID']);
+				$averageCorrectAttempts = $averageCorrectAttempts[0]['avg'];
+				$averageCorrectAttempts = floor($averageCorrectAttempts);
+				foreach ($responses as $key => $val) {
+					$sum = $sum + $val['score'];
+					$attempts++;
+					if($val['correct']){
+						$correctAttempts++;
+					}
+				}
+				$sum = floor($sum);
+				$averageScore = floor($averageScore);
+				if($sum<10){
+					$badge = "4";
+				}
+				if($sum>10 && $sum<35){
+					$badge = "1";
+				}
+				if($sum>35 && $sum<60){
+					$badge = "2";
+				}
+				if($sum>60){
+					$badge = "3";
+				}
+				$userResponses = $this->home_lib->getResponseDL($value['skillID']);
+				$userResponsesArray= array();
+				foreach ($userResponses as $key => $value12) {
+					array_push($userResponsesArray, $value12['number']);
+				}
+				$otherUserResponses = $this->home_lib->getResponseDLUser($value['skillID'], $userID);
+				$otherUserResponsesArray = array();
+				foreach ($otherUserResponses as $key => $value123) {
+					array_push($otherUserResponsesArray, $value123['number']);
+				}
+				$userResponsesCorrect = $this->home_lib->getResponseDLCorrect($value['skillID']);
+				$userResponsesArrayCorrect= array();
+				foreach ($userResponsesCorrect as $key => $value1212) {
+					array_push($userResponsesArrayCorrect, $value1212['number']);
+				}
+				$otherUserResponsesCorrect = $this->home_lib->getResponseDLUserCorrect($value['skillID'], $userID);
+				$otherUserResponsesArrayCorrect = array();
+				foreach ($otherUserResponsesCorrect as $key => $value123123) {
+					array_push($otherUserResponsesArrayCorrect, $value123123['number']);
+				}
+				$skillDetails = array(
+					'skillID' => $value['skillID'],
+					'skill' => $value['skill'],
+					'score' => $sum,
+					'badge' => $badge,
+					'averageScore' => $averageScore,
+					'attempts' => $attempts,
+					'averageAttempts' => $averageAttempts,
+					'correctAttempts' => $correctAttempts,
+					'averageCorrectAttempts' => $averageCorrectAttempts,
+					'userResponsesArray' => $userResponsesArray,
+					'otherUserResponsesArray' => $otherUserResponsesArray,
+					'userResponsesArrayCorrect' => $userResponsesArrayCorrect,
+					'otherUserResponsesArrayCorrect' => $otherUserResponsesArrayCorrect
+				);
+				array_push($this->data['skillsUser'], $skillDetails);
+			}
+			$this->load->view('report', $this->data);
+		}
+
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu1
--- http://www.phpmyadmin.net
+-- version 4.0.10.18
+-- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 23, 2017 at 03:03 PM
--- Server version: 5.7.19-0ubuntu0.16.04.1
--- PHP Version: 7.0.15-0ubuntu0.16.04.4
+-- Host: localhost:3306
+-- Generation Time: Nov 10, 2017 at 03:49 PM
+-- Server version: 5.6.36-cll-lve
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `campuspuppy`
@@ -26,12 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE `achievements` (
-  `achievementID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `achievements` (
+  `achievementID` int(5) NOT NULL AUTO_INCREMENT,
   `achievementTitle` text NOT NULL,
   `achievementDescription` text NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`achievementID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `achievements`
@@ -47,11 +48,13 @@ INSERT INTO `achievements` (`achievementID`, `achievementTitle`, `achievementDes
 -- Table structure for table `adminAuth`
 --
 
-CREATE TABLE `adminAuth` (
-  `adminID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adminAuth` (
+  `adminID` int(5) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`adminID`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `adminAuth`
@@ -66,12 +69,13 @@ INSERT INTO `adminAuth` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `colleges`
 --
 
-CREATE TABLE `colleges` (
-  `college_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `colleges` (
+  `college_id` int(5) NOT NULL AUTO_INCREMENT,
   `college` varchar(255) NOT NULL,
   `logo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg',
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`college_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1160 ;
 
 --
 -- Dumping data for table `colleges`
@@ -144,7 +148,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (64, 'YMCA University of Science and technology, Faridabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/YMCA_University.jpg', 1),
 (65, 'World College Of Technology and Management, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/WCTM.jpg', 1),
 (66, 'Aryan Institue Of Technology, Ghaziabad', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Aryan_Institute_of_Technology.jpg', 1),
-(67, 'Bharati Vidyapeeth\'s College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/bhartiya_Vidyapeeth.jpg', 1),
+(67, 'Bharati Vidyapeeth''s College of Engineering, Delhi', 'http://backoffice.campuspuppy.com/assets/collegeLogo/bhartiya_Vidyapeeth.jpg', 1),
 (68, 'Dronacharya College of Engineering, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DCE,greater_Noida.jpg', 1),
 (69, 'BML Munjal University, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/BML_Munjal.jpg', 1),
 (70, 'Bennett University, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Bennett_University.jpg', 1),
@@ -359,7 +363,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (279, 'DNS College of engineering and technology, Amroha', 'http://backoffice.campuspuppy.com/assets/collegeLogo/DNS_College_of_engineering_and_technology.jpg', 1),
 (280, 'Divya Jyoti College of Engineering and technology, Modinagar', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Divya Jyoti College of Engineering and technology.jpg', 1),
 (281, 'Ganeshi lal Narayandas Agrawal Institute of technology, Mathura', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Ganeshi_lal_Narayandas_Agrawal_Institute_of_technology.jpg', 1),
-(282, 'Women\'s Institute of engineering and technology, Sitapur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Womens_Institute_of_engineering_and_technology.jpg', 1),
+(282, 'Women''s Institute of engineering and technology, Sitapur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Womens_Institute_of_engineering_and_technology.jpg', 1),
 (283, 'Vidya Bhavan college of engineering and technology, Kanpur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Vidya_Bhavan_college_of_engineering_and_technology.jpg', 1),
 (284, 'Venkateshwara Institute of technology, Merrut', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Venkateshwar Institute of technology.jpg', 1),
 (285, 'Veer Kunwar Institute of Technology, Bijnaur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/Veer_Kunwar_Institute_of_Technology.jpg', 1),
@@ -484,7 +488,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (403, 'S G T University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (404, 'MERI College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (405, 'Seth Jai Parkash Mukand Lal Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(406, 'Lingaya\'s University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(406, 'Lingaya''s University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (407, 'Dr. K N Modi Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (408, 'Kurukshetra Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (409, 'Babu Banarsi Das Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -542,7 +546,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (461, 'Al-Falah School of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (462, 'Greater Noida College of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (463, 'GD Goenka School Of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(464, 'Bimla Devi Educational Society\'s Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(464, 'Bimla Devi Educational Society''s Group Of Institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (465, 'RP Inderprastha Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (466, 'PM College of engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (467, 'Jan Nayak Ch. Devi Lal Memorial College of Engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -569,7 +573,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (488, 'Jai Prakash Mukund Lal Innovative engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (489, 'Narendra Deva University of agriculture and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (490, 'Baba Sahab Dr. Bhim Rao Ambedkar College of agricultural engineering ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(491, 'Lingaya\'s Institute of management and technology for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(491, 'Lingaya''s Institute of management and technology for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (492, 'DR College of enginnering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (493, 'NC College  of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (494, 'Technology education and research institute ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -616,7 +620,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (535, 'Darsh Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (536, 'Birla Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (537, 'Nehru Gram Bharti University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(538, 'Lingaya\'s GVKS Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(538, 'Lingaya''s GVKS Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (539, 'Maharana Pratap Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (540, 'Satyug Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (541, 'Mata Rajkaur Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -666,7 +670,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (585, 'Allahabad Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (586, 'SD Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (587, 'Murli Manohar Agrawal Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(588, 'Institute of people\'s science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(588, 'Institute of people''s science and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (589, 'Gyan Bharti Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (590, 'Excel Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (591, 'Gurgaon College of engineering for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -684,7 +688,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (603, 'Shri Ram Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (604, 'NC Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (605, 'Institute of advanced management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(606, 'Faculty of engineering shanti Niketan Trust\'s group of institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(606, 'Faculty of engineering shanti Niketan Trust''s group of institutions', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (607, 'Asian Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (608, 'Modern Institute of management for women ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (609, 'RB Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -779,11 +783,11 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (699, 'Bangalore technological University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (700, 'Adichunchanagiri Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (701, 'KS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(702, 'KLE Socieety\'s B V Bhoomraddi Colleg of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(702, 'KLE Socieety''s B V Bhoomraddi Colleg of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (703, 'KS School of engineering and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (704, 'Jain College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (705, 'Ballari Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(706, 'Alva\'s Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(706, 'Alva''s Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (707, 'Academy for technical and management excellence', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (708, 'RR Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (709, 'University of agricultural sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -808,14 +812,14 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (727, 'Sri Dharmasthala Manjunatheshwara Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (728, 'PA College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (729, 'BTL  Institute of technology and management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(730, 'HKE Society\'s PDA College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(730, 'HKE Society''s PDA College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (731, 'GSSS Institute of engineering and technology for women', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (732, 'Government Engineering College, Hassan', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (733, 'Government Sri Krishanarajendra Sliver jubilee Technological Institute', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (734, 'BGS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (735, 'PNS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (736, 'Shree Devi Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(737, 'BLDEA\'s VP Dr. PG Halakatti College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(737, 'BLDEA''s VP Dr. PG Halakatti College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (738, 'Shri Madhwa Vadiraja Institute of technology and management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (739, 'KLS Vishwanathrao Deshpande Rural Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (740, 'Karavali Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -869,9 +873,9 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (788, 'Government Engineering College, Haveri', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (789, 'Sri Taralbalu Jagadguru institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (790, 'Government Engineering College, Bellary', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(791, 'SJPN Trust\'s Hirasugar Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(791, 'SJPN Trust''s Hirasugar Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (792, 'NDRK Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(793, 'VSM\'s Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(793, 'VSM''s Institute of Technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (794, 'Smt. Kamala and Sri Venkappa M Agadi College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (795, 'Shridevi Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (796, 'Shetty Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -893,7 +897,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (812, 'Dr. MV Shetty Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (813, 'Kalpataru Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (814, 'Karnataka Veterinary, Animal and Fisheries Sciences University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(815, 'RTE Society\'s Rural Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(815, 'RTE Society''s Rural Engineering College', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (816, 'Government Engineering College, Raichur', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (817, 'C Byregowda Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (818, 'Proudadevaraya Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -901,7 +905,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (820, 'Lingarajappa Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (821, 'GSS Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (822, 'Rai Technology University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(823, 'HKE Society\'s SLN College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(823, 'HKE Society''s SLN College of engineering', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (824, 'Government Engineering College, Coorg', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (825, 'Veerappa Nisty Engineering College ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (826, 'Sri Belimatha mahasamsthana Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -910,7 +914,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (829, 'Cauvery Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (830, 'Girijabai Sail Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (831, 'Sri Basaveshwara Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(832, 'PNS Women\'s Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(832, 'PNS Women''s Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (833, 'Gopal reddy College of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (834, 'Government Tool Room and Training Center', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (835, 'Biluru Gurubasava Mahaswamiji Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -922,7 +926,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (841, 'AJ Institute of engineering and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (842, 'Maharaja Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (843, 'Harlal Instititute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(844, 'Bharati Vidyapeeth\'s Institute of management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(844, 'Bharati Vidyapeeth''s Institute of management and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (845, 'Indian Institute of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (846, 'ABV- Indian Institute of Information Technology and Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (847, 'Acharya Bangalore B-School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -957,9 +961,9 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (876, 'Berhampur University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (877, 'Bharathidasan Institute of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (878, 'Bharati Vidyapeeth Abhijeet Kadam Institute of management and social sciences', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(879, 'Bharati Vidyapeeth\'s Institute of management and entrepreneurship development', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(880, 'Bharati Vidyapeeth\'s Instituteof management studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(881, 'Bharatiya Vidya Bhavan\'s Usha and lakshmi mittal Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(879, 'Bharati Vidyapeeth''s Institute of management and entrepreneurship development', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(880, 'Bharati Vidyapeeth''s Instituteof management studies and research', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(881, 'Bharatiya Vidya Bhavan''s Usha and lakshmi mittal Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (882, 'Birla Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (883, 'Birla Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (884, 'BK School of business management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -1114,7 +1118,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (1033, 'Koshys Institute of management studies', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1034, 'Lal Bahadur Shastri Institute of management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1035, 'Loyola Institute of business administration', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(1036, 'MAEER\'s MIT School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1036, 'MAEER''s MIT School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1037, 'MAEER"S MIT School of business ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1038, 'Malaviya National  Institute of technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1039, 'Management development Institute', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -1209,7 +1213,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (1127, 'Taxila Business Schools', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1128, 'Tezpur University', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1129, 'Thiagarajar School of Management ', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(1130, 'Tula\'s Institute, The engineering and management college', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1130, 'Tula''s Institute, The engineering and management college', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1131, 'unique Institute of management and technology', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1132, 'United Institute of management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1133, 'Universal Business School', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
@@ -1235,7 +1239,10 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 (1153, 'Xavier Institute of Management and Entrepreneurship', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1154, 'Xavier Institute of Social Service', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
 (1155, 'XLRI - Xavier School of Management', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
-(1156, 'College Name Not Listed', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1);
+(1156, 'College Name Not Listed', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo.jpg', 1),
+(1157, 'Amity University, Gurgaon', 'http://backoffice.campuspuppy.com/assets/collegeLogo/amity1.png', 1),
+(1158, 'Amity University, Greater Noida', 'http://backoffice.campuspuppy.com/assets/collegeLogo/amity11.png', 1),
+(1159, 'Doaba Group Of Colleges', 'http://backoffice.campuspuppy.com/assets/collegeLogo/default-logo1.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -1243,7 +1250,7 @@ INSERT INTO `colleges` (`college_id`, `college`, `logo`, `active`) VALUES
 -- Table structure for table `connections`
 --
 
-CREATE TABLE `connections` (
+CREATE TABLE IF NOT EXISTS `connections` (
   `active` int(5) NOT NULL,
   `passive` int(5) NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -1267,7 +1274,18 @@ INSERT INTO `connections` (`active`, `passive`, `status`) VALUES
 (2, 157, 1),
 (1, 40, 1),
 (40, 12, 0),
-(134, 39, 0);
+(134, 39, 1),
+(218, 202, 1),
+(218, 206, 1),
+(218, 217, 1),
+(218, 217, 1),
+(201, 38, 0),
+(229, 37, 0),
+(265, 217, 1),
+(265, 219, 1),
+(265, 206, 1),
+(283, 230, 1),
+(230, 265, 0);
 
 -- --------------------------------------------------------
 
@@ -1275,22 +1293,24 @@ INSERT INTO `connections` (`active`, `passive`, `status`) VALUES
 -- Table structure for table `contactMessages`
 --
 
-CREATE TABLE `contactMessages` (
-  `contactID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `contactMessages` (
+  `contactID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
   `message` text NOT NULL,
   `messageRead` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`contactID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `contactMessages`
 --
 
 INSERT INTO `contactMessages` (`contactID`, `name`, `email`, `mobile`, `message`, `messageRead`, `created_at`) VALUES
-(1, 'Raghawendra Singh', 'ragh1995@hotmail.com', 9717034866, 'Error occured while submitting skill test in your website.', 0, '2017-07-13 16:23:12');
+(1, 'Raghawendra Singh', 'ragh1995@hotmail.com', 9717034866, 'Error occured while submitting skill test in your website.', 0, '2017-07-13 16:23:12'),
+(2, 'KENNETH MOHANDAS', 'kennethmohandas111@gmail.com', 9971381272, 'This message is basically to bring into your notice that u have sent me a mail, stating that my online test result has been uploaded on my profile on campuspuppy, under skills section but there is no result in that section .So,please kindly resend my result to me.\r\nTHANK YOU .', 0, '2017-10-01 16:03:47');
 
 -- --------------------------------------------------------
 
@@ -1298,22 +1318,23 @@ INSERT INTO `contactMessages` (`contactID`, `name`, `email`, `mobile`, `message`
 -- Table structure for table `content`
 --
 
-CREATE TABLE `content` (
-  `content_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `content` (
+  `content_id` int(5) NOT NULL AUTO_INCREMENT,
   `aboutUs` text NOT NULL,
   `termsAndConditions` text NOT NULL,
   `privacyPolicy` text NOT NULL,
   `coat` text NOT NULL,
   `facebook` varchar(255) NOT NULL,
-  `twitter` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `twitter` varchar(255) NOT NULL,
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `content`
 --
 
 INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPolicy`, `coat`, `facebook`, `twitter`) VALUES
-(1, '<section>\n      <div style="color: #000">\n        <div style="margin-bottom:50px;">\n          <br>\n          <p style="padding: 10px; text-align: justify;">Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual’s specific skill set and expertise in it.</p>\n          <p style="padding: 10px; text-align: justify;">Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what’s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p>\n          <div style="margin-left: 40px;">\n            <span style="display:flex;">\n              <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/1.png" width="64" style="margin-top:40px;">\n              <span style="margin:60px 20px 10px 45px; ">\n                Bridge the gap between companies and potential candidates.\n              </span>\n            </span>\n          </div>\n          <div style="margin-left: 40px;">\n            <span style="display:flex;">\n              <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/2.png" width="64" style="margin-top:40px;">\n              <span style="margin:60px 20px 10px 45px; ">\n                A professional social networking platform to directly connect potential candidates and employers.\n              </span>\n            </span>\n          </div>\n          <div style="margin-left: 40px;">\n            <span style="display:flex;">\n              <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/3.png" width="64" style="margin-top:40px;">\n              <span style="margin:60px 20px 10px 45px; ">\n                Platform to test individualistic skill sets.\n              </span>\n            </span>\n          </div>\n          <div style="margin-left: 40px;">\n            <span style="display:flex;">\n              <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/4.png" width="64" style="margin-top:40px;">\n              <span style="margin:60px 20px 10px 45px; ">\n                Help in providing dream jobs/internship.\n              </span>\n            </span>\n          </div>\n          <div style="margin-left: 40px;">\n            <span style="display:flex;">\n              <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/5.png" width="64" height="64" style="margin-top:40px;">\n              <span style="margin:70px 20px 10px 45px; ">\n                Employers can post skill based jobs/internships.\n              </span>\n            </span>\n          </div>\n          <div style="margin-left: 40px;">\n            <span style="display:flex;">\n              <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/6.png" width="64" height="64" style="margin-top:40px;">\n              <span style="margin:60px 20px 10px 45px; ">\n                Employers can save on time and resources, as only skilled candidates are provided.\n              </span>\n            </span>\n          </div>\n                  <div style="margin-left: 40px;">\n                    <span style="display:flex;">\n                      <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/7.png" width="64" height="64" style="margin-top:60px;">\n                      <span style="margin:80px 20px 10px 45px; ">\n                        Candidates can verify skill possessed by them and apply for internship/job according to the skills verified.\n                      </span>\n                    </span>\n                  </div>\n                  <div style="margin-left: 40px;">\n                    <span style="display:flex;">\n                      <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/8.png" width="64" height="64" style="margin-top:40px;">\n                      <span style="margin:60px 20px 10px 45px; ">\n                        Candidates get a chance for self improvement and get recognised among their colleagues.\n                      </span>\n                    </span>\n                  </div>\n                  <div style="margin-left: 40px;">\n                    <span style="display:flex;">\n                      <img src="http://www.campuspuppy.com/imageDirectory/aboutUs/9.png" width="64" height="64" style="margin-top:40px;">\n                      <span style="margin:70px 20px 10px 45px; ">\n                        Hassle free and relaxed recruitment process.\n                      </span>\n                    </span>\n                  </div>\n                  <br><br>\n        </div>\n      </div>\n    </section>', '<p>The cornerstone of our business is to focus on our Members first. We protect your personal information using industry &shy;standard safeguards. We may share your information with your consent or as required by law, and we will always let you know when we make significant changes to this Terms and Conditions.</p><p>Statement of Rights and Responsibilities This Statement of Rights and Responsibilities (&quot;Statement,&quot; &quot;Terms,&quot; or &quot;SRR&quot;) derives from the CampusPuppy Principles, and is our terms of service that governs our relationship with users and others who interact with CampusPuppy, as well as CampusPuppy brands, products and services, which we call the &ldquo;CampusPuppy Services&rdquo; or &ldquo;Services&rdquo;. By using or accessing the CampusPuppy Services, you agree to this Statement, as updated from time to time in accordance with the section below.</p><p><strong>A. Amendments</strong><br /><br />1. We&rsquo;ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</p><p>2. If we make changes to policies, guidelines or other terms referenced in or incorporated by this Statement, we may provide you notice regarding the same.</p><p>3. Your continued use of the CampusPuppy Services, following notice of the changes to our terms, policies or guidelines, constitutes your acceptance of our amended terms, policies or guidelines.</p><p>4. Termination If you violate the letter or spirit of this Statement, or otherwise create risk or possible legal exposure for us, we can stop providing all or part of CampusPuppy to you.</p><p><strong>B. Disputes</strong></p><p>1. You will resolve any claim, cause of action or dispute (claim) you have with us arising out of or relating to this Statement or CampusPuppy exclusively in the Delhi District Court, and you agree to submit to the personal jurisdiction of such courts for the purpose of litigating all such claims. The laws of the Country(India) will govern this Statement, as well as any claim that might arise between you and us, without regard to conflict of law provisions.</p><p>2. If anyone brings a claim against us related to your actions, content or information on CampusPuppy, you will indemnify and hold us harmless from and against all damages, losses, and expenses of any kind (including reasonable legal fees and costs) related to such claim. Although we provide rules for user conduct, we do not control or direct users&#39; actions on CampusPuppy and are not responsible for the content or information users transmit or share on CampusPuppy. We are not responsible for any offensive, inappropriate, obscene, unlawful or otherwise objectionable content or information you may encounter on CampusPuppy. We are not responsible for the conduct, whether online or offline, of any user of CampusPuppy.</p><p>3. We try to keep CampusPuppy up, bugfree and safe, but you use it at your own risk. we are providing CampusPuppy as is without any express or implied warranties, but not limited to, fitness for a particular purpose, and non&shy;infringement. we do not guarantee that CampusPuppy will always be safe, secure or error &shy;free or that CampusPuppy will always function without disruptions, delays or imperfections. CampusPuppy is not responsible for the actions, content, information, or data of third parties, and you release us, our directors, officers, employees, and agents from any claims and damages, known and unknown, arising out of or in any way connected with any claim you have against any such third parties.</p><p><strong>C. Safety:</strong></p><p>We do our best to keep CampusPuppy safe, but we cannot guarantee it. We need your help to keep it safe, which includes the following commitments by you:</p><p>1. You will not post unauthorized commercial communications (such as spam) on CampusPuppy.<br />2. You will not collect users&#39; content or information, or otherwise access CampusPuppy , using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.<br />3. You will not engage in unlawful multi&shy;level marketing, such as a pyramid scheme, on CampusPuppy.<br />4. You will not upload viruses or other malicious code.<br />5. You will not solicit login information or access an account belonging to someone else.<br />6. You will not bully, intimidate, or harass any user.<br />7. You will not post content that: is hate speech, threatening, or pornographic, incites violence, or contains nudity or graphic or gratuitous violence.<br />9. You will not use CampusPuppy to do anything unlawful, misleading, malicious, or discriminatory.<br />10. You will not do anything that could disable, overburden, or impair the proper working or appearance of CampusPuppy, such as a denial of service attack or interference with page rendering or other CampusPuppy functionality.<br />11. You will not facilitate or encourage any violations of this Statement or our policies.</p><p><strong>D. Registration:</strong></p><p>To create an account on CampusPuppy, you must provide us with at least your name, email address mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, college details, educational achievements, skills etc) to help you build your profile and to provide. You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p>CampusPuppy users provide their real names and information, and we need your help to keep it that way. Here are some commitments you make to us relating to registering and maintaining the security of your account:<br /><br />1. You will not provide any false personal information on CampusPuppy, or create an account for anyone other than yourself without permission.<br />2. You will not create more than one personal account.<br />3. If we disable your account, you will not create another one without our permission.<br />4. You will not use CampusPuppy if you are under 16.<br />5. You will keep your contact information accurate and up&shy;-to-&shy;date.<br />6. You will not share your password, let anyone else access your account, or do anything else that might jeopardize the security of your account.<br />7. You will not transfer your account to anyone without first getting our written permission.</p><p><strong>E. Consent to CampusPuppy Processing Information About You</strong></p><p>You agree that information you provide on your profile can be seen by others and used by us as described in this Privacy Policy and our User Agreement.</p><p>The personal information that you provide to us may reveal or allow others to identify aspects of your life that are not expressly stated on your profile (for example, your picture or your name may reveal your gender). By providing personal information to us when you create or update your account and profile, you are expressly and voluntarily accepting the terms and conditions of our User Agreement and freely accepting and agreeing to our processing of your personal information in ways set out by this Privacy Policy. Supplying to us any information deemed &ldquo;sensitive&rdquo; by applicable law is entirely voluntary on your part. You can withdraw or modify your consent to our collection and processing of the information you provide at any time, in accordance with the terms of this Privacy Policy and the User Agreement, by changing your account settings or your profile on CampusPuppy or by closing your CampusPuppy account.</p>', '<p>Campus Puppy&rsquo;s mission is to connect the company professionals with potential candidates available for jobs and internships. Our registered users (&ldquo;Members&rdquo;) share their professional identities, engage with their network, and find business and career opportunities.<br /><br />We believe that our services allow our Members to effectively compete and achieve their full career potential. The cornerstone of our business is to focus on our Members first.<br /><br />Maintaining your trust is our top priority, so we adhere to the following principles to protect your privacy:<br /><br />We protect your personal information and will only provide it to third parties:</p><p>1. with your consent.<br />2.&nbsp;where it is necessary to carry out your instructions.<br />3.&nbsp;as reasonably necessary in order to provide our features and functionality to you.<br />4.&nbsp;when we reasonably believe it is required by law, subpoena or other legal process, or<br />5.&nbsp;as necessary to enforce our User Agreement or protect the rights, property, or safety of CampusPuppy, our Members and Visitors, and the public.</p><p>We have implemented appropriate security safeguards designed to protect your information in accordance with industry standards.</p><p>We may modify this Privacy Policy from time to time, and if we make material changes to it, we will provide notice through our Service, or by other means so that you may review the changes before you continue to use our Services. If you object to any changes, you may contact us regarding the same.</p><p><strong>1. Data Controllers</strong></p><p>Our Privacy Policy applies to any Member or Visitor. We collect information when you use our Services to offer you a personalized and relevant experience. If you have any concern about providing information to us or having such information displayed on our Services or otherwise used in any manner permitted in this Privacy Policy and the User Agreement, you should not become a Member. If you have already registered, you can contact us regarding the issues.</p><p><strong>2. Consent</strong></p><p>If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy and agree to the User Agreement.<br /><br /><strong>3. Change</strong></p><p>We may modify this Privacy Policy, and if we make material changes to it, we will provide notice through our Services, or by other means, to provide you the opportunity to review the changes before they become effective. Your continued use of our Services after we publish or send a notice about our changes to this Privacy Policy means that you are consenting to the updated Privacy Policy.<br /><br /><strong>A. Information We Collect</strong></p><p><strong>1. Registration</strong></p><p>To create an account on CampusPuppy, you must provide us with at least your name, email address, mobile number and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, &nbsp;educational details and skills) to help you build your profile. You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p><strong>2. Profile Information</strong></p><p>We collect information when you fill out a profile. A complete CampusPuppy profile that includes professional details &ndash; like your education details, and skills &ndash; helps you get found by other people for opportunities. After you create an account, you may choose to provide additional information on your Campus Puppy profile, such as descriptions of your skills, professional experience, and educational background. Providing additional information enables you to derive more benefit from our Services by helping you express your professional identity, find other professionals, opportunities, and information, and help recruiters.</p><p><strong>B. Information we collect:</strong></p><p><strong>1. Customer Service</strong></p><p>We collect information when you contact us for customer support. When you contact our customer support services, we may have to access your inbox, and other contributions to our Services and collect the information we need to categorize your question, respond to it, and, if applicable, investigate any breach of our User Agreement or this Privacy Policy. We also use this information to track potential problems and trends and customize our support responses to better serve you.</p><p><strong>2. Using the CampusPuppy Site</strong></p><p>We collect information when you visit our Services &nbsp;and interact with advertising on and off our Services.</p><p><strong>3. Messages</strong></p><p>We collect information about you when you send, receive, or engage with messages in connection with our Services.</p><p><strong>4. Others</strong></p><p>Our Services are a dynamic, innovative environment, which means we are always seeking to improve the Services we offer you. We often introduce new features, some of which may result in the collection of new information. Furthermore, new partnerships or corporate acquisitions may result in new features, and we may potentially collect new types of information. If we start collecting substantially new types of personal information and materially change how we handle your data, we will modify this Privacy Policy and notify you.<br /><br /><strong>C. How We Use Your Data</strong><br /><br /><strong>1. Services</strong></p><p>Our Services help you connect with others, find and be found for work opportunities, stay informed, get training and be more productive. We use your data to authenticate you and authorize access to our Services.</p><p><strong>2. Stay Connected</strong></p><p>Our Services allow you to stay in touch, in communication and up to date with colleagues, and other professional contacts. To do so, you will &ldquo;connect&rdquo; with the professionals who you choose, and who also wish to &ldquo;connect&rdquo; with you.<br />It is your choice whether to send a connection request, or allow another Member to become your connection. When you invite someone to connect with you, your invitation will include your name, photo, and contact information. We will send invitation reminders to the person you invited.</p><p><strong>3. Career</strong></p><p>Our Services allow you to explore careers, evaluate educational opportunities, and seek out, and be found for, career opportunities. Your profile can be found by those looking to hire (for a job) or be hired by you. We will use your data to recommend jobs, show you and others who work at a company, in an industry, function or location or have certain skills and connections.</p><p><strong>4. Productivity</strong></p><p>Our Services allow you to collaborate with fellow colleagues and employers. Our Services allow you to communicate with them.</p><p><strong>5. Communications</strong></p><p>We contact you and enable communications between members.<br /><br />We will contact you through email, notices posted on our website, messages to your CampusPuppy inbox, and other ways through our Services. We will send you messages about the availability of our Services, security, or other service-related issues. We also send messages about how to use the Services, network updates, reminders, job suggestions and promotional messages from us and our partners. Please be aware that you cannot opt out of receiving service messages from us, including security and legal notices.</p><p><strong>6. Marketing</strong></p><p>We use data and content about Members for invitations and communications promoting membership and network growth, engagement and our Services.<br /><br /><strong>D. Developing Services and Research</strong><br /><br /><strong>1. Service Development</strong></p><p>We use data, including public feedback, to conduct research and development for the further development of our Services in order to provide you and others with a better, more intuitive and personalized experience, drive membership growth and engagement on our Services, and help connect professionals to each other and to economic opportunity.<br /><br /><strong>2. Other Research</strong></p><p>We seek to create economic opportunity for members of the global workforce and to help them be more productive and successful. We use the data available to us to research social, economic and workplace trends such as jobs availability and skills needed for these jobs and policies that help bridge the gap in various industries and geographic areas. &nbsp;</p><p><strong>3. Customer Support</strong></p><p>We use the data (which can include your communications) needed to investigate, respond to and resolve complaints and Service issues (e.g., bugs).</p><p><strong>4. Security and Investigations</strong></p><p>We use your data (including your communications) if we think it&rsquo;s necessary for security purposes or to investigate possible fraud or other violations of our User Agreement or this Privacy Policy and/or attempts to harm our Members or Visitors.<br /><br /><strong>E. How We Share Information</strong></p><p><strong>1. Our Services</strong></p><p>Any information you include on your profile will be seen by others.</p><p><strong>2. Service Providers</strong></p><p>We use others to help us provide our Services (e.g., maintenance, analysis, fraud detection, marketing and development). They will have access to your information as reasonably necessary to perform these tasks on our behalf and are obligated to not to disclose or use it for other purposes.</p><p><strong>3. Legal Disclosures</strong></p><p>We may need to share your data when we believe it&rsquo;s required by law or to protect your and our rights and security.</p><p>It is possible that we will need to disclose information about you when required by law, or other legal process or if we have a good faith belief that disclosure is reasonably necessary to</p><p>1. investigate, prevent, or take action regarding suspected or actual illegal activities or to assist government enforcement agencies;<br />2.&nbsp;enforce our agreements with you,<br />3.&nbsp;investigate and defend ourselves against any third-party claims or allegations,<br />4.&nbsp;protect the security or integrity of our Service (such as by sharing with companies facing similar threats); or<br />5.&nbsp;exercise or protect the rights and safety of Campus Puppy, our Members, personnel, or others. We attempt to notify Members about legal demands for their personal data when appropriate in our judgment, unless prohibited by law or court order or when the request is an emergency. We may dispute such demands when we believe, in our discretion, that the requests are overbroad, vague or lack proper authority, but we do not promise to challenge every demand.<br /><br /><strong>F. Your Choices &amp; Obligations</strong><br /><br /><strong>1. Data Retention</strong></p><p>We retain the personal data you provide while your account is in existence or as needed to provide you Services. Even if you only use our Services when looking for a new job every few years, we will retain your information and keep your profile open.</p><p><br /><strong>G. Other Important Information</strong></p><p><strong>1. Security</strong></p><p>We monitor for and try to prevent security breaches. Please use the security features available through our Services.<br /><br /><strong>2. Contact Information</strong></p><p>If you have questions or complaints regarding this Policy, please first contact Campus Puppy online. You can also reach us by physical mail. If contacting us does not resolve your complaint, you have more options.</p>', '<p>The employment scenario of the 21st century is evolving and with it are the expectations of the companies from the job and internship aspirants. Companies receive thousands of resumes each day with one not really different from the other. Thus showcasing the verified skills that candidates possess is a parameter that will be credible for the companies to differentiate. Here CampusPuppy steps in by introducing COAT which is a robust system made on machine learning for, automated evaluation of your skill sets. COAT is the assessment exam that gives students the option to choose the particular skill set in which they want to specialize in and not focusing on a predefined set or course specific sets.&nbsp;<br />\nIt goes beyond and provides industry recognized credentials and connects you to opportunities from across the spectrum. It further connects you to leading organizations with jobs in the specific skill sets that the candidate possesses.</p>\n\n<p><br />\n<strong>What&rsquo;s in for the students?</strong></p>\n\n<p>COAT is a bridge that helps students reach their dream destination. Coat is an exam that helps students to get recognized among the companies which are leading in the skill set that the student specializes in. Students are given an option of taking the test only for the skill sets they are good at and not a predefined test. This enhances the confidence as well as the chances of getting mapped with core companies of that domain. As we are a symbol of loyalty as a company, we inculcate trust through our bridging techniques with the help of COAT and get students reach their dream job.</p>\n\n<p><strong>What&rsquo;s in for the colleges?</strong></p>\n\n<p>The success of an institution is measured by how employable its students are! It is the responsibility of an institute to uphold its name by ensuring that the students passing out are both talented as well as employable. The institute today should focus on the quality of skills that its student possesses and not the quantity of students getting placed.. This is where COAT comes in!</p>\n\n<p>COAT provides a robust system to understand where the students of the particular institute stand today in the competitive world of jobs and employment. Students can judge where they actually stand in the specific skills they want to specialize in. This way, institutes will get their students placed in core companies which is actually the perfect job for the student and not just a run in the mill. COAT gives a measure that evaluates the students capability in particular skills and further improve.</p>', 'https://www.facebook.com/campuspuppy', 'https://www.twitter.com/campuspuppy');
+(1, '<p>Eradicating the gap between employers and potential candidates, we, at CampusPuppy, consider it a need in this era to connect an individual with a company, based on the individual&rsquo;s specific skill set and expertise in it.</p><p>Linking together a social community that leaves fake profiles in a galaxy far far away, we intend to provide a hassle free experience of recruitment to both students and employers, at the same time. And what&rsquo;s more? This professionally socialized environment allows candidates to take various tests to validate individualistic skills. Our sole intention is to bring out a genuine and relaxed recruitment environment and we believe that is what gives us our special place in the market.</p><p>Bridge the gap between companies and potential candidates.</p><p>A professional social networking platform to directly connect potential candidates and employers.</p><p>Platform to test individualistic skill sets.</p><p>Help in providing dream jobs/internship.</p><p>Employers can post skill based jobs/internships.</p><p>Employers can save on time and resources, as only skilled candidates are provided.</p><p>Candidates can verify skill possessed by them and apply for internship/job according to the skills verified.</p><p>Candidates get a chance for self improvement and get recognised among their colleagues.</p><p>Hassle free and relaxed recruitment process.</p><p>&nbsp;</p>', '<p>The cornerstone of our business is to focus on our Members first. We protect your personal information using industry &shy;standard safeguards. We may share your information with your consent or as required by law, and we will always let you know when we make significant changes to this Terms and Conditions.</p><p>Statement of Rights and Responsibilities This Statement of Rights and Responsibilities (&quot;Statement,&quot; &quot;Terms,&quot; or &quot;SRR&quot;) derives from the CampusPuppy Principles, and is our terms of service that governs our relationship with users and others who interact with CampusPuppy, as well as CampusPuppy brands, products and services, which we call the &ldquo;CampusPuppy Services&rdquo; or &ldquo;Services&rdquo;. By using or accessing the CampusPuppy Services, you agree to this Statement, as updated from time to time in accordance with the section below.</p><p><strong>A. Amendments</strong><br /><br />1. We&rsquo;ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</p><p>2. If we make changes to policies, guidelines or other terms referenced in or incorporated by this Statement, we may provide you notice regarding the same.</p><p>3. Your continued use of the CampusPuppy Services, following notice of the changes to our terms, policies or guidelines, constitutes your acceptance of our amended terms, policies or guidelines.</p><p>4. Termination If you violate the letter or spirit of this Statement, or otherwise create risk or possible legal exposure for us, we can stop providing all or part of CampusPuppy to you.</p><p><strong>B. Disputes</strong></p><p>1. You will resolve any claim, cause of action or dispute (claim) you have with us arising out of or relating to this Statement or CampusPuppy exclusively in the Delhi District Court, and you agree to submit to the personal jurisdiction of such courts for the purpose of litigating all such claims. The laws of the Country(India) will govern this Statement, as well as any claim that might arise between you and us, without regard to conflict of law provisions.</p><p>2. If anyone brings a claim against us related to your actions, content or information on CampusPuppy, you will indemnify and hold us harmless from and against all damages, losses, and expenses of any kind (including reasonable legal fees and costs) related to such claim. Although we provide rules for user conduct, we do not control or direct users&#39; actions on CampusPuppy and are not responsible for the content or information users transmit or share on CampusPuppy. We are not responsible for any offensive, inappropriate, obscene, unlawful or otherwise objectionable content or information you may encounter on CampusPuppy. We are not responsible for the conduct, whether online or offline, of any user of CampusPuppy.</p><p>3. We try to keep CampusPuppy up, bugfree and safe, but you use it at your own risk. we are providing CampusPuppy as is without any express or implied warranties, but not limited to, fitness for a particular purpose, and non&shy;infringement. we do not guarantee that CampusPuppy will always be safe, secure or error &shy;free or that CampusPuppy will always function without disruptions, delays or imperfections. CampusPuppy is not responsible for the actions, content, information, or data of third parties, and you release us, our directors, officers, employees, and agents from any claims and damages, known and unknown, arising out of or in any way connected with any claim you have against any such third parties.</p><p><strong>C. Safety:</strong></p><p>We do our best to keep CampusPuppy safe, but we cannot guarantee it. We need your help to keep it safe, which includes the following commitments by you:</p><p>1. You will not post unauthorized commercial communications (such as spam) on CampusPuppy.<br />2. You will not collect users&#39; content or information, or otherwise access CampusPuppy , using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.<br />3. You will not engage in unlawful multi&shy;level marketing, such as a pyramid scheme, on CampusPuppy.<br />4. You will not upload viruses or other malicious code.<br />5. You will not solicit login information or access an account belonging to someone else.<br />6. You will not bully, intimidate, or harass any user.<br />7. You will not post content that: is hate speech, threatening, or pornographic, incites violence, or contains nudity or graphic or gratuitous violence.<br />9. You will not use CampusPuppy to do anything unlawful, misleading, malicious, or discriminatory.<br />10. You will not do anything that could disable, overburden, or impair the proper working or appearance of CampusPuppy, such as a denial of service attack or interference with page rendering or other CampusPuppy functionality.<br />11. You will not facilitate or encourage any violations of this Statement or our policies.</p><p><strong>D. Registration:</strong></p><p>To create an account on CampusPuppy, you must provide us with at least your name, email address mobile number, and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, college details, educational achievements, skills etc) to help you build your profile and to provide. You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p>CampusPuppy users provide their real names and information, and we need your help to keep it that way. Here are some commitments you make to us relating to registering and maintaining the security of your account:<br /><br />1. You will not provide any false personal information on CampusPuppy, or create an account for anyone other than yourself without permission.<br />2. You will not create more than one personal account.<br />3. If we disable your account, you will not create another one without our permission.<br />4. You will not use CampusPuppy if you are under 16.<br />5. You will keep your contact information accurate and up&shy;-to-&shy;date.<br />6. You will not share your password, let anyone else access your account, or do anything else that might jeopardize the security of your account.<br />7. You will not transfer your account to anyone without first getting our written permission.</p><p><strong>E. Consent to CampusPuppy Processing Information About You</strong></p><p>You agree that information you provide on your profile can be seen by others and used by us as described in this Privacy Policy and our User Agreement.</p><p>The personal information that you provide to us may reveal or allow others to identify aspects of your life that are not expressly stated on your profile (for example, your picture or your name may reveal your gender). By providing personal information to us when you create or update your account and profile, you are expressly and voluntarily accepting the terms and conditions of our User Agreement and freely accepting and agreeing to our processing of your personal information in ways set out by this Privacy Policy. Supplying to us any information deemed &ldquo;sensitive&rdquo; by applicable law is entirely voluntary on your part. You can withdraw or modify your consent to our collection and processing of the information you provide at any time, in accordance with the terms of this Privacy Policy and the User Agreement, by changing your account settings or your profile on CampusPuppy or by closing your CampusPuppy account.</p>', '<p>Campus Puppy&rsquo;s mission is to connect the company professionals with potential candidates available for jobs and internships. Our registered users (&ldquo;Members&rdquo;) share their professional identities, engage with their network, and find business and career opportunities.<br /><br />We believe that our services allow our Members to effectively compete and achieve their full career potential. The cornerstone of our business is to focus on our Members first.<br /><br />Maintaining your trust is our top priority, so we adhere to the following principles to protect your privacy:<br /><br />We protect your personal information and will only provide it to third parties:</p><p>1. with your consent.<br />2.&nbsp;where it is necessary to carry out your instructions.<br />3.&nbsp;as reasonably necessary in order to provide our features and functionality to you.<br />4.&nbsp;when we reasonably believe it is required by law, subpoena or other legal process, or<br />5.&nbsp;as necessary to enforce our User Agreement or protect the rights, property, or safety of CampusPuppy, our Members and Visitors, and the public.</p><p>We have implemented appropriate security safeguards designed to protect your information in accordance with industry standards.</p><p>We may modify this Privacy Policy from time to time, and if we make material changes to it, we will provide notice through our Service, or by other means so that you may review the changes before you continue to use our Services. If you object to any changes, you may contact us regarding the same.</p><p><strong>1. Data Controllers</strong></p><p>Our Privacy Policy applies to any Member or Visitor. We collect information when you use our Services to offer you a personalized and relevant experience. If you have any concern about providing information to us or having such information displayed on our Services or otherwise used in any manner permitted in this Privacy Policy and the User Agreement, you should not become a Member. If you have already registered, you can contact us regarding the issues.</p><p><strong>2. Consent</strong></p><p>If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy and agree to the User Agreement.<br /><br /><strong>3. Change</strong></p><p>We may modify this Privacy Policy, and if we make material changes to it, we will provide notice through our Services, or by other means, to provide you the opportunity to review the changes before they become effective. Your continued use of our Services after we publish or send a notice about our changes to this Privacy Policy means that you are consenting to the updated Privacy Policy.<br /><br /><strong>A. Information We Collect</strong></p><p><strong>1. Registration</strong></p><p>To create an account on CampusPuppy, you must provide us with at least your name, email address, mobile number and a password and agree to our User Agreement and this Privacy Policy, which governs how we treat your information. You may provide additional information during the registration flow (for example, &nbsp;educational details and skills) to help you build your profile. You understand that, by creating an account, we and others will be able to identify you by your CampusPuppy profile.</p><p><strong>2. Profile Information</strong></p><p>We collect information when you fill out a profile. A complete CampusPuppy profile that includes professional details &ndash; like your education details, and skills &ndash; helps you get found by other people for opportunities. After you create an account, you may choose to provide additional information on your Campus Puppy profile, such as descriptions of your skills, professional experience, and educational background. Providing additional information enables you to derive more benefit from our Services by helping you express your professional identity, find other professionals, opportunities, and information, and help recruiters.</p><p><strong>B. Information we collect:</strong></p><p><strong>1. Customer Service</strong></p><p>We collect information when you contact us for customer support. When you contact our customer support services, we may have to access your inbox, and other contributions to our Services and collect the information we need to categorize your question, respond to it, and, if applicable, investigate any breach of our User Agreement or this Privacy Policy. We also use this information to track potential problems and trends and customize our support responses to better serve you.</p><p><strong>2. Using the CampusPuppy Site</strong></p><p>We collect information when you visit our Services &nbsp;and interact with advertising on and off our Services.</p><p><strong>3. Messages</strong></p><p>We collect information about you when you send, receive, or engage with messages in connection with our Services.</p><p><strong>4. Others</strong></p><p>Our Services are a dynamic, innovative environment, which means we are always seeking to improve the Services we offer you. We often introduce new features, some of which may result in the collection of new information. Furthermore, new partnerships or corporate acquisitions may result in new features, and we may potentially collect new types of information. If we start collecting substantially new types of personal information and materially change how we handle your data, we will modify this Privacy Policy and notify you.<br /><br /><strong>C. How We Use Your Data</strong><br /><br /><strong>1. Services</strong></p><p>Our Services help you connect with others, find and be found for work opportunities, stay informed, get training and be more productive. We use your data to authenticate you and authorize access to our Services.</p><p><strong>2. Stay Connected</strong></p><p>Our Services allow you to stay in touch, in communication and up to date with colleagues, and other professional contacts. To do so, you will &ldquo;connect&rdquo; with the professionals who you choose, and who also wish to &ldquo;connect&rdquo; with you.<br />It is your choice whether to send a connection request, or allow another Member to become your connection. When you invite someone to connect with you, your invitation will include your name, photo, and contact information. We will send invitation reminders to the person you invited.</p><p><strong>3. Career</strong></p><p>Our Services allow you to explore careers, evaluate educational opportunities, and seek out, and be found for, career opportunities. Your profile can be found by those looking to hire (for a job) or be hired by you. We will use your data to recommend jobs, show you and others who work at a company, in an industry, function or location or have certain skills and connections.</p><p><strong>4. Productivity</strong></p><p>Our Services allow you to collaborate with fellow colleagues and employers. Our Services allow you to communicate with them.</p><p><strong>5. Communications</strong></p><p>We contact you and enable communications between members.<br /><br />We will contact you through email, notices posted on our website, messages to your CampusPuppy inbox, and other ways through our Services. We will send you messages about the availability of our Services, security, or other service-related issues. We also send messages about how to use the Services, network updates, reminders, job suggestions and promotional messages from us and our partners. Please be aware that you cannot opt out of receiving service messages from us, including security and legal notices.</p><p><strong>6. Marketing</strong></p><p>We use data and content about Members for invitations and communications promoting membership and network growth, engagement and our Services.<br /><br /><strong>D. Developing Services and Research</strong><br /><br /><strong>1. Service Development</strong></p><p>We use data, including public feedback, to conduct research and development for the further development of our Services in order to provide you and others with a better, more intuitive and personalized experience, drive membership growth and engagement on our Services, and help connect professionals to each other and to economic opportunity.<br /><br /><strong>2. Other Research</strong></p><p>We seek to create economic opportunity for members of the global workforce and to help them be more productive and successful. We use the data available to us to research social, economic and workplace trends such as jobs availability and skills needed for these jobs and policies that help bridge the gap in various industries and geographic areas. &nbsp;</p><p><strong>3. Customer Support</strong></p><p>We use the data (which can include your communications) needed to investigate, respond to and resolve complaints and Service issues (e.g., bugs).</p><p><strong>4. Security and Investigations</strong></p><p>We use your data (including your communications) if we think it&rsquo;s necessary for security purposes or to investigate possible fraud or other violations of our User Agreement or this Privacy Policy and/or attempts to harm our Members or Visitors.<br /><br /><strong>E. How We Share Information</strong></p><p><strong>1. Our Services</strong></p><p>Any information you include on your profile will be seen by others.</p><p><strong>2. Service Providers</strong></p><p>We use others to help us provide our Services (e.g., maintenance, analysis, fraud detection, marketing and development). They will have access to your information as reasonably necessary to perform these tasks on our behalf and are obligated to not to disclose or use it for other purposes.</p><p><strong>3. Legal Disclosures</strong></p><p>We may need to share your data when we believe it&rsquo;s required by law or to protect your and our rights and security.</p><p>It is possible that we will need to disclose information about you when required by law, or other legal process or if we have a good faith belief that disclosure is reasonably necessary to</p><p>1. investigate, prevent, or take action regarding suspected or actual illegal activities or to assist government enforcement agencies;<br />2.&nbsp;enforce our agreements with you,<br />3.&nbsp;investigate and defend ourselves against any third-party claims or allegations,<br />4.&nbsp;protect the security or integrity of our Service (such as by sharing with companies facing similar threats); or<br />5.&nbsp;exercise or protect the rights and safety of Campus Puppy, our Members, personnel, or others. We attempt to notify Members about legal demands for their personal data when appropriate in our judgment, unless prohibited by law or court order or when the request is an emergency. We may dispute such demands when we believe, in our discretion, that the requests are overbroad, vague or lack proper authority, but we do not promise to challenge every demand.<br /><br /><strong>F. Your Choices &amp; Obligations</strong><br /><br /><strong>1. Data Retention</strong></p><p>We retain the personal data you provide while your account is in existence or as needed to provide you Services. Even if you only use our Services when looking for a new job every few years, we will retain your information and keep your profile open.</p><p><br /><strong>G. Other Important Information</strong></p><p><strong>1. Security</strong></p><p>We monitor for and try to prevent security breaches. Please use the security features available through our Services.<br /><br /><strong>2. Contact Information</strong></p><p>If you have questions or complaints regarding this Policy, please first contact Campus Puppy online. You can also reach us by physical mail. If contacting us does not resolve your complaint, you have more options.</p>', '<p>The employment scenario of the 21st century is evolving and with it are the expectations of the companies from the job and internship aspirants. Companies receive thousands of resumes each day with one not really different from the other. Thus showcasing the verified skills that candidates possess is a parameter that will be credible for the companies to differentiate. Here CampusPuppy steps in by introducing COAT which is a robust system made on machine learning for, automated evaluation of your skill sets. COAT is the assessment exam that gives students the option to choose the particular skill set in which they want to specialize in and not focusing on a predefined set or course specific sets.&nbsp;<br />\nIt goes beyond and provides industry recognized credentials and connects you to opportunities from across the spectrum. It further connects you to leading organizations with jobs in the specific skill sets that the candidate possesses.</p>\n\n<p><br />\n<strong>What&rsquo;s in for the students?</strong></p>\n\n<p>COAT is a bridge that helps students reach their dream destination. Coat is an exam that helps students to get recognized among the companies which are leading in the skill set that the student specializes in. Students are given an option of taking the test only for the skill sets they are good at and not a predefined test. This enhances the confidence as well as the chances of getting mapped with core companies of that domain. As we are a symbol of loyalty as a company, we inculcate trust through our bridging techniques with the help of COAT and get students reach their dream job.</p>\n\n<p><strong>What&rsquo;s in for the colleges?</strong></p>\n\n<p>The success of an institution is measured by how employable its students are! It is the responsibility of an institute to uphold its name by ensuring that the students passing out are both talented as well as employable. The institute today should focus on the quality of skills that its student possesses and not the quantity of students getting placed.. This is where COAT comes in!</p>\n\n<p>COAT provides a robust system to understand where the students of the particular institute stand today in the competitive world of jobs and employment. Students can judge where they actually stand in the specific skills they want to specialize in. This way, institutes will get their students placed in core companies which is actually the perfect job for the student and not just a run in the mill. COAT gives a measure that evaluates the students capability in particular skills and further improve.</p>', 'https://www.facebook.com/campuspuppy', 'https://www.twitter.com/campuspuppy');
 
 -- --------------------------------------------------------
 
@@ -1321,13 +1342,14 @@ INSERT INTO `content` (`content_id`, `aboutUs`, `termsAndConditions`, `privacyPo
 -- Table structure for table `courses`
 --
 
-CREATE TABLE `courses` (
-  `course_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `courses` (
+  `course_id` int(5) NOT NULL AUTO_INCREMENT,
   `course` varchar(255) NOT NULL,
   `duration` int(3) NOT NULL,
   `courseType` enum('1','2','3','4') NOT NULL DEFAULT '3',
-  `active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=118 ;
 
 --
 -- Dumping data for table `courses`
@@ -1449,7 +1471,8 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `courseType`, `active`
 (113, 'Bachelor of Science-   Industrial Chemistry', 3, '3', 1),
 (114, 'Bachelor of Science-   Life Sciences', 3, '3', 1),
 (115, 'Bachelor of Science-   Physical Sciences', 3, '3', 1),
-(116, 'Bachelor of Science-   Physical Education and Sports Sciences', 3, '3', 1);
+(116, 'Bachelor of Science-   Physical Education and Sports Sciences', 3, '3', 1),
+(117, 'Bachelor of Technology- Applied Electronics and Instrumentation', 4, '3', 1);
 
 -- --------------------------------------------------------
 
@@ -1457,15 +1480,16 @@ INSERT INTO `courses` (`course_id`, `course`, `duration`, `courseType`, `active`
 -- Table structure for table `educationalDetails`
 --
 
-CREATE TABLE `educationalDetails` (
-  `educationID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `educationalDetails` (
+  `educationID` int(5) NOT NULL AUTO_INCREMENT,
   `educationType` enum('1','2','3','4') NOT NULL,
   `description` text NOT NULL,
   `year` int(4) NOT NULL,
   `scoreType` enum('1','2') NOT NULL,
   `score` float NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`educationID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=179 ;
 
 --
 -- Dumping data for table `educationalDetails`
@@ -1568,7 +1592,81 @@ INSERT INTO `educationalDetails` (`educationID`, `educationType`, `description`,
 (100, '3', 'Bachelor of Technology- Computer Science and Engineering-adas, at JSS Academy of tcehnical education', 0, '1', 0, 172),
 (101, '3', 'Bachelor of Technology- Electrical Engineering-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 174),
 (102, '3', 'Bachelor of Technology- Computer Science and Engineering-2014, at JSS Academy of Technical Education, Noida', 2014, '1', 0, 175),
-(103, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of tcehnical education', 2016, '1', 0, 177);
+(103, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at JSS Academy of tcehnical education', 2016, '1', 0, 177),
+(104, '3', 'Bachelor of Technology- Mechanical Engineering	-2012, at Dehradun Institute of Technology', 2012, '1', 0, 178),
+(105, '3', 'Bachelor of Technology- Chemical Engineering-2020, at College Name Not Listed', 2020, '1', 0, 179),
+(106, '3', 'Bachelor of Technology- Information Technology-2016, at JSS Academy of Technical Education, Noida', 2016, '1', 0, 180),
+(107, '3', 'Bachelor of Arts-  Applied Psychology-2017, at Acharya Bangalore B-School', 2017, '1', 0, 185),
+(108, '3', 'Bachelor of Arts-  Business Economics-2011, at Malaviya National  Institute of technology', 2011, '1', 0, 186),
+(109, '3', 'Bachelor of Arts-  Applied Psychology-2016, at 3 Amrut Mody School of Management, Ahmedabad University', 2016, '1', 0, 187),
+(110, '3', 'Bachelor of Technology- Electrical Engineering-2018, at College Name Not Listed', 2018, '1', 0, 188),
+(111, '3', 'Bachelor of Technology- Information Technology-2013, at College Name Not Listed', 2013, '1', 0, 190),
+(112, '3', 'Master of Computer Application-2018, at JSS Academy of tcehnical education', 2018, '1', 0, 191),
+(113, '3', 'Master of Computer Application-2018, at JSS Academy of tcehnical education', 2018, '1', 0, 192),
+(114, '3', 'Master of Computer Application-2015, at JSS Academy of tcehnical education', 2015, '1', 0, 193),
+(115, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at ITS Engineering College, Greater Noida', 2015, '1', 0, 194),
+(116, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at JSS Academy of Technical Education, Noida', 2015, '1', 0, 195),
+(117, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 196),
+(118, '3', 'Bachelor of Arts-  Philosophy-2012, at College Name Not Listed', 2012, '1', 0, 197),
+(119, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of tcehnical education', 2018, '1', 0, 198),
+(120, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University', 2015, '1', 0, 199),
+(121, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 200),
+(122, '3', '<p>Bachelor of Technology- Computer Science and Engineering-2019, at SRM University (NCR Campus)</p>', 2015, '1', 8.3, 201),
+(123, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 202),
+(124, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 203),
+(125, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 205),
+(126, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 206),
+(127, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 207),
+(128, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 208),
+(130, '3', 'Bachelor of Science-  Computer Science-2015, at SRM University (NCR Campus)', 2015, '1', 0, 210),
+(131, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at SRM University', 2019, '1', 0, 211),
+(132, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at SRM University (NCR Campus)', 2018, '1', 0, 212),
+(133, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at SRM University', 2019, '1', 0, 213),
+(134, '3', '<p>Bachelor of Technology- Computer Science and Engineering-2018, at SRM University</p>', 2017, '1', 8.32, 214),
+(135, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 215),
+(136, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 216),
+(137, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 217),
+(138, '3', '<p>Bachelor of Technology- Computer Science and Engineering in SRM&nbsp;University Haryana .Understanding various fields of Computer Science</p>', 2015, '1', 7.5, 218),
+(139, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at SRM University (NCR Campus)', 2019, '1', 0, 219),
+(140, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at Shri Balwant Institute of technology', 2016, '1', 0, 220),
+(141, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 221),
+(142, '3', 'Bachelor of Technology- Computer Science and Engineering-2005, at SRM University (NCR Campus)', 2005, '1', 0, 222),
+(143, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at JSS Academy of tcehnical education', 2018, '1', 0, 223),
+(144, '3', 'Bachelor of Technology- Chemical Engineering-2019, at SRM University (NCR Campus)', 2019, '1', 0, 224),
+(145, '3', 'Bachelor of Technology- Instrumentation and Control Engineering-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 225),
+(146, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at Ajay Kumar Garg Engineering College, Ghaziabad', 2015, '1', 0, 227),
+(147, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at Ajay Kumar Garg Engineering College, Ghaziabad', 2015, '1', 0, 228),
+(148, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at SRM University (NCR Campus)', 2018, '1', 0, 229),
+(149, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at SRM University (NCR Campus)', 2018, '1', 0, 232),
+(150, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at College Name Not Listed', 2018, '1', 0, 235),
+(151, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 238),
+(152, '3', 'Bachelor of Science-  Computer Science-2015, at SRM University (NCR Campus)', 2015, '1', 0, 239),
+(153, '3', 'Bachelor of Science-  Computer Science-2015, at SRM University (NCR Campus)', 2015, '1', 0, 240),
+(154, '3', 'Bachelor of Technology- Information Technology-2013, at Nitte Meenakshi Institute of technology', 2013, '1', 0, 241),
+(155, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at SRM University (NCR Campus)', 2018, '1', 0, 234),
+(156, '3', 'Bachelor of Technology- Computer Science and Engineering-3rd , at SRM University (NCR Campus)', 3, '1', 0, 242),
+(157, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University (NCR Campus)', 2015, '1', 0, 243),
+(158, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at SRM University (NCR Campus)', 2019, '1', 0, 244),
+(159, '3', 'Master of Computer Application-2017, at JSS Academy of Technical Education, Noida', 2017, '1', 0, 246),
+(160, '3', 'Bachelor of Technology- Computer Science and Engineering-2019, at SRM University', 2019, '1', 0, 230),
+(161, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at Amity School of Engineering and Technology, Noida', 2018, '1', 0, 340),
+(162, '3', 'Bachelor of Technology- Computer Science and Engineering-2018, at Amity School of Engineering and Technology, Noida', 2018, '1', 0, 341),
+(163, '3', 'Bachelor of Technology- Civil Engineering-2017, at Indian Instiute of Technology, Delhi', 2017, '1', 0, 343),
+(164, '3', 'Bachelor of Technology- Information Technology-2018, at Amity School of Engineering and Technology, Noida', 2018, '1', 0, 344),
+(165, '3', 'Bachelor of Technology- Computer Science and Engineering-2020, at Amity School of Engineering and Technology, Noida', 2020, '1', 0, 345),
+(166, '3', 'Bachelor of Technology- Computer Science and Engineering-2013, at Amity School of Engineering and Technology, Noida', 2013, '1', 0, 346),
+(167, '4', 'Master of Business Administration- Marketing-2017, at Amity Business School', 2017, '1', 0, 348),
+(168, '3', 'Bachelor of Arts-  Applied Psychology-2011, at 3 Amrut Mody School of Management, Ahmedabad University', 2011, '1', 0, 349),
+(169, '3', 'Master of Computer Application-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 338),
+(170, '3', 'Master of Computer Application-2018, at JSS Academy of Technical Education, Noida', 2018, '1', 0, 338),
+(171, '3', '<p>Bachelor of Technology- Mechanical Engineering -2014, at College Name Not Listed</p>', 2014, '2', 82, 350),
+(172, '3', '<p>Bachelor of Technology- Mechanical Engineering -2017, at Amity School of Engineering and Technology, Noida</p>', 2017, '2', 76.2, 351),
+(173, '3', '<p>Bachelor of Technology- Mechanical Engineering -2016, at College Name Not Listed</p>', 2016, '2', 64.4, 352),
+(174, '3', 'Bachelor of Technology- Electronics and Communication Engineering-2015, at SRM University', 2015, '1', 0, 353),
+(175, '3', 'Bachelor of Technology- Computer Science and Engineering-2015, at SRM University', 2015, '1', 0, 354),
+(176, '3', 'Bachelor of Science-  Stastics-2019, at College Name Not Listed', 2019, '1', 0, 355),
+(177, '3', 'Bachelor of Arts-  Hindi-2018, at College Name Not Listed', 2018, '1', 0, 356),
+(178, '3', 'Bachelor of Technology- Computer Science and Engineering-2016, at College Name Not Listed', 2016, '1', 0, 357);
 
 -- --------------------------------------------------------
 
@@ -1576,13 +1674,14 @@ INSERT INTO `educationalDetails` (`educationID`, `educationType`, `description`,
 -- Table structure for table `employerUsers`
 --
 
-CREATE TABLE `employerUsers` (
+CREATE TABLE IF NOT EXISTS `employerUsers` (
   `userID` int(5) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `companyDescription` text NOT NULL,
   `companyWebsite` varchar(255) NOT NULL,
-  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'
+  `companyLogo` varchar(1000) NOT NULL DEFAULT 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg',
+  UNIQUE KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1612,12 +1711,15 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 (37, 'AKAL Information Systems Limited', 'HR', '<p>15 years in Business.<br />\nCMMi Level 3 &amp; ISO 9001:2008 Certified, ISO 2000 certified. 350+ Tech Experts.&nbsp;<br />\n<br />\nPresent in 6 Locations across India. 24/7 International Delivery Centre in Delhi. AKAL is a leading provider of technology solutions for global organizations looking to transform, grow and lead.&nbsp;AKAL brings IT and engineering services expertise under one roof to solve complex business problems for its clients. Working with some of the most cutting-edge technologies in the industry, AKAL is focused on creating innovative solutions and delivering exceptional service to its customers.&nbsp;What sets us apart is our commitment to methodologies &amp; best practices. We think like our customers and believe in long term partnerships with them while continually improving service quality and reducing costs.</p>\n', 'http://www.akalinfosys.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (38, 'Petzo India Private Limited', 'Co-Founder', '<p><strong><em>Petzo India (P) Ltd.</em></strong>is a fast-growing company serving Pets and the humans who love them. We&rsquo;re a company dedicated to the creation of products and services that make Pets Healthy.</p>\r\n\r\n<p>Today, Petzo India (P) Ltd. consists of several major properties:</p>\r\n\r\n<p><strong><em>Petzo Nourish Box:&nbsp;</em></strong>A monthly subscription Personalized food box for Pets.</p>\r\n\r\n<p><strong><em>Pet Herb:&nbsp;</em></strong>Essential Herbal supplements for Pets.</p>\r\n\r\n<p><strong><em>Petzo Research:&nbsp;</em></strong>Research based management consultation, providing market research and advisory solutions in the field of Animal Husbandry.</p>', 'http://www.petzo.in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (40, 'Campus Puppy Private Limited', 'Co-Founder', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
-(158, 'Adurcup', 'Co-founder', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(158, 'Adurcup', 'Co-founder', '<p>Adurcup is a web and mobile enabled platform for restaurants to transact across multiple verticals from a verified vendor base on daily basis. We are following a managed marketplace model where we have made standards (based on compulsory certifications and steps for better services) for vendors to qualify to sell on our platform and after qualification to sell, they have to follow operating procedures defined by us to attract more orders. Currently addressed verticals include food packaging, non-perishable groceries, clean and hygiene materials in the product procurement category and in the services category we are serving pest control services and Social wifi services for restaurants. We are introducing 3 most relevant verticals in every 30 days and have a target to make it operationally profitable in 60 days following strong unit economics.</p>', 'https://www.adurcup.com/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (159, 'O.OWriters', 'Writer', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
-(165, 'Cabbageheads.', 'Direcotr', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(165, 'Cabbageheads.', 'Director', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (166, 'Re-Rise', '', '<p>RE-Rise is World&rsquo;s first virtual incubator &amp; accelerator with optimum operational transparency &amp; the only ecosystem in the world which assists early stage entrepreneurs to innovate and instantiate business concepts in accordance with market reality and progress to sustain growth. RE-Rise assures business stability to the program participants since each of 60 RE-Rise mentors are having a combined business experience with technical expertise in their industry verticals such as Solar, Wind, Biomass, Electric Vehicle, Organic Farming, IoT, Gaming etc. Mentors help the start-ups in field of execution, financing, business modelling etc. in order to provide elemental tool for the entrepreneurs to start and eventually increase its pace. Ultimately, RE-Rise acts as a catalyst between entrepreneurs, investors, mentors and other stakeholders and thus creates a one of its kind startup ecosystem.</p>\n\n<p>We get inspired by daring ideas for a better and more sustainable world. We empower today&rsquo;s pioneers from varied sectors on their journey from a bold idea to a legendary company. At RE-Rise, all the bases are covered. World-class industry knowledge and expertise are coupled with expert supported programs, value-added services and facilities, and even access to funding.</p>', 'http://rerise.in/', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
 (169, 'Gtrs', 'Director', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
-(176, 'Dilip IT Consultant and Management', 'HR', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg');
+(176, 'Dilip IT Consultant and Management', 'HR', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(189, 'ENIGMA BRAND SOLUTIONS INDIA PVT LTD', 'PHP DEVELOPER,GRAPHIC DESIGNER,DIGITAL MARKETING,FILED SALE MARKETING', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(204, 'HCL', 'HR', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg'),
+(342, 'Velocity Manpower', 'Owner', '', '', 'http://backoffice.campuspuppy.com/assets/companyLogo/default-company.jpg');
 
 -- --------------------------------------------------------
 
@@ -1625,144 +1727,319 @@ INSERT INTO `employerUsers` (`userID`, `companyName`, `position`, `companyDescri
 -- Table structure for table `generalUsers`
 --
 
-CREATE TABLE `generalUsers` (
+CREATE TABLE IF NOT EXISTS `generalUsers` (
   `userID` int(5) NOT NULL,
   `collegeID` int(5) NOT NULL,
   `courseID` int(5) NOT NULL,
-  `batch` int(5) NOT NULL
+  `batch` int(5) NOT NULL,
+  `coatReport` int(11) NOT NULL DEFAULT '0',
+  `showReport` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `generalUsers`
 --
 
-INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`) VALUES
-(1, 1, 1, 2016),
-(2, 1, 2, 2016),
-(3, 1, 1, 2017),
-(4, 1, 1, 2016),
-(5, 2, 1, 2017),
-(6, 1, 1, 2016),
-(7, 1, 2, 2018),
-(8, 1, 1, 2017),
-(9, 1, 5, 2019),
-(10, 3, 2, 2017),
-(11, 3, 2, 2017),
-(12, 1, 2, 2018),
-(13, 1, 2, 2018),
-(14, 1, 1, 2017),
-(15, 1, 2, 2018),
-(16, 1, 1, 2018),
-(17, 1, 6, 2017),
-(39, 1, 1, 2018),
-(41, 1, 1, 2015),
-(43, 1, 5, 2018),
-(44, 1, 5, 2017),
-(45, 1, 1, 2017),
-(46, 4, 1, 2013),
-(47, 1, 2, 2018),
-(48, 1, 5, 2017),
-(49, 1, 1, 2020),
-(50, 1, 2, 2019),
-(51, 1, 2, 2017),
-(52, 1, 2, 2017),
-(53, 1, 2, 2019),
-(54, 56, 5, 2018),
-(56, 4, 1, 2018),
-(58, 1, 1, 2017),
-(59, 1, 7, 2020),
-(61, 85, 1, 2018),
-(63, 1, 5, 2019),
-(64, 1, 1, 2019),
-(65, 1, 1, 2017),
-(66, 1, 2, 2018),
-(67, 1, 1, 2017),
-(68, 1, 1, 2017),
-(69, 1, 2, 2018),
-(70, 1, 1, 2019),
-(71, 1, 2, 2017),
-(72, 1, 1, 2018),
-(73, 1, 5, 2018),
-(75, 1, 1, 2019),
-(76, 33, 1, 2017),
-(77, 1, 2, 2019),
-(78, 1, 1, 2017),
-(79, 1, 1, 2018),
-(80, 1, 1, 2018),
-(81, 1, 1, 2013),
-(82, 1, 1, 2017),
-(84, 1, 1, 2018),
-(85, 1, 1, 2018),
-(86, 1, 2, 2018),
-(87, 1, 1, 2018),
-(88, 1, 1, 2017),
-(89, 1, 5, 2017),
-(90, 1, 1, 2016),
-(91, 1, 1, 2016),
-(92, 1, 2, 2017),
-(93, 1, 5, 2016),
-(94, 1, 5, 2019),
-(95, 1, 2, 2019),
-(96, 1, 1, 2016),
-(97, 1, 1, 2017),
-(98, 1, 1, 2019),
-(99, 1, 1, 2017),
-(100, 1, 2, 2017),
-(101, 1, 2, 2017),
-(102, 1, 1, 2017),
-(103, 1, 2, 2016),
-(104, 1, 1, 2018),
-(105, 1, 1, 2019),
-(106, 2, 1, 2013),
-(107, 1, 1, 2018),
-(108, 38, 1, 2013),
-(109, 1, 2, 2019),
-(111, 1, 1, 2019),
-(112, 1, 1, 2016),
-(113, 1, 2, 2016),
-(114, 1, 2, 2018),
-(115, 1, 1, 2017),
-(118, 1, 5, 2018),
-(119, 4, 1, 2007),
-(120, 6, 1, 2017),
-(121, 1, 2, 2018),
-(122, 1, 1, 2019),
-(124, 1, 2, 2018),
-(125, 1, 2, 2018),
-(126, 1, 1, 2018),
-(127, 1, 2, 2018),
-(128, 1, 2, 2018),
-(129, 1, 2, 2018),
-(130, 1, 2, 2018),
-(131, 1, 2, 2018),
-(132, 1, 2, 2018),
-(133, 1, 2, 2018),
-(134, 1, 2, 2018),
-(135, 1, 2, 2018),
-(136, 1, 2, 2018),
-(137, 1, 2, 2018),
-(138, 1, 2, 2018),
-(139, 1, 1, 2016),
-(142, 1, 2, 2016),
-(143, 1, 1, 2018),
-(144, 1, 5, 2017),
-(145, 1, 2, 2019),
-(150, 1, 2, 2018),
-(152, 48, 1, 2017),
-(155, 64, 1, 2017),
-(157, 1156, 9, 2019),
-(161, 1, 1, 2015),
-(162, 1, 1, 2017),
-(163, 858, 58, 2016),
-(164, 1002, 70, 2016),
-(167, 46, 1, 2018),
-(168, 46, 1, 2014),
-(170, 1, 5, 4),
-(171, 1, 1, 2018),
-(172, 651, 1, 0),
-(174, 1, 7, 2017),
-(175, 1, 1, 2014),
-(177, 651, 1, 2016);
+INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`, `coatReport`, `showReport`) VALUES
+(1, 1, 1, 2016, 0, 0),
+(2, 1, 2, 2016, 0, 0),
+(3, 1, 1, 2017, 0, 0),
+(4, 1, 1, 2016, 0, 0),
+(5, 2, 1, 2017, 0, 0),
+(6, 1, 1, 2016, 0, 0),
+(7, 1, 2, 2018, 0, 0),
+(8, 1, 1, 2017, 0, 0),
+(9, 1, 5, 2019, 0, 0),
+(10, 3, 2, 2017, 0, 0),
+(11, 3, 2, 2017, 0, 0),
+(12, 1, 2, 2018, 0, 0),
+(13, 1, 2, 2018, 0, 0),
+(14, 1, 1, 2017, 0, 0),
+(15, 1, 2, 2018, 0, 0),
+(16, 1, 1, 2018, 0, 0),
+(17, 1, 6, 2017, 0, 0),
+(39, 1, 1, 2018, 0, 0),
+(41, 1, 1, 2015, 0, 0),
+(43, 1, 5, 2018, 0, 0),
+(44, 1, 5, 2017, 0, 0),
+(45, 1, 1, 2017, 0, 0),
+(46, 4, 1, 2013, 0, 0),
+(47, 1, 2, 2018, 0, 0),
+(48, 1, 5, 2017, 0, 0),
+(49, 1, 1, 2020, 0, 0),
+(50, 1, 2, 2019, 0, 0),
+(51, 1, 2, 2017, 0, 0),
+(52, 1, 2, 2017, 0, 0),
+(53, 1, 2, 2019, 0, 0),
+(54, 56, 5, 2018, 0, 0),
+(56, 4, 1, 2018, 0, 0),
+(58, 1, 1, 2017, 0, 0),
+(59, 1, 7, 2020, 0, 0),
+(61, 85, 1, 2018, 0, 0),
+(63, 1, 5, 2019, 0, 0),
+(64, 1, 1, 2019, 0, 0),
+(65, 1, 1, 2017, 0, 0),
+(66, 1, 2, 2018, 0, 0),
+(67, 1, 1, 2017, 0, 0),
+(68, 1, 1, 2017, 0, 0),
+(69, 1, 2, 2018, 0, 0),
+(70, 1, 1, 2019, 0, 0),
+(71, 1, 2, 2017, 0, 0),
+(72, 1, 1, 2018, 0, 0),
+(73, 1, 5, 2018, 0, 0),
+(75, 1, 1, 2019, 0, 0),
+(76, 33, 1, 2017, 0, 0),
+(77, 1, 2, 2019, 0, 0),
+(78, 1, 1, 2017, 0, 0),
+(79, 1, 1, 2018, 0, 0),
+(80, 1, 1, 2018, 0, 0),
+(81, 1, 1, 2013, 0, 0),
+(82, 1, 1, 2017, 0, 0),
+(84, 1, 1, 2018, 0, 0),
+(85, 1, 1, 2018, 0, 0),
+(86, 1, 2, 2018, 0, 0),
+(87, 1, 1, 2018, 0, 0),
+(88, 1, 1, 2017, 0, 0),
+(89, 1, 5, 2017, 0, 0),
+(90, 1, 1, 2016, 0, 0),
+(91, 1, 1, 2016, 0, 0),
+(92, 1, 2, 2017, 0, 0),
+(93, 1, 5, 2016, 0, 0),
+(94, 1, 5, 2019, 0, 0),
+(95, 1, 2, 2019, 0, 0),
+(96, 1, 1, 2016, 0, 0),
+(97, 1, 1, 2017, 0, 0),
+(98, 1, 1, 2019, 0, 0),
+(99, 1, 1, 2017, 0, 0),
+(100, 1, 2, 2017, 0, 0),
+(101, 1, 2, 2017, 0, 0),
+(102, 1, 1, 2017, 0, 0),
+(103, 1, 2, 2016, 0, 0),
+(104, 1, 1, 2018, 0, 0),
+(105, 1, 1, 2019, 0, 0),
+(106, 2, 1, 2013, 0, 0),
+(107, 1, 1, 2018, 0, 0),
+(108, 38, 1, 2013, 0, 0),
+(109, 1, 2, 2019, 0, 0),
+(111, 1, 1, 2019, 0, 0),
+(112, 1, 1, 2016, 0, 0),
+(113, 1, 2, 2016, 0, 0),
+(114, 1, 2, 2018, 0, 0),
+(115, 1, 1, 2017, 0, 0),
+(118, 1, 5, 2018, 0, 0),
+(119, 4, 1, 2007, 0, 0),
+(120, 6, 1, 2017, 0, 0),
+(121, 1, 2, 2018, 0, 0),
+(122, 1, 1, 2019, 0, 0),
+(124, 1, 2, 2018, 0, 0),
+(125, 1, 2, 2018, 0, 0),
+(126, 1, 1, 2018, 0, 0),
+(127, 1, 2, 2018, 0, 0),
+(128, 1, 2, 2018, 0, 0),
+(129, 1, 2, 2018, 0, 0),
+(130, 1, 2, 2018, 0, 0),
+(131, 1, 2, 2018, 0, 0),
+(132, 1, 2, 2018, 0, 0),
+(133, 1, 2, 2018, 0, 0),
+(134, 1, 2, 2018, 0, 0),
+(135, 1, 2, 2018, 0, 0),
+(136, 1, 2, 2018, 0, 0),
+(137, 1, 2, 2018, 0, 0),
+(138, 1, 2, 2018, 0, 0),
+(139, 1, 1, 2016, 0, 0),
+(142, 1, 2, 2016, 0, 0),
+(143, 1, 1, 2018, 0, 0),
+(144, 1, 5, 2017, 0, 0),
+(145, 1, 2, 2019, 0, 0),
+(150, 1, 2, 2018, 0, 0),
+(152, 48, 1, 2017, 0, 0),
+(155, 64, 1, 2017, 0, 0),
+(157, 1156, 9, 2019, 0, 0),
+(161, 1, 1, 2015, 0, 0),
+(162, 1, 1, 2017, 0, 0),
+(163, 858, 58, 2016, 0, 0),
+(164, 1002, 70, 2016, 0, 0),
+(167, 46, 1, 2018, 0, 0),
+(168, 46, 1, 2014, 0, 0),
+(170, 1, 5, 4, 0, 0),
+(171, 1, 1, 2018, 0, 0),
+(172, 651, 1, 0, 0, 0),
+(174, 1, 7, 2017, 0, 0),
+(175, 1, 1, 2014, 0, 0),
+(177, 651, 1, 2016, 0, 0),
+(178, 57, 6, 2012, 0, 0),
+(179, 1156, 19, 2020, 0, 0),
+(180, 1, 2, 2016, 0, 0),
+(181, 6, 1, 2017, 0, 0),
+(182, 1, 1, 2017, 0, 0),
+(183, 3, 1, 2017, 0, 0),
+(184, 1, 2, 2017, 0, 0),
+(185, 847, 58, 2017, 0, 0),
+(186, 1038, 61, 2011, 0, 0),
+(187, 858, 58, 2016, 0, 0),
+(188, 1156, 7, 2018, 0, 0),
+(190, 1156, 2, 2013, 0, 0),
+(191, 651, 4, 2018, 0, 0),
+(192, 651, 4, 2018, 0, 0),
+(193, 651, 4, 2015, 0, 0),
+(194, 36, 1, 2015, 0, 0),
+(195, 1, 1, 2015, 0, 0),
+(196, 1, 1, 2018, 0, 0),
+(197, 1156, 74, 2012, 0, 0),
+(198, 651, 1, 2018, 0, 0),
+(199, 1107, 1, 2015, 0, 0),
+(200, 26, 1, 2015, 0, 0),
+(201, 26, 1, 2019, 0, 0),
+(202, 26, 1, 2015, 0, 0),
+(203, 26, 1, 2015, 0, 0),
+(205, 26, 1, 2015, 0, 0),
+(206, 26, 1, 2015, 0, 0),
+(207, 26, 1, 2015, 0, 0),
+(208, 26, 1, 2015, 0, 0),
+(209, 26, 1, 2019, 0, 0),
+(210, 26, 96, 2015, 0, 0),
+(211, 1107, 1, 2019, 0, 0),
+(212, 26, 1, 2018, 0, 0),
+(213, 1107, 1, 2019, 0, 0),
+(214, 1107, 1, 2018, 0, 0),
+(215, 26, 1, 2015, 0, 0),
+(216, 26, 1, 2015, 0, 0),
+(217, 26, 1, 2015, 0, 0),
+(218, 1156, 1, 2015, 0, 0),
+(219, 26, 1, 2019, 0, 0),
+(220, 524, 1, 2016, 0, 0),
+(221, 26, 1, 2015, 0, 0),
+(222, 26, 1, 2005, 0, 0),
+(223, 651, 1, 2018, 0, 0),
+(224, 26, 19, 2019, 0, 0),
+(225, 1, 11, 2018, 0, 0),
+(227, 28, 1, 2015, 0, 0),
+(228, 28, 1, 2015, 0, 0),
+(229, 26, 1, 2018, 0, 0),
+(231, 1156, 4, 2018, 0, 0),
+(232, 26, 1, 2018, 0, 0),
+(235, 1156, 1, 2018, 0, 0),
+(238, 26, 1, 2015, 0, 0),
+(239, 26, 96, 2015, 0, 0),
+(240, 26, 96, 2015, 0, 0),
+(241, 633, 2, 2013, 0, 0),
+(234, 26, 1, 2018, 0, 0),
+(242, 26, 1, 3, 0, 0),
+(243, 26, 1, 2015, 0, 0),
+(244, 26, 1, 2019, 0, 0),
+(246, 1, 4, 2017, 0, 0),
+(247, 26, 1, 2019, 1, 1),
+(248, 26, 1, 2019, 1, 1),
+(249, 26, 1, 2019, 1, 1),
+(250, 26, 1, 2019, 1, 1),
+(251, 26, 1, 2019, 1, 1),
+(252, 26, 1, 2019, 1, 1),
+(253, 26, 1, 2019, 1, 1),
+(254, 26, 1, 2019, 1, 1),
+(255, 26, 1, 2019, 1, 1),
+(256, 26, 1, 2019, 1, 1),
+(257, 26, 1, 2019, 1, 1),
+(258, 26, 1, 2019, 1, 1),
+(259, 26, 1, 2019, 1, 1),
+(260, 26, 1, 2019, 1, 1),
+(261, 26, 1, 2019, 1, 1),
+(262, 26, 1, 2019, 1, 1),
+(263, 26, 1, 2019, 1, 1),
+(264, 26, 1, 2019, 1, 1),
+(265, 26, 1, 2019, 1, 1),
+(266, 26, 1, 2019, 1, 1),
+(267, 26, 1, 2019, 1, 1),
+(268, 26, 1, 2019, 1, 1),
+(269, 26, 1, 2019, 1, 1),
+(270, 26, 1, 2019, 1, 1),
+(271, 26, 1, 2019, 1, 1),
+(272, 26, 1, 2019, 1, 1),
+(273, 26, 1, 2019, 1, 1),
+(274, 26, 1, 2019, 1, 1),
+(275, 26, 1, 2019, 1, 1),
+(276, 26, 1, 2019, 1, 1),
+(277, 26, 1, 2019, 1, 1),
+(278, 26, 1, 2019, 1, 1),
+(279, 26, 1, 2019, 1, 1),
+(280, 26, 1, 2019, 1, 1),
+(281, 26, 1, 2019, 1, 1),
+(282, 26, 1, 2019, 1, 1),
+(283, 26, 1, 2019, 1, 1),
+(284, 26, 1, 2019, 1, 1),
+(285, 26, 1, 2019, 1, 1),
+(286, 26, 1, 2019, 1, 1),
+(287, 26, 1, 2019, 1, 1),
+(288, 26, 1, 2019, 1, 1),
+(289, 26, 1, 2019, 1, 1),
+(290, 26, 1, 2019, 1, 1),
+(291, 26, 1, 2019, 1, 1),
+(292, 26, 1, 2019, 1, 1),
+(293, 26, 1, 2019, 1, 1),
+(294, 26, 1, 2019, 1, 1),
+(295, 26, 1, 2019, 1, 1),
+(296, 26, 1, 2019, 1, 1),
+(297, 26, 1, 2019, 1, 1),
+(298, 26, 1, 2019, 1, 1),
+(299, 26, 1, 2019, 1, 1),
+(300, 26, 1, 2019, 1, 1),
+(301, 26, 1, 2019, 1, 1),
+(302, 26, 1, 2018, 1, 1),
+(303, 26, 1, 2018, 1, 1),
+(304, 26, 1, 2018, 1, 1),
+(305, 26, 1, 2018, 1, 1),
+(306, 26, 1, 2018, 1, 1),
+(307, 26, 1, 2018, 1, 1),
+(308, 26, 1, 2018, 1, 1),
+(309, 26, 1, 2018, 1, 1),
+(310, 26, 1, 2018, 1, 1),
+(311, 26, 1, 2018, 1, 1),
+(312, 26, 1, 2018, 1, 1),
+(313, 26, 1, 2018, 1, 1),
+(314, 26, 1, 2018, 1, 1),
+(315, 26, 1, 2018, 1, 1),
+(316, 26, 1, 2018, 1, 1),
+(317, 26, 1, 2018, 1, 1),
+(318, 26, 1, 2018, 1, 1),
+(319, 26, 1, 2018, 1, 1),
+(320, 26, 1, 2018, 1, 1),
+(321, 26, 1, 2018, 1, 1),
+(322, 26, 1, 2018, 1, 1),
+(323, 26, 1, 2018, 1, 1),
+(324, 26, 1, 2018, 1, 1),
+(325, 26, 1, 2018, 1, 1),
+(326, 26, 1, 2018, 1, 1),
+(327, 26, 1, 2018, 1, 1),
+(328, 26, 1, 2018, 1, 1),
+(329, 26, 1, 2018, 1, 1),
+(330, 26, 1, 2018, 1, 1),
+(331, 26, 1, 2018, 1, 1),
+(332, 26, 1, 2018, 1, 1),
+(333, 26, 1, 2018, 1, 1),
+(334, 26, 1, 2018, 1, 1),
+(335, 26, 1, 2018, 1, 1),
+(336, 26, 1, 2018, 1, 1),
+(337, 26, 1, 2018, 1, 1),
+(338, 1, 4, 2018, 0, 0),
+(339, 1156, 4, 2018, 0, 0),
+(230, 1107, 1, 2019, 0, 0),
+(340, 18, 1, 2018, 0, 0),
+(341, 18, 1, 2018, 0, 0),
+(343, 345, 10, 2017, 0, 0),
+(344, 18, 2, 2018, 0, 0),
+(345, 18, 1, 2020, 0, 0),
+(346, 18, 1, 2013, 0, 0),
+(348, 856, 46, 2017, 0, 0),
+(349, 858, 58, 2011, 0, 0),
+(338, 1, 4, 2018, 0, 0),
+(338, 1, 4, 2018, 0, 0),
+(350, 1156, 6, 2014, 0, 0),
+(351, 18, 6, 2017, 0, 0),
+(352, 1156, 6, 2016, 0, 0),
+(353, 1107, 5, 2015, 0, 0),
+(354, 1107, 1, 2015, 0, 0),
+(355, 1156, 105, 2019, 0, 0),
+(356, 1156, 67, 2018, 0, 0),
+(357, 1156, 1, 2016, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1770,11 +2047,12 @@ INSERT INTO `generalUsers` (`userID`, `collegeID`, `courseID`, `batch`) VALUES
 -- Table structure for table `indianCities`
 --
 
-CREATE TABLE `indianCities` (
-  `cityID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `indianCities` (
+  `cityID` int(5) NOT NULL AUTO_INCREMENT,
   `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `state` varchar(255) NOT NULL,
+  PRIMARY KEY (`cityID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=568 ;
 
 --
 -- Dumping data for table `indianCities`
@@ -2355,7 +2633,7 @@ INSERT INTO `indianCities` (`cityID`, `city`, `state`) VALUES
 -- Table structure for table `internshipApplicants`
 --
 
-CREATE TABLE `internshipApplicants` (
+CREATE TABLE IF NOT EXISTS `internshipApplicants` (
   `internshipID` int(5) NOT NULL,
   `userID` int(5) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL,
@@ -2367,7 +2645,14 @@ CREATE TABLE `internshipApplicants` (
 --
 
 INSERT INTO `internshipApplicants` (`internshipID`, `userID`, `status`, `timestamp`) VALUES
-(4, 1, '1', '2017-07-15 08:52:36');
+(4, 1, '1', '2017-07-15 08:52:36'),
+(3, 201, '1', '2017-08-31 05:19:34'),
+(4, 201, '1', '2017-08-31 05:19:55'),
+(7, 320, '1', '2017-10-06 06:03:16'),
+(4, 320, '1', '2017-10-06 06:03:35'),
+(7, 267, '1', '2017-10-06 18:42:15'),
+(2, 267, '1', '2017-10-06 18:43:39'),
+(3, 267, '1', '2017-10-06 18:44:06');
 
 -- --------------------------------------------------------
 
@@ -2375,7 +2660,7 @@ INSERT INTO `internshipApplicants` (`internshipID`, `userID`, `status`, `timesta
 -- Table structure for table `internshipLocations`
 --
 
-CREATE TABLE `internshipLocations` (
+CREATE TABLE IF NOT EXISTS `internshipLocations` (
   `internshipID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2390,7 +2675,8 @@ INSERT INTO `internshipLocations` (`internshipID`, `cityID`) VALUES
 (4, 135),
 (5, 135),
 (3, 135),
-(6, 135);
+(6, 135),
+(7, 135);
 
 -- --------------------------------------------------------
 
@@ -2398,8 +2684,8 @@ INSERT INTO `internshipLocations` (`internshipID`, `cityID`) VALUES
 -- Table structure for table `internshipOffers`
 --
 
-CREATE TABLE `internshipOffers` (
-  `internshipID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `internshipOffers` (
+  `internshipID` int(5) NOT NULL AUTO_INCREMENT,
   `internshipTitle` varchar(255) NOT NULL,
   `internshipType` enum('1','2') NOT NULL,
   `internshipDescription` text NOT NULL,
@@ -2417,20 +2703,22 @@ CREATE TABLE `internshipOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`internshipID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `internshipOffers`
 --
 
 INSERT INTO `internshipOffers` (`internshipID`, `internshipTitle`, `internshipType`, `internshipDescription`, `startDate`, `applicationDeadline`, `stipendType`, `minimumStipend`, `maximumStipend`, `stipend`, `durationType`, `duration`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
-(1, 'Sales and Marketing Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do Day-to-Day:</strong></p><p>&bull; Engaging with customers to understand their lifestyle and fitness requirements, suggesting fitness options based on their needs and ensuring closure of leads towards conversion</p><p>&bull; Identifying zones/localities with maximum demand for fitness studios and working closely with the Business Development Team to maximise customer satisfaction</p><p>&bull; Providing quality service to customers by giving fitness options based on their requirements, assisting in final purchase and addressing their concerns</p><p>&bull; Provide feedback to our Technology team to improve the website and application basis feedback received from customers</p><p>&bull; Provide world class user support through emails, phone calls and social media to&nbsp;<em>FITPASS Customers</em></p><p>&bull; Hustle with one of the most hard-working teams in the country</p><p>&bull; Contribute to building the team and the organisation for long term success</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organisational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p>', '2017-08-01', '2017-07-30', '2', 0, 0, 0, '1', 6, '2', 100, '3', '2', 1, 18, '2017-07-12 11:40:13'),
-(2, 'Business Development Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do day-to-day:</strong></p><p>&bull; A field intensive role where you need to identifying key players in the industry through extensive market research and convert them into FITPASS partners</p><p>&bull; Imparting necessary training to partnered fitness studios to help them use the CRM system to their maximum advantage</p><p>&bull; Connecting with partnered fitness studios and conducting meetings regularly to maintain long-term relationships and address their concerns</p><p>&bull; Work closely with the Product and Technology team to improve services basis feedback received</p><p>&bull; Working closely with the Branding and Marketing team to increase customer engagement with the brand and with the product</p><p>&bull; Developing strategies for the expansion of FITPASS pan India</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organizational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p><p>&bull; Hustler</p>', '2017-08-01', '2017-07-31', '2', 0, 0, 0, '1', 6, '1', 5, '3', '2', 1, 18, '2017-07-10 09:23:05'),
-(3, 'Web Development Intern Required', '1', '<p>We are looking for an outstanding Web Developer intern to be responsible for the coding innovative design and layout of our website. He/she will build our website from concept all the way to completion from the bottom up fashioning everything from the home page to site layout and function.Familiarity with PHP, Java script, My SQL language and related frameworks.</p><p><strong>Core Responsibilities include:</strong></p><ul><li>Design website from scratch</li><li>Database management</li><li>API integration</li></ul>', '2017-08-01', '2017-07-31', '4', 0, 0, 5000, '1', 8, '2', 1, '2', '2', 1, 38, '2017-07-10 09:23:09'),
-(4, 'Content Writer Intern Required', '2', '<p>The ideal candidate is someone majoring in Journalism, Communications, or Marketing, with an interest in writing lifestyle content, a goal of learning 1 more about content generation and distribution, and a love of dogs. This internship will give him/her the opportunity to write a ton, work with other writers with experience writing for various publications and businesses, and a chance be in a fast-past startup environment where creativity is encouraged.</p><p><strong>Responsibilities:</strong></p><ul><li>Develop content ideas</li><li>Assist with writing blog articles</li><li>Assist with content calendar</li><li>Assist with sharing blog content</li><li>Assist with various marketing needs (anything from creating videos, to photography, to social media, to helping at events-- this can vary depending on his/her interests and/or skillset!)</li></ul><p><strong>What they&#39;ll get out of it:</strong></p><ul><li>How to write engaging blog posts</li><li>How to write content for a variety of audiences</li><li>How to use Wordpress</li><li>Best practices for sharing content on social channels</li><li>SEO best practices</li><li>They&#39;ll leave with a great portfolio of writing they would do to use for applying to full-time jobs in the future!</li><li>Plus, they&#39;ll get to work with a close and dynamic team with expertise in a range of areas</li></ul>', '2017-08-01', '2017-07-30', '4', 0, 0, 5000, '1', 6, '1', 1, '3', '2', 1, 38, '2017-07-12 11:40:16'),
-(5, 'Graphic Designer Intern', '2', '<p>A super star designer with a sharp eye to help create memorable visual elements for our marketing team, who will also be part of the User Experience Design and Prototyping team, a very talented and innovative UX strategist and developer who follows a lean UX approach to creating and building experiences for the Indian and international markets, someone with a great sensibility and who can turn around work on a tight schedule.</p><p>Responsibilities include:</p><ul><li>Assisting in designing supporting material</li><li>Providing design for digital efforts.</li><li>Creating Infographics and short videos.</li><li>UX/UI design</li></ul>', '2017-08-01', '2017-07-30', '4', 0, 0, 5000, '1', 6, '1', 1, '2', '2', 1, 38, '2017-07-12 11:40:20'),
-(6, 'PHP Web Developer Intern', '2', '<p>We are looking for a PHP Developer responsible for managing back-end services and the interchange of data between the server and the users. Your primary focus will be the development of all server-side logic, definition and maintenance of the central database, and ensuring high performance and responsiveness to requests from the front-end. You will also be responsible for integrating the front-end elements built by your co-workers into the application. Therefore, a basic understanding of front-end technologies is necessary as well.</p><p><strong>Responsibilities</strong></p><p>&nbsp; - Integration of user-facing elements developed by front-end developers</p><p>&nbsp; - Build efficient, testable, and reusable PHP modules</p><p>&nbsp; - Solve complex performance problems and architectural challenges</p><p>&nbsp; - Integration of data storage solutions (may include databases, key-value stores, blob stores, etc.)</p><p><strong>Skills And Qualifications</strong></p><p>&nbsp; - Strong knowledge of PHP web frameworks (such as Laravel, Yii, etc)</p><p>&nbsp; - Understanding the fully synchronous behavior of PHP</p><p>&nbsp; - Understanding of MVC design patterns</p><p>&nbsp; - Basic understanding of front-end technologies, such as JavaScript, HTML5, and CSS3</p><p>&nbsp; - Knowledge of object oriented PHP programming</p><p>&nbsp; - Understanding accessibility and security compliance</p><p>&nbsp; - Strong knowledge of the common PHP or web server exploits and their solutions</p><p>&nbsp; - Understanding fundamental design principles behind a scalable application</p><p>&nbsp; - User authentication and authorization between multiple systems, servers, and environments</p><p>&nbsp; - Integration of multiple data sources and databases into one system</p><p>&nbsp; - Familiarity with limitations of PHP as a platform and its workarounds</p><p>&nbsp; - Creating database schemas that represent and support business processes</p><p>&nbsp; - Familiarity with SQL/NoSQL databases and their declarative query languages</p><p>&nbsp; - Proficient understanding of code versioning tools, such as Git</p><p>&nbsp; - Make sure to mention other frameworks, libraries, or any other technology related to your development stack</p><p>&nbsp; - List education level or certification you require</p>', '2017-07-24', '2017-07-20', '4', 0, 0, 2000, '2', 0, '2', 2, '2', '2', 1, 166, '2017-07-14 11:59:15');
+(1, 'Sales and Marketing Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do Day-to-Day:</strong></p><p>&bull; Engaging with customers to understand their lifestyle and fitness requirements, suggesting fitness options based on their needs and ensuring closure of leads towards conversion</p><p>&bull; Identifying zones/localities with maximum demand for fitness studios and working closely with the Business Development Team to maximise customer satisfaction</p><p>&bull; Providing quality service to customers by giving fitness options based on their requirements, assisting in final purchase and addressing their concerns</p><p>&bull; Provide feedback to our Technology team to improve the website and application basis feedback received from customers</p><p>&bull; Provide world class user support through emails, phone calls and social media to&nbsp;<em>FITPASS Customers</em></p><p>&bull; Hustle with one of the most hard-working teams in the country</p><p>&bull; Contribute to building the team and the organisation for long term success</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organisational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p>', '2017-08-01', '2017-09-20', '2', 0, 0, 0, '1', 6, '2', 100, '3', '2', 1, 18, '2017-08-27 10:49:05'),
+(2, 'Business Development Intern Required', '2', '<p><strong>Why should you join FITPASS?</strong></p><p>&bull;&nbsp;<strong>Team:</strong>&nbsp;Work with smart and passionate people</p><p>&bull;&nbsp;<strong>Growth:</strong>&nbsp;We have, in a short span of time, put together a very impressive client list with some of the best names in the industry as our clients</p><p>&bull;&nbsp;<strong>Start-up Culture:</strong>&nbsp;Working in a start-up environment will give you exposure to multiple fields and you will learn how a business is built from the ground up</p><p>&bull;&nbsp;<strong>Impact:</strong>&nbsp;FITPASS does not function on a defined hierarchy &amp; everyone&#39;s given equal creative freedom to come up with and execute new ideas to further the business. This setup allows employees to take ownership of their ideas.</p><p><strong>Here&rsquo;s what you&rsquo;ll do day-to-day:</strong></p><p>&bull; A field intensive role where you need to identifying key players in the industry through extensive market research and convert them into FITPASS partners</p><p>&bull; Imparting necessary training to partnered fitness studios to help them use the CRM system to their maximum advantage</p><p>&bull; Connecting with partnered fitness studios and conducting meetings regularly to maintain long-term relationships and address their concerns</p><p>&bull; Work closely with the Product and Technology team to improve services basis feedback received</p><p>&bull; Working closely with the Branding and Marketing team to increase customer engagement with the brand and with the product</p><p>&bull; Developing strategies for the expansion of FITPASS pan India</p><p><strong>Who we&rsquo;re looking for:</strong></p><p>&bull; Someone with a prior work experience is a bonus, though it is not a necessity</p><p>&bull; Excellent written and verbal communication skills in English, and a functional knowledge of Hindi</p><p>&bull; Great understanding of the product</p><p>&bull; Excellent organizational and time management skills with the drive to achieve targets</p><p>&bull; Comfortable travelling within the city</p><p>&bull; Ability to thrive in a highly-charged environment</p><p>&bull; Good knowledge of MS Office</p><p>&bull; Hustler</p>', '2017-08-01', '2017-09-20', '2', 0, 0, 0, '1', 6, '1', 5, '3', '2', 1, 18, '2017-08-27 10:48:56'),
+(3, 'Web Development Intern Required', '1', '<p>We are looking for an outstanding Web Developer intern to be responsible for the coding innovative design and layout of our website. He/she will build our website from concept all the way to completion from the bottom up fashioning everything from the home page to site layout and function.Familiarity with PHP, Java script, My SQL language and related frameworks.</p><p><strong>Core Responsibilities include:</strong></p><ul><li>Design website from scratch</li><li>Database management</li><li>API integration</li></ul>', '2017-08-01', '2017-09-20', '4', 0, 0, 5000, '1', 8, '2', 1, '2', '2', 1, 38, '2017-08-27 10:48:38'),
+(4, 'Content Writer Intern Required', '2', '<p>The ideal candidate is someone majoring in Journalism, Communications, or Marketing, with an interest in writing lifestyle content, a goal of learning 1 more about content generation and distribution, and a love of dogs. This internship will give him/her the opportunity to write a ton, work with other writers with experience writing for various publications and businesses, and a chance be in a fast-past startup environment where creativity is encouraged.</p><p><strong>Responsibilities:</strong></p><ul><li>Develop content ideas</li><li>Assist with writing blog articles</li><li>Assist with content calendar</li><li>Assist with sharing blog content</li><li>Assist with various marketing needs (anything from creating videos, to photography, to social media, to helping at events-- this can vary depending on his/her interests and/or skillset!)</li></ul><p><strong>What they&#39;ll get out of it:</strong></p><ul><li>How to write engaging blog posts</li><li>How to write content for a variety of audiences</li><li>How to use Wordpress</li><li>Best practices for sharing content on social channels</li><li>SEO best practices</li><li>They&#39;ll leave with a great portfolio of writing they would do to use for applying to full-time jobs in the future!</li><li>Plus, they&#39;ll get to work with a close and dynamic team with expertise in a range of areas</li></ul>', '2017-08-01', '2017-09-20', '4', 0, 0, 5000, '1', 6, '1', 1, '3', '2', 1, 38, '2017-08-27 10:48:50'),
+(5, 'Graphic Designer Intern', '2', '<p>A super star designer with a sharp eye to help create memorable visual elements for our marketing team, who will also be part of the User Experience Design and Prototyping team, a very talented and innovative UX strategist and developer who follows a lean UX approach to creating and building experiences for the Indian and international markets, someone with a great sensibility and who can turn around work on a tight schedule.</p><p>Responsibilities include:</p><ul><li>Assisting in designing supporting material</li><li>Providing design for digital efforts.</li><li>Creating Infographics and short videos.</li><li>UX/UI design</li></ul>', '2017-08-01', '2017-09-20', '4', 0, 0, 5000, '1', 6, '1', 1, '2', '2', 1, 38, '2017-08-27 10:48:26'),
+(6, 'PHP Web Developer Intern', '2', '<p>We are looking for a PHP Developer responsible for managing back-end services and the interchange of data between the server and the users. Your primary focus will be the development of all server-side logic, definition and maintenance of the central database, and ensuring high performance and responsiveness to requests from the front-end. You will also be responsible for integrating the front-end elements built by your co-workers into the application. Therefore, a basic understanding of front-end technologies is necessary as well.</p><p><strong>Responsibilities</strong></p><p>&nbsp; - Integration of user-facing elements developed by front-end developers</p><p>&nbsp; - Build efficient, testable, and reusable PHP modules</p><p>&nbsp; - Solve complex performance problems and architectural challenges</p><p>&nbsp; - Integration of data storage solutions (may include databases, key-value stores, blob stores, etc.)</p><p><strong>Skills And Qualifications</strong></p><p>&nbsp; - Strong knowledge of PHP web frameworks (such as Laravel, Yii, etc)</p><p>&nbsp; - Understanding the fully synchronous behavior of PHP</p><p>&nbsp; - Understanding of MVC design patterns</p><p>&nbsp; - Basic understanding of front-end technologies, such as JavaScript, HTML5, and CSS3</p><p>&nbsp; - Knowledge of object oriented PHP programming</p><p>&nbsp; - Understanding accessibility and security compliance</p><p>&nbsp; - Strong knowledge of the common PHP or web server exploits and their solutions</p><p>&nbsp; - Understanding fundamental design principles behind a scalable application</p><p>&nbsp; - User authentication and authorization between multiple systems, servers, and environments</p><p>&nbsp; - Integration of multiple data sources and databases into one system</p><p>&nbsp; - Familiarity with limitations of PHP as a platform and its workarounds</p><p>&nbsp; - Creating database schemas that represent and support business processes</p><p>&nbsp; - Familiarity with SQL/NoSQL databases and their declarative query languages</p><p>&nbsp; - Proficient understanding of code versioning tools, such as Git</p><p>&nbsp; - Make sure to mention other frameworks, libraries, or any other technology related to your development stack</p><p>&nbsp; - List education level or certification you require</p>', '2017-07-24', '2017-09-12', '4', 0, 0, 2000, '2', 0, '2', 2, '2', '2', 1, 166, '2017-08-27 10:48:15'),
+(7, 'Android Developer Intern Required', '2', '<p><strong>Responsibilities</strong><br /><br />&bull; Translate designs and wireframes into high quality code<br> &bull; Design, build, and maintain high performance, reusable, and reliable code<br />&bull; Ensure the best possible performance, quality, and responsiveness of the application<br />&bull; Identify and correct bottlenecks and fix bugs<br /><br /><strong>The required skill set are as follows:</strong><br /><br />&bull; Strong knowledge of Android SDK, different versions of Android, and how to deal with different screen sizes<br />&bull; Familiarity with RESTful APIs to connect Android applications to back-end services<br />&bull; Strong knowledge of Android UI design principles, patterns, and best practices<br />&bull; Experience with offline storage, threading, and performance tuning<br />&bull; Knowledge of the open-source Android ecosystem and the libraries available for common tasks<br />&bull; Ability to understand business requirements and translate them into technical requirements<br />&bull; Familiarity with cloud message APIs and push notifications<br />&bull; Understanding of Google&rsquo;s Android design principles and interface guidelines<br />&bull; Proficient understanding of code versioning tools, such as Git&nbsp;</p>', '2017-09-04', '2017-09-02', '3', 5000, 10000, 0, '1', 8, '2', 1, '2', '2', 1, 158, '2017-08-27 10:57:58');
 
 -- --------------------------------------------------------
 
@@ -2438,7 +2726,7 @@ INSERT INTO `internshipOffers` (`internshipID`, `internshipTitle`, `internshipTy
 -- Table structure for table `internshipSkills`
 --
 
-CREATE TABLE `internshipSkills` (
+CREATE TABLE IF NOT EXISTS `internshipSkills` (
   `internshipID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2457,7 +2745,9 @@ INSERT INTO `internshipSkills` (`internshipID`, `skillID`) VALUES
 (6, 20),
 (6, 15),
 (6, 9),
-(6, 18);
+(6, 18),
+(7, 25),
+(7, 1);
 
 -- --------------------------------------------------------
 
@@ -2465,12 +2755,23 @@ INSERT INTO `internshipSkills` (`internshipID`, `skillID`) VALUES
 -- Table structure for table `jobApplicants`
 --
 
-CREATE TABLE `jobApplicants` (
+CREATE TABLE IF NOT EXISTS `jobApplicants` (
   `jobID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   `status` enum('1','2','3','4') NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobApplicants`
+--
+
+INSERT INTO `jobApplicants` (`jobID`, `userID`, `status`, `timestamp`) VALUES
+(3, 320, '1', '2017-10-06 06:03:54'),
+(1, 320, '1', '2017-10-06 06:04:13'),
+(3, 308, '1', '2017-10-06 06:16:54'),
+(1, 308, '1', '2017-10-06 06:16:59'),
+(3, 352, '1', '2017-10-27 16:40:53');
 
 -- --------------------------------------------------------
 
@@ -2478,7 +2779,7 @@ CREATE TABLE `jobApplicants` (
 -- Table structure for table `jobLocations`
 --
 
-CREATE TABLE `jobLocations` (
+CREATE TABLE IF NOT EXISTS `jobLocations` (
   `jobID` int(5) NOT NULL,
   `cityID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2491,7 +2792,8 @@ INSERT INTO `jobLocations` (`jobID`, `cityID`) VALUES
 (1, 135),
 (1, 231),
 (2, 135),
-(2, 231);
+(2, 231),
+(3, 61);
 
 -- --------------------------------------------------------
 
@@ -2499,8 +2801,8 @@ INSERT INTO `jobLocations` (`jobID`, `cityID`) VALUES
 -- Table structure for table `jobOffers`
 --
 
-CREATE TABLE `jobOffers` (
-  `jobID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `jobOffers` (
+  `jobID` int(5) NOT NULL AUTO_INCREMENT,
   `jobTitle` varchar(255) NOT NULL,
   `jobType` enum('1','2') NOT NULL,
   `jobDescription` text NOT NULL,
@@ -2516,16 +2818,20 @@ CREATE TABLE `jobOffers` (
   `status` enum('1','2','3') NOT NULL,
   `active` tinyint(1) NOT NULL,
   `addedBy` int(5) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`jobID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `jobOffers`
 --
 
 INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `startDate`, `applicationDeadline`, `offerType`, `minimumOffer`, `maximumOffer`, `offer`, `partTime`, `openings`, `applicants`, `status`, `active`, `addedBy`, `timestamp`) VALUES
-(1, 'JAVA Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li>Candidate should have very strong technical background in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Exception handling, Collections API, Multithreading with latest concurrency package, Best practices&nbsp;(such as avoiding code duplication, avoiding hard coded values etc.), Design patterns</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB</li><li>Experience in implementing JMS messaging services</li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech (Comp./ EEE)/ MCA (regular) with around &nbsp;(0 &ndash; 1) yrs. of exp. as a Java Developer with exp. in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns with an I.T./ Software Service Company.&nbsp;</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB,</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts, Hibernate.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Built MVC based Web Application Using JSP/Spring framework.</li></ul>', '2017-08-01', '2017-07-30', '1', 1.2, 1.8, 0, '2', 10, '2', '2', 1, 37, '2017-07-12 11:39:58'),
-(2, '.NET Developer Required', '1', '<p><strong>Job Responsibilities:</strong></p><ul><li><p>Full Life Cycle application development.</p></li><li><p>Designing, coding and debugging applications.</p></li><li><p>Software analysis, code analysis, requirements analysis, software review, identification of code metrics, system risk analysis, software reliability analysis.</p></li><li><p>Software modelling and simulation</p></li><li><p>Software testing and quality assurance</p></li><li><p>Performance tuning, improvement, balancing, usability, automation.</p></li><li><p>Support, maintain and document software functionality.</p></li><li><p>Integrate software with existing systems.</p></li><li><p>Should have strong knowledge in Oracle/ MS SQL and MySQL Database.</p></li><li><p>Strong in handling Oracle 10g/ SQL Database of large distributed production environment.</p></li><li><p>Database administration of databases such as Oracle/ MS SQL Server.</p></li><li><p>Should have knowledge of configuration, stored procedure, Joining / Unions, Indexing &amp; shrinking DB, QC of DB.</p></li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech. (Comp./ EEE)/ MCA (regular) with around one &nbsp;(0 - 1) yrs. of exp. as dot NET developer with an I.T./ Software Development Company.</li><li>Candidates must have 60 % marks (from 10th to Higher degree).</li><li>Must have strong basic concepts in ASP.Net 4.0, C#, VB.Net, C#, Framework (2.0, 3.5,4.0, 4.5) HTML &amp; Java Script, &nbsp; ADO.Net, Windows/ Web Application, Web/Web service, WCF, MVC, &amp; JS/ JQuery.</li><li>MSP (Microsoft Software Professional) Certified developer is preferred.</li><li>Should have strong basic concepts of Database (Oracle and/ or SQL Server) and Database Query is must for end developer.</li><li>Strong in basic OOPs with Ajax &amp; Controls, XML and HTML</li><li>Programming Analytical Skills</li><li>Good knowledge of Design Patterns</li><li>Experience of working in n-Tier architecture.</li><li>Should be a Team Player</li><li>Highly logical and analytical in approach</li></ul>', '2017-08-01', '2017-07-30', '1', 1.2, 1.8, 0, '2', 5, '2', '2', 1, 37, '2017-07-12 11:40:01');
+(1, 'JAVA Developer Required', '2', '<p><strong>Job Responsibilities:</strong></p><ul><li>Candidate should have very strong technical background in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Exception handling, Collections API, Multithreading with latest concurrency package, Best practices&nbsp;(such as avoiding code duplication, avoiding hard coded values etc.), Design patterns</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB</li><li>Experience in implementing JMS messaging services</li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech (Comp./ EEE)/ MCA (regular) with around &nbsp;(0 &ndash; 1) yrs. of exp. as a Java Developer with exp. in Core Java, Spring (MVC, IOC), struts Hibernate/JPA, Agile (scrum), Web services and Design Patterns with an I.T./ Software Service Company.&nbsp;</li><li>Good knowledge of OOPS concepts, Hibernate and Spring version 3.x 1, Spring Dependency Injection (IOC, MVC, JDBC, JMS, etc)</li><li>Good knowledge of Application Servers like Tomcat and Weblogic.&nbsp;</li><li>Good knowledge of Restful services and JDBC</li><li>Good knowledge of XML Parsers, XML Schema, JAXB,</li><li>Expertise in J2EE technologies: Spring, Java, JSP, JSF, JDBC, Struts, Hibernate.</li><li>Experience in designing database schemas and writing fine-tuned queries.</li><li>Sound knowledge of Messaging tools like MQ/JMS/TIBCO/Mule ESB.&nbsp;</li><li>Built MVC based Web Application Using JSP/Spring framework.</li></ul>', '2017-08-21', '2017-09-20', '1', 1.2, 1.8, 0, '2', 10, '2', '2', 1, 37, '2017-08-27 10:49:45'),
+(2, '.NET Developer Required', '2', '<p><strong>Job Responsibilities:</strong></p><ul><li><p>Full Life Cycle application development.</p></li><li><p>Designing, coding and debugging applications.</p></li><li><p>Software analysis, code analysis, requirements analysis, software review, identification of code metrics, system risk analysis, software reliability analysis.</p></li><li><p>Software modelling and simulation</p></li><li><p>Software testing and quality assurance</p></li><li><p>Performance tuning, improvement, balancing, usability, automation.</p></li><li><p>Support, maintain and document software functionality.</p></li><li><p>Integrate software with existing systems.</p></li><li><p>Should have strong knowledge in Oracle/ MS SQL and MySQL Database.</p></li><li><p>Strong in handling Oracle 10g/ SQL Database of large distributed production environment.</p></li><li><p>Database administration of databases such as Oracle/ MS SQL Server.</p></li><li><p>Should have knowledge of configuration, stored procedure, Joining / Unions, Indexing &amp; shrinking DB, QC of DB.</p></li></ul><p><strong>Desired Candidate Profile:</strong></p><ul><li>A B.E./ B.Tech. (Comp./ EEE)/ MCA (regular) with around one &nbsp;(0 - 1) yrs. of exp. as dot NET developer with an I.T./ Software Development Company.</li><li>Candidates must have 60 % marks (from 10th to Higher degree).</li><li>Must have strong basic concepts in ASP.Net 4.0, C#, VB.Net, C#, Framework (2.0, 3.5,4.0, 4.5) HTML &amp; Java Script, &nbsp; ADO.Net, Windows/ Web Application, Web/Web service, WCF, MVC, &amp; JS/ JQuery.</li><li>MSP (Microsoft Software Professional) Certified developer is preferred.</li><li>Should have strong basic concepts of Database (Oracle and/ or SQL Server) and Database Query is must for end developer.</li><li>Strong in basic OOPs with Ajax &amp; Controls, XML and HTML</li><li>Programming Analytical Skills</li><li>Good knowledge of Design Patterns</li><li>Experience of working in n-Tier architecture.</li><li>Should be a Team Player</li><li>Highly logical and analytical in approach</li></ul>', '2017-08-21', '2017-09-20', '1', 1.2, 1.8, 0, '2', 5, '2', '2', 1, 37, '2017-08-27 10:49:40'),
+(3, 'L1 Support Engineer Required', '2', '<p>&ldquo;L1 Support Engineer&rdquo;&nbsp;within our IT Infrastructure business for first level of troubleshooting on systems, applications, networks etc. Selected candidates would be trained and will work in a front end client&nbsp;facing role and would be the first point of contact for any IT related issues like laptop/desktop, Operating systems, network connectivity etc. The candidates should have excellent communication skills.&nbsp;<br /><br /><strong>Eligibility Criteria</strong><br /><br />BE / B.Tech (any stream) any stream from&nbsp;2014, 2015 and 2016&nbsp;batch. Should have cleared all semester exams (no backlogs)<br />-BCA/B.Sc.(CS)/MCA candidates with excellent academic background can also apply.<br />-Candidates should have excellent communication skills.<br />- Decent knowledge related to operating system, hardware, networking, etc.<br /><br /><strong>Job Description:</strong><br /><br />1. Fundamental Technical knowledge on system trouble shooting, few prominent knowledge areas are:-&nbsp;<br />&middot; Microsoft Windows Operating Systems (9X, NT, 2000, XP)<br />&middot; Microsoft Office<br />&middot; Network Connectivity<br />&middot; Printers and print Services<br />&middot; E-Mail and Internet mail<br />&middot; Familiar with Lotus Notes and MS Outlook email clients.<br /><br />2. Excellent communication skills, with neutral accent.&nbsp;<br />3. Excellent written communication skills with email etiquette.<br /><br /><strong>Please Note</strong><br /><br />Employee need to work in rotational shifts.<br />Shift duration: 10 Hours (9 hours of work+ 1 hour of break)<br />We follow 5 day work week however weekend off may not always be&nbsp;on Saturday&nbsp;&amp; Sundays and may fall on other week days.</p>', '2017-08-21', '2017-09-20', '1', 2.64, 3, 0, '2', 5, '3', '2', 1, 176, '2017-08-27 10:49:34'),
+(4, 'Digital marketing,PHP Developer,Graphic Designer, Digital marketing  ', '2', '<p>Good Communication skill,Good knowdleg about php and boastrap,and digital marketing,&nbsp;</p>', '2017-08-21', '2017-09-20', '1', 1.2, 2, 0, '2', 2, '1', '2', 0, 189, '2017-08-27 10:49:21'),
+(5, 'Digital marketing,PHP Developer,Graphic Designer, Digital marketing  ', '2', '<p>Good Communication skill,Good knowdleg about php and boastrap,and digital marketing,&nbsp;</p>', '2017-08-21', '2017-09-20', '1', 1.2, 2, 0, '2', 2, '1', '2', 0, 189, '2017-08-27 10:49:26');
 
 -- --------------------------------------------------------
 
@@ -2533,7 +2839,7 @@ INSERT INTO `jobOffers` (`jobID`, `jobTitle`, `jobType`, `jobDescription`, `star
 -- Table structure for table `jobSkills`
 --
 
-CREATE TABLE `jobSkills` (
+CREATE TABLE IF NOT EXISTS `jobSkills` (
   `jobID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -2546,7 +2852,16 @@ INSERT INTO `jobSkills` (`jobID`, `skillID`) VALUES
 (1, 17),
 (1, 25),
 (2, 22),
-(2, 25);
+(2, 25),
+(4, 1),
+(4, 6),
+(4, 10),
+(4, 11),
+(4, 14),
+(4, 15),
+(4, 18),
+(4, 17),
+(4, 20);
 
 -- --------------------------------------------------------
 
@@ -2554,14 +2869,15 @@ INSERT INTO `jobSkills` (`jobID`, `skillID`) VALUES
 -- Table structure for table `messages`
 --
 
-CREATE TABLE `messages` (
-  `messageID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `messages` (
+  `messageID` int(5) NOT NULL AUTO_INCREMENT,
   `sender` int(5) NOT NULL,
   `receiver` int(5) NOT NULL,
   `message` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `read` tinyint(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `read` tinyint(1) NOT NULL,
+  PRIMARY KEY (`messageID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `messages`
@@ -2577,7 +2893,7 @@ INSERT INTO `messages` (`messageID`, `sender`, `receiver`, `message`, `timestamp
 (7, 1, 39, 'hello', '2017-07-10 08:43:30', 1),
 (8, 1, 39, 'hello?', '2017-07-10 08:43:30', 1),
 (9, 1, 2, 'iti-si?', '2017-07-10 08:41:20', 1),
-(10, 39, 2, 'Kahan ma\'am bug pe bug aaye ja rhe hai :P', '2017-07-10 08:42:22', 1),
+(10, 39, 2, 'Kahan ma''am bug pe bug aaye ja rhe hai :P', '2017-07-10 08:42:22', 1),
 (11, 2, 1, 'kya hai nik- ill??', '2017-07-10 09:03:55', 1),
 (12, 1, 2, 'stella??', '2017-07-10 08:45:49', 1),
 (13, 2, 39, 'to kuch kar te re ho nhi \nsirf namrata se baat kr re ho', '2017-07-10 08:45:22', 1),
@@ -2585,7 +2901,7 @@ INSERT INTO `messages` (`messageID`, `sender`, `receiver`, `message`, `timestamp
 (15, 39, 2, 'Aapka naam Namrata hai??', '2017-07-10 08:44:56', 1),
 (16, 39, 1, 'Pata nhi sir.. No idea', '2017-07-10 08:51:53', 1),
 (17, 2, 39, 'bhot bakk re ho, pitna hai kya tumko?', '2017-07-10 08:45:22', 1),
-(18, 39, 2, 'Kyun Maarne pitne ki baat kr rhy ho ma\'am aap??', '2017-07-10 08:50:13', 1),
+(18, 39, 2, 'Kyun Maarne pitne ki baat kr rhy ho ma''am aap??', '2017-07-10 08:50:13', 1),
 (19, 39, 2, 'hello', '2017-07-10 08:50:44', 1),
 (20, 39, 2, 'hi', '2017-07-10 08:50:44', 1),
 (21, 2, 39, 'friday ko kaunsi beer?', '2017-07-10 09:23:16', 1),
@@ -2608,15 +2924,16 @@ INSERT INTO `messages` (`messageID`, `sender`, `receiver`, `message`, `timestamp
 -- Table structure for table `notifications`
 --
 
-CREATE TABLE `notifications` (
-  `notificationID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `notificationID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `image` varchar(1000) NOT NULL,
   `notification` varchar(1000) NOT NULL,
   `concernedUser` int(5) NOT NULL,
   `link` varchar(1000) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`notificationID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 --
 -- Dumping data for table `notifications`
@@ -2650,7 +2967,40 @@ INSERT INTO `notifications` (`notificationID`, `name`, `image`, `notification`, 
 (25, 'Itishri Singh', 'http://backoffice.campuspuppy.com/assets/profileImages/itishrisingh-cp.jpg', 'Itishri Singh has sent you a Connection Request.', 12, 'http://www.campuspuppy.com/connections', '2017-07-14 11:58:33'),
 (26, 'Nikhil Verma', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma.jpg', 'Nikhil Verma has applied for your Internship Offer, <b>Content Writer Intern Required</b>', 38, 'http://www.campuspuppy.com/applicants/2/4', '2017-07-15 08:52:36'),
 (27, 'Abhay', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Abhay has sent you a Connection Request.', 18, 'http://www.campuspuppy.com/connections', '2017-07-17 10:38:32'),
-(28, 'Akshay Vashistha', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Akshay Vashistha has sent you a Connection Request.', 39, 'http://www.campuspuppy.com/connections', '2017-07-19 10:16:20');
+(28, 'Akshay Vashistha', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Akshay Vashistha has sent you a Connection Request.', 39, 'http://www.campuspuppy.com/connections', '2017-07-19 10:16:20'),
+(29, 'ravi', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'ravi has applied for your Internship Offer, <b>Web Development Intern Required</b>', 38, 'http://www.campuspuppy.com/applicants/2/3', '2017-08-31 05:19:34'),
+(30, 'ravi', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'ravi has applied for your Internship Offer, <b>Content Writer Intern Required</b>', 38, 'http://www.campuspuppy.com/applicants/2/4', '2017-08-31 05:19:55'),
+(31, 'Sahil Kumar Maurya', 'http://www.campuspuppy.com/assets/uploads/ProfileImage/Sahil_Kumar_Maurya39_10072017083037.jpg', 'Sahil Kumar Maurya has accepted your Connection Request.', 134, 'http://www.campuspuppy.com/connections', '2017-09-01 13:22:46'),
+(32, 'karan', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'karan has sent you a Connection Request.', 202, 'http://www.campuspuppy.com/connections', '2017-09-02 06:47:19'),
+(33, 'karan', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'karan has sent you a Connection Request.', 202, 'http://www.campuspuppy.com/connections', '2017-09-02 06:49:56'),
+(34, 'karan', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'karan has sent you a Connection Request.', 206, 'http://www.campuspuppy.com/connections', '2017-09-02 06:50:19'),
+(35, 'karan', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'karan has sent you a Connection Request.', 217, 'http://www.campuspuppy.com/connections', '2017-09-02 06:50:35'),
+(36, 'karan', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'karan has sent you a Connection Request.', 217, 'http://www.campuspuppy.com/connections', '2017-09-02 06:50:36'),
+(37, 'ravi', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'ravi has sent you a Connection Request.', 38, 'http://www.campuspuppy.com/connections', '2017-09-12 08:21:20'),
+(38, 'Prateek', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Prateek has sent you a Connection Request.', 37, 'http://www.campuspuppy.com/connections', '2017-09-12 14:23:57'),
+(39, 'KAPIL KUMAR', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'KAPIL KUMAR has accepted your Connection Request.', 218, 'http://www.campuspuppy.com/connections', '2017-09-13 12:45:12'),
+(40, 'harshit sachdeva', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'harshit sachdeva has accepted your Connection Request.', 218, 'http://www.campuspuppy.com/connections', '2017-09-18 17:42:24'),
+(41, 'Prashant Chaudhary', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Prashant Chaudhary has sent you a Connection Request.', 37, 'http://www.campuspuppy.com/connections', '2017-09-23 04:49:56'),
+(42, 'Ishaan Bhaskar', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Ishaan Bhaskar has sent you a Connection Request.', 217, 'http://www.campuspuppy.com/connections', '2017-09-26 15:03:51'),
+(43, 'Ishaan Bhaskar', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Ishaan Bhaskar has sent you a Connection Request.', 219, 'http://www.campuspuppy.com/connections', '2017-09-26 15:04:29'),
+(44, 'Ishaan Bhaskar', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Ishaan Bhaskar has sent you a Connection Request.', 206, 'http://www.campuspuppy.com/connections', '2017-09-26 15:05:21'),
+(45, 'Nilaksh Thakur', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Nilaksh Thakur has accepted your Connection Request.', 218, 'http://www.campuspuppy.com/connections', '2017-09-27 06:06:06'),
+(46, 'Nilaksh Thakur', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Nilaksh Thakur has accepted your Connection Request.', 265, 'http://www.campuspuppy.com/connections', '2017-09-27 06:06:44'),
+(47, 'Kenneth Mohandas', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Kenneth Mohandas has accepted your Connection Request.', 265, 'http://www.campuspuppy.com/connections', '2017-09-27 06:12:16'),
+(48, 'Navodit Singhal', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Navodit Singhal has sent you a Connection Request.', 230, 'http://www.campuspuppy.com/connections', '2017-09-27 06:14:11'),
+(49, 'Pranay Khanna', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Pranay Khanna has accepted your Connection Request.', 283, 'http://www.campuspuppy.com/connections', '2017-09-27 09:07:42'),
+(50, 'KAPIL KUMAR', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'KAPIL KUMAR has accepted your Connection Request.', 265, 'http://www.campuspuppy.com/connections', '2017-09-28 04:25:24'),
+(51, 'Pranay Khanna', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'Pranay Khanna has sent you a Connection Request.', 265, 'http://www.campuspuppy.com/connections', '2017-10-03 12:24:18'),
+(52, 'SAHIL KAUSHISH', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'SAHIL KAUSHISH has applied for your Internship Offer, <b>Android Developer Intern Required</b>', 158, 'http://www.campuspuppy.com/applicants/2/7', '2017-10-06 06:03:16'),
+(53, 'SAHIL KAUSHISH', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'SAHIL KAUSHISH has applied for your Internship Offer, <b>Content Writer Intern Required</b>', 38, 'http://www.campuspuppy.com/applicants/2/4', '2017-10-06 06:03:35'),
+(54, 'SAHIL KAUSHISH', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'SAHIL KAUSHISH has applied for your Job Offer, <b>L1 Support Engineer Required</b>', 176, 'http://www.campuspuppy.com/applicants/1/3', '2017-10-06 06:03:54'),
+(55, 'SAHIL KAUSHISH', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'SAHIL KAUSHISH has applied for your Job Offer, <b>JAVA Developer Required</b>', 37, 'http://www.campuspuppy.com/applicants/1/1', '2017-10-06 06:04:13'),
+(56, 'pardeep rohilla', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'pardeep rohilla has applied for your Job Offer, <b>L1 Support Engineer Required</b>', 176, 'http://www.campuspuppy.com/applicants/1/3', '2017-10-06 06:16:54'),
+(57, 'pardeep rohilla', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'pardeep rohilla has applied for your Job Offer, <b>JAVA Developer Required</b>', 37, 'http://www.campuspuppy.com/applicants/1/1', '2017-10-06 06:16:59'),
+(58, 'bhaveet kumar', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'bhaveet kumar has applied for your Internship Offer, <b>Android Developer Intern Required</b>', 158, 'http://www.campuspuppy.com/applicants/2/7', '2017-10-06 18:42:15'),
+(59, 'bhaveet kumar', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'bhaveet kumar has applied for your Internship Offer, <b>Business Development Intern Required</b>', 18, 'http://www.campuspuppy.com/applicants/2/2', '2017-10-06 18:43:39'),
+(60, 'bhaveet kumar', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'bhaveet kumar has applied for your Internship Offer, <b>Web Development Intern Required</b>', 38, 'http://www.campuspuppy.com/applicants/2/3', '2017-10-06 18:44:06'),
+(61, 'sachin yadav', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'sachin yadav has applied for your Job Offer, <b>L1 Support Engineer Required</b>', 176, 'http://www.campuspuppy.com/applicants/1/3', '2017-10-27 16:40:53');
 
 -- --------------------------------------------------------
 
@@ -2658,14 +3008,15 @@ INSERT INTO `notifications` (`notificationID`, `name`, `image`, `notification`, 
 -- Table structure for table `otp`
 --
 
-CREATE TABLE `otp` (
-  `otpID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `otp` (
+  `otpID` int(5) NOT NULL AUTO_INCREMENT,
   `mobile` bigint(11) NOT NULL,
   `otp` int(4) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
-  `expiry` bigint(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `expiry` bigint(12) NOT NULL,
+  PRIMARY KEY (`otpID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `otp`
@@ -2676,7 +3027,21 @@ INSERT INTO `otp` (`otpID`, `mobile`, `otp`, `active`, `generatedAt`, `expiry`) 
 (2, 9560839425, 5254, 0, 1499880595, 1499887795),
 (3, 9717034866, 8758, 0, 1499962296, 1499969496),
 (4, 402770163, 1122, 1, 1500042430, 1500049630),
-(5, 9451169817, 5817, 1, 1500094666, 1500101866);
+(5, 9451169817, 5817, 1, 1500094666, 1500101866),
+(6, 7376870187, 7788, 0, 1503159376, 1503166576),
+(7, 9053220180, 5925, 0, 1504077434, 1504084634),
+(8, 9540702676, 2421, 0, 1504110061, 1504117261),
+(9, 8791448792, 5417, 0, 1504362587, 1504369787),
+(10, 9599523032, 7507, 1, 1505153249, 1505160449),
+(11, 9467282823, 9954, 1, 1505278374, 1505285574),
+(12, 9810853847, 6382, 0, 1506507225, 1506514425),
+(13, 9560217892, 5411, 0, 1506772338, 1506779538),
+(14, 9862791992, 4859, 0, 1506966236, 1506973436),
+(15, 9582987155, 4541, 0, 1507382415, 1507389615),
+(16, 9466061450, 9333, 0, 1507638408, 1507645608),
+(17, 9991915421, 3868, 1, 1508760277, 1508767477),
+(18, 8587926236, 3601, 0, 1509122535, 1509129735),
+(19, 7291053211, 3452, 1, 1509905373, 1509912573);
 
 -- --------------------------------------------------------
 
@@ -2684,15 +3049,16 @@ INSERT INTO `otp` (`otpID`, `mobile`, `otp`, `active`, `generatedAt`, `expiry`) 
 -- Table structure for table `passwordToken`
 --
 
-CREATE TABLE `passwordToken` (
-  `tokenID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `passwordToken` (
+  `tokenID` int(5) NOT NULL AUTO_INCREMENT,
   `token` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `tokenType` enum('1','2') NOT NULL,
   `generatedAt` bigint(12) NOT NULL,
   `expiry` bigint(12) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tokenID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
 
 --
 -- Dumping data for table `passwordToken`
@@ -2730,7 +3096,97 @@ INSERT INTO `passwordToken` (`tokenID`, `token`, `email`, `tokenType`, `generate
 (29, 'Q7c283rf', 'great.shivam19@gmail.com', '1', 1500377776, 1500384976, 0),
 (30, '7ue3fm7z', 'harshit@adurcup.com', '1', 1500448578, 1500455778, 0),
 (31, 'ue175jo2', 'akshayvashistha1995@gmail.com', '2', 1500458991, 1500466191, 0),
-(32, '7857174d', 'akshayvashistha1995@gmail.com', '1', 1500459089, 1500466289, 0);
+(32, '7857174d', 'akshayvashistha1995@gmail.com', '1', 1500459089, 1500466289, 0),
+(33, '27594u5w', 'Anubhav.gahlout89@gmail.com', '1', 1501109145, 1501116345, 0),
+(34, 'e350u9am', 'sourabhlucky99@gmail.com', '1', 1501137066, 1501144266, 0),
+(35, 'a6dpkrj2', 'prakher@gorentride.com', '1', 1501157647, 1501164847, 0),
+(36, '33f829o4', 'nikhilverma@campuspuppy.com', '2', 1501416729, 1501423929, 0),
+(37, 'bn6abafa', 'info@diliponit.com', '2', 1501489189, 1501496389, 1),
+(38, 'b774n5xj', 'dilip@diliponit.com', '1', 1501489697, 1501496897, 1),
+(39, '61aa8gzo', 'vaibhavattree@gmail.com', '1', 1501504500, 1501511700, 0),
+(40, '52fnr271', 'manoj.sagoi@gmail.com', '1', 1501605520, 1501612720, 0),
+(41, '2udk5exo', 'bikashpattnaik59@gmail.com', '1', 1502383246, 1502390446, 1),
+(42, 'on1aojeo', 'akki.gr34@gmail.com', '2', 1502518759, 1502525959, 1),
+(43, 'idjnxrza', 'hr@ebsprints.com', '1', 1502705874, 1502713074, 0),
+(44, '0u3z6635', 'nikhilverma@campuspuppy.com', '2', 1502865963, 1502873163, 0),
+(45, 'g6em3uy0', 'kaustabh.barman13@gmail.com', '1', 1503076757, 1503083957, 0),
+(46, '07rc3ip9', 'kaustabh.barman13@gmail.com', '1', 1503086805, 1503094005, 0),
+(47, 'zox5py4f', 'shivanshugupta2794@gmail.com', '1', 1503139565, 1503146765, 1),
+(48, 'cb3a1ixo', 'arungupta20395@gmail.com', '1', 1503147183, 1503154383, 1),
+(49, '841dmb7v', 'shantanu8960@gmail.com', '1', 1503159326, 1503166526, 0),
+(50, '6e1502o6', 'mkisachin@gmail.com', '1', 1503161217, 1503168417, 1),
+(51, 'ew5pi8fb', 'varun07nurav@gmail.com', '1', 1503432019, 1503439219, 0),
+(52, 'edc9ovy3', 'sriv.rashika@gmail.com', '1', 1503504044, 1503511244, 0),
+(53, '1afdwab3', 'sanaherneja@outlook.com', '1', 1503653661, 1503660861, 0),
+(54, 'c4opbu1o', 'shailvi.singh@teamimpetus.com', '1', 1503775772, 1503782972, 1),
+(55, '9bd4796y', 'nikhilverma@campuspuppy.com', '2', 1503825750, 1503832950, 0),
+(56, 'fjldab79', 'kmr.ashit1303@gmail.com', '1', 1504077309, 1504084509, 0),
+(57, '58a3d1g4', 'waliaroopak25@gmail.com', '1', 1504078935, 1504086135, 1),
+(58, 'o9982bQ8', 'bhardwaj.ravi101@gmail.com', '1', 1504080452, 1504087652, 0),
+(59, 'yd8817x5', 'harshsachdeva80@gmail.com', '1', 1504082790, 1504089990, 0),
+(60, 'l1aufdeb', 'swatiarora084@gmail.com', '1', 1504083097, 1504090297, 0),
+(61, 'rf3eb1nu', 'manishbhalla1@gmail.com', '1', 1504087831, 1504095031, 1),
+(62, '1bd638f3', 'kapilmit10@gmail.com', '1', 1504096241, 1504103441, 0),
+(63, 'd9xf2186', 'kushagrasingh770@gmail.com', '1', 1504103004, 1504110204, 0),
+(64, 'ncuv8323', 'mayankkhanduja8@gmail.com', '1', 1504103169, 1504110369, 0),
+(65, '8c9j4d8f', 'pranav.vashist1@gmail.com', '1', 1504106117, 1504113317, 0),
+(66, 'a8o9a9f0', 'bhardwaj.ravi101@gmail.com', '1', 1504109845, 1504117045, 0),
+(67, 'd99e7guf', 'kanishkgarg55@gmail.com', '1', 1504112103, 1504119303, 0),
+(68, 'oo1lk3e2', 'rajat1111997@gmail.com', '1', 1504112382, 1504119582, 0),
+(69, '791i34d0', 'aditi.mudgalaa2@gmail.com', '1', 1504154759, 1504161959, 0),
+(70, '3rdb20u4', 'piyush46749@gmail.com', '1', 1504156488, 1504163688, 0),
+(71, '16Qdba07', 'znair96@gmail.com', '1', 1504158833, 1504166033, 0),
+(72, '4a007o1c', 'rajatking111997@gmail.com', '1', 1504159933, 1504167133, 1),
+(73, '7rz4aar2', '24ishanb@gmail.com', '1', 1504166910, 1504174110, 0),
+(74, 'ld7og4ar', 'nthakur119@gmail.com', '1', 1504168723, 1504175923, 0),
+(75, 'zp8oy6re', 'Karankg1997@gmail.com', '1', 1504169845, 1504177045, 0),
+(76, '01cdfu4m', 'kennethmohandas111@gmail.com', '1', 1504191703, 1504198903, 0),
+(77, '7duv4w5i', 'himanshu.sachdeva1994@gmail.com', '1', 1504204091, 1504211291, 0),
+(78, '587abd2v', 'pgpreetgoel12@gmail.com', '1', 1504260156, 1504267356, 0),
+(79, 'o2b9f1od', 'arunv4080@gmail.com', '1', 1504319417, 1504326617, 0),
+(80, 'p4bfe67a', 'sakshamrehan3@gmail.com', '1', 1504362409, 1504369609, 0),
+(81, '4o3c5l09', 'sagunachopra97@gmail.com', '1', 1504372236, 1504379436, 0),
+(82, 'ufwy9fuo', 'mariyam.jalees123@gmail.com', '1', 1504600352, 1504607552, 0),
+(83, 'npl4o7y5', 'july.kushal@gmail.com', '1', 1505152876, 1505160076, 0),
+(84, 'oban3rik', 'kushal2007gupta@gmail.com', '1', 1505154027, 1505161227, 0),
+(85, 'f01ddz25', 'prateek.wadhwa14@gmail.com', '1', 1505226164, 1505233364, 0),
+(86, '6ae0g5b0', 'hitherto.wylde@gmail.com', '1', 1505235457, 1505242657, 0),
+(87, '0iba2o8c', 'vivekmishra892@gmail.com', '1', 1505277113, 1505284313, 1),
+(88, '5406dery', 'kunalmanik95@gmail.com', '1', 1505277741, 1505284941, 0),
+(89, 'vz472Q2e', 'navdeepgahlawat3@gmail.com', '1', 1505278039, 1505285239, 0),
+(90, '2uedey1o', 'shadybalraj@gmail.com', '1', 1505278223, 1505285423, 0),
+(91, '95jcofbf', 'shandydeeksha16@gmail.com', '1', 1505278338, 1505285538, 1),
+(92, '25a4ua1e', 'yatharthk8241@gmail.com', '1', 1505288102, 1505295302, 0),
+(93, 'g6598ld7', 'kumaryogesh13500@gmail.com', '1', 1505350910, 1505358110, 0),
+(94, 'd98ocf6z', 'pranaykhanna2012@gmail.com', '2', 1505385200, 1505392400, 0),
+(95, 'wm1ogbbd', 'somya.sg18@gmail.com', '1', 1505494165, 1505501365, 0),
+(96, 'd7a5d2u1', 'dhruv.gpt02@gmail.com', '1', 1505551842, 1505559042, 0),
+(97, 'fn59yf56', 'manikjuneja13@gmail.com', '1', 1505620067, 1505627267, 0),
+(98, 'a06gzxo4', 'aru_agarwal95@rediffmail.com', '2', 1505727541, 1505734741, 0),
+(99, 'j68m031a', 'aru_agarwal95@rediffmail.com', '1', 1505727581, 1505734781, 0),
+(100, '0v9a57ye', 'vivekmaddhesiya1991@gmail.com', '1', 1505925289, 1505932489, 0),
+(101, 'e8o0ik49', 'pranaykhanna2012@gmail.com', '1', 1506492584, 1506499784, 0),
+(102, 'kcm840va', 'pranaykhanna2012@gmail.com', '1', 1506503187, 1506510387, 0),
+(103, 'g3fd4oex', 'abgaur1996@gmail.com', '1', 1506507121, 1506514321, 0),
+(104, 'pd47m5nu', 'vibhorjain2689@gmail.com', '1', 1506517558, 1506524758, 0),
+(105, 'w5axf0ia', 'diwakarjha397@gmail.com', '2', 1506592761, 1506599961, 0),
+(106, '47epo3kr', 'ramsunderbhakta@gmail.com', '1', 1506749237, 1506756437, 0),
+(107, '9epr2ebf', 'srm.katiyar@gmail.com', '2', 1506770953, 1506778153, 0),
+(108, 'e694ru82', 'ads@rhd.com', '1', 1506842791, 1506849991, 1),
+(109, 'xdcj0cad', 'shriya96gupta@gmail.com', '1', 1506961641, 1506968841, 0),
+(110, '9c736n08', 'manaskashyaptech@gmail.com', '1', 1506966191, 1506973391, 0),
+(111, 'f915rxko', 'surya.kapoor14@gmail.com', '1', 1507195106, 1507202306, 0),
+(112, '2bk968x7', 'hammad.raza57@gmail.com', '1', 1507575678, 1507582878, 0),
+(113, 'a3dbx640', 'urchihe@gmail.com', '1', 1507916949, 1507924149, 0),
+(114, 'dxrb436c', 'pagalpuneet2017@gmail.com', '1', 1508259390, 1508266590, 0),
+(115, 'e8fx5df9', 'shivateja.boddeti@gmail.com', '1', 1508333654, 1508340854, 0),
+(116, '95eakeju', 'praveens440@gmail.com', '1', 1508660914, 1508668114, 0),
+(117, '416e16od', 'ersachinme2016@gmail.com', '1', 1509122257, 1509129457, 0),
+(118, '4d38da51', 'abhaykantravi1992@gmail.com', '1', 1509345393, 1509352593, 0),
+(119, '542bcob2', 'shivam_malhotra@outlook.com', '1', 1509734506, 1509741706, 1),
+(120, 'e7b2a21d', 'garg.eshaan1998@gmail.com', '1', 1509905307, 1509912507, 0),
+(121, 'l3va8yf7', 'monchauhan411@gmail.com', '1', 1509992095, 1509999295, 0),
+(122, '054ad29o', 'akhtar.nawaz4@gmail.com', '1', 1510236860, 1510244060, 0);
 
 -- --------------------------------------------------------
 
@@ -2738,13 +3194,14 @@ INSERT INTO `passwordToken` (`tokenID`, `token`, `email`, `tokenType`, `generate
 -- Table structure for table `projects`
 --
 
-CREATE TABLE `projects` (
-  `projectID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `projects` (
+  `projectID` int(5) NOT NULL AUTO_INCREMENT,
   `projectTitle` text NOT NULL,
   `projectLink` text NOT NULL,
   `projectDescription` text NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`projectID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `projects`
@@ -2753,7 +3210,7 @@ CREATE TABLE `projects` (
 INSERT INTO `projects` (`projectID`, `projectTitle`, `projectLink`, `projectDescription`, `userID`) VALUES
 (1, 'DiscountsDekho', 'http://www.discountsdekho.com', '<p>DiscountsDekho is web-portal for discounts running in stores across Delhi NCR</p>', 1),
 (2, 'gbxfg', '', '<p>dfbldfldgg</p>', 12),
-(3, '<script>alert(\'asdsad\')</script>', '', '<p>askjn</p>', 172);
+(3, '<script>alert(''asdsad'')</script>', '', '<p>askjn</p>', 172);
 
 -- --------------------------------------------------------
 
@@ -2761,8 +3218,8 @@ INSERT INTO `projects` (`projectID`, `projectTitle`, `projectLink`, `projectDesc
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `question_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `question_id` int(5) NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
   `option1` text NOT NULL,
   `option2` text NOT NULL,
@@ -2770,8 +3227,9 @@ CREATE TABLE `questions` (
   `option4` text NOT NULL,
   `answer` enum('1','2','3','4') NOT NULL,
   `skillID` int(5) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=730 ;
 
 --
 -- Dumping data for table `questions`
@@ -3512,14 +3970,62 @@ INSERT INTO `questions` (`question_id`, `question`, `option1`, `option2`, `optio
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reportContent`
+--
+
+CREATE TABLE IF NOT EXISTS `reportContent` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `skillID` int(5) NOT NULL,
+  `noBadge` text NOT NULL,
+  `beginner` text NOT NULL,
+  `intermediate` text NOT NULL,
+  `expert` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `reportContent`
+--
+
+INSERT INTO `reportContent` (`id`, `skillID`, `noBadge`, `beginner`, `intermediate`, `expert`) VALUES
+(1, 1, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basic java programming, have a good grip in that first and then go ahead with android.<br /> 2. Give time to the subject regularly.<br /> &nbsp;</p>', '<p>Your performance in the subject is satisfactory. While your performance in Basic &nbsp;java programming is good but your knowledge in Advance concepts of the subject like libraries and classes involved with android is very poor. Your basics are weak hence you&rsquo;re not able to perform well in all areas of the subject. &nbsp;All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basic java programming, have a good grip in that first and then go ahead with android.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. Your skill is good but you need to practice executing small projects to get better understanding. Try to learn more about different android classes and the libraries. You need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try focusing on libraries and classes of android.<br /> 2. Do small projects to get an industry experience.<br /> &nbsp;</p>', '<p>Your performance in this skill is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over all the areas of Java and hence you have been able to perform well. Your knowledge in terms of functions, methods involved and classes in android is strong. Your foundation is great, practice regularly to maintain the excellence. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice executing what you learn simultaneously.<br /> 2. Try doing internships in this sector and get a practical experience.<br /> &nbsp;</p>'),
+(2, 2, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Start with basics<br />\n2. Refer online tutorials for the subject and refer to your curriculum books.<br />\n3. Understand the concepts thoroughly</p>', '<p>Your performance in this is satisfactory. While your performance in basic Artificial Intelligence concepts is good, but your performance in advance concepts like gaming algorithms is really poor. Practice and understand all concepts well. You need to do in depth study of the subject and not only by the surface. If you follow all the steps you will be able to ace the language. All the Best!</p>', '<p>Your performance in this language is really good. According to our analysis, you have a good understanding of all relevant areas. Any skill get stronger with practice, with Artificial intelligence &nbsp;&nbsp;try reading your curriculum books and concentrate more on algorithms and gaming questions. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Try to broaden your horizon by having a good grasp in the basic concepts first. This can be done by going through books or concepts other than your curriculum.<br />\n2. Do internships to have in depth knowledge of the subject.</p>', '<p>Your performance in this is phenomenal. You have exhibited a remarkable performance in this particular skill. Your level of understanding is commendable and you have a really good grip on the subject. Practice regularly in order to maintain this level of excellence throughout. Try to exceed your current level of performance by expanding your horizon, learning new concepts and solving more conceptual problems of this language. All the best!<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Practice high level concepts on online coding portals.<br />\n2. Solve more conceptual problems.<br />\n3. Participate in hackathons and coding events to get the feel of industry environment.<br />\n4. Do internships in this field to get a better exposure</p>'),
+(3, 3, '<p><strong>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.</strong><br /> <br /> Tips:<br /> <br /> <strong>1. Start from basic, refer to your curriculum books and tutorials.<br /> 2. Give time to the subject regularly</strong><br /> &nbsp;</p>', '<p>Your performance in the subject is satisfactory. While your performance in Basic concepts like DFA and NFA, CFL is good but in Advance concepts of the subject like Pushdown automata and turing machines is very poor. Your basics are not that strong hence you&rsquo;re not able to perform well in all areas of the subject. &nbsp;All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics of your curriculum, read more about automata.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. Your concepts are good in terms of Deterministic and Non Deterministic finite automata but try broadening your horizon to pushdown automata, CFL, turing machines and learning concepts other than your curriculum. You need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try focusing on Pushdown automata and turing machines.<br /> 2. Do small projects for practical experience.<br /> &nbsp;</p>', '<p>Your performance in this skill is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over all the areas of automata. You have a really good knowledge of Mealy, Moore machines, Deterministic and Non Deterministic, Pushdown automata etc. Practice regularly to maintain the excellence. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice more, go deeper into turing machines.<br /> &nbsp;</p>'),
+(4, 4, '<p dir="ltr">Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start with basics<br /> 2. Refer online tutorials for the subject.<br /> 3. Give time to the subject regularly</p>', '<p dir="ltr">Your performance in the language is satisfactory. While your performance in Basic Programming concepts is good, your performance in Advance concepts of are poor. So, focus more on this section to achieve perfection in all areas. Start with basics, initially understand OOPS(Object Oriented Programming) concept. It will give you the basis to start with the basic of the language. Always prefer hands on session in the learning phase at it gives you a better horizon to think better and to get the grip over the language. Then after you ace the basics, move towards practicing the higher level problems. Practice writing programs and identifying errors in the programs. If you follow all the steps you will be able to ace the language. All the Best!</p>', '<p dir="ltr">Your performance in this language is really good. According to our analysis, you have a good understanding of all relevant areas. This language becomes stronger through practice thus to keep up the level you have to practice regularly, this not only helps in qualifying for company interviews but also helps in competitive exams for higher education. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try to broaden your horizon by going through books or concepts other than your curriculum.<br /> 2. Do internships to have in depth knowledge of the subject.</p>', '<p dir="ltr">Your performance in this language is phenomenal. You have exhibited a remarkable performance in this particular skill. Your level of understanding is commendable and you have a really good grip on the subject. Practice regularly in order to maintain this level of excellence throughout. Try to exceed your current level of performance by expanding your horizon, learning new concepts and solving more conceptual problems of this language. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice high level concepts on online coding portals.<br /> 2. Solve more conceptual problems.<br /> 3. Participate in hackathons and coding events to get the feel of industry environment.<br /> 4. Do internships in this field to get a better exposure</p>'),
+(5, 5, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Start with basics<br />\n2. Refer online tutorials for the subject.<br />\n3. Give time to the subject regularly</p>', '<p>Your performance in the language is satisfactory. While your performance in Basic Programming is good but when it comes to advances C# concepts, your performance is really poor. Practice writing programs and identifying errors in the programs. You need to do in depth study of the subject and not only by the surface. If you follow all the steps you will be able to ace the language. All the Best!</p>', '<p>Your performance in this language is really good. According to our analysis, you have a good understanding of all relevant areas. Any skill get stronger with practice, with C# try doing small projects alongside for better understanding. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Try to broaden your horizon by going through books or concepts other than your curriculum.<br />\n2. Do internships to have in depth knowledge of the subject.</p>', '<p>Your performance in this language is phenomenal. You have exhibited a remarkable performance in this particular skill. Your level of understanding is commendable and you have a really good grip on the subject. Practice regularly in order to maintain this level of excellence throughout. Try to exceed your current level of performance by expanding your horizon, learning new concepts and solving more conceptual problems of this language. All the best!<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Practice high level concepts on online coding portals.<br />\n2. Solve more conceptual problems.<br />\n3. Participate in hackathons and coding events to get the feel of industry environment.<br />\n4. Do internships in this field to get a better exposure.</p>'),
+(6, 6, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Start with basics<br />\n2. Refer online tutorials for the subject.<br />\n3. Go through OOPS concepts well.</p>\n', '<p dir="ltr">Your performance in the language is satisfactory. While your performance in Basic Programming concepts is good, your performance in Advance concepts of this language is poor. So, focus more on this section to achieve perfection in all areas. Start with basics, initially understand OOPS(Object Oriented Programming) concept. It will give you the basis to start with the basic of the language. Always prefer hands on session in the learning phase at itg gives you a better horizon to think better and to get the grip over the language. Then after you ace the basics, move towards practicing the higher level problems. Practice writing programs and identifying errors in the programs. If you follow all the steps you will be able to ace the language. All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. You should start with basic concepts, specifically having clarity in Object Oriented programming.<br /> 2. Try executing basic programs like, patterns, arithmetic operations, decision making, loops etc.<br /> 3. For Object oriented programming and basic concepts refer your curriculum books first.</p>', '<p dir="ltr">Your performance in this language is really good. According to our analysis, you have a good understanding of all relevant areas. This language becomes stronger through practice thus to keep up the level you have to practice regularly. Try hands on session while learning the concepts. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try to broaden your horizon by going through books or concepts other than your curriculum.<br /> 2. Do internships to have in depth knowledge of the subject.</p>', '<p dir="ltr">Your performance in this language is phenomenal. You have exhibited a remarkable performance in this particular skill. Your level of understanding is commendable and you have a really good grip on the subject. Practice regularly in order to maintain this level of excellence throughout. Try to exceed your current level of performance by expanding your horizon, learning new concepts and solving more conceptual problems of this language. All the best!<br /> <br /> Tips:<br /> <br /> 1. Practice high level concepts on online coding portals.<br /> 2. Solve more conceptual problems.<br /> 3. Participate in hackathons and coding events to get the feel of industry environment.<br /> 4. Do internships in this field to get a better exposure.</p>'),
+(7, 7, '<p dir="ltr">Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics, refer to Behrouz A. Forouzan.<br /> 2. Give time to the subject regularly</p>', '<p>Your performance in the subject is satisfactory. While your performance in Basic networking concepts in terms of topologies is clear, your performance in Advance concepts of the subject are poor. Your knowledge with the different layers and their insights is not upto the mark . Your basics are weak hence you&rsquo;re not able to perform well in all areas of the subject. &nbsp;All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics, refer to Behrouz A. Forouzan.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. You just need to focus on advanced concepts of Computer networks that is by referring books and portals other than your curriculum. Try working out more on complexities of the subject and get an in depth view in terms of network layer and concepts of subnetting. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try to broaden your horizon by going through books or concepts other than your curriculum.<br /> 2. Do small projects to get an industry experience.<br /> &nbsp;</p>', '<p>Your performance in this subject is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over all the areas covering computer networks. Your knowledge in terms of topologies, all layers of OSI model and their functions is commendable. You can do well in jobs related to network engineer and can also go beyond and do well in cloud computing aspects. Your foundation is great, practice regularly to maintain the excellence. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice high level concepts.<br /> 2. Try doing internships in this sector and get a practical experience.<br /> 3. You can also appear for CCNA certification.<br /> &nbsp;</p>'),
+(8, 8, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics of computer architecture.<br /> 2. Give time to the subject regularly<br /> &nbsp;</p>', '<p>Your performance in the subject is satisfactory. While your performance in Basic gates, logics is strong but your knowledge in Advance concepts of the subject is very poor. Your basics are weak hence you&rsquo;re not able to perform well in all areas of the subject. &nbsp;All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics of your curriculum.<br /> 2. Refer to your curriculum books and tutorials.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. Your skill is good but you need to practice executing small projects to get better understanding. Try to learn more about the architecture and the gates in computer organization. You need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try going out of your curriculum and learning new concepts. &nbsp;<br /> 2. Do small projects to get an industry experience.<br /> &nbsp;</p>', '<p>Your performance in this skill is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over all the areas of Computer organization and hence you have been able to perform well. Your knowledge in terms of computer architecture is commendable. Your foundation is great, practice regularly to maintain the excellence. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice executing what you learn simultaneously.<br /> 2. Try to broaden your horizon and learn deeper concepts.<br /> &nbsp;</p>'),
+(9, 9, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(10, 10, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(11, 11, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(12, 12, '<p dir="ltr">Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basic, refer to your curriculum books and tutorials.<br /> 2. Give time to the subject regularly</p>', '<p>Your performance in the subject is satisfactory. While your performance in Basic database concepts is good but your knowledge in Advance concepts of the subject like SQL queries, relational databases and normalities is very poor. Your basics are not that strong hence you&rsquo;re not able to perform well in all areas of the subject. &nbsp;All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics of your curriculum, read more about databases.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. Your concepts are good but try broadening your horizon and learning concepts other than your curriculum. You need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try focusing more on queries and normalities.<br /> 2. Do small projects for practical experience.<br /> &nbsp;</p>', '<p>Your performance in this skill is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over all the areas of database. You are really good with SQL queries and relational database concepts. Your foundation is great, practice regularly to maintain the excellence. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice executing queries.<br /> 2. Try doing internships in this sector and get a practical experience.<br /> &nbsp;</p>'),
+(13, 13, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(14, 14, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(15, 15, '<p>You need to practise basic HTML tags to perform well. Try creating web pages for practise.</p>', '<p>You have a great foundation of HTML and HTML tags. Practise for better score. All the Best</p>', '<p>You have a great foundation of HTML and HTML tags. Practise for better score. All the Best</p>', '<p>Your performance in HTML is great. You have a really good command over the HTML tags.</p>'),
+(16, 16, '<p dir="ltr">Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> Tips:<br /> <br /> 1. Make your concepts stronger by going through online tutorials.<br /> 2. Give time to the subject regularly</p>', '<p dir="ltr">Your performance in the subject is satisfactory. While your understanding about arduino and Raspberry pi is good, but you lack the in depth knowledge of sensors and different modules like bluetooth etc. Focus more on developing softwares in accordance with hardware. We wish you all the best!<br /> <br /> Tips:<br /> <br /> 1. Execute projects in this domain.<br /> 2. Try with different modules and sensor.</p>', '<p dir="ltr">Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. Try to broaden your horizon by executing projects and linking the hardware with software. Keep up the good work. All the best!<br /> <br /> <br /> Tips:<br /> 1. Try doing internships and gain some practical experience.<br /> 2. Execute projects in this domain.<br /> 3. Try with different modules and sensor.</p>', '<p dir="ltr">Your performance in this skill is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over concepts related to arduino, Raspberry pi and sensors. Try to broaden your horizon by executing projects and linking the hardware with software. Keep up the good work. All the best!<br /> <br /> Tips:<br /> <br /> 1. Try doing internships and gain some practical experience.<br /> 2. Execute projects in this domain.<br /> 3. Try with different modules and sensor.</p>'),
+(17, 18, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(18, 17, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Start with basics<br />\n2. Refer online tutorials for the subject.<br />\n3. Give through OOPS concepts well.</p>\n', '<p dir="ltr">Your performance in the language is satisfactory.Your basics are not clear and to ace any language the foundation has to be really strong. Start with focusing on OOPS(Object Oriented Programming), then start with basics of Java. Give time and while going through the concepts, execute programs and try to identify the errors. Try practicing regularly it will definitely make a difference. All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. You should start with basic concepts, specifically having clarity in Object Oriented programming.<br /> 2. Try executing basic programs like, patterns, arithmetic operations, decision making, loops etc.<br /> 3. For Object oriented programming and basic concepts refer your curriculum books first.</p>', '<p dir="ltr">Your performance in this language is really good. According to our analysis, you have a good understanding of all relevant areas. Every skill gets better with practice and specially a computer language needs time to get thorough with completely. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try hands on session while learning concepts.<br /> 2. Try to go beyond your curriculum and learn advanced concepts.<br /> 3. Try referring to books like Java Complete Reference. &nbsp;</p>', '<p dir="ltr">Your performance in java is phenomenal. You have exhibited a remarkable performance in this particular skill. Your level of understanding is commendable and you have a really good command over the language. Try to maintain the excellence by broadening your horizon. Read more, not only till the surface but deeply learn the concepts and try to solve conceptual problems. This will help in increasing your level. &nbsp;All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice high level concepts on online coding portals.<br /> 2. Solve more conceptual problems.<br /> 3. Get involved in live projects.<br /> 4. Try to get industry exposure.</p>'),
+(19, 19, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics, refer to Peter Baer Galvin.<br /> 2. Give time to the subject regularly<br /> &nbsp;</p>', '<p>Your performance in the subject is satisfactory. While your performance in Basic operating system terms like file systems etc is clear but your performance in Advance concepts of the subject like solving problems for FIFO, Round Robin etc is very poor. Your basics are weak hence you&rsquo;re not able to perform well in all areas of the subject. &nbsp;All the Best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start from basics, refer to Peter Baer Galvin.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. You just need to focus on advanced concepts of Operating System that is by referring books and portals other than your curriculum. Try gaining knowledge individually for each operating system, like Linux, Unix etc. You need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Try focusing on each operating system and having a good command over your basic curriculum.<br /> 2. Do small projects to get an industry experience.<br /> &nbsp;</p>', '<p>Your performance in this subject is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over all the areas covering Operating Systems. Your knowledge in terms of kernels, file systems are very clear. You can do well in jobs related to OS admin and support Your foundation is great, practice regularly to maintain the excellence. All the best!<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Practice high level concepts.<br /> 2. Try doing internships in this sector and get a practical experience.<br /> &nbsp;</p>'),
+(20, 20, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(21, 21, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(22, 22, '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>', '<p>No Comment Available</p>'),
+(23, 25, '<p dir="ltr">Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> <strong>Tips:</strong><br /> <br /> 1. Start with basics<br /> 2. Revise your formula&rsquo;s<br /> 3. Give time to each section regularly<br /> 4. Try timing yourself with each question</p>', '<p dir="ltr">Your performance in General Aptitude is satisfactory. While your performance could be better if you focus on all the sectors of the subject equally. Clear your basic concepts and formulas. As this subject is a mandatory need to qualify for any company or competitive exam, hence more time should be given to this particular subject. Do not jump into heavy problems straight, try solving the basics first. Regular practice is the key to ace this subject and know your worth. Give tests with timer involved to judge yourself. All the Best!</p>', '<p dir="ltr">Your performance in General Aptitude &nbsp;is really good. According to our analysis, you have a good understanding of all relevant areas of General Aptitude. General aptitude becomes stronger through practice thus to keep up the level you have to practice regularly, this not only helps in qualifying for company interviews but also helps in competitive exams for higher education. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!</p>', '<p dir="ltr">Your performance in General Aptitude is phenomenal. According to our analysis, you have an exceptional understanding of all relevant areas of General Aptitude. General aptitude becomes stronger through practice thus to keep up the level you have to practice regularly, this not only helps in qualifying for company interviews but also helps in competitive exams for higher education. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!</p>'),
+(24, 26, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br /> <br /> Tips:<br /> <br /> 1. Practice on your communication techniques.<br /> 2. Give time to the subject regularly</p>', '<p>Your performance in the subject is satisfactory. While you fulfil the basic requirements of communication, but your logical and critical thinking is very weak. You need to coordinate events and improve your confidence level to communicate and persuade people in a better way. All the Best!<br /> <br /> Tips:<br /> <br /> 1. Try coordinating events in small level.<br /> 2. Practice on your communication techniques.<br /> &nbsp;</p>', '<p>Your performance in this subject is really good. According to our analysis, you have a good understanding of all relevant areas. Your negotiation and communication techniques are really good but focus more on reasoning and logical. &nbsp;Keep it up!<br /> <br /> Tips:<br /> <br /> 1. Try focusing more on critical reasoning.<br /> 2. Do small projects or internships.<br /> 3. Coordinate events at college level.<br /> &nbsp;</p>', '<p>Your performance in this skill is phenomenal. You have exhibited a remarkable performance in this particular skill. You have a really good command over interpersonal skills and good logical reasoning. You have a good negotiation mind and are able to communicate well. We wish you All the Best!<br /> <br /> Tips:<br /> <br /> 1. Try doing internships and gain some practical experience.<br /> &nbsp;</p>'),
+(25, 27, '<p>Sorry but you could not qualify a decent level in this subject to get a beginner&rsquo;s badge. Your basic concepts are very poor and you need to start from the basics to attain a badge in this skill. Try to go through the basic book first, then slowly raise up your level. This will help you gain confidence and the will to learn more.<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Start with basics<br />\n2. Refer online tutorials for the subject.<br />\n3. Give time to the subject regularly</p>', '<p>Your performance in this is satisfactory. While your performance in Basic understanding of the subject is good but when it comes to advances concepts, your performance is really poor. Practice and identifying errors in the programs. You need to do in depth study of the subject and not only by the surface. If you follow all the steps you will be able to ace the language. All the Best!</p>\n', '<p>Your performance in this language is really good. According to our analysis, you have a good understanding of all relevant areas. Any skill get stronger with practice, with Bid data try doing small projects alongside for better understanding. You just need to practice hard enough to remain in touch with the field and not lose your hold on this subject. Keep it up!<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Try to broaden your horizon by going through books or concepts other than your curriculum.<br />\n2. Do internships to have in depth knowledge of the subject.</p>', '<p>Your performance in this language is phenomenal. You have exhibited a remarkable performance in this particular skill. Your level of understanding is commendable and you have a really good grip on the subject. Practice regularly in order to maintain this level of excellence throughout. Try to exceed your current level of performance by expanding your horizon, learning new concepts and solving more conceptual problems of this language. All the best!<br />\n<br />\n<strong>Tips:</strong><br />\n<br />\n1. Practice high level concepts on online coding portals.<br />\n2. Solve more conceptual problems.<br />\n3. Participate in hackathons and coding events to get the feel of industry environment.<br />\n4. Do internships in this field to get a better exposure</p>');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `skills`
 --
 
-CREATE TABLE `skills` (
-  `skillID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `skills` (
+  `skillID` int(5) NOT NULL AUTO_INCREMENT,
   `skill_name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`skillID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `skills`
@@ -3556,12 +4062,13 @@ INSERT INTO `skills` (`skillID`, `skill_name`, `active`) VALUES
 -- Table structure for table `testSettings`
 --
 
-CREATE TABLE `testSettings` (
-  `skillID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `testSettings` (
+  `skillID` int(5) NOT NULL AUTO_INCREMENT,
   `numberQuestions` int(5) NOT NULL,
   `timeAllowed` int(5) NOT NULL,
-  `passingCriteria` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `passingCriteria` int(5) NOT NULL,
+  PRIMARY KEY (`skillID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `testSettings`
@@ -3598,8 +4105,8 @@ INSERT INTO `testSettings` (`skillID`, `numberQuestions`, `timeAllowed`, `passin
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `mobile` bigint(10) NOT NULL,
@@ -3617,8 +4124,10 @@ CREATE TABLE `users` (
   `identityDocumentStatus` enum('1','2','3','4') DEFAULT NULL,
   `registrationLevel` enum('1','2','3','4','5') DEFAULT '1',
   `active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=358 ;
 
 --
 -- Dumping data for table `users`
@@ -3650,7 +4159,7 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (23, 'Manoj Kumar Garg', 'manoj@netcreativemind.com', 9810978433, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (24, 'S R Mustafa', 'srmustafa73@gmail.com', 7838204509, '5baced99d0bb5e574737dc535576bc9c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (25, 'Madhu S Shivakumar', 'madhu.ss96@gmail.com', 9108642164, 'd7aad483f66d38e875ff283dc220b58e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 61, 1, 0, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
-(26, 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'b24331b1a138cde62aa1f679164fc62f', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma-cp.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, '', '1', '3', 1, '2017-07-10 08:47:30'),
+(26, 'Nikhil Verma', 'nikhilverma@campuspuppy.com', 7503705892, 'a581a9ff40d2a401f4046761dff80a4c', 'http://backoffice.campuspuppy.com/assets/profileImages/nikhilverma-cp.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 1, '', '1', '3', 1, '2017-10-12 05:43:10'),
 (27, 'Rinku Kumar', 'rinku@1solutions.biz', 7428961976, '04b993c532201cefcdbb7b994f105355', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 0, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (28, 'Adid Khan', 'adid@explorecivil.net', 9973882422, 'c30761beaa3c43a3e9624603bc2e76f7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 0, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (29, 'Rohit Dutt', 'rohit@thealternativeglobal.com', 8800331664, '8a9ef653eb0a66d4f031a2110b6224be', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
@@ -3663,7 +4172,7 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (36, 'Parul Singh', 'withparulsingh@gmail.com', 9873855357, '9a517c9d23fa78e7117c63de3c494d72', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '2', 135, 1, 0, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (37, 'Sukhneet Kaur', 'sukhneet@akalinfosys.com', 9871092725, '989ce6020295e0438ca30ad02cbc6ea3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '2', 135, 1, 1, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (38, 'Shrikant Choudhary', 'shrikant@petzo.in', 9999966521, 'e398837d51d5eae383e4b66cf4535ea8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '2', 135, 1, 1, 0, '', '1', '5', 1, '2017-07-10 08:47:30'),
-(39, 'Sahil Kumar Maurya', 'sahil.kr.maurya@gmail.com', 9958316967, 'c55736dca01f35fabebe9cf2de679707', 'http://www.campuspuppy.com/assets/uploads/ProfileImage/Sahil_Kumar_Maurya39_10072017083037.jpg', 'http://www.campuspuppy.com/assets/img/cover-002.jpg', 'M', '4', '1', 135, 1, 1, 1, '', '1', '5', 1, '2017-07-12 09:51:23'),
+(39, 'Sahil Kumar Maurya', 'sahil.kr.maurya@gmail.com', 9958316967, 'c55736dca01f35fabebe9cf2de679707', 'http://www.campuspuppy.com/assets/uploads/ProfileImage/Sahil_Kumar_Maurya39_10072017083037.jpg', 'http://www.campuspuppy.com/assets/img/cover-002.jpg', 'M', '4', '1', 135, 1, 1, 0, '', '1', '5', 1, '2017-09-01 13:22:25'),
 (40, 'Itishri Singh', 'itishrisingh@campuspuppy.com', 9999511987, '0cc175b9c0f1b6a831c399e269772661', 'http://backoffice.campuspuppy.com/assets/profileImages/itishrisingh-cp.jpg', 'http://www.campuspuppy.com/assets/img/cover-001.jpg', 'F', '4', '2', 135, 1, 1, 0, '', '1', '5', 1, '2017-07-13 18:21:16'),
 (41, 'Abhishek Seth', 'abhishekseth666@gmail.com', 8287544126, 'd8578edf8458ce06fbc5bb76a58c5ca4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, '', '1', '3', 1, '2017-07-10 08:47:30'),
 (42, 'Mohak Juneja', 'mohakjuneja@yahoo.com', 9646500758, 'cf7711ff42e1b9f2dcf1374e5825f940', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, '', '1', '1', 1, '2017-07-10 08:47:30'),
@@ -3768,7 +4277,7 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (141, 'Bhawana Singh', 'singh.bhawana2@gmail.com', 8384915589, 'a8f5f167f44f4964e6c998dee827110c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-10 08:47:30'),
 (142, 'Priyanshi Agarwal', 'priyanshi2403@hotmail.com', 8506991027, '2d4b2243126bbe7d82bbef36bf0a87b4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-10 08:47:30'),
 (143, 'Shivani Prakash Gupta', 'shivani.prakash1995@gmail.com', 7408165064, 'dcfd118559931b1c0f45719f65071428', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-10 08:47:30'),
-(144, 'Arunima Agarwal', 'aru_agarwal95@rediffmail.com', 9953033631, 'ef956fba1acf7bbd0a1d142f32dbc6f0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-10 08:47:30'),
+(144, 'Arunima Agarwal', 'aru_agarwal95@rediffmail.com', 9953033631, '8c8d49f77dda24be5b8ab87a3d6f53dc', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-18 09:40:03'),
 (145, 'Nishith Jaiswal', 'jnishith01@gmail.com', 9582736108, '7815696ecbf1c96e6894b779456d330e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-10 08:47:30'),
 (146, 'Aman Raheja', 'amanraheja12@gmail.com', 7417758232, '7555051b6d8a2dca27a29f9cb0d2e3a6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-10 08:47:30'),
 (147, 'Vasundhra Sharma', 'sharmavasundhra95@gmail.com', 9990197575, '3f76818f507fe7eb6422bd0703c64c88', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-07-10 08:47:30'),
@@ -3802,7 +4311,188 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 (174, 'Tripti Mittal', 'triptimittal2010@gmail.com', 9195824664, '44086c5eb7616591396ffb07656a158e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-16 09:58:21'),
 (175, 'Prakhar Srivastava', 'prasri510@gmail.com', 9873851094, '96688eabbf0ef4d8ed468cbb67f0bade', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-17 19:10:13'),
 (176, 'Dilip IT Consultant and Management', 'info@diliponit.com', 8970818356, '5678c02fe6dec4c67637f9bc490ecc8d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '2', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-19 06:31:34'),
-(177, 'Shivam Srivastava', 'great.shivam19@gmail.com', 7838141687, '4f73954d7ffa07973f2d28bde12fca4d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-18 11:36:37');
+(177, 'Shivam Srivastava', 'great.shivam19@gmail.com', 7838141687, '4f73954d7ffa07973f2d28bde12fca4d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-18 11:36:37'),
+(178, 'Anubhav Gahlout', 'anubhav.gahlout89@gmail.com', 8188128475, '62a553a26243645a72827390fa16897a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-30 12:24:03'),
+(179, 'Sourabh Soni', 'sourabhlucky99@gmail.com', 7318018968, 'ea5e2b898fe75cf49d87494e537f62d5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-27 06:31:35'),
+(180, 'Prakher ', 'prakher@gorentride.com', 9654028487, 'f3a63968652cc6bc90d5ec7d96fefce3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-27 12:14:39'),
+(181, 'Kruti Goyal', 'kaaggoyal@gmail.com', 7532022541, '94f09c5841850148fc370607059ef12f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, '', '1', '4', 1, '2017-07-10 08:47:30'),
+(182, 'Sonam Pal', 'sonam9018@gmail.com', 8178941098, 'fb3a36dcc0c109aaa3f9de2d89714b68', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, '', '1', '4', 1, '2017-07-10 08:47:30'),
+(183, 'Rohan Chopra', 'rohanchopra68@gmail.com', 9999930792, '41b046191358d2415a4bfd551656c061', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, '', '1', '4', 1, '2017-07-10 08:47:30'),
+(184, 'Nishant Tyagi', 'luckytyagig@gmail.com', 9690647094, '41b046191358d2415a4bfd551656c061', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, '', '1', '4', 1, '2017-07-30 14:21:03'),
+(185, 'Dilip IT Consultant and management', 'dilip@diliponit.com', 9743414816, 'f273a52dc731eb2454252a7e325d5022', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-07-31 08:28:16'),
+(186, 'VAIBHAV ATTREE', 'vaibhavattree@gmail.com', 9958270863, '2ff2d114f3fffaa76bd8d1babc7e0c09', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-07-31 12:35:28'),
+(187, 'manoj sagoi', 'manoj.sagoi@gmail.com', 8826366174, 'e20f517179e9cd52ae29dae43c121b95', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-01 16:39:03'),
+(188, 'Bikash Pattnaik', 'bikashpattnaik59@gmail.com', 9938953932, '57e46f2f0ed47ab86e5c919f13828a83', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-10 16:40:45'),
+(189, 'Madan', 'hr@ebsprints.com', 8880522522, 'a096e0a251115b18ff02ea7f96d6880f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '2', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-14 10:20:19'),
+(190, 'Kaustabh Barman', 'kaustabh.barman13@gmail.com', 8076233968, '1c4cd69af1788413dede29a14be8639e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-18 20:07:11'),
+(191, 'shivanshu gupta', 'shivanshugupta2794@gmail.com', 7351292479, '0b6cd7986978c739cb42299510a3c57f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-19 10:46:05'),
+(192, 'Arun Kumar', 'arungupta20395@gmail.com', 9675955977, 'bd4401f98b544dd8d4c35d54253d2793', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-19 12:53:02'),
+(193, 'Shantanu', 'shantanu8960@gmail.com', 7376870187, '93cfd02046953b07d959ab786b035cc7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-08-19 16:16:40'),
+(194, 'sachin', 'mkisachin@gmail.com', 9717827346, '81dc9bdb52d04dc20036dbd8313ed055', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-19 16:46:56'),
+(195, 'varun singh', 'varun07nurav@gmail.com', 9911362440, 'f8aa915c3b2da5a7f6b2a2e9d35072c5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-22 20:01:40'),
+(196, 'salokya', 'sriv.rashika@gmail.com', 9911910576, '62c1dc840b80b395403ad0fed7debcf6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-23 16:02:08'),
+(197, 'Sana ', 'sanaherneja@outlook.com', 9953618166, '768f46da8dbc8a7e1918605b1fbc76ff', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-25 09:38:52'),
+(198, 'Shailvi Singh', 'shailvi.singh@teamimpetus.com', 9453164557, 'b7164ba5dbae9ffdcf63d9c0e105f358', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-26 19:29:24'),
+(199, 'Ashit', 'kmr.ashit1303@gmail.com', 9053220180, '7f8f48c78cbc972f224ed0069114fcd9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, 'http://www.campuspuppy.com/identityDocument/id_card.pdf', '2', '4', 1, '2017-08-30 07:19:54'),
+(200, 'Roopak walia', 'waliaroopak25@gmail.com', 9996607400, '1324af371d0c83e366f30ebc6b1bc668', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-30 07:42:14'),
+(201, 'ravi', 'bhardwaj.ravi101@gmail.com', 9540702676, 'dfc10bdbcec595e4d0eec87390895c43', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-08-30 16:21:16'),
+(202, 'harshit sachdeva', 'harshsachdeva80@gmail.com', 8447882079, '6ae28a55456b101be8261e5dee44cd3e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 08:47:51'),
+(203, 'swati arora', 'swatiarora084@gmail.com', 8569805229, '6a035f4d19a12aff9130f2ec0ccc4119', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 08:53:32'),
+(204, 'Monika Singh', 'monikasingh@hcl.com', 9650691555, '8b3282626403db8a8138a6377b955e7a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '2', 135, 1, 1, 0, '', '1', '5', 1, '2017-09-18 16:17:50'),
+(205, 'manish', 'manishbhalla1@gmail.com', 9987628783, '3a8512972834fb0b0d079abc4d6aa48d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-30 10:10:30'),
+(206, 'KAPIL KUMAR', 'kapilmit10@gmail.com', 9466061450, 'dd48e09a593d12aff6a314d2bf5a26cb', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-10-10 12:27:14'),
+(207, 'kushagra singh', 'kushagrasingh770@gmail.com', 8586871314, 'a2eb822df778feffad8b20ea038995aa', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 14:23:42'),
+(208, 'Mayank Khanduja', 'mayankkhanduja8@gmail.com', 9013028638, 'b46f685f85e0af830d82ddbbe795eff3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 14:26:43'),
+(209, 'Pranav vashist', 'pranav.vashist1@gmail.com', 8447847063, 'd69f1db266ee2077e2b1e220aeffc211', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 15:16:31'),
+(210, 'Kanishk Garg', 'kanishkgarg55@gmail.com', 9873244668, '53808354d956d316ea50ecae21910283', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 16:55:24'),
+(211, 'Rajat Sharma', 'rajat1111997@gmail.com', 9991538131, '1fb41bbe5e723a4ba2f157a97d928913', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-30 17:00:39'),
+(212, 'Aditi Mudgal', 'aditi.mudgalaa2@gmail.com', 8130211368, 'c18692b896ddbc0a5eb83fd64983db93', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 04:46:30'),
+(213, 'PIYUSH', 'piyush46749@gmail.com', 9991950504, '126e1e2ba9bf10e37055776c3c0853e0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 05:17:30'),
+(214, 'zubin nair', 'znair96@gmail.com', 9810255331, '60b7abdf7dc947f78b5601723b71cb3c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 15:57:01'),
+(215, 'DAVID', 'rajatking111997@gmail.com', 9873017735, '91a847fb870fd24648cffd72847dea2f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-08-31 06:12:12'),
+(216, 'ishaan bhaskar', '24ishanb@gmail.com', 9555394746, 'e276db8c4e48bf20b18fcb312216cf23', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 08:08:59'),
+(217, 'Nilaksh Thakur', 'nthakur119@gmail.com', 9418067518, '2f2bd891ee1d169b20874e5dfc6533e2', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 08:39:16'),
+(218, 'karan', 'Karankg1997@gmail.com', 9560217892, '7c117c7b7aa0884428f71bc4269e389e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-006.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-09-30 12:12:11'),
+(219, 'Kenneth Mohandas', 'kennethmohandas111@gmail.com', 9971381272, '828da7f4c34eed26873cade974c8de90', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 15:02:09'),
+(220, 'Himanshu Sachdeva', 'himanshu.sachdeva1994@gmail.com', 8130329097, '5832cd5506fe896818368034bea3243e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-08-31 18:28:33'),
+(221, 'Preet', 'pgpreetgoel12@gmail.com', 9582987155, '740c94ad74f60818d9ae41da7881e015', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-10-07 13:20:33'),
+(222, 'Arun', 'arunv4080@gmail.com', 7404273824, '8d014b59248b188d22d3e6f534881cf5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-02 02:31:08'),
+(223, 'Saksham Rehan', 'sakshamrehan3@gmail.com', 8791448792, '24ff641ad8e7a1411a47a6558f7be2b3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-09-02 14:30:25'),
+(224, 'Saguna Chopra', 'sagunachopra97@gmail.com', 9654959891, '569ba09eab44013e3e23550d04bcc986', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-02 17:11:17'),
+(225, 'Mariyam ', 'mariyam.jalees123@gmail.com', 9818436417, '74a1c09aadf53ddab8346330ef701811', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-05 08:33:10'),
+(226, 'Saif Aslam', 'saifasm8@gmail.com', 7838836421, '91d45fdad0a140aadbbce5abcee51554', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '2', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-09-07 10:10:23'),
+(227, 'kusal gupta', 'july.kushal@gmail.com', 9599523032, '52f0ac8fc05dc13f478f27dfb4a977bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-11 18:02:08'),
+(228, 'Kushal Gupta', 'kushal2007gupta@gmail.com', 9455681856, '52f0ac8fc05dc13f478f27dfb4a977bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-11 18:20:59'),
+(229, 'Prateek', 'prateek.wadhwa14@gmail.com', 7206345990, '38f17efe263aec7e30081d4bca251820', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-12 14:23:17'),
+(230, 'Pranay Khanna', 'pranaykhanna2012@gmail.com', 7838269616, 'c6e6e9119e31c91cc4b2833f89abeabe', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-27 09:06:56'),
+(231, 'Saurav Dobhal', 'hitherto.wylde@gmail.com', 9873878992, '9903737e4fe836bf375220f1928a375d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-12 16:58:37'),
+(232, 'Vivek', 'vivekmishra892@gmail.com', 9971689497, '6eea9b7ef19179a06954edd0f6c05ceb', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-09-13 04:31:53'),
+(233, 'sajal bansal', 'sajalbansal974@gmail.com', 9654422844, 'e563326f1612cddc7b7e8ce81b4a3233', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-09-13 04:31:30'),
+(234, 'Yogesh Kumar', 'kumaryogesh13500@gmail.com', 9990038348, 'e0f489329a2f1aa9a4b14ae118767227', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-14 01:05:04'),
+(235, 'Kunal Manik', 'kunalmanik95@gmail.com', 8708420411, '548f06af15a6493170cb6f400581d096', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-13 04:43:28'),
+(236, 'ROHAN YADAV', 'ROHANYADAV024@GMAIL.COM', 9717852740, 'e807f1fcf82d132f9bb018ca6738a19f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-09-13 04:37:07'),
+(237, 'Kaushal Kumar', 'kumar96kaushal@gmail.com', 9671144354, '10c02a49d1494425da60231fff38c467', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-09-13 04:40:23'),
+(238, 'navdeep', 'navdeepgahlawat3@gmail.com', 9467282823, 'f457a057b1808a6e174bb26fe15c5fd0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-13 04:48:37'),
+(239, 'Balraj Saini', 'shadybalraj@gmail.com', 9991915421, '5a8c80bc0ef6ca5ae6cf038c8df315a5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-23 12:03:06'),
+(240, 'Deeksha Shandilya', 'shandydeeksha16@gmail.com', 9034676589, '23b431acfeb41e15d466d75de822307c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-09-13 04:52:17'),
+(241, 'YATHARTH KUNDRA', 'yatharthk8241@gmail.com', 9900367606, '069ee1d167a0a9d25e8764b4e4dfe930', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-13 07:36:16'),
+(242, 'somya gupta', 'somya.sg18@gmail.com', 7065133060, '30047ab667f31e031e84eb206e42b3dc', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-15 16:50:34'),
+(243, 'DHRUV', 'dhruv.gpt02@gmail.com', 9899491103, '5ff0ebed76fe2d5e4fe35c3465eed616', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-16 08:51:15'),
+(244, 'Manik Juneja', 'manikjuneja13@gmail.com', 8222800220, 'f3b95292c3eadbed8af336fe91018d83', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-17 03:53:55'),
+(245, 'Aakash Mudgil', 'aakashmudgil7@gmail.com', 8586937718, 'ed24ef33deb188768c6a3a2926f7c2f6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-09-19 17:21:29'),
+(246, 'Vivek Kumar Maddhesiya', 'vivekmaddhesiya1991@gmail.com', 8765617924, '1dc36fe72f272b889d364dc4d4c7ffd8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-20 16:40:40'),
+(247, 'Biswa Bijaya Samal', 'me@biswabijaya.com', 9090374605, '0028606febd55af7e7e880dcd38145b5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:32'),
+(248, 'satvik bansal', 'satvikbansl@gmail.com', 9466364576, '6e0808f67dc19b32c166dfe5307507c8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:33'),
+(249, 'Rishabh Pandey', 'pandeyrishabh97@gmail.com', 8929893219, '1586cc0b899b1724b176e05eb22042f9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:34'),
+(250, 'Rishabh Kumar', 'rishabh.bhardwaj2010@gmail.com', 8285618367, '07b23adbb666e5c0b28c3d37282b69db', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:35'),
+(251, 'Kunwar Pulastya', 'kpulastya9@gmail.com', 9560429444, '71ce2352360788def4e11c28ba587b67', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:35'),
+(252, 'Shivam Gupta', 'shivugupta97@gmail.com', 8222089634, 'b40112469d6bb94ca27231a383f5fbd1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:36'),
+(253, 'Harish                       ', 'ambdharish100@gmail.com', 9138256325, '8c2bd9890f876c0e4ca1a9bc2037df31', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:36'),
+(254, 'Utkarsh Sharma', 'sharmautkarsh96@gmail.com', 8607322246, '83ce1e8e50190f2b09fcd26f30fab65f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:37'),
+(255, 'ANSHUL SHARMA', 'anshulsankhyan@gmail.com', 8894828736, '05a301b4b7a2bd3fdc61de2a9aa0d842', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:37'),
+(256, 'gagan yadav', 'bindassgagan@gmail.com', 7532992250, 'cec0c5981b6ecbf832bba7f43759397f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:37'),
+(257, 'Adish Jain', 'adishjain589@gmail.com', 8950697737, 'c5f8a7e74fd63e7acf56dfb6ddd09418', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:38'),
+(258, 'Prajesh Mehta', 'prajesh.meheta@gmail.com', 9582783109, '306bb98682cab115aa1b8931853a36ab', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:38'),
+(259, 'juhi parikh', 'juhiparikh97@gmail.com', 8585919707, '68e6691249652ac535c6ae62163d96e9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:39'),
+(260, 'N K HARRIS KUMAR', 'harrisnk.1998@gmail.com', 9953653388, 'eba1d9e1affbdd3a47678305e48efbd1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:39'),
+(261, 'K Srinath', 'lnsnath@gmail.com', 9968297704, '87863baab6871748b63352599bd8f06b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:40'),
+(262, 'Jyoti dalal', 'jyotidalal1997@gmail.com', 8930578371, '63226edbb6722866769dbc3bd182f336', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:41'),
+(263, 'Harsh Jangra', 'harshjangra48@gmail.com', 8950198238, '349df45dbfd35eaa9b4809dc0c1a5834', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:42'),
+(264, 'Jyoti Gambhir', 'jyotigambhir247@gmail.com', 8814053073, '39af072a4c951cb684f43a8f15234536', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:42'),
+(265, 'Ishaan Bhaskar', 'ikbh99@gmail.com', 9015975255, 'e276db8c4e48bf20b18fcb312216cf23', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:43'),
+(266, 'shruti thapar', 'shrutithapar15@gmail.com', 7056703040, 'd70cb91d7205f02242d43d1d66d830a9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:43'),
+(267, 'bhaveet kumar', 'bhaveetseekin14@gmail.com', 8930855838, 'bd8efb476ec2433fa85cd3cba06b4c63', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:43'),
+(268, 'pranav vashist', 'pranav.vashist111@gmail.com', 8447847063, 'd69f1db266ee2077e2b1e220aeffc211', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:44'),
+(269, 'Rishabh Sinha', 'rishabh566@live.com', 9999288920, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:44'),
+(270, 'Parichay Sharma', 'parichaysharma21@gmail.com', 9717661840, 'a895e25a071eba550a3db52f0b5d9ef0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:45'),
+(271, 'raghav aggarwal', 'raghav9712@gmail.com', 9810877466, '6053586e1a5d26919d8b997e52fa27ec', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:45'),
+(272, 'hritika tandon', 'tandonhritika@gmail.com', 9992533383, 'bbc7f430cd5dc0fef7ad088371c03a71', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:46'),
+(273, 'satyam agrawal', 'satyam.agr1996@gmail.com', 9992209339, '9aafad407f857ef19a3bee004a7df4a4', 'http://www.campuspuppy.com/assets/uploads/ProfileImage/satyam_agrawal273_28092017013014.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-27 20:00:14'),
+(274, 'Ravi Kharb', 'ravikkharb@gmail.com', 9034612834, '8ee50bfb994662363b22998cc213fe32', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:47'),
+(275, 'rishabh surana', 'rishu.surana14@gmail.com', 8287776461, '15b1a4c0ddb2fdb69f33dc5616542a7d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:47'),
+(276, 'Shonik Raj', 'rajshonik@gmail.com', 9464374414, 'dbabe6aa3bf071169639c4ca988121aa', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:47'),
+(277, 'Pulkit Gogia', 'pulkit.ramjas@gmail.com', 8287493983, 'c1ebaa4a65aefce86572f0d0350c155c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:48'),
+(278, 'Vaishali singh', 'vishusingh7790@gmail.com', 9034449142, '40c3a8cdce1668cf859c9e14ab0b999d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:48'),
+(279, 'garishma arora', 'garishma14@gmail.com', 9013232020, 'c7c6f4230c2b66f46bbeaddf895dc19b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:49'),
+(280, 'vasant vohra', 'vasantvvv@gmail.com', 8700410435, '4f95aab4a3023235322d65b4fd5d5e05', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:49'),
+(281, 'SAKSHI GUPTA', 'sakshi.gupta0417@gmail.com', 9873560417, 'ab1dbd386662b62477b62087a389256a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:50'),
+(282, 'Archirekh Majumder', 'archirekhmajumder42@gmail.com', 9830788010, '01218e86e95e581b12f7c12e3c981eb8', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:50'),
+(283, 'Navodit Singhal', 'singhalnavodit@gmail.com', 9818728650, '763b9e7a732bc998e0772040cf5110bf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:51'),
+(284, 'Hemant Kumar', 'hemantdahiya99@gmail.com', 8529493494, '78bb292f9460177b64475cd16821920e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:51'),
+(285, 'Daya  vats', 'daya23vats@gmail.com', 7404802608, 'f592b5d3889dcfb8809034f4e8d838cd', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:52'),
+(286, 'aditya sethi', 'adisethi123@gmail.com', 9953999221, '3dd26396192b16eda60bb99efaf8e7a4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:52'),
+(287, 'kshitij katiyar', 'srm.katiyar@gmail.com', 8571019767, '7f0dae1a7771a92608caae73a1017bb6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-30 11:30:30'),
+(288, 'manik batra', 'manikbatra25@gmail.com', 9896377265, 'c62406846525b5d1ae388252e97eebc2', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:53'),
+(289, 'Rishav  Kaushal', 'rishavkaushal111@gmail.com', 9599510941, '827ccb0eea8a706c4c34a16891f84e7b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:54'),
+(290, 'Aastha Verma', 'aasthav1997@gmail.com', 8802655249, '8fd375682f1c7d7def5894bf4b6f2ccf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:54'),
+(291, 'diwakar kumar', 'diwakarjha397@gmail.com', 7876025394, 'e10adc3949ba59abbe56e057f20f883e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-28 09:59:43'),
+(292, 'pranav vashist', 'pranav.vashist28@gmail.com', 7011136275, 'd69f1db266ee2077e2b1e220aeffc211', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:55'),
+(293, 'sandeep chahal', 'sandeepchahal740@gmail.com', 9118000060, 'fc0d4bcbb7721a72fa6ca48258dd7bf5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:55'),
+(294, 'shivani gulati', 'shivani.gulati77@gmail.com', 9310645901, '2138cb5b0302e84382dd9b3677576b24', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:56'),
+(295, 'PREETI GUPTA', 'preetigupta998@gmail.com', 8826013055, '48d9d2bbfdb0d128464d3d7ecfa626b4', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:56'),
+(296, 'RAVI KHAPRA', 'anonymouscia786@gmail.com', 9671400742, '3d3966a365f3c300004a14135e1236f1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:57'),
+(297, 'Ritika  Agarwal', 'ritikaa72@gmail.com', 9530090539, '8377260da528225b6bd7d85d1215f32d', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:57'),
+(298, 'SHUBHANGI KUNDRA', 'shubhangi.kundra.99@gmail.com', 9729630399, '5650ecb36f6611ba3e7497db983f3f7b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:58'),
+(299, 'NIKHIL GUPTA', 'gupta.nikhil3199@gmail.com', 9654553327, '102eb1ef188b1a24e1a3e2621298702a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:58'),
+(300, 'AVINASH  BAGUL', 'avibagul80@gmail.com', 8087974090, 'c7013e06526afc34c1818f456a3880db', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:58'),
+(301, 'prafful singh', 'prafful.singh017@gmail.com', 8384928547, '3fc0a7acf087f549ac2b266baf94b8b1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:59'),
+(302, 'Inaam mir', 'mirinaam1995.im@gmail.com', 8059817107, 'f59046ad3f1c4966c398bd1fc9ed8b33', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:23:59'),
+(303, 'Dimple Bhardwaj', 'bhardwaj.dimple13@yahoo.com', 8816937894, '047eb126571d816e4d8d7c1cff453984', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:00'),
+(304, 'Neha Rana', 'neharana95126@gmail.com', 8930023813, 'a05c15c5197d178fa82e9eb9b3f8cf9e', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:00'),
+(305, 'Sakshi  Dhawan', 'sakshidhawan87@gmail.com', 9999147267, '20412eb6968682060afde3b19ab484f3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:01'),
+(306, 'Utsav Preet', 'utsavpreet@gmail.com', 9717286281, '420ff54f63f0c752838b0debb64ad865', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:01'),
+(307, 'Karthik Mohan', 'karthikmohan59@gmail.com', 9566113354, 'ca1ce7282abaf433cb28178f2b1460cf', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:02'),
+(308, 'pardeep rohilla', 'pardeeprohilla060@gmail.com', 8571027185, '2999f74c20197d34301f442cfc10a19b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:02'),
+(309, 'shikhar kapila', 'kap.shikhar@gmail.com', 9999288920, '403f8e510ebb7ac9489f2f1d1804a50b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:03'),
+(310, 'Faisal Ahmed', 'faisalahmedwork1@gmail.com', 9468267176, '34d9836a599015ab4215aaa3dfb7e2d5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:03'),
+(311, 'Yashika Chaudhary', 'yashikac17@gmail.com', 7027673833, '957773852059a0090d504aefb934c9e2', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:03'),
+(312, 'Maninder Duhan', 'Maninderduhan1@gmail.com', 9050566076, '99461716eba4e60a6eae8471bdf57034', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:04'),
+(313, 'Devanshu  Kaushik', 'devanshu.kaushik74@gmail.com', 8800208006, 'f713b8e4b896ef1f730f1d89abfc95d0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:05'),
+(314, 'Garima Chauhan', 'garimachauhan54@gmail.com', 8813017767, 'e63f56d891426b54ad592f0f5537b17a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:05'),
+(315, 'hardik talwar', 'hardik23197@gmail.com', 9416080923, '6f1a4eac96bd3e211101867f3f7e5826', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 07:02:16'),
+(316, 'Aditya Kohli', 'akohli2014@gmail.com', 9999219792, 'ad64c1befd4671bf4cfb491bfff2de8b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:06'),
+(317, 'Kaushal Kumar', 'kaushalscobono@gmail.com', 9671144354, '10c02a49d1494425da60231fff38c467', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:07'),
+(318, 'Mohan Samal', 'mohan.k.samal@gmail.com', 8826819550, '85064efb60a9601805dcea56ec5402f7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:07'),
+(319, 'ARUSHI SHARMA', 'sharmaarushionline05@gmail.com', 9990113151, '398e00ed7218d1d0a1fcea08dbf9aac1', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:08'),
+(320, 'SAHIL KAUSHISH', 'sahilkaushish7@gmail.com', 9813827414, '3d769db291e9ba1661ab59393570952c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:08'),
+(321, 'K H VAISHNAVI', '2khv.1096@gmail.com', 8447770809, '1a7a54e0e7dce9a656dd751c732e519f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:09'),
+(322, 'sachin ruhil', 'sachinruhil06@gmail.com', 9811159922, 'ffac1fcbb5e5b438e064fff0eb38879f', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:09'),
+(323, 'Harmanan Kohli', 'hkohli40@gmail.com', 9819527168, '2d1b07ff9f34bfdf546a6b45c6319bdb', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:09'),
+(324, 'Shubham Angaria', 'shubhammetrodude@gmail.com', 9582053671, '39f789c974aaf55fa304153254b48355', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:10'),
+(325, 'Varshini Srinivasan', 'suj.varsha@gmail.com', 9599587417, '1329f0fee1a45a217ea1447f3c87bcd9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:10'),
+(326, 'Chiman  saini', 'Chimansaini1994@gmail.com', 8059109052, '632e37e4ab4ce2c4003b8ebe40cf6289', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:11'),
+(327, 'Pulkita Goel', 'pulkitagoel.goel@gmail.com', 9899411381, 'b592499c4e84ab826a65e3170040699a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:11');
+INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileImage`, `coverImage`, `gender`, `relationshipStatus`, `accountType`, `cityID`, `emailVerified`, `mobileVerified`, `displayMobile`, `identityDocument`, `identityDocumentStatus`, `registrationLevel`, `active`, `created_at`) VALUES
+(328, 'POOJA BHUSHAN', 'poojabhushan96@gmail.com', 8930929558, '04eaae5e3b8c6620e759dc99f37bb4a3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:12'),
+(329, 'Damini Sharma', 'daminisharma.278@gmail.com', 9818028713, '67cb6d1087fe07ff0647e5bc83916746', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:12'),
+(330, 'priya duggal', 'priya07duggal@gmail.com', 7838779549, 'ebf36750de40477dbcb4f996bb01a979', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:12'),
+(331, 'Saurabh Joshi', 'saurabhjoshi130894@gmail.com', 7275581735, 'cc06bbaba0df3b2fe7127954ce952c6c', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:13'),
+(332, 'vanshika oberoi', 'vanshikaoberoi17@gmail.com', 9999331265, '9ce5bf51f40edd95f7f4dbfcce918ad7', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:13'),
+(333, 'Anirudh Gupta', 'emanirudh96@gmail.com', 8860982609, '8dc52efd4d15108378c27c92e1ef04ae', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:14'),
+(334, 'Dimple Bhardwaj', 'bhardwaj.dimple13@gmail.com', 7015455465, '047eb126571d816e4d8d7c1cff453984', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'F', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:14'),
+(335, 'Shubhank Kuchhal', 'shubhank.kuchhal1997@gmail.com', 7404643238, 'b47592872fca4910b55af1120167fcc5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:15'),
+(336, 'ROHAN YADAV', 'VIVEKJOGESHAM178@GMAIL.COM', 9717852741, '25f9e794323b453885f5181f1b624d0b', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:15'),
+(337, 'sajal bansal', 'dipeshbansal407@gmail.com', 9654760456, 'e563326f1612cddc7b7e8ce81b4a3233', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 1, 1, 0, NULL, NULL, '5', 1, '2017-09-26 06:24:15'),
+(338, 'balrmk', 'pagalpuneet2017@gmail.com', 8826358224, '1fb8de92b619818c13a557bef7f00f92', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-17 17:01:33'),
+(339, 'Kunal Manik', 'kunalmanik0895@gmail.com', 8901315677, '548f06af15a6493170cb6f400581d096', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-09-26 06:49:35'),
+(340, 'Aditya Gaur', 'abgaur1996@gmail.com', 9810853847, '7202566eff84ebe367637814f04cda75', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-09-27 10:13:57'),
+(341, 'vibhor jain', 'vibhorjain2689@gmail.com', 9599952969, 'a8b6bb3b34339f5a6d439a0ef7fc7878', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-27 13:06:24'),
+(342, 'Ram Bhakta', 'ramsunderbhakta@gmail.com', 9076129303, 'db7b1319e761188a3a7a0ad72681ae04', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '2', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-09-30 05:27:45'),
+(343, 'abc', 'ads@rhd.com', 1111111111, '62305bc1d05a4fce3f4e0b2d884397d5', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-10-01 07:26:30'),
+(344, 'Shriya Gupta', 'shriya96gupta@gmail.com', 9654097875, '008c41473317601853abafc6aeaa16b3', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-02 16:27:51'),
+(345, 'MANAS KASHYAP', 'manaskashyaptech@gmail.com', 9862791992, '3b130ad71adeabed59071f7a323fc4fa', 'http://www.campuspuppy.com/assets/uploads/ProfileImage/MANAS_KASHYAP345_02102017231747.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '4', 1, '2017-10-02 17:47:47'),
+(346, 'surya kapoor', 'surya.kapoor14@gmail.com', 9899556852, '256abac5ed95ebe4e14fcd3c6f697bc0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-05 09:19:20'),
+(347, 'Alvin Divyank Lakra', 'lakraalvin@gmail.com', 9871164461, '117610f03b89917236464a3d9b4fb5ab', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '1', 1, '2017-10-06 05:15:49'),
+(348, 'Hammad Raza', 'hammad.raza57@gmail.com', 9999929541, 'f0bfd9d865292d2d59fd630313fcd5ca', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-09 19:02:55'),
+(349, 'missionary', 'urchihe@gmail.com', 813014861, 'a43bf0eea8819c04af027d9b694ca3b6', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-13 17:53:03'),
+(350, 'siva teja boddeti', 'shivateja.boddeti@gmail.com', 8333833925, '27dccae70613dbc1eed74c363f875586', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 551, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-18 13:44:14'),
+(351, 'PRAVEEN KUMAR SINGH', 'praveens440@gmail.com', 8750203048, 'aea86aa1961dd15c438cc134a5294729', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 1, NULL, NULL, '3', 1, '2017-10-22 08:29:53'),
+(352, 'sachin yadav', 'ersachinme2016@gmail.com', 8587926236, '959301c94d7c7876c2a50035482294b8', 'http://www.campuspuppy.com/assets/uploads/ProfileImage/sachin_yadav352_27102017221553.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', 'M', '4', '1', 135, 0, 0, 0, 'http://www.campuspuppy.com/identityDocument/New_Doc_2017-08-30_(10)_1.jpg', '2', '4', 1, '2017-10-27 16:47:10'),
+(353, 'ABHAY KANT RAVI', 'abhaykantravi1992@gmail.com', 9108568845, 'f90ccfa62be9e614b785a61179a57b84', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-10-30 06:37:51'),
+(354, 'shivam malhotra', 'shivam_malhotra@outlook.com', 8527402882, '3c7232e2cb129376c6af16ac7bdecc33', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '2', 1, '2017-11-03 18:41:46'),
+(355, 'eshaan garg', 'garg.eshaan1998@gmail.com', 7291053211, 'aee03f9d8d7d9944dcba301160a170f0', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-11-05 18:09:05'),
+(356, 'Monika', 'monchauhan411@gmail.com', 9560417003, '6f3fc039bfe1efdb272111f276a0e84a', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-11-06 18:19:04'),
+(357, 'Nawaz', 'akhtar.nawaz4@gmail.com', 8285857259, 'fb567abe60f79d02b69f71c012b529c9', 'http://backoffice.campuspuppy.com/assets/profileImages/default-user.jpg', 'http://www.campuspuppy.com/assets/img/cover-default.jpg', NULL, '4', '1', 135, 0, 0, 0, NULL, NULL, '3', 1, '2017-11-09 14:16:39');
 
 -- --------------------------------------------------------
 
@@ -3810,32 +4500,634 @@ INSERT INTO `users` (`userID`, `name`, `email`, `mobile`, `password`, `profileIm
 -- Table structure for table `userSkills`
 --
 
-CREATE TABLE `userSkills` (
+CREATE TABLE IF NOT EXISTS `userSkills` (
   `userID` int(5) NOT NULL,
   `skillID` int(5) NOT NULL,
   `score` float NOT NULL,
   `testDate` bigint(12) NOT NULL,
-  `skillType` enum('1','2','3','4') NOT NULL
+  `skillType` enum('1','2','3','4','5') NOT NULL,
+  `COATuserID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `userSkills`
 --
 
-INSERT INTO `userSkills` (`userID`, `skillID`, `score`, `testDate`, `skillType`) VALUES
-(1, 1, 100, 1499682684, '1'),
-(1, 2, 100, 1499682684, '1'),
-(1, 3, 100, 1499682684, '1'),
-(1, 4, 100, 1499682684, '1'),
-(39, 4, 70, 1499797800, '1'),
-(39, 25, 80, 1499797800, '1'),
-(161, 12, 70, 1499797800, '1'),
-(6, 15, 60, 1499797800, '1'),
-(14, 14, 70, 1499797800, '1'),
-(172, 7, 70, 1500057000, '1'),
-(80, 17, 80, 1500229800, '1'),
-(39, 17, 70, 1500229800, '1'),
-(134, 25, 80, 1500402600, '1');
+INSERT INTO `userSkills` (`userID`, `skillID`, `score`, `testDate`, `skillType`, `COATuserID`) VALUES
+(1, 1, 100, 1499682684, '1', 0),
+(1, 2, 100, 1499682684, '1', 0),
+(1, 3, 100, 1499682684, '1', 0),
+(1, 4, 100, 1499682684, '1', 0),
+(39, 4, 70, 1499797800, '1', 0),
+(39, 25, 80, 1499797800, '1', 0),
+(161, 12, 70, 1499797800, '1', 0),
+(6, 15, 60, 1499797800, '1', 0),
+(14, 14, 70, 1499797800, '1', 0),
+(172, 7, 70, 1500057000, '1', 0),
+(80, 17, 80, 1500229800, '1', 0),
+(39, 17, 70, 1500229800, '1', 0),
+(134, 25, 80, 1500402600, '1', 0),
+(190, 17, 70, 1503081000, '1', 0),
+(190, 12, 60, 1503081000, '1', 0),
+(190, 15, 80, 1503081000, '1', 0),
+(201, 17, 60, 1504031400, '1', 0),
+(201, 15, 60, 1504031400, '1', 0),
+(201, 21, 60, 1504031400, '1', 0),
+(201, 4, 60, 1504117800, '1', 0),
+(201, 19, 60, 1504117800, '1', 0),
+(213, 4, 70, 1504117800, '1', 0),
+(214, 15, 60, 1504117800, '1', 0),
+(214, 4, 70, 1504117800, '1', 0),
+(216, 15, 70, 1504117800, '1', 0),
+(216, 17, 70, 1504117800, '1', 0),
+(216, 11, 90, 1504117800, '1', 0),
+(216, 6, 80, 1504117800, '1', 0),
+(217, 15, 80, 1504117800, '1', 0),
+(217, 11, 90, 1504117800, '1', 0),
+(217, 17, 90, 1504117800, '1', 0),
+(217, 6, 60, 1504117800, '1', 0),
+(218, 17, 70, 1504117800, '1', 0),
+(216, 3, 60, 1504117800, '1', 0),
+(219, 17, 60, 1504117800, '1', 0),
+(219, 7, 80, 1504117800, '1', 0),
+(219, 11, 60, 1504117800, '1', 0),
+(219, 4, 70, 1504117800, '1', 0),
+(219, 6, 60, 1504117800, '1', 0),
+(214, 17, 60, 1504117800, '1', 0),
+(214, 11, 80, 1504117800, '1', 0),
+(214, 13, 70, 1504117800, '1', 0),
+(214, 19, 60, 1504117800, '1', 0),
+(206, 15, 70, 1504117800, '1', 0),
+(206, 17, 70, 1504117800, '1', 0),
+(206, 11, 70, 1504117800, '1', 0),
+(206, 13, 60, 1504117800, '1', 0),
+(220, 17, 70, 1504204200, '1', 0),
+(220, 15, 90, 1504204200, '1', 0),
+(202, 17, 70, 1504204200, '1', 0),
+(202, 12, 60, 1504204200, '1', 0),
+(202, 6, 70, 1504204200, '1', 0),
+(202, 4, 80, 1504204200, '1', 0),
+(202, 8, 60, 1504290600, '1', 0),
+(202, 13, 60, 1504290600, '1', 0),
+(206, 19, 60, 1504290600, '1', 0),
+(206, 7, 60, 1504290600, '1', 0),
+(206, 25, 60, 1504290600, '1', 0),
+(206, 4, 60, 1504290600, '1', 0),
+(223, 4, 60, 1504290600, '1', 0),
+(223, 6, 70, 1504290600, '1', 0),
+(223, 17, 70, 1504290600, '1', 0),
+(202, 11, 90, 1504290600, '1', 0),
+(202, 20, 70, 1504290600, '1', 0),
+(202, 18, 60, 1504290600, '1', 0),
+(202, 19, 60, 1504290600, '1', 0),
+(218, 21, 70, 1504377000, '1', 0),
+(201, 6, 60, 1504463400, '1', 0),
+(206, 3, 60, 1504463400, '1', 0),
+(206, 6, 60, 1504463400, '1', 0),
+(206, 8, 60, 1504463400, '1', 0),
+(206, 12, 60, 1504463400, '1', 0),
+(225, 6, 60, 1504549800, '1', 0),
+(225, 11, 70, 1504549800, '1', 0),
+(228, 17, 70, 1505068200, '1', 0),
+(228, 11, 70, 1505068200, '1', 0),
+(202, 15, 80, 1505241000, '1', 0),
+(247, 15, 47.3203, 1506407013, '3', 1),
+(247, 9, -6.82787, 1506407013, '5', 1),
+(247, 6, 6.81656, 1506407013, '5', 1),
+(247, 4, 10.7069, 1506407013, '2', 1),
+(247, 25, 6.99288, 1506407013, '5', 1),
+(248, 2, 1.16767, 1506407013, '5', 2),
+(248, 16, -3.3514, 1506407013, '5', 2),
+(248, 26, -10.6364, 1506407013, '5', 2),
+(248, 25, 12.6814, 1506407013, '2', 2),
+(222, 2, 4.5399, 1506407013, '5', 3),
+(222, 16, -2.94615, 1506407013, '5', 3),
+(222, 21, -7.16278, 1506407014, '5', 3),
+(222, 26, -5.55974, 1506407014, '5', 3),
+(222, 25, 10.2128, 1506407014, '2', 3),
+(249, 15, 59.6668, 1506407014, '3', 4),
+(249, 13, -10.4956, 1506407014, '5', 4),
+(249, 4, 8.6437, 1506407014, '5', 4),
+(249, 17, -10.5652, 1506407014, '5', 4),
+(249, 26, -10.1701, 1506407014, '5', 4),
+(249, 25, 0.680361, 1506407014, '5', 4),
+(250, 9, -2.06785, 1506407015, '5', 5),
+(250, 15, 48.6424, 1506407015, '3', 5),
+(250, 13, 15.6557, 1506407015, '2', 5),
+(250, 4, 13.0207, 1506407015, '2', 5),
+(250, 25, 8.12766, 1506407015, '5', 5),
+(250, 17, 11.3724, 1506407015, '2', 5),
+(238, 8, -10.0521, 1506407015, '5', 6),
+(238, 4, 14.5534, 1506407015, '2', 6),
+(238, 19, 17.0643, 1506407015, '2', 6),
+(238, 17, -11.9298, 1506407015, '5', 6),
+(238, 25, 17.1536, 1506407015, '2', 6),
+(203, 17, 13.8097, 1506407015, '2', 7),
+(203, 6, -4.92445, 1506407015, '5', 7),
+(203, 15, -10.1067, 1506407015, '5', 7),
+(203, 4, -10.4323, 1506407015, '5', 7),
+(203, 25, -11.0308, 1506407015, '5', 7),
+(251, 4, 16.9613, 1506407016, '2', 8),
+(251, 17, 33.4049, 1506407016, '2', 8),
+(251, 25, 39.8598, 1506407016, '3', 8),
+(252, 2, -10.2087, 1506407016, '5', 9),
+(252, 1, -6.52633, 1506407016, '5', 9),
+(252, 17, -10.6812, 1506407016, '5', 9),
+(252, 12, -11.1449, 1506407016, '5', 9),
+(252, 21, -12.0841, 1506407016, '5', 9),
+(252, 25, -11.1241, 1506407016, '5', 9),
+(253, 25, 25.4214, 1506407016, '2', 10),
+(253, 21, -1.68563, 1506407016, '5', 10),
+(253, 12, 19.98, 1506407016, '2', 10),
+(253, 25, 25.4214, 1506407016, '2', 10),
+(254, 15, 56.3714, 1506407017, '3', 11),
+(254, 17, 17.5707, 1506407017, '2', 11),
+(254, 4, 23.0543, 1506407017, '2', 11),
+(254, 19, 5.35562, 1506407017, '5', 11),
+(254, 11, -12.1844, 1506407017, '5', 11),
+(254, 25, 4.55275, 1506407017, '5', 11),
+(255, 17, -2.2435, 1506407017, '5', 12),
+(255, 2, -5.9284, 1506407017, '5', 12),
+(255, 25, 2.32391, 1506407017, '5', 12),
+(256, 6, 27.3127, 1506407017, '2', 13),
+(256, 4, 0.0132732, 1506407018, '5', 13),
+(256, 19, 0, 1506407018, '5', 13),
+(256, 25, 18.393, 1506407018, '2', 13),
+(257, 15, 56.3272, 1506407018, '3', 14),
+(257, 9, 34.4266, 1506407018, '2', 14),
+(257, 18, -2.68074, 1506407018, '5', 14),
+(257, 26, 0.53668, 1506407018, '5', 14),
+(257, 17, 21.3816, 1506407018, '2', 14),
+(257, 25, 9.66068, 1506407018, '5', 14),
+(258, 15, 37.8051, 1506407018, '3', 15),
+(258, 17, 5.27347, 1506407018, '5', 15),
+(258, 19, -7.03052, 1506407018, '5', 15),
+(258, 4, 5.69711, 1506407019, '5', 15),
+(258, 25, 3.96519, 1506407019, '5', 15),
+(259, 6, -10.5745, 1506407019, '5', 16),
+(259, 11, -11.2558, 1506407019, '5', 16),
+(259, 15, 52.6067, 1506407019, '3', 16),
+(259, 17, 7.23042, 1506407019, '5', 16),
+(259, 25, 9.29446, 1506407019, '5', 16),
+(239, 25, 8.15931, 1506407019, '5', 17),
+(239, 17, 19.488, 1506407019, '2', 17),
+(230, 17, 13.9812, 1506407019, '2', 18),
+(230, 15, 59.6222, 1506407019, '3', 18),
+(230, 4, 9.9755, 1506407019, '5', 18),
+(230, 19, 8.57893, 1506407019, '5', 18),
+(230, 25, 9.75649, 1506407019, '5', 18),
+(260, 4, 21.4013, 1506407019, '2', 19),
+(260, 6, 12.8584, 1506407019, '2', 19),
+(260, 15, 52.3512, 1506407020, '3', 19),
+(260, 17, -11.3187, 1506407020, '5', 19),
+(260, 25, 13.6261, 1506407020, '2', 19),
+(214, 15, 60.252, 1506407020, '4', 20),
+(214, 4, 36.0975, 1506407020, '3', 20),
+(214, 17, 21.8186, 1506407020, '2', 20),
+(214, 19, 44.4145, 1506407020, '3', 20),
+(214, 11, 7.37393, 1506407020, '5', 20),
+(214, 25, 8.49288, 1506407020, '5', 20),
+(261, 4, 52.6989, 1506407020, '3', 21),
+(261, 6, 18.7212, 1506407020, '2', 21),
+(261, 17, -10.2271, 1506407020, '5', 21),
+(261, 15, 33.1235, 1506407020, '2', 21),
+(261, 25, 38.3192, 1506407020, '3', 21),
+(262, 4, 7.87018, 1506407021, '5', 22),
+(262, 17, 9.79466, 1506407021, '5', 22),
+(262, 11, 4.61307, 1506407021, '5', 22),
+(262, 25, 2.09558, 1506407021, '5', 22),
+(217, 15, 42.2991, 1506407021, '3', 24),
+(217, 20, -10.3476, 1506407021, '5', 24),
+(217, 19, -2.8033, 1506407021, '5', 24),
+(217, 4, 2.70395, 1506407021, '5', 24),
+(217, 25, -0.510331, 1506407021, '5', 24),
+(202, 17, 40.9847, 1506407021, '3', 25),
+(202, 15, 47.8551, 1506407021, '3', 25),
+(202, 6, 42.1668, 1506407021, '3', 25),
+(202, 4, 23.6583, 1506407021, '2', 25),
+(202, 25, 9.13424, 1506407022, '5', 25),
+(202, 11, 14.877, 1506407022, '2', 25),
+(263, 17, -11.3738, 1506407022, '5', 26),
+(263, 11, -10.5169, 1506407022, '5', 26),
+(263, 15, 34.7255, 1506407022, '2', 26),
+(263, 6, -11.6531, 1506407022, '5', 26),
+(263, 25, 7.09846, 1506407022, '5', 26),
+(264, 11, 6.93301, 1506407022, '5', 27),
+(264, 3, -10.0576, 1506407022, '5', 27),
+(264, 4, 10.5613, 1506407022, '2', 27),
+(264, 25, -2.7966, 1506407022, '5', 27),
+(240, 25, 11.5581, 1506407022, '2', 28),
+(240, 17, 8.6844, 1506407022, '5', 28),
+(265, 4, -10.2908, 1506407023, '5', 29),
+(265, 15, 55.3358, 1506407023, '3', 29),
+(265, 17, 33.5259, 1506407023, '2', 29),
+(265, 19, -1.86329, 1506407023, '5', 29),
+(265, 25, 32.1009, 1506407023, '2', 29),
+(266, 25, -0.925075, 1506407023, '5', 30),
+(266, 11, 5.83331, 1506407023, '5', 30),
+(266, 4, 6.61192, 1506407023, '5', 30),
+(266, 13, 1.60465, 1506407023, '5', 30),
+(266, 6, 18.153, 1506407023, '2', 30),
+(267, 6, 12.3207, 1506407023, '2', 31),
+(267, 17, -10.6349, 1506407023, '5', 31),
+(267, 15, 41.6515, 1506407023, '3', 31),
+(267, 11, -10.3704, 1506407024, '5', 31),
+(267, 25, 2.60624, 1506407024, '5', 31),
+(221, 3, -10.4605, 1506407024, '5', 33),
+(221, 4, 15.0132, 1506407024, '2', 33),
+(221, 11, 3.95027, 1506407024, '5', 33),
+(221, 17, -10.5918, 1506407024, '5', 33),
+(221, 6, -12.2207, 1506407024, '5', 33),
+(221, 25, -11.8227, 1506407024, '5', 33),
+(269, 3, -0.909116, 1506407024, '5', 34),
+(269, 15, 35.5484, 1506407025, '3', 34),
+(269, 25, 13.1141, 1506407025, '2', 34),
+(218, 17, 29.2518, 1506407025, '2', 35),
+(218, 25, 1.01718, 1506407025, '5', 35),
+(270, 4, 17.753, 1506407025, '2', 36),
+(270, 21, -10.1722, 1506407025, '5', 36),
+(270, 11, 5.88827, 1506407025, '5', 36),
+(270, 15, 29.4891, 1506407025, '2', 36),
+(270, 26, -11.3785, 1506407025, '5', 36),
+(270, 25, 10.3509, 1506407025, '2', 36),
+(271, 4, 25.2985, 1506407025, '2', 37),
+(271, 6, -10.9571, 1506407025, '5', 37),
+(271, 27, -10.152, 1506407025, '5', 37),
+(271, 25, -10.0681, 1506407026, '5', 37),
+(272, 15, 35.7276, 1506407026, '3', 38),
+(272, 17, -10.7955, 1506407026, '5', 38),
+(272, 13, 13.363, 1506407026, '2', 38),
+(272, 11, -10.6351, 1506407026, '5', 38),
+(272, 19, -11.3533, 1506407026, '5', 38),
+(272, 25, -11.2542, 1506407026, '5', 38),
+(273, 17, -0.968725, 1506407026, '5', 39),
+(273, 4, -10.7601, 1506407026, '5', 39),
+(273, 12, -10.9095, 1506407026, '5', 39),
+(273, 11, -10.552, 1506407026, '5', 39),
+(273, 3, -10.8534, 1506407026, '5', 39),
+(273, 25, -7.3502, 1506407026, '5', 39),
+(273, 25, -7.3502, 1506407027, '5', 39),
+(274, 21, -10.3076, 1506407027, '5', 40),
+(274, 16, 10.6833, 1506407027, '2', 40),
+(274, 4, 44.4068, 1506407027, '3', 40),
+(274, 3, 7.90977, 1506407027, '5', 40),
+(274, 14, 35.7909, 1506407027, '3', 40),
+(274, 25, 29.9534, 1506407027, '2', 40),
+(275, 4, 9.42824, 1506407027, '5', 41),
+(275, 6, -3.48037, 1506407027, '5', 41),
+(275, 21, 2.37105, 1506407027, '5', 41),
+(275, 25, 9.61782, 1506407027, '5', 41),
+(276, 7, 3.33613, 1506407027, '5', 42),
+(276, 15, 36.7718, 1506407027, '3', 42),
+(276, 17, -11.9184, 1506407027, '5', 42),
+(276, 4, 9.27873, 1506407027, '5', 42),
+(276, 26, -1.7524, 1506407028, '5', 42),
+(276, 25, 3.41068, 1506407028, '5', 42),
+(277, 11, -4.98794, 1506407028, '5', 43),
+(277, 26, -6.16736, 1506407028, '5', 43),
+(277, 17, -4.58252, 1506407028, '5', 43),
+(277, 19, -10.845, 1506407028, '5', 43),
+(277, 4, -10.2323, 1506407028, '5', 43),
+(277, 25, -10.024, 1506407028, '5', 43),
+(278, 7, 15.2464, 1506407028, '2', 44),
+(278, 11, 2.34623, 1506407029, '5', 44),
+(278, 17, -11.2266, 1506407029, '5', 44),
+(278, 21, -10.0855, 1506407029, '5', 44),
+(278, 3, -11.3919, 1506407029, '5', 44),
+(278, 25, -6.85635, 1506407029, '5', 44),
+(279, 11, -10.6088, 1506407029, '5', 45),
+(279, 25, 25.559, 1506407029, '2', 45),
+(279, 15, 11.0938, 1506407029, '2', 45),
+(279, 19, 7.34505, 1506407029, '5', 45),
+(280, 1, -11.3326, 1506407030, '5', 46),
+(280, 21, -10.4411, 1506407030, '5', 46),
+(280, 15, 49.8597, 1506407030, '3', 46),
+(280, 19, -8.36474, 1506407030, '5', 46),
+(280, 25, 5.53709, 1506407030, '5', 46),
+(281, 17, -10.6247, 1506407030, '5', 47),
+(281, 15, -11.341, 1506407030, '5', 47),
+(281, 3, -10.3992, 1506407030, '5', 47),
+(281, 13, -9.3075, 1506407030, '5', 47),
+(281, 25, 2.00204, 1506407030, '5', 47),
+(282, 17, 9.66277, 1506407030, '5', 48),
+(282, 11, -6.57122, 1506407030, '5', 48),
+(282, 4, 8.83971, 1506407030, '5', 48),
+(282, 13, 10.3917, 1506407031, '2', 48),
+(282, 25, -3.40605, 1506407031, '5', 48),
+(283, 6, 23.1997, 1506407031, '2', 49),
+(283, 11, 2.84976, 1506407031, '5', 49),
+(283, 17, 15.6556, 1506407031, '2', 49),
+(283, 19, 1.14532, 1506407031, '5', 49),
+(283, 7, 20.123, 1506407031, '2', 49),
+(283, 25, 2.47378, 1506407031, '5', 49),
+(284, 4, 18.8028, 1506407031, '2', 50),
+(284, 6, -11.213, 1506407031, '5', 50),
+(284, 17, -11.7545, 1506407031, '5', 50),
+(284, 25, 1.05645, 1506407031, '5', 50),
+(219, 6, 1.50024, 1506407031, '5', 51),
+(219, 11, -1.95708, 1506407031, '5', 51),
+(219, 17, 13.4738, 1506407031, '2', 51),
+(219, 19, 6.02969, 1506407031, '5', 51),
+(219, 7, 25.3624, 1506407032, '2', 51),
+(219, 25, 15.8318, 1506407032, '2', 51),
+(285, 1, -3.28762, 1506407032, '5', 52),
+(285, 15, 39.1264, 1506407032, '3', 52),
+(285, 11, -10.3713, 1506407032, '5', 52),
+(285, 17, -11.8413, 1506407032, '5', 52),
+(285, 25, 3.12843, 1506407032, '5', 52),
+(206, 6, 12.3126, 1506407032, '2', 53),
+(206, 11, -1.92167, 1506407032, '5', 53),
+(206, 17, 26.376, 1506407032, '2', 53),
+(206, 19, 5.83354, 1506407032, '5', 53),
+(206, 15, 38.5241, 1506407032, '3', 53),
+(206, 25, 12.7656, 1506407032, '2', 53),
+(286, 6, 5.45223, 1506407033, '5', 54),
+(286, 4, 3.45768, 1506407033, '5', 54),
+(286, 25, 7.62557, 1506407033, '5', 54),
+(287, 15, 34.9838, 1506407033, '2', 55),
+(287, 11, -10.0078, 1506407033, '5', 55),
+(287, 25, -12.4663, 1506407033, '5', 55),
+(244, 15, 33.6053, 1506407033, '2', 56),
+(244, 9, 22.9386, 1506407033, '2', 56),
+(244, 4, 8.53887, 1506407033, '5', 56),
+(244, 11, 10.1762, 1506407033, '2', 56),
+(244, 25, 4.01244, 1506407033, '5', 56),
+(288, 4, 7.24835, 1506407034, '5', 57),
+(288, 11, -4.851, 1506407034, '5', 57),
+(288, 19, -6.975, 1506407034, '5', 57),
+(288, 17, -11.0205, 1506407034, '5', 57),
+(288, 26, -3.63451, 1506407034, '5', 57),
+(288, 25, 7.01855, 1506407034, '5', 57),
+(289, 15, -10.2098, 1506407034, '5', 58),
+(289, 11, -10.4086, 1506407034, '5', 58),
+(289, 25, -10.1269, 1506407034, '5', 58),
+(290, 6, 20.6874, 1506407034, '2', 59),
+(290, 17, 3.88365, 1506407034, '5', 59),
+(290, 25, 6.69965, 1506407034, '5', 59),
+(291, 1, -10.8501, 1506407035, '5', 60),
+(291, 19, -10.02, 1506407035, '5', 60),
+(291, 4, 2.53562, 1506407035, '5', 60),
+(291, 18, -5.91417, 1506407035, '5', 60),
+(291, 25, -2.52342, 1506407035, '5', 60),
+(292, 3, -10.8298, 1506407035, '5', 61),
+(292, 26, -5.55728, 1506407035, '5', 61),
+(292, 13, 6.81434, 1506407035, '5', 61),
+(292, 11, 6.3107, 1506407035, '5', 61),
+(292, 17, 0, 1506407035, '5', 61),
+(292, 25, 17.398, 1506407035, '2', 61),
+(293, 17, -5.47794, 1506407035, '5', 62),
+(293, 11, -0.0460089, 1506407036, '5', 62),
+(293, 4, -3.52424, 1506407036, '5', 62),
+(293, 25, -3.87613, 1506407036, '5', 62),
+(294, 4, 17.2847, 1506407036, '2', 63),
+(294, 15, 26.4932, 1506407036, '2', 63),
+(294, 26, -2.14749, 1506407036, '5', 63),
+(294, 8, 12.2089, 1506407036, '2', 63),
+(294, 25, 6.03492, 1506407036, '5', 63),
+(295, 15, 8.38802, 1506407036, '5', 64),
+(295, 6, 14.2841, 1506407036, '2', 64),
+(295, 4, -10.077, 1506407036, '5', 64),
+(295, 11, -12.3647, 1506407036, '5', 64),
+(295, 19, 3.2625, 1506407036, '5', 64),
+(295, 25, -1.97344, 1506407036, '5', 64),
+(296, 15, 35.5729, 1506407037, '3', 65),
+(296, 4, 6.45657, 1506407037, '5', 65),
+(296, 6, -3.67419, 1506407037, '5', 65),
+(296, 17, 6.13139, 1506407037, '5', 65),
+(296, 9, -10.47, 1506407037, '5', 65),
+(296, 25, -0.0660456, 1506407037, '5', 65),
+(297, 3, 0.406938, 1506407037, '5', 66),
+(297, 11, -11.3915, 1506407037, '5', 66),
+(297, 17, -11.8572, 1506407037, '5', 66),
+(297, 15, 40.4831, 1506407037, '3', 66),
+(297, 4, 38.9838, 1506407037, '3', 66),
+(297, 25, -11.1183, 1506407038, '5', 66),
+(298, 6, 29.8105, 1506407038, '2', 67),
+(298, 17, -11.3996, 1506407038, '5', 67),
+(298, 15, -10.7992, 1506407038, '5', 67),
+(298, 11, -3.64297, 1506407038, '5', 67),
+(298, 25, -1.59206, 1506407038, '5', 67),
+(299, 11, 9.56685, 1506407038, '5', 68),
+(299, 17, -9.22457, 1506407038, '5', 68),
+(299, 15, 65.6732, 1506407038, '4', 68),
+(299, 25, 33.4849, 1506407038, '2', 68),
+(300, 6, 21.185, 1506407038, '2', 69),
+(300, 15, 52.7818, 1506407038, '3', 69),
+(300, 9, 15.4804, 1506407038, '2', 69),
+(300, 11, 4.6133, 1506407039, '5', 69),
+(300, 25, -2.34178, 1506407039, '5', 69),
+(301, 4, 24.2592, 1506407039, '2', 70),
+(301, 15, 60.6563, 1506407039, '4', 70),
+(301, 21, -10.1594, 1506407039, '5', 70),
+(301, 9, 21.5887, 1506407039, '2', 70),
+(301, 6, 20.6859, 1506407039, '2', 70),
+(301, 25, -12.3851, 1506407039, '5', 70),
+(211, 4, 11.9505, 1506407039, '2', 71),
+(211, 11, 2.94282, 1506407039, '5', 71),
+(211, 15, 16.1403, 1506407039, '2', 71),
+(211, 9, 13.2833, 1506407039, '2', 71),
+(211, 13, 11.1233, 1506407039, '2', 71),
+(211, 25, 8.12905, 1506407039, '5', 71),
+(302, 11, 7.71694, 1506407040, '5', 72),
+(302, 15, 56.6736, 1506407040, '3', 72),
+(302, 6, -12.2644, 1506407040, '5', 72),
+(302, 25, 26.5297, 1506407040, '2', 72),
+(232, 4, 5.20293, 1506407040, '5', 73),
+(232, 6, -2.37443, 1506407040, '5', 73),
+(232, 15, -11.1356, 1506407040, '5', 73),
+(232, 17, -10.9109, 1506407040, '5', 73),
+(232, 25, -8.59339, 1506407040, '5', 73),
+(304, 9, 23.2672, 1506407040, '2', 75),
+(304, 15, 43.7554, 1506407040, '3', 75),
+(304, 17, -1.25993, 1506407040, '5', 75),
+(304, 25, -11.2132, 1506407041, '5', 75),
+(229, 17, 7.51727, 1506407041, '5', 76),
+(229, 12, 4.64049, 1506407041, '5', 76),
+(229, 15, 12.7546, 1506407041, '2', 76),
+(229, 9, -10.5164, 1506407041, '5', 76),
+(229, 6, -4.59417, 1506407041, '5', 76),
+(229, 25, 11.8727, 1506407041, '2', 76),
+(305, 17, -10.9029, 1506407041, '5', 77),
+(305, 4, 0.599775, 1506407041, '5', 77),
+(305, 6, -11.5887, 1506407041, '5', 77),
+(305, 12, -10.7799, 1506407041, '5', 77),
+(305, 25, -11.849, 1506407041, '5', 77),
+(306, 15, 101.144, 1506407042, '4', 79),
+(306, 9, 59.9407, 1506407042, '3', 79),
+(306, 16, 1.21598, 1506407042, '5', 79),
+(306, 18, -10.6531, 1506407042, '5', 79),
+(306, 25, -11.9999, 1506407042, '5', 79),
+(307, 1, 37.5368, 1506407042, '3', 80),
+(307, 6, 7.38594, 1506407042, '5', 80),
+(307, 14, 14.3443, 1506407042, '2', 80),
+(307, 2, -7.32172, 1506407042, '5', 80),
+(307, 25, 9.26137, 1506407042, '5', 80),
+(212, 26, -10.1989, 1506407042, '5', 82),
+(212, 6, -11.0255, 1506407042, '5', 82),
+(212, 12, -11.5818, 1506407042, '5', 82),
+(212, 25, -10.7207, 1506407042, '5', 82),
+(308, 4, 1.77074, 1506407043, '5', 83),
+(308, 7, 6.63715, 1506407043, '5', 83),
+(308, 12, -4.86691, 1506407043, '5', 83),
+(308, 25, 5.22545, 1506407043, '5', 83),
+(309, 9, 12.398, 1506407043, '2', 84),
+(309, 15, 44.7606, 1506407043, '3', 84),
+(309, 18, -4.1827, 1506407043, '5', 84),
+(309, 25, 22.4428, 1506407043, '2', 84),
+(310, 4, 18.729, 1506407043, '2', 85),
+(310, 11, 28.2397, 1506407043, '2', 85),
+(310, 1, 36.3352, 1506407043, '3', 85),
+(310, 17, 18.6319, 1506407043, '2', 85),
+(310, 25, 39.2707, 1506407043, '3', 85),
+(311, 8, -11.2941, 1506407044, '5', 86),
+(311, 12, 4.22194, 1506407044, '5', 86),
+(311, 19, -1.86248, 1506407044, '5', 86),
+(311, 4, 11.4671, 1506407044, '2', 86),
+(311, 15, 74.697, 1506407044, '4', 86),
+(311, 25, 7.24292, 1506407044, '5', 86),
+(312, 7, 35.0895, 1506407044, '3', 87),
+(312, 15, 7.17771, 1506407045, '5', 87),
+(312, 9, -11.3057, 1506407045, '5', 87),
+(312, 12, 0.0969584, 1506407045, '5', 87),
+(312, 25, -5.30553, 1506407045, '5', 87),
+(313, 26, -10.6949, 1506407045, '5', 88),
+(313, 25, 7.93847, 1506407045, '5', 88),
+(234, 6, -10.0123, 1506407045, '5', 89),
+(234, 17, 3.65646, 1506407045, '5', 89),
+(234, 12, 6.63999, 1506407045, '5', 89),
+(234, 25, 14.0077, 1506407045, '2', 89),
+(314, 17, -3.54047, 1506407045, '5', 90),
+(314, 19, 5.86794, 1506407045, '5', 90),
+(314, 4, 7.65613, 1506407046, '5', 90),
+(314, 15, 22.114, 1506407046, '2', 90),
+(314, 9, 16.6589, 1506407046, '2', 90),
+(314, 25, 5.13531, 1506407046, '5', 90),
+(235, 1, 40.1541, 1506407046, '3', 91),
+(235, 2, 21.1319, 1506407046, '2', 91),
+(235, 12, 72.0532, 1506407046, '4', 91),
+(235, 25, 29.6174, 1506407046, '2', 91),
+(315, 4, 0.724848, 1506407046, '5', 92),
+(315, 11, 3.33933, 1506407046, '5', 92),
+(315, 1, 2.07332, 1506407046, '5', 92),
+(315, 3, -10.211, 1506407046, '5', 92),
+(315, 25, -1.78092, 1506407046, '5', 92),
+(316, 1, -6.41803, 1506407047, '5', 93),
+(316, 6, -12.1405, 1506407047, '5', 93),
+(316, 12, -11.5795, 1506407047, '5', 93),
+(316, 17, 0, 1506407047, '5', 93),
+(316, 11, -11.3214, 1506407047, '5', 93),
+(316, 25, -11.607, 1506407047, '5', 93),
+(317, 4, 13.0781, 1506407047, '2', 94),
+(317, 6, 16.6367, 1506407047, '2', 94),
+(317, 11, 10.3449, 1506407047, '2', 94),
+(317, 2, 5.92357, 1506407047, '5', 94),
+(317, 25, 9.15371, 1506407047, '5', 94),
+(318, 6, -10.2219, 1506407047, '5', 95),
+(318, 15, -11.484, 1506407047, '5', 95),
+(318, 16, -0.954583, 1506407048, '5', 95),
+(318, 21, -10.8402, 1506407048, '5', 95),
+(318, 25, 5.15786, 1506407048, '5', 95),
+(319, 4, -11.4756, 1506407048, '5', 96),
+(319, 6, -10.3797, 1506407048, '5', 96),
+(319, 15, 9.05875, 1506407048, '5', 96),
+(319, 20, -10.0819, 1506407048, '5', 96),
+(319, 25, -2.86816, 1506407048, '5', 96),
+(320, 4, 0.899052, 1506407048, '5', 97),
+(320, 15, 27.3941, 1506407048, '2', 97),
+(320, 9, 7.20493, 1506407048, '5', 97),
+(320, 25, 8.80437, 1506407048, '5', 97),
+(321, 1, 0.353983, 1506407049, '5', 98),
+(321, 6, 12.4225, 1506407049, '2', 98),
+(321, 7, 35.3687, 1506407049, '3', 98),
+(321, 17, -10.2677, 1506407049, '5', 98),
+(321, 25, 19.5454, 1506407049, '2', 98),
+(322, 21, -10.9287, 1506407049, '5', 99),
+(322, 25, 4.1276, 1506407049, '5', 99),
+(323, 15, 44.3161, 1506407049, '3', 100),
+(323, 21, 5.90357, 1506407049, '5', 100),
+(323, 13, 31.5492, 1506407050, '2', 100),
+(323, 11, 6.50493, 1506407050, '5', 100),
+(323, 25, -10.3591, 1506407050, '5', 100),
+(323, 25, -10.3591, 1506407050, '5', 100),
+(324, 1, -11.248, 1506407050, '5', 101),
+(324, 6, -10.3938, 1506407050, '5', 101),
+(324, 12, -6.43055, 1506407050, '5', 101),
+(324, 17, -10.0164, 1506407050, '5', 101),
+(324, 11, -10.0416, 1506407050, '5', 101),
+(324, 25, -10.698, 1506407050, '5', 101),
+(325, 4, -10.4796, 1506407050, '5', 102),
+(325, 6, 18.0121, 1506407051, '2', 102),
+(325, 20, -10.3313, 1506407051, '5', 102),
+(325, 15, 27.5433, 1506407051, '2', 102),
+(325, 25, 8.59816, 1506407051, '5', 102),
+(326, 11, 7.87146, 1506407051, '5', 103),
+(326, 15, 8.66417, 1506407051, '5', 103),
+(326, 7, -2.50746, 1506407051, '5', 103),
+(326, 13, 2.81278, 1506407051, '5', 103),
+(326, 25, 3.58631, 1506407051, '5', 103),
+(327, 17, 2.83474, 1506407051, '5', 104),
+(327, 6, -10.8658, 1506407051, '5', 104),
+(327, 15, 4.24292, 1506407051, '5', 104),
+(327, 7, 17.8312, 1506407051, '2', 104),
+(327, 25, 5.35725, 1506407052, '5', 104),
+(328, 8, -10.1427, 1506407052, '5', 105),
+(328, 12, -10.4242, 1506407052, '5', 105),
+(328, 19, -10.4475, 1506407052, '5', 105),
+(328, 4, -10.8927, 1506407052, '5', 105),
+(328, 15, -10.6987, 1506407052, '5', 105),
+(328, 25, -10.1635, 1506407052, '5', 105),
+(329, 4, 4.31035, 1506407052, '5', 106),
+(329, 6, -11.0558, 1506407052, '5', 106),
+(329, 11, 2.57288, 1506407052, '5', 106),
+(329, 15, 3.02354, 1506407052, '5', 106),
+(329, 25, 13.558, 1506407052, '2', 106),
+(330, 6, -10.2836, 1506407053, '5', 107),
+(330, 4, -10.7951, 1506407053, '5', 107),
+(330, 21, -10.5784, 1506407053, '5', 107),
+(330, 12, -11.8232, 1506407053, '5', 107),
+(330, 25, 7.98771, 1506407053, '5', 107),
+(331, 15, 21.3052, 1506407053, '2', 108),
+(331, 5, -3.07569, 1506407053, '5', 108),
+(331, 9, 19.3973, 1506407053, '2', 108),
+(331, 25, 7.63771, 1506407053, '5', 108),
+(332, 6, 7.7689, 1506407053, '5', 109),
+(332, 20, -10.8019, 1506407053, '5', 109),
+(332, 2, -10.959, 1506407053, '5', 109),
+(332, 12, -10.599, 1506407054, '5', 109),
+(332, 25, -10.4424, 1506407054, '5', 109),
+(333, 2, 1.89097, 1506407054, '5', 110),
+(333, 26, -9.01444, 1506407054, '5', 110),
+(333, 16, -0.767146, 1506407054, '5', 110),
+(333, 6, -6.6419, 1506407054, '5', 110),
+(333, 1, -6.97202, 1506407054, '5', 110),
+(333, 25, -8.95517, 1506407054, '5', 110),
+(334, 11, 2.19234, 1506407054, '5', 111),
+(334, 15, 48.1478, 1506407054, '3', 111),
+(334, 6, -0.968815, 1506407054, '5', 111),
+(334, 12, 5.62961, 1506407054, '5', 111),
+(334, 25, 21.3805, 1506407055, '2', 111),
+(335, 25, 6.97974, 1506407055, '5', 112),
+(335, 15, 52.8723, 1506407055, '3', 112),
+(335, 17, 2.31948, 1506407055, '5', 112),
+(336, 2, 26.7702, 1506407055, '2', 113),
+(336, 6, -10.3351, 1506407055, '5', 113),
+(336, 11, 7.38639, 1506407055, '5', 113),
+(336, 13, 5.94474, 1506407055, '5', 113),
+(336, 17, 16.9501, 1506407055, '2', 113),
+(336, 25, 1.08561, 1506407055, '5', 113),
+(337, 6, -10.1825, 1506407055, '5', 114),
+(337, 17, -6.38291, 1506407055, '5', 114),
+(337, 26, -9.25586, 1506407056, '5', 114),
+(337, 25, 7.60151, 1506407056, '5', 114),
+(260, 18, 60, 1506537000, '1', 0),
+(260, 19, 70, 1506537000, '1', 0),
+(260, 8, 60, 1506537000, '1', 0),
+(260, 11, 60, 1506537000, '1', 0),
+(202, 21, 80, 1508610600, '1', 0),
+(193, 15, 60, 1509042600, '1', 0),
+(193, 21, 60, 1509042600, '1', 0),
+(357, 17, 70, 1510165800, '1', 0),
+(357, 15, 60, 1510165800, '1', 0);
 
 -- --------------------------------------------------------
 
@@ -3843,8 +5135,8 @@ INSERT INTO `userSkills` (`userID`, `skillID`, `score`, `testDate`, `skillType`)
 -- Table structure for table `workExperience`
 --
 
-CREATE TABLE `workExperience` (
-  `weID` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `workExperience` (
+  `weID` int(5) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -3852,8 +5144,9 @@ CREATE TABLE `workExperience` (
   `startYear` int(4) NOT NULL,
   `endMonth` varchar(255) NOT NULL,
   `endYear` int(4) NOT NULL,
-  `userID` int(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userID` int(5) NOT NULL,
+  PRIMARY KEY (`weID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `workExperience`
@@ -3861,245 +5154,9 @@ CREATE TABLE `workExperience` (
 
 INSERT INTO `workExperience` (`weID`, `companyName`, `position`, `description`, `startMonth`, `startYear`, `endMonth`, `endYear`, `userID`) VALUES
 (1, 'DiscountsDekho', 'Web Developer', '<p>Developed official website for DiscountsDekho, using HTML, CSS, JavaScript, and PHP.</p>', 'June', 2014, 'July', 2015, 1),
-(2, 'fdg', 'er', '<p>ergfdgfgfg</p>', 'Jan', 2017, 'Mar', 2017, 12);
+(2, 'fdg', 'er', '<p>ergfdgfgfg</p>', 'Jan', 2017, 'Mar', 2017, 12),
+(3, 'yamaha motors ', 'interns', '<p>I have done an internship here in manufacturing department in the group if 3.&nbsp;</p>', 'May', 2016, 'July', 2016, 351);
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `achievements`
---
-ALTER TABLE `achievements`
-  ADD PRIMARY KEY (`achievementID`);
-
---
--- Indexes for table `adminAuth`
---
-ALTER TABLE `adminAuth`
-  ADD PRIMARY KEY (`adminID`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- Indexes for table `colleges`
---
-ALTER TABLE `colleges`
-  ADD PRIMARY KEY (`college_id`);
-
---
--- Indexes for table `contactMessages`
---
-ALTER TABLE `contactMessages`
-  ADD PRIMARY KEY (`contactID`);
-
---
--- Indexes for table `content`
---
-ALTER TABLE `content`
-  ADD PRIMARY KEY (`content_id`);
-
---
--- Indexes for table `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`course_id`);
-
---
--- Indexes for table `educationalDetails`
---
-ALTER TABLE `educationalDetails`
-  ADD PRIMARY KEY (`educationID`);
-
---
--- Indexes for table `employerUsers`
---
-ALTER TABLE `employerUsers`
-  ADD UNIQUE KEY `userID` (`userID`);
-
---
--- Indexes for table `indianCities`
---
-ALTER TABLE `indianCities`
-  ADD PRIMARY KEY (`cityID`);
-
---
--- Indexes for table `internshipOffers`
---
-ALTER TABLE `internshipOffers`
-  ADD PRIMARY KEY (`internshipID`);
-
---
--- Indexes for table `jobOffers`
---
-ALTER TABLE `jobOffers`
-  ADD PRIMARY KEY (`jobID`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`messageID`);
-
---
--- Indexes for table `notifications`
---
-ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notificationID`);
-
---
--- Indexes for table `otp`
---
-ALTER TABLE `otp`
-  ADD PRIMARY KEY (`otpID`);
-
---
--- Indexes for table `passwordToken`
---
-ALTER TABLE `passwordToken`
-  ADD PRIMARY KEY (`tokenID`);
-
---
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`projectID`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`);
-
---
--- Indexes for table `skills`
---
-ALTER TABLE `skills`
-  ADD PRIMARY KEY (`skillID`);
-
---
--- Indexes for table `testSettings`
---
-ALTER TABLE `testSettings`
-  ADD PRIMARY KEY (`skillID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `mobile` (`mobile`);
-
---
--- Indexes for table `workExperience`
---
-ALTER TABLE `workExperience`
-  ADD PRIMARY KEY (`weID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `achievements`
---
-ALTER TABLE `achievements`
-  MODIFY `achievementID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `adminAuth`
---
-ALTER TABLE `adminAuth`
-  MODIFY `adminID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `colleges`
---
-ALTER TABLE `colleges`
-  MODIFY `college_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1157;
---
--- AUTO_INCREMENT for table `contactMessages`
---
-ALTER TABLE `contactMessages`
-  MODIFY `contactID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `content`
---
-ALTER TABLE `content`
-  MODIFY `content_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `courses`
---
-ALTER TABLE `courses`
-  MODIFY `course_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
---
--- AUTO_INCREMENT for table `educationalDetails`
---
-ALTER TABLE `educationalDetails`
-  MODIFY `educationID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
---
--- AUTO_INCREMENT for table `indianCities`
---
-ALTER TABLE `indianCities`
-  MODIFY `cityID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
---
--- AUTO_INCREMENT for table `internshipOffers`
---
-ALTER TABLE `internshipOffers`
-  MODIFY `internshipID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `jobOffers`
---
-ALTER TABLE `jobOffers`
-  MODIFY `jobID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `messages`
---
-ALTER TABLE `messages`
-  MODIFY `messageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
---
--- AUTO_INCREMENT for table `notifications`
---
-ALTER TABLE `notifications`
-  MODIFY `notificationID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
---
--- AUTO_INCREMENT for table `otp`
---
-ALTER TABLE `otp`
-  MODIFY `otpID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `passwordToken`
---
-ALTER TABLE `passwordToken`
-  MODIFY `tokenID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `projectID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `question_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=730;
---
--- AUTO_INCREMENT for table `skills`
---
-ALTER TABLE `skills`
-  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `testSettings`
---
-ALTER TABLE `testSettings`
-  MODIFY `skillID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
---
--- AUTO_INCREMENT for table `workExperience`
---
-ALTER TABLE `workExperience`
-  MODIFY `weID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

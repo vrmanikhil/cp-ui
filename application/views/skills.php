@@ -63,23 +63,32 @@
 					<h2 class="section-title"><b>MY SKILLS</b></h2>
 					<div class="skills-container flex">
 					<?php
+					$count = 0;
 					if(empty($userSkills)){?>
 						<p>No Skill(s) Added to the Profile.</p>
 					<?php }else{
 						foreach($userSkills as $key => $value){
-							if($value['skillType'] == 1){?>
+							if($value['skillType'] == 1){ $count++; ?>
 								<div class="skill flex free">
 									<p><?= $value['skill_name']?></p>
 								</div>
 
-					<?php 	}else{?>
+					<?php 	}else{
+					if($value['skillType'] == 2 || $value['skillType'] == 3 || $value['skillType'] == 4){ $count++;
+					?>
 								<div class="skill flex paid">
 									<p><?= $value['skill_name']?></p>
 								</div>
 					<?php
-						}}}
+					}	}}}
+					if($count==0){ echo "No Skills Found"; }
 					?>
 					</div>
+					<?php if(!empty($reportGenerated[0]['coatReport'])){ ?>
+						<?php if(!empty($reportGenerated[0]['showReport'])){ ?>
+					<div style="margin-bottom: 20px;"><center><a target="_blank" href="<?php echo base_url('/home/report/?userID=').$_SESSION['userData']['userID']; ?>" class="btn btn--primary notifications__load-more"><i class="fa fa-download" aria-hidden="true"></i>
+ Download COAT Report</a></center></div>
+ 					<?php }} ?>
 					<div class = "skills">
 						<h2 class="section-title"><b>ADD NEW SKILL</b></h2>
 						<select class="select" id="skills">

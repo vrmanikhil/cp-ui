@@ -233,7 +233,7 @@ class Web extends CI_Controller {
 	public function submitAnswers()
 	{
 		$skill_id = $this->session->userdata('skill_data')['skillID'];
-        $answer = json_decode($_POST['data']['answers']);
+        $answer = json_decode($_COOKIE['data']);
         $i = 0;
         foreach ($answer as $key) {
         	$ans[$i++] = json_decode(json_encode($key), true);
@@ -252,8 +252,9 @@ class Web extends CI_Controller {
         }
         $this->session->set_flashdata('message', array('content' => $msg[1], 'class' => $msg[0]));
         $this->session->unset_userdata('test_settings');
+        $_COOKIE['data'] = null;
         $this->session->unset_userdata('skill_data');
-        echo true;
+        redirect(base_url('skills'));
 	}
 
 	public function addAchievement(){

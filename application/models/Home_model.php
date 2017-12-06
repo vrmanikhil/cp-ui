@@ -1121,4 +1121,107 @@ class Home_model extends CI_Model {
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////////////////
+
+	public function getUserDetailsReport($userID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $coatDB->select('users.firstName, users.lastName, users.email, users.batch, users.mobile, users.gender, colleges.collegeName, courses.course');
+	  $coatDB->join('courses', 'users.courseID=courses.courseID');
+	  $coatDB->join('colleges', 'users.collegeID=colleges.collegeID');
+	  $query = $coatDB->get_where('users', array('userID'=>$userID));
+	  return $query->result_array();
+	}
+
+	public function getUserSkillsReport($userID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $coatDB->select('skillID, skill');
+	  $coatDB->join('skills', 'userSkills.skillID=skills.skill_id');
+	  $query = $coatDB->get_where('userSkills', array('userID'=>$userID));
+	  return $query->result_array();
+	}
+
+	public function getResponses($userID, $skillID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $coatDB->select('questions.difficulty_level, questions.expert_time, questions.skill_id, responses.questionID, responses.score, responses.timeConsumed, responses.correct');
+	  $coatDB->join('questions', 'responses.questionID=questions.question_id');
+	  $query = $coatDB->get_where('responses', array('userID'=>$userID, 'skill_id'=>$skillID));
+	  return $query->result_array();
+	}
+
+	public function getAverageAttempts($skillID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $query = "SELECT skill_id AS skillID, COUNT(*) / skill.count AS avg FROM responses AS A JOIN questions AS B, ( SELECT COUNT( DISTINCT(skill_id) ) AS count FROM questions ) AS skill WHERE A.questionID = B.question_id AND skill_id='$skillID' GROUP BY skill_id ORDER BY avg;";
+	  $result = $coatDB->query($query);
+	  return $result->result_array();
+	}
+
+	public function getAverageCorrectAttempts($skillID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $query = "SELECT skill_id AS skillID, COUNT(*) / skill.count AS avg FROM responses AS A JOIN questions AS B, ( SELECT COUNT( DISTINCT(skill_id) ) AS count FROM questions ) AS skill WHERE A.questionID = B.question_id AND skill_id='$skillID' AND correct='1' GROUP BY skill_id ORDER BY avg;";
+	  $result = $coatDB->query($query);
+	  return $result->result_array();
+	}
+
+	public function getAverageScore($skillID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $coatDB->select('AVG(score) AS averageScore');
+	  $query = $coatDB->get_where('userSkills', array('skillID'=>$skillID));
+	  return $query->result_array();
+	}
+
+	public function getResponseDL($skillID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $users = $this->getNumberOfUsers($skillID)[0]['number'];
+	  $query = "SELECT `difficulty_level`, FLOOR(COUNT(*)/$users) AS `number` FROM `responses` JOIN `questions` ON `responses`.`questionID`=`questions`.`question_id` WHERE `skill_id` = '$skillID' GROUP BY `difficulty_level`";
+	  $result = $coatDB->query($query);
+	  return $result->result_array();
+	}
+
+	public function getResponseDLUser($skillID, $userID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $query = "SELECT `difficulty_level`, COUNT(*) AS `number` FROM `responses` JOIN `questions` ON `responses`.`questionID`=`questions`.`question_id` WHERE `skill_id` = '$skillID' AND `userID`='$userID' GROUP BY `difficulty_level`";
+	  $result = $coatDB->query($query);
+	  return $result->result_array();
+	}
+
+	public function getResponseDLCorrect($skillID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $users = $this->getNumberOfUsers($skillID)[0]['number'];
+	  $query = "SELECT `difficulty_level`, FLOOR(COUNT(*)/$users) AS `number` FROM `responses` JOIN `questions` ON `responses`.`questionID`=`questions`.`question_id` WHERE `skill_id` = '$skillID' AND `correct`='1' GROUP BY `difficulty_level`";
+	  $result = $coatDB->query($query);
+	  return $result->result_array();
+	}
+
+	public function getResponseDLUserCorrect($skillID, $userID){
+	  $coatDB = $this->load->database('coatDB', TRUE);
+	  $query = "SELECT `difficulty_level`, COUNT(*) AS `number` FROM `responses` JOIN `questions` ON `responses`.`questionID`=`questions`.`question_id` WHERE `skill_id` = '$skillID' AND `userID`='$userID' AND `correct`='1' GROUP BY `difficulty_level`";
+	  $result = $coatDB->query($query);
+	  return $result->result_array();
+	}
+
+	public function getCOATUserID($userID){
+		$query = $this->db->get_where('userSkills', array('userID' => $userID));
+		return $query->result_array();
+	}
+
+	public function getNumberOfUsers($skillID){
+		$coatDB = $this->load->database('coatDB', TRUE);
+		$coatDB->select('COUNT(*) AS number');
+		$query = $coatDB->get_where('userSkills', array('skillID'=>$skillID));
+		return $query->result_array();
+	}
+
+	public function getReportContent(){
+		$query = $this->db->get('reportContent');
+		return $query->result_array();
+	}
+
+	public function checkReportGenerated($userID){
+		$query = $this->db->get_where('generalUsers', array('userID' => $userID));
+		return $query->result_array();
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////////
+
 }

@@ -509,17 +509,6 @@ public function injectClassName(&$data)
 		return $success;
 	}
 
-	public function checkForNewMessages($lastid)
-	{
-		$CI = &get_instance();
-		$CI->load->model('Home_model', 'homemodel');
-		$success = $CI->homemodel->checkForNewNotifications($_SESSION['userData']['userID'], $lastid);
-		if($success){
-			$this->fixTimestamp($success, 'timestamp', 'd M Y  g:i A');
-			$this->injectClassName($success);
-		}
-		return $success;
-	}
 
 	public function getUserSkills($userID){
 		$CI = &get_instance();
@@ -893,5 +882,89 @@ public function injectClassName(&$data)
 		$CI->load->model('home_model','homeModel');
 		return $CI->homeModel->closeOffer($offerType, $offerID);
 	}
+
+	//////////////////////////////////////////////////////////////
+
+	public function getUserDetailsReport($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserDetailsReport($userID);
+	}
+
+	public function getUserSkillsReport($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getUserSkillsReport($userID);
+	}
+
+	public function getResponses($userID, $skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getResponses($userID, $skillID);
+	}
+
+	public function getAverageAttempts($skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAverageAttempts($skillID);
+	}
+
+	public function getAverageScore($skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAverageScore($skillID);
+	}
+
+	public function getAverageCorrectAttempts($skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getAverageCorrectAttempts($skillID);
+	}
+
+	public function getResponseDL($skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getResponseDL($skillID);
+	}
+
+	public function getResponseDLUser($skillID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getResponseDLUser($skillID, $userID);
+	}
+
+	public function getResponseDLCorrect($skillID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getResponseDLCorrect($skillID);
+	}
+
+	public function getResponseDLUserCorrect($skillID, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getResponseDLUserCorrect($skillID, $userID);
+	}
+
+	public function getCOATUserID($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getCOATUserID($userID);
+	}
+
+	public function getReportContent(){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getReportContent();
+	}
+
+	public function checkReportGenerated($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->checkReportGenerated($userID);
+	}
+
+	
+
+	///////////////////////////////////////////////////////////////
 
 }
