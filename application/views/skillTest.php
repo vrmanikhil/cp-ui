@@ -45,6 +45,23 @@
 							</svg>
 						</span>
 						<span class="explore-panel__link-text flex__item">Skills</span>
+						<div class="col-sm-12 well" style="margin-top: 25px;">
+              				<center><b>Test Time</b></center>
+              				<div><b><center id = 'timer' style= "font-size: 2em"></center></b></div>
+            			</div>
+            			<div class="col-sm-12 well" style="margin-top: 0px;">
+              				<center><b>Skips Left:</b></center>
+              				<div><b><center id = 'skipsLeft' style= "font-size: 2em"><?= $skips?></center></b></div>
+            			</div>
+            			<div class="col-sm-12 well">
+              				<center><b>Question Time </b>
+                				<div class="svg-test">
+		               			</div>
+              				</center>
+            			</div>
+            			<div class="col-sm-12 well">
+            			  <center><button class="btn btn-lg finishTest" style="background-color: #3d464d; color: #fff;">FINISH TEST</button></center>
+            			</div>
 					</a>
 				</div>
 				<div class="post card">
@@ -57,38 +74,41 @@
 					<div id="timer"></div>
 				</div>
 				<div class="card">
-					<label><strong style = "font-weight: 600">Question : <sec id = "ques-no"></sec></strong></label>
-					<p class="mcq" id="ques-content"></p>
-					<div class="options">
-							<div class="option flex">
-								<span class="opt">A</span>
-								<input type="radio" name="answer" id="option1" value="1" />
-								<label for="option1" class='option-label' data='1'></label>
-							</div>
-							<div class="option flex">
-								<span class="opt">B</span>
-								<input type="radio" name="answer" id="option2" value="2" />
-								<label for="option2" class='option-label' data='2'></label>
-							</div>
-							<div class="option flex">
-								<span class="opt">C</span>
-								<input type="radio" name="answer" id="option3" value="3" />
-								<label for="option3" class='option-label' data='3'></label>
-							</div>
-							<div class="option flex">
-								<span class="opt">D</span>
-								<input type="radio" name="answer" id="option4" value="4" />
-								<label for="option4" class='option-label' data='4'></label>
-							</div>
-					</div>
-					<div class="flex">
-					<button class="btn btn-primary testButton" id="previous-button">Previous</button>
-					<button class="btn btn-primary testButton" id="next-button">Next</button>
-					</div>
-					<div class="<!-- submitButton -->" id="submitButton">
-						<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-						<button class="btn btn-primary testButton" id="final-submit">Submit</button>
-					</div>
+					<div class="col-sm-12">
+                            <p class="mcq skipQuestion" style="float: right;"><?php if($skips > 0){?><a href = "javascript:">Skip Question</a><?php }else{}?></p>
+                            
+    						<p class="mcq"><strong>Question</strong></p>
+    						<div class="mcq" id = "question"><?=$questionData[0]['question']?></div>
+                            <div class="options">
+    							<div class = 'option'>
+    								<span class="opt">A</span>
+    								<input type="radio" name="answer" id="optionA" value="1" />
+    								<label for="optionA" id = 'option1'><?=$questionData[0]['option1']?></label>
+    							</div>
+    							<div class = 'option'>
+    								<span class="opt">B</span>
+    								<input type="radio" name="answer" id="optionB" value="2" />
+    								<label for="optionB" id = 'option2'><?=$questionData[0]['option2']?></label>
+    							</div>
+    							<div class = 'option'>
+    								<span class="opt">C</span>
+    								<input type="radio" name="answer" id="optionC" value="3" />
+    								<label for="optionC" id = 'option3'><?=$questionData[0]['option3']?></label>
+    							</div>
+    							<div class = 'option'>
+    								<span class="opt">D</span>
+    								<input type="radio" name="answer" id="optionD" value="4" />
+    								<label for="optionD" id = 'option4'><?=$questionData[0]['option4']?></label>
+    							</div>
+    						</div>
+    					</div>
+                       
+    					<center>
+                            <button id="reset" class="btn btn-default" style="background-color: #3d464d; color: #fff; margin-top: 10px;">RESET</button>
+                            <button class="btn btn-default submitAns" style="background-color: #3d464d; color: #fff; margin-top: 10px;">SUBMIT</button>
+                        </center>
+
+          </div>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
