@@ -71,6 +71,7 @@
 						<li role="presentation" class="active"><a href="#professional-details" aria-controls="professional-details" role="tab" data-toggle="tab">Professional Details</a></li>
 						<li role="presentation"><a href="#skills" aria-controls="skills" role="tab" data-toggle="tab">Skills</a></li>
 						<li role="presentation"><a href="#personal-details" aria-controls="personal-details" role="tab" data-toggle="tab">Personal Details</a></li>
+						<li role="presentation"><a href="#downloads" aria-controls="downloads" role="tab" data-toggle="tab">Downloads</a></li>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<li role="presentation"><a href="#company-details" aria-controls="company-details" role="tab" data-toggle="tab">Company Details</a></li>
 						<?php } ?>
@@ -187,6 +188,9 @@
 								<p class="flex personal-info"><strong>Mobile Number</strong><span><?= $userDetails['mobile']?></span></p>
 							<?php } ?>
 						</div>
+						<div role="tabpanel" class="tab-pane fade" id="downloads">
+							<button><a href="<?= base_url()?>/user-profile/<?= $userDetails['userID']?>?download=1">Download Resume</a></button>
+						</div>
 						<?php if($userDetails['accountType']=='2') { ?>
 						<div role="tabpanel" class="tab-pane fade" id="company-details">
 							<h3 class="heading flex">
@@ -284,7 +288,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Education Details</h3>
-			<form action="<?= base_url('web/addEducation')?>" method="POST" class="form educationDet">
+			<form action="<?= base_url('web/addEducation')?>" method="POST" class="form educationDet" enctype = "multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="educationType">Education Type <span style="color: red; font-size: 12px;">required</span></label>
@@ -323,6 +327,11 @@
 				<div class="form-group">
 					<label for="educationDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
 					<textarea name="educationDescription" data-ckeditor="yes" required id="educationDescription" cols="30" rows="5" class="form__input"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="file">Certificate/Marksheet/Degree <span style="color: red; font-size: 12px;">required</span></label>
+					<input type="file" name="file" id = "file" required class = "form__input">
+					<span style="color: green; font-size: 12px;">Allowed formats-pdf/jpg/jpeg/doc(Max:4MB)</span>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>

@@ -211,8 +211,7 @@ class Home extends CI_Controller {
 		$resume['educationalDetails'] = $this->data['educationalDetails'];
 		$resume['workExperiences'] = $this->data['workExperiences'];
 		$resume['skills'] = $this->data['skills'];
-		if(isset($_GET['download']) == 1)
-			if($_SESSION['userData']['accountType'] == 2){
+		if(isset($_GET['download']) == 1){
 				$resume['userDetails']['profileImage'] = file_get_contents($resume['userDetails']['profileImage']);
 				$base64 = base64_encode($resume['userDetails']['profileImage']);
 				$resume['userDetails']['profileImage'] = 'data:image/jpeg;base64,' . $base64;
@@ -225,7 +224,6 @@ class Home extends CI_Controller {
 				$dompdf->setPaper('A4', 'landscape');
 				$dompdf->render();
 				$dompdf->stream(md5($resume['userDetails']['userID']).'.pdf');
-			}else{
 				$this->session->set_flashdata('message', array('content' => 'Oops, Something went wrong.', 'class' => 'error'));
 				redirect(base_url());
 			}
