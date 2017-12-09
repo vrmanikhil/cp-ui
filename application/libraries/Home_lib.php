@@ -360,31 +360,20 @@ class Home_lib {
 		return $percent;
 	}
 
-	public function addSkill($score, $userID, $skill_id, $num_ques)
+	public function addSkill($score, $userID, $skill_id)
 	{
 		$response = 0;
 		$CI = &get_instance();
 		$CI->load->model('Home_model', 'homemodel');
-		if($this->passedTest($score)){
 			date_default_timezone_set('Asia/Kolkata');
 			$time = time();
 			$date = date("d-m-Y", $time);
 			$datestamp = strtotime($date);
 			if($CI->homemodel->addSkillToUser($skill_id, $userID, $score, $datestamp)){
-				$response = 1;
+				$response = true;
 			}else{
-				$response = 2;
+				$response = false;
 			}
-		}
-		return $response;
-	}
-
-	public function passedTest($score)
-	{
-		$CI = &get_instance();
-		$CI->load->model('Home_model', 'homemodel');
-		$test_settings = $CI->session->userdata('test_settings');
-		return ($score >= $test_settings[0]['passingCriteria']);
 	}
 
 	/*	Chats	*/

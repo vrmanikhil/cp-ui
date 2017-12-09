@@ -781,7 +781,11 @@ class Home extends CI_Controller {
 		$this->data['skillData']['skillID'] = $_SESSION['userData']['currentSkill'];
 		$this->data['skillData']['skillName'] = $_SESSION['userData']['currentSkillName'];
 		$this->data['questionData'] = $_SESSION['questionData'];
-		$this->data['totalTime'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['totalTime'];
+		$totalTime = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['totalTime'];
+		// var_dump($totalTime); die;
+		$this->data['totalTime'] = $totalTime;
+		// var_dump($this->data);die;
+		// echo $this->data['totalTime'];die;
 		$this->data['skips'] = $_SESSION['userData'][$_SESSION['userData']['currentSkill']]['skips'];
 		$this->load->view('skillTest', $this->data);
 	}
@@ -825,6 +829,7 @@ class Home extends CI_Controller {
 				$skill_data = $this->session->userdata('skill_data');
 				$this->data['skill_name'] = $skill_data['skill_name'];
 				$this->data['title'] = 'Skill Test Guidelines';
+				$this->data['skill_id'] = $test_settings[0]['skillID'];
 				$this->load->view('skillTestGuidelines', $this->data);
 			}else{
 				$this->session->set_flashdata('message', array('content' => 'Something Went Wrong. Please Try Again.', 'class' => 'error'));

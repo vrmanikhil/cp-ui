@@ -36,16 +36,18 @@ class HomeFunctions extends CI_Controller {
 		$skill_id = $this->input->get('skillID');
 			$_SESSION['userData']['intest'] = false;
 			$_SESSION['userData']['currentSkill'] = $skill_id;
-			$_SESSION['userData']['currentSkillName'] = $this->getSkillData($skill_id)[0]['skill'];
+			// var_dump($this->getSkillData($skill_id)); die;
+			$_SESSION['userData']['currentSkillName'] = $this->getSkillData($skill_id)[0]['skill_name'];
 			$_SESSION['userData'][$skill_id]['totalScore'] = 0;
 			$_SESSION['userData'][$skill_id]['skips'] = 3;
 			$_SESSION['userData'][$skill_id]['skipStatus'] = 0;
 			$_SESSION['userData'][$skill_id]['level'] = 1;
 			$testTime = $this->home_lib->getTestSetup()[0]['timeAllowed'];
+			// var_dump($testTime); die;
 			$_SESSION['userData'][$skill_id]['totalTime'] = $testTime*60;
 			$_SESSION['userData'][$skill_id]['responses'] = array();
 			$_SESSION['questionData'] = $this->getQuestionDetails(1, $skill_id);
-			redirect(base_url('skill-test'));
+			redirect(base_url('skills/skill-test'));
 	}
 
 	public function nextQuestion(){
@@ -105,20 +107,6 @@ class HomeFunctions extends CI_Controller {
 		}
 	}
 
-	public function getSkips($userID, $skillID){
-		$skips = $this->home_lib->getSkips($userID, $skillID)[0]['skips'];
-		$skipStatus = $_SESSION['userData'][$skillID]['skipStatus'];
-		if($skipStatus == 0){
-			$skips = 3 - $skips;
-		}elseif($skipStatus == 1){
-			$skips = 4 - $skips;
-		}elseif($skipStatus == 2){
-			$skips = 5 - $skips;
-		}else{
-			return false;
-		}
-		return $skips;
-	}
 
 	public function getSkipStatus($totalScore){
 		if($totalScore>=-10 && $totalScore < 30)
@@ -223,9 +211,23 @@ class HomeFunctions extends CI_Controller {
 	}
 
 	public function endTest(){
+		$userID = $_SESSION['userData']['userID'];
+		$skill_id = $_SESSION['userData']['currentSkill'];
+		$score = $_SESSION['userData'][$skill_id]['totalScore'];
+		if($score >= 7){
+			$result = $this->home_lib->addSkill($score, $userID, $skill_id);
+			var_dump($result); die;
+			if(!$result){
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured. Please Try Again.','class'=>'error'));
+				$this->updateInfo();
+				redirect('skills');
+			}
+			$this->session->set_flashdata('message', array('content'=>'Congratulations your score was '.$score.' and skill was Successfully added to your Profile.','class'=>'success'));
+		}else{
+			$this->session->set_flashdata('message', array('content'=>'Your score was '.$score.' and were unable to Clear the Skill Test. Better Luck Next Time.','class'=>'error'));
+		} 
 		$this->updateInfo();
-		$this->session->set_flashdata('message', array('content'=>'You have Completed the Test.','class'=>'success'));
-		redirect('skill-tests');
+		redirect('skills');
 	}
 
 	public function updateInfo(){
@@ -241,9 +243,6 @@ class HomeFunctions extends CI_Controller {
 		$_SESSION['userData'][$skill_id]['level'] = NULL;
 		$_SESSION['userData'][$skill_id]['responses'] = NULL;
 		$_SESSION['userData']['intest'] = false;
-		$this->home_lib->unlockSkills($skill_id, $_SESSION['userData']['userID']);
-		$this->home_lib->changeSkillStatusToComplete($skill_id, $_SESSION['userData']['userID'], $totalScore);
-		$this->home_lib->unlockTests($testID, $_SESSION['userData']['userID']);
 	}
 
 	public function test(){
@@ -266,5 +265,21 @@ class HomeFunctions extends CI_Controller {
 			$score = $score/2;
 		}
 		return $score;
+	}
+
+	private function getSkillData($skill_id){
+		return $this->home_lib->getSkillData($skill_id);
+	}
+
+	public function testtest(){
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) //check ip from share internet 
+		{ 
+			$ip=$_SERVER['HTTP_CLIENT_IP']; 
+		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) //to check ip is pass from proxy 
+		{ 
+			$ip=$_SERVER['HTTP_X_FORWARDED_FOR']; 
+		} else { 
+			$ip=$_SERVER['REMOTE_ADDR']; 
+		} echo $ip;
 	}
 }

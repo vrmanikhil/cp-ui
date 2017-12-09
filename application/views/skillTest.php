@@ -45,24 +45,24 @@
 							</svg>
 						</span>
 						<span class="explore-panel__link-text flex__item">Skills</span>
-						<div class="col-sm-12 well" style="margin-top: 25px;">
-              				<center><b>Test Time</b></center>
-              				<div><b><center id = 'timer' style= "font-size: 2em"></center></b></div>
-            			</div>
-            			<div class="col-sm-12 well" style="margin-top: 0px;">
-              				<center><b>Skips Left:</b></center>
-              				<div><b><center id = 'skipsLeft' style= "font-size: 2em"><?= $skips?></center></b></div>
-            			</div>
-            			<div class="col-sm-12 well">
-              				<center><b>Question Time </b>
-                				<div class="svg-test">
-		               			</div>
-              				</center>
-            			</div>
-            			<div class="col-sm-12 well">
-            			  <center><button class="btn btn-lg finishTest" style="background-color: #3d464d; color: #fff;">FINISH TEST</button></center>
-            			</div>
 					</a>
+					<div class="col-sm-12 well">
+              			<center><b>Test Time</b></center>
+              			<div><b><center id = 'timer' style= "font-size: 2em"></center></b></div>
+            		</div>
+
+            		<div class="col-sm-12 well">
+             			<center><b>Skips Left:</b></center>
+              			<div><b><center id = 'skipsLeft' style= "font-size: 2em"><?= $skips?></center></b></div>
+            		</div>
+            		<div class="col-sm-12 well" >
+              			<center><b>Question Time </b>
+                			<div><b><center class = 'svg-type' style= "font-size: 2em"></center></b></div>
+              			</center>
+            		</div>
+            		<div class="col-sm-12 well">
+           				<center><button class="btn btn-lg finishTest" style="background-color: #3d464d; color: #fff;">FINISH TEST</button></center>
+            		</div>
 				</div>
 				<div class="post card">
 					<img src="/assets/img/showcase/CP1.png" alt="" style="width: 100%;">
@@ -70,7 +70,7 @@
 			</aside>
 			<div class="main-body flex__item">
 				<div class="card flex">
-					<p class="skill-name" style = "font-weight: 800">Skill Test: <strong style="font-weight: 600"><?php echo $skill_data['skill_name']; ?></strong></p>
+					<p class="skill-name" style = "font-weight: 800">Skill Test: <strong style="font-weight: 600"><?php echo $skillData['skillName']; ?></strong></p>
 					<div id="timer"></div>
 				</div>
 				<div class="card">
@@ -83,22 +83,22 @@
     							<div class = 'option'>
     								<span class="opt">A</span>
     								<input type="radio" name="answer" id="optionA" value="1" />
-    								<label for="optionA" id = 'option1'><?=$questionData[0]['option1']?></label>
+    								<label for="optionA" class = "option-label" id = 'option1'><?=$questionData[0]['option1']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">B</span>
     								<input type="radio" name="answer" id="optionB" value="2" />
-    								<label for="optionB" id = 'option2'><?=$questionData[0]['option2']?></label>
+    								<label for="optionB" class = "option-label" id = 'option2'><?=$questionData[0]['option2']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">C</span>
     								<input type="radio" name="answer" id="optionC" value="3" />
-    								<label for="optionC" id = 'option3'><?=$questionData[0]['option3']?></label>
+    								<label for="optionC" class = "option-label" id = 'option3'><?=$questionData[0]['option3']?></label>
     							</div>
     							<div class = 'option'>
     								<span class="opt">D</span>
     								<input type="radio" name="answer" id="optionD" value="4" />
-    								<label for="optionD" id = 'option4'><?=$questionData[0]['option4']?></label>
+    								<label for="optionD" class = "option-label" id = 'option4'><?=$questionData[0]['option4']?></label>
     							</div>
     						</div>
     					</div>
@@ -127,171 +127,201 @@
 				</div>
 			</aside>
 		</main>
-		<?php echo $footer; ?>
+		<?php echo $footer;?>
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
+	<?php var_dump($totalTime); die;?>
 	<script type="text/javascript">
-		questions = JSON.parse(atob("<?php echo $question_string; ?>"));
-		var eventKey = "<?php echo $skill_data['skill_name']?>_test";
-		time = <?php echo $test_settings[0]['timeAllowed']; ?>,r=document.getElementById('timer'),tmp=time;
-		setInterval(function () {
-			var c = tmp--,m=(c/60)>>0,s=(c-m*60)+'';
-			timer.textContent='Time Remaining: '+m+':'+(s.length>1?'':'0')+s
-			if (c<1) {
-				submitAnswers(eventKey);
-			}
+		var timePassed= 0;
 
-		},1000);
-		var currentId = 1;
-		$('#next-button').click(function () {
-			var current = +getCurrent(eventKey);
-			populateQuestion(eventKey, current + 1);
-		})
+// var totalTime = <?php echo $totalTime; ?>;
+// var totalTime = 90;
+var questionTime = <?= 2*$questionData[0]['expert_time']?>;
+var interval = null;
+(function ( $ ) {
+    $.fn.svgTimer = function(options) {
+        var opts = $.extend({}, $.fn.svgTimer.defaults, options);
+        var template = "<div class='svg-hexagonal-counter'>"
+            + "<h2>"+questionTime+"</h2>"
+            + "<svg class='counter' x='0px' y='0px' viewBox='0 0 776 628'>"
+            + "<path class='track' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
+            + "<path class='fill' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
+            + "</svg>"
+            + "</div>";
 
-		$('#previous-button').click(function () {
-			var current = +getCurrent(eventKey);
-			populateQuestion(eventKey, current - 1);
-		})
+        return this.each(function() {
+            // Build dom for svg countdown
+            var parentEl = $(this);
+            parentEl.append(template);
 
-		$('.option-label').click(function () {
-			var option = $(this).attr('data');
-			var current = +getCurrent(eventKey);
-			saveAns(eventKey, current, option);
-		})
+            //define dom elements
+            var track = parentEl.find('.track');
+            var fill = parentEl.find('.fill');
+            var counterText = parentEl.find('h2');
 
-		$('#final-submit').click(function () {
-			submitAnswers(eventKey);
-		})
+            //set time and offset
+            var time = questionTime; /* how long the timer runs for */
+            var initialOffset = 2160;
+            timePassed = 1;
 
-		function init(eventKey) {
-			if (alreadyInit(eventKey)) {
-				reinitialise(eventKey)
-			} else {
-				localStorage.clear();
-				ans = [];
-				for (i = 0; i < questions.length; i++) {
-						ans[i] = {ques_id: questions[i].question_id, ans: ''};
-				}
-				// console.log(ans);
-				localStorage.setItem(eventKey+'_length', questions.length);
-				localStorage.setItem(eventKey+'_answers', JSON.stringify(ans));
-				populateQuestion(eventKey, 0);
-			}
-		}
+            //draw initial hexagon
+            track.css('stroke', opts.track);
+            fill.css({
+                'stroke': opts.fill,
+                'stroke-dashoffset': initialOffset-(timePassed*(initialOffset/time)) + 'px',
+                'transition': 'stroke-dashoffset 1s ' +  opts.transition
+            });
 
+            //run timer
+           
+            interval = setInterval(function() {
+                track.css('stroke', opts.track);
+                fill.css({
+                    'stroke': opts.fill,
+                    'stroke-dashoffset': initialOffset-(timePassed*(initialOffset/time)) + 'px',
+                    'transition': 'stroke-dashoffset 1s ' +  opts.transition
+                }); 
+                if(time/timePassed > 3){
+                     opts.fill = "rgb(39,174,96)";
+                }else if(time/timePassed <= 3 && time/timePassed > 1.5){
+                     opts.fill = "rgb(241,152,12)";
+                }else if(time/timePassed <= 1.5){
+                     opts.fill = "rgb(204,0,0)";
+                }
+                if(opts.direction === 'forward'){
+                    counterText.text(i);
+                } else if (opts.direction === 'backward') {
+                    var count = questionTime - timePassed;
+                    counterText.text(count);
+                }
 
-		function alreadyInit(eventKey) {
-			return !!localStorage.getItem(eventKey+'_current');
-		}
+                if (timePassed == time) {
+                    submitAnswers('0',--questionTime,tmp);
+                    clearInterval(interval);
+                }
+                timePassed++;
+            }, 1000);
+    
+        });
+    };
 
-		function reinitialise(eventKey) {
-			populateQuestion(eventKey, +getCurrent(eventKey));
-		}
+    $.fn.svgTimer.defaults = {
+        track: 'rgb(56, 71, 83)',
+        fill: 'rgb(39,174,96)',
+        transition: 'linear',
+        direction: 'backward',
+    }
+}( jQuery ));
 
-		function populateQuestion(eventKey, index) {
-			var ques = getQuestion(eventKey, index);
-			var opts = [ques.option1,ques.option2,ques.option3,ques.option4];
-			$('#ques-content').html(ques.ques);
-			$('#ques-no').html(+getCurrent(eventKey)+1);
-			populateOptions(opts, ques.ans);
-			disableButtons(eventKey);
-		}
+$(function () {
+  $('.svg-test').svgTimer();
+});
 
-		function populateOptions(options, ans) {
-			var opts = $('.option-label');
-			opts.each(function (index) {
-				$(this).html(options[index]);
-			});
-			markAnswer(ans);
-		}
+var time = totalTime,r=document.getElementById('timer'),tmp=time;
+setInterval(function () {
+    var c = tmp--,h = (c/3600)>>0,m=((c-h*3600)/60)>>0,s=(c-m*60-h*3600)+'';
+    if(h>0){
+        timer.textContent= h+' : '+m+' : '+(s.length>1?'':'0')+s
+    }else{
+        timer.textContent= m+' : '+(s.length>1?'':'0')+s
+    }
+    if (c<1) {
+        finishTest();
+    }
 
-		function markAnswer(ans) {
-			var ans = +ans;
-			if (ans != 4 || ans != 3|| ans != 2 || ans != 1 )
-				$('input[name=answer]').prop('checked', false);
-			$('#option'+ans).prop('checked', true);
-		}
+},1000);
+var ans = 0;
+var selected = null;
+$('.option').on('click', function(){
+    selected = $(this).find("input[name = answer]").attr('id');
+    ans = $("#"+selected).val();
+});    
 
-		function disableButtons(eventKey) {
-			var index = getCurrent(eventKey);
-			if (index == 0)
-				$('#previous-button').attr('hidden', 'hidden');
-			else if(index == questions.length -1)
-				$('#next-button').attr('hidden', 'hidden');
-			else {
-				$('#previous-button').removeAttr('hidden');
-				$('#next-button').removeAttr('hidden');
-			}
-		}
+$('.skipQuestion').on('click', function(){
+    data = {answer: '0', timeConsumed: totalTime-tmp, totalTime:tmp};
+   $.post('<?= base_url('homeFunctions/skipQuestion')?>', data).done(function(res){
+        res = JSON.parse(res);
+        if(res.skips!=false)
+            populate(res);
+        else{
+            populate(res);
+            $('.skipQuestion').hide();
+        }
+   })
+});
 
-		function getCurrent(eventKey) {
-			return localStorage.getItem(eventKey+'_current')
-		}
+$('#reset').on('click', function() {
+   $('input[type=radio]').prop('checked', function () {
+       return this.getAttribute('checked') == 'checked';
+   });
+})
 
-		function getAnswers(eventKey) {
-			return JSON.parse(localStorage.getItem(eventKey+'_answers'));
-		}
+$('.submitAns').on('click', function(){
+    $(this).hide();
+    $('#reset').hide();
+    submitAnswers(ans, totalTime-tmp, tmp);
+});
 
-		function getQuestion(eventKey, index) {
-			var ans = getAnswers(eventKey);
-			// console.log(index);
-			localStorage.setItem(eventKey+'_current', index);
-			return {
-				ques: questions[index].question,
-				option1: questions[index].option1,
-				option2: questions[index].option2,
-				option3: questions[index].option3,
-				option4: questions[index].option4,
-				ans: ans[index].ans || ''
-			};
-		}
+$('.finishTest').on('click', function(){
+    finishTest();
+});
+function submitAnswers(ans, timePassed, tmp){   
+   data = {answer: ans, timeConsumed: timePassed, totalTime:tmp};
+   $.post('<?= base_url('homeFunctions/nextQuestion')?>', data).done(function(res){
+        if(res == 'false'){
+            window.location = "<?= base_url('skill-tests')?>";
+        }
+        console.log(res);
+        res = JSON.parse(res);
+        if(res.skips!=false){
+            populate(res);
+            $('.skipQuestion').show();
+        }
+        else{
+            populate(res);
+            $('.skipQuestion').hide();
+        }
+   })
+}
 
-		function saveAns(eventKey, current, option) {
-			var ans = getAnswers(eventKey);
-			ans[current].ans = option;
-			localStorage.setItem(eventKey+'_answers', JSON.stringify(ans));
-		}
+function finishTest(){
+    clearInterval(interval);
+    window.location = "<?= base_url('homeFunctions/endTest')?>";
+}
 
-		function submitAnswers(eventKey) {
-			var data =JSON.stringify(getAnswers(eventKey));
-			document.cookie = "data = " + data;
-			if (data) {
-				localStorage.clear();
-				window.location.replace('<?php echo base_url('skills/submit-answers');?>');
-			} else {
-				alert('Some error occured');
-			}
-		}
+function populate(res){
+    if(res.questionData == null){
+        finishTest();
+    }else{
+    $('.submitAns').hide()
+    $('#reset').hide();
+    $('#question').empty();
+    $("#"+selected).prop("checked", false);
+    $('#question').html(res.questionData.question);
+    $('#option1').html(res.questionData.option1);
+    $('#option2').html(res.questionData.option2);
+    $('#option3').html(res.questionData.option3);
+    $('#option4').html(res.questionData.option4);
+    $(document).find('#skipsLeft').html(res.skipsLeft);
+    $('.skipQuestion').show();
+    questionTime = 2*res.questionData.expert_time;
+    totalTime = res.totalTime;
+    clearInterval(interval);
+    $('.svg-test').empty();
+    $('.svg-test').svgTimer();
+        var hey = setInterval(function () {
+            var nc = 0;
+            if (nc<=0) {
+                clearInterval(hey);
+                $('.submitAns').show()
+                $('#reset').show()   
+                }
+        },1000);
+} 
+}
 
-		$(document).ready(function () {
-			$(document).on("contextmenu", function (e) {
-				return false;
-			});
-			init(eventKey);
-		});
-
-		document.onkeydown = function (e) {
-			if (event.keyCode == 123) {
-				return false;
-			}
-
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-				return false;
-			}
-
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-				return false;
-			}
-
-			if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-				return false;
-			}
-
-			if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-				return false;
-			}
-		}
+		
 	</script>
 </body>
 </html>

@@ -119,8 +119,7 @@ class Home_model extends CI_Model {
 	public function addSkilltoUser($skill_id, $user_id, $score, $date)
 	{
 		$data = ['skillID'=> $skill_id, 'userID'=> $user_id, 'score'=> $score, 'testDate'=> $date, 'skillType'=> '1'];
-		$this->db->insert('userSkills', $data);
-		return (bool)$this->db->affected_rows();
+		return $this->db->insert('userSkills', $data);
 	}
 	/*		SKILL END 		*/
 	/*		CHATS		*/

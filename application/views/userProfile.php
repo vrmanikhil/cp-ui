@@ -127,30 +127,7 @@
 									<?php echo "<br>"; } ?>
 								</div>
 							</section>
-							<section>
-								<h3 class="heading flex">
-									<span>Projects</span>
-									<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
-									<a href="javascript:" class="btn btn--primary js-open-edit-modal" data-modal-type="edit-projects"><i class="fa fa-plus" aria-hidden="true"></i></a>
-									<?php } ?>
-								</h3>
-								<div class="projects__container">
-									<?php if(empty($projects)) echo "<p>No Projects Added</p>";
-									else foreach ($projects as $key => $value) { ?>
-										<div class="project">
-										<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
-											<div class="action-btns">
-												<a href="javascript:" data-json='<?= json_encode($value) ?>' data-type="edit-projects" class="btn btn--primary js-edit-entity projectDetails"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-												<a href="<?php echo base_url('web/delete/'.$value['projectID'].'/projects/projectID')?>" class="btn btn--primary delete-project"><i class="fa fa-trash" aria-hidden="true"></i></a>
-											</div>
-											<?php } ?>
-											<p><strong><?= $value['projectTitle'] ?></strong></p>
-											<p><a target='_blank' href='<?= $value["projectLink"] ?>'><?= $value['projectLink'] ?></a></p>
-											<p><?= $value['projectDescription'] ?></p>
-										</div>
-									<?php echo "<br>";} ?>
-								</div>
-							</section>
+							
 							<section>
 								<h3 class="heading flex">
 									<span>Achievements</span>
@@ -375,30 +352,6 @@
 				</div>
 			</form>
 		</div>
-	</div>
-	<div class="remodal edit-projects" data-remodal-id="editProjectsModal">
-		<button data-remodal-action="close" class="remodal-close"></button>
-		<div class="modal-body">
-			<h3>Project</h3>
-			<form action="<?= base_url('web/addProject')?>" method="POST" class="form projectDet">
-				<div class="form-group">
-					<label for="projectName">Name <span style="color: red; font-size: 12px;">required</span></label>
-					<input type="text" class="form__input" placeholder="Project name" required id="projectName" name="projectTitle">
-				</div>
-				<div class="form-group">
-					<label for="projectLink">Link</label>
-					<input type="text" class="form__input" placeholder="Project Link" id="projectLink" name="projectLink">
-				</div>
-				<div class="form-group">
-					<label for="projectDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
-					<textarea name="projectDescription" data-ckeditor="yes" required id="projectDescription" cols="30" rows="5" class="form__input"></textarea>
-				</div>
-				<div class="form-group action-bar">
-					<button data-remodal-action="close" class="btn">Close</button>
-					<input type="hidden" name="<?php echo $csrf_token_name; ?>" value="<?php echo $csrf_token; ?>">
-					<input type="submit" class="btn btn--primary" value="Save">
-				</div>
-		</form>
 	</div>
 	<div class="remodal edit-work-experience" data-remodal-id="editWorkExperienceModal">
 		<button data-remodal-action="close" class="remodal-close"></button>

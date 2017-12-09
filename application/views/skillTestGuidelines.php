@@ -69,7 +69,7 @@
 							<li>Number of Questions that will be asked are <strong><?php echo $numberQuestion; ?>.</strong></li>
 						</ul>
 					</p>
-					<center><a href = "<?php echo base_url('skills/skill-test'); ?>"><button class="btn btn-primary">Start Test</button></a></center>
+					<center><a href = "<?php echo base_url('homeFunctions/beginTest?skillID='.$skill_id); ?>"><button class="btn btn-primary">Start Test</button></a></center>
 				</div>
 			</div>
 			<aside class="flex__item right-pane">
