@@ -328,16 +328,28 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('educationDescription')){
 			$description = $x;
 		}
-		$data = array(
+		$educationDocument = '';
+		$this->load->library('upload');
+	 	$config['upload_path'] = 'educationDocument';
+	 	$config['allowed_types'] = 'jpg|jpeg|png|JPG|pdf|doc|docx';
+	 	$config['max_size']	= '4000';
+	 	$config['file_name'] = explode(' ', $_SESSION['userData']['name'])[0].$userID.$educationType;
+	 	$this->upload->initialize($config);
+	 	$result = $this->upload->do_upload('file');
+	 	$x = $this->upload->data();
+		$educationDocument = $x['file_name'];
+		if($result){
+			$data = array(
 				'educationType' => $educationType,
 				'year' => $educationYear,
 				'scoreType' => $scoreType,
 				'score' => $score,
 				'description' => $description,
-				'userID' => $userID
+				'userID' => $userID,
+				'proof' => $educationDocument
 			);
-		if($educationYear == '' || $educationType == '' || $scoreType == '' || $score == '' || $description == ''){
-			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
+			if($educationYear == '' || $educationType == '' || $scoreType == '' || $score == '' || $description == ''){
+			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}else{
 			if(isset($_POST['type'])){
@@ -352,10 +364,16 @@ class Web extends CI_Controller {
 				redirect(base_url('user-profile/'.$userID));
 			}
 			else{
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
+				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('user-profile/'.$userID));
 			}
 		}
+		}else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong.','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
+		}
+		
+		
 	}
 
 	public function addProject(){
