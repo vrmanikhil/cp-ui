@@ -57,7 +57,7 @@
             		</div>
             		<div class="col-sm-12 well" >
               			<center><b>Question Time </b>
-                			<div><b><center class = 'svg-type' style= "font-size: 2em"></center></b></div>
+                			<div><b><center id = 'questionTimer' class = "svg-test" style= "font-size: 2em"></center></b></div>
               			</center>
             		</div>
             		<div class="col-sm-12 well">
@@ -71,7 +71,6 @@
 			<div class="main-body flex__item">
 				<div class="card flex">
 					<p class="skill-name" style = "font-weight: 800">Skill Test: <strong style="font-weight: 600"><?php echo $skillData['skillName']; ?></strong></p>
-					<div id="timer"></div>
 				</div>
 				<div class="card">
 					<div class="col-sm-12">
@@ -131,88 +130,38 @@
 	</div>
 	<script src="<?php echo base_url('/assets/js/jquery-3.2.0.min.js'); ?>"></script>
 	<script src="<?php echo base_url('/assets/js/common.js'); ?>"></script>
-	<?php var_dump($totalTime); die;?>
 	<script type="text/javascript">
 		var timePassed= 0;
 
-// var totalTime = <?php echo $totalTime; ?>;
+var totalTime = <?php echo $totalTime; ?>;
 // var totalTime = 90;
 var questionTime = <?= 2*$questionData[0]['expert_time']?>;
 var interval = null;
 (function ( $ ) {
     $.fn.svgTimer = function(options) {
-        var opts = $.extend({}, $.fn.svgTimer.defaults, options);
-        var template = "<div class='svg-hexagonal-counter'>"
-            + "<h2>"+questionTime+"</h2>"
-            + "<svg class='counter' x='0px' y='0px' viewBox='0 0 776 628'>"
-            + "<path class='track' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
-            + "<path class='fill' d='M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z'></path>"
-            + "</svg>"
-            + "</div>";
-
+        
         return this.each(function() {
-            // Build dom for svg countdown
-            var parentEl = $(this);
-            parentEl.append(template);
-
-            //define dom elements
-            var track = parentEl.find('.track');
-            var fill = parentEl.find('.fill');
-            var counterText = parentEl.find('h2');
-
-            //set time and offset
-            var time = questionTime; /* how long the timer runs for */
-            var initialOffset = 2160;
-            timePassed = 1;
-
-            //draw initial hexagon
-            track.css('stroke', opts.track);
-            fill.css({
-                'stroke': opts.fill,
-                'stroke-dashoffset': initialOffset-(timePassed*(initialOffset/time)) + 'px',
-                'transition': 'stroke-dashoffset 1s ' +  opts.transition
-            });
-
-            //run timer
-           
-            interval = setInterval(function() {
-                track.css('stroke', opts.track);
-                fill.css({
-                    'stroke': opts.fill,
-                    'stroke-dashoffset': initialOffset-(timePassed*(initialOffset/time)) + 'px',
-                    'transition': 'stroke-dashoffset 1s ' +  opts.transition
-                }); 
-                if(time/timePassed > 3){
-                     opts.fill = "rgb(39,174,96)";
-                }else if(time/timePassed <= 3 && time/timePassed > 1.5){
-                     opts.fill = "rgb(241,152,12)";
-                }else if(time/timePassed <= 1.5){
-                     opts.fill = "rgb(204,0,0)";
+          var qtime = questionTime,r=document.getElementById('questionTimer'),temp=qtime;
+            interval = setInterval(function () {
+                var tt = temp--,hr = (tt/3600)>>0,min=((tt-hr*3600)/60)>>0,sec=(tt-min*60-hr*3600)+'';
+                console.log('tt'+tt);
+                console.log('sec'+sec);
+                if(min>0){
+                    questionTimer.textContent= min+' : '+(sec.length>1?'':'0')+sec
+                }else{
+                    questionTimer.textContent= (sec.length>1?'':'0')+sec
                 }
-                if(opts.direction === 'forward'){
-                    counterText.text(i);
-                } else if (opts.direction === 'backward') {
-                    var count = questionTime - timePassed;
-                    counterText.text(count);
-                }
-
-                if (timePassed == time) {
+                if (tt<1) {
                     submitAnswers('0',--questionTime,tmp);
-                    clearInterval(interval);
                 }
-                timePassed++;
-            }, 1000);
+
+            },1000);
     
         });
     };
 
-    $.fn.svgTimer.defaults = {
-        track: 'rgb(56, 71, 83)',
-        fill: 'rgb(39,174,96)',
-        transition: 'linear',
-        direction: 'backward',
-    }
-}( jQuery ));
+   
+}(jQuery));
 
 $(function () {
   $('.svg-test').svgTimer();
@@ -231,6 +180,9 @@ setInterval(function () {
     }
 
 },1000);
+
+
+
 var ans = 0;
 var selected = null;
 $('.option').on('click', function(){
