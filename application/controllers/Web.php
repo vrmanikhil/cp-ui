@@ -197,6 +197,17 @@ class Web extends CI_Controller {
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}
+		$workExperienceDocument = '';
+		$this->load->library('upload');
+	 	$config['upload_path'] = 'workExperienceDocument';
+	 	$config['allowed_types'] = 'jpg|jpeg|png|JPG|pdf';
+	 	$config['max_size']	= '4000';
+	 	$config['file_name'] = explode(' ', $_SESSION['userData']['name'])[0].$userID.time();
+	 	$this->upload->initialize($config);
+	 	$result = $this->upload->do_upload('file');
+	 	$x = $this->upload->data();
+		$workExperienceDocument = $x['file_name'];
+		if($result){
 		$data = array(
 			'companyName' => $companyName,
 			'position' => $position,
@@ -205,7 +216,8 @@ class Web extends CI_Controller {
 			'startYear' => $startYear,
 			'endMonth' => $endMonth,
 			'endYear' => $endYear,
-			'userID' =>$userID
+			'userID' =>$userID,
+			'proof' => $workExperienceDocument
 		);
 		if($companyName==''||$position==''||$description==''||$startMonth==''||$startYear==''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
@@ -227,6 +239,10 @@ class Web extends CI_Controller {
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('user-profile/'.$userID));
 			}
+		}
+		}else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong.','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
 		}
 	}
 
@@ -267,11 +283,23 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('achievementDescription')){
 			$achievementDescription = $x;
 		}
-		$data = array(
-			'achievementTitle' => $achievementTitle,
-			'achievementDescription' => $achievementDescription,
-			'userID' =>$userID
-		);
+		$achievementDocument = '';
+		$this->load->library('upload');
+	 	$config['upload_path'] = 'achievementDocument';
+	 	$config['allowed_types'] = 'jpg|jpeg|png|JPG|pdf';
+	 	$config['max_size']	= '4000';
+	 	$config['file_name'] = explode(' ', $_SESSION['userData']['name'])[0].$userID.time();
+	 	$this->upload->initialize($config);
+	 	$result = $this->upload->do_upload('file');
+	 	$x = $this->upload->data();
+		$achievementDocument = $x['file_name'];
+		if($result){
+			$data = array(
+				'achievementTitle' => $achievementTitle,
+				'achievementDescription' => $achievementDescription,
+				'userID' =>$userID,
+				'proof' => $achievementDocument
+			);
 		if($achievementTitle==''||$achievementDescription==''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 			redirect(base_url('user-profile/').$userID);
@@ -292,6 +320,10 @@ class Web extends CI_Controller {
 				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again','class'=>'error'));
 				redirect(base_url('user-profile/').$userID);
 			}
+		}
+	}else{
+			$this->session->set_flashdata('message', array('content'=>'Something Went Wrong.','class'=>'error'));
+			redirect(base_url('user-profile/'.$userID));
 		}
 	}
 
@@ -331,9 +363,9 @@ class Web extends CI_Controller {
 		$educationDocument = '';
 		$this->load->library('upload');
 	 	$config['upload_path'] = 'educationDocument';
-	 	$config['allowed_types'] = 'jpg|jpeg|png|JPG|pdf|doc|docx';
+	 	$config['allowed_types'] = 'jpg|jpeg|png|JPG|pdf';
 	 	$config['max_size']	= '4000';
-	 	$config['file_name'] = explode(' ', $_SESSION['userData']['name'])[0].$userID.$educationType;
+	 	$config['file_name'] = explode(' ', $_SESSION['userData']['name'])[0].$userID.$educationType.time();
 	 	$this->upload->initialize($config);
 	 	$result = $this->upload->do_upload('file');
 	 	$x = $this->upload->data();

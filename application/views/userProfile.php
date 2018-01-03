@@ -331,7 +331,7 @@
 				<div class="form-group">
 					<label for="file">Certificate/Marksheet/Degree <span style="color: red; font-size: 12px;">required</span></label>
 					<input type="file" name="file" id = "file" required class = "form__input">
-					<span style="color: green; font-size: 12px;">Allowed formats-pdf/jpg/jpeg/doc(Max:4MB)</span>
+					<span style="color: green; font-size: 12px;">Allowed formats-pdf/jpg/jpeg(Max:4MB)</span>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -345,7 +345,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Achievement</h3>
-			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form achievementDet">
+			<form action="<?php echo base_url('web/addAchievement'); ?>" method="POST" class="form achievementDet" enctype = "multipart/form-data">
 				<div class="form-group">
 					<label for="achievementName">Name <span style="color: red; font-size: 12px;">required</span></label>
 					<input type="text" class="form__input" placeholder="Achievement Name" required id="achievementName" name="achievementTitle">
@@ -353,6 +353,11 @@
 				<div class="form-group">
 					<label for="achievementDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
 					<textarea name="achievementDescription" data-ckeditor="yes" required id="achievementDescription" cols="30" rows="5" class="form__input"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="file">Certificate <span style="color: red; font-size: 12px;">required</span></label>
+					<input type="file" name="file" id = "file" required class = "form__input">
+					<span style="color: green; font-size: 12px;">Allowed formats-pdf/jpg/jpeg(Max:4MB)</span>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
@@ -366,7 +371,7 @@
 		<button data-remodal-action="close" class="remodal-close"></button>
 		<div class="modal-body">
 			<h3>Work Experience</h3>
-			<form action="<?=base_url('web/addWorkEx')?>" method="POST" class="form workExDet">
+			<form action="<?=base_url('web/addWorkEx')?>" method="POST" class="form workExDet" enctype = "multipart/form-data">
 				<div class="horizontal-group">
 					<div class="form-group">
 						<label for="companyName">Company's Name <span style="color: red; font-size: 12px;">required</span></label>
@@ -448,6 +453,11 @@
 				<div class="form-group">
 					<label for="workDescription">Description <span style="color: red; font-size: 12px;">required</span></label>
 					<textarea name="workDescription" id="workDescription" cols="30" data-ckeditor="yes" rows="5" class="form__input"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="file">Work Certificate/Identity Card <span style="color: red; font-size: 12px;">required</span></label>
+					<input type="file" name="file" id = "file" required class = "form__input">
+					<span style="color: green; font-size: 12px;">Allowed formats-pdf/jpg/jpeg(Max:4MB)</span>
 				</div>
 				<div class="form-group action-bar">
 					<button data-remodal-action="close" class="btn">Close</button>
