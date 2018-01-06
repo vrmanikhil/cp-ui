@@ -171,10 +171,11 @@
 						<div role="tabpanel" class="tab-pane fade" id="personal-details">
 							<h3 class="heading flex">
 								<span>Personal Details</span>
-								<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){?>
+								<?php if($userDetails['userID'] == $_SESSION['userData']['userID']){ $userDetails['careerObjective'] = $careerObjective[0]['careerObjective'];?>
 								<a href="javascript:" data-json='<?= json_encode($userDetails) ?>' data-type="edit-personal-information" class="btn btn--primary js-edit-entity">Edit</a>
 								<?php } ?>
 							</h3>
+							<p class="flex personal-info"><strong>Career Objective</strong><span><?php if(!isset($careerObjective) || $careerObjective == NULL){ echo "Carrer Objective not Available";}else{ echo $careerObjective[0]['careerObjective'];} ?></span></p>
 							<p class="flex personal-info"><strong>Gender</strong><span><?php if($userDetails['gender']==="M") { echo "Male"; } if($userDetails['gender']==="F") { echo "Female"; } ?></span></p>
 							<p class="flex personal-info"><strong>Location</strong><span><?php echo $userDetails['city'].", ".$userDetails['state']; ?></span></p>
 							<p class="flex personal-info"><strong>Email Address</strong><span><?= $userDetails['email']?></span></p>
@@ -274,6 +275,12 @@
 							<option value="M">Male</option>
 							<option value="F">Female</option>
 						</select>
+					</div>
+				</div>
+				<div class = "horizontal-group">
+					<div class="form-group">
+						<label for="careerObjective">Carrer Objective</label>
+						<textarea name = 'careerObjective' id = 'careerObjective' cols = 85></textarea>
 					</div>
 				</div>
 				<div class="form-group action-bar">

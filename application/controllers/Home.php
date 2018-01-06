@@ -205,12 +205,14 @@ class Home extends CI_Controller {
 		$this->data['educationalDetails'] = $this->home_lib->getEducationalDetails($userID);
 		$this->data['workExperiences'] = $this->home_lib->getWorkExperiences($userID);
 		$this->data['skills'] = $this->home_lib->getUserSkills($userID);
+		$this->data['careerObjective'] = $this->home_lib->getCareerObjective($userID);
 		$resume['userDetails'] = $this->data['userDetails'];
 		$resume['achievements'] = $this->data['achievements'];
 		$resume['projects'] = $this->data['projects'];
 		$resume['educationalDetails'] = $this->data['educationalDetails'];
 		$resume['workExperiences'] = $this->data['workExperiences'];
 		$resume['skills'] = $this->data['skills'];
+		$resume['careerObjective'] = $this->data['careerObjective'];
 		if(isset($_GET['download']) == 1){
 				$resume['userDetails']['profileImage'] = file_get_contents($resume['userDetails']['profileImage']);
 				$base64 = base64_encode($resume['userDetails']['profileImage']);
@@ -218,7 +220,7 @@ class Home extends CI_Controller {
 				$resume['campusPuppy'] =file_get_contents("http://backoffice.campuspuppy.com/assets/images/logo.png");
 				$base64 = base64_encode($resume['campusPuppy']);
 				$resume['campusPuppy'] = 'data:image/jpeg;base64,' . $base64;
-				$html = $this->load->view('resume', $resume, true);
+				$html = $this->load->view('index', $resume, true);
 				$dompdf = new Dompdf();
 				$dompdf->loadHtml($html);
 				$dompdf->setPaper('A4', 'landscape');

@@ -632,6 +632,12 @@ class Home_model extends CI_Model {
 		return $this->db->update('achievements', $data);
 	}
 
+	public function updateCareerObjective($data,$userID){
+		$data1['careerObjective'] = $data;
+		$this->db->where('userID', $userID);
+		return $this->db->update('careerObjective', $data1);
+	}
+
 	public function delete($id, $table, $name){
 		return $this->db->delete($table, array($name => $id));
 	}
@@ -640,6 +646,11 @@ class Home_model extends CI_Model {
 		$this->db->join('indianCities', 'users.cityID = indianCities.cityID', 'left');
 		$result = $this->db->get_where('users', array('userID' => $userId), '1');
 		return $result->result_array();
+	}
+
+	public function getCareerObjective($userID){
+		$this->db->where('userID', $userID);
+		return $this->db->get('careerObjective')->result_array();
 	}
 
 	public function getUserSkills($userID){

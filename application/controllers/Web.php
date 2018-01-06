@@ -829,7 +829,7 @@ class Web extends CI_Controller {
 			}
         }
 		}
-
+		//hello
 	public function editCompanyLogo(){
 		$companyLogo = '';
 		$userID = $_SESSION['userData']['userID'];
@@ -878,6 +878,7 @@ class Web extends CI_Controller {
 	public function editPersonalDetails(){
 		$location = '';
 		$gender = '';
+		$careerObjective = '';
 		$userID = $_SESSION['userData']['userID'];
 		if($x = $this->input->post('location')){
 			$location = $x;
@@ -885,23 +886,29 @@ class Web extends CI_Controller {
 		if($x = $this->input->post('gender')){
 			$gender = $x;
 		}
+		if($x = $this->input->post('careerObjective')){
+			$careerObjective = $x;
+		}
 		$data = array(
 			'cityID' => $location,
 			'gender' => $gender
 		);
-		if($location==''||$gender==''){
+		if($location==''||$gender==''||$careerObjective == ''){
 			$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again1','class'=>'error'));
 			redirect(base_url('user-profile/'.$userID));
 		}
 		else{
-			$result = $this->home_lib->editPersonalDetails($data, $userID);
+			$result = $this->home_lib->updateCareerObjective($careerObjective, $userID);
 			if($result){
-				$this->session->set_flashdata('message', array('content'=>'Details successfully Edited.','class'=>'success'));
-				redirect(base_url('user-profile/'.$userID));
-			}
-			else{
-				$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
-				redirect(base_url('user-profile/'.$userID));
+				$result = $this->home_lib->editPersonalDetails($data, $userID);
+				if($result){
+					$this->session->set_flashdata('message', array('content'=>'Details successfully Edited.','class'=>'success'));
+					redirect(base_url('user-profile/'.$userID));
+				}
+				else{
+					$this->session->set_flashdata('message', array('content'=>'Some Error Occured, Please Try Again2','class'=>'error'));
+					redirect(base_url('user-profile/'.$userID));
+				}
 			}
 		}
 	}

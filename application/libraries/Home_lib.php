@@ -337,6 +337,18 @@ class Home_lib {
 		return $CI->homeModel->getUserDetails($userID);
 	}
 
+	public function getCareerObjective($userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->getCareerObjective($userID);
+	}
+
+	public function updateCareerObjective($careerObjective, $userID){
+		$CI = &get_instance();
+		$CI->load->model('home_model','homeModel');
+		return $CI->homeModel->updateCareerObjective($careerObjective, $userID);
+	}
+
 	public function checkAnswers($ans)
 	{
 		$CI = &get_instance();

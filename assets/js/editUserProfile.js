@@ -35,7 +35,8 @@ $(document).ready(function () {
 			score: 'score',
 			scoreType: 'scoreType',
 			position: 'position',
-			gender : 'gender'
+			gender : 'gender',
+			careerObjective: 'careerObjective'
 		};
 		var json = $(this).data('json');
 		var type = $(this).data('type');
